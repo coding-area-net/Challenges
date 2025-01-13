@@ -1218,6 +1218,11 @@
 		"*Chunks* that players are in *delete*",
 		"completely after the given *time*"
 	],
+	"item-delay-damage-description": [
+		"§4Damage delay",
+		"All *damage* from all *players* is",
+		"added up and dealt after *5 minutes*."
+	],
 	"item-dragon-goal": [
 		"§5Ender Dragon",
 		"Kill the *Ender Dragon* to win"

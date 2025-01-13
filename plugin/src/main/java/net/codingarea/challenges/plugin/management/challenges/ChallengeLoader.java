@@ -2,17 +2,7 @@ package net.codingarea.challenges.plugin.management.challenges;
 
 import net.anweisen.utilities.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.AdvancementDamageChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.BlockBreakDamageChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.BlockPlaceDamageChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.DamagePerBlockChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.DamagePerItemChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.DeathOnFallChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.FreezeChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.JumpDamageChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.ReversedDamageChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.SneakDamageChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.WaterAllergyChallenge;
+import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.*;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.effect.BlockEffectChallenge;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.effect.ChunkRandomEffectChallenge;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.effect.EntityRandomEffectChallenge;
@@ -207,6 +197,7 @@ public final class ChallengeLoader extends ModuleChallengeLoader {
 		register(DeathOnFallChallenge.class);
 		register(ReversedDamageChallenge.class);
 		register(FreezeChallenge.class);
+		register(DelayDamageChallenge.class);
 
 		// Effect
 		register(ChunkRandomEffectChallenge.class);

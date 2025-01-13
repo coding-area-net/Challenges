@@ -1238,6 +1238,11 @@
 		"*Chunks*, in denen sich *Spieler* befinden,",
 		"werden nach gegebener *Zeit* komplett *gelöscht*"
 	],
+	"item-delay-damage-description": [
+		"§4Verzögerter Schaden",
+		"Der *schaden* von allen *Spielern* ist",
+		"zusammenaddiert und wird nach einer bestimmten *Zeit* hinzugefügt."
+	],
 	"item-dragon-goal": [
 		"§5Enderdrache",
 		"Töte den *Enderdrachen* um zu gewinnen"
