@@ -35,7 +35,7 @@ public class HealEntityAction extends EntityTargetAction {
 		int amount = Integer.parseInt(subActions.get("amount")[0]);
 		if (entity instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity) entity;
-			AttributeInstance attribute = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+			AttributeInstance attribute = livingEntity.getAttribute(Attribute.MAX_HEALTH);
 			if (attribute == null) return;
 			double newHealth = Math.min(livingEntity.getHealth() + amount,
 					attribute.getBaseValue());

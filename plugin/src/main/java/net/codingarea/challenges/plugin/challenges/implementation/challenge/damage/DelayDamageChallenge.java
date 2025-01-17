@@ -74,11 +74,13 @@ public class DelayDamageChallenge extends TimedChallenge {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerDamage(@Nonnull EntityDamageEvent event) {
-        if (canGetDamage) return;
+        if (!shouldExecuteEffect()) return;
         if (!(event.getEntity() instanceof Player)) return;
+        if (ignorePlayer((Player) event.getEntity())) return;
+        if (canGetDamage) return;
 
-        Player player = (Player) event.getEntity();
         double damage = event.getFinalDamage();
+        Player player = (Player) event.getEntity();
 
         damageMap.put(player, damageMap.getOrDefault(player, 0.0) + damage);
         event.setCancelled(true);

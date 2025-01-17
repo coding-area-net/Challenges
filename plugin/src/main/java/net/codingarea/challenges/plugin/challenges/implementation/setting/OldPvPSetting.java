@@ -72,7 +72,7 @@ public class OldPvPSetting extends Setting {
 	}
 
 	protected void setAttackSpeed(@Nonnull Player player, double value) {
-		AttributeInstance attribute = player.getAttribute(Attribute.GENERIC_ATTACK_SPEED);
+		AttributeInstance attribute = player.getAttribute(Attribute.ATTACK_SPEED);
 		if (attribute == null) return;
 		attribute.setBaseValue(value);
 	}

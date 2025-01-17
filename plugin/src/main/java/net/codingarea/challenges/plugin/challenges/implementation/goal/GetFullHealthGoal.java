@@ -52,7 +52,7 @@ public class GetFullHealthGoal extends SettingModifierGoal {
 	public void getWinnersOnEnd(@NotNull List<Player> winners) {
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			if (ignorePlayer(player)) continue;
-			AttributeInstance attribute = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+			AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
 			if (attribute != null) {
 				if (player.getHealth() >= attribute.getBaseValue()) {
 					winners.add(player);
@@ -83,7 +83,7 @@ public class GetFullHealthGoal extends SettingModifierGoal {
 		if (!(event.getEntity() instanceof Player)) return;
 		if (!shouldExecuteEffect()) return;
 		if (ignorePlayer((Player) event.getEntity())) return;
-		AttributeInstance attribute = ((Player) event.getEntity()).getAttribute(Attribute.GENERIC_MAX_HEALTH);
+		AttributeInstance attribute = ((Player) event.getEntity()).getAttribute(Attribute.MAX_HEALTH);
 		Bukkit.getScheduler().runTask(plugin, () -> {
 			if (attribute != null && ((Player) event.getEntity()).getHealth() >= attribute.getBaseValue()) {
 				ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED);
