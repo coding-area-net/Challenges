@@ -34,9 +34,6 @@ language: "de"
 small-caps: false
 
 timer:
-  stopped-message: "§8• §7Timer §c§lpaused §8•"
-  count-up-message: "§8• §7Time: §a§l{time} §8•"
-  count-down-message: "§8• §7Time: §c§l{time} §8•"
   format:
     seconds: "{mm}:{ss}"
     minutes: "{mm}:{ss}"
