@@ -8,6 +8,7 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.ItemDescription;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.utils.misc.DatabaseHelper;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -18,13 +19,13 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.profile.PlayerProfile;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.net.URL;
+import java.util.*;
 
 /**
  * @author anweisen | https://github.com/anweisen
@@ -315,6 +316,19 @@ public class ItemBuilder extends net.anweisen.utilities.bukkit.utils.item.ItemBu
 		public SkullBuilder(@Nonnull UUID ownerUUID, @Nonnull String ownerName, @Nonnull String name, @Nonnull String... lore) {
 			super(Material.PLAYER_HEAD, name, lore);
 			setOwner(ownerUUID, ownerName);
+		}
+
+		public SkullBuilder(@Nonnull URL base64) {
+			super(new ItemStack(Material.PLAYER_HEAD) {{
+				SkullMeta meta = (SkullMeta) getItemMeta();
+
+				PlayerProfile profile = Bukkit.createPlayerProfile(UUID.randomUUID());
+				profile.getTextures().setSkin(base64);
+
+				meta.setOwnerProfile(profile);
+
+				setItemMeta(meta);
+			}});
 		}
 
 		@Nonnull
