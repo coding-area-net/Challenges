@@ -526,6 +526,12 @@
 		"Der *maximale Radius*, in dem sich die",
 		"Positionen befinden können"
 	],
+	"item-language-setting": [
+		"§bSprache",
+		"Setze die *Sprache*"
+	],
+	"item-language-setting-german": "§fDeutsch",
+	"item-language-setting-english": "§fEnglish",
 	"item-difficulty-setting": [
 		"§aSchwierigkeit",
 		"Stellt die *Schwierigkeitsstufe* ein"

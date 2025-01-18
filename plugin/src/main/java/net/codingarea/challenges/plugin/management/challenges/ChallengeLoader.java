@@ -114,14 +114,14 @@ public final class ChallengeLoader extends ModuleChallengeLoader {
 		register(RespawnSetting.class);
 		register(SplitHealthSetting.class);
 		register(DamageDisplaySetting.class);
-		register(PregameMovementSetting.class);
+		register(LanguageSetting.class);
 
+		register(PregameMovementSetting.class);
 		register(DeathMessageSetting.class);
 		register(HealthDisplaySetting.class);
 		registerWithCommand(PositionSetting.class, "position");
 		register(DeathPositionSetting.class);
 		register(PlayerGlowSetting.class);
-		register(SoupSetting.class);
 		register(NoHungerSetting.class);
 
 		register(NoItemDamageSetting.class);
@@ -146,6 +146,7 @@ public final class ChallengeLoader extends ModuleChallengeLoader {
 		register(SlotLimitSetting.class);
 		register(OldPvPSetting.class);
 		register(TotemSaveDeathSetting.class);
+		register(SoupSetting.class);
 
 
 		// Challenges

@@ -13,6 +13,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+/**
+ * @author rollocraft | https://github.com/rollocraft
+ * @since 2.3.2
+ */
 public class LanguageCommand implements SenderCommand, Completer {
 
     @Override

@@ -525,6 +525,12 @@
 		"§aDifficulty",
 		"Sets the *Difficulty*"
 	],
+	"item-language-setting": [
+		"§bLanguage",
+		"Sets the *Language*"
+	],
+	"item-language-setting-german": "§fDeutsch",
+	"item-language-setting-english": "§fEnglish",
 	"item-one-life-setting": [
 		"§cOne Teamlife",
 		"*Everyone* dies when *one player dies*"
