@@ -53,7 +53,7 @@ public final class Challenges extends BukkitModule {
 	private ChallengeTimer challengeTimer;
 	private LoaderRegistry loaderRegistry;
 	private MetricsLoader metricsLoader;
-  private GameWorldStorage gameWorldStorage;
+  	private GameWorldStorage gameWorldStorage;
 	private GeneratorWorldPortalManager generatorWorldPortalManager;
 
 	@Nonnull
@@ -174,6 +174,7 @@ public final class Challenges extends BukkitModule {
 		registerCommand(new ForwardingCommand("time set midnight"), "midnight");
 		registerCommand(new ResultCommand(), "result");
 		registerCommand(new SkipTimerCommand(), "skiptimer");
+		registerCommand(new LanguageCommand(), "setlanguage");
 		registerListenerCommand(new GodModeCommand(), "godmode");
 	}
 

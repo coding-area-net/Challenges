@@ -56,6 +56,15 @@ public final class LanguageLoader extends ContentLoader {
 		loadDefault();
 	}
 
+	public void reload(String language) {
+		this.language = language;
+		read();
+		download();
+		init();
+		Challenges.getInstance().getScoreboardManager().updateAll();
+		Challenges.getInstance().getConfigManager().getSettingsConfig().set("language", language);
+	}
+
 	private void loadDefault() {
 		download();
 		init();

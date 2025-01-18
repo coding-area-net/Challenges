@@ -57,7 +57,7 @@ public class PlayerConnectionListener implements Listener {
 			if (Challenges.getInstance().isFirstInstall()) {
 				player.sendMessage("");
 				player.sendMessage(Prefix.CHALLENGES + "§7Thanks for downloading §e§lChallenges§7!");
-				player.sendMessage(Prefix.CHALLENGES + "§7You can change the language in the §econfig.yml");
+				player.sendMessage(Prefix.CHALLENGES + "§7You can change the language in the settings or with /setlang [language]");
 				player.sendMessage(Prefix.CHALLENGES + "§7For more join our discord §ediscord.gg/74Ay5zF");
 			}
 
