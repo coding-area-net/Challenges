@@ -170,7 +170,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
 		SoundSample.BREAK.play(currentQuestionedPlayer);
 		
 		currentQuestion = null;
-		AttributeInstance attribute = currentQuestionedPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+		AttributeInstance attribute = currentQuestionedPlayer.getAttribute(Attribute.MAX_HEALTH);
 
 		if (attribute.getBaseValue() == 2) {
 			kill(currentQuestionedPlayer);
