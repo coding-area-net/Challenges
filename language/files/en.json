@@ -318,7 +318,6 @@
 	"bossbar-dont-stop-running": "§8» §7Move in §8┃ §e{0}",
 	"bossbar-five-hundred-blocks": "§8» §fBlocks Walked §8┃ §7{0} §8/ §7{1}",
 	"bossbar-level-border": "§8» §7Border size §8┃ §7{0}",
-	"bossbar-level-border": "§8» §7Border size §8┃ §7{0}",
 	"bossbar-race-goal-info": "§8» §fGoal §8┃ §7X: {0} §8/ §7Z: {1} §8┃ §e{2} Blocks",
 	"bossbar-race-goal": "§8» §fGoal §8┃ §7X: {0} §8/ §7Z: {1}",
 	"bossbar-first-at-height-goal": "§8» §fGoal §8┃ §7Y: {0}",
