@@ -8,10 +8,13 @@ import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.block.Biome;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -38,13 +41,18 @@ public class ForceBiomeBattleGoal extends ForceBattleGoal<BiomeTarget> {
 
     @Override
     public BiomeTarget getTargetFromDocument(Document document, String path) {
-        return new BiomeTarget(document.getEnum(path, Biome.class));
+         return new BiomeTarget(Registry.BIOME.get(NamespacedKey.minecraft(Objects.requireNonNull(document.getString(path)).toLowerCase())));
     }
 
     @Override
     public List<BiomeTarget> getListFromDocument(Document document, String path) {
-        return document.getEnumList(path, Biome.class).stream().map(BiomeTarget::new).collect(Collectors.toList());
+        return document.getStringList(path).stream()
+                .map(biomeName -> new BiomeTarget(
+                        Registry.BIOME.get(NamespacedKey.minecraft(biomeName.toLowerCase()))
+                ))
+                .collect(Collectors.toList());
     }
+
 
     @Override
     protected Message getLeaderboardTitleMessage() {

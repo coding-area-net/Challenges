@@ -74,7 +74,7 @@ public class RandomizedHPChallenge extends SettingModifier {
 			return;
 		}
 		int health = random.nextInt(getValue() * 100) + 1;
-		entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(health);
+		entity.getAttribute(Attribute.MAX_HEALTH).setBaseValue(health);
 		entity.setHealth(health);
 	}
 
@@ -94,7 +94,7 @@ public class RandomizedHPChallenge extends SettingModifier {
 				EntityType type = entity.getType();
 				double health = entityDefaultHealth.getOrDefault(type, getDefaultHealth(type));
 				entityDefaultHealth.put(type, health);
-				AttributeInstance attribute = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+				AttributeInstance attribute = entity.getAttribute(Attribute.MAX_HEALTH);
 				if (attribute == null) return;
 				attribute.setBaseValue(health);
 				entity.setHealth(health);
@@ -108,7 +108,7 @@ public class RandomizedHPChallenge extends SettingModifier {
 		entity.remove();
 		if (!(entity instanceof LivingEntity)) return 0;
 		AttributeInstance attribute = ((LivingEntity) entity)
-				.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+				.getAttribute(Attribute.MAX_HEALTH);
 		if (attribute == null) return 10;
 		return attribute.getBaseValue();
 	}

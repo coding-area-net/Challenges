@@ -92,7 +92,7 @@ public class SplitHealthSetting extends Setting {
 			if (currentPlayer.equals(player)) continue;
 
 			double health = player.getHealth();
-			AttributeInstance attribute = currentPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+			AttributeInstance attribute = currentPlayer.getAttribute(Attribute.MAX_HEALTH);
 			if (attribute == null) return;
 			if (health > attribute.getValue()) {
 				health = attribute.getValue();

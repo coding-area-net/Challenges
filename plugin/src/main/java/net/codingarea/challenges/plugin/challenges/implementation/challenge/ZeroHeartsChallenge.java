@@ -47,7 +47,7 @@ public class ZeroHeartsChallenge extends SettingModifier {
 		});
 		bossbar.show();
 		Bukkit.getOnlinePlayers().forEach(player -> {
-			AttributeInstance attribute = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+			AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
 			if (attribute == null) return;
 			attribute.setBaseValue(0);
 		});
@@ -73,7 +73,7 @@ public class ZeroHeartsChallenge extends SettingModifier {
 	@ScheduledTask(ticks = 20, async = false)
 	public void onSecond() {
 		broadcast(player -> {
-			AttributeInstance attribute = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+			AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
 			if (attribute == null) return;
 			attribute.setBaseValue(0);
 		});

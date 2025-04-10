@@ -58,6 +58,12 @@ public final class BlockUtils {
 		return chunk1.getX() == chunk2.getX() && chunk1.getZ() == chunk2.getZ();
 	}
 
+	public static boolean isSameBlockIgnoreHeight(@Nullable Location loc1, @Nullable Location loc2) {
+		if (loc1 == null || loc2 == null) return false;
+		return loc1.getBlockX() == loc2.getBlockX()
+				&& loc1.getBlockZ() == loc2.getBlockZ();
+	}
+
 	/**
 	 * @param block middle block
 	 * @return the block above, under, in the front, behind, to the left and to the right of the middle block

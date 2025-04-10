@@ -33,7 +33,7 @@ public final class ChallengeTimer {
 
 	@Getter
 	private final TimerFormat format;
-	private final String stoppedMessage, upMessage, downMessage;
+	private final Message stoppedMessage, upMessage, downMessage;
 	private final boolean specificStartSounds, defaultStartSound;
 	@Getter
   private long time = 0;
@@ -52,9 +52,9 @@ public final class ChallengeTimer {
 
 		// Load format + messages
 		Document timerConfig = pluginConfig.getDocument("timer");
-		stoppedMessage = timerConfig.getString("stopped-message", "");
-		upMessage = timerConfig.getString("count-up-message", "");
-		downMessage = timerConfig.getString("count-down-message", "");
+		stoppedMessage = Message.forName("stopped-message");
+		upMessage = Message.forName("count-up-message");
+		downMessage = Message.forName("count-down-message");
 
 		Document formatConfig = timerConfig.getDocument("format");
 		format = new TimerFormat(formatConfig);
@@ -165,10 +165,9 @@ public final class ChallengeTimer {
 
 	@Nonnull
 	private String getActionbar() {
-		String message = !paused || (!countingUp && time > 0) ? (countingUp ? upMessage : downMessage) : stoppedMessage;
+		Message message = !paused || (!countingUp && time > 0) ? (countingUp ? upMessage : downMessage) : stoppedMessage;
 		String time = getFormattedTime();
-		message = message.replace("{time}", time);
-		return isSmallCaps() ? FontUtils.toSmallCaps(message) : message;
+		return message.asString(time);
 	}
 
 	private boolean isSmallCaps() {

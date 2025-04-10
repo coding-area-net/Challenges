@@ -53,11 +53,15 @@ public class PlayerConnectionListener implements Listener {
 			MinecraftNameWrapper.ENTITY_EFFECT, 17, 1, 2);
 		Challenges.getInstance().getScoreboardManager().handleJoin(player);
 
+		if (Challenges.getInstance().isFirstInstall()) {
+			player.sendMessage(Prefix.CHALLENGES + "§7To use this plugin you need to have permissions. Give yourself permissions in the Server Console with: /op [name]");
+		}
+
 		if (player.hasPermission("challenges.gui")) {
 			if (Challenges.getInstance().isFirstInstall()) {
 				player.sendMessage("");
 				player.sendMessage(Prefix.CHALLENGES + "§7Thanks for downloading §e§lChallenges§7!");
-				player.sendMessage(Prefix.CHALLENGES + "§7You can change the language in the §econfig.yml");
+				player.sendMessage(Prefix.CHALLENGES + "§7You can change the language in the settings or with /setlang [language]");
 				player.sendMessage(Prefix.CHALLENGES + "§7For more join our discord §ediscord.gg/74Ay5zF");
 			}
 

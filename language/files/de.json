@@ -34,6 +34,9 @@
 	"new-challenge": "§a§lNeu!",
 	"feature-disabled": "Diese Funktion ist derzeit §cdeaktiviert",
 	"challenge-disabled": "Diese Challenge ist derzeit §cdeaktiviert",
+	"stopped-message": "§8• §7Timer §c§lpaused §8•",
+	"count-up-message": "§8• §7Time: §a§l{0} §8•",
+	"count-down-message": "§8• §7Time: §c§l{0} §8•",
 	"timer-not-started": "Der Timer wurde noch §cnicht gestartet",
 	"timer-was-started": "Der Timer wurde §agestartet",
 	"timer-was-paused": "Der Timer wurde §cpausiert",
@@ -523,6 +526,12 @@
 		"Der *maximale Radius*, in dem sich die",
 		"Positionen befinden können"
 	],
+	"item-language-setting": [
+		"§bSprache",
+		"Setze die *Sprache*"
+	],
+	"item-language-setting-german": "§fDeutsch",
+	"item-language-setting-english": "§fEnglish",
 	"item-difficulty-setting": [
 		"§aSchwierigkeit",
 		"Stellt die *Schwierigkeitsstufe* ein"
@@ -1237,6 +1246,11 @@
 		"§6Chunk Löschung",
 		"*Chunks*, in denen sich *Spieler* befinden,",
 		"werden nach gegebener *Zeit* komplett *gelöscht*"
+	],
+	"item-delay-damage-description": [
+		"§4Verzögerter Schaden",
+		"Der *schaden* von allen *Spielern* ist",
+		"zusammenaddiert und wird nach einer bestimmten *Zeit* hinzugefügt."
 	],
 	"item-dragon-goal": [
 		"§5Enderdrache",

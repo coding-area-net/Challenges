@@ -2,17 +2,7 @@ package net.codingarea.challenges.plugin.management.challenges;
 
 import net.anweisen.utilities.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.AdvancementDamageChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.BlockBreakDamageChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.BlockPlaceDamageChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.DamagePerBlockChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.DamagePerItemChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.DeathOnFallChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.FreezeChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.JumpDamageChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.ReversedDamageChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.SneakDamageChallenge;
-import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.WaterAllergyChallenge;
+import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.*;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.effect.BlockEffectChallenge;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.effect.ChunkRandomEffectChallenge;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.effect.EntityRandomEffectChallenge;
@@ -124,14 +114,14 @@ public final class ChallengeLoader extends ModuleChallengeLoader {
 		register(RespawnSetting.class);
 		register(SplitHealthSetting.class);
 		register(DamageDisplaySetting.class);
-		register(PregameMovementSetting.class);
+		register(LanguageSetting.class);
 
+		register(PregameMovementSetting.class);
 		register(DeathMessageSetting.class);
 		register(HealthDisplaySetting.class);
 		registerWithCommand(PositionSetting.class, "position");
 		register(DeathPositionSetting.class);
 		register(PlayerGlowSetting.class);
-		register(SoupSetting.class);
 		register(NoHungerSetting.class);
 
 		register(NoItemDamageSetting.class);
@@ -156,6 +146,7 @@ public final class ChallengeLoader extends ModuleChallengeLoader {
 		register(SlotLimitSetting.class);
 		register(OldPvPSetting.class);
 		register(TotemSaveDeathSetting.class);
+		register(SoupSetting.class);
 
 
 		// Challenges
@@ -207,6 +198,7 @@ public final class ChallengeLoader extends ModuleChallengeLoader {
 		register(DeathOnFallChallenge.class);
 		register(ReversedDamageChallenge.class);
 		register(FreezeChallenge.class);
+		register(DelayDamageChallenge.class);
 
 		// Effect
 		register(ChunkRandomEffectChallenge.class);

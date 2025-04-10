@@ -321,7 +321,7 @@ public class LoopChallenge extends Setting {
 		private boolean isTool(@Nonnull ItemStack itemStack) {
 			if (itemStack.getItemMeta() != null) {
 				try {
-					Collection<AttributeModifier> attributeModifiers = itemStack.getItemMeta().getAttributeModifiers(Attribute.GENERIC_ATTACK_DAMAGE);
+					Collection<AttributeModifier> attributeModifiers = itemStack.getItemMeta().getAttributeModifiers(Attribute.ATTACK_DAMAGE);
 					return attributeModifiers == null || !attributeModifiers.isEmpty();
 				} catch (NullPointerException exception) {
 					return false;

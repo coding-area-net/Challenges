@@ -15,6 +15,8 @@ import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.block.Biome;
 import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
@@ -26,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 
 /**
@@ -137,10 +140,12 @@ public class ForceBiomeChallenge extends CompletableForceChallenge {
 	public void loadGameState(@NotNull Document document) {
 		super.loadGameState(document);
 		if (document.contains("target")) {
-			biome = document.getEnum("target", Biome.class);
+			String biomeName = document.getString("target");
+			biome = Registry.BIOME.get(NamespacedKey.minecraft(Objects.requireNonNull(biomeName).toLowerCase()));
 			setState(biome == null ? WAITING : COUNTDOWN);
 		}
 	}
+
 
 	@Override
 	public void writeGameState(@NotNull Document document) {

@@ -225,3 +225,9 @@ commands:
     permission: "challenges.godmode"
     aliases:
       - "god"
+  setlanguage:
+    usage: "/setlanguage [language]"
+    description: "Changes the language"
+    permission: "challenges.setlanguage"
+    aliases:
+      - "setlang"

@@ -41,7 +41,7 @@ public class HealCommand implements SenderCommand, Completer {
 		boolean otherPlayers = false;
 		for (Player player : targets) {
 			Message.forName("command-heal-healed").send(player, Prefix.CHALLENGES);
-			AttributeInstance attribute = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+			AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
 			if (attribute == null) {
 				player.setHealth(20);
 			} else {

@@ -34,6 +34,9 @@
 	"new-challenge": "§a§lNew!",
 	"feature-disabled": "This function is currently §cdeactivated",
 	"challenge-disabled": "This challenge is currently §cdeactivated",
+	"stopped-message": "§8• §7Timer §c§lpaused §8•",
+	"count-up-message": "§8• §7Time: §a§l{0} §8•",
+	"count-down-message": "§8• §7Time: §c§l{0} §8•",
 	"timer-not-started": "The timer §chasn't been started",
 	"timer-was-started": "The timer has been §astarted",
 	"timer-was-paused": "The timer has been §cpaused",
@@ -315,7 +318,6 @@
 	"bossbar-dont-stop-running": "§8» §7Move in §8┃ §e{0}",
 	"bossbar-five-hundred-blocks": "§8» §fBlocks Walked §8┃ §7{0} §8/ §7{1}",
 	"bossbar-level-border": "§8» §7Border size §8┃ §7{0}",
-	"bossbar-level-border": "§8» §7Border size §8┃ §7{0}",
 	"bossbar-race-goal-info": "§8» §fGoal §8┃ §7X: {0} §8/ §7Z: {1} §8┃ §e{2} Blocks",
 	"bossbar-race-goal": "§8» §fGoal §8┃ §7X: {0} §8/ §7Z: {1}",
 	"bossbar-first-at-height-goal": "§8» §fGoal §8┃ §7Y: {0}",
@@ -522,6 +524,12 @@
 		"§aDifficulty",
 		"Sets the *Difficulty*"
 	],
+	"item-language-setting": [
+		"§bLanguage",
+		"Sets the *Language*"
+	],
+	"item-language-setting-german": "§fDeutsch",
+	"item-language-setting-english": "§fEnglish",
 	"item-one-life-setting": [
 		"§cOne Teamlife",
 		"*Everyone* dies when *one player dies*"
@@ -1217,6 +1225,11 @@
 		"§6Chunk Deletion",
 		"*Chunks* that players are in *delete*",
 		"completely after the given *time*"
+	],
+	"item-delay-damage-description": [
+		"§4Damage delay",
+		"All *damage* from all *players* is",
+		"added up and dealt after *5 minutes*."
 	],
 	"item-dragon-goal": [
 		"§5Ender Dragon",
