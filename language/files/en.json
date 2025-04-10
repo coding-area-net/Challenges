@@ -69,6 +69,12 @@
 		"§cThere are no missing config settings.",
 		"§cYou can manually update it to §c§l{0}"
 	],
+	"unsuported-language": [
+		"§cThe language §7(§e{0}§7) is not supported"
+	],
+	"not-op":[
+		"§7To use this plugin you need to have permissions. Give yourself permissions in the Server Console with: /op [name]"
+	],
 	"join-message": "§e{0} §7has §ajoined §7the server",
 	"quit-message": "§e{0} §7has §cleft §7the server",
 	"timer-paused-message": [

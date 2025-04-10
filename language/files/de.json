@@ -69,6 +69,12 @@
 		"§cEs fehlen keine Einstellungen in der Config.",
 		"§cDu kannst die Version ohne bedenken selbst auf §c§l{0} §cstellen."
 	],
+	"unsuported-language": [
+		"§cDiese Sprache §7(§e{0}§7) wird nicht unterstützt"
+	],
+	"not-op":[
+		"§7Um dieses Plugin zu nutzen, musst du die Berechtigung haben. Gib dir die Berechtigung in der Serverkonsole mit: /op [name]"
+	],
 	"join-message": "§e{0} §7hat den Server §abetreten",
 	"quit-message": "§e{0} §7hat den Server §cverlassen",
 	"timer-paused-message": [

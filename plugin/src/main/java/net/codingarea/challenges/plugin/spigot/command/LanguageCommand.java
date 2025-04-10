@@ -37,7 +37,7 @@ public class LanguageCommand implements SenderCommand, Completer {
                 Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).reload("en");
                 break;
             default:
-                sender.sendMessage("§cUnsupportet language!");
+                Message.forName("unsuported-language").send(sender, Prefix.CHALLENGES, args[0]);
         }
     }
 
