@@ -6,6 +6,8 @@ import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.utils.bukkit.misc.Version.MinecraftVersion;
+import net.codingarea.challenges.plugin.utils.bukkit.misc.Version.Version;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder.PotionBuilder;
 import org.bukkit.Color;
@@ -74,7 +76,12 @@ public class RandomizedHPChallenge extends SettingModifier {
 			return;
 		}
 		int health = random.nextInt(getValue() * 100) + 1;
-		entity.getAttribute(Attribute.MAX_HEALTH).setBaseValue(health);
+		AttributeInstance attribute;
+		if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_21_2)) {
+			entity.getAttribute(Attribute.valueOf("MAX_HEALTH")).setBaseValue(health);
+		} else {
+			entity.getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH")).setBaseValue(health);
+		}
 		entity.setHealth(health);
 	}
 
@@ -94,7 +101,14 @@ public class RandomizedHPChallenge extends SettingModifier {
 				EntityType type = entity.getType();
 				double health = entityDefaultHealth.getOrDefault(type, getDefaultHealth(type));
 				entityDefaultHealth.put(type, health);
-				AttributeInstance attribute = entity.getAttribute(Attribute.MAX_HEALTH);
+
+				AttributeInstance attribute;
+				if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_21_2)) {
+					attribute = entity.getAttribute(Attribute.valueOf("MAX_HEALTH"));
+				} else {
+					attribute = entity.getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH"));
+				}
+
 				if (attribute == null) return;
 				attribute.setBaseValue(health);
 				entity.setHealth(health);
@@ -107,8 +121,12 @@ public class RandomizedHPChallenge extends SettingModifier {
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), entityType);
 		entity.remove();
 		if (!(entity instanceof LivingEntity)) return 0;
-		AttributeInstance attribute = ((LivingEntity) entity)
-				.getAttribute(Attribute.MAX_HEALTH);
+		AttributeInstance attribute;
+		if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_21_2)) {
+			attribute = ((LivingEntity) entity).getAttribute(Attribute.valueOf("MAX_HEALTH"));
+		} else {
+			attribute = ((LivingEntity) entity).getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH"));
+		}
 		if (attribute == null) return 10;
 		return attribute.getBaseValue();
 	}

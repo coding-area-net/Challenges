@@ -8,6 +8,7 @@ import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
+import net.codingarea.challenges.plugin.utils.bukkit.misc.Version.MinecraftVersion;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import org.bukkit.Bukkit;
@@ -47,7 +48,12 @@ public class ZeroHeartsChallenge extends SettingModifier {
 		});
 		bossbar.show();
 		Bukkit.getOnlinePlayers().forEach(player -> {
-			AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
+			AttributeInstance attribute;
+			if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_21_2)) {
+				attribute = player.getAttribute(Attribute.valueOf("MAX_HEALTH"));
+			} else {
+				attribute = player.getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH"));
+			}
 			if (attribute == null) return;
 			attribute.setBaseValue(0);
 		});
@@ -73,7 +79,12 @@ public class ZeroHeartsChallenge extends SettingModifier {
 	@ScheduledTask(ticks = 20, async = false)
 	public void onSecond() {
 		broadcast(player -> {
-			AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
+			AttributeInstance attribute;
+			if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_21_2)) {
+				attribute = player.getAttribute(Attribute.valueOf("MAX_HEALTH"));
+			} else {
+				attribute = player.getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH"));
+			}
 			if (attribute == null) return;
 			attribute.setBaseValue(0);
 		});

@@ -8,6 +8,7 @@ import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
+import net.codingarea.challenges.plugin.utils.bukkit.misc.Version.MinecraftVersion;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -52,7 +53,12 @@ public class GetFullHealthGoal extends SettingModifierGoal {
 	public void getWinnersOnEnd(@NotNull List<Player> winners) {
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			if (ignorePlayer(player)) continue;
-			AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
+			AttributeInstance attribute;
+			if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_21_2)) {
+				attribute = player.getAttribute(Attribute.valueOf("MAX_HEALTH"));
+			} else {
+				attribute = player.getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH"));
+			}
 			if (attribute != null) {
 				if (player.getHealth() >= attribute.getBaseValue()) {
 					winners.add(player);
@@ -83,7 +89,12 @@ public class GetFullHealthGoal extends SettingModifierGoal {
 		if (!(event.getEntity() instanceof Player)) return;
 		if (!shouldExecuteEffect()) return;
 		if (ignorePlayer((Player) event.getEntity())) return;
-		AttributeInstance attribute = ((Player) event.getEntity()).getAttribute(Attribute.MAX_HEALTH);
+		AttributeInstance attribute;
+		if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_21_2)) {
+			attribute = ((Player) event.getEntity()).getAttribute(Attribute.valueOf("MAX_HEALTH"));
+		} else {
+			attribute = ((Player) event.getEntity()).getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH"));
+		}
 		Bukkit.getScheduler().runTask(plugin, () -> {
 			if (attribute != null && ((Player) event.getEntity()).getHealth() >= attribute.getBaseValue()) {
 				ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED);

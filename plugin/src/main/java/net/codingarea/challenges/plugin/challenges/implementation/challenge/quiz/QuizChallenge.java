@@ -15,6 +15,7 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.spigot.events.PlayerJumpEvent;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
+import net.codingarea.challenges.plugin.utils.bukkit.misc.Version.MinecraftVersion;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
@@ -170,7 +171,12 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
 		SoundSample.BREAK.play(currentQuestionedPlayer);
 		
 		currentQuestion = null;
-		AttributeInstance attribute = currentQuestionedPlayer.getAttribute(Attribute.MAX_HEALTH);
+		AttributeInstance attribute;
+		if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_21_2)) {
+			attribute = currentQuestionedPlayer.getAttribute(Attribute.valueOf("MAX_HEALTH"));
+		} else {
+			attribute = currentQuestionedPlayer.getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH"));
+		}
 
 		if (attribute.getBaseValue() == 2) {
 			kill(currentQuestionedPlayer);
