@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author anweisen | https://github.com/anweisen
@@ -79,15 +80,17 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
 
 	@Override
 	protected void onEnable() {
-		bossbar.setContent((bossbar, player) -> {
-			if (currentItem == null) {
-				bossbar.setTitle(Message.forName("bossbar-all-items-finished").asString());
-				return;
-			}
-      
-			bossbar.setTitle(Message.forName("bossbar-all-items-current-max").asComponent(currentItem, totalItemsCount - itemsToFind.size() + 1, totalItemsCount));
-		});
-		bossbar.show();
+	  bossbar.setContent((bossbar, player) -> {
+	   if (currentItem == null) {
+	    bossbar.setTitle(Message.forName("bossbar-all-items-finished").asString());
+	    return;
+	   }
+	   bossbar.setTitle(Message.forName("bossbar-all-items-current-max").asComponent(
+	       getItemDisplayName(currentItem),
+	       totalItemsCount - itemsToFind.size() + 1,
+	       totalItemsCount));
+	  });
+	  bossbar.show();
 	}
 
 	@Override
@@ -108,7 +111,7 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
 			return;
 		}
 
-		Message.forName("all-items-skipped").broadcast(Prefix.CHALLENGES, currentItem);
+		Message.forName("all-items-skipped").broadcast(Prefix.CHALLENGES, getItemDisplayName(currentItem));
 		SoundSample.PLING.broadcast();
 		nextItem();
 		bossbar.update();
@@ -142,7 +145,7 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
 		if (!shouldExecuteEffect()) return;
 		if (ignorePlayer(player)) return;
 		if (currentItem != material) return;
-		Message.forName("all-items-found").broadcast(Prefix.CHALLENGES, currentItem, NameHelper.getName(player));
+		Message.forName("all-items-found").broadcast(Prefix.CHALLENGES, getItemDisplayName(currentItem) , NameHelper.getName(player));
 		SoundSample.PLING.broadcast();
 		nextItem();
 		bossbar.update();
@@ -185,4 +188,31 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
 		return totalItemsCount;
 	}
 
+	private String getItemDisplayName(@Nullable Material material) {
+		if (material == null) return "Unbekannt";
+
+		String name = material.name();
+
+		if (name.contains("SMITHING_TEMPLATE")) {
+			String prefix = name.replace("_SMITHING_TEMPLATE", "");
+			String formattedPrefix = Arrays.stream(prefix.split("_"))
+					.map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+					.collect(Collectors.joining(" "));
+
+			return formattedPrefix + " Smithing template";
+		}
+
+		if (name.endsWith("_BANNER_PATTERN")) {
+			String prefix = name.replace("_BANNER_PATTERN", "");
+			String formattedPrefix = Arrays.stream(prefix.split("_"))
+					.map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+					.collect(Collectors.joining(" "));
+
+			return formattedPrefix + " Banner Pattern";
+		}
+
+		return Arrays.stream(name.split("_"))
+						.map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+						.collect(Collectors.joining(" "));
+	}
 }

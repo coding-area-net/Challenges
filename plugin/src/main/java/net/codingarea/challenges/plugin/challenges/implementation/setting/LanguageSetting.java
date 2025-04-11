@@ -46,7 +46,6 @@ public class LanguageSetting extends Modifier {
         ItemBuilder.SkullBuilder GermanSkull = new ItemBuilder.SkullBuilder(GERMAN_SKULL);
         ItemBuilder.SkullBuilder EnglishSkull = new ItemBuilder.SkullBuilder(ENGLISH_SKULL);
         if (getValue() == GERMAN)
-            //TODO: Wie macht man diesen Pfeil? → Prefix falsch!
             return GermanSkull.setName(DefaultItem.getItemPrefix() + Message.forName("item-language-setting-german")).hideAttributes();
         return EnglishSkull.setName(DefaultItem.getItemPrefix() + Message.forName("item-language-setting-english")).hideAttributes();
     }
