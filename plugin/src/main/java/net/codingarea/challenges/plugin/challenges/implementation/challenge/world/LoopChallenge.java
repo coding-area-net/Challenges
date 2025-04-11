@@ -331,7 +331,6 @@ public class LoopChallenge extends Setting {
 					Collection<AttributeModifier> attributeModifiers = itemStack.getItemMeta().getAttributeModifiers(attribute);
 					return attributeModifiers == null || !attributeModifiers.isEmpty();
 
-					//TODO: TEST!
 				} catch (NullPointerException exception) {
 					return false;
 				}
