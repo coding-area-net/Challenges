@@ -30,7 +30,7 @@ public final class DefaultItem {
 	public static ItemBuilder navigateBack() {
 		URL BACK_SKULL;
 		try {
-			BACK_SKULL  = new URL("http://textures.minecraft.net/texture/bd69e06e5dadfd84e5f3d1c21063f2553b2fa945ee1d4d7152fdc5425bc12a9");
+			BACK_SKULL  = new URL("https://textures.minecraft.net/texture/bd69e06e5dadfd84e5f3d1c21063f2553b2fa945ee1d4d7152fdc5425bc12a9");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -41,7 +41,7 @@ public final class DefaultItem {
 	public static ItemBuilder navigateNext() {
 		URL NEXT_SKULL;
 		try {
-			NEXT_SKULL  = new URL("http://textures.minecraft.net/texture/19bf3292e126a105b54eba713aa1b152d541a1d8938829c56364d178ed22bf");
+			NEXT_SKULL  = new URL("https://textures.minecraft.net/texture/19bf3292e126a105b54eba713aa1b152d541a1d8938829c56364d178ed22bf");
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
