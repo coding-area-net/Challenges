@@ -27,62 +27,64 @@ import java.util.Map;
 
 @Since("2.3.2")
 public class DelayDamageChallenge extends TimedChallenge {
-    private boolean canGetDamage = false;
 
-    private final Map<Player, Double> damageMap = new HashMap<>();
+  private boolean canGetDamage = false;
+  private final Map<Player, Double> damageMap = new HashMap<>();
 
-    public DelayDamageChallenge() {
-        super(MenuType.CHALLENGES, 1, 64, 4, false);
-        setCategory(SettingCategory.DAMAGE);
+  public DelayDamageChallenge() {
+    super(MenuType.CHALLENGES, 1, 64, 4, false);
+    setCategory(SettingCategory.DAMAGE);
+  }
+
+  @Override
+  protected int getSecondsUntilNextActivation() {
+    return getValue() * 30;
+  }
+
+  @Override
+  protected void onTimeActivation() {
+
+    double totalDamage = damageMap.values().stream()
+      .mapToDouble(Double::doubleValue)
+      .sum();
+
+    int playerCount = damageMap.size();
+
+    if (playerCount > 0) {
+      canGetDamage = true;
+      for (Player player : Bukkit.getOnlinePlayers()) {
+        player.damage(totalDamage);
+        Message.forName(("extreme-force-battle-took-damage")).send(player, Prefix.DAMAGE, totalDamage / 2);
+      }
+      canGetDamage = false;
     }
 
-    @Override
-    protected int getSecondsUntilNextActivation() {
-        return getValue() * 30;
-    }
+    damageMap.clear();
+    restartTimer();
+  }
 
-    @Override
-    protected void onTimeActivation() {
+  @Override
+  public @NotNull ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.REDSTONE, Message.forName("item-delay-damage-description"));
+  }
 
-        double totalDamage = damageMap.values().stream().mapToDouble(Double::doubleValue).sum();
-        int playerCount = damageMap.size();
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-time-seconds-description").asArray(getValue() * 30);
+  }
 
-        if (playerCount > 0) {
-            canGetDamage = true;
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                player.damage(totalDamage);
-                Message.forName(("extreme-force-battle-took-damage")).send(player, Prefix.DAMAGE, totalDamage / 2);
-            }
-            canGetDamage = false;
-        }
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onPlayerDamage(@Nonnull EntityDamageEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (!(event.getEntity() instanceof Player)) return;
+    if (ignorePlayer((Player) event.getEntity())) return;
+    if (canGetDamage) return;
 
+    double damage = event.getFinalDamage();
+    Player player = (Player) event.getEntity();
 
-        damageMap.clear();
-        restartTimer();
-    }
-
-    @Override
-    public @NotNull ItemBuilder createDisplayItem() {
-        return new ItemBuilder(Material.REDSTONE, Message.forName("item-delay-damage-description"));
-    }
-
-    @Nullable
-    @Override
-    protected String[] getSettingsDescription() {
-        return Message.forName("item-time-seconds-description").asArray(getValue() * 30);
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlayerDamage(@Nonnull EntityDamageEvent event) {
-        if (!shouldExecuteEffect()) return;
-        if (!(event.getEntity() instanceof Player)) return;
-        if (ignorePlayer((Player) event.getEntity())) return;
-        if (canGetDamage) return;
-
-        double damage = event.getFinalDamage();
-        Player player = (Player) event.getEntity();
-
-        damageMap.put(player, damageMap.getOrDefault(player, 0.0) + damage);
-        event.setCancelled(true);
-    }
+    damageMap.put(player, damageMap.getOrDefault(player, 0.0) + damage);
+    event.setCancelled(true);
+  }
 }
