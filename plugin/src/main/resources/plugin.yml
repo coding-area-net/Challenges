@@ -231,3 +231,4 @@ commands:
     permission: "challenges.setlanguage"
     aliases:
       - "setlang"
+      - "language"
