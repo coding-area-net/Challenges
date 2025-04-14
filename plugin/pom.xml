@@ -43,7 +43,7 @@
         <dependency>
             <groupId>de.dytanic.cloudnet</groupId>
             <artifactId>cloudnet-driver</artifactId>
-            <version>3.3.0-RELEASE</version>
+            <version>3.4.5-RELEASE</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
