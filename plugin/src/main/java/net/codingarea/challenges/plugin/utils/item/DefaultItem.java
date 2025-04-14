@@ -1,5 +1,7 @@
 package net.codingarea.challenges.plugin.utils.item;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.UUID;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder.SkullBuilder;
@@ -26,12 +28,24 @@ public final class DefaultItem {
 
 	@Nonnull
 	public static ItemBuilder navigateBack() {
-		return new SkullBuilder(ARROW_LEFT_UUID, "MHF_ArrowLeft").setName(Message.forName("navigate-back")).hideAttributes();
+		URL BACK_SKULL;
+		try {
+			BACK_SKULL  = new URL("https://textures.minecraft.net/texture/bd69e06e5dadfd84e5f3d1c21063f2553b2fa945ee1d4d7152fdc5425bc12a9");
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+		return new SkullBuilder(BACK_SKULL).setName(Message.forName("navigate-back")).hideAttributes();
 	}
 
 	@Nonnull
 	public static ItemBuilder navigateNext() {
-		return new SkullBuilder(ARROW_RIGHT_UUID, "MHF_ArrowRight").setName(Message.forName("navigate-next")).hideAttributes();
+		URL NEXT_SKULL;
+		try {
+			NEXT_SKULL  = new URL("https://textures.minecraft.net/texture/19bf3292e126a105b54eba713aa1b152d541a1d8938829c56364d178ed22bf");
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+		return new SkullBuilder(NEXT_SKULL).setName(Message.forName("navigate-next")).hideAttributes();
 	}
 
 	@Nonnull

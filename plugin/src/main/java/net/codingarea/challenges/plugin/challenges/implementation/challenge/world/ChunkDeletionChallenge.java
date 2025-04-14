@@ -1,6 +1,5 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
-import de.dytanic.cloudnet.driver.event.EventListener;
 import java.util.HashMap;
 import net.anweisen.utilities.common.collection.pair.Tuple;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
@@ -18,6 +17,8 @@ import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
@@ -87,7 +88,7 @@ public class ChunkDeletionChallenge extends SettingModifier {
     bossbar.update();
   }
 
-  @EventListener
+  @EventHandler(priority = EventPriority.HIGH)
   public void onPlayerMove(PlayerMoveEvent event) {
     if (event.getTo() == null || !checkIfAllowed(event.getPlayer())) {
       return;

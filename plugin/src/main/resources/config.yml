@@ -22,7 +22,7 @@
 # The config-version is even with the version of the default config.
 # You will be notified, when this version is older than the of the default in the plugin jar.
 # We recommend regenerating the config to get access to new features / settings.
-config-version: "2.2.0"
+config-version: "2.2.1"
 
 # Currently supported by default
 # - en (English)
@@ -34,9 +34,6 @@ language: "de"
 small-caps: false
 
 timer:
-  stopped-message: "§8• §7Timer §c§lpaused §8•"
-  count-up-message: "§8• §7Time: §a§l{time} §8•"
-  count-down-message: "§8• §7Time: §c§l{time} §8•"
   format:
     seconds: "{mm}:{ss}"
     minutes: "{mm}:{ss}"

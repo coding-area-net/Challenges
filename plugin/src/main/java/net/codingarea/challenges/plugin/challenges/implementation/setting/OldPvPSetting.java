@@ -4,6 +4,7 @@ import net.anweisen.utilities.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.challenges.plugin.utils.bukkit.misc.Version.MinecraftVersion;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -72,7 +73,12 @@ public class OldPvPSetting extends Setting {
 	}
 
 	protected void setAttackSpeed(@Nonnull Player player, double value) {
-		AttributeInstance attribute = player.getAttribute(Attribute.GENERIC_ATTACK_SPEED);
+		AttributeInstance attribute;
+		if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_21_2)) {
+			attribute = player.getAttribute(Attribute.valueOf("ATTACK_SPEED"));
+		} else {
+			attribute = player.getAttribute(Attribute.valueOf("GENERIC_ATTACK_SPEED"));
+		}
 		if (attribute == null) return;
 		attribute.setBaseValue(value);
 	}

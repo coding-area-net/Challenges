@@ -4,6 +4,7 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.challenges.plugin.utils.bukkit.misc.Version.MinecraftVersion;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder.PotionBuilder;
 import org.bukkit.Bukkit;
@@ -92,7 +93,12 @@ public class SplitHealthSetting extends Setting {
 			if (currentPlayer.equals(player)) continue;
 
 			double health = player.getHealth();
-			AttributeInstance attribute = currentPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+			AttributeInstance attribute;
+			if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_21_2)) {
+				attribute = player.getAttribute(Attribute.valueOf("MAX_HEALTH"));
+			} else {
+				attribute = player.getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH"));
+			}
 			if (attribute == null) return;
 			if (health > attribute.getValue()) {
 				health = attribute.getValue();

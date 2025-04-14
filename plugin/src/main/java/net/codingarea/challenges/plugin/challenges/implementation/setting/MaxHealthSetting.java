@@ -79,7 +79,12 @@ public class MaxHealthSetting extends Modifier {
 	}
 
 	private void updateHealth(Player player) {
-		AttributeInstance attribute = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+		AttributeInstance attribute;
+		if (net.codingarea.challenges.plugin.utils.bukkit.misc.Version.MinecraftVersion.current().isNewerOrEqualThan(net.codingarea.challenges.plugin.utils.bukkit.misc.Version.MinecraftVersion.V1_21_2)) {
+			attribute = player.getAttribute(Attribute.valueOf("MAX_HEALTH"));
+		} else {
+			attribute = player.getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH"));
+		}
 		if (attribute == null)
 			return; // This should never happen because its a generic attribute, but just in case
 		int newMaxHealth = getMaxHealth(player);

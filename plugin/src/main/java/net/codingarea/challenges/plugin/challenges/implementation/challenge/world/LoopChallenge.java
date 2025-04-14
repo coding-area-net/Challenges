@@ -13,6 +13,7 @@ import net.codingarea.challenges.plugin.management.scheduler.policy.PlayerCountP
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
+import net.codingarea.challenges.plugin.utils.bukkit.misc.Version.MinecraftVersion;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import org.bukkit.Location;
@@ -321,8 +322,15 @@ public class LoopChallenge extends Setting {
 		private boolean isTool(@Nonnull ItemStack itemStack) {
 			if (itemStack.getItemMeta() != null) {
 				try {
-					Collection<AttributeModifier> attributeModifiers = itemStack.getItemMeta().getAttributeModifiers(Attribute.GENERIC_ATTACK_DAMAGE);
+					Attribute attribute;
+					if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_21_2)) {
+						attribute = Attribute.valueOf("MAX_HEALTH");
+					} else {
+						attribute = Attribute.valueOf("GENERIC_MAX_HEALTH");
+					}
+					Collection<AttributeModifier> attributeModifiers = itemStack.getItemMeta().getAttributeModifiers(attribute);
 					return attributeModifiers == null || !attributeModifiers.isEmpty();
+
 				} catch (NullPointerException exception) {
 					return false;
 				}

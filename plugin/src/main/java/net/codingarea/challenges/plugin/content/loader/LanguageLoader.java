@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import lombok.Getter;
 import net.anweisen.utilities.bukkit.utils.logging.Logger;
 import net.anweisen.utilities.common.collection.IOUtils;
 import net.anweisen.utilities.common.config.Document;
@@ -27,17 +28,14 @@ public final class LanguageLoader extends ContentLoader {
 	public static final String DEFAULT_LANGUAGE = "en";
 	public static final String DIRECT_FILE_PATH = "direct-language-file";
 
-	private static final JsonParser parser = new JsonParser();
+	@Getter
+  private static volatile boolean loaded = false;
+	@Getter
+  private String language;
+	@Getter
+  private boolean smallCapsFont;
 
-	private static volatile boolean loaded = false;
-	private String language;
-	private boolean smallCapsFont;
-
-	public static boolean isLoaded() {
-		return loaded;
-	}
-
-	@Override
+  @Override
 	protected void load() {
 
 		Document config = Challenges.getInstance().getConfigDocument();
@@ -54,6 +52,15 @@ public final class LanguageLoader extends ContentLoader {
 		}
 
 		loadDefault();
+	}
+
+	public void reload(String language) {
+		this.language = language;
+		read();
+		download();
+		init();
+		Challenges.getInstance().getScoreboardManager().updateAll();
+		Challenges.getInstance().getConfigManager().getSettingsConfig().set("language", language);
 	}
 
 	private void loadDefault() {
@@ -80,7 +87,7 @@ public final class LanguageLoader extends ContentLoader {
 	private void download() {
 		try {
 
-			JsonArray languages = parser.parse(IOUtils.toString(getGitHubUrl("language/languages.json"))).getAsJsonArray();
+			JsonArray languages = JsonParser.parseString(IOUtils.toString(getGitHubUrl("language/languages.json"))).getAsJsonArray();
 			Logger.debug("Fetched languages {}", languages);
 			for (JsonElement element : languages) {
 				try {
@@ -128,7 +135,7 @@ public final class LanguageLoader extends ContentLoader {
 			}
 
 			int messages = 0;
-			JsonObject read = parser.parse(FileUtils.newBufferedReader(file)).getAsJsonObject();
+			JsonObject read = JsonParser.parseReader(FileUtils.newBufferedReader(file)).getAsJsonObject();
 			for (Entry<String, JsonElement> entry : read.entrySet()) {
 				Message message = Message.forName(entry.getKey());
 				JsonElement element = entry.getValue();
@@ -149,14 +156,6 @@ public final class LanguageLoader extends ContentLoader {
 		} catch (Exception ex) {
 			Logger.error("Could not read languages", ex);
 		}
-	}
-
-	public String getLanguage() {
-		return language;
-	}
-
-	public boolean isSmallCapsFont() {
-		return smallCapsFont;
 	}
 
 }

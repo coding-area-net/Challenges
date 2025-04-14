@@ -1,12 +1,12 @@
 name: Challenges
-version: 2.3.1
+version: 2.3.3
 author: CodingArea
 authors:
   - anweisen
   - KxmischesDomi
 database: true
 website: coding-area.net
-api-version: 1.13
+api-version: 1.14
 main: net.codingarea.challenges.plugin.Challenges
 load: POSTWORLD
 softdepend:
@@ -17,7 +17,7 @@ description: |
 
 require:
   spigot: true
-  version: 1.13
+  version: 1.14
 
 commands:
   help:
@@ -225,3 +225,10 @@ commands:
     permission: "challenges.godmode"
     aliases:
       - "god"
+  setlanguage:
+    usage: "/setlanguage [language]"
+    description: "Changes the language"
+    permission: "challenges.setlanguage"
+    aliases:
+      - "setlang"
+      - "language"
