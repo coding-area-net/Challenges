@@ -5,7 +5,7 @@ import net.anweisen.utilities.bukkit.utils.menu.MenuPosition;
 import net.codingarea.challenges.plugin.management.menu.generator.MenuGenerator;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.0
  */
 @Getter

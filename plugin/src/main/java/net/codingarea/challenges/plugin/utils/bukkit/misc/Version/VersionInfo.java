@@ -2,8 +2,11 @@ package net.codingarea.challenges.plugin.utils.bukkit.misc.Version;
 
 import java.util.Objects;
 import javax.annotation.Nullable;
+
+import lombok.Getter;
 import net.anweisen.utilities.common.logging.ILogger;
 
+@Getter
 public class VersionInfo implements Version {
     protected static final ILogger logger = ILogger.forThisClass();
     private final int major;
@@ -20,28 +23,16 @@ public class VersionInfo implements Version {
         this.revision = revision;
     }
 
-    public int getMajor() {
-        return this.major;
-    }
-
-    public int getMinor() {
-        return this.minor;
-    }
-
-    public int getRevision() {
-        return this.revision;
-    }
-
     public boolean equals(Object other) {
         if (this == other) {
             return true;
         } else {
-            return !(other instanceof Version) ? false : this.equals((Version)other);
+            return other instanceof Version && this.equals((Version) other);
         }
     }
 
     public int hashCode() {
-        return Objects.hash(new Object[]{this.major, this.minor, this.revision});
+        return Objects.hash(this.major, this.minor, this.revision);
     }
 
     public String toString() {
@@ -72,7 +63,7 @@ public class VersionInfo implements Version {
         try {
             return parseExceptionally(input);
         } catch (Exception ex) {
-            logger.error("Could not parse version for input {}", new Object[]{ex.getMessage()});
+            logger.error("Could not parse version for input {}", ex.getMessage());
             return def;
         }
     }

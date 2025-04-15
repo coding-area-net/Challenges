@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 1.0
  */
 public class ChunkDeconstructionChallenge extends TimedChallenge {

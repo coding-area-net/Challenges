@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 import javax.annotation.Nonnull;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1
  */
 public class PlayerSneakTrigger extends ChallengeTrigger {

@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 public class BlockDropListener implements Listener {

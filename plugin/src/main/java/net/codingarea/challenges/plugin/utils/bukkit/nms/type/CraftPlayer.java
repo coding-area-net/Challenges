@@ -4,8 +4,8 @@ import net.codingarea.challenges.plugin.utils.bukkit.nms.NMSProvider;
 import org.bukkit.entity.Player;
 
 /**
- * @author TobiasDeBruijn | https://github.com/TobiasDeBruijn
- * @source https://github.com/TobiasDeBruijn/BukkitReflectionUtil
+ * @author TobiasDeBruijn | <a href="https://github.com/TobiasDeBruijn">.<a href="..</a>
+">* {@code @source} https://github.com/TobiasDeB</a>ruijn/BukkitReflectionUtil
  * @since 2.2.0
  */
 public abstract class CraftPlayer extends BukkitNMSClass<Player> {

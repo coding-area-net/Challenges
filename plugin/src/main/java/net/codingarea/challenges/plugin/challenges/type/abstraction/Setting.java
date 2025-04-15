@@ -12,7 +12,7 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import javax.annotation.Nonnull;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 1.0
  */
 

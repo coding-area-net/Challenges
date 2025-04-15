@@ -24,7 +24,7 @@ import org.bukkit.projectiles.ProjectileSource;
 import javax.annotation.Nonnull;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 public class DamageDisplaySetting extends Setting {

@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.utils.misc;
 import org.bukkit.Material;
 
 /**
- * @author KxmischesDomi | https://github.com/KxmischesDomi
+ * @author KxmischesDomi | <a href="https://github.com/KxmischesDomi">...</a>
  * @since 2.0
  */
 public final class ArmorUtils {

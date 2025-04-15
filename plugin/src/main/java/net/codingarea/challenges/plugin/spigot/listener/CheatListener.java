@@ -18,7 +18,7 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 import javax.annotation.Nonnull;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 public class CheatListener implements Listener {
@@ -37,17 +37,11 @@ public class CheatListener implements Listener {
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onSneak(PlayerToggleSneakEvent event) {
-		if (!event.isSneaking()) return;
-//
-//		StructureManager manager = Bukkit.getStructureManager();
-//		Map<NamespacedKey, Structure> structures = manager.getStructures();
-//		//		Entry<NamespacedKey, Structure> entry = IRandom.threadLocal().choose(entries);
+		if (!event.isSneaking()) {
+        }
 ////		Structure structure = entry.getValue();
-//		Structure structure = manager.getStructure(new NamespacedKey("minecraft", "shipwreck/rightsideup_backhalf"));
-//		structure.place(event.getPlayer().getLocation(), true, StructureRotation.NONE, Mirror.NONE, -1, 0,
-//				ThreadLocalRandom.current());
 
-	}
+    }
 
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onCommand(@Nonnull PlayerCommandPreprocessEvent event) {

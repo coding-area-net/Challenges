@@ -18,7 +18,7 @@ import org.bukkit.inventory.Inventory;
 import javax.annotation.Nonnull;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.0
  */
 public class MainCustomMenuGenerator extends ChallengeMenuGenerator {
@@ -68,7 +68,7 @@ public class MainCustomMenuGenerator extends ChallengeMenuGenerator {
 	@Override
 	public void onPreChallengePageClicking(@Nonnull MenuClickInfo info, int page) {
 		if (info.getSlot() == VIEW_SLOT) {
-			if (Challenges.getInstance().getCustomChallengesLoader().getCustomChallenges().size() == 0) {
+			if (Challenges.getInstance().getCustomChallengesLoader().getCustomChallenges().isEmpty()) {
 				Message.forName("custom-not-loaded").send(info.getPlayer(), Prefix.CUSTOM);
 				return;
 			}

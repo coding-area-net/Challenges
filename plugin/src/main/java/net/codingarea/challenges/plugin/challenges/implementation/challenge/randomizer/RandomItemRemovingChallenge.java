@@ -16,7 +16,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0
  */
 @Since("2.0")
@@ -55,7 +55,7 @@ public class RandomItemRemovingChallenge extends TimedChallenge {
 
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			if (ignorePlayer(player)) continue;
-			if (player.getInventory().getContents().length <= 0) continue;
+			if (player.getInventory().getContents().length == 0) continue;
 
 			Bukkit.getScheduler().runTask(plugin, () -> {
 				InventoryUtils.removeRandomItem(player.getInventory());

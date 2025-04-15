@@ -5,7 +5,7 @@ import net.codingarea.challenges.plugin.content.Message;
 import javax.annotation.Nonnull;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 public final class InventoryTitleManager {
@@ -35,11 +35,11 @@ public final class InventoryTitleManager {
 
 	@Nonnull
 	public static String getTitle(@Nonnull String menu, String... sub) {
-		String name = menu;
+		StringBuilder name = new StringBuilder(menu);
 		for (String s : sub) {
-			name += getTitleSplitter() + s;
+			name.append(getTitleSplitter()).append(s);
 		}
-		return getTitle(name);
+		return getTitle(name.toString());
 	}
 
 	@Nonnull
@@ -49,7 +49,7 @@ public final class InventoryTitleManager {
 
 	@Nonnull
 	public static String getMenuSettingTitle(@Nonnull MenuType menu, @Nonnull String name, int page, boolean showPages) {
-		return getTitle(menu.getName() + getTitleSplitter() + name + (showPages && false ? " §8• " + Message.forName("inventory-color") + (page + 1) : ""));
+		return getTitle(menu.getName() + getTitleSplitter() + name + (false ? " §8• " + Message.forName("inventory-color") + (page + 1) : ""));
 	}
 
 	@Nonnull

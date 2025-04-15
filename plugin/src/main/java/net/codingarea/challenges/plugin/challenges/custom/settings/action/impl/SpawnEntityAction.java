@@ -11,7 +11,7 @@ import org.bukkit.entity.EntityType;
 import java.util.Map;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.1
  */
 public class SpawnEntityAction extends EntityTargetAction {

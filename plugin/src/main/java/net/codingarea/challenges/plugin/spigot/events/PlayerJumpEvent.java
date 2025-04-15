@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 import javax.annotation.Nonnull;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0
  */
 public class PlayerJumpEvent extends PlayerEvent implements Cancellable {

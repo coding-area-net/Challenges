@@ -9,7 +9,7 @@ import net.codingarea.challenges.plugin.management.menu.generator.categorised.Se
 import javax.annotation.Nonnull;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 public abstract class RandomizerSetting extends Setting {

@@ -12,7 +12,7 @@ import org.bukkit.event.EventHandler;
 import javax.annotation.Nonnull;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 public class PvPSetting extends Setting {

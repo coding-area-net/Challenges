@@ -11,7 +11,7 @@ import org.bukkit.World.Environment;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.0
  */
 @Since("2.1.0")
