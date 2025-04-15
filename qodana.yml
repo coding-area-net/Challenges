@@ -1,4 +1,4 @@
 version: "1.0"
-failThreshold: 999
+linter: jetbrains/qodana-jvm-community:2024.3
 profile:
-  name: qodana.starter
+  name: qodana.recommended
