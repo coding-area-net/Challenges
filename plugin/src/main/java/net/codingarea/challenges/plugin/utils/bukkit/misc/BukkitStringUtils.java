@@ -19,7 +19,7 @@ import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.2.0
  */
 public class BukkitStringUtils {
@@ -67,7 +67,8 @@ public class BukkitStringUtils {
 			} else {
 				if (lastWasParagraph) {
 					ChatColor newColor = ChatColor.getByChar(c);
-					if (!newColor.isColor()) {
+                    assert newColor != null;
+                    if (!newColor.isColor()) {
 						if (newColor == ChatColor.RESET) {
 							currentFormatting.clear();
 							currentColor = null;

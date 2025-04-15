@@ -7,7 +7,6 @@ import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.Version.MinecraftVersion;
-import net.codingarea.challenges.plugin.utils.bukkit.misc.Version.Version;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder.PotionBuilder;
 import org.bukkit.Color;
@@ -29,10 +28,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 1.0
  */
 public class RandomizedHPChallenge extends SettingModifier {
@@ -78,9 +78,9 @@ public class RandomizedHPChallenge extends SettingModifier {
 		int health = random.nextInt(getValue() * 100) + 1;
 		AttributeInstance attribute;
 		if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_21_2)) {
-			entity.getAttribute(Attribute.valueOf("MAX_HEALTH")).setBaseValue(health);
+			Objects.requireNonNull(entity.getAttribute(Attribute.valueOf("MAX_HEALTH"))).setBaseValue(health);
 		} else {
-			entity.getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH")).setBaseValue(health);
+			Objects.requireNonNull(entity.getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH"))).setBaseValue(health);
 		}
 		entity.setHealth(health);
 	}

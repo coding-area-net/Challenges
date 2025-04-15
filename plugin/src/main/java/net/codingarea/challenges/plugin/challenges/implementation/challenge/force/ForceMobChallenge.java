@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 @ExcludeFromRandomChallenges

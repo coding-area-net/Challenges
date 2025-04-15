@@ -7,7 +7,7 @@ import net.codingarea.challenges.plugin.utils.bukkit.nms.type.BorderPacketFactor
 import net.codingarea.challenges.plugin.utils.bukkit.nms.type.PacketBorder;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.3
  */
 public class BorderPacketFactory_1_17 extends BorderPacketFactory {

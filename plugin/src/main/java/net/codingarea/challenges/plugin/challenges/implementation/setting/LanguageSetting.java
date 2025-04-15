@@ -12,6 +12,7 @@ import org.bukkit.Material;
 import javax.annotation.Nonnull;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 
 public class LanguageSetting extends Modifier {
 
@@ -55,11 +56,11 @@ public class LanguageSetting extends Modifier {
         switch (getValue()) {
             case GERMAN:
                 ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("item-language-setting-german"));
-                Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).reload("de");
+                Objects.requireNonNull(Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class)).reload("de");
                 break;
             case ENGLISH:
                 ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("item-language-setting-english"));
-                Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).reload("en");
+                Objects.requireNonNull(Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class)).reload("en");
                 break;
             default:
                 ChallengeHelper.playToggleChallengeTitle(this, false);

@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets;
 
+import lombok.Getter;
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.ExtremeForceBattleGoal;
 import net.codingarea.challenges.plugin.content.Message;
 import org.bukkit.Material;
@@ -8,10 +9,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.3
  */
+@Getter
 public abstract class ForceTarget<T> {
     protected final T target;
 
@@ -32,15 +36,11 @@ public abstract class ForceTarget<T> {
         return target.toString();
     }
 
-    public T getTarget() {
-        return target;
-    }
-
     public void updateDisplayStand(@NotNull ArmorStand armorStand) {
         if (target instanceof Material) {
-            armorStand.getEquipment().setHelmet(new ItemStack((Material) target));
+            Objects.requireNonNull(armorStand.getEquipment()).setHelmet(new ItemStack((Material) target));
         } else {
-            armorStand.getEquipment().setHelmet(null);
+            Objects.requireNonNull(armorStand.getEquipment()).setHelmet(null);
         }
     }
 

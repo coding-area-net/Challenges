@@ -7,7 +7,7 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Entity;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.0
  */
 public final class NMSUtils {

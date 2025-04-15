@@ -7,7 +7,7 @@ import net.codingarea.challenges.plugin.management.menu.generator.implementation
 import org.bukkit.entity.Player;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.2
  */
 public abstract class GeneratorSubSettingsBuilder extends SubSettingsBuilder {

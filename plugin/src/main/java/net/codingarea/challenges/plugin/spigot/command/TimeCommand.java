@@ -16,7 +16,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0
  */
 public class TimeCommand implements PlayerCommand, Completer {
@@ -34,7 +34,7 @@ public class TimeCommand implements PlayerCommand, Completer {
 	@Override
 	public void onCommand(@Nonnull Player player, @Nonnull String[] args) throws Exception {
 
-		if (args.length <= 0) {
+		if (args.length == 0) {
 			Message.forName("syntax").send(player, Prefix.CHALLENGES, "time <set/add/remove/query/day/night/noon/midnight>");
 			return;
 		}
@@ -54,7 +54,7 @@ public class TimeCommand implements PlayerCommand, Completer {
 				player.performCommand("time set midnight");
 				break;
 			case "set": {
-				if (args.length <= 1) {
+				if (args.length == 1) {
 					Message.forName("syntax").send(player, Prefix.CHALLENGES, "time set <ticks/day/night/noon/midnight>");
 					break;
 				}
@@ -74,7 +74,7 @@ public class TimeCommand implements PlayerCommand, Completer {
 				break;
 			}
 			case "add": {
-				if (args.length <= 1) {
+				if (args.length == 1) {
 					Message.forName("syntax").send(player, Prefix.CHALLENGES, "time add <ticks>");
 					break;
 				}
@@ -87,7 +87,7 @@ public class TimeCommand implements PlayerCommand, Completer {
 				break;
 			}
 			case "subtract": {
-				if (args.length <= 1) {
+				if (args.length == 1) {
 					Message.forName("syntax").send(player, Prefix.CHALLENGES, "time subtract <ticks>");
 					break;
 				}

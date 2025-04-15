@@ -7,7 +7,7 @@ import net.codingarea.challenges.plugin.utils.bukkit.nms.implementations.v1_13.P
 import org.bukkit.World;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.3
  */
 public class PacketBorder_1_17 extends PacketBorder_1_13 {
@@ -17,16 +17,6 @@ public class PacketBorder_1_17 extends PacketBorder_1_13 {
             world,
             NMSUtils.getClass("world.level.border.WorldBorder")
         );
-    }
-
-    @Override
-    protected Object createWorldBorder() {
-        try {
-            return ReflectionUtil.invokeConstructor(nmsClass);
-        } catch (Exception exception) {
-            Challenges.getInstance().getLogger().error("Failed to create world border:", exception);
-            return null;
-        }
     }
 
 

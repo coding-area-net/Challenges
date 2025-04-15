@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 @Since("2.0")
@@ -38,10 +38,10 @@ public class RandomEventChallenge extends TimedChallenge {
 		setCategory(SettingCategory.RANDOMIZER);
 		events = new Event[]{
 				new SpeedEvent(),
-				new SpawnEntitiesEvent(),
+                new SpawnEntitiesEvent(),
 				new HoleEvent(),
 				new FlyEvent(),
-				new CobWebEvent(),
+                new CobWebEvent(),
 				new ReplaceOresEvent(),
 				new SicknessEvent()
 		};
@@ -190,7 +190,7 @@ public class RandomEventChallenge extends TimedChallenge {
 		}
 	}
 
-	public class SpawnEntitiesEvent implements Event {
+	public static class SpawnEntitiesEvent implements Event {
 
 		@Nonnull
 		@Override
@@ -214,7 +214,7 @@ public class RandomEventChallenge extends TimedChallenge {
 
 	}
 
-	public class CobWebEvent implements Event {
+	public static class CobWebEvent implements Event {
 
 		@Nonnull
 		@Override

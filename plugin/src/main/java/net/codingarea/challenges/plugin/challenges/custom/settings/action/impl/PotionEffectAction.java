@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.Map;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.0
  */
 public class PotionEffectAction extends EntityTargetAction {

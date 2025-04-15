@@ -12,7 +12,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.3
  */
 public class BukkitSerialization {
@@ -22,8 +22,7 @@ public class BukkitSerialization {
 	 *
 	 * @param playerInventory to turn into an array of strings.
 	 * @return Array of strings: [ main content, armor content ]
-	 * @throws IllegalStateException
-	 */
+     */
 	public static String[] playerInventoryToBase64(PlayerInventory playerInventory) throws IllegalStateException {
 		//get the main content part, this doesn't return the armor
 		String content = toBase64(playerInventory);
@@ -41,8 +40,7 @@ public class BukkitSerialization {
 	 *
 	 * @param items to turn into a Base64 String.
 	 * @return Base64 string of the items.
-	 * @throws IllegalStateException
-	 */
+     */
 	public static String itemStackArrayToBase64(ItemStack[] items) throws IllegalStateException {
 		try {
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -76,8 +74,7 @@ public class BukkitSerialization {
 	 *
 	 * @param inventory to serialize
 	 * @return Base64 string of the provided inventory
-	 * @throws IllegalStateException
-	 */
+     */
 	public static String toBase64(Inventory inventory) throws IllegalStateException {
 		try {
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -108,8 +105,7 @@ public class BukkitSerialization {
 	 *
 	 * @param data Base64 string of data containing an inventory.
 	 * @return Inventory created from the Base64 string.
-	 * @throws IOException
-	 */
+     */
 	public static Inventory fromBase64(Inventory inventory, String data) throws IOException {
 		try {
 			ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
@@ -132,12 +128,11 @@ public class BukkitSerialization {
 	 * <p>
 	 * <p/>
 	 * <p>
-	 * Base off of {@link #fromBase64(String)}.
+	 * Base off of .
 	 *
 	 * @param data Base64 string to convert to ItemStack array.
 	 * @return ItemStack array created from the Base64 string.
-	 * @throws IOException
-	 */
+     */
 	public static ItemStack[] itemStackArrayFromBase64(String data) throws IOException {
 		try {
 			ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));

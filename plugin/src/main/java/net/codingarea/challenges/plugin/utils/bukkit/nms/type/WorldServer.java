@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.utils.bukkit.nms.type;
 import org.bukkit.World;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.3
  */
 public abstract class WorldServer extends BukkitNMSClass<World> {

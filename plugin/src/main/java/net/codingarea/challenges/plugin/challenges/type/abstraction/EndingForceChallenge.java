@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 public abstract class EndingForceChallenge extends AbstractForceChallenge {
@@ -60,12 +60,7 @@ public abstract class EndingForceChallenge extends AbstractForceChallenge {
 		failed.forEach(ChallengeHelper::kill);
 	}
 
-	@Override
-	protected void handleCountdown() {
-		bossbar.update();
-	}
-
-	protected abstract boolean isFailing(@Nonnull Player player);
+    protected abstract boolean isFailing(@Nonnull Player player);
 
 	protected abstract void broadcastFailedMessage(@Nonnull Player player);
 

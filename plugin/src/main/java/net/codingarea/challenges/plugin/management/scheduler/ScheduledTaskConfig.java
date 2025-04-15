@@ -7,7 +7,7 @@ import lombok.Getter;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 @Getter

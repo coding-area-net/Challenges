@@ -7,7 +7,7 @@ import net.codingarea.challenges.plugin.utils.bukkit.nms.type.BorderPacketFactor
 import net.codingarea.challenges.plugin.utils.bukkit.nms.type.PacketBorder;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.3
  */
 public class BorderPacketFactory_1_13 extends BorderPacketFactory {
@@ -36,6 +36,7 @@ public class BorderPacketFactory_1_13 extends BorderPacketFactory {
         try {
             Class<?> clazz = NMSUtils.getClass("PacketPlayOutWorldBorder");
             Class<?> actionClazz = NMSUtils.getClass("PacketPlayOutWorldBorder$EnumWorldBorderAction");
+            assert actionClazz != null;
             for (Object enumConstant : actionClazz.getEnumConstants()) {
                 if (enumConstant.toString().equalsIgnoreCase(worldBorderAction)) {
                     return ReflectionUtil.invokeConstructor(clazz, new Class[]{packetBorder.getNMSClass(), actionClazz}, new Object[]{packetBorder.getWorldBorderObject(), enumConstant});

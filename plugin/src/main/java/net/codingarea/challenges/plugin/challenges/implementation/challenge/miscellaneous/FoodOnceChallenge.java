@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 1.0
  */
 public class FoodOnceChallenge extends SettingModifier {

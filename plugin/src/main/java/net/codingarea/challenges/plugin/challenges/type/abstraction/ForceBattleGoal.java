@@ -38,7 +38,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.0
  */
 public abstract class ForceBattleGoal<T extends ForceTarget<?>> extends MenuGoal {

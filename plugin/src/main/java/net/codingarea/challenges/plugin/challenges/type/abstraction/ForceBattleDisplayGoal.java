@@ -17,9 +17,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.0
  */
 public abstract class ForceBattleDisplayGoal<T extends ForceTarget<?>> extends ForceBattleGoal<T> {
@@ -66,7 +67,7 @@ public abstract class ForceBattleDisplayGoal<T extends ForceTarget<?>> extends F
     public void handleDisplayStandUpdate(@NotNull Player player, @NotNull ArmorStand armorStand) {
         if (currentTarget.containsKey(player.getUniqueId())) {
             currentTarget.get(player.getUniqueId()).updateDisplayStand(armorStand);
-        } else if (armorStand.getEquipment().getHelmet() != null) {
+        } else if (Objects.requireNonNull(armorStand.getEquipment()).getHelmet() != null) {
             armorStand.getEquipment().setHelmet(null);
         }
     }

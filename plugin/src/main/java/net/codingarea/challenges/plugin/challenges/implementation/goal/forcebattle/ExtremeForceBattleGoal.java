@@ -30,14 +30,11 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Function;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.3
  */
 public class ExtremeForceBattleGoal extends ForceBattleDisplayGoal<ForceTarget<?>> {
@@ -224,7 +221,7 @@ public class ExtremeForceBattleGoal extends ForceBattleDisplayGoal<ForceTarget<?
             return new DamageTarget(globalRandom.range(1, 19));
         }),
         ADVANCEMENT(object -> {
-            return new AdvancementTarget(Bukkit.getAdvancement(NamespacedKey.fromString((String) object)));
+            return new AdvancementTarget(Bukkit.getAdvancement(Objects.requireNonNull(NamespacedKey.fromString((String) object))));
         }, player -> {
             return new AdvancementTarget(globalRandom.choose(AdvancementTarget.getPossibleAdvancements()));
         }),

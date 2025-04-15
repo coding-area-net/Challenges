@@ -17,7 +17,6 @@ import net.codingarea.challenges.plugin.management.scheduler.policy.PlayerCountP
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
-import net.codingarea.challenges.plugin.utils.misc.FontUtils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
@@ -26,7 +25,7 @@ import org.bukkit.entity.Player;
 import javax.annotation.Nonnull;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 1.0
  */
 public final class ChallengeTimer {

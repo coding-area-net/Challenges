@@ -18,9 +18,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.2.0
  */
 @Since("2.2.0")
@@ -55,7 +56,7 @@ public class NoSharedAdvancementsChallenge extends Setting {
 		List<String> advancementKeys = document.getStringList("advancements");
 		for (String advancementKey : advancementKeys) {
 			try {
-				advancementsDone.add(Bukkit.getAdvancement(BukkitReflectionUtils.fromString(advancementKey)));
+				advancementsDone.add(Bukkit.getAdvancement(Objects.requireNonNull(BukkitReflectionUtils.fromString(advancementKey))));
 			} catch (Exception exception) {
 				// DON'T EXIST
 			}

@@ -25,7 +25,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0
  */
 @Since("2.0")

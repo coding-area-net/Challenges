@@ -8,7 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.0
  */
 public class HungerTrigger extends ChallengeTrigger {
@@ -25,7 +25,7 @@ public class HungerTrigger extends ChallengeTrigger {
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
 	public void onPickup(FoodLevelChangeEvent event) {
 		if (!(event.getEntity() instanceof Player)) return;
-		if (event.getFoodLevel() < ((Player) event.getEntity()).getFoodLevel()) {
+		if (event.getFoodLevel() < event.getEntity().getFoodLevel()) {
 			createData()
 					.entity(event.getEntity())
 					.event(event)

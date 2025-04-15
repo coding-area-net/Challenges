@@ -20,9 +20,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.0
  */
 @Since("2.2.0")
@@ -54,8 +55,10 @@ public class ForceAdvancementBattleGoal extends ForceBattleGoal<AdvancementTarge
 	public AdvancementTarget getTargetFromDocument(Document document, String path) {
 		String advancementKey = document.getString(path);
 		try {
-			NamespacedKey namespacedKey = BukkitReflectionUtils.fromString(advancementKey);
-			return new AdvancementTarget(Bukkit.getAdvancement(namespacedKey));
+            assert advancementKey != null;
+            NamespacedKey namespacedKey = BukkitReflectionUtils.fromString(advancementKey);
+            assert namespacedKey != null;
+            return new AdvancementTarget(Bukkit.getAdvancement(namespacedKey));
 		} catch (Exception exception) {
 			// DON'T EXIST
 		}
@@ -68,7 +71,7 @@ public class ForceAdvancementBattleGoal extends ForceBattleGoal<AdvancementTarge
 		List<AdvancementTarget> advancementTargets = new ArrayList<>();
 		for (String advancementKey : advancementKeys) {
 			try {
-				advancementTargets.add(new AdvancementTarget(Bukkit.getAdvancement(BukkitReflectionUtils.fromString(advancementKey))));
+				advancementTargets.add(new AdvancementTarget(Bukkit.getAdvancement(Objects.requireNonNull(BukkitReflectionUtils.fromString(advancementKey)))));
 			} catch (Exception exception) {
 				// DON'T EXIST
 			}

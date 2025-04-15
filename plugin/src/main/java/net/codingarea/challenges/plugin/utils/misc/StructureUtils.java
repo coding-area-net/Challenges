@@ -4,7 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.StructureType;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.3
  */
 public class StructureUtils {

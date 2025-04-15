@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.0
  */
 public abstract class PlayerTargetAction extends EntityTargetAction {

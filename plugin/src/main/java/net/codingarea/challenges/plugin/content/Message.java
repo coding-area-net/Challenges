@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 public interface Message {

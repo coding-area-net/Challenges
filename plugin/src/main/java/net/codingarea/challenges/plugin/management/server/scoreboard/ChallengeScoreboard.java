@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 public final class ChallengeScoreboard {
@@ -92,16 +92,16 @@ public final class ChallengeScoreboard {
 		}
 	}
 
-	public final void show() {
+	public void show() {
 		Challenges.getInstance().getScoreboardManager().setCurrentScoreboard(this);
 	}
 
-	public final void hide() {
+	public void hide() {
 		if (Challenges.getInstance().getScoreboardManager().getCurrentScoreboard() != this) return;
 		Challenges.getInstance().getScoreboardManager().setCurrentScoreboard(null);
 	}
 
-	public final boolean isShown() {
+	public boolean isShown() {
 		return Challenges.getInstance().getScoreboardManager().isShown(this);
 	}
 

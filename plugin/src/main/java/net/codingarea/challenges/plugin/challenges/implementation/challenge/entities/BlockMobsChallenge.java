@@ -22,9 +22,10 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.Objects;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.3
  */
 @Since("2.1.3")
@@ -49,7 +50,7 @@ public class BlockMobsChallenge extends Setting {
 		LivingEntity entity = (LivingEntity) event.getBlock().getWorld()
 				.spawnEntity(event.getBlock().getLocation().add(0.5, 0, 0.5), type);
 
-		Collection<ItemStack> drops = event.getBlock().getDrops(event.getPlayer().getEquipment().getItemInMainHand());
+		Collection<ItemStack> drops = event.getBlock().getDrops(Objects.requireNonNull(event.getPlayer().getEquipment()).getItemInMainHand());
 
 		int i = 0;
 		// Put every stack in a different slot to make sure everything drops properly
@@ -60,7 +61,8 @@ public class BlockMobsChallenge extends Setting {
 
 			switch (i) {
 				case 0:
-					equipment.setHelmetDropChance(1);
+                    assert equipment != null;
+                    equipment.setHelmetDropChance(1);
 					break;
 				case 1:
 					slot = EquipmentSlot.CHEST;
