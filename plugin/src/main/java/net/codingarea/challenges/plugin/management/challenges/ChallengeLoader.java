@@ -95,8 +95,8 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
  * This class loads all challenges of this plugin.
  * In pre2 versions, this class was known as PluginChallengeLoader.
  *
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
+ * @autho<a href="r">KxmischesDomi | https://github</a>.com/kxmischesdomi
  * @since 2.0
  */
 public final class ChallengeLoader extends ModuleChallengeLoader {

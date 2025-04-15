@@ -16,7 +16,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import javax.annotation.Nonnull;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 1.0
  */
 public class OneTeamLifeSetting extends Setting {

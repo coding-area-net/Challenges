@@ -35,7 +35,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntitySpawnEvent;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0
  */
 @Since("2.0")

@@ -15,7 +15,7 @@ import org.bukkit.util.Vector;
 import javax.annotation.Nonnull;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 @Since("2.0")

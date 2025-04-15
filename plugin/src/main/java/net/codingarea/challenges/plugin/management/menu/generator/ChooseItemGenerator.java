@@ -17,7 +17,7 @@ import javax.annotation.Nonnull;
 import java.util.LinkedHashMap;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.0
  */
 public abstract class ChooseItemGenerator extends MultiPageMenuGenerator {

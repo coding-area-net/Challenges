@@ -14,7 +14,7 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import javax.annotation.Nonnull;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 1.0
  */
 public class DupedSpawningChallenge extends Setting {

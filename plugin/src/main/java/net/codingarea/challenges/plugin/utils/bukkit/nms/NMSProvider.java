@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.utils.bukkit.nms;
 
+import lombok.Getter;
 import net.anweisen.utilities.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.implementations.v1_13.*;
@@ -13,12 +14,19 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.3
  */
 public class NMSProvider {
 
     private final static int majorVersion;
+    /**
+     * -- GETTER --
+     *
+     * @return A border packet factory
+     *
+     */
+    @Getter
     private static final BorderPacketFactory borderPacketFactory;
 
     static {
@@ -102,14 +110,6 @@ public class NMSProvider {
             return new PacketBorder_1_13(world);
         }
         throw new IllegalStateException("Could not find a PacketBorder implementation for version " + getFormattedVersion());
-    }
-
-    /**
-     * @return A border packet factory
-     * @throws IllegalStateException If no implementation was found for the current version
-     */
-    public static BorderPacketFactory getBorderPacketFactory() {
-        return borderPacketFactory;
     }
 
     private static boolean versionIsAtLeast(int majorVersion) {

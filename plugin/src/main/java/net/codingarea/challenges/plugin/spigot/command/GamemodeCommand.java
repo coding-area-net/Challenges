@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 1.0
  */
 public class GamemodeCommand implements SenderCommand, Completer {
@@ -26,7 +26,7 @@ public class GamemodeCommand implements SenderCommand, Completer {
 	public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 		List<Player> targets = new ArrayList<>();
 
-		if (args.length <= 0) {
+		if (args.length == 0) {
 			Message.forName("syntax").send(sender, Prefix.CHALLENGES, "gm <gamemode> [player]");
 			return;
 		}

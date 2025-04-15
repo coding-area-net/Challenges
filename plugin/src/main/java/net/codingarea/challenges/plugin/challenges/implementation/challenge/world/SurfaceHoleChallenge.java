@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
+ * @autho<a href="r">KxmischesDomi | https://github</a>.com/kxmischesdomi
  * @since 1.0
  */
 public class SurfaceHoleChallenge extends SettingModifier {

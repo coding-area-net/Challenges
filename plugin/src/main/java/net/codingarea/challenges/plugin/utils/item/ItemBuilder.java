@@ -28,7 +28,7 @@ import java.net.URL;
 import java.util.*;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 1.0
  */
 public class ItemBuilder extends net.anweisen.utilities.bukkit.utils.item.ItemBuilder {
@@ -325,7 +325,8 @@ public class ItemBuilder extends net.anweisen.utilities.bukkit.utils.item.ItemBu
 				PlayerProfile profile = Bukkit.createPlayerProfile(UUID.randomUUID());
 				profile.getTextures().setSkin(base64);
 
-				meta.setOwnerProfile(profile);
+                assert meta != null;
+                meta.setOwnerProfile(profile);
 
 				setItemMeta(meta);
 			}});

@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.utils.bukkit.nms.type;
 
 /**
- * @author TobiasDeBruijn | https://github.com/TobiasDeBruijn
- * @source https://github.com/TobiasDeBruijn/BukkitReflectionUtil
+ * @author TobiasDeBruijn | <a href="https://github.com/TobiasDeBruijn">.<a href="..</a>
+">* {@code @source} https://github.com/TobiasDeB</a>ruijn/BukkitReflectionUtil
  * @since 2.2.0
  */
 public abstract class PlayerConnection extends AbstractNMSClass {

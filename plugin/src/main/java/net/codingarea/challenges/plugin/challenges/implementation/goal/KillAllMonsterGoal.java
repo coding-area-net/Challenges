@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.3
  */
 @Since("2.1.3")
@@ -30,7 +30,10 @@ public class KillAllMonsterGoal extends KillMobsGoal {
 	static List<EntityType> getAllMobsToKill() {
 		LinkedList<EntityType> list = new LinkedList<>(Arrays.asList(EntityType.values()));
 		list.removeIf(type -> !type.isAlive());
-		list.removeIf(type -> !Monster.class.isAssignableFrom(type.getEntityClass()));
+		list.removeIf(type -> {
+            assert type.getEntityClass() != null;
+            return !Monster.class.isAssignableFrom(type.getEntityClass());
+        });
 		list.add(EntityType.PHANTOM);
 		list.add(EntityType.ENDER_DRAGON);
 		list.add(EntityType.SHULKER);

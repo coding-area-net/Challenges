@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0
  */
 public final class ListBuilder<T> {
@@ -30,7 +30,7 @@ public final class ListBuilder<T> {
 		return addAll(Arrays.asList(t));
 	}
 
-	public final ListBuilder<T> addAll(Collection<T> collection) {
+	public ListBuilder<T> addAll(Collection<T> collection) {
 		list.addAll(collection);
 		return this;
 	}
@@ -40,7 +40,7 @@ public final class ListBuilder<T> {
 		return addAllIfNotContains(Arrays.asList(t));
 	}
 
-	public final ListBuilder<T> addAllIfNotContains(Collection<T> collection) {
+	public ListBuilder<T> addAllIfNotContains(Collection<T> collection) {
 		for (T t : collection) {
 			if (!list.contains(t)) list.add(t);
 		}

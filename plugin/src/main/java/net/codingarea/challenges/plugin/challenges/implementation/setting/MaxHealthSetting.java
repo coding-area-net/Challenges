@@ -9,8 +9,6 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.bukkit.nms.NMSProvider;
-import net.codingarea.challenges.plugin.utils.bukkit.nms.type.CraftPlayer;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.attribute.Attribute;
@@ -21,7 +19,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 1.0
  */
 public class MaxHealthSetting extends Modifier {

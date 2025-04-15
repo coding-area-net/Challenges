@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.1
  */
 @Since("2.1.1")

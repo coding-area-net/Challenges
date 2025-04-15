@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0
  */
 @Since("2.0")
@@ -30,7 +30,7 @@ public class RandomItemSwappingChallenge extends TimedChallenge {
 	}
 
 	public static void swapRandomItems(Player player) {
-		if (player.getInventory().getContents().length <= 0) return;
+		if (player.getInventory().getContents().length == 0) return;
 		int slot = InventoryUtils.getRandomFullSlot(player.getInventory());
 		if (slot == -1) return;
 		swapItemToRandomSlot(

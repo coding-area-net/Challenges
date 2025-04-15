@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import javax.annotation.Nonnull;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 public class ExtraWorldRestrictionListener implements Listener {

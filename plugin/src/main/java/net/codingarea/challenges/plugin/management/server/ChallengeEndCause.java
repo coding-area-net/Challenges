@@ -6,7 +6,7 @@ import lombok.Getter;
 import net.codingarea.challenges.plugin.content.Message;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 1.0
  */
 @Getter

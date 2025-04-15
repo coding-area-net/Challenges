@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1
  */
 public class CustomMainSettingsMenuGenerator extends ChooseItemGenerator implements IParentCustomGenerator {
@@ -45,12 +45,7 @@ public class CustomMainSettingsMenuGenerator extends ChooseItemGenerator impleme
 		return new String[]{title};
 	}
 
-	@Override
-	public int[] getNavigationSlots(int page) {
-		return MainCustomMenuGenerator.NAVIGATION_SLOTS;
-	}
-
-  @Override
+    @Override
 	public void accept(Player player, SettingType type, Map<String, String[]> data) {
 
 		subSettings.putAll(data);

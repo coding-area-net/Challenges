@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.sub;
 
+import lombok.Getter;
 import net.anweisen.utilities.common.misc.StringUtils;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder.*;
 import net.codingarea.challenges.plugin.content.Message;
@@ -16,9 +17,10 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.0
  */
+@Getter
 public abstract class SubSettingsBuilder {
 
 	private String key;
@@ -63,11 +65,7 @@ public abstract class SubSettingsBuilder {
 
 	public abstract boolean hasSettings();
 
-	public SubSettingsBuilder getParent() {
-		return parent;
-	}
-
-	public SubSettingsBuilder setParent(SubSettingsBuilder parent) {
+    public SubSettingsBuilder setParent(SubSettingsBuilder parent) {
 
 		SubSettingsBuilder parentBuilder = getParent();
 		if (parentBuilder != null) {
@@ -79,15 +77,7 @@ public abstract class SubSettingsBuilder {
 
 	}
 
-	public SubSettingsBuilder getChild() {
-		return child;
-	}
-
-	public String getKey() {
-		return key;
-	}
-
-	public SubSettingsBuilder setKey(String key) {
+    public SubSettingsBuilder setKey(String key) {
 		this.key = key;
 		return this;
 	}

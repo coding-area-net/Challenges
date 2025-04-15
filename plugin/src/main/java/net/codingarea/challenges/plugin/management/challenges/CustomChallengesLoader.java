@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.management.challenges;
 
+import lombok.Getter;
 import net.anweisen.utilities.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.CustomChallenge;
@@ -17,9 +18,10 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1
  */
+@Getter
 public class CustomChallengesLoader extends ModuleChallengeLoader {
 
 	private final Map<UUID, CustomChallenge> customChallenges = new LinkedHashMap<>();
@@ -122,14 +124,6 @@ public class CustomChallengesLoader extends ModuleChallengeLoader {
 		getCustomChallengesByTrigger(challengeExecutionData.getTrigger())
 				.forEach(customChallenge -> customChallenge
 						.onTriggerFulfilled(challengeExecutionData));
-	}
-
-	public int getMaxNameLength() {
-		return maxNameLength;
-	}
-
-	public Map<UUID, CustomChallenge> getCustomChallenges() {
-		return customChallenges;
 	}
 
 }
