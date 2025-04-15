@@ -4,6 +4,11 @@ on:
   pull_request:
   push:
 
+permissions:
+  contents: write
+  pull-requests: write
+  checks: write
+
 jobs:
   qodana:
     runs-on: ubuntu-latest
@@ -20,6 +25,8 @@ jobs:
         uses: JetBrains/qodana-action@v2024.3
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+        with:
+          push-fixes: pull-request
       - uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: ${{ runner.temp }}/qodana/results/qodana.sarif.json
