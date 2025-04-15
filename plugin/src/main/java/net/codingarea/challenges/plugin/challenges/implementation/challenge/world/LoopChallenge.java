@@ -46,7 +46,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0.2
  */
 @Since("2.0.2")
@@ -189,13 +189,11 @@ public class LoopChallenge extends Setting {
 	private static class EntityDamageLoop implements Loop {
 
 		private final LivingEntity entity;
-		private final DamageCause damageCause;
-		private final double damage;
+        private final double damage;
 
 		public EntityDamageLoop(LivingEntity entity, DamageCause cause, double damage) {
 			this.entity = entity;
-			this.damageCause = cause;
-			this.damage = damage;
+            this.damage = damage;
 		}
 
 		@Override
@@ -304,7 +302,7 @@ public class LoopChallenge extends Setting {
 			org.bukkit.inventory.meta.Damageable damageable = (org.bukkit.inventory.meta.Damageable) itemStack.getItemMeta();
 			if (damageable == null) return false;
 			damageable.setDamage(damageable.getDamage() + 1);
-			itemStack.setItemMeta((ItemMeta) damageable);
+			itemStack.setItemMeta(damageable);
 
 			for (int slot = 0; slot < player.getInventory().getSize(); slot++) {
 				ItemStack item = player.getInventory().getItem(slot);

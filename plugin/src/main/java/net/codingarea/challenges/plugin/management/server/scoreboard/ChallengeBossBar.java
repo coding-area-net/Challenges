@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 public final class ChallengeBossBar {

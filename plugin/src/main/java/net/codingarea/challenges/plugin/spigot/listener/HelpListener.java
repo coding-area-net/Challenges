@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 1.0
  */
 public class HelpListener implements Listener {

@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 public final class MessageManager {

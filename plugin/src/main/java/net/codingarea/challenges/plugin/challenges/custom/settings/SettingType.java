@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.0
  */
 public enum SettingType {

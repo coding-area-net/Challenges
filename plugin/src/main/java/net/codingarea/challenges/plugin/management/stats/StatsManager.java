@@ -24,8 +24,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/KxmischesDomi
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
+ * @autho<a href="r">KxmischesDomi | https://github</a>.com/KxmischesDomi
  * @since 2.0
  */
 public final class StatsManager implements Listener {
@@ -118,7 +118,7 @@ public final class StatsManager implements Listener {
 				.select("stats", "name")
 				.where("uuid", uuid)
 				.execute().first()
-				.map(result -> new PlayerStats(uuid, result.getString("name"), result.getDocument("stats")))
+				.map(result -> new PlayerStats(uuid, Objects.requireNonNull(result.getString("name")), result.getDocument("stats")))
 				.orElse(new PlayerStats(uuid, name));
 	}
 
@@ -139,7 +139,7 @@ public final class StatsManager implements Listener {
 				.select("uuid", "stats", "name")
 				.execute().all()
 				.filter(result -> result.getUUID("uuid") != null)
-				.map(result -> new PlayerStats(result.getUUID("uuid"), result.getString("name"), result.getDocument("stats")))
+				.map(result -> new PlayerStats(Objects.requireNonNull(result.getUUID("uuid")), Objects.requireNonNull(result.getString("name")), result.getDocument("stats")))
 				.collect(Collectors.toList());
 	}
 

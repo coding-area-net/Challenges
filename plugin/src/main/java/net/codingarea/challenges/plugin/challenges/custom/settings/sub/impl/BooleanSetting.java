@@ -6,7 +6,7 @@ import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.0
  */
 public class BooleanSetting extends ValueSetting {

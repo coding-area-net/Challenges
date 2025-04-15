@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.2
  */
 public class EmptyChallenge implements IChallenge {

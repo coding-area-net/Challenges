@@ -19,7 +19,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0
  */
 @Since("2.0")
@@ -31,7 +31,7 @@ public class RandomItemDroppingChallenge extends TimedChallenge {
 	}
 
 	public static void dropRandomItem(Player player) {
-		if (player.getInventory().getContents().length <= 0) return;
+		if (player.getInventory().getContents().length == 0) return;
 		dropRandomItem(player.getLocation(), player.getInventory());
 	}
 

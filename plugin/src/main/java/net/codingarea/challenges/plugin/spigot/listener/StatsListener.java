@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @see net.codingarea.challenges.plugin.management.stats.StatsManager
  * @since 2.0
  */

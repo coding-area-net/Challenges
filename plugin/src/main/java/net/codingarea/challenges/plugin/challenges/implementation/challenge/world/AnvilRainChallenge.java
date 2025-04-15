@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 1.0
  */
 public class AnvilRainChallenge extends MenuSetting {

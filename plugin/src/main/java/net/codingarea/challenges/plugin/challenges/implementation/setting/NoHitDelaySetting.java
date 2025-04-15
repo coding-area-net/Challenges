@@ -15,7 +15,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import javax.annotation.Nonnull;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0
  */
 public class NoHitDelaySetting extends Setting {

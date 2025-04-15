@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 1.0
  */
 public class SnakeChallenge extends Setting {
@@ -43,12 +43,7 @@ public class SnakeChallenge extends Setting {
 		return new ItemBuilder(Material.BLUE_TERRACOTTA, Message.forName("item-snake-challenge"));
 	}
 
-	@Override
-	protected void onEnable() {
-
-	}
-
-	@Override
+    @Override
 	protected void onDisable() {
 		blocks.clear();
 	}

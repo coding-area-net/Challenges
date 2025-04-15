@@ -8,7 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.3
  */
 public class GetItemTrigger extends ChallengeTrigger {

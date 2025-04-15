@@ -12,7 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 @Since("2.0")

@@ -5,7 +5,7 @@ import org.bukkit.ChatColor;
 import java.util.LinkedList;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 1.0
  */
 public class FontUtils {

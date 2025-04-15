@@ -10,7 +10,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.3
  */
 public class PacketBorder_1_13 extends PacketBorder {

@@ -15,9 +15,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.3
  */
 public class MobTarget extends ForceTarget<EntityType> {
@@ -74,9 +75,9 @@ public class MobTarget extends ForceTarget<EntityType> {
     public void updateDisplayStand(@NotNull ArmorStand armorStand) {
         Material spawnEgg = EntityUtils.getSpawnEgg(target);
         if (spawnEgg == null) {
-            armorStand.getEquipment().setHelmet(null);
+            Objects.requireNonNull(armorStand.getEquipment()).setHelmet(null);
         } else {
-            armorStand.getEquipment().setHelmet(new ItemStack(spawnEgg));
+            Objects.requireNonNull(armorStand.getEquipment()).setHelmet(new ItemStack(spawnEgg));
         }
     }
 

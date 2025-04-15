@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.0
  */
 public class DatabaseCommand implements PlayerCommand, TabCompleter {
@@ -148,7 +148,7 @@ public class DatabaseCommand implements PlayerCommand, TabCompleter {
 
 		if (args.length <= 1) {
 			return Utils.filterRecommendations(args[0], "save", "load", "reset");
-		} else if (args.length <= 2) {
+		} else if (args.length == 2) {
 			return Utils.filterRecommendations(args[1], databaseExecutors.keySet().toArray(new String[0]));
 		}
 		return Lists.newLinkedList();

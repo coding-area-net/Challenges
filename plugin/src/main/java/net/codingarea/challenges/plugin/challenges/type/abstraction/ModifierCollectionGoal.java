@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0
  */
 public abstract class ModifierCollectionGoal extends CollectionGoal implements IModifier {
@@ -42,19 +42,7 @@ public abstract class ModifierCollectionGoal extends CollectionGoal implements I
 		setValue(defaultValue);
 	}
 
-	@Nonnull
-	@Override
-	public SoundSample getStartSound() {
-		return SoundSample.DRAGON_BREATH;
-	}
-
-	@Nullable
-	@Override
-	public SoundSample getWinSound() {
-		return SoundSample.WIN;
-	}
-
-	@Override
+    @Override
 	public void handleClick(@Nonnull ChallengeMenuClickInfo info) {
 		ChallengeHelper.handleModifierClick(info, this);
 	}

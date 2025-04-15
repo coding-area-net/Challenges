@@ -6,7 +6,7 @@ import net.codingarea.challenges.plugin.utils.bukkit.nms.ReflectionUtil;
 import org.bukkit.entity.Player;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.3
  */
 public class CraftPlayer_1_17 extends CraftPlayer {

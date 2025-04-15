@@ -6,7 +6,7 @@ import net.codingarea.challenges.plugin.utils.bukkit.nms.type.WorldServer;
 import org.bukkit.World;
 
 /**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
+ * @author sehrschlechtYT | <a href="https://github.com/sehrschlechtYT">...</a>
  * @since 2.2.3
  */
 public class WorldServer_1_13 extends WorldServer {

@@ -27,7 +27,7 @@ import org.bukkit.potion.PotionEffectType;
 import javax.annotation.Nonnull;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0
  */
 @Since("2.0")

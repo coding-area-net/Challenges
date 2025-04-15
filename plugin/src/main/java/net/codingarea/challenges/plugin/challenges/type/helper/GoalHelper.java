@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 import java.util.function.ToIntBiFunction;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 public final class GoalHelper {
@@ -106,7 +106,7 @@ public final class GoalHelper {
 						if (displayed >= LEADERBOARD_SIZE) break;
 						scoreboard.addLine(Message.forName("scoreboard-leaderboard").asString(place, NameHelper.getName(current), NumberFormatter.MIDDLE_NUMBER.format(entry.getKey())));
 					}
-					if (displayed >= LEADERBOARD_SIZE) break;
+					if (displayed == LEADERBOARD_SIZE) break;
 					place++;
 				}
 			}

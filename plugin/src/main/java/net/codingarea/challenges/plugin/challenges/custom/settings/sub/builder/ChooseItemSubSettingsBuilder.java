@@ -17,7 +17,7 @@ import java.util.Map.Entry;
 import java.util.function.Consumer;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.0
  */
 @Getter

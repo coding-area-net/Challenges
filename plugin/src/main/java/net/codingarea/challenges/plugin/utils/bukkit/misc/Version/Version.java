@@ -82,7 +82,7 @@ public interface Version {
     @Nonnull
     @CheckReturnValue
     static Version getAnnotatedSince(@Nonnull Object object) {
-        return (Version)(!object.getClass().isAnnotationPresent(Since.class) ? new VersionInfo(1, 0, 0) : parse(((Since)object.getClass().getAnnotation(Since.class)).value()));
+        return !object.getClass().isAnnotationPresent(Since.class) ? new VersionInfo(1, 0, 0) : parse(object.getClass().getAnnotation(Since.class).value());
     }
 
     @Nonnull

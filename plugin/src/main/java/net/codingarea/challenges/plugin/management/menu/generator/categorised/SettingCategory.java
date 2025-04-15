@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.management.menu.generator.categorised;
 
+import lombok.Getter;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
@@ -8,9 +9,10 @@ import org.bukkit.Material;
 import java.util.function.Supplier;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.2.0
  */
+@Getter
 public class SettingCategory {
 
 	//Challenges
@@ -44,20 +46,8 @@ public class SettingCategory {
 		this.messageSupplier = messageSupplier;
 	}
 
-	public int getPriority() {
-		return priority;
-	}
-
-	public ItemBuilder getDisplayItem() {
+    public ItemBuilder getDisplayItem() {
 		return new ItemBuilder(material, messageSupplier.get());
-	}
-
-	public Material getMaterial() {
-		return material;
-	}
-
-	public Supplier<Message> getMessageSupplier() {
-		return messageSupplier;
 	}
 
 }

@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
 import java.util.UUID;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 public final class CloudNet3Support implements CloudSupport {

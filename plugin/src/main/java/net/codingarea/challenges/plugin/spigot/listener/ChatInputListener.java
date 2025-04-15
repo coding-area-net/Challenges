@@ -13,7 +13,7 @@ import java.util.UUID;
 import java.util.function.Consumer;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1
  */
 public class ChatInputListener implements Listener {

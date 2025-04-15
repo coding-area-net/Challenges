@@ -21,7 +21,7 @@ import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 import javax.annotation.Nonnull;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0
  */
 public class CustomEventListener implements Listener {
@@ -85,8 +85,7 @@ public class CustomEventListener implements Listener {
 			isIgnored = true;
 		} else if (!AbstractChallenge.ignoreGameMode(event.getNewGameMode()) && AbstractChallenge.ignoreGameMode(event.getPlayer().getGameMode())) {
 			execute = true;
-			isIgnored = false;
-		}
+        }
 
 		if (execute) {
 			PlayerIgnoreStatusChangeEvent statusEvent = new PlayerIgnoreStatusChangeEvent(event.getPlayer(), isIgnored);

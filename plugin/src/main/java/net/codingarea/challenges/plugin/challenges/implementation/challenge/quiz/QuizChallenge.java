@@ -46,7 +46,7 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0
  */
 public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabCompleter {
@@ -178,7 +178,8 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
 			attribute = currentQuestionedPlayer.getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH"));
 		}
 
-		if (attribute.getBaseValue() == 2) {
+        assert attribute != null;
+        if (attribute.getBaseValue() == 2) {
 			kill(currentQuestionedPlayer);
 			attribute.setBaseValue(20);
 			return;
@@ -573,8 +574,8 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onMove(@Nonnull EntityDamageEvent event) {
 		if (!shouldExecuteEffect()) return;
-		if (!(event.getEntity() instanceof Player)) return;;
-		Player player = (Player) event.getEntity();
+		if (!(event.getEntity() instanceof Player)) return;
+        Player player = (Player) event.getEntity();
 		if (ignorePlayer(player)) return;
 		SavedStatistic.DAMAGE_TAKEN.increaseStatistic(player, event.getCause().name(), ChallengeHelper.getFinalDamage(event));
 	}
