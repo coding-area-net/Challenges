@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author rollocraft | https://github.com/rollocraft
+ * @author rollocraft | <a href="https://github.com/rollocraft">...</a>
  * @since 2.3.2
  */
 

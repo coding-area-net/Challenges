@@ -13,7 +13,6 @@ import net.codingarea.challenges.plugin.utils.bukkit.misc.wrapper.AttributeWrapp
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,7 +24,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.2.0
  */
 @Since("2.2.0")

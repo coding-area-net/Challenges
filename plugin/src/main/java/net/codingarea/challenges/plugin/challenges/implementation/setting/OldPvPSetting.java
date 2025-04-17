@@ -4,11 +4,9 @@ import net.anweisen.utilities.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.bukkit.misc.version.MinecraftVersion;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.wrapper.AttributeWrapper;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,7 +19,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import javax.annotation.Nonnull;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 2.0
  */
 @Since("2.0")

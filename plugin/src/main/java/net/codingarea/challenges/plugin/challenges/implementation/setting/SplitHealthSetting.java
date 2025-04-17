@@ -11,7 +11,6 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder.PotionBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,7 +23,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 1.0
  */
 public class SplitHealthSetting extends Setting {
