@@ -2,7 +2,8 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.action.impl;
 
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.EntityTargetAction;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
-import net.codingarea.challenges.plugin.utils.bukkit.misc.Version.MinecraftVersion;
+import net.codingarea.challenges.plugin.utils.bukkit.misc.version.MinecraftVersion;
+import net.codingarea.challenges.plugin.utils.bukkit.misc.wrapper.AttributeWrapper;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
@@ -36,12 +37,7 @@ public class HealEntityAction extends EntityTargetAction {
 		int amount = Integer.parseInt(subActions.get("amount")[0]);
 		if (entity instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity) entity;
-			AttributeInstance attribute;
-			if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_21_2)) {
-				attribute = livingEntity.getAttribute(Attribute.valueOf("MAX_HEALTH"));
-			} else {
-				attribute = livingEntity.getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH"));
-			}
+			AttributeInstance attribute = livingEntity.getAttribute(AttributeWrapper.MAX_HEALTH);
 
 			if (attribute == null) return;
 			double newHealth = Math.min(livingEntity.getHealth() + amount,

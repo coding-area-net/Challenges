@@ -9,8 +9,7 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.bukkit.nms.NMSProvider;
-import net.codingarea.challenges.plugin.utils.bukkit.nms.type.CraftPlayer;
+import net.codingarea.challenges.plugin.utils.bukkit.misc.wrapper.AttributeWrapper;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.attribute.Attribute;
@@ -79,12 +78,7 @@ public class MaxHealthSetting extends Modifier {
 	}
 
 	private void updateHealth(Player player) {
-		AttributeInstance attribute;
-		if (net.codingarea.challenges.plugin.utils.bukkit.misc.Version.MinecraftVersion.current().isNewerOrEqualThan(net.codingarea.challenges.plugin.utils.bukkit.misc.Version.MinecraftVersion.V1_21_2)) {
-			attribute = player.getAttribute(Attribute.valueOf("MAX_HEALTH"));
-		} else {
-			attribute = player.getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH"));
-		}
+		AttributeInstance attribute = player.getAttribute(AttributeWrapper.MAX_HEALTH);
 		if (attribute == null)
 			return; // This should never happen because its a generic attribute, but just in case
 		int newMaxHealth = getMaxHealth(player);

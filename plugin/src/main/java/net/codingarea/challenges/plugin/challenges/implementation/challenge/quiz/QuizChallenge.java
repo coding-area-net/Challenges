@@ -15,7 +15,8 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.spigot.events.PlayerJumpEvent;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
-import net.codingarea.challenges.plugin.utils.bukkit.misc.Version.MinecraftVersion;
+import net.codingarea.challenges.plugin.utils.bukkit.misc.version.MinecraftVersion;
+import net.codingarea.challenges.plugin.utils.bukkit.misc.wrapper.AttributeWrapper;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
@@ -111,7 +112,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
 	protected int getSecondsUntilNextActivation() {
 		return random.around(getValue() * 60 * 3, 60);
 	}
-	
+
 	private void broadcastMessage(@Nonnull String questionedPlayerMessage, @Nonnull String othersMessage, Object... args) {
 		broadcast(player1 -> {
 			if (currentQuestionedPlayer == player1) {
@@ -169,15 +170,10 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
 		List<String> rightAnswers = currentQuestion.getRightAnswers();
 		Message.forName("quiz-right-answer-was" + (rightAnswers.size() != 1 ? "-multiple" : "")).send(currentQuestionedPlayer, prefix, StringUtils.getArrayAsString(rightAnswers.toArray(new String[0]), "§7, §e"));
 		SoundSample.BREAK.play(currentQuestionedPlayer);
-		
-		currentQuestion = null;
-		AttributeInstance attribute;
-		if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_21_2)) {
-			attribute = currentQuestionedPlayer.getAttribute(Attribute.valueOf("MAX_HEALTH"));
-		} else {
-			attribute = currentQuestionedPlayer.getAttribute(Attribute.valueOf("GENERIC_MAX_HEALTH"));
-		}
 
+		currentQuestion = null;
+		AttributeInstance attribute = currentQuestionedPlayer.getAttribute(AttributeWrapper.MAX_HEALTH);
+		if (attribute == null) return;
 		if (attribute.getBaseValue() == 2) {
 			kill(currentQuestionedPlayer);
 			attribute.setBaseValue(20);
@@ -209,7 +205,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
 			bossbar.update();
 			return;
 		}
-		
+
 		broadcastMessage("quiz-right-answer", "quiz-right-answer-other", answer);
 		SoundSample.LEVEL_UP.play(player);
 		currentQuestion = null;

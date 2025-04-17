@@ -38,7 +38,7 @@ public class VoidMapGenerator extends ChunkGenerator {
 //  public void loadStrongholds(World world) {
 //
 //    for (int i = 0; i < 3; i++) {
-//      Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), () -> {
+//      Bukkit.getScheduler().runTaskLater(Challenges.getInstance().getPlugin(), () -> {
 //        Location portal = world
 //            .locateNearestStructure(new Location(world, 0, 0, 0), StructureType.STRONGHOLD, 180,
 //                true);
@@ -60,7 +60,7 @@ public class VoidMapGenerator extends ChunkGenerator {
 
 //    if (portalChunks == null) {
 //      portalChunks = Lists.newLinkedList();
-//      Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
+//      Bukkit.getScheduler().runTask(Challenges.getInstance().getPlugin(), () -> {
 //        loadStrongholds(world);
 //      });
 //    }
