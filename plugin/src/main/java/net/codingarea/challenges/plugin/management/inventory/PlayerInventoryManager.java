@@ -247,7 +247,8 @@ public final class PlayerInventoryManager implements Listener {
 
 			ItemStack stack;
 			if (item.getMaterial() == Material.PLAYER_HEAD) {
-				stack = new SkullBuilder(player.getUniqueId(), player.getName(), Message.forName(item.getMessage()).asString()).build();
+				stack = new SkullBuilder(Message.forName(item.getMessage()).asString())
+					.setOwner(player.getUniqueId(), player.getName()).build();
 			} else {
 				stack = new ItemBuilder(item.getMaterial(), Message.forName(item.getMessage()).asString()).build();
 			}

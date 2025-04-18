@@ -15,55 +15,47 @@ import java.net.URL;
 
 public class LanguageSetting extends Modifier {
 
-    public static final int ENGLISH = 1;
-    public static final int GERMAN = 2;
+  public static final int ENGLISH = 1;
+  public static final int GERMAN = 2;
 
-    public static final URL GERMAN_SKULL;
-    public static final URL ENGLISH_SKULL;
+  public static final String GERMAN_SKULL = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWU3ODk5YjQ4MDY4NTg2OTdlMjgzZjA4NGQ5MTczZmU0ODc4ODY0NTM3NzQ2MjZiMjRiZDhjZmVjYzc3YjNmIn19fQ",
+    ENGLISH_SKULL = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODgzMWM3M2Y1NDY4ZTg4OGMzMDE5ZTI4NDdlNDQyZGZhYTg4ODk4ZDUwY2NmMDFmZDJmOTE0YWY1NDRkNTM2OCJ9fX0";
 
-    static {
-        try {
-            GERMAN_SKULL = new URL("http://textures.minecraft.net/texture/5e7899b4806858697e283f084d9173fe487886453774626b24bd8cfecc77b3f");
-            ENGLISH_SKULL = new URL("http://textures.minecraft.net/texture/46c9923bebd9ad90a80a0731c3f3b9db729b0785015e18e3ec07e4e91099be06");
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+  public LanguageSetting() {
+    super(MenuType.SETTINGS, 1, 2, ENGLISH);
+  }
+
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.KNOWLEDGE_BOOK, Message.forName("item-language-setting"));
+  }
+
+  @Nonnull
+  @Override
+  public ItemBuilder createSettingsItem() {
+    String texture = getValue() == GERMAN ? GERMAN_SKULL : ENGLISH_SKULL;
+    return new ItemBuilder.SkullBuilder(DefaultItem.getItemPrefix() + Message.forName(getSettingName())).setBase64Texture(texture).hideAttributes();
+  }
+
+  @Override
+  public void playValueChangeTitle() {
+    switch (getValue()) {
+      case GERMAN:
+        Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).reload("de");
+        ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName(getSettingName()));
+        break;
+      case ENGLISH:
+        Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).reload("en");
+        ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName(getSettingName()));
+        break;
+      default:
+        ChallengeHelper.playToggleChallengeTitle(this, false);
     }
+  }
 
-    public LanguageSetting() {
-        super(MenuType.SETTINGS, 1, 2, ENGLISH);
-    }
-
-    @Nonnull
-    @Override
-    public ItemBuilder createDisplayItem() {
-        return new ItemBuilder(Material.KNOWLEDGE_BOOK, Message.forName("item-language-setting"));
-    }
-
-    @Nonnull
-    @Override
-    public ItemBuilder createSettingsItem() {
-        ItemBuilder.SkullBuilder GermanSkull = new ItemBuilder.SkullBuilder(GERMAN_SKULL);
-        ItemBuilder.SkullBuilder EnglishSkull = new ItemBuilder.SkullBuilder(ENGLISH_SKULL);
-        if (getValue() == GERMAN)
-            return GermanSkull.setName(DefaultItem.getItemPrefix() + Message.forName("item-language-setting-german")).hideAttributes();
-        return EnglishSkull.setName(DefaultItem.getItemPrefix() + Message.forName("item-language-setting-english")).hideAttributes();
-    }
-
-    @Override
-    public void playValueChangeTitle() {
-        switch (getValue()) {
-            case GERMAN:
-                ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("item-language-setting-german"));
-                Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).reload("de");
-                break;
-            case ENGLISH:
-                ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("item-language-setting-english"));
-                Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).reload("en");
-                break;
-            default:
-                ChallengeHelper.playToggleChallengeTitle(this, false);
-        }
-    }
+  private String getSettingName() {
+    return getValue() == GERMAN ? "item-language-setting-german" : "item-language-setting-english";
+  }
 
 }

@@ -1,5 +1,7 @@
 package net.codingarea.challenges.plugin.utils.item;
 
+import com.google.gson.JsonParser;
+import lombok.NonNull;
 import net.anweisen.utilities.bukkit.utils.item.BannerPattern;
 import net.anweisen.utilities.bukkit.utils.misc.GameProfileUtils;
 import net.anweisen.utilities.common.annotations.DeprecatedSince;
@@ -8,10 +10,7 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.ItemDescription;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.utils.misc.DatabaseHelper;
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.DyeColor;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.enchantments.Enchantment;
@@ -20,11 +19,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.profile.PlayerProfile;
+import org.bukkit.profile.PlayerTextures;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -278,80 +280,55 @@ public class ItemBuilder extends net.anweisen.utilities.bukkit.utils.item.ItemBu
 			super(Material.PLAYER_HEAD);
 		}
 
-		/**
-		 * @deprecated Use uuid and name to be able to access database cached textures to reduce loading time
-		 */
-		@Deprecated
-		@DeprecatedSince("2.0")
-		public SkullBuilder(@Nonnull String owner) {
-			super(Material.PLAYER_HEAD);
-			setOwner(owner);
-		}
-
-		/**
-		 * @deprecated Use uuid and name to be able to access database cached textures to reduce loading time
-		 */
-		@Deprecated
-		@DeprecatedSince("2.0")
-		public SkullBuilder(@Nonnull String owner, @Nonnull String name, @Nonnull String... lore) {
-			super(Material.PLAYER_HEAD, name, lore);
-			setOwner(owner);
-		}
-
-		public SkullBuilder(@Nonnull UUID ownerUUID, @Nonnull String ownerName) {
-			super(Material.PLAYER_HEAD);
-			setOwner(ownerUUID, ownerName);
-		}
-
-		public SkullBuilder(@Nonnull UUID ownerUUID, @Nonnull String ownerName, @Nonnull Message message) {
+		public SkullBuilder(Message message) {
 			super(Material.PLAYER_HEAD, message);
-			setOwner(ownerUUID, ownerName);
 		}
 
-		public SkullBuilder(@Nonnull UUID ownerUUID, @Nonnull String ownerName, @Nonnull ItemDescription description) {
-			super(Material.PLAYER_HEAD, description);
-			setOwner(ownerUUID, ownerName);
-		}
-
-		public SkullBuilder(@Nonnull UUID ownerUUID, @Nonnull String ownerName, @Nonnull String name, @Nonnull String... lore) {
+		public SkullBuilder(String name, String... lore) {
 			super(Material.PLAYER_HEAD, name, lore);
-			setOwner(ownerUUID, ownerName);
 		}
 
-		public SkullBuilder(@Nonnull URL base64) {
-			super(new ItemStack(Material.PLAYER_HEAD) {{
-				SkullMeta meta = (SkullMeta) getItemMeta();
-
-				PlayerProfile profile = Bukkit.createPlayerProfile(UUID.randomUUID());
-				profile.getTextures().setSkin(base64);
-
-				meta.setOwnerProfile(profile);
-
-				setItemMeta(meta);
-			}});
-		}
-
-		@Nonnull
-		@Deprecated
-		@DeprecatedSince("2.0")
-		@ReplaceWith("setOwner(UUID)")
-		public ItemBuilder.SkullBuilder setOwner(@Nonnull String owner) {
-			getMeta().setOwner(owner);
+		@NonNull
+		public ItemBuilder.SkullBuilder setOwner(@NonNull OfflinePlayer owner) {
+			getMeta().setOwningPlayer(owner);
 			return this;
 		}
 
-		@Nonnull
-		public ItemBuilder.SkullBuilder setOwner(@Nonnull UUID uuid, @Nonnull String name) {
-			if (Challenges.getInstance().getDatabaseManager().isEnabled()) {
-				String textures = DatabaseHelper.getTextures(uuid);
-				if (textures != null) {
-					GameProfileUtils.applyTextures(getMeta(), uuid, name, textures);
-					return this;
-				}
+		@NonNull
+		public ItemBuilder.SkullBuilder setOwner(@NonNull UUID uuid, @NonNull String name) {
+			PlayerProfile profile = Bukkit.createPlayerProfile(uuid, name);
+			getMeta().setOwnerProfile(profile);
+			return this;
+		}
+
+		public ItemBuilder.SkullBuilder setTexture(@NonNull String textureUrl) {
+			UUID uuid = UUID.nameUUIDFromBytes(textureUrl.getBytes());
+
+			PlayerProfile profile = Bukkit.createPlayerProfile(uuid);
+			PlayerTextures texture = profile.getTextures();
+
+			try {
+				texture.setSkin(new URL(textureUrl));
+			} catch (MalformedURLException e) {
+				throw new IllegalArgumentException("Invalid texture url", e);
 			}
 
-			setOwner(name);
+			profile.setTextures(texture);
+			getMeta().setOwnerProfile(profile);
 			return this;
+		}
+
+		public ItemBuilder.SkullBuilder setBase64Texture(@NonNull String base64Texture) {
+			String textureUrlJson = new String(Base64.getDecoder().decode(base64Texture),
+				StandardCharsets.UTF_8);
+
+			String textureUrl = JsonParser.parseString(textureUrlJson)
+				.getAsJsonObject()
+				.get("textures").getAsJsonObject()
+				.get("SKIN").getAsJsonObject()
+				.get("url").getAsString();
+
+			return setTexture(textureUrl);
 		}
 
 		@Nonnull

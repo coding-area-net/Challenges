@@ -16,10 +16,8 @@ import javax.annotation.Nonnull;
  */
 public final class DefaultItem {
 
-	// Owner: MHF_ArrowLeft
-	private static final UUID ARROW_LEFT_UUID = UUID.fromString("a68f0b64-8d14-4000-a95f-4b9ba14f8df9");
-	// Owner: MHF_ArrowRight
-	private static final UUID ARROW_RIGHT_UUID = UUID.fromString("50c8510b-5ea0-4d60-be9a-7d542d6cd156");
+	private static final String ARROW_LEFT = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjAwNmVjMWVjYTJmMjY4NWY3MGU2NTQxMWNmZTg4MDhhMDg4ZjdjZjA4MDg3YWQ4ZWVjZTk2MTgzNjEwNzBlMyJ9fX0=",
+		ARROW_RIGHT = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmY5ZTE5ZTVmMmNlMzQ4OGMyOTU4MmI2ZDI2MDE1MDA2MjZlOGRiMmE4OGNkMTgxNjQ0MzJmZWYyZTM0ZGU2YiJ9fX0=";
 
 	@Nonnull
 	public static String getItemPrefix() {
@@ -28,24 +26,12 @@ public final class DefaultItem {
 
 	@Nonnull
 	public static ItemBuilder navigateBack() {
-		URL BACK_SKULL;
-		try {
-			BACK_SKULL  = new URL("https://textures.minecraft.net/texture/bd69e06e5dadfd84e5f3d1c21063f2553b2fa945ee1d4d7152fdc5425bc12a9");
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		}
-		return new SkullBuilder(BACK_SKULL).setName(Message.forName("navigate-back")).hideAttributes();
+		return new SkullBuilder().setBase64Texture(ARROW_LEFT).setName(Message.forName("navigate-back")).hideAttributes();
 	}
 
 	@Nonnull
 	public static ItemBuilder navigateNext() {
-		URL NEXT_SKULL;
-		try {
-			NEXT_SKULL  = new URL("https://textures.minecraft.net/texture/19bf3292e126a105b54eba713aa1b152d541a1d8938829c56364d178ed22bf");
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		}
-		return new SkullBuilder(NEXT_SKULL).setName(Message.forName("navigate-next")).hideAttributes();
+		return new SkullBuilder().setBase64Texture(ARROW_RIGHT).setName(Message.forName("navigate-next")).hideAttributes();
 	}
 
 	@Nonnull

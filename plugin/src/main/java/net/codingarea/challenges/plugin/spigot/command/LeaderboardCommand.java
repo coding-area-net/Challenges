@@ -103,7 +103,8 @@ public class LeaderboardCommand implements PlayerCommand {
 			int slot = slots[i - offset];
 			PlayerStats stats = leaderboard.get(i);
 			String coloredName = cloudSupport.isNameSupport() && cloudSupport.hasNameFor(stats.getPlayerUUID()) ? cloudSupport.getColoredName(stats.getPlayerUUID()) : stats.getPlayerName();
-			ItemBuilder item = new SkullBuilder(stats.getPlayerUUID(), stats.getPlayerName()).setName(Message.forName("stats-leaderboard-display")
+			ItemBuilder item = new SkullBuilder().setOwner(stats.getPlayerUUID(), stats.getPlayerName())
+				.setName(Message.forName("stats-leaderboard-display")
 					.asArray(coloredName, statistic.formatChat(stats.getStatisticValue(statistic)), statisticName, i + 1));
 			inventory.cloneLastAndAdd().setItem(slot, item.hideAttributes());
 

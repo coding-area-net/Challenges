@@ -17,6 +17,7 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder.SkullBuilder;
 import net.codingarea.challenges.plugin.utils.misc.StatsHelper;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
@@ -99,7 +100,7 @@ public class StatsCommand implements PlayerCommand {
 
 		AnimatedInventory inventory = new AnimatedInventory(InventoryTitleManager.getStatsTitle(name), 5 * 9, MenuPosition.HOLDER);
 		StatsHelper.setAccent(inventory, 3);
-		inventory.cloneLastAndAdd().setItem(13, new SkullBuilder(uuid, name, Message.forName("stats-of").asString(coloredName)).build());
+		inventory.cloneLastAndAdd().setItem(13, new SkullBuilder(Message.forName("stats-of").asString(coloredName)).setOwner(uuid, name).build());
 
 		LeaderboardInfo info = Challenges.getInstance().getStatsManager().getLeaderboardInfo(uuid);
 		createInventory(stats, info, inventory, StatsHelper.getSlots(2));
