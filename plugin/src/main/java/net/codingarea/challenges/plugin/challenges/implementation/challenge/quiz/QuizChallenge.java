@@ -15,14 +15,12 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.spigot.events.PlayerJumpEvent;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
-import net.codingarea.challenges.plugin.utils.bukkit.misc.version.MinecraftVersion;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.wrapper.AttributeWrapper;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.TriFunction;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.boss.BarColor;
 import org.bukkit.command.Command;
@@ -47,7 +45,7 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.0
  */
 public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabCompleter {
@@ -569,8 +567,8 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onMove(@Nonnull EntityDamageEvent event) {
 		if (!shouldExecuteEffect()) return;
-		if (!(event.getEntity() instanceof Player)) return;;
-		Player player = (Player) event.getEntity();
+		if (!(event.getEntity() instanceof Player)) return;
+        Player player = (Player) event.getEntity();
 		if (ignorePlayer(player)) return;
 		SavedStatistic.DAMAGE_TAKEN.increaseStatistic(player, event.getCause().name(), ChallengeHelper.getFinalDamage(event));
 	}

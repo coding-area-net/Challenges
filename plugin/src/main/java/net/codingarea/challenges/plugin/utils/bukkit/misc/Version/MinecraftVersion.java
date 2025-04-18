@@ -1,4 +1,4 @@
-package net.codingarea.challenges.plugin.utils.bukkit.misc.version;
+package net.codingarea.challenges.plugin.utils.bukkit.misc.Version;
 
 import org.bukkit.Bukkit;
 
@@ -6,7 +6,7 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 1.0
  */
 public enum MinecraftVersion implements Version {

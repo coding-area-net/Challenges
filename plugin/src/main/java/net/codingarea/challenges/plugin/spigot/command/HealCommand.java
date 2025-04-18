@@ -7,7 +7,6 @@ import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.version.MinecraftVersion;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.wrapper.AttributeWrapper;
 import net.codingarea.challenges.plugin.utils.misc.CommandHelper;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 1.0
  */
 public class HealCommand implements SenderCommand, Completer {

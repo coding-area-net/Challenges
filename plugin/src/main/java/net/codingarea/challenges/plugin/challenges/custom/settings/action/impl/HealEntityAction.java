@@ -2,13 +2,11 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.action.impl;
 
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.EntityTargetAction;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
-import net.codingarea.challenges.plugin.utils.bukkit.misc.version.MinecraftVersion;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.wrapper.AttributeWrapper;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -16,7 +14,7 @@ import org.bukkit.entity.LivingEntity;
 import java.util.Map;
 
 /**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
+ * @author KxmischesDomi | <a href="https://github.com/kxmischesdomi">...</a>
  * @since 2.1.0
  */
 public class HealEntityAction extends EntityTargetAction {

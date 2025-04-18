@@ -3,13 +3,8 @@ package net.codingarea.challenges.plugin.utils.item;
 import com.google.gson.JsonParser;
 import lombok.NonNull;
 import net.anweisen.utilities.bukkit.utils.item.BannerPattern;
-import net.anweisen.utilities.bukkit.utils.misc.GameProfileUtils;
-import net.anweisen.utilities.common.annotations.DeprecatedSince;
-import net.anweisen.utilities.common.annotations.ReplaceWith;
-import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.ItemDescription;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.utils.misc.DatabaseHelper;
 import org.bukkit.*;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
@@ -30,7 +25,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
- * @author anweisen | https://github.com/anweisen
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
  * @since 1.0
  */
 public class ItemBuilder extends net.anweisen.utilities.bukkit.utils.item.ItemBuilder {

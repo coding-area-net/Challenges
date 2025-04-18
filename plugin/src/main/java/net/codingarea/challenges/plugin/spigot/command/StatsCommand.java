@@ -17,7 +17,6 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder.SkullBuilder;
 import net.codingarea.challenges.plugin.utils.misc.StatsHelper;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
@@ -27,8 +26,8 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/KxmischesDomi
+ * @author anweisen | <a href="https://github.com/anweisen">...</a>
+ * @autho<a href="r">KxmischesDomi | https://github</a>.com/KxmischesDomi
  * @since 2.0
  */
 public class StatsCommand implements PlayerCommand {
