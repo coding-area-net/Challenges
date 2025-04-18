@@ -1,4 +1,4 @@
-package net.codingarea.challenges.plugin.utils.bukkit.misc.version;
+package net.codingarea.challenges.plugin.utils.bukkit.misc.Version;
 
 import lombok.Getter;
 import net.anweisen.utilities.common.logging.ILogger;
