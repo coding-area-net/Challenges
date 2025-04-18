@@ -8,6 +8,7 @@ import lombok.Getter;
 import net.anweisen.utilities.bukkit.utils.logging.Logger;
 import net.anweisen.utilities.common.collection.IOUtils;
 import net.anweisen.utilities.common.config.Document;
+import net.anweisen.utilities.common.config.FileDocument;
 import net.anweisen.utilities.common.misc.FileUtils;
 import net.anweisen.utilities.common.misc.GsonUtils;
 import net.codingarea.challenges.plugin.Challenges;
@@ -15,6 +16,7 @@ import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.utils.logging.ConsolePrint;
 
 import javax.annotation.Nonnull;
+import javax.print.Doc;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map.Entry;
@@ -26,7 +28,8 @@ import java.util.Map.Entry;
 public final class LanguageLoader extends ContentLoader {
 
 	public static final String DEFAULT_LANGUAGE = "en";
-	public static final String DIRECT_FILE_PATH = "direct-language-file";
+
+	public static final String KEY_LANGUAGE = "language", KEY_SMALL_CAPS = "smallcaps", KEY_DIRECT_LANGUAGE_FILE = "manualfile";
 
 	@Getter
   private static volatile boolean loaded = false;
@@ -35,16 +38,46 @@ public final class LanguageLoader extends ContentLoader {
 	@Getter
   private boolean smallCapsFont;
 
+	public File getLanguagePropertiesFile() {
+		return getMessageFile("language", "properties");
+	}
+
+	public Document getLanguageProperties() {
+		try {
+			FileUtils.createFilesIfNecessary(getLanguagePropertiesFile());
+
+			FileDocument document = FileDocument.readPropertiesFile(getLanguagePropertiesFile());
+		} catch (Exception e) {
+			Logger.error("Could not read language properties", e);
+		}
+		return Document.empty();
+	}
+
+	public void migrateLanguageConfig() {
+		Document configDocument = Challenges.getInstance().getConfigDocument();
+		String oldLanguage = configDocument.getString("language");
+		String oldDirectFilePath = configDocument.getString("direct-language-file");
+		boolean oldSmallCapsFont = configDocument.getBoolean("small-caps");
+
+		Document languageProperties = getLanguageProperties();
+		languageProperties.set(KEY_LANGUAGE, oldLanguage);
+		languageProperties.set(KEY_SMALL_CAPS, oldSmallCapsFont);
+
+		if (configDocument.contains("direct-language-file")) {
+			languageProperties.set(KEY_DIRECT_LANGUAGE_FILE, oldDirectFilePath);
+		}
+	}
+
   @Override
 	protected void load() {
 
-		Document config = Challenges.getInstance().getConfigDocument();
+		Document config = getLanguageProperties();
 
-		smallCapsFont = config.getBoolean("small-caps", false);
+		smallCapsFont = config.getBoolean(KEY_SMALL_CAPS, false);
 
-		if (config.contains(DIRECT_FILE_PATH)) {
-			language = Challenges.getInstance().getConfigDocument().getString("language", DEFAULT_LANGUAGE);
-			String path = config.getString(DIRECT_FILE_PATH);
+		if (config.contains(KEY_DIRECT_LANGUAGE_FILE)) {
+			language = config.getString(KEY_LANGUAGE, DEFAULT_LANGUAGE);
+			String path = config.getString(KEY_DIRECT_LANGUAGE_FILE);
 			if (path == null) return;
 			Logger.info("Using direct language file '{}'", path);
 			readLanguage(new File(path));
@@ -52,6 +85,24 @@ public final class LanguageLoader extends ContentLoader {
 		}
 
 		loadDefault();
+	}
+
+	public void changeLanguage(@Nonnull String language) {
+		if (language.equalsIgnoreCase(this.language)) {
+			Logger.info("Language '{}' is already selected", language);
+			return;
+		}
+
+		this.language = language;
+		Document properties = getLanguageProperties();
+		properties.set(KEY_LANGUAGE, language);
+    try {
+      properties.saveToFile(getLanguagePropertiesFile());
+    } catch (IOException e) {
+			Logger.error("Could not save language properties", e);
+    }
+    reload(language);
+		Logger.info("Language changed to '{}'", language);
 	}
 
 	public void reload(String language) {

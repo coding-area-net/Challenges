@@ -42,11 +42,11 @@ public class LanguageSetting extends Modifier {
   public void playValueChangeTitle() {
     switch (getValue()) {
       case GERMAN:
-        Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).reload("de");
+        Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).changeLanguage("de");
         ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName(getSettingName()));
         break;
       case ENGLISH:
-        Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).reload("en");
+        Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).changeLanguage("en");
         ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName(getSettingName()));
         break;
       default:

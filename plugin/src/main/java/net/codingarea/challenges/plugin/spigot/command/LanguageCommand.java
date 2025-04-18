@@ -29,12 +29,12 @@ public class LanguageCommand implements SenderCommand, Completer {
             case "german":
             case "deutsch":
             case "de":
-                Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).reload("de");
+                Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).changeLanguage("de");
                 break;
             case "english":
             case "englisch":
             case "en":
-                Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).reload("en");
+                Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).changeLanguage("en");
                 break;
             default:
                 Message.forName("unsuported-language").send(sender, Prefix.CHALLENGES, args[0]);
