@@ -1,4 +1,4 @@
-package net.codingarea.challenges.plugin.utils.bukkit.misc.Version;
+package net.codingarea.challenges.plugin.utils.bukkit.misc.version;
 
 import net.anweisen.utilities.common.annotations.Since;
 
