@@ -6,10 +6,10 @@ import javax.annotation.Nonnull;
 
 public interface GamestateSaveable {
 
-	String getUniqueGamestateName();
+  String getUniqueGamestateName();
 
-	void writeGameState(@Nonnull Document document);
+  void writeGameState(@Nonnull Document document);
 
-	void loadGameState(@Nonnull Document document);
+  void loadGameState(@Nonnull Document document);
 
 }

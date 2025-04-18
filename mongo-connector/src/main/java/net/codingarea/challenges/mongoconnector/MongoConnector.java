@@ -7,9 +7,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MongoConnector extends JavaPlugin {
 
-	@Override
-	public void onLoad() {
-		Challenges.getInstance().getDatabaseManager().registerDatabase("mongodb", MongoDBDatabase.class, this);
-	}
+  @Override
+  public void onLoad() {
+    Challenges.getInstance().getDatabaseManager().registerDatabase("mongodb", MongoDBDatabase.class, this);
+  }
 
 }

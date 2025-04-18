@@ -7,20 +7,20 @@ import java.util.function.BiPredicate;
 
 public enum PlayerCountPolicy implements IPolicy {
 
-	ALWAYS((online, max) -> true),
-	EMPTY((online, max) -> online == 0),
-	SOMEONE((online, max) -> online > 0),
-	FULL(Integer::equals);
+  ALWAYS((online, max) -> true),
+  EMPTY((online, max) -> online == 0),
+  SOMEONE((online, max) -> online > 0),
+  FULL(Integer::equals);
 
-	private final BiPredicate<Integer, Integer> check;
+  private final BiPredicate<Integer, Integer> check;
 
-	PlayerCountPolicy(@Nonnull BiPredicate<Integer, Integer> check) {
-		this.check = check;
-	}
+  PlayerCountPolicy(@Nonnull BiPredicate<Integer, Integer> check) {
+    this.check = check;
+  }
 
-	@Override
-	public boolean check(@Nonnull Object holder) {
-		return check.test(Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
-	}
+  @Override
+  public boolean check(@Nonnull Object holder) {
+    return check.test(Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
+  }
 
 }

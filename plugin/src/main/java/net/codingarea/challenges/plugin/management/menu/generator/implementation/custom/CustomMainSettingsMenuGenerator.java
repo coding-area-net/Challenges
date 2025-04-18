@@ -16,76 +16,76 @@ import java.util.function.Function;
 
 public class CustomMainSettingsMenuGenerator extends ChooseItemGenerator implements IParentCustomGenerator {
 
-	@Getter
+  @Getter
   private final IParentCustomGenerator parent;
-	private final SettingType type;
-	private final String title;
-	private final String key;
-	private final Function<String, IChallengeSetting> instanceGetter;
-	private IChallengeSetting setting;
-	private SubSettingsBuilder subSettingsBuilder;
-	private Map<String, String[]> subSettings;
+  private final SettingType type;
+  private final String title;
+  private final String key;
+  private final Function<String, IChallengeSetting> instanceGetter;
+  private IChallengeSetting setting;
+  private SubSettingsBuilder subSettingsBuilder;
+  private Map<String, String[]> subSettings;
 
-	public CustomMainSettingsMenuGenerator(IParentCustomGenerator parent, SettingType type, String key, String title, LinkedHashMap<String, ItemStack> items, Function<String, IChallengeSetting> instanceGetter) {
-		super(items);
-		this.parent = parent;
-		this.type = type;
-		this.title = title;
-		this.key = key;
-		this.instanceGetter = instanceGetter;
-		this.subSettings = new HashMap<>();
-	}
+  public CustomMainSettingsMenuGenerator(IParentCustomGenerator parent, SettingType type, String key, String title, LinkedHashMap<String, ItemStack> items, Function<String, IChallengeSetting> instanceGetter) {
+    super(items);
+    this.parent = parent;
+    this.type = type;
+    this.title = title;
+    this.key = key;
+    this.instanceGetter = instanceGetter;
+    this.subSettings = new HashMap<>();
+  }
 
-	@Override
-	public String[] getSubTitles(int page) {
-		return new String[]{title};
-	}
+  @Override
+  public String[] getSubTitles(int page) {
+    return new String[]{title};
+  }
 
-    @Override
-	public void accept(Player player, SettingType type, Map<String, String[]> data) {
+  @Override
+  public void accept(Player player, SettingType type, Map<String, String[]> data) {
 
-		subSettings.putAll(data);
+    subSettings.putAll(data);
 
-		if (!openSubSettingsMenu(player)) {
-			parent.accept(player, this.type, subSettings);
-		}
+    if (!openSubSettingsMenu(player)) {
+      parent.accept(player, this.type, subSettings);
+    }
 
-	}
+  }
 
-	@Override
-	public void onItemClick(Player player, String itemKey) {
-		this.setting = instanceGetter.apply(itemKey);
-		this.subSettingsBuilder = setting.getSubSettingsBuilder();
+  @Override
+  public void onItemClick(Player player, String itemKey) {
+    this.setting = instanceGetter.apply(itemKey);
+    this.subSettingsBuilder = setting.getSubSettingsBuilder();
 
-		subSettings.put(key, new String[]{setting.getName()});
+    subSettings.put(key, new String[]{setting.getName()});
 
-		if (!openSubSettingsMenu(player)) {
-			parent.accept(player, type, subSettings);
-		}
+    if (!openSubSettingsMenu(player)) {
+      parent.accept(player, type, subSettings);
+    }
 
-	}
+  }
 
-	private boolean openSubSettingsMenu(Player player) {
+  private boolean openSubSettingsMenu(Player player) {
 
-		if (subSettingsBuilder != null && subSettingsBuilder.hasSettings()) {
-			subSettingsBuilder.open(player, this, title);
-			subSettingsBuilder = subSettingsBuilder.getChild();
+    if (subSettingsBuilder != null && subSettingsBuilder.hasSettings()) {
+      subSettingsBuilder.open(player, this, title);
+      subSettingsBuilder = subSettingsBuilder.getChild();
 
-			return true;
-		}
-		return false;
-	}
+      return true;
+    }
+    return false;
+  }
 
-	@Override
-	public void onBackToMenuItemClick(Player player) {
-		parent.decline(player);
-	}
+  @Override
+  public void onBackToMenuItemClick(Player player) {
+    parent.decline(player);
+  }
 
-	@Override
-	public void decline(Player player) {
-		if (setting != null)
-			this.subSettings = MapUtils.createStringArrayMap(key, setting.getName());
-		open(player, 0);
-	}
+  @Override
+  public void decline(Player player) {
+    if (setting != null)
+      this.subSettings = MapUtils.createStringArrayMap(key, setting.getName());
+    open(player, 0);
+  }
 
 }

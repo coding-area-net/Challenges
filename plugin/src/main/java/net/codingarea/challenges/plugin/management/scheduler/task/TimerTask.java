@@ -16,21 +16,21 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TimerTask {
 
-	@Nonnull
-	TimerStatus[] status();
+  @Nonnull
+  TimerStatus[] status();
 
-	boolean async() default true;
+  boolean async() default true;
 
-	@Nonnull
-	ChallengeStatusPolicy challengePolicy() default ChallengeStatusPolicy.ENABLED;
+  @Nonnull
+  ChallengeStatusPolicy challengePolicy() default ChallengeStatusPolicy.ENABLED;
 
-	@Nonnull
-	PlayerCountPolicy playerPolicy() default PlayerCountPolicy.SOMEONE;
+  @Nonnull
+  PlayerCountPolicy playerPolicy() default PlayerCountPolicy.SOMEONE;
 
-	@Nonnull
-	ExtraWorldPolicy worldPolicy() default ExtraWorldPolicy.NOT_USED;
+  @Nonnull
+  ExtraWorldPolicy worldPolicy() default ExtraWorldPolicy.NOT_USED;
 
-	@Nonnull
-	FreshnessPolicy freshnessPolicy() default FreshnessPolicy.ALWAYS;
+  @Nonnull
+  FreshnessPolicy freshnessPolicy() default FreshnessPolicy.ALWAYS;
 
 }

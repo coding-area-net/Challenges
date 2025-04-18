@@ -4,10 +4,10 @@ import javax.annotation.Nonnull;
 
 public interface IPolicy {
 
-	boolean check(@Nonnull Object holder);
+  boolean check(@Nonnull Object holder);
 
-	default boolean isApplicable(@Nonnull Object holder) {
-		return true;
-	}
+  default boolean isApplicable(@Nonnull Object holder) {
+    return true;
+  }
 
 }

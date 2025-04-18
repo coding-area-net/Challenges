@@ -16,56 +16,56 @@ import java.util.List;
 
 public abstract class MultiPageMenuGenerator extends MenuGenerator {
 
-	protected final List<Inventory> inventories = new ArrayList<>();
+  protected final List<Inventory> inventories = new ArrayList<>();
 
-	@Nonnull
-	protected Inventory createNewInventory(int page) {
-		Inventory inventory = Bukkit.createInventory(MenuPosition.HOLDER, getSize(), getTitle(page));
-		InventoryUtils.fillInventory(inventory, ItemBuilder.FILL_ITEM);
-		inventories.add(inventory);
-		return inventory;
-	}
+  @Nonnull
+  protected Inventory createNewInventory(int page) {
+    Inventory inventory = Bukkit.createInventory(MenuPosition.HOLDER, getSize(), getTitle(page));
+    InventoryUtils.fillInventory(inventory, ItemBuilder.FILL_ITEM);
+    inventories.add(inventory);
+    return inventory;
+  }
 
-	protected String getTitle(@Nonnegative int page) {
-		return InventoryTitleManager.getTitle(getMenuType(), page);
-	}
+  protected String getTitle(@Nonnegative int page) {
+    return InventoryTitleManager.getTitle(getMenuType(), page);
+  }
 
-	public abstract int getSize();
+  public abstract int getSize();
 
-	public abstract int getPagesCount();
+  public abstract int getPagesCount();
 
-	public abstract void generatePage(@Nonnull Inventory inventory, int page);
+  public abstract void generatePage(@Nonnull Inventory inventory, int page);
 
-	public abstract int[] getNavigationSlots(@Nonnegative int page);
+  public abstract int[] getNavigationSlots(@Nonnegative int page);
 
-	@Override
-	public void generateInventories() {
-		inventories.clear();
+  @Override
+  public void generateInventories() {
+    inventories.clear();
 
-		for (int page = 0; page < getPagesCount(); page++) {
-			Inventory inventory = createNewInventory(page);
-			generatePage(inventory, page);
-		}
+    for (int page = 0; page < getPagesCount(); page++) {
+      Inventory inventory = createNewInventory(page);
+      generatePage(inventory, page);
+    }
 
-		for (int i = 0; i < inventories.size(); i++) {
-			addNavigationItems(inventories.get(i), i);
-		}
+    for (int i = 0; i < inventories.size(); i++) {
+      addNavigationItems(inventories.get(i), i);
+    }
 
-		reopenInventoryForPlayers();
+    reopenInventoryForPlayers();
 
-	}
+  }
 
-	@Override
-	public List<Inventory> getInventories() {
-		return inventories;
-	}
+  @Override
+  public List<Inventory> getInventories() {
+    return inventories;
+  }
 
-	public void addNavigationItems(@Nonnull Inventory inventory, int page) {
-		InventoryUtils.setNavigationItems(inventory,
-				getNavigationSlots(page), true,
-				InventorySetter.INVENTORY, page, inventories.size(),
-				DefaultItem.navigateBack().clone().setLore("", "§7Shift §8» §7-5"),
-				DefaultItem.navigateNext().clone().setLore("", "§7Shift §8» §7+5"));
-	}
+  public void addNavigationItems(@Nonnull Inventory inventory, int page) {
+    InventoryUtils.setNavigationItems(inventory,
+      getNavigationSlots(page), true,
+      InventorySetter.INVENTORY, page, inventories.size(),
+      DefaultItem.navigateBack().clone().setLore("", "§7Shift §8» §7-5"),
+      DefaultItem.navigateNext().clone().setLore("", "§7Shift §8» §7+5"));
+  }
 
 }

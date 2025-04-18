@@ -19,97 +19,97 @@ import java.util.List;
 
 public class GameWorldStorage implements GamestateSaveable {
 
-	private final List<World> worlds = new LinkedList<>();
-	private World overworld;
-	private World nether;
-	private World end;
-	private World voidWorld;
+  private final List<World> worlds = new LinkedList<>();
+  private World overworld;
+  private World nether;
+  private World end;
+  private World voidWorld;
 
-	public void enable() {
-		Challenges.getInstance().getChallengeManager().registerGameStateSaver(this);
+  public void enable() {
+    Challenges.getInstance().getChallengeManager().registerGameStateSaver(this);
 
-		for (int i = 0; i < 3 && i < Bukkit.getWorlds().size(); i++) {
-			World world = Bukkit.getWorlds().get(i);
-			switch (i) {
-				case 0: {
-					overworld = world;
-					worlds.add(world);
-				}
-				break;
-				case 1: {
-					if (world.getEnvironment() == Environment.NETHER) {
-						nether = world;
-						worlds.add(world);
-					} else if (world.getEnvironment() == Environment.THE_END) {
-						end = world;
-						worlds.add(world);
-					}
-				}
-				break;
-				case 2: {
-					if (world.getEnvironment() == Environment.THE_END) {
-						end = world;
-						worlds.add(world);
-					}
-				}
-				break;
-			}
-		}
+    for (int i = 0; i < 3 && i < Bukkit.getWorlds().size(); i++) {
+      World world = Bukkit.getWorlds().get(i);
+      switch (i) {
+        case 0: {
+          overworld = world;
+          worlds.add(world);
+        }
+        break;
+        case 1: {
+          if (world.getEnvironment() == Environment.NETHER) {
+            nether = world;
+            worlds.add(world);
+          } else if (world.getEnvironment() == Environment.THE_END) {
+            end = world;
+            worlds.add(world);
+          }
+        }
+        break;
+        case 2: {
+          if (world.getEnvironment() == Environment.THE_END) {
+            end = world;
+            worlds.add(world);
+          }
+        }
+        break;
+      }
+    }
 
-	}
+  }
 
-	@Override
-	public String getUniqueGamestateName() {
-		return getClass().getSimpleName().toLowerCase();
-	}
+  @Override
+  public String getUniqueGamestateName() {
+    return getClass().getSimpleName().toLowerCase();
+  }
 
-	@Override
-	public void writeGameState(@NotNull Document document) {
-		document.set("void-generated", voidWorld != null);
-	}
+  @Override
+  public void writeGameState(@NotNull Document document) {
+    document.set("void-generated", voidWorld != null);
+  }
 
-	@Override
-	public void loadGameState(@NotNull Document document) {
-		if (document.getBoolean("void-generated")) {
-			getOrCreateVoidWorld();
-		}
-	}
+  @Override
+  public void loadGameState(@NotNull Document document) {
+    if (document.getBoolean("void-generated")) {
+      getOrCreateVoidWorld();
+    }
+  }
 
-	@Nonnull
-	public World getOrCreateVoidWorld() {
-		if (voidWorld != null) {
-			return voidWorld;
-		}
+  @Nonnull
+  public World getOrCreateVoidWorld() {
+    if (voidWorld != null) {
+      return voidWorld;
+    }
 
-		VoidMapGenerator generator = new VoidMapGenerator();
-		voidWorld = new WorldCreator("void").type(WorldType.FLAT).generator(
-				generator).createWorld();
-		worlds.add(voidWorld);
+    VoidMapGenerator generator = new VoidMapGenerator();
+    voidWorld = new WorldCreator("void").type(WorldType.FLAT).generator(
+      generator).createWorld();
+    worlds.add(voidWorld);
 
-		return voidWorld;
-	}
+    return voidWorld;
+  }
 
-	public World getWorld(@Nullable Environment environment) {
-		if (environment == null) return null;
-		switch (environment) {
-			case NORMAL:
-				return overworld;
-			case NETHER:
-				return nether;
-			case THE_END:
-				return end;
-			case CUSTOM:
-				return Challenges.getInstance().getWorldManager().getExtraWorld();
-		}
-		return null;
-	}
+  public World getWorld(@Nullable Environment environment) {
+    if (environment == null) return null;
+    switch (environment) {
+      case NORMAL:
+        return overworld;
+      case NETHER:
+        return nether;
+      case THE_END:
+        return end;
+      case CUSTOM:
+        return Challenges.getInstance().getWorldManager().getExtraWorld();
+    }
+    return null;
+  }
 
-	public List<String> getCustomGeneratedGameWorlds() {
-		return Collections.singletonList("void");
-	}
+  public List<String> getCustomGeneratedGameWorlds() {
+    return Collections.singletonList("void");
+  }
 
-	public List<World> getGameWorlds() {
-		return Collections.unmodifiableList(worlds);
-	}
+  public List<World> getGameWorlds() {
+    return Collections.unmodifiableList(worlds);
+  }
 
 }

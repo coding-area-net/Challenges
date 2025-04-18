@@ -17,50 +17,50 @@ import java.util.function.Consumer;
 
 public enum MenuType {
 
-	TIMER("timer", Material.CLOCK, new TimerMenuGenerator(), false),
-	GOAL("goal", Material.COMPASS, new SmallCategorisedMenuGenerator()),
-	DAMAGE("damage", Material.IRON_SWORD, new SettingsMenuGenerator()),
-	ITEMS("item_blocks", Material.STICK, new SettingsMenuGenerator()),
-	CHALLENGES("challenges", Material.BOOK, new CategorisedMenuGenerator()),
-	SETTINGS("settings", Material.COMPARATOR, new SettingsMenuGenerator()),
-	CUSTOM("custom", Material.WRITABLE_BOOK, new MainCustomMenuGenerator());
+  TIMER("timer", Material.CLOCK, new TimerMenuGenerator(), false),
+  GOAL("goal", Material.COMPASS, new SmallCategorisedMenuGenerator()),
+  DAMAGE("damage", Material.IRON_SWORD, new SettingsMenuGenerator()),
+  ITEMS("item_blocks", Material.STICK, new SettingsMenuGenerator()),
+  CHALLENGES("challenges", Material.BOOK, new CategorisedMenuGenerator()),
+  SETTINGS("settings", Material.COMPARATOR, new SettingsMenuGenerator()),
+  CUSTOM("custom", Material.WRITABLE_BOOK, new MainCustomMenuGenerator());
 
-	private final String key;
-	@Getter
+  private final String key;
+  @Getter
   private final Material displayItem;
-	@Getter
+  @Getter
   private final MenuGenerator menuGenerator;
-	@Getter
+  @Getter
   private final boolean usable;
 
-	MenuType(@Nonnull String key, @Nonnull Material displayItem, MenuGenerator menuGenerator, boolean usable) {
-		this.key = key;
-		this.displayItem = displayItem;
-		this.menuGenerator = menuGenerator;
-		this.usable = usable;
+  MenuType(@Nonnull String key, @Nonnull Material displayItem, MenuGenerator menuGenerator, boolean usable) {
+    this.key = key;
+    this.displayItem = displayItem;
+    this.menuGenerator = menuGenerator;
+    this.usable = usable;
 
-		menuGenerator.setMenuType(this);
-	}
+    menuGenerator.setMenuType(this);
+  }
 
-	MenuType(@Nonnull String key, @Nonnull Material displayItem, MenuGenerator menuGenerator) {
-		this(key, displayItem, menuGenerator, true);
-	}
+  MenuType(@Nonnull String key, @Nonnull Material displayItem, MenuGenerator menuGenerator) {
+    this(key, displayItem, menuGenerator, true);
+  }
 
-	@Nonnull
-	public String getName() {
-		return ChatColor.stripColor(getDisplayName());
-	}
+  @Nonnull
+  public String getName() {
+    return ChatColor.stripColor(getDisplayName());
+  }
 
-	@Nonnull
-	public String getDisplayName() {
-		return Message.forName("menu-" + key).asString();
-	}
+  @Nonnull
+  public String getDisplayName() {
+    return Message.forName("menu-" + key).asString();
+  }
 
   @SuppressWarnings("unchecked")
-	public <T extends MenuGenerator> void executeWithGenerator(Class<T> clazz, Consumer<T> action) {
-		if (clazz.isAssignableFrom(menuGenerator.getClass())) {
-			action.accept((T) menuGenerator);
-		}
-	}
+  public <T extends MenuGenerator> void executeWithGenerator(Class<T> clazz, Consumer<T> action) {
+    if (clazz.isAssignableFrom(menuGenerator.getClass())) {
+      action.accept((T) menuGenerator);
+    }
+  }
 
 }

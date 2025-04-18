@@ -19,52 +19,52 @@ import java.util.UUID;
  */
 public class GeneratorWorldPortalManager implements GamestateSaveable {
 
-	public Map<UUID, Location> lastWorldLocations;
+  public Map<UUID, Location> lastWorldLocations;
 
-	public GeneratorWorldPortalManager() {
-		lastWorldLocations = new HashMap<>();
-		Challenges.getInstance().getChallengeManager().registerGameStateSaver(this);
-	}
+  public GeneratorWorldPortalManager() {
+    lastWorldLocations = new HashMap<>();
+    Challenges.getInstance().getChallengeManager().registerGameStateSaver(this);
+  }
 
-	@Nullable
-	public Location getAndRemoveLastWorld(@Nonnull Player player) {
-		return lastWorldLocations.remove(player.getUniqueId());
-	}
+  @Nullable
+  public Location getAndRemoveLastWorld(@Nonnull Player player) {
+    return lastWorldLocations.remove(player.getUniqueId());
+  }
 
-	public void setLastLocation(@Nonnull Player player, @Nonnull Location location) {
-		lastWorldLocations.put(player.getUniqueId(), location);
-	}
+  public void setLastLocation(@Nonnull Player player, @Nonnull Location location) {
+    lastWorldLocations.put(player.getUniqueId(), location);
+  }
 
-	public boolean isCustomWorld(@Nonnull String name) {
-		return Challenges.getInstance().getGameWorldStorage().getCustomGeneratedGameWorlds().contains(name);
-	}
+  public boolean isCustomWorld(@Nonnull String name) {
+    return Challenges.getInstance().getGameWorldStorage().getCustomGeneratedGameWorlds().contains(name);
+  }
 
-	@Override
-	public String getUniqueGamestateName() {
-		return getClass().getSimpleName().toLowerCase();
-	}
+  @Override
+  public String getUniqueGamestateName() {
+    return getClass().getSimpleName().toLowerCase();
+  }
 
-	@Override
-	public void writeGameState(@NotNull Document document) {
-		for (Entry<UUID, Location> entry : lastWorldLocations.entrySet()) {
-			UUID uuid = entry.getKey();
-			Location location = entry.getValue();
-			document.set(uuid.toString(), location);
-		}
-	}
+  @Override
+  public void writeGameState(@NotNull Document document) {
+    for (Entry<UUID, Location> entry : lastWorldLocations.entrySet()) {
+      UUID uuid = entry.getKey();
+      Location location = entry.getValue();
+      document.set(uuid.toString(), location);
+    }
+  }
 
-	@Override
-	public void loadGameState(@NotNull Document document) {
-		for (String key : document.keys()) {
-			try {
-				Location location = document.getInstance(key, Location.class);
-				UUID uuid = UUID.fromString(key);
-				lastWorldLocations.put(uuid, location);
-			} catch (Exception exception) {
-				Challenges.getInstance().getLogger().error("Couldn't load last location of: " + key);
-				Challenges.getInstance().getLogger().error("", exception);
-			}
-		}
-	}
+  @Override
+  public void loadGameState(@NotNull Document document) {
+    for (String key : document.keys()) {
+      try {
+        Location location = document.getInstance(key, Location.class);
+        UUID uuid = UUID.fromString(key);
+        lastWorldLocations.put(uuid, location);
+      } catch (Exception exception) {
+        Challenges.getInstance().getLogger().error("Couldn't load last location of: " + key);
+        Challenges.getInstance().getLogger().error("", exception);
+      }
+    }
+  }
 
 }

@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public abstract class AbstractTaskConfig {
 
-	protected final boolean async;
+  protected final boolean async;
 
-	public AbstractTaskConfig(boolean async) {
-		this.async = async;
-	}
+  public AbstractTaskConfig(boolean async) {
+    this.async = async;
+  }
 
 }

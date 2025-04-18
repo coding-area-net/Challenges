@@ -25,104 +25,104 @@ import java.util.function.Supplier;
 
 public final class ServerManager {
 
-	private final boolean setSpectatorOnWin;
-	private final boolean dropItemsOnEnd;
-	private final boolean winSounds;
+  private final boolean setSpectatorOnWin;
+  private final boolean dropItemsOnEnd;
+  private final boolean winSounds;
 
-	private boolean isFresh; // This indicated if the timer was never started before
-	private boolean hasCheated;
+  private boolean isFresh; // This indicated if the timer was never started before
+  private boolean hasCheated;
 
-	public ServerManager() {
-		Document sessionConfig = Challenges.getInstance().getConfigManager().getSessionConfig();
-		hasCheated = sessionConfig.getBoolean("cheated");
-		isFresh = sessionConfig.getBoolean("fresh", true);
+  public ServerManager() {
+    Document sessionConfig = Challenges.getInstance().getConfigManager().getSessionConfig();
+    hasCheated = sessionConfig.getBoolean("cheated");
+    isFresh = sessionConfig.getBoolean("fresh", true);
 
-		Document pluginConfig = Challenges.getInstance().getConfigDocument();
-		setSpectatorOnWin = pluginConfig.getBoolean("set-spectator-on-win");
-		dropItemsOnEnd = pluginConfig.getBoolean("drop-items-on-end");
-		winSounds = pluginConfig.getBoolean("enabled-win-sounds");
-	}
+    Document pluginConfig = Challenges.getInstance().getConfigDocument();
+    setSpectatorOnWin = pluginConfig.getBoolean("set-spectator-on-win");
+    dropItemsOnEnd = pluginConfig.getBoolean("drop-items-on-end");
+    winSounds = pluginConfig.getBoolean("enabled-win-sounds");
+  }
 
-	public void setNotFresh() {
-		isFresh = false;
-		Challenges.getInstance().getConfigManager().getSessionConfig().set("fresh", false);
-	}
+  public void setNotFresh() {
+    isFresh = false;
+    Challenges.getInstance().getConfigManager().getSessionConfig().set("fresh", false);
+  }
 
-	public void setHasCheated() {
-		hasCheated = true;
-		Challenges.getInstance().getConfigManager().getSessionConfig().set("cheated", true);
-	}
+  public void setHasCheated() {
+    hasCheated = true;
+    Challenges.getInstance().getConfigManager().getSessionConfig().set("cheated", true);
+  }
 
-	public boolean isFresh() {
-		return isFresh;
-	}
+  public boolean isFresh() {
+    return isFresh;
+  }
 
-	public boolean hasCheated() {
-		return hasCheated;
-	}
+  public boolean hasCheated() {
+    return hasCheated;
+  }
 
-	public void endChallenge(@Nonnull ChallengeEndCause endCause, Supplier<List<Player>> winnerGetter) {
-		if (ChallengeAPI.isPaused()) {
-			Logger.warn("Tried to end challenge while timer was paused");
-			return;
-		}
+  public void endChallenge(@Nonnull ChallengeEndCause endCause, Supplier<List<Player>> winnerGetter) {
+    if (ChallengeAPI.isPaused()) {
+      Logger.warn("Tried to end challenge while timer was paused");
+      return;
+    }
 
-		IGoal currentGoal = Challenges.getInstance().getChallengeManager().getCurrentGoal();
-		List<Player> winners = new LinkedList<>();
-		if (winnerGetter != null) {
-			winners = winnerGetter.get();
-		} else if (currentGoal != null && endCause.isWinnable()) {
-			currentGoal.getWinnersOnEnd(winners);
-		}
+    IGoal currentGoal = Challenges.getInstance().getChallengeManager().getCurrentGoal();
+    List<Player> winners = new LinkedList<>();
+    if (winnerGetter != null) {
+      winners = winnerGetter.get();
+    } else if (currentGoal != null && endCause.isWinnable()) {
+      currentGoal.getWinnersOnEnd(winners);
+    }
 
-		if (endCause != ChallengeEndCause.GOAL_REACHED || setSpectatorOnWin) {
-			setSpectator();
-		}
-		if (endCause == ChallengeEndCause.GOAL_REACHED && winSounds && currentGoal != null && currentGoal.getWinSound() != null) {
-			currentGoal.getWinSound().broadcast();
-		}
-		if (dropItemsOnEnd) {
-			for (Player player : Bukkit.getOnlinePlayers()) {
-				if (winners.isEmpty() || winners.contains(player)) continue;
-				dropItems(player);
-			}
-		}
+    if (endCause != ChallengeEndCause.GOAL_REACHED || setSpectatorOnWin) {
+      setSpectator();
+    }
+    if (endCause == ChallengeEndCause.GOAL_REACHED && winSounds && currentGoal != null && currentGoal.getWinSound() != null) {
+      currentGoal.getWinSound().broadcast();
+    }
+    if (dropItemsOnEnd) {
+      for (Player player : Bukkit.getOnlinePlayers()) {
+        if (winners.isEmpty() || winners.contains(player)) continue;
+        dropItems(player);
+      }
+    }
 
-		Challenges.getInstance().getChallengeTimer().pause(false);
+    Challenges.getInstance().getChallengeTimer().pause(false);
 
-		String winnerString = StringUtils.getIterableAsString(winners, "§7, ", player -> "§e§l" + NameHelper.getName(player));
-		String time = Challenges.getInstance().getChallengeTimer().getFormattedTime();
-		String seed = Bukkit.getWorlds().isEmpty() ? "?" :
-				String.valueOf(ChallengeAPI.getGameWorld(Environment.NORMAL).getSeed());
-		endCause.getMessage(!winners.isEmpty()).broadcast(Prefix.CHALLENGES, time, winnerString, seed);
+    String winnerString = StringUtils.getIterableAsString(winners, "§7, ", player -> "§e§l" + NameHelper.getName(player));
+    String time = Challenges.getInstance().getChallengeTimer().getFormattedTime();
+    String seed = Bukkit.getWorlds().isEmpty() ? "?" :
+      String.valueOf(ChallengeAPI.getGameWorld(Environment.NORMAL).getSeed());
+    endCause.getMessage(!winners.isEmpty()).broadcast(Prefix.CHALLENGES, time, winnerString, seed);
 
-	}
+  }
 
-	private void setSpectator() {
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			player.setGameMode(GameMode.SPECTATOR);
-			SoundSample.BLAST.play(player);
+  private void setSpectator() {
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      player.setGameMode(GameMode.SPECTATOR);
+      SoundSample.BLAST.play(player);
 
-			try {
-				player.getWorld().spawnEntity(player.getLocation(), MinecraftNameWrapper.FIREWORK);
-			} catch (IllegalArgumentException ex) {
-				// We cant spawn fireworks like that in some versions of spigot
-			}
-		}
-	}
+      try {
+        player.getWorld().spawnEntity(player.getLocation(), MinecraftNameWrapper.FIREWORK);
+      } catch (IllegalArgumentException ex) {
+        // We cant spawn fireworks like that in some versions of spigot
+      }
+    }
+  }
 
-	private void dropItems(@Nonnull Player player) {
-		dropItems(player.getLocation(), player.getInventory().getContents());
-		player.getInventory().clear();
-	}
+  private void dropItems(@Nonnull Player player) {
+    dropItems(player.getLocation(), player.getInventory().getContents());
+    player.getInventory().clear();
+  }
 
-	private void dropItems(@Nonnull Location location, @Nonnull ItemStack[] items) {
-		for (ItemStack item : items) {
-			if (item == null) continue;
-			if (BukkitReflectionUtils.isAir(item.getType())) continue;
-			if (location.getWorld() == null) return;
-			location.getWorld().dropItem(location, item);
-		}
-	}
+  private void dropItems(@Nonnull Location location, @Nonnull ItemStack[] items) {
+    for (ItemStack item : items) {
+      if (item == null) continue;
+      if (BukkitReflectionUtils.isAir(item.getType())) continue;
+      if (location.getWorld() == null) return;
+      location.getWorld().dropItem(location, item);
+    }
+  }
 
 }
