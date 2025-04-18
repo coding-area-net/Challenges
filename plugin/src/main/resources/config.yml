@@ -22,7 +22,7 @@
 # The config-version is even with the version of the default config.
 # You will be notified, when this version is older than the of the default in the plugin jar.
 # We recommend regenerating the config to get access to new features / settings.
-config-version: "2.2.1"
+config-version: "2.4"
 
 timer:
   format:

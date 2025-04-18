@@ -6,7 +6,7 @@
 
     <groupId>net.codingarea.challenges</groupId>
     <artifactId>root</artifactId>
-    <version>2.3.2</version>
+    <version>2.4</version>
     <packaging>pom</packaging>
     <name>root</name>
     <url>https://github.com/anweisen/Challenges</url>
