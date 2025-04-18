@@ -17,11 +17,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class BedrockWallChallenge extends SettingModifier {
 
 	public BedrockWallChallenge() {

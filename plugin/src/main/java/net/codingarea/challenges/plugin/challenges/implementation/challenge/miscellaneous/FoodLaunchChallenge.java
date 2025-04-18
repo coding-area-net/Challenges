@@ -17,10 +17,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0.2
- */
 @Since("2.0.2")
 public class FoodLaunchChallenge extends SettingModifier {
 

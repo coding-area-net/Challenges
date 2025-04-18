@@ -31,10 +31,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @Since("2.0")
 @ExcludeFromRandomChallenges
 public class ForceBiomeChallenge extends CompletableForceChallenge {

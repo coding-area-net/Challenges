@@ -8,10 +8,6 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.EntityEvent;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.2
- */
 public class EntityDamageByPlayerEvent extends EntityEvent implements Cancellable {
 
 	private static final HandlerList handlers = new HandlerList();

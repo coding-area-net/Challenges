@@ -5,10 +5,6 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSett
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class BooleanSetting extends ValueSetting {
 
 

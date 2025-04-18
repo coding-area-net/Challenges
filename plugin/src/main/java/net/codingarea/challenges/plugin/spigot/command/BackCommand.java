@@ -23,10 +23,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class BackCommand implements PlayerCommand, TabCompleter, Listener {
 
 	private final Map<UUID, List<Location>> lastLocations = new HashMap<>();

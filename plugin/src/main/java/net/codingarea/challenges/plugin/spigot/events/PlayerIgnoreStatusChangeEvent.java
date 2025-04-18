@@ -5,10 +5,6 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.2
- */
 public class PlayerIgnoreStatusChangeEvent extends PlayerEvent {
 
 	private static final HandlerList handlers = new HandlerList();

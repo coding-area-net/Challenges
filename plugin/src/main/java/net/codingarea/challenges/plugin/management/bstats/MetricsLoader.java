@@ -11,10 +11,6 @@ import net.codingarea.challenges.plugin.utils.misc.MemoryConverter;
 
 import java.util.HashMap;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 public class MetricsLoader {
 
 	public void start() {

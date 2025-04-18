@@ -24,10 +24,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 @Getter
 @ToString
 public class CustomChallenge extends Setting {

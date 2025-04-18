@@ -15,10 +15,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public class OneTeamLifeSetting extends Setting {
 
 	private boolean isKilling = false;

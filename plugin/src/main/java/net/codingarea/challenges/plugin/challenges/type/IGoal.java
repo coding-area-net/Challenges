@@ -10,11 +10,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @see ChallengeManager
- * @since 2.0
- */
 public interface IGoal extends IChallenge {
 
 	/**

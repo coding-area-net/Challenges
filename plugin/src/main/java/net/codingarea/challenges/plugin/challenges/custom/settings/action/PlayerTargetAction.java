@@ -7,10 +7,6 @@ import org.bukkit.entity.Player;
 import java.util.Map;
 import java.util.function.Supplier;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public abstract class PlayerTargetAction extends EntityTargetAction {
 
 	public PlayerTargetAction(String name, SubSettingsBuilder subSettingsBuilder) {

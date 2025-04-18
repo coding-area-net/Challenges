@@ -12,10 +12,6 @@ import org.bukkit.entity.Player;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.1
- */
 public class WinChallengeAction extends PlayerTargetAction {
 
 	private final List<Player> winner = Lists.newLinkedList();

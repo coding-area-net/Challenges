@@ -27,10 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class BackpackSetting extends SettingModifier implements PlayerCommand {
 
 	public static final int SHARED = 1,

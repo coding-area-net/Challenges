@@ -5,10 +5,6 @@ import net.codingarea.challenges.plugin.utils.bukkit.nms.ReflectionUtil;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.type.WorldServer;
 import org.bukkit.World;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class WorldServer_1_13 extends WorldServer {
 
     /**

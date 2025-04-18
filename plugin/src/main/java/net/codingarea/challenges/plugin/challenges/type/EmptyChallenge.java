@@ -13,10 +13,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.2
- */
 public class EmptyChallenge implements IChallenge {
 
 	private final MenuType menuType;

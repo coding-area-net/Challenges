@@ -24,10 +24,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.BiConsumer;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @ExcludeFromRandomChallenges
 public class ForceHeightChallenge extends EndingForceChallenge {
 

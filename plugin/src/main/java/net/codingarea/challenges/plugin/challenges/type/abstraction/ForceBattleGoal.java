@@ -37,10 +37,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.0
- */
 public abstract class ForceBattleGoal<T extends ForceTarget<?>> extends MenuGoal {
 
 	protected final Map<UUID, Integer> jokerUsed = new HashMap<>();

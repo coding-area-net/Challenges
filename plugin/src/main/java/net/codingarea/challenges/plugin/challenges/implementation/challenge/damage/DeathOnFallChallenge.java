@@ -15,10 +15,6 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class DeathOnFallChallenge extends Setting {
 

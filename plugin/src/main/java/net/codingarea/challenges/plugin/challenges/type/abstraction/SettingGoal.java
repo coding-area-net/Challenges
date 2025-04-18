@@ -8,10 +8,6 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public abstract class SettingGoal extends Setting implements IGoal {
 
 	public SettingGoal() {

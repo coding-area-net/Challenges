@@ -24,10 +24,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class RandomPotionEffectChallenge extends MenuSetting {
 

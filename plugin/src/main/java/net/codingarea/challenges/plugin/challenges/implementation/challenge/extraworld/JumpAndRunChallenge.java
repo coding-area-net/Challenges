@@ -35,10 +35,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class JumpAndRunChallenge extends WorldDependentChallenge {
 
 	private final List<UUID> lastPlayers = new ArrayList<>();

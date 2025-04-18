@@ -16,10 +16,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.0
- */
 @Since("2.2.0")
 public class ForceBlockBattleGoal extends ForceBattleDisplayGoal<BlockTarget> {
 

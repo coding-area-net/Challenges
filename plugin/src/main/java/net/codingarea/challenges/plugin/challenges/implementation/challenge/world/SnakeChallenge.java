@@ -24,10 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class SnakeChallenge extends Setting {
 
 	private final ArrayList<Block> blocks = new ArrayList<>();

@@ -25,10 +25,6 @@ import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public final class ChallengeTimer {
 
 	@Getter

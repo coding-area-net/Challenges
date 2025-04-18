@@ -17,10 +17,6 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class CheatListener implements Listener {
 
 	public CheatListener() {

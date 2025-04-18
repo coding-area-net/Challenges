@@ -2,9 +2,6 @@ package net.codingarea.challenges.plugin.utils.bukkit.nms.type;
 
 /**
  * Used for nms classes that are represented by a bukkit class
- * @param <T> The bukkit type that represents the NMS class
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
  */
 public abstract class BukkitNMSClass<T> extends AbstractNMSClass {
 

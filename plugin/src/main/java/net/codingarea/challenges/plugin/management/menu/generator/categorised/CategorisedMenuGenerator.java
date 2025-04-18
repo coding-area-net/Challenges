@@ -20,10 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.2.0
- */
 public class CategorisedMenuGenerator extends SettingsMenuGenerator {
 
 	private final Map<SettingCategory, CategorisedSettingsMenuGenerator> categories = new LinkedHashMap<>();

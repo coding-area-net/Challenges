@@ -15,10 +15,6 @@ import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public abstract class FindItemGoal extends SettingGoal {
 
 	private final Material searchedItem;

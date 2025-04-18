@@ -13,11 +13,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class BlockBreakDamageChallenge extends SettingModifier {
 
 	public BlockBreakDamageChallenge() {

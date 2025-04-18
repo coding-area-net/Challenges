@@ -14,10 +14,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class HungerPerBlockChallenge extends SettingModifier {
 

@@ -15,10 +15,6 @@ import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @Since("2.0")
 @RequireVersion(MinecraftVersion.V1_16)
 public class BastionSpawnSetting extends NetherPortalSpawnSetting {

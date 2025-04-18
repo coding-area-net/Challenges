@@ -16,10 +16,6 @@ import org.bukkit.Material;
 import javax.annotation.Nonnull;
 import java.util.*;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1
- */
 public class CustomChallengesLoader extends ModuleChallengeLoader {
 
 	private final Map<UUID, CustomChallenge> customChallenges = new LinkedHashMap<>();

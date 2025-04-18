@@ -6,10 +6,6 @@ import net.codingarea.challenges.plugin.Challenges;
 import java.util.*;
 import java.util.Map.Entry;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class MapUtils {
 
 	public static Map<String, String> createStringMap(String... data) {

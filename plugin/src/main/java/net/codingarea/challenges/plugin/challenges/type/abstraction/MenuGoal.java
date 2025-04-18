@@ -10,10 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.1.4
- */
 public abstract class MenuGoal extends MenuSetting implements IGoal {
 	public MenuGoal(@NotNull MenuType menu, @NotNull Message title) {
 		super(menu, title);

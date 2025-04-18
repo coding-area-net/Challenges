@@ -11,10 +11,6 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public abstract class EndingForceChallenge extends AbstractForceChallenge {
 
 	public EndingForceChallenge(@Nonnull MenuType menu) {

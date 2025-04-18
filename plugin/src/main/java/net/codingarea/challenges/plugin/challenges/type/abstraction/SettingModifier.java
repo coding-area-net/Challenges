@@ -11,10 +11,6 @@ import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public abstract class SettingModifier extends Modifier {
 
 	private boolean enabled;

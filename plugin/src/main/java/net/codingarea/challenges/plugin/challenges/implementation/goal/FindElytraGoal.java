@@ -8,10 +8,6 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.1
- */
 @Since("2.1.1")
 public class FindElytraGoal extends FindItemGoal {
 

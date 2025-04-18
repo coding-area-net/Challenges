@@ -30,11 +30,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class DifficultySetting extends Modifier implements SenderCommand, TabCompleter {
 
 	public DifficultySetting() {

@@ -19,10 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class GodModeCommand implements SenderCommand, Completer, Listener {
 
     private final List<UUID> godModePlayers = new ArrayList<>();

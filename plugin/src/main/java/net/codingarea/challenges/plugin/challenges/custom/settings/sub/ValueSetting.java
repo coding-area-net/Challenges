@@ -4,10 +4,6 @@ import lombok.Getter;
 import net.anweisen.utilities.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public abstract class ValueSetting {
 
 	@Getter

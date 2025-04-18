@@ -21,10 +21,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.3
- */
 @Since("1.3")
 public class TrafficLightChallenge extends TimedChallenge {
 

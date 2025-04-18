@@ -7,10 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.CraftItemEvent;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class CraftItemTrigger extends ChallengeTrigger {
 
 	public CraftItemTrigger(String name) {

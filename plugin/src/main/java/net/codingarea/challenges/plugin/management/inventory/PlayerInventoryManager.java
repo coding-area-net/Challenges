@@ -29,10 +29,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class PlayerInventoryManager implements Listener {
 
 	private final List<HotbarItem> hotbarItems;

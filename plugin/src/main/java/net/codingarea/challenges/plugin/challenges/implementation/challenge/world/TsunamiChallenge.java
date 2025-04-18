@@ -32,11 +32,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class TsunamiChallenge extends TimedChallenge {
 

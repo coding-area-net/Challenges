@@ -6,10 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class AdvancementTrigger extends ChallengeTrigger {
 
 	public AdvancementTrigger(String name) {

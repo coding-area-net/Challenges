@@ -20,10 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class DatabaseCommand implements PlayerCommand, TabCompleter {
 
 	private final Map<String, DatabaseCommandExecutor> databaseExecutors;

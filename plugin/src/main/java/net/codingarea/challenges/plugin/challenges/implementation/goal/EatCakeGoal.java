@@ -18,10 +18,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.2
- */
 @Since("2.1.2")
 public class EatCakeGoal extends SettingGoal {
 

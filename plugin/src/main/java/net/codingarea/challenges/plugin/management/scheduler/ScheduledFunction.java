@@ -5,10 +5,6 @@ import java.lang.reflect.Method;
 import javax.annotation.Nonnull;
 import lombok.EqualsAndHashCode;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @EqualsAndHashCode
 public final class ScheduledFunction {
 

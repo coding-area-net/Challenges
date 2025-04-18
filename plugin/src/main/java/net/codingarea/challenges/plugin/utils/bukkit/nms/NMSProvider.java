@@ -12,10 +12,6 @@ import net.codingarea.challenges.plugin.utils.bukkit.nms.type.*;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class NMSProvider {
 
     private final static int majorVersion;

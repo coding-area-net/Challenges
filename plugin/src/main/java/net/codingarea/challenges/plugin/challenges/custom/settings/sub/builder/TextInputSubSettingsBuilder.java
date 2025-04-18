@@ -17,10 +17,6 @@ import java.util.Map.Entry;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.2
- */
 public class TextInputSubSettingsBuilder extends SubSettingsBuilder {
 
 	private final Consumer<Player> onOpen;

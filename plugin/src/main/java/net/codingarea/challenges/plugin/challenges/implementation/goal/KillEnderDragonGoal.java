@@ -12,10 +12,6 @@ import org.bukkit.entity.EntityType;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public class KillEnderDragonGoal extends KillEntityGoal {
 
 	public KillEnderDragonGoal() {

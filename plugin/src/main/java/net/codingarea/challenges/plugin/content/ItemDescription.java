@@ -10,10 +10,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class ItemDescription {
 
 	private static final Document config = Challenges.getInstance().getConfigDocument().getDocument("design");

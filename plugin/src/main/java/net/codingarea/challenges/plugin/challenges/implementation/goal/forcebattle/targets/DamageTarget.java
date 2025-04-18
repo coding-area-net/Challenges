@@ -4,10 +4,6 @@ import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebatt
 import net.codingarea.challenges.plugin.content.Message;
 import org.bukkit.entity.Player;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class DamageTarget extends ForceTarget<Integer> {
 
     public DamageTarget(Integer target) {

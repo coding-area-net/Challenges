@@ -46,10 +46,6 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabCompleter {
 
 	private static QuizChallenge instance;

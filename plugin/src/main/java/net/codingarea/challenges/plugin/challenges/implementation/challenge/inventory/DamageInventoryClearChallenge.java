@@ -15,10 +15,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class DamageInventoryClearChallenge extends SettingModifier {
 
 	public DamageInventoryClearChallenge() {

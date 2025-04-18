@@ -16,9 +16,6 @@ import java.util.UUID;
 
 /**
  * Manages the portal locations of custom worlds
- *
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
  */
 public class GeneratorWorldPortalManager implements GamestateSaveable {
 

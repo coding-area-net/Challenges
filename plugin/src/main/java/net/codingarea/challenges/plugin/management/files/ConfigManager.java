@@ -17,10 +17,6 @@ import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public final class ConfigManager {
 
 	private final List<String> missingConfigSettings;

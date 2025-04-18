@@ -28,10 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class InvseeCommand implements PlayerCommand, Listener {
 
 	private static final int

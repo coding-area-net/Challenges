@@ -16,10 +16,6 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import java.util.LinkedHashMap;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public abstract class ChooseItemGenerator extends MultiPageMenuGenerator {
 
 	private final LinkedHashMap<String, ItemStack> items;

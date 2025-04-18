@@ -30,10 +30,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @ExcludeFromRandomChallenges
 public class ForceMobChallenge extends CompletableForceChallenge {
 

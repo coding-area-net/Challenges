@@ -14,11 +14,6 @@ import java.net.URL;
 import java.util.*;
 import java.util.regex.Pattern;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public final class Utils {
 
 	private Utils() {

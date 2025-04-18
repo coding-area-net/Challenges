@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 /**
  * @author TobiasDeBruijn | https://github.com/TobiasDeBruijn
  * @source https://github.com/TobiasDeBruijn/BukkitReflectionUtil
- * @since 2.2.0
  */
 public abstract class CraftPlayer extends BukkitNMSClass<Player> {
 

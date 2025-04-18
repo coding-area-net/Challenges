@@ -23,10 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class AnvilRainChallenge extends MenuSetting {
 
 	private final Random random = new Random();

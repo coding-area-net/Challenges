@@ -9,10 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @Data
 public final class PlayerData {
 

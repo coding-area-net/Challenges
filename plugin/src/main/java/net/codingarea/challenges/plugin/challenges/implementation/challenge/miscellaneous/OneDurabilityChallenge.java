@@ -17,10 +17,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class OneDurabilityChallenge extends Setting {
 
 	public OneDurabilityChallenge() {

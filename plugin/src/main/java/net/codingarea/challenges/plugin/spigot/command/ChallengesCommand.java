@@ -16,10 +16,6 @@ import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public class ChallengesCommand implements PlayerCommand, Completer {
 
 	@Override

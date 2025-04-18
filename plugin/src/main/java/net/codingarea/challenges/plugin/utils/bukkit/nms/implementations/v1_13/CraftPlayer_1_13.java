@@ -5,10 +5,6 @@ import net.codingarea.challenges.plugin.utils.bukkit.nms.ReflectionUtil;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.type.CraftPlayer;
 import org.bukkit.entity.Player;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class CraftPlayer_1_13 extends CraftPlayer {
     /**
      * @param player   The player to create the CraftPlayer for

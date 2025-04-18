@@ -28,10 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 @CanInstaKillOnEnable
 public class NoDupedItemsChallenge extends Setting {

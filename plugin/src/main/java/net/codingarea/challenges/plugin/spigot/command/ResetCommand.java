@@ -16,10 +16,6 @@ import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public class ResetCommand implements SenderCommand, Completer {
 
 	private final boolean confirmReset, seedResetCommand;

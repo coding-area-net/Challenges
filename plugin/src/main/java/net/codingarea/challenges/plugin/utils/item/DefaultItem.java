@@ -10,10 +10,6 @@ import org.bukkit.Material;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class DefaultItem {
 
 	private static final String ARROW_LEFT = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjAwNmVjMWVjYTJmMjY4NWY3MGU2NTQxMWNmZTg4MDhhMDg4ZjdjZjA4MDg3YWQ4ZWVjZTk2MTgzNjEwNzBlMyJ9fX0=",

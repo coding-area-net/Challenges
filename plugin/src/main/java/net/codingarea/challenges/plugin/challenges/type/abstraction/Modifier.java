@@ -12,10 +12,6 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public abstract class Modifier extends AbstractChallenge implements IModifier {
 
 	private final int max, min;

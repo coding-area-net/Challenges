@@ -14,10 +14,6 @@ import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @Since("2.0")
 public class AlwaysRunningChallenge extends Setting {
 

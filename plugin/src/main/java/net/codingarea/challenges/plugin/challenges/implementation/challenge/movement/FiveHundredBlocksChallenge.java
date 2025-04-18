@@ -34,10 +34,6 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 @Since("2.1.0")
 public class FiveHundredBlocksChallenge extends SettingModifier {
 

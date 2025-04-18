@@ -16,10 +16,6 @@ import net.codingarea.challenges.plugin.utils.item.ItemUtils;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import org.bukkit.Material;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class BlockRandomizerChallenge extends RandomizerSetting {
 
 	public BlockRandomizerChallenge() {

@@ -19,10 +19,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0.2
- */
 @Since("2.0.2")
 public class FreezeChallenge extends SettingModifier {
 

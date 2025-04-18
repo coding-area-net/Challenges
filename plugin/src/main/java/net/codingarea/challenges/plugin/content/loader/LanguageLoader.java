@@ -21,10 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map.Entry;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class LanguageLoader extends ContentLoader {
 
 	public static final String DEFAULT_LANGUAGE = "en";

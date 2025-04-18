@@ -15,10 +15,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public class SoupSetting extends Setting {
 
 	public SoupSetting() {

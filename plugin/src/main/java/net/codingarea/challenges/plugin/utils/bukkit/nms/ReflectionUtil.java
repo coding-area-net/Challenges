@@ -14,7 +14,6 @@ import org.bukkit.Bukkit;
 /**
  * @author TobiasDeBruijn | https://github.com/TobiasDeBruijn
  * @source https://github.com/TobiasDeBruijn/BukkitReflectionUtil
- * @since 2.2.0
  */
 public class ReflectionUtil {
 

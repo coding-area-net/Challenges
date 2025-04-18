@@ -36,10 +36,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class ExtremeForceBattleGoal extends ForceBattleDisplayGoal<ForceTarget<?>> {
 
 

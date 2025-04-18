@@ -16,10 +16,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class ChunkDeconstructionChallenge extends TimedChallenge {
 
 	public ChunkDeconstructionChallenge() {

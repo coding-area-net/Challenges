@@ -4,10 +4,6 @@ import net.codingarea.challenges.plugin.content.Message;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class InventoryTitleManager {
 
 	private InventoryTitleManager() {

@@ -17,10 +17,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.1
- */
 @Since("2.1.1")
 public class BlockFlyInAirChallenge extends Setting {
 
