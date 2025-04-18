@@ -1,8 +1,5 @@
 package net.codingarea.challenges.plugin.utils.item;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.UUID;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder.SkullBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;

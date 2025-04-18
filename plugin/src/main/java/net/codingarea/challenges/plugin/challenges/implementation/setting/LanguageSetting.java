@@ -10,8 +10,7 @@ import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import javax.annotation.Nonnull;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.Objects;
 
 public class LanguageSetting extends Modifier {
 
@@ -42,11 +41,11 @@ public class LanguageSetting extends Modifier {
   public void playValueChangeTitle() {
     switch (getValue()) {
       case GERMAN:
-        Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).changeLanguage("de");
+        Objects.requireNonNull(Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class)).changeLanguage("de");
         ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName(getSettingName()));
         break;
       case ENGLISH:
-        Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).changeLanguage("en");
+        Objects.requireNonNull(Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class)).changeLanguage("en");
         ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName(getSettingName()));
         break;
       default:

@@ -9,6 +9,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import java.util.Objects;
+
 public class StandsOnSpecificBlockTrigger extends ChallengeTrigger {
 
 	public StandsOnSpecificBlockTrigger(String name) {
@@ -24,7 +26,7 @@ public class StandsOnSpecificBlockTrigger extends ChallengeTrigger {
 	public void onMove(PlayerMoveEvent event) {
 		if (BlockUtils.isSameBlockLocation(event.getTo(), event.getFrom())) return;
 		Block blockBelow = BlockUtils.getBlockBelow(
-				event.getTo());
+                Objects.requireNonNull(event.getTo()));
 		if (blockBelow == null) return;
 
 		createData()

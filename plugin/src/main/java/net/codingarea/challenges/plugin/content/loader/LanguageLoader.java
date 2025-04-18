@@ -16,7 +16,6 @@ import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.utils.logging.ConsolePrint;
 
 import javax.annotation.Nonnull;
-import javax.print.Doc;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map.Entry;

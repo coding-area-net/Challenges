@@ -228,10 +228,7 @@ public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGen
 			Player player = info.getPlayer();
 
 			switch (info.getSlot()) {
-				default:
-					SoundSample.CLICK.play(player);
-					break;
-				case DELETE_SLOT:
+                case DELETE_SLOT:
 					if (!Challenges.getInstance().getCustomChallengesLoader().getCustomChallenges().containsKey(uuid)) {
 						Message.forName("custom-not-deleted").send(player, Prefix.CUSTOM);
 						SoundSample.BASS_OFF.play(player);
@@ -301,7 +298,10 @@ public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGen
 					materialMenuGenerator.open(player, 0);
 					SoundSample.CLICK.play(player);
 					break;
-			}
+                default:
+                    SoundSample.CLICK.play(player);
+                    break;
+            }
 		}
 
   }

@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.management.server;
 
+import lombok.Getter;
 import net.anweisen.utilities.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
@@ -7,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
 
+@Getter
 public final class TitleManager {
 
 	private static final int fadein = 5, duration = 20, fadeout = 10;
@@ -30,15 +32,7 @@ public final class TitleManager {
 		message.broadcastTitle(args);
 	}
 
-	public boolean isChallengeStatusEnabled() {
-		return challengeStatusEnabled;
-	}
-
-	public boolean isTimerStatusEnabled() {
-		return timerStatusEnabled;
-	}
-
-	public void sendTitle(@Nonnull Player player, @Nonnull String title, @Nonnull String subtitle) {
+    public void sendTitle(@Nonnull Player player, @Nonnull String title, @Nonnull String subtitle) {
 		player.sendTitle(title, subtitle, fadein, duration, fadeout);
 	}
 

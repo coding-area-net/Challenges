@@ -220,7 +220,7 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
 				index++;
 			}
 
-			if (itemIndex >= 2) {
+			if (itemIndex == 2) {
 				SoundSample.CLICK.play(info.getPlayer());
 				return;
 			}
