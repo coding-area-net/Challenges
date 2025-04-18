@@ -21,49 +21,49 @@ import java.util.List;
 @Since("2.0")
 public class LastManStandingGoal extends SettingGoal {
 
-	private Player winner;
+  private Player winner;
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.IRON_HELMET, Message.forName("item-last-man-standing-goal"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.IRON_HELMET, Message.forName("item-last-man-standing-goal"));
+  }
 
-	@Override
-	public void getWinnersOnEnd(@Nonnull List<Player> winners) {
-		determineWinner();
-		if (winner != null)
-			winners.add(winner);
-	}
+  @Override
+  public void getWinnersOnEnd(@Nonnull List<Player> winners) {
+    determineWinner();
+    if (winner != null)
+      winners.add(winner);
+  }
 
-	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-	public void onPlayerDeath(@Nonnull PlayerDeathEvent event) {
-		if (!isEnabled()) return;
-		checkEnd();
-	}
+  @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+  public void onPlayerDeath(@Nonnull PlayerDeathEvent event) {
+    if (!isEnabled()) return;
+    checkEnd();
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onLeave(@Nonnull PlayerQuitEvent event) {
-		if (!isEnabled()) return;
-		checkEnd();
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onLeave(@Nonnull PlayerQuitEvent event) {
+    if (!isEnabled()) return;
+    checkEnd();
+  }
 
-	protected void determineWinner() {
-		int playersLiving = 0;
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (player.getGameMode() == GameMode.SPECTATOR) continue;
-			playersLiving++;
-			winner = player;
-		}
+  protected void determineWinner() {
+    int playersLiving = 0;
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      if (player.getGameMode() == GameMode.SPECTATOR) continue;
+      playersLiving++;
+      winner = player;
+    }
 
-		if (playersLiving != 1)
-			winner = null;
-	}
+    if (playersLiving != 1)
+      winner = null;
+  }
 
-	protected void checkEnd() {
-		determineWinner();
-		if (winner == null) return;
-		ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED);
-	}
+  protected void checkEnd() {
+    determineWinner();
+    if (winner == null) return;
+    ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED);
+  }
 
 }

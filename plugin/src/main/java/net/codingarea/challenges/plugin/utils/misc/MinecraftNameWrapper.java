@@ -1,8 +1,5 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import javax.annotation.Nonnull;
 import net.anweisen.utilities.common.misc.ReflectionUtils;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.ReflectionUtil;
 import org.bukkit.Material;
@@ -10,6 +7,10 @@ import org.bukkit.Particle;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.potion.PotionEffectType;
+
+import javax.annotation.Nonnull;
+import java.lang.reflect.Field;
+import java.util.Arrays;
 
 public class MinecraftNameWrapper {
 

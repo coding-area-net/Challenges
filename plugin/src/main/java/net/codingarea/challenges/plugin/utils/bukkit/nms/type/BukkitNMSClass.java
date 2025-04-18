@@ -5,20 +5,21 @@ package net.codingarea.challenges.plugin.utils.bukkit.nms.type;
  */
 public abstract class BukkitNMSClass<T> extends AbstractNMSClass {
 
-    public Object nmsObject;
+  public Object nmsObject;
 
-    /**
-     * @param nmsClass The NMS class
-     */
-    public BukkitNMSClass(Class<?> nmsClass, T bukkitObject) {
-        super(nmsClass);
-        this.nmsObject = get(bukkitObject);
-    }
+  /**
+   * @param nmsClass The NMS class
+   */
+  public BukkitNMSClass(Class<?> nmsClass, T bukkitObject) {
+    super(nmsClass);
+    this.nmsObject = get(bukkitObject);
+  }
 
-    /**
-     * Creates an NMS object of the specified bukkit type object
-     * @param bukkitObject An instance of the specified bukkit type
-     * @return The NMS object
-     */
-    public abstract Object get(T bukkitObject);
+  /**
+   * Creates an NMS object of the specified bukkit type object
+   *
+   * @param bukkitObject An instance of the specified bukkit type
+   * @return The NMS object
+   */
+  public abstract Object get(T bukkitObject);
 }

@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FallbackNames {
 
-    @Nonnull
-    String[] value();
+  @Nonnull
+  String[] value();
 
 }

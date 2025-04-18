@@ -18,26 +18,26 @@ import javax.annotation.Nonnull;
 @Since("2.0")
 public class DeathOnFallChallenge extends Setting {
 
-	public DeathOnFallChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.DAMAGE);
-	}
+  public DeathOnFallChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.DAMAGE);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.FEATHER, Message.forName("item-death-on-fall-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.FEATHER, Message.forName("item-death-on-fall-challenge"));
+  }
 
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onEntityDamage(@Nonnull EntityDamageEvent event) {
-		if (!(event.getEntity() instanceof Player)) return;
-		if (!shouldExecuteEffect()) return;
-		Player player = (Player) event.getEntity();
-		if (ignorePlayer(player)) return;
-		if (event.getCause() != DamageCause.FALL) return;
-		event.setDamage(player.getHealth());
-		event.setCancelled(false);
-	}
+  @EventHandler(priority = EventPriority.HIGH)
+  public void onEntityDamage(@Nonnull EntityDamageEvent event) {
+    if (!(event.getEntity() instanceof Player)) return;
+    if (!shouldExecuteEffect()) return;
+    Player player = (Player) event.getEntity();
+    if (ignorePlayer(player)) return;
+    if (event.getCause() != DamageCause.FALL) return;
+    event.setDamage(player.getHealth());
+    event.setCancelled(false);
+  }
 
 }

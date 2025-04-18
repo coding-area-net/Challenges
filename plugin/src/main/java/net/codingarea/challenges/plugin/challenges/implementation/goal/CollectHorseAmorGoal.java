@@ -16,26 +16,26 @@ import java.util.List;
 @Since("2.1.2")
 public class CollectHorseAmorGoal extends ItemCollectionGoal {
 
-	public CollectHorseAmorGoal() {
-		super();
-		setCategory(SettingCategory.FASTEST_TIME);
-		List<Material> targets = new ArrayList<>(Arrays.asList(
-				Material.DIAMOND_HORSE_ARMOR,
-				Material.GOLDEN_HORSE_ARMOR,
-				Material.IRON_HORSE_ARMOR
-		));
+  public CollectHorseAmorGoal() {
+    super();
+    setCategory(SettingCategory.FASTEST_TIME);
+    List<Material> targets = new ArrayList<>(Arrays.asList(
+      Material.DIAMOND_HORSE_ARMOR,
+      Material.GOLDEN_HORSE_ARMOR,
+      Material.IRON_HORSE_ARMOR
+    ));
 
-		if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_14)) {
-			targets.add(Material.LEATHER_HORSE_ARMOR);
-		}
+    if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_14)) {
+      targets.add(Material.LEATHER_HORSE_ARMOR);
+    }
 
-		setTarget(targets.toArray(new Object[0]));
-	}
+    setTarget(targets.toArray(new Object[0]));
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.DIAMOND_HORSE_ARMOR, Message.forName("item-collect-horse-armor-goal"));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.DIAMOND_HORSE_ARMOR, Message.forName("item-collect-horse-armor-goal"));
+  }
 
 }

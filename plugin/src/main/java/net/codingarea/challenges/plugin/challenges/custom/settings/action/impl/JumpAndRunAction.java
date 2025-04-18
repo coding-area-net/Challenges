@@ -10,20 +10,20 @@ import java.util.Map;
 
 public class JumpAndRunAction extends ChallengeAction {
 
-	public JumpAndRunAction(String name) {
-		super(name);
-	}
+  public JumpAndRunAction(String name) {
+    super(name);
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.ACACIA_STAIRS;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.ACACIA_STAIRS;
+  }
 
-	@Override
-	public void execute(
-			ChallengeExecutionData executionData,
-			Map<String, String[]> subActions) {
-		AbstractChallenge.getFirstInstance(JumpAndRunChallenge.class).startWorldChallenge();
-	}
+  @Override
+  public void execute(
+    ChallengeExecutionData executionData,
+    Map<String, String[]> subActions) {
+    AbstractChallenge.getFirstInstance(JumpAndRunChallenge.class).startWorldChallenge();
+  }
 
 }

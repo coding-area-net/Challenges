@@ -7,8 +7,8 @@ import java.util.Map;
 
 public interface IChallengeAction {
 
-	IRandom random = IRandom.create();
+  IRandom random = IRandom.create();
 
-	void execute(ChallengeExecutionData executionData, Map<String, String[]> subActions);
+  void execute(ChallengeExecutionData executionData, Map<String, String[]> subActions);
 
 }

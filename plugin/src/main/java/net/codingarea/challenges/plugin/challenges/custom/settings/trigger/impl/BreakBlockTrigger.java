@@ -9,22 +9,22 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 public class BreakBlockTrigger extends ChallengeTrigger {
 
-	public BreakBlockTrigger(String name) {
-		super(name, SubSettingsHelper.createBlockSettingsBuilder());
-	}
+  public BreakBlockTrigger(String name) {
+    super(name, SubSettingsHelper.createBlockSettingsBuilder());
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.GOLDEN_PICKAXE;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.GOLDEN_PICKAXE;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onBlockBreak(BlockBreakEvent event) {
-		createData()
-				.entity(event.getPlayer())
-				.event(event)
-				.block(event.getBlock().getType())
-				.execute();
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onBlockBreak(BlockBreakEvent event) {
+    createData()
+      .entity(event.getPlayer())
+      .event(event)
+      .block(event.getBlock().getType())
+      .execute();
+  }
 
 }

@@ -15,46 +15,46 @@ import javax.annotation.Nonnull;
 
 public class ExtraWorldRestrictionListener implements Listener {
 
-	@EventHandler(priority = EventPriority.LOW)
-	public void onBlockPlace(@Nonnull BlockPlaceEvent event) {
-		if (!isInExtraWorld(event.getBlock().getLocation())) return;
-		if (Challenges.getInstance().getWorldManager().getSettings().isPlaceBlocks()) return;
+  @EventHandler(priority = EventPriority.LOW)
+  public void onBlockPlace(@Nonnull BlockPlaceEvent event) {
+    if (!isInExtraWorld(event.getBlock().getLocation())) return;
+    if (Challenges.getInstance().getWorldManager().getSettings().isPlaceBlocks()) return;
 
-		event.setBuild(false);
-		event.setCancelled(true);
-	}
+    event.setBuild(false);
+    event.setCancelled(true);
+  }
 
-	@EventHandler(priority = EventPriority.LOW)
-	public void onBlockBreak(@Nonnull BlockBreakEvent event) {
-		if (!isInExtraWorld(event.getBlock().getLocation())) return;
-		if (Challenges.getInstance().getWorldManager().getSettings().isDestroyBlocks()) return;
+  @EventHandler(priority = EventPriority.LOW)
+  public void onBlockBreak(@Nonnull BlockBreakEvent event) {
+    if (!isInExtraWorld(event.getBlock().getLocation())) return;
+    if (Challenges.getInstance().getWorldManager().getSettings().isDestroyBlocks()) return;
 
-		event.setCancelled(true);
-	}
+    event.setCancelled(true);
+  }
 
-	@EventHandler(priority = EventPriority.LOW)
-	public void onDrop(@Nonnull PlayerDropItemEvent event) {
-		if (!isInExtraWorld(event.getPlayer().getWorld())) return;
-		if (Challenges.getInstance().getWorldManager().getSettings().isDropItems()) return;
+  @EventHandler(priority = EventPriority.LOW)
+  public void onDrop(@Nonnull PlayerDropItemEvent event) {
+    if (!isInExtraWorld(event.getPlayer().getWorld())) return;
+    if (Challenges.getInstance().getWorldManager().getSettings().isDropItems()) return;
 
-		event.setCancelled(true);
-	}
+    event.setCancelled(true);
+  }
 
-	@EventHandler(priority = EventPriority.LOW)
-	public void onPickUp(@Nonnull PlayerPickupItemEvent event) {
-		if (!isInExtraWorld(event.getPlayer().getWorld())) return;
-		if (Challenges.getInstance().getWorldManager().getSettings().isPickupItems()) return;
+  @EventHandler(priority = EventPriority.LOW)
+  public void onPickUp(@Nonnull PlayerPickupItemEvent event) {
+    if (!isInExtraWorld(event.getPlayer().getWorld())) return;
+    if (Challenges.getInstance().getWorldManager().getSettings().isPickupItems()) return;
 
-		event.setCancelled(true);
-	}
+    event.setCancelled(true);
+  }
 
-	private boolean isInExtraWorld(@Nonnull Location location) {
-		if (location.getWorld() == null) return false;
-		return isInExtraWorld(location.getWorld());
-	}
+  private boolean isInExtraWorld(@Nonnull Location location) {
+    if (location.getWorld() == null) return false;
+    return isInExtraWorld(location.getWorld());
+  }
 
-	private boolean isInExtraWorld(@Nonnull World world) {
-		return Challenges.getInstance().getWorldManager().getExtraWorld().equals(world);
-	}
+  private boolean isInExtraWorld(@Nonnull World world) {
+    return Challenges.getInstance().getWorldManager().getExtraWorld().equals(world);
+  }
 
 }

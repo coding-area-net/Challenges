@@ -21,28 +21,28 @@ import javax.annotation.Nonnull;
 @Since("2.0")
 public class NewEntityOnJumpChallenge extends Setting {
 
-	public NewEntityOnJumpChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.ENTITIES);
-	}
+  public NewEntityOnJumpChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.ENTITIES);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-jump-entity-challenge")).setColor(Color.GREEN);
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-jump-entity-challenge")).setColor(Color.GREEN);
+  }
 
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onJump(@Nonnull PlayerJumpEvent event) {
-		if (ignorePlayer(event.getPlayer())) return;
-		if (!shouldExecuteEffect()) return;
-		spawnRandomEntity(event.getPlayer().getLocation());
-	}
+  @EventHandler(priority = EventPriority.HIGH)
+  public void onJump(@Nonnull PlayerJumpEvent event) {
+    if (ignorePlayer(event.getPlayer())) return;
+    if (!shouldExecuteEffect()) return;
+    spawnRandomEntity(event.getPlayer().getLocation());
+  }
 
-	private void spawnRandomEntity(@Nonnull Location location) {
-		if (location.getWorld() == null) return;
-		EntityType type = globalRandom.choose(RandomMobAction.getSpawnableMobs());
-		location.getWorld().spawnEntity(location, type);
-	}
+  private void spawnRandomEntity(@Nonnull Location location) {
+    if (location.getWorld() == null) return;
+    EntityType type = globalRandom.choose(RandomMobAction.getSpawnableMobs());
+    location.getWorld().spawnEntity(location, type);
+  }
 
 }

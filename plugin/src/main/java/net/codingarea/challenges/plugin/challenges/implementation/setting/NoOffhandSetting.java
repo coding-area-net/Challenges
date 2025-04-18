@@ -20,44 +20,44 @@ import javax.annotation.Nonnull;
 @Since("2.0")
 public class NoOffhandSetting extends Setting {
 
-	public NoOffhandSetting() {
-		super(MenuType.SETTINGS);
-	}
+  public NoOffhandSetting() {
+    super(MenuType.SETTINGS);
+  }
 
-	@Override
-	protected void onEnable() {
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
-			if (itemInOffHand.getType() == Material.AIR) return;
-			player.getWorld().dropItemNaturally(player.getLocation(), itemInOffHand);
-			player.getInventory().setItemInOffHand(null);
-			player.updateInventory();
-		}
-	}
+  @Override
+  protected void onEnable() {
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
+      if (itemInOffHand.getType() == Material.AIR) return;
+      player.getWorld().dropItemNaturally(player.getLocation(), itemInOffHand);
+      player.getInventory().setItemInOffHand(null);
+      player.updateInventory();
+    }
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.SHIELD, Message.forName("item-no-offhand-setting"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.SHIELD, Message.forName("item-no-offhand-setting"));
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onPlayerSwapHandItems(PlayerSwapHandItemsEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		event.setCancelled(true);
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onPlayerSwapHandItems(PlayerSwapHandItemsEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    event.setCancelled(true);
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onInventoryClick(InventoryClickEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (!(event.getWhoClicked() instanceof Player)) return;
-		Player player = (Player) event.getWhoClicked();
-		if (ignorePlayer(player)) return;
-		if (event.getClickedInventory() == null) return;
-		if (event.getClickedInventory().getType() != InventoryType.PLAYER) return;
-		if (event.getSlot() != 40) return;
-		event.setCancelled(true);
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onInventoryClick(InventoryClickEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (!(event.getWhoClicked() instanceof Player)) return;
+    Player player = (Player) event.getWhoClicked();
+    if (ignorePlayer(player)) return;
+    if (event.getClickedInventory() == null) return;
+    if (event.getClickedInventory().getType() != InventoryType.PLAYER) return;
+    if (event.getSlot() != 40) return;
+    event.setCancelled(true);
+  }
 
 }

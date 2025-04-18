@@ -17,29 +17,29 @@ import javax.annotation.Nonnull;
 @Since("2.0")
 public class DeathPositionSetting extends Setting {
 
-	private static final String POSITION_PREFIX = "death-";
+  private static final String POSITION_PREFIX = "death-";
 
-	public DeathPositionSetting() {
-		super(MenuType.SETTINGS);
-	}
+  public DeathPositionSetting() {
+    super(MenuType.SETTINGS);
+  }
 
-	@EventHandler(priority = EventPriority.LOWEST)
-	public void onDeath(@Nonnull PlayerDeathEvent event) {
-		if (!shouldExecuteEffect()) return;
+  @EventHandler(priority = EventPriority.LOWEST)
+  public void onDeath(@Nonnull PlayerDeathEvent event) {
+    if (!shouldExecuteEffect()) return;
 
-		int index = 1;
-		while (AbstractChallenge.getFirstInstance(PositionSetting.class).containsPosition(POSITION_PREFIX + index))
-			index++;
+    int index = 1;
+    while (AbstractChallenge.getFirstInstance(PositionSetting.class).containsPosition(POSITION_PREFIX + index))
+      index++;
 
-		Player player = event.getEntity();
-		player.performCommand("pos " + POSITION_PREFIX + index);
+    Player player = event.getEntity();
+    player.performCommand("pos " + POSITION_PREFIX + index);
 
-	}
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.MUSIC_DISC_11, Message.forName("item-death-position-setting"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.MUSIC_DISC_11, Message.forName("item-death-position-setting"));
+  }
 
 }

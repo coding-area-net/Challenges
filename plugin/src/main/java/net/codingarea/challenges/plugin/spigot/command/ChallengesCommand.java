@@ -18,37 +18,37 @@ import java.util.List;
 
 public class ChallengesCommand implements PlayerCommand, Completer {
 
-	@Override
-	public void onCommand(@Nonnull Player player, @Nonnull String[] args) {
-		if (args.length > 1) {
-			Message.forName("syntax").send(player, Prefix.CHALLENGES, "challenges [menu]");
-			return;
-		}
+  @Override
+  public void onCommand(@Nonnull Player player, @Nonnull String[] args) {
+    if (args.length > 1) {
+      Message.forName("syntax").send(player, Prefix.CHALLENGES, "challenges [menu]");
+      return;
+    }
 
-		if (args.length == 1) {
-			String menuName = args[0].toUpperCase();
-			try {
-				MenuType menuType = MenuType.valueOf(menuName);
-				Challenges.getInstance().getMenuManager().openMenu(player, menuType, 0);
-			} catch (IllegalArgumentException exception) {
-				Challenges.getInstance().getMenuManager().openGUI(player);
-			}
-			return;
-		}
+    if (args.length == 1) {
+      String menuName = args[0].toUpperCase();
+      try {
+        MenuType menuType = MenuType.valueOf(menuName);
+        Challenges.getInstance().getMenuManager().openMenu(player, menuType, 0);
+      } catch (IllegalArgumentException exception) {
+        Challenges.getInstance().getMenuManager().openGUI(player);
+      }
+      return;
+    }
 
-		Challenges.getInstance().getMenuManager().openGUI(player);
+    Challenges.getInstance().getMenuManager().openGUI(player);
 
-	}
+  }
 
 
-	@Nullable
-	@Override
-	public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
-		return args.length != 1 ? null : Utils.filterRecommendations(args[0],
-			Arrays.stream(MenuType.values())
-				.map(menuType -> menuType.name().toLowerCase())
-				.toArray(String[]::new)
-		);
-	}
+  @Nullable
+  @Override
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
+    return args.length != 1 ? null : Utils.filterRecommendations(args[0],
+      Arrays.stream(MenuType.values())
+        .map(menuType -> menuType.name().toLowerCase())
+        .toArray(String[]::new)
+    );
+  }
 
 }

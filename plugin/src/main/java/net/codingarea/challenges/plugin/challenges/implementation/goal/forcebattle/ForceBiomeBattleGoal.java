@@ -19,51 +19,51 @@ import java.util.stream.Collectors;
 
 public class ForceBiomeBattleGoal extends ForceBattleGoal<BiomeTarget> {
 
-    public ForceBiomeBattleGoal() {
-        super(Message.forName("menu-force-biome-battle-goal-settings"));
-    }
+  public ForceBiomeBattleGoal() {
+    super(Message.forName("menu-force-biome-battle-goal-settings"));
+  }
 
-    @NotNull
-    @Override
-    public ItemBuilder createDisplayItem() {
-        return new ItemBuilder(Material.FILLED_MAP, Message.forName("item-force-biome-battle-goal"));
-    }
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.FILLED_MAP, Message.forName("item-force-biome-battle-goal"));
+  }
 
-    @Override
-    protected BiomeTarget[] getTargetsPossibleToFind() {
-        List<Biome> biomes = BiomeTarget.getPossibleBiomes();
-        return biomes.stream().map(BiomeTarget::new).toArray(BiomeTarget[]::new);
-    }
+  @Override
+  protected BiomeTarget[] getTargetsPossibleToFind() {
+    List<Biome> biomes = BiomeTarget.getPossibleBiomes();
+    return biomes.stream().map(BiomeTarget::new).toArray(BiomeTarget[]::new);
+  }
 
-    @Override
-    public BiomeTarget getTargetFromDocument(Document document, String path) {
-         return new BiomeTarget(Registry.BIOME.get(NamespacedKey.minecraft(Objects.requireNonNull(document.getString(path)).toLowerCase())));
-    }
+  @Override
+  public BiomeTarget getTargetFromDocument(Document document, String path) {
+    return new BiomeTarget(Registry.BIOME.get(NamespacedKey.minecraft(Objects.requireNonNull(document.getString(path)).toLowerCase())));
+  }
 
-    @Override
-    public List<BiomeTarget> getListFromDocument(Document document, String path) {
-        return document.getStringList(path).stream()
-                .map(biomeName -> new BiomeTarget(
-                        Registry.BIOME.get(NamespacedKey.minecraft(biomeName.toLowerCase()))
-                ))
-                .collect(Collectors.toList());
-    }
+  @Override
+  public List<BiomeTarget> getListFromDocument(Document document, String path) {
+    return document.getStringList(path).stream()
+      .map(biomeName -> new BiomeTarget(
+        Registry.BIOME.get(NamespacedKey.minecraft(biomeName.toLowerCase()))
+      ))
+      .collect(Collectors.toList());
+  }
 
 
-    @Override
-    protected Message getLeaderboardTitleMessage() {
-        return Message.forName("force-biome-battle-leaderboard");
-    }
+  @Override
+  protected Message getLeaderboardTitleMessage() {
+    return Message.forName("force-biome-battle-leaderboard");
+  }
 
-    @ScheduledTask(ticks = 5, async = false, timerPolicy = TimerPolicy.STARTED)
-    public void checkBiomes() {
-        if (!shouldExecuteEffect()) return;
-        broadcastFiltered(player -> {
-            BiomeTarget target = currentTarget.get(player.getUniqueId());
-            if (target != null && target.check(player)) {
-                handleTargetFound(player);
-            }
-        });
-    }
+  @ScheduledTask(ticks = 5, async = false, timerPolicy = TimerPolicy.STARTED)
+  public void checkBiomes() {
+    if (!shouldExecuteEffect()) return;
+    broadcastFiltered(player -> {
+      BiomeTarget target = currentTarget.get(player.getUniqueId());
+      if (target != null && target.check(player)) {
+        handleTargetFound(player);
+      }
+    });
+  }
 
 }

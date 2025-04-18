@@ -15,22 +15,22 @@ import javax.annotation.Nonnull;
 @Since("2.0")
 public class KillIronGolemGoal extends KillEntityGoal {
 
-	public KillIronGolemGoal() {
-		super(EntityType.IRON_GOLEM);
-		setCategory(SettingCategory.KILL_ENTITY);
-		this.killerNeeded = true;
-	}
+  public KillIronGolemGoal() {
+    super(EntityType.IRON_GOLEM);
+    setCategory(SettingCategory.KILL_ENTITY);
+    this.killerNeeded = true;
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.IRON_INGOT, Message.forName("item-iron-golem-goal"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.IRON_INGOT, Message.forName("item-iron-golem-goal"));
+  }
 
-	@Nonnull
-	@Override
-	public SoundSample getStartSound() {
-		return new SoundSample().addSound(Sound.ENTITY_IRON_GOLEM_HURT, 1);
-	}
+  @Nonnull
+  @Override
+  public SoundSample getStartSound() {
+    return new SoundSample().addSound(Sound.ENTITY_IRON_GOLEM_HURT, 1);
+  }
 
 }

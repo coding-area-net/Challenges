@@ -8,21 +8,21 @@ import org.bukkit.event.EventPriority;
 
 public class PickupItemTrigger extends ChallengeTrigger {
 
-	public PickupItemTrigger(String name) {
-		super(name);
-	}
+  public PickupItemTrigger(String name) {
+    super(name);
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.STICK;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.STICK;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onPickup(PlayerPickupItemEvent event) {
-		createData()
-				.entity(event.getPlayer())
-				.event(event)
-				.execute();
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onPickup(PlayerPickupItemEvent event) {
+    createData()
+      .entity(event.getPlayer())
+      .event(event)
+      .execute();
+  }
 
 }

@@ -18,8 +18,11 @@ import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.ParticleUtils;
-import org.bukkit.*;
+import org.bukkit.Color;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Particle.DustOptions;
+import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
@@ -35,137 +38,137 @@ import java.util.List;
 @Since("2.1.0")
 public class RaceGoal extends SettingModifierGoal {
 
-	protected long seed = IRandom.create().getSeed();
+  protected long seed = IRandom.create().getSeed();
 
-	private Location goal;
+  private Location goal;
 
-	public RaceGoal() {
-		super(MenuType.GOAL, 1, 30, 5);
-		setCategory(SettingCategory.FASTEST_TIME);
-	}
+  public RaceGoal() {
+    super(MenuType.GOAL, 1, 30, 5);
+    setCategory(SettingCategory.FASTEST_TIME);
+  }
 
-	@Override
-	public void getWinnersOnEnd(@NotNull List<Player> winners) {
-	}
+  @Override
+  public void getWinnersOnEnd(@NotNull List<Player> winners) {
+  }
 
-	@Override
-	protected void onEnable() {
-		reloadGoalLocation();
-		bossbar.setContent((bar, player) -> {
-			bar.setColor(BarColor.GREEN);
-			if (player.getWorld() == goal.getWorld()) {
+  @Override
+  protected void onEnable() {
+    reloadGoalLocation();
+    bossbar.setContent((bar, player) -> {
+      bar.setColor(BarColor.GREEN);
+      if (player.getWorld() == goal.getWorld()) {
 
-				Location relativeGoal = goal.clone();
-				relativeGoal.setY(player.getLocation().getY());
-				relativeGoal.add(0.5, 0, 0.5);
-				int distance = (int) Math.round(player.getLocation().distance(relativeGoal));
+        Location relativeGoal = goal.clone();
+        relativeGoal.setY(player.getLocation().getY());
+        relativeGoal.add(0.5, 0, 0.5);
+        int distance = (int) Math.round(player.getLocation().distance(relativeGoal));
 
-				bar.setTitle(Message.forName("bossbar-race-goal-info")
-						.asString(goal.getBlockX(), goal.getBlockZ(), distance));
-			} else {
-				bar.setTitle(Message.forName("bossbar-race-goal")
-						.asString(goal.getBlockX(), goal.getBlockZ()));
-			}
+        bar.setTitle(Message.forName("bossbar-race-goal-info")
+          .asString(goal.getBlockX(), goal.getBlockZ(), distance));
+      } else {
+        bar.setTitle(Message.forName("bossbar-race-goal")
+          .asString(goal.getBlockX(), goal.getBlockZ()));
+      }
 
-		});
-		bossbar.show();
-	}
+    });
+    bossbar.show();
+  }
 
-	@Override
-	protected void onDisable() {
-		bossbar.hide();
-		goal = null;
-	}
+  @Override
+  protected void onDisable() {
+    bossbar.hide();
+    goal = null;
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("subtitle-range-blocks").asString(getValue() * 100));
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("subtitle-range-blocks").asString(getValue() * 100));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-range-blocks-description").asArray(getValue() * 100);
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-range-blocks-description").asArray(getValue() * 100);
+  }
 
 
-	@Override
-	protected void onValueChange() {
-		reloadGoalLocation();
-		bossbar.update();
-	}
+  @Override
+  protected void onValueChange() {
+    reloadGoalLocation();
+    bossbar.update();
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.STRUCTURE_VOID, Message.forName("item-race-goal"));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.STRUCTURE_VOID, Message.forName("item-race-goal"));
+  }
 
-	@ScheduledTask(ticks = 20)
-	public void onSecond() {
-		if (goal == null) return;
-		bossbar.update();
-		broadcast(player -> {
-			Location relativeGoal = goal.clone();
-			relativeGoal.setY(player.getLocation().getY());
-			relativeGoal.add(0.5, 0, 0.5);
-			ParticleUtils.drawLine(player, player.getLocation(), relativeGoal, MinecraftNameWrapper.REDSTONE_DUST, new DustOptions(
-					Color.LIME, 1), 1, 0.5, 50);
+  @ScheduledTask(ticks = 20)
+  public void onSecond() {
+    if (goal == null) return;
+    bossbar.update();
+    broadcast(player -> {
+      Location relativeGoal = goal.clone();
+      relativeGoal.setY(player.getLocation().getY());
+      relativeGoal.add(0.5, 0, 0.5);
+      ParticleUtils.drawLine(player, player.getLocation(), relativeGoal, MinecraftNameWrapper.REDSTONE_DUST, new DustOptions(
+        Color.LIME, 1), 1, 0.5, 50);
 
-			if (player.getWorld() != goal.getWorld()) return;
-			if (player.getLocation().distance(relativeGoal) > 20) return;
-			ParticleUtils.spawnParticleCircleAroundRadius(Challenges.getInstance(), relativeGoal,
-				MinecraftNameWrapper.INSTANT_EFFECT, 0.75, 0.5);
-		});
-	}
+      if (player.getWorld() != goal.getWorld()) return;
+      if (player.getLocation().distance(relativeGoal) > 20) return;
+      ParticleUtils.spawnParticleCircleAroundRadius(Challenges.getInstance(), relativeGoal,
+        MinecraftNameWrapper.INSTANT_EFFECT, 0.75, 0.5);
+    });
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onMove(PlayerMoveEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		if (BlockUtils.isSameBlockLocationIgnoreHeight(event.getFrom(), event.getTo())) return;
-		if (event.getTo().getWorld() != goal.getWorld()) return;
-		if (event.getTo() == null) return;
-		if (BlockUtils.isSameBlockLocationIgnoreHeight(event.getTo(), goal)) {
-			Message.forName("race-goal-reached").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
-			ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, () -> Collections.singletonList(event.getPlayer()));
-			ParticleUtils.spawnParticleCircleAroundRadius(Challenges.getInstance(), event.getTo(), MinecraftNameWrapper.ENTITY_EFFECT, 0.75, 2);
-		}
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onMove(PlayerMoveEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    if (BlockUtils.isSameBlockLocationIgnoreHeight(event.getFrom(), event.getTo())) return;
+    if (event.getTo().getWorld() != goal.getWorld()) return;
+    if (event.getTo() == null) return;
+    if (BlockUtils.isSameBlockLocationIgnoreHeight(event.getTo(), goal)) {
+      Message.forName("race-goal-reached").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+      ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, () -> Collections.singletonList(event.getPlayer()));
+      ParticleUtils.spawnParticleCircleAroundRadius(Challenges.getInstance(), event.getTo(), MinecraftNameWrapper.ENTITY_EFFECT, 0.75, 2);
+    }
+  }
 
-	private void reloadGoalLocation() {
+  private void reloadGoalLocation() {
 
-		World world = ChallengeAPI.getGameWorld(Environment.NORMAL);
-		int y = 999;
+    World world = ChallengeAPI.getGameWorld(Environment.NORMAL);
+    int y = 999;
 
-		IRandom iRandom = IRandom.create(seed);
-		// Some more calculations to prevent the result cords to always end with the same digits.
-		int max = getValue() * 100 - iRandom.nextInt(getValue() - getValue() / 2);
+    IRandom iRandom = IRandom.create(seed);
+    // Some more calculations to prevent the result cords to always end with the same digits.
+    int max = getValue() * 100 - iRandom.nextInt(getValue() - getValue() / 2);
 
-		int x = iRandom.nextInt(max * 2) - max;
-		int z = iRandom.nextInt(max * 2) - max;
-		goal = new Location(world, x, y, z);
-	}
+    int x = iRandom.nextInt(max * 2) - max;
+    int z = iRandom.nextInt(max * 2) - max;
+    goal = new Location(world, x, y, z);
+  }
 
-	@Override
-	public void loadGameState(@NotNull Document document) {
-		if (!document.contains("seed")) {
-			seed = IRandom.create().getSeed();
-			return;
-		}
+  @Override
+  public void loadGameState(@NotNull Document document) {
+    if (!document.contains("seed")) {
+      seed = IRandom.create().getSeed();
+      return;
+    }
 
-		long seed = document.getLong("seed");
-		if (this.seed == seed) return;
-		this.seed = seed;
+    long seed = document.getLong("seed");
+    if (this.seed == seed) return;
+    this.seed = seed;
 
-		if (!isEnabled()) return;
-		reloadGoalLocation();
-		bossbar.update();
-	}
+    if (!isEnabled()) return;
+    reloadGoalLocation();
+    bossbar.update();
+  }
 
-	@Override
-	public void writeGameState(@NotNull Document document) {
-		document.set("seed", seed);
-	}
+  @Override
+  public void writeGameState(@NotNull Document document) {
+    document.set("seed", seed);
+  }
 
 }

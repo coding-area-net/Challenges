@@ -12,27 +12,27 @@ import java.util.Map;
 
 public class FreezeAction extends EntityTargetAction {
 
-	FreezeChallenge instance = AbstractChallenge
-			.getFirstInstance(FreezeChallenge.class);
+  FreezeChallenge instance = AbstractChallenge
+    .getFirstInstance(FreezeChallenge.class);
 
-	public FreezeAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true));
-	}
+  public FreezeAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.ICE;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.ICE;
+  }
 
-	@Override
-	public void executeFor(Entity entity, Map<String, String[]> subActions) {
+  @Override
+  public void executeFor(Entity entity, Map<String, String[]> subActions) {
 
-		if (entity instanceof LivingEntity) {
-			LivingEntity livingEntity = (LivingEntity) entity;
-			instance.setFreeze(livingEntity, 2);
-		}
+    if (entity instanceof LivingEntity) {
+      LivingEntity livingEntity = (LivingEntity) entity;
+      instance.setFreeze(livingEntity, 2);
+    }
 
 
-	}
+  }
 
 }

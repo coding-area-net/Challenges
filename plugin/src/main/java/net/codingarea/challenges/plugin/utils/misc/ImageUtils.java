@@ -13,34 +13,34 @@ import java.net.URL;
 
 public final class ImageUtils {
 
-	public static final char IMAGE_CHAR = '█';
+  public static final char IMAGE_CHAR = '█';
 
-	private ImageUtils() {
-	}
+  private ImageUtils() {
+  }
 
-	@Nullable
-	public static BufferedImage getImage(@Nonnull String url) throws IOException {
-		HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-		connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36");
-		return ImageIO.read(connection.getInputStream());
-	}
+  @Nullable
+  public static BufferedImage getImage(@Nonnull String url) throws IOException {
+    HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+    connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36");
+    return ImageIO.read(connection.getInputStream());
+  }
 
-	public static BufferedImage getPlayerHead(@Nonnull Player player, int size) throws IOException {
-		String url = "https://crafatar.com/avatars/" + player.getUniqueId() + "?size=" + size + "&overlay";
-		return getImage(url);
-	}
+  public static BufferedImage getPlayerHead(@Nonnull Player player, int size) throws IOException {
+    String url = "https://crafatar.com/avatars/" + player.getUniqueId() + "?size=" + size + "&overlay";
+    return getImage(url);
+  }
 
-	public static String[] convertImageToText(@Nonnull BufferedImage image) {
-		String[] output = new String[image.getHeight()];
-		for (int y = 0; y < output.length; y++) {
-			StringBuilder text = new StringBuilder();
-			for (int x = 0; x < image.getWidth(); x++) {
-				text.append(ColorConversions.convertAwtColorToChatColor(new Color(image.getRGB(x, y))))
-						.append(IMAGE_CHAR);
-			}
-			output[y] = text.toString();
-		}
-		return output;
-	}
+  public static String[] convertImageToText(@Nonnull BufferedImage image) {
+    String[] output = new String[image.getHeight()];
+    for (int y = 0; y < output.length; y++) {
+      StringBuilder text = new StringBuilder();
+      for (int x = 0; x < image.getWidth(); x++) {
+        text.append(ColorConversions.convertAwtColorToChatColor(new Color(image.getRGB(x, y))))
+          .append(IMAGE_CHAR);
+      }
+      output[y] = text.toString();
+    }
+    return output;
+  }
 
 }

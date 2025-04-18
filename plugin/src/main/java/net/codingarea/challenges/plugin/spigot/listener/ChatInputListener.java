@@ -14,30 +14,30 @@ import java.util.function.Consumer;
 
 public class ChatInputListener implements Listener {
 
-	private static Map<UUID, Consumer<AsyncPlayerChatEvent>> inputActions = new HashMap<>();
+  private static Map<UUID, Consumer<AsyncPlayerChatEvent>> inputActions = new HashMap<>();
 
-	public ChatInputListener() {
-		inputActions = new HashMap<>();
-	}
+  public ChatInputListener() {
+    inputActions = new HashMap<>();
+  }
 
-	public static void setInputAction(Player player, Consumer<AsyncPlayerChatEvent> event) {
-		inputActions.put(player.getUniqueId(), event);
-	}
+  public static void setInputAction(Player player, Consumer<AsyncPlayerChatEvent> event) {
+    inputActions.put(player.getUniqueId(), event);
+  }
 
-	@EventHandler(priority = EventPriority.LOW)
-	public void onChat(AsyncPlayerChatEvent event) {
+  @EventHandler(priority = EventPriority.LOW)
+  public void onChat(AsyncPlayerChatEvent event) {
 
-		Consumer<AsyncPlayerChatEvent> action = inputActions.remove(event.getPlayer().getUniqueId());
-		if (action != null) {
-			action.accept(event);
-			event.setCancelled(true);
-		}
+    Consumer<AsyncPlayerChatEvent> action = inputActions.remove(event.getPlayer().getUniqueId());
+    if (action != null) {
+      action.accept(event);
+      event.setCancelled(true);
+    }
 
-	}
+  }
 
-	@EventHandler(priority = EventPriority.LOW)
-	public void onQuit(PlayerQuitEvent event) {
-		inputActions.remove(event.getPlayer().getUniqueId());
-	}
+  @EventHandler(priority = EventPriority.LOW)
+  public void onQuit(PlayerQuitEvent event) {
+    inputActions.remove(event.getPlayer().getUniqueId());
+  }
 
 }

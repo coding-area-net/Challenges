@@ -23,49 +23,49 @@ import java.util.Objects;
 @Since("2.2.0")
 public class NoSharedAdvancementsChallenge extends Setting {
 
-	private final List<Advancement> advancementsDone = new LinkedList<>();
+  private final List<Advancement> advancementsDone = new LinkedList<>();
 
-	public NoSharedAdvancementsChallenge() {
-		super(MenuType.CHALLENGES);
-	}
+  public NoSharedAdvancementsChallenge() {
+    super(MenuType.CHALLENGES);
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.KNOWLEDGE_BOOK, Message.forName("item-no-shared-advancements-challenge"));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.KNOWLEDGE_BOOK, Message.forName("item-no-shared-advancements-challenge"));
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onAdvancementDone(PlayerAdvancementDoneEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (event.getAdvancement().getKey().toString().contains(":recipes/")) return;
-		if (advancementsDone.contains(event.getAdvancement())) {
-			ChallengeHelper.kill(event.getPlayer());
-		} else {
-			advancementsDone.add(event.getAdvancement());
-		}
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onAdvancementDone(PlayerAdvancementDoneEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (event.getAdvancement().getKey().toString().contains(":recipes/")) return;
+    if (advancementsDone.contains(event.getAdvancement())) {
+      ChallengeHelper.kill(event.getPlayer());
+    } else {
+      advancementsDone.add(event.getAdvancement());
+    }
+  }
 
-	@Override
-	public void loadGameState(@NotNull Document document) {
-		advancementsDone.clear();
-		List<String> advancementKeys = document.getStringList("advancements");
-		for (String advancementKey : advancementKeys) {
-			try {
-				advancementsDone.add(Bukkit.getAdvancement(Objects.requireNonNull(BukkitReflectionUtils.fromString(advancementKey))));
-			} catch (Exception exception) {
-				// DON'T EXIST
-			}
-		}
-	}
+  @Override
+  public void loadGameState(@NotNull Document document) {
+    advancementsDone.clear();
+    List<String> advancementKeys = document.getStringList("advancements");
+    for (String advancementKey : advancementKeys) {
+      try {
+        advancementsDone.add(Bukkit.getAdvancement(Objects.requireNonNull(BukkitReflectionUtils.fromString(advancementKey))));
+      } catch (Exception exception) {
+        // DON'T EXIST
+      }
+    }
+  }
 
-	@Override
-	public void writeGameState(@NotNull Document document) {
-		List<String> foundItems = new LinkedList<>();
-		for (Advancement advancement : advancementsDone) {
-			foundItems.add(advancement.getKey().toString());
-		}
-		document.set("advancements", foundItems);
-	}
+  @Override
+  public void writeGameState(@NotNull Document document) {
+    List<String> foundItems = new LinkedList<>();
+    for (Advancement advancement : advancementsDone) {
+      foundItems.add(advancement.getKey().toString());
+    }
+    document.set("advancements", foundItems);
+  }
 
 }

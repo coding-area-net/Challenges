@@ -14,20 +14,20 @@ import java.util.Arrays;
 @Since("2.0")
 public class KillAllBossesGoal extends KillMobsGoal {
 
-	public KillAllBossesGoal() {
-		super(Arrays.asList(EntityType.ENDER_DRAGON, EntityType.WITHER, EntityType.ELDER_GUARDIAN));
-		setCategory(SettingCategory.KILL_ENTITY);
-	}
+  public KillAllBossesGoal() {
+    super(Arrays.asList(EntityType.ENDER_DRAGON, EntityType.WITHER, EntityType.ELDER_GUARDIAN));
+    setCategory(SettingCategory.KILL_ENTITY);
+  }
 
-	@Override
-	public Message getBossbarMessage() {
-		return Message.forName("bossbar-kill-all-bosses");
-	}
+  @Override
+  public Message getBossbarMessage() {
+    return Message.forName("bossbar-kill-all-bosses");
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.DIAMOND_SWORD, Message.forName("item-all-bosses-goal"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.DIAMOND_SWORD, Message.forName("item-all-bosses-goal"));
+  }
 
 }

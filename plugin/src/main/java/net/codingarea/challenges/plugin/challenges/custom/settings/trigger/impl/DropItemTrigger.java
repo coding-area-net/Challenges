@@ -8,21 +8,21 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 
 public class DropItemTrigger extends ChallengeTrigger {
 
-	public DropItemTrigger(String name) {
-		super(name);
-	}
+  public DropItemTrigger(String name) {
+    super(name);
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.DROPPER;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.DROPPER;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onItemDrop(PlayerDropItemEvent event) {
-		createData()
-				.entity(event.getPlayer())
-				.event(event)
-				.execute();
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onItemDrop(PlayerDropItemEvent event) {
+    createData()
+      .entity(event.getPlayer())
+      .event(event)
+      .execute();
+  }
 
 }

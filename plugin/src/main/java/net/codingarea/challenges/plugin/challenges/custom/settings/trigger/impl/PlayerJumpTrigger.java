@@ -10,18 +10,18 @@ import javax.annotation.Nonnull;
 
 public class PlayerJumpTrigger extends ChallengeTrigger {
 
-	public PlayerJumpTrigger(String name) {
-		super(name);
-	}
+  public PlayerJumpTrigger(String name) {
+    super(name);
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.RABBIT_FOOT;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.RABBIT_FOOT;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onJump(@Nonnull PlayerJumpEvent event) {
-		createData().entity(event.getPlayer()).execute();
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onJump(@Nonnull PlayerJumpEvent event) {
+    createData().entity(event.getPlayer()).execute();
+  }
 
 }

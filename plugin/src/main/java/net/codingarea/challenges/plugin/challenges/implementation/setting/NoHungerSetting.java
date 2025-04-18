@@ -13,32 +13,32 @@ import javax.annotation.Nonnull;
 
 public class NoHungerSetting extends Setting {
 
-	public NoHungerSetting() {
-		super(MenuType.SETTINGS);
-	}
+  public NoHungerSetting() {
+    super(MenuType.SETTINGS);
+  }
 
-	@Override
-	protected void onEnable() {
-		broadcastFiltered(this::feedPlayer);
-	}
+  @Override
+  protected void onEnable() {
+    broadcastFiltered(this::feedPlayer);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.BREAD, Message.forName("no-hunger-setting"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.BREAD, Message.forName("no-hunger-setting"));
+  }
 
-	@EventHandler(ignoreCancelled = true)
-	public void onHunger(@Nonnull FoodLevelChangeEvent event) {
-		if (!(event.getEntity() instanceof Player)) return;
-		if (!shouldExecuteEffect()) return;
-		feedPlayer(((Player) event.getEntity()));
-		event.setCancelled(true);
-	}
+  @EventHandler(ignoreCancelled = true)
+  public void onHunger(@Nonnull FoodLevelChangeEvent event) {
+    if (!(event.getEntity() instanceof Player)) return;
+    if (!shouldExecuteEffect()) return;
+    feedPlayer(((Player) event.getEntity()));
+    event.setCancelled(true);
+  }
 
-	private void feedPlayer(@Nonnull Player player) {
-		player.setFoodLevel(20);
-		player.setSaturation(20);
-	}
+  private void feedPlayer(@Nonnull Player player) {
+    player.setFoodLevel(20);
+    player.setSaturation(20);
+  }
 
 }

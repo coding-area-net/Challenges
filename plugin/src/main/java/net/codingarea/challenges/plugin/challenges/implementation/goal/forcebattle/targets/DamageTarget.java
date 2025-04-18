@@ -6,43 +6,43 @@ import org.bukkit.entity.Player;
 
 public class DamageTarget extends ForceTarget<Integer> {
 
-    public DamageTarget(Integer target) {
-        super(target);
-    }
+  public DamageTarget(Integer target) {
+    super(target);
+  }
 
-    @Override
-    public boolean check(Player player) {
-        return false;
-    }
+  @Override
+  public boolean check(Player player) {
+    return false;
+  }
 
-    @Override
-    public Object toMessage() {
-        return (double) target / 2;
-    }
+  @Override
+  public Object toMessage() {
+    return (double) target / 2;
+  }
 
-    @Override
-    public String getName() {
-        return String.valueOf((double) target / 2);
-    }
+  @Override
+  public String getName() {
+    return String.valueOf((double) target / 2);
+  }
 
-    @Override
-    public Message getNewTargetMessage() {
-        return Message.forName("extreme-force-battle-new-damage");
-    }
+  @Override
+  public Message getNewTargetMessage() {
+    return Message.forName("extreme-force-battle-new-damage");
+  }
 
-    @Override
-    public Message getCompletedMessage() {
-        return Message.forName("extreme-force-battle-took-damage");
-    }
+  @Override
+  public Message getCompletedMessage() {
+    return Message.forName("extreme-force-battle-took-damage");
+  }
 
-    @Override
-    public ExtremeForceBattleGoal.TargetType getType() {
-        return ExtremeForceBattleGoal.TargetType.DAMAGE;
-    }
+  @Override
+  public ExtremeForceBattleGoal.TargetType getType() {
+    return ExtremeForceBattleGoal.TargetType.DAMAGE;
+  }
 
-    @Override
-    public Message getScoreboardDisplayMessage() {
-        return Message.forName("force-battle-damage-target-display");
-    }
+  @Override
+  public Message getScoreboardDisplayMessage() {
+    return Message.forName("force-battle-damage-target-display");
+  }
 
 }

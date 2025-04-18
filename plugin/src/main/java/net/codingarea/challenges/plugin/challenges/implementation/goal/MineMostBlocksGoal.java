@@ -13,22 +13,22 @@ import javax.annotation.Nonnull;
 
 public class MineMostBlocksGoal extends PointsGoal {
 
-	public MineMostBlocksGoal() {
-		super();
-		setCategory(SettingCategory.SCORE_POINTS);
-	}
+  public MineMostBlocksGoal() {
+    super();
+    setCategory(SettingCategory.SCORE_POINTS);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.GOLDEN_PICKAXE, Message.forName("item-mine-most-blocks-goal"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.GOLDEN_PICKAXE, Message.forName("item-mine-most-blocks-goal"));
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onBlockBreak(@Nonnull BlockBreakEvent event) {
-		if (!isEnabled()) return;
-		if (event.getBlock().isPassable()) return;
-		collect(event.getPlayer());
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onBlockBreak(@Nonnull BlockBreakEvent event) {
+    if (!isEnabled()) return;
+    if (event.getBlock().isPassable()) return;
+    collect(event.getPlayer());
+  }
 
 }

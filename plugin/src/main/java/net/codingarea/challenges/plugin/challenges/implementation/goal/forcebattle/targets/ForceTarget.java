@@ -13,35 +13,41 @@ import java.util.Objects;
 
 @Getter
 public abstract class ForceTarget<T> {
-    protected final T target;
+  protected final T target;
 
-    protected ForceTarget(T target) {
-        this.target = target;
+  protected ForceTarget(T target) {
+    this.target = target;
+  }
+
+  public abstract boolean check(Player player);
+
+  public abstract Object toMessage();
+
+  public abstract String getName();
+
+  public abstract Message getNewTargetMessage();
+
+  public abstract Message getCompletedMessage();
+
+  public abstract ExtremeForceBattleGoal.TargetType getType();
+
+  public abstract Message getScoreboardDisplayMessage();
+
+  @Override
+  public String toString() {
+    return target.toString();
+  }
+
+  public void updateDisplayStand(@NotNull ArmorStand armorStand) {
+    if (target instanceof Material) {
+      Objects.requireNonNull(armorStand.getEquipment()).setHelmet(new ItemStack((Material) target));
+    } else {
+      Objects.requireNonNull(armorStand.getEquipment()).setHelmet(null);
     }
+  }
 
-    public abstract boolean check(Player player);
-    public abstract Object toMessage();
-    public abstract String getName();
-    public abstract Message getNewTargetMessage();
-    public abstract Message getCompletedMessage();
-    public abstract ExtremeForceBattleGoal.TargetType getType();
-    public abstract Message getScoreboardDisplayMessage();
-
-    @Override
-    public String toString() {
-        return target.toString();
-    }
-
-    public void updateDisplayStand(@NotNull ArmorStand armorStand) {
-        if (target instanceof Material) {
-            Objects.requireNonNull(armorStand.getEquipment()).setHelmet(new ItemStack((Material) target));
-        } else {
-            Objects.requireNonNull(armorStand.getEquipment()).setHelmet(null);
-        }
-    }
-
-    public Object getTargetSaveObject() {
-        return target.toString();
-    }
+  public Object getTargetSaveObject() {
+    return target.toString();
+  }
 
 }

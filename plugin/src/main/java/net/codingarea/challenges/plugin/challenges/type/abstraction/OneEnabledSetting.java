@@ -7,32 +7,32 @@ import javax.annotation.Nonnull;
 
 public abstract class OneEnabledSetting extends Setting {
 
-	private final String typeId;
+  private final String typeId;
 
-	public OneEnabledSetting(@Nonnull MenuType menu, @Nonnull String typeId) {
-		super(menu);
-		this.typeId = typeId;
-	}
+  public OneEnabledSetting(@Nonnull MenuType menu, @Nonnull String typeId) {
+    super(menu);
+    this.typeId = typeId;
+  }
 
-	public OneEnabledSetting(@Nonnull MenuType menu, boolean enabledByDefault, @Nonnull String typeId) {
-		super(menu, enabledByDefault);
-		this.typeId = typeId;
-	}
+  public OneEnabledSetting(@Nonnull MenuType menu, boolean enabledByDefault, @Nonnull String typeId) {
+    super(menu, enabledByDefault);
+    this.typeId = typeId;
+  }
 
 
-	@Override
-	public void setEnabled(boolean enabled) {
-		super.setEnabled(enabled);
-		if (isEnabled()) disableOthers();
-	}
+  @Override
+  public void setEnabled(boolean enabled) {
+    super.setEnabled(enabled);
+    if (isEnabled()) disableOthers();
+  }
 
-	protected final void disableOthers() {
-		Challenges.getInstance().getChallengeManager().getChallenges().stream()
-				.filter(challenge -> challenge != this)
-				.filter(challenge -> challenge instanceof OneEnabledSetting)
-				.map(challenge -> (OneEnabledSetting) challenge)
-				.filter(setting -> setting.typeId.equals(typeId))
-				.forEach(setting -> setting.setEnabled(false));
-	}
+  protected final void disableOthers() {
+    Challenges.getInstance().getChallengeManager().getChallenges().stream()
+      .filter(challenge -> challenge != this)
+      .filter(challenge -> challenge instanceof OneEnabledSetting)
+      .map(challenge -> (OneEnabledSetting) challenge)
+      .filter(setting -> setting.typeId.equals(typeId))
+      .forEach(setting -> setting.setEnabled(false));
+  }
 
 }

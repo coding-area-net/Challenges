@@ -17,35 +17,35 @@ import javax.annotation.Nonnull;
 
 public class OneTeamLifeSetting extends Setting {
 
-	private boolean isKilling = false;
+  private boolean isKilling = false;
 
-	public OneTeamLifeSetting() {
-		super(MenuType.SETTINGS, true);
-	}
+  public OneTeamLifeSetting() {
+    super(MenuType.SETTINGS, true);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.FIRE_CHARGE, Message.forName("item-one-life-setting"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.FIRE_CHARGE, Message.forName("item-one-life-setting"));
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onDeath(@Nonnull PlayerDeathEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (isKilling) return;
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onDeath(@Nonnull PlayerDeathEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (isKilling) return;
 
-		Bukkit.getScheduler().runTask(plugin, () -> {
-			AbstractChallenge.getFirstInstance(DeathMessageSetting.class).setHideMessagesTemporarily(isKilling = true);
-			for (Player player : Bukkit.getOnlinePlayers()) {
-				if (player == event.getEntity()) continue;
-				if (ignorePlayer(player)) continue;
-				ChallengeHelper.kill(player);
-			}
+    Bukkit.getScheduler().runTask(plugin, () -> {
+      AbstractChallenge.getFirstInstance(DeathMessageSetting.class).setHideMessagesTemporarily(isKilling = true);
+      for (Player player : Bukkit.getOnlinePlayers()) {
+        if (player == event.getEntity()) continue;
+        if (ignorePlayer(player)) continue;
+        ChallengeHelper.kill(player);
+      }
 
-			AbstractChallenge.getFirstInstance(RespawnSetting.class).checkAllPlayersDead();
-			AbstractChallenge.getFirstInstance(DeathMessageSetting.class).setHideMessagesTemporarily(isKilling = false);
-		});
+      AbstractChallenge.getFirstInstance(RespawnSetting.class).checkAllPlayersDead();
+      AbstractChallenge.getFirstInstance(DeathMessageSetting.class).setHideMessagesTemporarily(isKilling = false);
+    });
 
-	}
+  }
 
 }

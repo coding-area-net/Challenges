@@ -13,21 +13,21 @@ import javax.annotation.Nonnull;
 
 public class KillWitherGoal extends KillEntityGoal {
 
-	public KillWitherGoal() {
-		super(EntityType.WITHER);
-		setCategory(SettingCategory.KILL_ENTITY);
-	}
+  public KillWitherGoal() {
+    super(EntityType.WITHER);
+    setCategory(SettingCategory.KILL_ENTITY);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.NETHER_STAR, Message.forName("item-wither-goal"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.NETHER_STAR, Message.forName("item-wither-goal"));
+  }
 
-	@Nonnull
-	@Override
-	public SoundSample getStartSound() {
-		return new SoundSample().addSound(Sound.ENTITY_WITHER_SPAWN, 1);
-	}
+  @Nonnull
+  @Override
+  public SoundSample getStartSound() {
+    return new SoundSample().addSound(Sound.ENTITY_WITHER_SPAWN, 1);
+  }
 
 }

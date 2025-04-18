@@ -13,33 +13,33 @@ import java.util.Map;
 
 public class PotionEffectAction extends EntityTargetAction {
 
-	public PotionEffectAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true).addChild(
-				SubSettingsHelper.createPotionSettingsBuilder(true, true)));
-	}
+  public PotionEffectAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true).addChild(
+      SubSettingsHelper.createPotionSettingsBuilder(true, true)));
+  }
 
-	@Override
-	public void executeFor(Entity entity, Map<String, String[]> subActions) {
-		if (entity instanceof LivingEntity) {
-			LivingEntity livingEntity = (LivingEntity) entity;
-			try {
+  @Override
+  public void executeFor(Entity entity, Map<String, String[]> subActions) {
+    if (entity instanceof LivingEntity) {
+      LivingEntity livingEntity = (LivingEntity) entity;
+      try {
 
-				PotionEffectType effectType = PotionEffectType.getByName(subActions.get("potion_type")[0]);
-				if (effectType == null) return;
-				PotionEffect effect = effectType.createEffect(Integer.parseInt(subActions.get("length")[0]) * 20 + 1,
-						Integer.parseInt(subActions.get("amplifier")[0]));
+        PotionEffectType effectType = PotionEffectType.getByName(subActions.get("potion_type")[0]);
+        if (effectType == null) return;
+        PotionEffect effect = effectType.createEffect(Integer.parseInt(subActions.get("length")[0]) * 20 + 1,
+          Integer.parseInt(subActions.get("amplifier")[0]));
 
-				livingEntity.addPotionEffect(effect);
-			} catch (Exception exception) {
-				Challenges.getInstance().getLogger().severe("Error while adding potion effect to player");
-				Challenges.getInstance().getLogger().error("", exception);
-			}
-		}
-	}
+        livingEntity.addPotionEffect(effect);
+      } catch (Exception exception) {
+        Challenges.getInstance().getLogger().severe("Error while adding potion effect to player");
+        Challenges.getInstance().getLogger().error("", exception);
+      }
+    }
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.POTION;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.POTION;
+  }
 
 }

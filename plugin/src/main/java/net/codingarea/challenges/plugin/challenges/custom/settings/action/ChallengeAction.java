@@ -12,36 +12,36 @@ import java.util.LinkedHashMap;
 import java.util.function.Supplier;
 
 public abstract class ChallengeAction extends ChallengeSetting implements
-		IChallengeAction {
+  IChallengeAction {
 
-	protected static final IRandom random = IRandom.create();
+  protected static final IRandom random = IRandom.create();
 
-	public ChallengeAction(String name,
-						   SubSettingsBuilder subSettingsBuilder) {
-		super(name, subSettingsBuilder);
-	}
+  public ChallengeAction(String name,
+                         SubSettingsBuilder subSettingsBuilder) {
+    super(name, subSettingsBuilder);
+  }
 
-	public ChallengeAction(String name) {
-		super(name);
-	}
+  public ChallengeAction(String name) {
+    super(name);
+  }
 
-	public ChallengeAction(String name, Supplier<SubSettingsBuilder> builderSupplier) {
-		super(name, builderSupplier);
-	}
+  public ChallengeAction(String name, Supplier<SubSettingsBuilder> builderSupplier) {
+    super(name, builderSupplier);
+  }
 
-	public static LinkedHashMap<String, ItemStack> getMenuItems() {
-		LinkedHashMap<String, ItemStack> map = new LinkedHashMap<>();
+  public static LinkedHashMap<String, ItemStack> getMenuItems() {
+    LinkedHashMap<String, ItemStack> map = new LinkedHashMap<>();
 
-		for (ChallengeAction value : Challenges.getInstance().getCustomSettingsLoader().getActions().values()) {
-			map.put(value.getName(), new ItemBuilder(value.getMaterial(), Message.forName(value.getMessage())).hideAttributes().build());
-		}
+    for (ChallengeAction value : Challenges.getInstance().getCustomSettingsLoader().getActions().values()) {
+      map.put(value.getName(), new ItemBuilder(value.getMaterial(), Message.forName(value.getMessage())).hideAttributes().build());
+    }
 
-		return map;
-	}
+    return map;
+  }
 
-	@Override
-	public final String getMessage() {
-		return "item-custom-action-" + getMessageSuffix();
-	}
+  @Override
+  public final String getMessage() {
+    return "item-custom-action-" + getMessageSuffix();
+  }
 
 }

@@ -6,17 +6,17 @@ import java.util.function.Supplier;
 
 public abstract class EntityTargetAction extends ChallengeAction implements IEntityTargetAction {
 
-	public EntityTargetAction(String name,
-							  SubSettingsBuilder subSettingsBuilder) {
-		super(name, subSettingsBuilder);
-	}
+  public EntityTargetAction(String name,
+                            SubSettingsBuilder subSettingsBuilder) {
+    super(name, subSettingsBuilder);
+  }
 
-	public EntityTargetAction(String name) {
-		super(name);
-	}
+  public EntityTargetAction(String name) {
+    super(name);
+  }
 
-	public EntityTargetAction(String name, Supplier<SubSettingsBuilder> builderSupplier) {
-		super(name, builderSupplier);
-	}
+  public EntityTargetAction(String name, Supplier<SubSettingsBuilder> builderSupplier) {
+    super(name, builderSupplier);
+  }
 
 }

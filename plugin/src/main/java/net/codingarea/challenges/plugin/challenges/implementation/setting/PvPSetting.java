@@ -13,21 +13,21 @@ import javax.annotation.Nonnull;
 
 public class PvPSetting extends Setting {
 
-	public PvPSetting() {
-		super(MenuType.SETTINGS, true);
-	}
+  public PvPSetting() {
+    super(MenuType.SETTINGS, true);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.STONE_SWORD, Message.forName("item-pvp-setting"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.STONE_SWORD, Message.forName("item-pvp-setting"));
+  }
 
-	@EventHandler
-	public void onDamage(@Nonnull EntityDamageByPlayerEvent event) {
-		if (isEnabled()) return;
-		if (!(event.getEntity() instanceof Player)) return;
-		event.setCancelled(true);
-	}
+  @EventHandler
+  public void onDamage(@Nonnull EntityDamageByPlayerEvent event) {
+    if (isEnabled()) return;
+    if (!(event.getEntity() instanceof Player)) return;
+    event.setCancelled(true);
+  }
 
 }

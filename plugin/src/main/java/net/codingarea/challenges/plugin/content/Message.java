@@ -15,69 +15,69 @@ import java.util.Collection;
 
 public interface Message {
 
-	String NULL = "§r§fN/A";
-	Collection<String> UNKNOWN_MESSAGES = new ArrayList<>();
+  String NULL = "§r§fN/A";
+  Collection<String> UNKNOWN_MESSAGES = new ArrayList<>();
 
-	static String unknown(@Nonnull String name) {
-		if (!UNKNOWN_MESSAGES.contains(name)) {
-			UNKNOWN_MESSAGES.add(name);
-			Logger.warn("Tried accessing unknown messages '{}'", name);
-		}
+  static String unknown(@Nonnull String name) {
+    if (!UNKNOWN_MESSAGES.contains(name)) {
+      UNKNOWN_MESSAGES.add(name);
+      Logger.warn("Tried accessing unknown messages '{}'", name);
+    }
 
-		return name;
-	}
+    return name;
+  }
 
-	@Nonnull
-	@CheckReturnValue
-	static Message forName(@Nonnull String name) {
-		return MessageManager.getOrCreateMessage(name);
-	}
+  @Nonnull
+  @CheckReturnValue
+  static Message forName(@Nonnull String name) {
+    return MessageManager.getOrCreateMessage(name);
+  }
 
-	@Nonnull
-	String asString(@Nonnull Object... args);
+  @Nonnull
+  String asString(@Nonnull Object... args);
 
-	@Nonnull
-	BaseComponent asComponent(@Nonnull Object... args);
+  @Nonnull
+  BaseComponent asComponent(@Nonnull Object... args);
 
-	@Nonnull
-	String asRandomString(@Nonnull IRandom random, @Nonnull Object... args);
+  @Nonnull
+  String asRandomString(@Nonnull IRandom random, @Nonnull Object... args);
 
-	@Nonnull
-	BaseComponent asRandomComponent(@Nonnull IRandom random, @Nonnull Prefix prefix, @Nonnull Object... args);
+  @Nonnull
+  BaseComponent asRandomComponent(@Nonnull IRandom random, @Nonnull Prefix prefix, @Nonnull Object... args);
 
-	@Nonnull
-	String asRandomString(@Nonnull Object... args);
+  @Nonnull
+  String asRandomString(@Nonnull Object... args);
 
-	@Nonnull
-	String[] asArray(@Nonnull Object... args);
+  @Nonnull
+  String[] asArray(@Nonnull Object... args);
 
-	@Nonnull
-	BaseComponent[] asComponentArray(@Nullable Prefix prefix, @Nonnull Object... args);
+  @Nonnull
+  BaseComponent[] asComponentArray(@Nullable Prefix prefix, @Nonnull Object... args);
 
-	@Nonnull
-	ItemDescription asItemDescription(@Nonnull Object... args);
+  @Nonnull
+  ItemDescription asItemDescription(@Nonnull Object... args);
 
-	void send(@Nonnull CommandSender target, @Nonnull Prefix prefix, @Nonnull Object... args);
+  void send(@Nonnull CommandSender target, @Nonnull Prefix prefix, @Nonnull Object... args);
 
-	void sendRandom(@Nonnull CommandSender target, @Nonnull Prefix prefix, @Nonnull Object... args);
+  void sendRandom(@Nonnull CommandSender target, @Nonnull Prefix prefix, @Nonnull Object... args);
 
-	void sendRandom(@Nonnull IRandom random, @Nonnull CommandSender target, @Nonnull Prefix prefix, @Nonnull Object... args);
+  void sendRandom(@Nonnull IRandom random, @Nonnull CommandSender target, @Nonnull Prefix prefix, @Nonnull Object... args);
 
-	void broadcast(@Nonnull Prefix prefix, @Nonnull Object... args);
+  void broadcast(@Nonnull Prefix prefix, @Nonnull Object... args);
 
-	void broadcastRandom(@Nonnull Prefix prefix, @Nonnull Object... args);
+  void broadcastRandom(@Nonnull Prefix prefix, @Nonnull Object... args);
 
-	void broadcastRandom(@Nonnull IRandom random, @Nonnull Prefix prefix, @Nonnull Object... args);
+  void broadcastRandom(@Nonnull IRandom random, @Nonnull Prefix prefix, @Nonnull Object... args);
 
-	void broadcastTitle(@Nonnull Object... args);
+  void broadcastTitle(@Nonnull Object... args);
 
-	void sendTitle(@Nonnull Player player, @Nonnull Object... args);
+  void sendTitle(@Nonnull Player player, @Nonnull Object... args);
 
-	void sendTitleInstant(@Nonnull Player player, @Nonnull Object... args);
+  void sendTitleInstant(@Nonnull Player player, @Nonnull Object... args);
 
-	void setValue(@Nonnull String[] value);
+  void setValue(@Nonnull String[] value);
 
-	@Nonnull
-	String getName();
+  @Nonnull
+  String getName();
 
 }

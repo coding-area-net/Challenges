@@ -29,97 +29,97 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Since("2.1.0")
 public class AllAdvancementGoal extends PointsGoal {
 
-	private final List<Advancement> allAdvancements;
-	private final int advancementCount;
+  private final List<Advancement> allAdvancements;
+  private final int advancementCount;
 
-	public AllAdvancementGoal() {
-		setCategory(SettingCategory.FASTEST_TIME);
-		allAdvancements = new LinkedList<>();
-		Bukkit.getServer().advancementIterator().forEachRemaining(advancement -> {
-			if (!advancement.getKey().toString().contains(":recipes/")) {
-				allAdvancements.add(advancement);
-			}
-		});
-		advancementCount = allAdvancements.size();
-	}
+  public AllAdvancementGoal() {
+    setCategory(SettingCategory.FASTEST_TIME);
+    allAdvancements = new LinkedList<>();
+    Bukkit.getServer().advancementIterator().forEachRemaining(advancement -> {
+      if (!advancement.getKey().toString().contains(":recipes/")) {
+        allAdvancements.add(advancement);
+      }
+    });
+    advancementCount = allAdvancements.size();
+  }
 
-	@Override
-	protected void onEnable() {
-		updateAdvancements();
-		scoreboard.setContent(GoalHelper.createScoreboard(() ->
-				getPoints(new AtomicInteger(), true), player -> {
-			return Collections.singletonList(Message.forName("all-advancements-goal").asString(advancementCount));
-		}));
-		scoreboard.show();
-	}
+  @Override
+  protected void onEnable() {
+    updateAdvancements();
+    scoreboard.setContent(GoalHelper.createScoreboard(() ->
+      getPoints(new AtomicInteger(), true), player -> {
+      return Collections.singletonList(Message.forName("all-advancements-goal").asString(advancementCount));
+    }));
+    scoreboard.show();
+  }
 
-	@Override
-	protected void onDisable() {
-		scoreboard.hide();
-	}
+  @Override
+  protected void onDisable() {
+    scoreboard.hide();
+  }
 
-	@Override
-	public void getWinnersOnEnd(@NotNull List<Player> winners) {
-		broadcastFiltered(player -> {
-			if (hasWon(player)) {
-				winners.add(player);
-			}
-		});
-	}
+  @Override
+  public void getWinnersOnEnd(@NotNull List<Player> winners) {
+    broadcastFiltered(player -> {
+      if (hasWon(player)) {
+        winners.add(player);
+      }
+    });
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.BOOK, Message.forName("item-all-advancements-goal"));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.BOOK, Message.forName("item-all-advancements-goal"));
+  }
 
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onAdvancement(PlayerAdvancementDoneEvent event) {
-		if (event.getAdvancement().getKey().toString().contains(":recipes/")) return;
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		updateAdvancements(event.getPlayer());
-		scoreboard.update();
-	}
+  @EventHandler(priority = EventPriority.HIGH)
+  public void onAdvancement(PlayerAdvancementDoneEvent event) {
+    if (event.getAdvancement().getKey().toString().contains(":recipes/")) return;
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    updateAdvancements(event.getPlayer());
+    scoreboard.update();
+  }
 
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onJoin(PlayerJoinEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		updateAdvancements(event.getPlayer());
-		scoreboard.update();
-	}
+  @EventHandler(priority = EventPriority.HIGH)
+  public void onJoin(PlayerJoinEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    updateAdvancements(event.getPlayer());
+    scoreboard.update();
+  }
 
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onGamemodeChange(PlayerGameModeChangeEvent event) {
-		if (!shouldExecuteEffect()) return;
-		Bukkit.getScheduler().runTask(plugin, (Runnable) scoreboard::update);
-	}
+  @EventHandler(priority = EventPriority.HIGH)
+  public void onGamemodeChange(PlayerGameModeChangeEvent event) {
+    if (!shouldExecuteEffect()) return;
+    Bukkit.getScheduler().runTask(plugin, (Runnable) scoreboard::update);
+  }
 
-	protected void updateAdvancements() {
-		broadcastFiltered(this::updateAdvancements);
-	}
+  protected void updateAdvancements() {
+    broadcastFiltered(this::updateAdvancements);
+  }
 
-	protected void updateAdvancements(@Nonnull Player player) {
-		int done = 0;
-		for (Advancement advancement : allAdvancements) {
-			AdvancementProgress progress = player.getAdvancementProgress(advancement);
-			if (progress.isDone()) {
-				done++;
-			}
-		}
-		setPoints(player.getUniqueId(), done);
-		checkForWinning(player);
-	}
+  protected void updateAdvancements(@Nonnull Player player) {
+    int done = 0;
+    for (Advancement advancement : allAdvancements) {
+      AdvancementProgress progress = player.getAdvancementProgress(advancement);
+      if (progress.isDone()) {
+        done++;
+      }
+    }
+    setPoints(player.getUniqueId(), done);
+    checkForWinning(player);
+  }
 
-	protected void checkForWinning(Player player) {
-		if (hasWon(player)) {
-			ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED);
-		}
-	}
+  protected void checkForWinning(Player player) {
+    if (hasWon(player)) {
+      ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED);
+    }
+  }
 
-	protected boolean hasWon(@Nonnull Player player) {
-		return getPoints(player.getUniqueId()) >= advancementCount;
-	}
+  protected boolean hasWon(@Nonnull Player player) {
+    return getPoints(player.getUniqueId()) >= advancementCount;
+  }
 
 }

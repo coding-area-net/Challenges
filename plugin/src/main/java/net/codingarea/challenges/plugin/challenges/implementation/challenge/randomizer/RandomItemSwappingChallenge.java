@@ -20,65 +20,65 @@ import javax.annotation.Nullable;
 @Since("2.0")
 public class RandomItemSwappingChallenge extends TimedChallenge {
 
-	public RandomItemSwappingChallenge() {
-		super(MenuType.CHALLENGES, 1, 60, 5);
-		setCategory(SettingCategory.RANDOMIZER);
-	}
+  public RandomItemSwappingChallenge() {
+    super(MenuType.CHALLENGES, 1, 60, 5);
+    setCategory(SettingCategory.RANDOMIZER);
+  }
 
-	public static void swapRandomItems(Player player) {
-		if (player.getInventory().getContents().length == 0) return;
-		int slot = InventoryUtils.getRandomFullSlot(player.getInventory());
-		if (slot == -1) return;
-		swapItemToRandomSlot(
-				player.getInventory(),
-				InventoryUtils.getRandomFullSlot(player.getInventory()),
-				InventoryUtils.getRandomSlot(player.getInventory())
-		);
-	}
+  public static void swapRandomItems(Player player) {
+    if (player.getInventory().getContents().length == 0) return;
+    int slot = InventoryUtils.getRandomFullSlot(player.getInventory());
+    if (slot == -1) return;
+    swapItemToRandomSlot(
+      player.getInventory(),
+      InventoryUtils.getRandomFullSlot(player.getInventory()),
+      InventoryUtils.getRandomSlot(player.getInventory())
+    );
+  }
 
-	private static void swapItemToRandomSlot(@Nonnull Inventory inventory, int slot1, int slot2) {
-		if (slot1 == -1 || slot2 == -1) return;
-		ItemStack item1 = inventory.getItem(slot1);
-		ItemStack item2 = inventory.getItem(slot2);
-		inventory.setItem(slot1, item2);
-		inventory.setItem(slot2, item1);
-	}
+  private static void swapItemToRandomSlot(@Nonnull Inventory inventory, int slot1, int slot2) {
+    if (slot1 == -1 || slot2 == -1) return;
+    ItemStack item1 = inventory.getItem(slot1);
+    ItemStack item2 = inventory.getItem(slot2);
+    inventory.setItem(slot1, item2);
+    inventory.setItem(slot2, item1);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.HOPPER, Message.forName("item-random-swapping-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.HOPPER, Message.forName("item-random-swapping-challenge"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-time-seconds-description").asArray(getValue());
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-time-seconds-description").asArray(getValue());
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeSecondsValueChangeTitle(this, getValue());
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeSecondsValueChangeTitle(this, getValue());
+  }
 
-	@Override
-	protected int getSecondsUntilNextActivation() {
-		return getValue();
-	}
+  @Override
+  protected int getSecondsUntilNextActivation() {
+    return getValue();
+  }
 
-	@Override
-	protected void onTimeActivation() {
-		restartTimer();
+  @Override
+  protected void onTimeActivation() {
+    restartTimer();
 
-		Bukkit.getScheduler().runTask(plugin, () -> {
+    Bukkit.getScheduler().runTask(plugin, () -> {
 
-			for (Player player : Bukkit.getOnlinePlayers()) {
-				if (ignorePlayer(player)) continue;
-				swapRandomItems(player);
-			}
+      for (Player player : Bukkit.getOnlinePlayers()) {
+        if (ignorePlayer(player)) continue;
+        swapRandomItems(player);
+      }
 
-		});
+    });
 
-	}
+  }
 
 }

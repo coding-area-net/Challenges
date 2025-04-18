@@ -12,50 +12,50 @@ import javax.annotation.Nullable;
 
 public abstract class SettingModifierGoal extends SettingModifier implements IGoal {
 
-	public SettingModifierGoal(@Nonnull MenuType menu) {
-		super(menu);
-	}
+  public SettingModifierGoal(@Nonnull MenuType menu) {
+    super(menu);
+  }
 
-	public SettingModifierGoal(@Nonnull MenuType menu, int max) {
-		super(menu, max);
-	}
+  public SettingModifierGoal(@Nonnull MenuType menu, int max) {
+    super(menu, max);
+  }
 
-	public SettingModifierGoal(@Nonnull MenuType menu, int min, int max) {
-		super(menu, min, max);
-	}
+  public SettingModifierGoal(@Nonnull MenuType menu, int min, int max) {
+    super(menu, min, max);
+  }
 
-	public SettingModifierGoal(@Nonnull MenuType menu, int min, int max, int defaultValue) {
-		super(menu, min, max, defaultValue);
-	}
+  public SettingModifierGoal(@Nonnull MenuType menu, int min, int max, int defaultValue) {
+    super(menu, min, max, defaultValue);
+  }
 
-	@Override
-	public final void setEnabled(boolean enabled) {
-		if (isEnabled() == enabled) return;
-		GoalHelper.handleSetEnabled(this, enabled);
-		super.setEnabled(enabled);
-	}
+  @Override
+  public final void setEnabled(boolean enabled) {
+    if (isEnabled() == enabled) return;
+    GoalHelper.handleSetEnabled(this, enabled);
+    super.setEnabled(enabled);
+  }
 
-	@Nonnull
-	@Override
-	public SoundSample getStartSound() {
-		return SoundSample.DRAGON_BREATH;
-	}
+  @Nonnull
+  @Override
+  public SoundSample getStartSound() {
+    return SoundSample.DRAGON_BREATH;
+  }
 
-	@Nullable
-	@Override
-	public SoundSample getWinSound() {
-		return SoundSample.WIN;
-	}
+  @Nullable
+  @Override
+  public SoundSample getWinSound() {
+    return SoundSample.WIN;
+  }
 
-	@Override
-	public void handleClick(@Nonnull ChallengeMenuClickInfo info) {
-		if (info.isLowerItemClick() && isEnabled()) {
-			ChallengeHelper.handleModifierClick(info, this);
-		} else {
-			setEnabled(!isEnabled());
-			SoundSample.playStatusSound(info.getPlayer(), isEnabled());
-			playStatusUpdateTitle();
-		}
-	}
+  @Override
+  public void handleClick(@Nonnull ChallengeMenuClickInfo info) {
+    if (info.isLowerItemClick() && isEnabled()) {
+      ChallengeHelper.handleModifierClick(info, this);
+    } else {
+      setEnabled(!isEnabled());
+      SoundSample.playStatusSound(info.getPlayer(), isEnabled());
+      playStatusUpdateTitle();
+    }
+  }
 
 }

@@ -22,36 +22,36 @@ import javax.annotation.Nullable;
 @Since("2.0")
 public class JumpDamageChallenge extends SettingModifier {
 
-	public JumpDamageChallenge() {
-		super(MenuType.CHALLENGES, 1, 60);
-		setCategory(SettingCategory.DAMAGE);
-	}
+  public JumpDamageChallenge() {
+    super(MenuType.CHALLENGES, 1, 60);
+    setCategory(SettingCategory.DAMAGE);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-jump-damage-challenge")).setColor(Color.ORANGE);
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-jump-damage-challenge")).setColor(Color.ORANGE);
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeHeartsValueChangeTitle(this, getValue() / 2);
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeHeartsValueChangeTitle(this, getValue() / 2);
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onSneak(@Nonnull PlayerJumpEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		Message.forName("jump-damage-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
-		event.getPlayer().setNoDamageTicks(0);
-		event.getPlayer().damage(getValue());
-		event.getPlayer().setNoDamageTicks(0);
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onSneak(@Nonnull PlayerJumpEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    Message.forName("jump-damage-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+    event.getPlayer().setNoDamageTicks(0);
+    event.getPlayer().damage(getValue());
+    event.getPlayer().setNoDamageTicks(0);
+  }
 
 }

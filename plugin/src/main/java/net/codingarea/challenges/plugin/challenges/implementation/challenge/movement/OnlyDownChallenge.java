@@ -18,25 +18,25 @@ import javax.annotation.Nonnull;
 @Since("2.0")
 public class OnlyDownChallenge extends Setting {
 
-	public OnlyDownChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.MOVEMENT);
-	}
+  public OnlyDownChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.MOVEMENT);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.ACACIA_SLAB, Message.forName("item-only-down-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.ACACIA_SLAB, Message.forName("item-only-down-challenge"));
+  }
 
-	@EventHandler
-	public void onPlayerMove(@Nonnull PlayerMoveEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		if (event.getTo() == null) return;
-		if (event.getTo().getBlockY() <= event.getFrom().getBlockY()) return;
-		Message.forName("only-down-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
-		ChallengeHelper.kill(event.getPlayer());
-	}
+  @EventHandler
+  public void onPlayerMove(@Nonnull PlayerMoveEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    if (event.getTo() == null) return;
+    if (event.getTo().getBlockY() <= event.getFrom().getBlockY()) return;
+    Message.forName("only-down-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+    ChallengeHelper.kill(event.getPlayer());
+  }
 
 }

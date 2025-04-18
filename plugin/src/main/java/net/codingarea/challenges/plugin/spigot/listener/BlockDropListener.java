@@ -21,54 +21,54 @@ import java.util.List;
 
 public class BlockDropListener implements Listener {
 
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void onBlockBreak(@Nonnull BlockBreakEvent event) {
-		if (event.getPlayer().getGameMode() == GameMode.CREATIVE) return;
-		if (!event.isDropItems()) return;
-		dropCustomDrops(event.getBlock(), () -> event.setDropItems(false));
-	}
+  @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+  public void onBlockBreak(@Nonnull BlockBreakEvent event) {
+    if (event.getPlayer().getGameMode() == GameMode.CREATIVE) return;
+    if (!event.isDropItems()) return;
+    dropCustomDrops(event.getBlock(), () -> event.setDropItems(false));
+  }
 
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void onBlockExplosion(@Nonnull BlockExplodeEvent event) {
-		handleExplosion(event.blockList(), () -> event.setYield(0));
-	}
+  @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+  public void onBlockExplosion(@Nonnull BlockExplodeEvent event) {
+    handleExplosion(event.blockList(), () -> event.setYield(0));
+  }
 
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void onEntityExplosion(@Nonnull EntityExplodeEvent event) {
-		handleExplosion(event.blockList(), () -> event.setYield(0));
-	}
+  @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+  public void onEntityExplosion(@Nonnull EntityExplodeEvent event) {
+    handleExplosion(event.blockList(), () -> event.setYield(0));
+  }
 
-	protected void handleExplosion(@Nonnull Iterable<Block> blocklist, @Nonnull Runnable dropsExist) {
-		for (Block block : blocklist) {
-			dropCustomDrops(block, dropsExist);
-		}
-	}
+  protected void handleExplosion(@Nonnull Iterable<Block> blocklist, @Nonnull Runnable dropsExist) {
+    for (Block block : blocklist) {
+      dropCustomDrops(block, dropsExist);
+    }
+  }
 
-	protected void dropCustomDrops(@Nonnull Block block, @Nonnull Runnable dropsExist) {
+  protected void dropCustomDrops(@Nonnull Block block, @Nonnull Runnable dropsExist) {
 
-		Material material = block.getType();
-		if (BukkitReflectionUtils.isAir(material)) return;
+    Material material = block.getType();
+    if (BukkitReflectionUtils.isAir(material)) return;
 
-		if (!ChallengeAPI.getDropChance(material)) {
-			dropsExist.run();
-			return;
-		}
+    if (!ChallengeAPI.getDropChance(material)) {
+      dropsExist.run();
+      return;
+    }
 
-		List<Material> drops = Challenges.getInstance().getBlockDropManager().getCustomDrops(material);
-		if (drops.isEmpty()) return;
+    List<Material> drops = Challenges.getInstance().getBlockDropManager().getCustomDrops(material);
+    if (drops.isEmpty()) return;
 
-		Location location = block.getLocation().clone().add(0.5, 0, 0.5);
-		if (location.getWorld() == null) return;
+    Location location = block.getLocation().clone().add(0.5, 0, 0.5);
+    if (location.getWorld() == null) return;
 
-		dropsExist.run();
-		for (Material drop : drops) {
-			try {
-				location.getWorld().dropItem(location, new ItemStack(drop));
-			} catch (Exception ex) {
-				Logger.warn("Unable to drop custom drop {}", drop, ex);
-			}
-		}
+    dropsExist.run();
+    for (Material drop : drops) {
+      try {
+        location.getWorld().dropItem(location, new ItemStack(drop));
+      } catch (Exception ex) {
+        Logger.warn("Unable to drop custom drop {}", drop, ex);
+      }
+    }
 
-	}
+  }
 
 }

@@ -9,8 +9,8 @@ import javax.annotation.Nonnull;
 @FunctionalInterface
 public interface IJumpGenerator {
 
-	@Nonnull
-	@CheckReturnValue
-	Block next(@Nonnull IRandom random, @Nonnull Block startingPoint, boolean includeFourBlockJumps, boolean includeUpGoing);
+  @Nonnull
+  @CheckReturnValue
+  Block next(@Nonnull IRandom random, @Nonnull Block startingPoint, boolean includeFourBlockJumps, boolean includeUpGoing);
 
 }

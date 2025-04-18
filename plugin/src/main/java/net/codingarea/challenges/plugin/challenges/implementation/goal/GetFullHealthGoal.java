@@ -25,66 +25,66 @@ import java.util.List;
 @Since("2.2.0")
 public class GetFullHealthGoal extends SettingModifierGoal {
 
-	public GetFullHealthGoal() {
-		super(MenuType.GOAL, 1, 20, 20);
-		setCategory(SettingCategory.FASTEST_TIME);
-	}
+  public GetFullHealthGoal() {
+    super(MenuType.GOAL, 1, 20, 20);
+    setCategory(SettingCategory.FASTEST_TIME);
+  }
 
-	@Override
-	protected void onEnable() {
-		broadcastFiltered(player -> {
-			player.setHealth(getValue());
-		});
-	}
+  @Override
+  protected void onEnable() {
+    broadcastFiltered(player -> {
+      player.setHealth(getValue());
+    });
+  }
 
-	@Override
-	protected void onValueChange() {
-		broadcastFiltered(player -> {
-			player.setHealth(getValue());
-		});
-	}
+  @Override
+  protected void onValueChange() {
+    broadcastFiltered(player -> {
+      player.setHealth(getValue());
+    });
+  }
 
-	@Override
-	public void getWinnersOnEnd(@NotNull List<Player> winners) {
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (ignorePlayer(player)) continue;
-			AttributeInstance attribute = player.getAttribute(AttributeWrapper.MAX_HEALTH);
-			if (attribute != null) {
-				if (player.getHealth() >= attribute.getBaseValue()) {
-					winners.add(player);
-				}
-			}
-		}
-	}
+  @Override
+  public void getWinnersOnEnd(@NotNull List<Player> winners) {
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      if (ignorePlayer(player)) continue;
+      AttributeInstance attribute = player.getAttribute(AttributeWrapper.MAX_HEALTH);
+      if (attribute != null) {
+        if (player.getHealth() >= attribute.getBaseValue()) {
+          winners.add(player);
+        }
+      }
+    }
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.AZURE_BLUET, Message.forName("item-get-full-health-goal"));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.AZURE_BLUET, Message.forName("item-get-full-health-goal"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-heart-start-description").asArray(getValue() / 2f);
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-heart-start-description").asArray(getValue() / 2f);
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onHealthChange(EntityRegainHealthEvent event) {
-		if (!(event.getEntity() instanceof Player)) return;
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer((Player) event.getEntity())) return;
-		Bukkit.getScheduler().runTask(plugin, () -> {
-			AttributeInstance attribute = ((Player) event.getEntity()).getAttribute(AttributeWrapper.MAX_HEALTH);
-			if (attribute != null && ((Player) event.getEntity()).getHealth() >= attribute.getBaseValue()) {
-				ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED);
-			}
-		});
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onHealthChange(EntityRegainHealthEvent event) {
+    if (!(event.getEntity() instanceof Player)) return;
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer((Player) event.getEntity())) return;
+    Bukkit.getScheduler().runTask(plugin, () -> {
+      AttributeInstance attribute = ((Player) event.getEntity()).getAttribute(AttributeWrapper.MAX_HEALTH);
+      if (attribute != null && ((Player) event.getEntity()).getHealth() >= attribute.getBaseValue()) {
+        ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED);
+      }
+    });
+  }
 
 }

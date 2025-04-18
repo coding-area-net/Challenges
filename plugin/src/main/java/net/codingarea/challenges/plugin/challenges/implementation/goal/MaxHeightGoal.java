@@ -13,15 +13,15 @@ import org.jetbrains.annotations.NotNull;
 @Since("2.1.0")
 public class MaxHeightGoal extends FirstPlayerAtHeightGoal {
 
-	public MaxHeightGoal() {
-		setCategory(SettingCategory.FASTEST_TIME);
-		setHeightToGetTo(ChallengeAPI.getGameWorld(Environment.NORMAL).getMaxHeight());
-	}
+  public MaxHeightGoal() {
+    setCategory(SettingCategory.FASTEST_TIME);
+    setHeightToGetTo(ChallengeAPI.getGameWorld(Environment.NORMAL).getMaxHeight());
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.FEATHER, Message.forName("item-max-height-goal").asItemDescription(getHeightToGetTo()));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.FEATHER, Message.forName("item-max-height-goal").asItemDescription(getHeightToGetTo()));
+  }
 
 }

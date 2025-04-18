@@ -14,21 +14,21 @@ import java.util.List;
 
 public class SkipTimerCommand implements SenderCommand, Completer {
 
-	@Override
-	public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
-		for (IChallenge challenge : Challenges.getInstance().getChallengeManager().getChallenges()) {
-			if (!challenge.isEnabled()) continue;
-			if (challenge instanceof TimedChallenge) {
-				TimedChallenge timedChallenge = (TimedChallenge) challenge;
-				timedChallenge.setSecondsUntilActivation(0);
-			}
-		}
-	}
+  @Override
+  public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
+    for (IChallenge challenge : Challenges.getInstance().getChallengeManager().getChallenges()) {
+      if (!challenge.isEnabled()) continue;
+      if (challenge instanceof TimedChallenge) {
+        TimedChallenge timedChallenge = (TimedChallenge) challenge;
+        timedChallenge.setSecondsUntilActivation(0);
+      }
+    }
+  }
 
-	@Nullable
-	@Override
-	public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
-		return Collections.emptyList();
-	}
+  @Nullable
+  @Override
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
+    return Collections.emptyList();
+  }
 
 }

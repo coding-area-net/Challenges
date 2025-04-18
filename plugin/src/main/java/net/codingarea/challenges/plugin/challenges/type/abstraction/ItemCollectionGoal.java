@@ -18,46 +18,46 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class ItemCollectionGoal extends CollectionGoal {
 
-	public ItemCollectionGoal(@NotNull Material... target) {
-		super(target);
-	}
+  public ItemCollectionGoal(@NotNull Material... target) {
+    super(target);
+  }
 
-	public ItemCollectionGoal(boolean enabledByDefault, @NotNull Material... target) {
-		super(enabledByDefault, target);
-	}
+  public ItemCollectionGoal(boolean enabledByDefault, @NotNull Material... target) {
+    super(enabledByDefault, target);
+  }
 
-	protected void handleCollect(@Nonnull Player player, @Nonnull Material material) {
-		collect(player, material, () -> {
-			Message.forName("item-collected").send(player, Prefix.CHALLENGES, material);
-			SoundSample.PLING.play(player);
-		});
-	}
+  protected void handleCollect(@Nonnull Player player, @Nonnull Material material) {
+    collect(player, material, () -> {
+      Message.forName("item-collected").send(player, Prefix.CHALLENGES, material);
+      SoundSample.PLING.play(player);
+    });
+  }
 
-	@Override
-	protected void onEnable() {
-		scoreboard.setContent(GoalHelper.createScoreboard(() -> getPoints(new AtomicInteger(), true),
-				player -> Collections.singletonList(Message.forName("items-to-collect").asString(target.length))));
-		scoreboard.show();
-	}
+  @Override
+  protected void onEnable() {
+    scoreboard.setContent(GoalHelper.createScoreboard(() -> getPoints(new AtomicInteger(), true),
+      player -> Collections.singletonList(Message.forName("items-to-collect").asString(target.length))));
+    scoreboard.show();
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onPickupItem(@Nonnull PlayerPickupItemEvent event) {
-		if (!shouldExecuteEffect()) return;
-		Material material = event.getItem().getItemStack().getType();
-		Player player = event.getPlayer();
-		handleCollect(player, material);
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onPickupItem(@Nonnull PlayerPickupItemEvent event) {
+    if (!shouldExecuteEffect()) return;
+    Material material = event.getItem().getItemStack().getType();
+    Player player = event.getPlayer();
+    handleCollect(player, material);
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onPlayerInventoryClick(@Nonnull PlayerInventoryClickEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (event.isCancelled()) return;
-		if (event.getClickedInventory() == null) return;
-		if (event.getClickedInventory().getHolder() != event.getPlayer()) return;
-		if (event.getCurrentItem() == null) return;
-		Player player = event.getPlayer();
-		Material material = event.getCurrentItem().getType();
-		handleCollect(player, material);
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onPlayerInventoryClick(@Nonnull PlayerInventoryClickEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (event.isCancelled()) return;
+    if (event.getClickedInventory() == null) return;
+    if (event.getClickedInventory().getHolder() != event.getPlayer()) return;
+    if (event.getCurrentItem() == null) return;
+    Player player = event.getPlayer();
+    Material material = event.getCurrentItem().getType();
+    handleCollect(player, material);
+  }
 
 }

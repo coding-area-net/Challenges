@@ -16,110 +16,110 @@ import java.util.List;
 
 public abstract class InventoryClickEventWrapper extends Event {
 
-	private final InventoryClickEvent event;
+  private final InventoryClickEvent event;
 
-	public InventoryClickEventWrapper(@Nonnull InventoryClickEvent event) {
-		this.event = event;
-	}
+  public InventoryClickEventWrapper(@Nonnull InventoryClickEvent event) {
+    this.event = event;
+  }
 
-	@Nullable
-	public Inventory getClickedInventory() {
-		return event.getClickedInventory();
-	}
+  @Nullable
+  public Inventory getClickedInventory() {
+    return event.getClickedInventory();
+  }
 
-	@Nonnull
-	public Inventory getInventory() {
-		return event.getInventory();
-	}
+  @Nonnull
+  public Inventory getInventory() {
+    return event.getInventory();
+  }
 
-	@Nonnull
-	public InventoryView getView() {
-		return event.getView();
-	}
+  @Nonnull
+  public InventoryView getView() {
+    return event.getView();
+  }
 
-	@Nonnull
-	public ClickType getClick() {
-		return event.getClick();
-	}
+  @Nonnull
+  public ClickType getClick() {
+    return event.getClick();
+  }
 
-	@Nonnull
-	public HumanEntity getWhoClicked() {
-		return event.getWhoClicked();
-	}
+  @Nonnull
+  public HumanEntity getWhoClicked() {
+    return event.getWhoClicked();
+  }
 
-	public int getSlot() {
-		return event.getSlot();
-	}
+  public int getSlot() {
+    return event.getSlot();
+  }
 
-	public int getRawSlot() {
-		return event.getRawSlot();
-	}
+  public int getRawSlot() {
+    return event.getRawSlot();
+  }
 
-	@Nonnull
-	public InventoryAction getAction() {
-		return event.getAction();
-	}
+  @Nonnull
+  public InventoryAction getAction() {
+    return event.getAction();
+  }
 
-	@Nullable
-	public ItemStack getCursor() {
-		return event.getCursor();
-	}
+  @Nullable
+  public ItemStack getCursor() {
+    return event.getCursor();
+  }
 
-	public int getHotbarButton() {
-		return event.getHotbarButton();
-	}
+  public int getHotbarButton() {
+    return event.getHotbarButton();
+  }
 
-	@Nonnull
-	public SlotType getSlotType() {
-		return event.getSlotType();
-	}
+  @Nonnull
+  public SlotType getSlotType() {
+    return event.getSlotType();
+  }
 
-	@Nonnull
-	public Result getResult() {
-		return event.getResult();
-	}
+  @Nonnull
+  public Result getResult() {
+    return event.getResult();
+  }
 
-	public void setResult(@Nonnull Result result) {
-		event.setResult(result);
-	}
+  public void setResult(@Nonnull Result result) {
+    event.setResult(result);
+  }
 
-	@Nullable
-	public ItemStack getCurrentItem() {
-		return event.getCurrentItem();
-	}
+  @Nullable
+  public ItemStack getCurrentItem() {
+    return event.getCurrentItem();
+  }
 
-	public void setCurrentItem(@Nullable ItemStack item) {
-		event.setCurrentItem(item);
-	}
+  public void setCurrentItem(@Nullable ItemStack item) {
+    event.setCurrentItem(item);
+  }
 
-	@Nonnull
-	public List<HumanEntity> getViewers() {
-		return event.getViewers();
-	}
+  @Nonnull
+  public List<HumanEntity> getViewers() {
+    return event.getViewers();
+  }
 
-	@Nonnull
-	public InventoryClickEvent getEvent() {
-		return event;
-	}
+  @Nonnull
+  public InventoryClickEvent getEvent() {
+    return event;
+  }
 
-	public boolean isCancelled() {
-		return event.isCancelled();
-	}
+  public boolean isCancelled() {
+    return event.isCancelled();
+  }
 
-	public void setCancelled(boolean cancel) {
-		event.setCancelled(cancel);
-	}
+  public void setCancelled(boolean cancel) {
+    event.setCancelled(cancel);
+  }
 
-	public boolean isRightClick() {
-		return event.isRightClick();
-	}
+  public boolean isRightClick() {
+    return event.isRightClick();
+  }
 
-	public boolean isLeftClick() {
-		return event.isLeftClick();
-	}
+  public boolean isLeftClick() {
+    return event.isLeftClick();
+  }
 
-	public boolean isShiftClick() {
-		return event.isShiftClick();
-	}
+  public boolean isShiftClick() {
+    return event.isShiftClick();
+  }
 
 }

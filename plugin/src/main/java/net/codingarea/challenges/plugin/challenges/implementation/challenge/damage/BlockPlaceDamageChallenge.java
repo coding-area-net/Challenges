@@ -17,33 +17,33 @@ import javax.annotation.Nullable;
 @Since("2.0")
 public class BlockPlaceDamageChallenge extends SettingModifier {
 
-	public BlockPlaceDamageChallenge() {
-		super(MenuType.CHALLENGES, 1, 60);
-		setCategory(SettingCategory.DAMAGE);
-	}
+  public BlockPlaceDamageChallenge() {
+    super(MenuType.CHALLENGES, 1, 60);
+    setCategory(SettingCategory.DAMAGE);
+  }
 
-	@EventHandler
-	public void onBreak(BlockPlaceEvent event) {
-		if (!shouldExecuteEffect()) return;
-		event.getPlayer().setNoDamageTicks(0);
-		event.getPlayer().damage(getValue());
-	}
+  @EventHandler
+  public void onBreak(BlockPlaceEvent event) {
+    if (!shouldExecuteEffect()) return;
+    event.getPlayer().setNoDamageTicks(0);
+    event.getPlayer().damage(getValue());
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.GOLD_BLOCK, Message.forName("item-block-place-damage-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.GOLD_BLOCK, Message.forName("item-block-place-damage-challenge"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
+  }
 
 }

@@ -9,16 +9,16 @@ import org.bukkit.event.Listener;
 
 public class ScoreboardUpdateListener implements Listener {
 
-	@EventHandler
-	public void onIgnoredChange(PlayerIgnoreStatusChangeEvent event) {
+  @EventHandler
+  public void onIgnoredChange(PlayerIgnoreStatusChangeEvent event) {
 
-		Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
-			ChallengeScoreboard currentScoreboard = Challenges.getInstance().getScoreboardManager().getCurrentScoreboard();
-			if (currentScoreboard != null) {
-				currentScoreboard.update();
-			}
-		});
+    Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
+      ChallengeScoreboard currentScoreboard = Challenges.getInstance().getScoreboardManager().getCurrentScoreboard();
+      if (currentScoreboard != null) {
+        currentScoreboard.update();
+      }
+    });
 
-	}
+  }
 
 }

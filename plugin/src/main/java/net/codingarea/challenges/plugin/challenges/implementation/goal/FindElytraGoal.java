@@ -11,15 +11,15 @@ import org.jetbrains.annotations.NotNull;
 @Since("2.1.1")
 public class FindElytraGoal extends FindItemGoal {
 
-	public FindElytraGoal() {
-		super(Material.ELYTRA);
-		setCategory(SettingCategory.FASTEST_TIME);
-	}
+  public FindElytraGoal() {
+    super(Material.ELYTRA);
+    setCategory(SettingCategory.FASTEST_TIME);
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.ELYTRA, Message.forName("item-find-elytra-goal"));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.ELYTRA, Message.forName("item-find-elytra-goal"));
+  }
 
 }

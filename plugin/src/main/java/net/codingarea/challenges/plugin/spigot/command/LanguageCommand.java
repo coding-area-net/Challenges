@@ -16,31 +16,31 @@ import java.util.Objects;
 
 public class LanguageCommand implements SenderCommand, Completer {
 
-    @Override
-    public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
-        if (args.length < 1) {
-            Message.forName("syntax").send(sender, Prefix.CHALLENGES, "setlang <language>");
-            return;
-        }
-        switch (args[0].toLowerCase()) {
-            case "german":
-            case "deutsch":
-            case "de":
-                Objects.requireNonNull(Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class)).changeLanguage("de");
-                break;
-            case "english":
-            case "englisch":
-            case "en":
-                Objects.requireNonNull(Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class)).changeLanguage("en");
-                break;
-            default:
-                Message.forName("unsuported-language").send(sender, Prefix.CHALLENGES, args[0]);
-        }
+  @Override
+  public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
+    if (args.length < 1) {
+      Message.forName("syntax").send(sender, Prefix.CHALLENGES, "setlang <language>");
+      return;
     }
+    switch (args[0].toLowerCase()) {
+      case "german":
+      case "deutsch":
+      case "de":
+        Objects.requireNonNull(Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class)).changeLanguage("de");
+        break;
+      case "english":
+      case "englisch":
+      case "en":
+        Objects.requireNonNull(Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class)).changeLanguage("en");
+        break;
+      default:
+        Message.forName("unsuported-language").send(sender, Prefix.CHALLENGES, args[0]);
+    }
+  }
 
-    @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
-        return Utils.filterRecommendations(args[0], "german", "english");
-    }
+  @Override
+  public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
+    return Utils.filterRecommendations(args[0], "german", "english");
+  }
 
 }

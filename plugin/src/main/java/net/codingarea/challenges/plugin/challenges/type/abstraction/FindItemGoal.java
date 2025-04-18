@@ -17,37 +17,37 @@ import java.util.List;
 
 public abstract class FindItemGoal extends SettingGoal {
 
-	private final Material searchedItem;
+  private final Material searchedItem;
 
-	public FindItemGoal(Material searchedItem) {
-		this.searchedItem = searchedItem;
-	}
+  public FindItemGoal(Material searchedItem) {
+    this.searchedItem = searchedItem;
+  }
 
-	@Override
-	public void getWinnersOnEnd(@NotNull List<Player> winners) {
+  @Override
+  public void getWinnersOnEnd(@NotNull List<Player> winners) {
 
-	}
+  }
 
-	private void checkItem(ItemStack itemStack, @Nonnull Player player) {
-		if (itemStack == null) return;
-		if (itemStack.getType() != searchedItem) return;
-		ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, () -> Collections.singletonList(player));
-	}
+  private void checkItem(ItemStack itemStack, @Nonnull Player player) {
+    if (itemStack == null) return;
+    if (itemStack.getType() != searchedItem) return;
+    ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, () -> Collections.singletonList(player));
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onPickup(PlayerPickupItemEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		checkItem(event.getItem().getItemStack(), event.getPlayer());
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onPickup(PlayerPickupItemEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    checkItem(event.getItem().getItemStack(), event.getPlayer());
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onInventoryClick(PlayerInventoryClickEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		if (event.getClickedInventory() == null) return;
-		if (event.getClickedInventory().getHolder() != event.getPlayer()) return;
-		checkItem(event.getCurrentItem(), event.getPlayer());
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onInventoryClick(PlayerInventoryClickEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    if (event.getClickedInventory() == null) return;
+    if (event.getClickedInventory().getHolder() != event.getPlayer()) return;
+    checkItem(event.getCurrentItem(), event.getPlayer());
+  }
 
 }

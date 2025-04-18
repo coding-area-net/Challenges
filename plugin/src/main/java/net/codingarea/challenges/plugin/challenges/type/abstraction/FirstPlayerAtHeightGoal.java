@@ -18,39 +18,39 @@ import java.util.List;
 @Getter
 public abstract class FirstPlayerAtHeightGoal extends SettingGoal {
 
-	private int heightToGetTo;
+  private int heightToGetTo;
 
-	@Override
-	protected void onEnable() {
-		bossbar.setContent((bar, player) -> {
-			bar.setTitle(Message.forName("bossbar-first-at-height-goal").asString(getHeightToGetTo()));
-		});
-		bossbar.show();
-	}
+  @Override
+  protected void onEnable() {
+    bossbar.setContent((bar, player) -> {
+      bar.setTitle(Message.forName("bossbar-first-at-height-goal").asString(getHeightToGetTo()));
+    });
+    bossbar.show();
+  }
 
-	@Override
-	protected void onDisable() {
-		bossbar.hide();
-	}
+  @Override
+  protected void onDisable() {
+    bossbar.hide();
+  }
 
-	@Override
-	public void getWinnersOnEnd(@NotNull List<Player> winners) {
-	}
+  @Override
+  public void getWinnersOnEnd(@NotNull List<Player> winners) {
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onMove(PlayerMoveEvent event) {
-		if (event.getTo() == null) return;
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		if (event.getTo().getBlockY() == event.getFrom().getBlockY()) return;
-		if (event.getTo().getBlockY() == heightToGetTo) {
-			Message.forName("height-reached").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), getHeightToGetTo());
-			ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, () -> Collections.singletonList(event.getPlayer()));
-		}
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onMove(PlayerMoveEvent event) {
+    if (event.getTo() == null) return;
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    if (event.getTo().getBlockY() == event.getFrom().getBlockY()) return;
+    if (event.getTo().getBlockY() == heightToGetTo) {
+      Message.forName("height-reached").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), getHeightToGetTo());
+      ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, () -> Collections.singletonList(event.getPlayer()));
+    }
+  }
 
-    protected void setHeightToGetTo(int heightToGetTo) {
-		this.heightToGetTo = heightToGetTo;
-	}
+  protected void setHeightToGetTo(int heightToGetTo) {
+    this.heightToGetTo = heightToGetTo;
+  }
 
 }

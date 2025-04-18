@@ -26,80 +26,80 @@ import java.util.stream.Collectors;
 
 public class SnakeChallenge extends Setting {
 
-	private final ArrayList<Block> blocks = new ArrayList<>();
+  private final ArrayList<Block> blocks = new ArrayList<>();
 
-	public SnakeChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.WORLD);
-	}
+  public SnakeChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.WORLD);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.BLUE_TERRACOTTA, Message.forName("item-snake-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.BLUE_TERRACOTTA, Message.forName("item-snake-challenge"));
+  }
 
-    @Override
-	protected void onDisable() {
-		blocks.clear();
-	}
+  @Override
+  protected void onDisable() {
+    blocks.clear();
+  }
 
-	@Override
-	public void writeGameState(@Nonnull Document document) {
-		super.writeGameState(document);
+  @Override
+  public void writeGameState(@Nonnull Document document) {
+    super.writeGameState(document);
 
-		List<Location> locations = blocks.stream().map(Block::getLocation).collect(Collectors.toList());
-		document.set("blocks", locations);
-	}
+    List<Location> locations = blocks.stream().map(Block::getLocation).collect(Collectors.toList());
+    document.set("blocks", locations);
+  }
 
-	@Override
-	public void loadGameState(@Nonnull Document document) {
-		super.loadGameState(document);
+  @Override
+  public void loadGameState(@Nonnull Document document) {
+    super.loadGameState(document);
 
-		blocks.addAll(document.getSerializableList("blocks", Location.class).stream().map(Location::getBlock).collect(Collectors.toList()));
-	}
+    blocks.addAll(document.getSerializableList("blocks", Location.class).stream().map(Location::getBlock).collect(Collectors.toList()));
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onMove(@Nonnull PlayerMoveEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (event.getTo() == null) return;
-		if (event.getFrom().getBlock().equals(event.getTo().getBlock())) return;
-		if (event.getPlayer().getGameMode() == GameMode.SPECTATOR || event.getPlayer().getGameMode() == GameMode.CREATIVE)
-			return;
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onMove(@Nonnull PlayerMoveEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (event.getTo() == null) return;
+    if (event.getFrom().getBlock().equals(event.getTo().getBlock())) return;
+    if (event.getPlayer().getGameMode() == GameMode.SPECTATOR || event.getPlayer().getGameMode() == GameMode.CREATIVE)
+      return;
 
-		Block from = event.getFrom().clone().subtract(0, 1, 0).getBlock();
-		Block to = event.getTo().clone().subtract(0, 0.15, 0).getBlock();
+    Block from = event.getFrom().clone().subtract(0, 1, 0).getBlock();
+    Block to = event.getTo().clone().subtract(0, 0.15, 0).getBlock();
 
-		if (from.getType().isSolid()) {
-			from.setType(BlockUtils.getTerracotta(getPlayersColor(event.getPlayer())), false);
-			blocks.add(from);
-		}
+    if (from.getType().isSolid()) {
+      from.setType(BlockUtils.getTerracotta(getPlayersColor(event.getPlayer())), false);
+      blocks.add(from);
+    }
 
-		if (blocks.contains(to)) {
-			Message.forName("snake-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
-			kill(event.getPlayer());
-			return;
-		}
+    if (blocks.contains(to)) {
+      Message.forName("snake-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+      kill(event.getPlayer());
+      return;
+    }
 
-		if (to.getType().isSolid()) {
-			to.setType(Material.BLACK_TERRACOTTA, false);
+    if (to.getType().isSolid()) {
+      to.setType(Material.BLACK_TERRACOTTA, false);
 
-			Block block = event.getPlayer().getLocation().getBlock();
-			if (!block.getType().isSolid()) {
-				block.breakNaturally();
-			}
-		}
+      Block block = event.getPlayer().getLocation().getBlock();
+      if (!block.getType().isSolid()) {
+        block.breakNaturally();
+      }
+    }
 
-	}
+  }
 
-	public int getPlayersColor(Player player) {
-		int i = 0;
-		for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
-			i++;
-			if (i > 17) i = 0;
-			if (currentPlayer == player) return i;
-		}
-		return 0;
-	}
+  public int getPlayersColor(Player player) {
+    int i = 0;
+    for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
+      i++;
+      if (i > 17) i = 0;
+      if (currentPlayer == player) return i;
+    }
+    return 0;
+  }
 
 }

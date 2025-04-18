@@ -10,30 +10,30 @@ import javax.annotation.Nullable;
 
 public abstract class SettingGoal extends Setting implements IGoal {
 
-	public SettingGoal() {
-		super(MenuType.GOAL);
-	}
+  public SettingGoal() {
+    super(MenuType.GOAL);
+  }
 
-	public SettingGoal(boolean enabledByDefault) {
-		super(MenuType.GOAL, enabledByDefault);
-	}
+  public SettingGoal(boolean enabledByDefault) {
+    super(MenuType.GOAL, enabledByDefault);
+  }
 
-	@Nonnull
-	public SoundSample getStartSound() {
-		return SoundSample.DRAGON_BREATH;
-	}
+  @Nonnull
+  public SoundSample getStartSound() {
+    return SoundSample.DRAGON_BREATH;
+  }
 
-	@Nullable
-	@Override
-	public SoundSample getWinSound() {
-		return SoundSample.WIN;
-	}
+  @Nullable
+  @Override
+  public SoundSample getWinSound() {
+    return SoundSample.WIN;
+  }
 
-	@Override
-	public void setEnabled(boolean enabled) {
-		if (isEnabled() == enabled) return;
-		GoalHelper.handleSetEnabled(this, enabled);
-		super.setEnabled(enabled);
-	}
+  @Override
+  public void setEnabled(boolean enabled) {
+    if (isEnabled() == enabled) return;
+    GoalHelper.handleSetEnabled(this, enabled);
+    super.setEnabled(enabled);
+  }
 
 }

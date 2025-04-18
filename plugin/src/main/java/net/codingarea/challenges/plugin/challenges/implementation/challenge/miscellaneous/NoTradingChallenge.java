@@ -16,34 +16,34 @@ import javax.annotation.Nonnull;
 
 public class NoTradingChallenge extends Setting {
 
-	public NoTradingChallenge() {
-		super(MenuType.CHALLENGES);
-	}
+  public NoTradingChallenge() {
+    super(MenuType.CHALLENGES);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.EMERALD, Message.forName("item-no-trading-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.EMERALD, Message.forName("item-no-trading-challenge"));
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onInteract(@Nonnull PlayerInteractEntityEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (event.getRightClicked() instanceof Villager) {
-			event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_VILLAGER_NO, 1F, 1F);
-			event.setCancelled(true);
-		} else if (event.getRightClicked().getType().name().equals("PIGLIN")) {
-			event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_PIGLIN_ADMIRING_ITEM, 1F, 1F);
-			event.setCancelled(true);
-		}
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onInteract(@Nonnull PlayerInteractEntityEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (event.getRightClicked() instanceof Villager) {
+      event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_VILLAGER_NO, 1F, 1F);
+      event.setCancelled(true);
+    } else if (event.getRightClicked().getType().name().equals("PIGLIN")) {
+      event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_PIGLIN_ADMIRING_ITEM, 1F, 1F);
+      event.setCancelled(true);
+    }
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onEntityPickupItem(@Nonnull EntityPickupItemEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (event.getEntityType().name().equals("PIGLIN")) {
-			event.setCancelled(true);
-		}
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onEntityPickupItem(@Nonnull EntityPickupItemEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (event.getEntityType().name().equals("PIGLIN")) {
+      event.setCancelled(true);
+    }
+  }
 
 }

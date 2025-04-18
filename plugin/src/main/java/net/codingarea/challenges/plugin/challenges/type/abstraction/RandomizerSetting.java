@@ -10,52 +10,52 @@ import javax.annotation.Nonnull;
 
 public abstract class RandomizerSetting extends Setting {
 
-	protected IRandom random = IRandom.create();
+  protected IRandom random = IRandom.create();
 
-	public RandomizerSetting(@Nonnull MenuType menu) {
-		super(menu);
-		setCategory(SettingCategory.RANDOMIZER);
-	}
+  public RandomizerSetting(@Nonnull MenuType menu) {
+    super(menu);
+    setCategory(SettingCategory.RANDOMIZER);
+  }
 
-	public RandomizerSetting(@Nonnull MenuType menu, boolean enabledByDefault) {
-		super(menu, enabledByDefault);
-		setCategory(SettingCategory.RANDOMIZER);
-	}
+  public RandomizerSetting(@Nonnull MenuType menu, boolean enabledByDefault) {
+    super(menu, enabledByDefault);
+    setCategory(SettingCategory.RANDOMIZER);
+  }
 
-	protected abstract void reloadRandomization();
+  protected abstract void reloadRandomization();
 
-	protected int getMatches(int pairs, int matchesRemaining) {
-		if ((pairs * 3) <= matchesRemaining - 3) return 3;
-		if ((pairs * 2) <= matchesRemaining - 2) return 2;
-		return 1;
-	}
+  protected int getMatches(int pairs, int matchesRemaining) {
+    if ((pairs * 3) <= matchesRemaining - 3) return 3;
+    if ((pairs * 2) <= matchesRemaining - 2) return 2;
+    return 1;
+  }
 
-	@Override
-	protected void onEnable() {
-		reloadRandomization();
-	}
+  @Override
+  protected void onEnable() {
+    reloadRandomization();
+  }
 
-	@Override
-	public void loadGameState(@Nonnull Document document) {
-		super.loadGameState(document);
-		if (!document.contains("seed")) {
-			random = new SeededRandomWrapper();
-			return;
-		}
+  @Override
+  public void loadGameState(@Nonnull Document document) {
+    super.loadGameState(document);
+    if (!document.contains("seed")) {
+      random = new SeededRandomWrapper();
+      return;
+    }
 
-		long seed = document.getLong("seed");
-		if (seed == random.getSeed()) return;
+    long seed = document.getLong("seed");
+    if (seed == random.getSeed()) return;
 
-		random = IRandom.create(seed);
+    random = IRandom.create(seed);
 
-		if (!isEnabled()) return;
-		reloadRandomization();
-	}
+    if (!isEnabled()) return;
+    reloadRandomization();
+  }
 
-	@Override
-	public void writeGameState(@Nonnull Document document) {
-		super.writeGameState(document);
-		document.set("seed", random.getSeed());
-	}
+  @Override
+  public void writeGameState(@Nonnull Document document) {
+    super.writeGameState(document);
+    document.set("seed", random.getSeed());
+  }
 
 }

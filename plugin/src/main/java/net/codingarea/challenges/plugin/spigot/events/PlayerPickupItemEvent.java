@@ -12,36 +12,36 @@ import javax.annotation.Nonnull;
 @Getter
 public class PlayerPickupItemEvent extends PlayerEvent implements Cancellable {
 
-	private static final HandlerList handlers = new HandlerList();
+  private static final HandlerList handlers = new HandlerList();
 
-	private final Item item;
-	private final int remaining;
-	private boolean cancel = false;
+  private final Item item;
+  private final int remaining;
+  private boolean cancel = false;
 
-	public PlayerPickupItemEvent(@Nonnull Player player, @Nonnull Item item, int remaining) {
-		super(player);
-		this.item = item;
-		this.remaining = remaining;
-	}
+  public PlayerPickupItemEvent(@Nonnull Player player, @Nonnull Item item, int remaining) {
+    super(player);
+    this.item = item;
+    this.remaining = remaining;
+  }
 
-	@Nonnull
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+  @Nonnull
+  public static HandlerList getHandlerList() {
+    return handlers;
+  }
 
-	@Override
-	public boolean isCancelled() {
-		return cancel;
-	}
+  @Override
+  public boolean isCancelled() {
+    return cancel;
+  }
 
-	@Override
-	public void setCancelled(boolean cancel) {
-		this.cancel = cancel;
-	}
+  @Override
+  public void setCancelled(boolean cancel) {
+    this.cancel = cancel;
+  }
 
-	@Nonnull
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+  @Nonnull
+  @Override
+  public HandlerList getHandlers() {
+    return handlers;
+  }
 }

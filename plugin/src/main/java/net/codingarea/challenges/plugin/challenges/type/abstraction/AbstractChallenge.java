@@ -30,188 +30,188 @@ import java.util.function.Consumer;
 
 public abstract class AbstractChallenge implements IChallenge, Listener {
 
-	protected static final Challenges plugin = Challenges.getInstance();
-	protected static final IRandom globalRandom = IRandom.create();
+  protected static final Challenges plugin = Challenges.getInstance();
+  protected static final IRandom globalRandom = IRandom.create();
 
-	private static final Map<Class<? extends AbstractChallenge>, AbstractChallenge> firstInstanceByClass = new HashMap<>();
-	@Getter
+  private static final Map<Class<? extends AbstractChallenge>, AbstractChallenge> firstInstanceByClass = new HashMap<>();
+  @Getter
   private static final boolean ignoreCreativePlayers, ignoreSpectatorPlayers;
 
-	static {
-		Document ignoreDocument = Challenges.getInstance().getConfigDocument().getDocument("ignore-players");
-		ignoreCreativePlayers = ignoreDocument.getBoolean("creative");
-		ignoreSpectatorPlayers = ignoreDocument.getBoolean("spectator");
-	}
+  static {
+    Document ignoreDocument = Challenges.getInstance().getConfigDocument().getDocument("ignore-players");
+    ignoreCreativePlayers = ignoreDocument.getBoolean("creative");
+    ignoreSpectatorPlayers = ignoreDocument.getBoolean("spectator");
+  }
 
-	protected final MenuType menu;
-	@Getter
+  protected final MenuType menu;
+  @Getter
   protected final ChallengeBossBar bossbar = new ChallengeBossBar();
-	@Getter
+  @Getter
   protected final ChallengeScoreboard scoreboard = new ChallengeScoreboard();
-	@Setter
-	protected SettingCategory category;
-	private String name;
-	private ItemStack cachedDisplayItem;
+  @Setter
+  protected SettingCategory category;
+  private String name;
+  private ItemStack cachedDisplayItem;
 
-	public AbstractChallenge(@Nonnull MenuType menu) {
-		this.menu = menu;
-		firstInstanceByClass.put(this.getClass(), this);
-	}
-
-	@Nonnull
-	public static <C extends AbstractChallenge> C getFirstInstance(@Nonnull Class<C> classOfChallenge) {
-		return classOfChallenge.cast(firstInstanceByClass.get(classOfChallenge));
-	}
-
-	public static void broadcast(@Nonnull Consumer<? super Player> action) {
-		Bukkit.getOnlinePlayers().forEach(action);
-	}
-
-	public static void broadcastFiltered(@Nonnull Consumer<? super Player> action) {
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (ignorePlayer(player)) continue;
-			action.accept(player);
-		}
-	}
-
-	public static void broadcastIgnored(@Nonnull Consumer<? super Player> action) {
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (!ignorePlayer(player)) continue;
-			action.accept(player);
-		}
-	}
-
-	@CheckReturnValue
-	public static boolean ignorePlayer(@Nonnull Player player) {
-		return ignoreGameMode(player.getGameMode());
-	}
-
-	@CheckReturnValue
-	public static boolean ignoreGameMode(@Nonnull GameMode gameMode) {
-		return (isIgnoreSpectatorPlayers() && gameMode == GameMode.SPECTATOR) || (isIgnoreCreativePlayers() && gameMode == GameMode.CREATIVE);
-	}
+  public AbstractChallenge(@Nonnull MenuType menu) {
+    this.menu = menu;
+    firstInstanceByClass.put(this.getClass(), this);
+  }
 
   @Nonnull
-	@Override
-	public final MenuType getType() {
-		return menu;
-	}
+  public static <C extends AbstractChallenge> C getFirstInstance(@Nonnull Class<C> classOfChallenge) {
+    return classOfChallenge.cast(firstInstanceByClass.get(classOfChallenge));
+  }
 
-	@Override
-	public SettingCategory getCategory() {
-		return category;
-	}
+  public static void broadcast(@Nonnull Consumer<? super Player> action) {
+    Bukkit.getOnlinePlayers().forEach(action);
+  }
 
-	protected final void updateItems() {
-		ChallengeHelper.updateItems(this);
-	}
+  public static void broadcastFiltered(@Nonnull Consumer<? super Player> action) {
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      if (ignorePlayer(player)) continue;
+      action.accept(player);
+    }
+  }
 
-	@Nonnull
-	@Override
-	public ItemStack getDisplayItem() {
-		if (cachedDisplayItem != null) return cachedDisplayItem.clone();
-		cachedDisplayItem = createDisplayItem().build();
-		return cachedDisplayItem.clone();
-	}
+  public static void broadcastIgnored(@Nonnull Consumer<? super Player> action) {
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      if (!ignorePlayer(player)) continue;
+      action.accept(player);
+    }
+  }
 
-	@Nonnull
-	@Override
-	public ItemStack getSettingsItem() {
-		ItemBuilder item = createSettingsItem();
-		String[] description = getSettingsDescription();
-		if (description != null && isEnabled()) {
-			item.appendLore(" ");
-			item.appendLore(description);
-		}
+  @CheckReturnValue
+  public static boolean ignorePlayer(@Nonnull Player player) {
+    return ignoreGameMode(player.getGameMode());
+  }
 
-		return item.build();
-	}
+  @CheckReturnValue
+  public static boolean ignoreGameMode(@Nonnull GameMode gameMode) {
+    return (isIgnoreSpectatorPlayers() && gameMode == GameMode.SPECTATOR) || (isIgnoreCreativePlayers() && gameMode == GameMode.CREATIVE);
+  }
 
-	@Nullable
-	protected String[] getSettingsDescription() {
-		return null;
-	}
+  @Nonnull
+  @Override
+  public final MenuType getType() {
+    return menu;
+  }
 
-	@Nonnull
-	public abstract ItemBuilder createDisplayItem();
+  @Override
+  public SettingCategory getCategory() {
+    return category;
+  }
 
-	@Nonnull
-	public abstract ItemBuilder createSettingsItem();
+  protected final void updateItems() {
+    ChallengeHelper.updateItems(this);
+  }
 
-	@Nonnull
-	@Override
-	public String getUniqueGamestateName() {
-		return getUniqueName();
-	}
+  @Nonnull
+  @Override
+  public ItemStack getDisplayItem() {
+    if (cachedDisplayItem != null) return cachedDisplayItem.clone();
+    cachedDisplayItem = createDisplayItem().build();
+    return cachedDisplayItem.clone();
+  }
 
-	@Nonnull
-	@Override
-	public String getUniqueName() {
-		return name != null ? name : (name = getClass().getSimpleName().toLowerCase()
-				.replace("setting", "")
-				.replace("challenge", "")
-				.replace("modifier", "")
-				.replace("goal", "")
-		);
-	}
+  @Nonnull
+  @Override
+  public ItemStack getSettingsItem() {
+    ItemBuilder item = createSettingsItem();
+    String[] description = getSettingsDescription();
+    if (description != null && isEnabled()) {
+      item.appendLore(" ");
+      item.appendLore(description);
+    }
 
-	@Override
-	public void handleShutdown() {
-	}
+    return item.build();
+  }
 
-	@Override
-	public void writeGameState(@Nonnull Document document) {
-	}
+  @Nullable
+  protected String[] getSettingsDescription() {
+    return null;
+  }
 
-	@Override
-	public void loadGameState(@Nonnull Document document) {
-	}
+  @Nonnull
+  public abstract ItemBuilder createDisplayItem();
 
-	@Override
-	public void writeSettings(@Nonnull Document document) {
-	}
+  @Nonnull
+  public abstract ItemBuilder createSettingsItem();
 
-	@Override
-	public void loadSettings(@Nonnull Document document) {
-	}
+  @Nonnull
+  @Override
+  public String getUniqueGamestateName() {
+    return getUniqueName();
+  }
 
-	@CheckReturnValue
-	protected boolean shouldExecuteEffect() {
-		return isEnabled() && ChallengeAPI.isStarted() && !ChallengeAPI.isWorldInUse();
-	}
+  @Nonnull
+  @Override
+  public String getUniqueName() {
+    return name != null ? name : (name = getClass().getSimpleName().toLowerCase()
+      .replace("setting", "")
+      .replace("challenge", "")
+      .replace("modifier", "")
+      .replace("goal", "")
+    );
+  }
 
-	/**
-	 * @deprecated Use {@link ChallengeHelper#kill(Player)}
-	 */
-	@Deprecated
-	@DeprecatedSince("2.1.0")
-	public void kill(@Nonnull Player player) {
-		ChallengeHelper.kill(player);
-	}
+  @Override
+  public void handleShutdown() {
+  }
 
-	/**
-	 * @deprecated Use {@link ChallengeHelper#kill(Player, int)}
-	 */
-	@Deprecated
-	@DeprecatedSince("2.1.0")
-	public void kill(@Nonnull Player player, int delay) {
-		ChallengeHelper.kill(player, delay);
+  @Override
+  public void writeGameState(@Nonnull Document document) {
+  }
 
-	}
+  @Override
+  public void loadGameState(@Nonnull Document document) {
+  }
 
-	@Nonnull
-	protected final Document getGameStateData() {
-		return plugin.getConfigManager().getGamestateConfig().getDocument(this.getUniqueGamestateName());
-	}
+  @Override
+  public void writeSettings(@Nonnull Document document) {
+  }
 
-	@Nonnull
-	protected final Document getPlayerData(@Nonnull UUID player) {
-		return getGameStateData().getDocument("player").getDocument(player.toString());
-	}
+  @Override
+  public void loadSettings(@Nonnull Document document) {
+  }
 
-	@Nonnull
-	protected final Document getPlayerData(@Nonnull Player player) {
-		return getPlayerData(player.getUniqueId());
-	}
+  @CheckReturnValue
+  protected boolean shouldExecuteEffect() {
+    return isEnabled() && ChallengeAPI.isStarted() && !ChallengeAPI.isWorldInUse();
+  }
+
+  /**
+   * @deprecated Use {@link ChallengeHelper#kill(Player)}
+   */
+  @Deprecated
+  @DeprecatedSince("2.1.0")
+  public void kill(@Nonnull Player player) {
+    ChallengeHelper.kill(player);
+  }
+
+  /**
+   * @deprecated Use {@link ChallengeHelper#kill(Player, int)}
+   */
+  @Deprecated
+  @DeprecatedSince("2.1.0")
+  public void kill(@Nonnull Player player, int delay) {
+    ChallengeHelper.kill(player, delay);
+
+  }
+
+  @Nonnull
+  protected final Document getGameStateData() {
+    return plugin.getConfigManager().getGamestateConfig().getDocument(this.getUniqueGamestateName());
+  }
+
+  @Nonnull
+  protected final Document getPlayerData(@Nonnull UUID player) {
+    return getGameStateData().getDocument("player").getDocument(player.toString());
+  }
+
+  @Nonnull
+  protected final Document getPlayerData(@Nonnull Player player) {
+    return getPlayerData(player.getUniqueId());
+  }
 
 }

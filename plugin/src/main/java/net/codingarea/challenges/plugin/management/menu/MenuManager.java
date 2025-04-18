@@ -21,131 +21,131 @@ import javax.annotation.Nonnull;
 
 public final class MenuManager {
 
-	public static final String MANAGE_GUI_PERMISSION = "challenges.manage";
-	public static final int[] GUI_SLOTS = {30, 32, 19, 25, 11, 15, 4};
-	@Getter
+  public static final String MANAGE_GUI_PERMISSION = "challenges.manage";
+  public static final int[] GUI_SLOTS = {30, 32, 19, 25, 11, 15, 4};
+  @Getter
   private final boolean displayNewInFront;
-	private final boolean permissionToManageGUI;
-	private AnimatedInventory gui;
-	private boolean generated = false;
+  private final boolean permissionToManageGUI;
+  private AnimatedInventory gui;
+  private boolean generated = false;
 
-	public MenuManager() {
-		ChallengeAPI.subscribeLoader(LanguageLoader.class, this::generateMenus);
-		ChallengeAPI.subscribeLoader(LanguageLoader.class, this::generateMainMenu);
-		displayNewInFront = Challenges.getInstance().getConfigDocument().getBoolean("display-new-in-front");
-		permissionToManageGUI = Challenges.getInstance().getConfigDocument().getBoolean("manage-settings-permission");
-		generateMainMenu();
-	}
+  public MenuManager() {
+    ChallengeAPI.subscribeLoader(LanguageLoader.class, this::generateMenus);
+    ChallengeAPI.subscribeLoader(LanguageLoader.class, this::generateMainMenu);
+    displayNewInFront = Challenges.getInstance().getConfigDocument().getBoolean("display-new-in-front");
+    permissionToManageGUI = Challenges.getInstance().getConfigDocument().getBoolean("manage-settings-permission");
+    generateMainMenu();
+  }
 
-	public void generateMainMenu() {
+  public void generateMainMenu() {
 
-		gui = new AnimatedInventory(InventoryTitleManager.getMainMenuTitle(), 5 * 9, MenuPosition.HOLDER);
-		gui.addFrame(new AnimationFrame(5 * 9).fill(ItemBuilder.FILL_ITEM));
-		gui.cloneLastAndAdd().setAccent(39, 41);
-		gui.cloneLastAndAdd().setAccent(38, 42);
-		gui.cloneLastAndAdd().setAccent(37, 43);
-		gui.cloneLastAndAdd().setAccent(28, 34);
-		gui.cloneLastAndAdd().setAccent(27, 35);
-		gui.cloneLastAndAdd().setAccent(18, 26);
-		gui.cloneLastAndAdd().setAccent(9, 17);
-		gui.cloneLastAndAdd().setAccent(10, 16);
-		gui.cloneLastAndAdd().setAccent(1, 7);
-		gui.cloneLastAndAdd().setAccent(2, 6);
+    gui = new AnimatedInventory(InventoryTitleManager.getMainMenuTitle(), 5 * 9, MenuPosition.HOLDER);
+    gui.addFrame(new AnimationFrame(5 * 9).fill(ItemBuilder.FILL_ITEM));
+    gui.cloneLastAndAdd().setAccent(39, 41);
+    gui.cloneLastAndAdd().setAccent(38, 42);
+    gui.cloneLastAndAdd().setAccent(37, 43);
+    gui.cloneLastAndAdd().setAccent(28, 34);
+    gui.cloneLastAndAdd().setAccent(27, 35);
+    gui.cloneLastAndAdd().setAccent(18, 26);
+    gui.cloneLastAndAdd().setAccent(9, 17);
+    gui.cloneLastAndAdd().setAccent(10, 16);
+    gui.cloneLastAndAdd().setAccent(1, 7);
+    gui.cloneLastAndAdd().setAccent(2, 6);
 
-		MenuType[] values = MenuType.values();
-		for (int i = 0; i < values.length; i += 2) {
+    MenuType[] values = MenuType.values();
+    for (int i = 0; i < values.length; i += 2) {
 
-			AnimationFrame frame = gui.getLastFrame().clone();
+      AnimationFrame frame = gui.getLastFrame().clone();
 
-			MenuType first = values[i];
-			frame.setItem(GUI_SLOTS[i], new ItemBuilder(first.getDisplayItem()).name(
-					DefaultItem.getItemPrefix() + first.getDisplayName()).hideAttributes());
+      MenuType first = values[i];
+      frame.setItem(GUI_SLOTS[i], new ItemBuilder(first.getDisplayItem()).name(
+        DefaultItem.getItemPrefix() + first.getDisplayName()).hideAttributes());
 
-			if (values.length > i + 1) {
-				MenuType second = values[i + 1];
-				frame.setItem(GUI_SLOTS[i + 1], new ItemBuilder(second.getDisplayItem()).name(
-						DefaultItem.getItemPrefix() + second.getDisplayName()).hideAttributes());
-			}
+      if (values.length > i + 1) {
+        MenuType second = values[i + 1];
+        frame.setItem(GUI_SLOTS[i + 1], new ItemBuilder(second.getDisplayItem()).name(
+          DefaultItem.getItemPrefix() + second.getDisplayName()).hideAttributes());
+      }
 
-			gui.addFrame(frame);
-		}
+      gui.addFrame(frame);
+    }
 
-	}
+  }
 
-	public void generateMenus() {
+  public void generateMenus() {
 
-		for (MenuType value : MenuType.values()) {
-			value.executeWithGenerator(ChallengeMenuGenerator.class, ChallengeMenuGenerator::resetChallengeCache);
-		}
+    for (MenuType value : MenuType.values()) {
+      value.executeWithGenerator(ChallengeMenuGenerator.class, ChallengeMenuGenerator::resetChallengeCache);
+    }
 
-		for (IChallenge challenge : Challenges.getInstance().getChallengeManager().getChallenges()) {
-			MenuType type = challenge.getType();
-			type.executeWithGenerator(ChallengeMenuGenerator.class, gen -> gen.addChallengeToCache(challenge));
-		}
+    for (IChallenge challenge : Challenges.getInstance().getChallengeManager().getChallenges()) {
+      MenuType type = challenge.getType();
+      type.executeWithGenerator(ChallengeMenuGenerator.class, gen -> gen.addChallengeToCache(challenge));
+    }
 
-		for (MenuType value : MenuType.values()) {
-			value.getMenuGenerator().generateInventories();
-		}
+    for (MenuType value : MenuType.values()) {
+      value.getMenuGenerator().generateInventories();
+    }
 
-		generated = true;
-	}
+    generated = true;
+  }
 
-	public void openGUI(@Nonnull Player player) {
-		SoundSample.PLOP.play(player);
-		MenuPosition.set(player, new MainMenuPosition());
-		gui.open(player, Challenges.getInstance());
-	}
+  public void openGUI(@Nonnull Player player) {
+    SoundSample.PLOP.play(player);
+    MenuPosition.set(player, new MainMenuPosition());
+    gui.open(player, Challenges.getInstance());
+  }
 
-	public void openGUIInstantly(@Nonnull Player player) {
-		MenuPosition.set(player, new MainMenuPosition());
-		gui.openNotAnimated(player, true, Challenges.getInstance());
-	}
+  public void openGUIInstantly(@Nonnull Player player) {
+    MenuPosition.set(player, new MainMenuPosition());
+    gui.openNotAnimated(player, true, Challenges.getInstance());
+  }
 
-	/**
-	 * @return If the specified menu page could be opened.
-	 * The menu may not be opened, when there are no challenges registered to that menu or the languages are not loaded
-	 */
-	public boolean openMenu(@Nonnull Player player, @Nonnull MenuType type, int page) {
-		if (!generated) {
-			SoundSample.BASS_OFF.play(player);
-			player.sendMessage(Prefix.CHALLENGES + "§cCould not open gui, languages are not loaded");
-			player.sendMessage(Prefix.CHALLENGES + "§cIs the plugin set up correctly?");
-			return false;
-		}
+  /**
+   * @return If the specified menu page could be opened.
+   * The menu may not be opened, when there are no challenges registered to that menu or the languages are not loaded
+   */
+  public boolean openMenu(@Nonnull Player player, @Nonnull MenuType type, int page) {
+    if (!generated) {
+      SoundSample.BASS_OFF.play(player);
+      player.sendMessage(Prefix.CHALLENGES + "§cCould not open gui, languages are not loaded");
+      player.sendMessage(Prefix.CHALLENGES + "§cIs the plugin set up correctly?");
+      return false;
+    }
 
-		type.getMenuGenerator().open(player, page);
+    type.getMenuGenerator().open(player, page);
 
-		return true;
-	}
+    return true;
+  }
 
   public void playNoPermissionsEffect(@Nonnull Player player) {
-		SoundSample.BASS_OFF.play(player);
-		Message.forName("no-permission").send(player, Prefix.CHALLENGES);
-	}
+    SoundSample.BASS_OFF.play(player);
+    Message.forName("no-permission").send(player, Prefix.CHALLENGES);
+  }
 
-	public boolean permissionToManageGUI() {
-		return permissionToManageGUI;
-	}
+  public boolean permissionToManageGUI() {
+    return permissionToManageGUI;
+  }
 
-	private class MainMenuPosition implements MenuPosition {
+  private class MainMenuPosition implements MenuPosition {
 
-		@Override
-		public void handleClick(@Nonnull MenuClickInfo info) {
+    @Override
+    public void handleClick(@Nonnull MenuClickInfo info) {
 
-			for (int i = 0; i < GUI_SLOTS.length; i++) {
-				int current = GUI_SLOTS[i];
-				if (current == info.getSlot()) {
-					MenuType type = MenuType.values()[i];
-					if (openMenu(info.getPlayer(), type, 0))
-						SoundSample.CLICK.play(info.getPlayer());
-					return;
-				}
-			}
+      for (int i = 0; i < GUI_SLOTS.length; i++) {
+        int current = GUI_SLOTS[i];
+        if (current == info.getSlot()) {
+          MenuType type = MenuType.values()[i];
+          if (openMenu(info.getPlayer(), type, 0))
+            SoundSample.CLICK.play(info.getPlayer());
+          return;
+        }
+      }
 
-			SoundSample.CLICK.play(info.getPlayer());
+      SoundSample.CLICK.play(info.getPlayer());
 
-		}
+    }
 
-	}
+  }
 
 }

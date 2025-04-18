@@ -9,31 +9,31 @@ import javax.annotation.Nonnull;
 
 public class SettingsMenuGenerator extends ChallengeMenuGenerator {
 
-	public static final int[] SLOTS = {10, 11, 12, 13, 14, 15, 16};
-	public static final int[] NAVIGATION_SLOTS = {27, 35};
-	public static final int SIZE = 4 * 9;
+  public static final int[] SLOTS = {10, 11, 12, 13, 14, 15, 16};
+  public static final int[] NAVIGATION_SLOTS = {27, 35};
+  public static final int SIZE = 4 * 9;
 
-	@Override
-	public int[] getSlots() {
-		return SLOTS;
-	}
+  @Override
+  public int[] getSlots() {
+    return SLOTS;
+  }
 
-	@Override
-	public int getSize() {
-		return SIZE;
-	}
+  @Override
+  public int getSize() {
+    return SIZE;
+  }
 
-	@Override
-	public int[] getNavigationSlots(int page) {
-		return NAVIGATION_SLOTS;
-	}
+  @Override
+  public int[] getNavigationSlots(int page) {
+    return NAVIGATION_SLOTS;
+  }
 
-	@Override
-	public void executeClickAction(@Nonnull IChallenge challenge, @Nonnull MenuClickInfo info, int itemIndex) {
-		if (itemIndex <= 1) {
-			challenge.handleClick(new ChallengeMenuClickInfo(info, itemIndex == 0));
-		}
+  @Override
+  public void executeClickAction(@Nonnull IChallenge challenge, @Nonnull MenuClickInfo info, int itemIndex) {
+    if (itemIndex <= 1) {
+      challenge.handleClick(new ChallengeMenuClickInfo(info, itemIndex == 0));
+    }
 
-	}
+  }
 
 }

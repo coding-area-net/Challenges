@@ -16,30 +16,30 @@ import java.util.List;
 @Since("2.1.3")
 public class KillAllMobsGoal extends KillMobsGoal {
 
-	public KillAllMobsGoal() {
-		super(getAllMobsToKill());
-		setCategory(SettingCategory.KILL_ENTITY);
-	}
+  public KillAllMobsGoal() {
+    super(getAllMobsToKill());
+    setCategory(SettingCategory.KILL_ENTITY);
+  }
 
-	static List<EntityType> getAllMobsToKill() {
-		LinkedList<EntityType> list = new LinkedList<>(Arrays.asList(EntityType.values()));
-		list.removeIf(type -> !type.isAlive());
-		list.remove(EntityType.GIANT);
-		list.remove(EntityType.ILLUSIONER);
-		list.remove(EntityType.PLAYER);
-		list.remove(EntityType.ARMOR_STAND);
-		return list;
-	}
+  static List<EntityType> getAllMobsToKill() {
+    LinkedList<EntityType> list = new LinkedList<>(Arrays.asList(EntityType.values()));
+    list.removeIf(type -> !type.isAlive());
+    list.remove(EntityType.GIANT);
+    list.remove(EntityType.ILLUSIONER);
+    list.remove(EntityType.PLAYER);
+    list.remove(EntityType.ARMOR_STAND);
+    return list;
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.BOW, Message.forName("item-all-mobs-goal"));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.BOW, Message.forName("item-all-mobs-goal"));
+  }
 
-	@Override
-	public Message getBossbarMessage() {
-		return Message.forName("bossbar-kill-all-mobs");
-	}
+  @Override
+  public Message getBossbarMessage() {
+    return Message.forName("bossbar-kill-all-mobs");
+  }
 
 }

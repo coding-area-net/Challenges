@@ -13,27 +13,27 @@ import java.util.Objects;
 
 public class StandsOnSpecificBlockTrigger extends ChallengeTrigger {
 
-	public StandsOnSpecificBlockTrigger(String name) {
-		super(name, SubSettingsHelper.createBlockSettingsBuilder());
-	}
+  public StandsOnSpecificBlockTrigger(String name) {
+    super(name, SubSettingsHelper.createBlockSettingsBuilder());
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.PACKED_ICE;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.PACKED_ICE;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onMove(PlayerMoveEvent event) {
-		if (BlockUtils.isSameBlockLocation(event.getTo(), event.getFrom())) return;
-		Block blockBelow = BlockUtils.getBlockBelow(
-                Objects.requireNonNull(event.getTo()));
-		if (blockBelow == null) return;
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onMove(PlayerMoveEvent event) {
+    if (BlockUtils.isSameBlockLocation(event.getTo(), event.getFrom())) return;
+    Block blockBelow = BlockUtils.getBlockBelow(
+      Objects.requireNonNull(event.getTo()));
+    if (blockBelow == null) return;
 
-		createData()
-				.entity(event.getPlayer())
-				.event(event)
-				.block(blockBelow.getType())
-				.execute();
-	}
+    createData()
+      .entity(event.getPlayer())
+      .event(event)
+      .block(blockBelow.getType())
+      .execute();
+  }
 
 }

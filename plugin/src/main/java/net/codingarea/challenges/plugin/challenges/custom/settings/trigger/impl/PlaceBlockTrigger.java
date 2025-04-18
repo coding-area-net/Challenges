@@ -9,22 +9,22 @@ import org.bukkit.event.block.BlockPlaceEvent;
 
 public class PlaceBlockTrigger extends ChallengeTrigger {
 
-	public PlaceBlockTrigger(String name) {
-		super(name, SubSettingsHelper.createBlockSettingsBuilder());
-	}
+  public PlaceBlockTrigger(String name) {
+    super(name, SubSettingsHelper.createBlockSettingsBuilder());
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.BRICKS;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.BRICKS;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onBlockPlace(BlockPlaceEvent event) {
-		createData()
-				.entity(event.getPlayer())
-				.event(event)
-				.block(event.getBlock().getType())
-				.execute();
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onBlockPlace(BlockPlaceEvent event) {
+    createData()
+      .entity(event.getPlayer())
+      .event(event)
+      .block(event.getBlock().getType())
+      .execute();
+  }
 
 }

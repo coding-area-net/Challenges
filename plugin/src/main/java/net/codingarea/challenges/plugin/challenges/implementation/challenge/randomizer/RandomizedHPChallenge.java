@@ -31,107 +31,107 @@ import java.util.Random;
 
 public class RandomizedHPChallenge extends SettingModifier {
 
-	private final Random random = new Random();
+  private final Random random = new Random();
 
-	public RandomizedHPChallenge() {
-		super(MenuType.CHALLENGES, 5);
-		setCategory(SettingCategory.RANDOMIZER);
-		randomizeExistingEntityHealth();
-	}
+  public RandomizedHPChallenge() {
+    super(MenuType.CHALLENGES, 5);
+    setCategory(SettingCategory.RANDOMIZER);
+    randomizeExistingEntityHealth();
+  }
 
-	@Override
-	protected void onDisable() {
-		resetExistingEntityHealth();
-	}
+  @Override
+  protected void onDisable() {
+    resetExistingEntityHealth();
+  }
 
-	@Override
-	public void onEnable() {
-		randomizeExistingEntityHealth();
-	}
+  @Override
+  public void onEnable() {
+    randomizeExistingEntityHealth();
+  }
 
-	@Override
-	protected void onValueChange() {
-		randomizeExistingEntityHealth();
-	}
+  @Override
+  protected void onValueChange() {
+    randomizeExistingEntityHealth();
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onSpawn(@Nonnull EntitySpawnEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (!(event.getEntity() instanceof LivingEntity)) return;
-		LivingEntity entity = (LivingEntity) event.getEntity();
-		randomizeEntityHealth(entity);
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onSpawn(@Nonnull EntitySpawnEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (!(event.getEntity() instanceof LivingEntity)) return;
+    LivingEntity entity = (LivingEntity) event.getEntity();
+    randomizeEntityHealth(entity);
+  }
 
-	private void randomizeEntityHealth(@Nonnull LivingEntity entity) {
-		if (entity instanceof Player) return;
-		if (!isEnabled()) {
-			entity.resetMaxHealth();
-			entity.setHealth(entity.getMaxHealth());
-			return;
-		}
-		int health = random.nextInt(getValue() * 100) + 1;
-		entity.setHealth(health);
-		AttributeInstance attribute = entity.getAttribute(AttributeWrapper.MAX_HEALTH);
-		if (attribute == null) return;
-		attribute.setBaseValue(health);
-	}
+  private void randomizeEntityHealth(@Nonnull LivingEntity entity) {
+    if (entity instanceof Player) return;
+    if (!isEnabled()) {
+      entity.resetMaxHealth();
+      entity.setHealth(entity.getMaxHealth());
+      return;
+    }
+    int health = random.nextInt(getValue() * 100) + 1;
+    entity.setHealth(health);
+    AttributeInstance attribute = entity.getAttribute(AttributeWrapper.MAX_HEALTH);
+    if (attribute == null) return;
+    attribute.setBaseValue(health);
+  }
 
-	private void randomizeExistingEntityHealth() {
-		for (World world : ChallengeAPI.getGameWorlds()) {
-			for (LivingEntity entity : world.getLivingEntities()) {
-				randomizeEntityHealth(entity);
-			}
-		}
-	}
+  private void randomizeExistingEntityHealth() {
+    for (World world : ChallengeAPI.getGameWorlds()) {
+      for (LivingEntity entity : world.getLivingEntities()) {
+        randomizeEntityHealth(entity);
+      }
+    }
+  }
 
-	private void resetExistingEntityHealth() {
-		Map<EntityType, Double> entityDefaultHealth = new HashMap<>();
-		for (World world : ChallengeAPI.getGameWorlds()) {
-			for (LivingEntity entity : world.getLivingEntities()) {
-				if (entity instanceof Player) continue;
-				EntityType type = entity.getType();
-				double health = entityDefaultHealth.getOrDefault(type, getDefaultHealth(type));
-				entityDefaultHealth.put(type, health);
+  private void resetExistingEntityHealth() {
+    Map<EntityType, Double> entityDefaultHealth = new HashMap<>();
+    for (World world : ChallengeAPI.getGameWorlds()) {
+      for (LivingEntity entity : world.getLivingEntities()) {
+        if (entity instanceof Player) continue;
+        EntityType type = entity.getType();
+        double health = entityDefaultHealth.getOrDefault(type, getDefaultHealth(type));
+        entityDefaultHealth.put(type, health);
 
-				AttributeInstance attribute = entity.getAttribute(AttributeWrapper.MAX_HEALTH);
-				if (attribute == null) return;
-				attribute.setBaseValue(health);
-				entity.setHealth(health);
-			}
-		}
-	}
+        AttributeInstance attribute = entity.getAttribute(AttributeWrapper.MAX_HEALTH);
+        if (attribute == null) return;
+        attribute.setBaseValue(health);
+        entity.setHealth(health);
+      }
+    }
+  }
 
-	private double getDefaultHealth(@Nonnull EntityType entityType) {
-		World world = ChallengeAPI.getGameWorld(Environment.NORMAL);
-		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), entityType);
-		entity.remove();
-		if (!(entity instanceof LivingEntity)) return 0;
-		AttributeInstance attribute = ((LivingEntity) entity).getAttribute(AttributeWrapper.MAX_HEALTH);
-		if (attribute == null) return 10;
-		return attribute.getBaseValue();
-	}
+  private double getDefaultHealth(@Nonnull EntityType entityType) {
+    World world = ChallengeAPI.getGameWorld(Environment.NORMAL);
+    Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), entityType);
+    entity.remove();
+    if (!(entity instanceof LivingEntity)) return 0;
+    AttributeInstance attribute = ((LivingEntity) entity).getAttribute(AttributeWrapper.MAX_HEALTH);
+    if (attribute == null) return 10;
+    return attribute.getBaseValue();
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new PotionBuilder(Material.POTION, Message.forName("item-randomized-hp-challenge")).setColor(Color.RED);
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new PotionBuilder(Material.POTION, Message.forName("item-randomized-hp-challenge")).setColor(Color.RED);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createSettingsItem() {
-		return super.createSettingsItem().amount(isEnabled() ? getValue() * 5 : 1);
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createSettingsItem() {
+    return super.createSettingsItem().amount(isEnabled() ? getValue() * 5 : 1);
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeHeartsValueChangeTitle(this, getValue() * 100);
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeHeartsValueChangeTitle(this, getValue() * 100);
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-max-health-description").asArray(getValue() * 50);
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-max-health-description").asArray(getValue() * 50);
+  }
 
 }

@@ -12,19 +12,19 @@ import javax.annotation.Nonnull;
 
 public class HydraNormalChallenge extends HydraChallenge {
 
-	public HydraNormalChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.ENTITIES);
-	}
+  public HydraNormalChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.ENTITIES);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.WITCH_SPAWN_EGG, Message.forName("item-hydra-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.WITCH_SPAWN_EGG, Message.forName("item-hydra-challenge"));
+  }
 
-	@Override
-	public int getNewMobsCount(@Nonnull EntityType entityType) {
-		return 2;
-	}
+  @Override
+  public int getNewMobsCount(@Nonnull EntityType entityType) {
+    return 2;
+  }
 }

@@ -9,30 +9,30 @@ import java.util.LinkedHashMap;
 
 public class SubSettingChooseMultipleMenuGenerator extends ChooseMultipleItemGenerator {
 
-	private final IParentCustomGenerator parent;
-	private final String key;
-	private final String title;
+  private final IParentCustomGenerator parent;
+  private final String key;
+  private final String title;
 
-	public SubSettingChooseMultipleMenuGenerator(String key, IParentCustomGenerator parent, LinkedHashMap<String, ItemStack> map, String title) {
-		super(map);
-		this.key = key;
-		this.title = title;
-		this.parent = parent;
-	}
+  public SubSettingChooseMultipleMenuGenerator(String key, IParentCustomGenerator parent, LinkedHashMap<String, ItemStack> map, String title) {
+    super(map);
+    this.key = key;
+    this.title = title;
+    this.parent = parent;
+  }
 
-	@Override
-	public String[] getSubTitles(int page) {
-		return new String[]{title};
-	}
+  @Override
+  public String[] getSubTitles(int page) {
+    return new String[]{title};
+  }
 
-	@Override
-	public void onItemClick(Player player, String[] itemKeys) {
-		parent.accept(player, null, MapUtils.createStringArrayMap(key, itemKeys));
-	}
+  @Override
+  public void onItemClick(Player player, String[] itemKeys) {
+    parent.accept(player, null, MapUtils.createStringArrayMap(key, itemKeys));
+  }
 
-	@Override
-	public void onBackToMenuItemClick(Player player) {
-		parent.decline(player);
-	}
+  @Override
+  public void onBackToMenuItemClick(Player player) {
+    parent.decline(player);
+  }
 
 }

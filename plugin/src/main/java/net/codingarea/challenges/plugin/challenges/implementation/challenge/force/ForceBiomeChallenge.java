@@ -35,118 +35,118 @@ import java.util.function.BiConsumer;
 @ExcludeFromRandomChallenges
 public class ForceBiomeChallenge extends CompletableForceChallenge {
 
-	private Biome biome;
+  private Biome biome;
 
-	public ForceBiomeChallenge() {
-		super(MenuType.CHALLENGES, 2, 20, 5);
-		setCategory(SettingCategory.FORCE);
-	}
+  public ForceBiomeChallenge() {
+    super(MenuType.CHALLENGES, 2, 20, 5);
+    setCategory(SettingCategory.FORCE);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.CHAINMAIL_BOOTS, Message.forName("item-force-biome-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.CHAINMAIL_BOOTS, Message.forName("item-force-biome-challenge"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return ChallengeHelper.getTimeRangeSettingsDescription(this, 60 * 3, 60);
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return ChallengeHelper.getTimeRangeSettingsDescription(this, 60 * 3, 60);
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 * 3 - 60, getValue() * 60 * 3 + 60);
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 * 3 - 60, getValue() * 60 * 3 + 60);
+  }
 
-	@Nonnull
-	@Override
-	protected BiConsumer<BossBarInstance, Player> setupBossbar() {
-		return (bossbar, player) -> {
-			if (getState() == WAITING) {
-				bossbar.setTitle(Message.forName("bossbar-force-biome-waiting").asString());
-				return;
-			}
+  @Nonnull
+  @Override
+  protected BiConsumer<BossBarInstance, Player> setupBossbar() {
+    return (bossbar, player) -> {
+      if (getState() == WAITING) {
+        bossbar.setTitle(Message.forName("bossbar-force-biome-waiting").asString());
+        return;
+      }
 
-			bossbar.setColor(BarColor.GREEN);
-			bossbar.setProgress(getProgress());
-			bossbar.setTitle(Message.forName("bossbar-force-biome-instruction").asComponent(biome, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation())));
-		};
-	}
+      bossbar.setColor(BarColor.GREEN);
+      bossbar.setProgress(getProgress());
+      bossbar.setTitle(Message.forName("bossbar-force-biome-instruction").asComponent(biome, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation())));
+    };
+  }
 
-	@Override
-	protected void broadcastFailedMessage() {
-		Message.forName("force-biome-fail").broadcast(Prefix.CHALLENGES, BukkitStringUtils.getBiomeName(biome));
-	}
+  @Override
+  protected void broadcastFailedMessage() {
+    Message.forName("force-biome-fail").broadcast(Prefix.CHALLENGES, BukkitStringUtils.getBiomeName(biome));
+  }
 
-	@Override
-	protected void broadcastSuccessMessage(@Nonnull Player player) {
-		Message.forName("force-biome-success").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), BukkitStringUtils.getBiomeName(biome));
-	}
+  @Override
+  protected void broadcastSuccessMessage(@Nonnull Player player) {
+    Message.forName("force-biome-success").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), BukkitStringUtils.getBiomeName(biome));
+  }
 
-	@Override
-	protected void chooseForcing() {
-		Biome[] biomes = Arrays.stream(Biome.values())
-				.filter(biome -> !biome.name().contains("END"))
-				.filter(biome -> !biome.name().contains("MUSHROOM"))
-				.filter(biome -> !biome.name().contains("VOID"))
-				.filter(biome -> !biome.name().equals("CUSTOM"))
-				.toArray(Biome[]::new);
+  @Override
+  protected void chooseForcing() {
+    Biome[] biomes = Arrays.stream(Biome.values())
+      .filter(biome -> !biome.name().contains("END"))
+      .filter(biome -> !biome.name().contains("MUSHROOM"))
+      .filter(biome -> !biome.name().contains("VOID"))
+      .filter(biome -> !biome.name().equals("CUSTOM"))
+      .toArray(Biome[]::new);
 
-		biome = globalRandom.choose(biomes);
-	}
+    biome = globalRandom.choose(biomes);
+  }
 
-	@Override
-	protected int getForcingTime() {
-		return globalRandom.around(getRarity(biome) * 60 * 6, 60);
-	}
+  @Override
+  protected int getForcingTime() {
+    return globalRandom.around(getRarity(biome) * 60 * 6, 60);
+  }
 
-	private int getRarity(@Nonnull Biome biome) {
-		Object[][] mapping = {
-				{"BADLANDS", 5},
-				{"JUNGLE", 4},
-				{"BAMBOO", 4},
-				{"MODIFIED", 3},
-				{"TALL", 3},
-				{"SWAMP", 2},
-		};
+  private int getRarity(@Nonnull Biome biome) {
+    Object[][] mapping = {
+      {"BADLANDS", 5},
+      {"JUNGLE", 4},
+      {"BAMBOO", 4},
+      {"MODIFIED", 3},
+      {"TALL", 3},
+      {"SWAMP", 2},
+    };
 
-		for (Object[] pair : mapping) {
-			String key = (String) pair[0];
-			if (biome.name().contains(key))
-				return (int) pair[1];
-		}
-		return 1;
-	}
+    for (Object[] pair : mapping) {
+      String key = (String) pair[0];
+      if (biome.name().contains(key))
+        return (int) pair[1];
+    }
+    return 1;
+  }
 
-	@Override
-	protected int getSecondsUntilNextActivation() {
-		return globalRandom.around(getValue() * 60 * 3, 60);
-	}
+  @Override
+  protected int getSecondsUntilNextActivation() {
+    return globalRandom.around(getValue() * 60 * 3, 60);
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onMove(@Nonnull PlayerMoveEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (event.getTo() == null) return;
-		if (event.getTo().getBlock().getBiome() != biome) return;
-		completeForcing(event.getPlayer());
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onMove(@Nonnull PlayerMoveEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (event.getTo() == null) return;
+    if (event.getTo().getBlock().getBiome() != biome) return;
+    completeForcing(event.getPlayer());
+  }
 
-	@Override
-	public void loadGameState(@NotNull Document document) {
-		super.loadGameState(document);
-		if (document.contains("target")) {
-			String biomeName = document.getString("target");
-			biome = Registry.BIOME.get(NamespacedKey.minecraft(Objects.requireNonNull(biomeName).toLowerCase()));
-			setState(biome == null ? WAITING : COUNTDOWN);
-		}
-	}
+  @Override
+  public void loadGameState(@NotNull Document document) {
+    super.loadGameState(document);
+    if (document.contains("target")) {
+      String biomeName = document.getString("target");
+      biome = Registry.BIOME.get(NamespacedKey.minecraft(Objects.requireNonNull(biomeName).toLowerCase()));
+      setState(biome == null ? WAITING : COUNTDOWN);
+    }
+  }
 
 
-	@Override
-	public void writeGameState(@NotNull Document document) {
-		super.writeGameState(document);
-		document.set("target", biome);
-	}
+  @Override
+  public void writeGameState(@NotNull Document document) {
+    super.writeGameState(document);
+    document.set("target", biome);
+  }
 
 }

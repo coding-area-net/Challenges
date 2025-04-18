@@ -17,20 +17,20 @@ import java.util.Arrays;
 @RequireVersion(MinecraftVersion.V1_19)
 public class KillAllBossesNewGoal extends KillMobsGoal {
 
-	public KillAllBossesNewGoal() {
-		super(Arrays.asList(EntityType.ENDER_DRAGON, EntityType.WITHER, EntityType.ELDER_GUARDIAN, EntityType.WARDEN));
-		setCategory(SettingCategory.KILL_ENTITY);
-	}
+  public KillAllBossesNewGoal() {
+    super(Arrays.asList(EntityType.ENDER_DRAGON, EntityType.WITHER, EntityType.ELDER_GUARDIAN, EntityType.WARDEN));
+    setCategory(SettingCategory.KILL_ENTITY);
+  }
 
-	@Override
-	public Message getBossbarMessage() {
-		return Message.forName("bossbar-kill-all-bosses");
-	}
+  @Override
+  public Message getBossbarMessage() {
+    return Message.forName("bossbar-kill-all-bosses");
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.NETHERITE_SWORD, Message.forName("item-all-bosses-new-goal"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.NETHERITE_SWORD, Message.forName("item-all-bosses-new-goal"));
+  }
 
 }

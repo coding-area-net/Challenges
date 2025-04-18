@@ -9,24 +9,24 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 
 public class HungerTrigger extends ChallengeTrigger {
 
-	public HungerTrigger(String name) {
-		super(name);
-	}
+  public HungerTrigger(String name) {
+    super(name);
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.ROTTEN_FLESH;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.ROTTEN_FLESH;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onPickup(FoodLevelChangeEvent event) {
-		if (!(event.getEntity() instanceof Player)) return;
-		if (event.getFoodLevel() < event.getEntity().getFoodLevel()) {
-			createData()
-					.entity(event.getEntity())
-					.event(event)
-					.execute();
-		}
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onPickup(FoodLevelChangeEvent event) {
+    if (!(event.getEntity() instanceof Player)) return;
+    if (event.getFoodLevel() < event.getEntity().getFoodLevel()) {
+      createData()
+        .entity(event.getEntity())
+        .event(event)
+        .execute();
+    }
+  }
 
 }

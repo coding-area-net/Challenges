@@ -6,25 +6,25 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 
 public abstract class ValueSetting {
 
-	@Getter
-	private final String key;
-	private final ItemBuilder itemBuilder;
+  @Getter
+  private final String key;
+  private final ItemBuilder itemBuilder;
 
-	public ValueSetting(String key, ItemBuilder itemBuilder) {
-		this.key = key;
-		this.itemBuilder = itemBuilder;
-	}
+  public ValueSetting(String key, ItemBuilder itemBuilder) {
+    this.key = key;
+    this.itemBuilder = itemBuilder;
+  }
 
-	public ItemBuilder createDisplayItem() {
-		return itemBuilder;
-	}
+  public ItemBuilder createDisplayItem() {
+    return itemBuilder;
+  }
 
-	public abstract String onClick(MenuClickInfo info, String value, int slotIndex);
+  public abstract String onClick(MenuClickInfo info, String value, int slotIndex);
 
-	public ItemBuilder getDisplayItem(String value) {
-		return createDisplayItem().hideAttributes();
-	}
+  public ItemBuilder getDisplayItem(String value) {
+    return createDisplayItem().hideAttributes();
+  }
 
-	public abstract ItemBuilder getSettingsItem(String value);
+  public abstract ItemBuilder getSettingsItem(String value);
 
 }

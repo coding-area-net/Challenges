@@ -21,36 +21,36 @@ import javax.annotation.Nullable;
 @Since("2.0")
 public class PickupItemLaunchChallenge extends SettingModifier {
 
-	public PickupItemLaunchChallenge() {
-		super(MenuType.CHALLENGES, 1, 10, 2);
-		setCategory(SettingCategory.INVENTORY);
-	}
+  public PickupItemLaunchChallenge() {
+    super(MenuType.CHALLENGES, 1, 10, 2);
+    setCategory(SettingCategory.INVENTORY);
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.BOW, Message.forName("item-pickup-launch-challenge"));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.BOW, Message.forName("item-pickup-launch-challenge"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-launcher-description").asArray(getValue());
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-launcher-description").asArray(getValue());
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("subtitle-launcher-description").asString(getValue()));
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("subtitle-launcher-description").asString(getValue()));
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onPlayerPickUpItem(@Nonnull PlayerPickupItemEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onPlayerPickUpItem(@Nonnull PlayerPickupItemEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
 
-		Vector velocityToAdd = new Vector(0, getValue() / 2, 0);
-		Vector newVelocity = EntityUtils.getSucceedingVelocity(event.getPlayer().getVelocity()).add(velocityToAdd);
-		event.getPlayer().setVelocity(newVelocity);
-	}
+    Vector velocityToAdd = new Vector(0, getValue() / 2, 0);
+    Vector newVelocity = EntityUtils.getSucceedingVelocity(event.getPlayer().getVelocity()).add(velocityToAdd);
+    event.getPlayer().setVelocity(newVelocity);
+  }
 
 }

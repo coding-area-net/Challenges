@@ -9,23 +9,23 @@ import org.bukkit.event.inventory.CraftItemEvent;
 
 public class CraftItemTrigger extends ChallengeTrigger {
 
-	public CraftItemTrigger(String name) {
-		super(name);
-	}
+  public CraftItemTrigger(String name) {
+    super(name);
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.CRAFTING_TABLE;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.CRAFTING_TABLE;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onCraft(CraftItemEvent event) {
-		if (!(event.getWhoClicked() instanceof Player)) return;
-		Player player = (Player) event.getWhoClicked();
-		createData()
-				.entity(player)
-				.event(event)
-				.execute();
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onCraft(CraftItemEvent event) {
+    if (!(event.getWhoClicked() instanceof Player)) return;
+    Player player = (Player) event.getWhoClicked();
+    createData()
+      .entity(player)
+      .event(event)
+      .execute();
+  }
 
 }

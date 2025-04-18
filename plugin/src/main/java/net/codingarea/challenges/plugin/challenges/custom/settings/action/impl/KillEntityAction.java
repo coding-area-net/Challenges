@@ -12,22 +12,22 @@ import java.util.Map;
 
 public class KillEntityAction extends EntityTargetAction {
 
-	public KillEntityAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true));
-	}
+  public KillEntityAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true));
+  }
 
-	@Override
-	public void executeFor(Entity entity, Map<String, String[]> subActions) {
-		if (entity instanceof Player) {
-			ChallengeHelper.kill(((Player) entity));
-		} else if (entity instanceof LivingEntity) {
-			((LivingEntity) entity).damage(((LivingEntity) entity).getHealth());
-		}
-	}
+  @Override
+  public void executeFor(Entity entity, Map<String, String[]> subActions) {
+    if (entity instanceof Player) {
+      ChallengeHelper.kill(((Player) entity));
+    } else if (entity instanceof LivingEntity) {
+      ((LivingEntity) entity).damage(((LivingEntity) entity).getHealth());
+    }
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.DIAMOND_SWORD;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.DIAMOND_SWORD;
+  }
 
 }

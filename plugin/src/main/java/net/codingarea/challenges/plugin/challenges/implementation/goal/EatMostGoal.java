@@ -16,27 +16,27 @@ import org.jetbrains.annotations.NotNull;
 @Since("2.1.2")
 public class EatMostGoal extends PointsGoal {
 
-	public EatMostGoal() {
-		super();
-		setCategory(SettingCategory.SCORE_POINTS);
-	}
+  public EatMostGoal() {
+    super();
+    setCategory(SettingCategory.SCORE_POINTS);
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.COOKIE, Message.forName("item-eat-most-goal"));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.COOKIE, Message.forName("item-eat-most-goal"));
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onItemConsume(FoodLevelChangeEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (!(event.getEntity() instanceof Player)) return;
-		if (ignorePlayer(((Player) event.getEntity()))) return;
-		int changedFoodLevel = event.getFoodLevel() - event.getEntity().getFoodLevel();
-		if (changedFoodLevel > 0) {
-			addPoints(event.getEntity().getUniqueId(), changedFoodLevel);
-			Message.forName("points-change").send(event.getEntity(), Prefix.CHALLENGES, "+" + changedFoodLevel);
-		}
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onItemConsume(FoodLevelChangeEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (!(event.getEntity() instanceof Player)) return;
+    if (ignorePlayer(((Player) event.getEntity()))) return;
+    int changedFoodLevel = event.getFoodLevel() - event.getEntity().getFoodLevel();
+    if (changedFoodLevel > 0) {
+      addPoints(event.getEntity().getUniqueId(), changedFoodLevel);
+      Message.forName("points-change").send(event.getEntity(), Prefix.CHALLENGES, "+" + changedFoodLevel);
+    }
+  }
 
 }

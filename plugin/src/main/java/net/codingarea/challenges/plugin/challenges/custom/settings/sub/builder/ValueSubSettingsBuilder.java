@@ -25,88 +25,88 @@ import java.util.function.Function;
 @Getter
 public class ValueSubSettingsBuilder extends GeneratorSubSettingsBuilder {
 
-	private final LinkedHashMap<ValueSetting, String> defaultSettings = new LinkedHashMap<>();
+  private final LinkedHashMap<ValueSetting, String> defaultSettings = new LinkedHashMap<>();
 
-	public ValueSubSettingsBuilder() {
-		super("value");
-	}
+  public ValueSubSettingsBuilder() {
+    super("value");
+  }
 
-	public ValueSubSettingsBuilder(SubSettingsBuilder parent) {
-		super("value", parent);
-	}
+  public ValueSubSettingsBuilder(SubSettingsBuilder parent) {
+    super("value", parent);
+  }
 
-	@Override
-	public MenuGenerator getGenerator(Player player, IParentCustomGenerator parentGenerator, String title) {
-		return new SubSettingValueMenuGenerator(parentGenerator, new LinkedHashMap<>(getDefaultSettings()), title);
-	}
+  @Override
+  public MenuGenerator getGenerator(Player player, IParentCustomGenerator parentGenerator, String title) {
+    return new SubSettingValueMenuGenerator(parentGenerator, new LinkedHashMap<>(getDefaultSettings()), title);
+  }
 
-	@Override
-	public List<String> getDisplay(Map<String, String[]> activated) {
-		List<String> display = Lists.newLinkedList();
+  @Override
+  public List<String> getDisplay(Map<String, String[]> activated) {
+    List<String> display = Lists.newLinkedList();
 
-		for (Entry<String, String[]> entry : activated.entrySet()) {
+    for (Entry<String, String[]> entry : activated.entrySet()) {
 
-			for (ValueSetting setting : defaultSettings.keySet()) {
+      for (ValueSetting setting : defaultSettings.keySet()) {
 
-				if (entry.getKey().equals(setting.getKey())) {
+        if (entry.getKey().equals(setting.getKey())) {
 
-					ItemBuilder builder = setting.getSettingsItem(entry.getValue()[0]);
-					if (builder != null) {
-						display.add("§7" + getKeyTranslation(entry.getKey()) + " " + builder.getName());
+          ItemBuilder builder = setting.getSettingsItem(entry.getValue()[0]);
+          if (builder != null) {
+            display.add("§7" + getKeyTranslation(entry.getKey()) + " " + builder.getName());
 
-					}
+          }
 
-				}
+        }
 
-			}
+      }
 
-		}
+    }
 
-		return display;
-	}
+    return display;
+  }
 
-	public String getKeyTranslation(String key) {
-		String messageName = "custom-subsetting-" + key;
-		return MessageManager.hasMessageInCache(messageName)
-				? Message.forName(messageName).asString() : StringUtils.getEnumName(key);
-	}
+  public String getKeyTranslation(String key) {
+    String messageName = "custom-subsetting-" + key;
+    return MessageManager.hasMessageInCache(messageName)
+      ? Message.forName(messageName).asString() : StringUtils.getEnumName(key);
+  }
 
-	public ValueSubSettingsBuilder addBooleanSetting(String key, ItemBuilder displayItem,
-													 boolean defaultValue) {
-		defaultSettings.put(new BooleanSetting(key, displayItem),
-				defaultValue ? "enabled" : "disabled");
-		return this;
-	}
+  public ValueSubSettingsBuilder addBooleanSetting(String key, ItemBuilder displayItem,
+                                                   boolean defaultValue) {
+    defaultSettings.put(new BooleanSetting(key, displayItem),
+      defaultValue ? "enabled" : "disabled");
+    return this;
+  }
 
-	public ValueSubSettingsBuilder addModifierSetting(String key, ItemBuilder displayItem,
-													  int defaultValue, int min, int max) {
-		defaultSettings.put(new ModifierSetting(key, min, max, displayItem),
-				String.valueOf(defaultValue));
-		return this;
-	}
+  public ValueSubSettingsBuilder addModifierSetting(String key, ItemBuilder displayItem,
+                                                    int defaultValue, int min, int max) {
+    defaultSettings.put(new ModifierSetting(key, min, max, displayItem),
+      String.valueOf(defaultValue));
+    return this;
+  }
 
-	public ValueSubSettingsBuilder addModifierSetting(String key, ItemBuilder displayItem,
-													  int defaultValue, int min, int max, Function<Integer, String> prefixGetter, Function<Integer, String> suffixGetter) {
-		defaultSettings.put(new ModifierSetting(key, min, max, displayItem, prefixGetter, suffixGetter),
-				String.valueOf(defaultValue));
-		return this;
-	}
+  public ValueSubSettingsBuilder addModifierSetting(String key, ItemBuilder displayItem,
+                                                    int defaultValue, int min, int max, Function<Integer, String> prefixGetter, Function<Integer, String> suffixGetter) {
+    defaultSettings.put(new ModifierSetting(key, min, max, displayItem, prefixGetter, suffixGetter),
+      String.valueOf(defaultValue));
+    return this;
+  }
 
-	public ValueSubSettingsBuilder addModifierSetting(String key, ItemBuilder displayItem,
-													  int defaultValue, int min, int max, Function<Integer, ItemBuilder> settingsItemGetter) {
-		defaultSettings.put(new ModifierSetting(key, min, max, displayItem, settingsItemGetter),
-				String.valueOf(defaultValue));
-		return this;
-	}
+  public ValueSubSettingsBuilder addModifierSetting(String key, ItemBuilder displayItem,
+                                                    int defaultValue, int min, int max, Function<Integer, ItemBuilder> settingsItemGetter) {
+    defaultSettings.put(new ModifierSetting(key, min, max, displayItem, settingsItemGetter),
+      String.valueOf(defaultValue));
+    return this;
+  }
 
 
-	public ValueSubSettingsBuilder fill(Consumer<ValueSubSettingsBuilder> actions) {
-		actions.accept(this);
-		return this;
-	}
+  public ValueSubSettingsBuilder fill(Consumer<ValueSubSettingsBuilder> actions) {
+    actions.accept(this);
+    return this;
+  }
 
-	public boolean hasSettings() {
-		return !defaultSettings.isEmpty();
-	}
+  public boolean hasSettings() {
+    return !defaultSettings.isEmpty();
+  }
 
 }

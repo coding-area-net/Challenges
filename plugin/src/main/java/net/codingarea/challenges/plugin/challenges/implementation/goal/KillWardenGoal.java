@@ -18,21 +18,21 @@ import javax.annotation.Nonnull;
 @RequireVersion(MinecraftVersion.V1_19)
 public class KillWardenGoal extends KillEntityGoal {
 
-	public KillWardenGoal() {
-		super(EntityType.WARDEN);
-		setCategory(SettingCategory.KILL_ENTITY);
-	}
+  public KillWardenGoal() {
+    super(EntityType.WARDEN);
+    setCategory(SettingCategory.KILL_ENTITY);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.ECHO_SHARD, Message.forName("item-warden-goal"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.ECHO_SHARD, Message.forName("item-warden-goal"));
+  }
 
-	@Nonnull
-	@Override
-	public SoundSample getStartSound() {
-		return new SoundSample().addSound(Sound.ENTITY_WARDEN_EMERGE, 0.2f);
-	}
+  @Nonnull
+  @Override
+  public SoundSample getStartSound() {
+    return new SoundSample().addSound(Sound.ENTITY_WARDEN_EMERGE, 0.2f);
+  }
 
 }

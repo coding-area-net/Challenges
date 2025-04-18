@@ -14,27 +14,27 @@ import java.util.Map;
 
 public class WinChallengeAction extends PlayerTargetAction {
 
-	private final List<Player> winner = Lists.newLinkedList();
+  private final List<Player> winner = Lists.newLinkedList();
 
-	public WinChallengeAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
-	}
+  public WinChallengeAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.GOLDEN_HELMET;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.GOLDEN_HELMET;
+  }
 
-	@Override
-	public void execute(ChallengeExecutionData executionData, Map<String, String[]> subActions) {
-		super.execute(executionData, subActions);
-		ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, () -> winner);
-		winner.clear();
-	}
+  @Override
+  public void execute(ChallengeExecutionData executionData, Map<String, String[]> subActions) {
+    super.execute(executionData, subActions);
+    ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, () -> winner);
+    winner.clear();
+  }
 
-	@Override
-	public void executeForPlayer(Player player, Map<String, String[]> subActions) {
-		winner.add(player);
-	}
+  @Override
+  public void executeForPlayer(Player player, Map<String, String[]> subActions) {
+    winner.add(player);
+  }
 
 }

@@ -11,26 +11,26 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public abstract class MenuGoal extends MenuSetting implements IGoal {
-	public MenuGoal(@NotNull MenuType menu, @NotNull Message title) {
-		super(menu, title);
-	}
+  public MenuGoal(@NotNull MenuType menu, @NotNull Message title) {
+    super(menu, title);
+  }
 
-	@Override
-	public final void setEnabled(boolean enabled) {
-		if (isEnabled() == enabled) return;
-		GoalHelper.handleSetEnabled(this, enabled);
-		super.setEnabled(enabled);
-	}
+  @Override
+  public final void setEnabled(boolean enabled) {
+    if (isEnabled() == enabled) return;
+    GoalHelper.handleSetEnabled(this, enabled);
+    super.setEnabled(enabled);
+  }
 
-	@Nonnull
-	@Override
-	public SoundSample getStartSound() {
-		return SoundSample.DRAGON_BREATH;
-	}
+  @Nonnull
+  @Override
+  public SoundSample getStartSound() {
+    return SoundSample.DRAGON_BREATH;
+  }
 
-	@Nullable
-	@Override
-	public SoundSample getWinSound() {
-		return SoundSample.WIN;
-	}
+  @Nullable
+  @Override
+  public SoundSample getWinSound() {
+    return SoundSample.WIN;
+  }
 }

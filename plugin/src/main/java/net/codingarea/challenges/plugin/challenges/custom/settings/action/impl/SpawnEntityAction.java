@@ -12,35 +12,35 @@ import java.util.Map;
 
 public class SpawnEntityAction extends EntityTargetAction {
 
-	public SpawnEntityAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false).addChild(SubSettingsHelper.createEntityTypeSettingsBuilder(false, false)));
-	}
+  public SpawnEntityAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false).addChild(SubSettingsHelper.createEntityTypeSettingsBuilder(false, false)));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.ZOMBIE_SPAWN_EGG;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.ZOMBIE_SPAWN_EGG;
+  }
 
-	@Override
-	public void executeFor(Entity entity, Map<String, String[]> subActions) {
-		if (entity.getLocation().getWorld() == null) return;
+  @Override
+  public void executeFor(Entity entity, Map<String, String[]> subActions) {
+    if (entity.getLocation().getWorld() == null) return;
 
-		String[] args = subActions.get(SubSettingsHelper.ENTITY_TYPE);
+    String[] args = subActions.get(SubSettingsHelper.ENTITY_TYPE);
 
-		for (String arg : args) {
+    for (String arg : args) {
 
-			try {
-				EntityType type = EntityType.valueOf(arg);
-				World world = entity.getLocation().getWorld();
-				world.spawnEntity(entity.getLocation(), type);
+      try {
+        EntityType type = EntityType.valueOf(arg);
+        World world = entity.getLocation().getWorld();
+        world.spawnEntity(entity.getLocation(), type);
 
-			} catch (Exception exception) {
-				Logger.error("", exception);
-			}
+      } catch (Exception exception) {
+        Logger.error("", exception);
+      }
 
-		}
+    }
 
 
-	}
+  }
 
 }

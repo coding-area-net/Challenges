@@ -12,50 +12,50 @@ import java.util.stream.Collectors;
 
 public class BiomeTarget extends ForceTarget<Biome> {
 
-    public BiomeTarget(Biome target) {
-        super(target);
-    }
+  public BiomeTarget(Biome target) {
+    super(target);
+  }
 
-    @Override
-    public boolean check(Player player) {
-        return player.getLocation().getBlock().getBiome() == target;
-    }
+  @Override
+  public boolean check(Player player) {
+    return player.getLocation().getBlock().getBiome() == target;
+  }
 
-    public static List<Biome> getPossibleBiomes() {
-        return Arrays.stream(Biome.values())
-                .filter(biome -> !biome.name().contains("VOID"))
-                .filter(biome -> !biome.name().equals("CUSTOM"))
-                .collect(Collectors.toList());
-    }
+  public static List<Biome> getPossibleBiomes() {
+    return Arrays.stream(Biome.values())
+      .filter(biome -> !biome.name().contains("VOID"))
+      .filter(biome -> !biome.name().equals("CUSTOM"))
+      .collect(Collectors.toList());
+  }
 
-    @Override
-    public Object toMessage() {
-        return target;
-    }
+  @Override
+  public Object toMessage() {
+    return target;
+  }
 
-    @Override
-    public String getName() {
-        return BukkitStringUtils.getBiomeName(target).toPlainText();
-    }
+  @Override
+  public String getName() {
+    return BukkitStringUtils.getBiomeName(target).toPlainText();
+  }
 
-    @Override
-    public Message getNewTargetMessage() {
-        return Message.forName("extreme-force-battle-new-biome");
-    }
+  @Override
+  public Message getNewTargetMessage() {
+    return Message.forName("extreme-force-battle-new-biome");
+  }
 
-    @Override
-    public Message getCompletedMessage() {
-        return Message.forName("extreme-force-battle-found-biome");
-    }
+  @Override
+  public Message getCompletedMessage() {
+    return Message.forName("extreme-force-battle-found-biome");
+  }
 
-    @Override
-    public ExtremeForceBattleGoal.TargetType getType() {
-        return ExtremeForceBattleGoal.TargetType.BIOME;
-    }
+  @Override
+  public ExtremeForceBattleGoal.TargetType getType() {
+    return ExtremeForceBattleGoal.TargetType.BIOME;
+  }
 
-    @Override
-    public Message getScoreboardDisplayMessage() {
-        return Message.forName("force-battle-biome-target-display");
-    }
+  @Override
+  public Message getScoreboardDisplayMessage() {
+    return Message.forName("force-battle-biome-target-display");
+  }
 
 }

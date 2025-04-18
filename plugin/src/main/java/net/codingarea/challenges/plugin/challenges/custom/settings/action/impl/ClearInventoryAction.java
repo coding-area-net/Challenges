@@ -9,18 +9,18 @@ import java.util.Map;
 
 public class ClearInventoryAction extends PlayerTargetAction {
 
-	public ClearInventoryAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
-	}
+  public ClearInventoryAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.TRAPPED_CHEST;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.TRAPPED_CHEST;
+  }
 
-	@Override
-	public void executeForPlayer(Player player, Map<String, String[]> subActions) {
-		player.getInventory().clear();
-	}
+  @Override
+  public void executeForPlayer(Player player, Map<String, String[]> subActions) {
+    player.getInventory().clear();
+  }
 
 }

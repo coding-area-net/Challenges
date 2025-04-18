@@ -11,15 +11,15 @@ import org.jetbrains.annotations.NotNull;
 @Since("2.1.2")
 public class CollectIceBlocksGoal extends ItemCollectionGoal {
 
-	public CollectIceBlocksGoal() {
-		super(Material.ICE, Material.BLUE_ICE, Material.PACKED_ICE, Material.SNOW_BLOCK);
-		setCategory(SettingCategory.FASTEST_TIME);
-	}
+  public CollectIceBlocksGoal() {
+    super(Material.ICE, Material.BLUE_ICE, Material.PACKED_ICE, Material.SNOW_BLOCK);
+    setCategory(SettingCategory.FASTEST_TIME);
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.PACKED_ICE, Message.forName("item-collect-ice-goal"));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.PACKED_ICE, Message.forName("item-collect-ice-goal"));
+  }
 
 }

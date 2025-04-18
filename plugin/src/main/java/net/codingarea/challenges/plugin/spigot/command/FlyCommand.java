@@ -15,47 +15,47 @@ import java.util.List;
 
 public class FlyCommand implements SenderCommand, Completer {
 
-	@Override
-	public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) throws Exception {
+  @Override
+  public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) throws Exception {
 
-		List<Player> targets = new ArrayList<>();
+    List<Player> targets = new ArrayList<>();
 
-		if (args.length > 0) {
-			targets.addAll(CommandHelper.getPlayers(sender, args[0]));
+    if (args.length > 0) {
+      targets.addAll(CommandHelper.getPlayers(sender, args[0]));
 
-		} else if (sender instanceof Player) {
-			targets.add((Player) sender);
-		}
+    } else if (sender instanceof Player) {
+      targets.add((Player) sender);
+    }
 
-		if (targets.isEmpty()) {
-			Message.forName("command-no-target").send(sender, Prefix.CHALLENGES);
-			return;
-		}
+    if (targets.isEmpty()) {
+      Message.forName("command-no-target").send(sender, Prefix.CHALLENGES);
+      return;
+    }
 
-		boolean otherPlayers = false;
-		for (Player target : targets) {
+    boolean otherPlayers = false;
+    for (Player target : targets) {
 
-			if (target.getAllowFlight()) {
-				Message.forName("command-fly-disabled").send(target, Prefix.CHALLENGES);
-			} else {
-				Message.forName("command-fly-enabled").send(target, Prefix.CHALLENGES);
-			}
-			target.setAllowFlight(!target.getAllowFlight());
+      if (target.getAllowFlight()) {
+        Message.forName("command-fly-disabled").send(target, Prefix.CHALLENGES);
+      } else {
+        Message.forName("command-fly-enabled").send(target, Prefix.CHALLENGES);
+      }
+      target.setAllowFlight(!target.getAllowFlight());
 
-			if (target != sender)
-				otherPlayers = true;
+      if (target != sender)
+        otherPlayers = true;
 
-		}
+    }
 
-		if (otherPlayers)
-			Message.forName("command-fly-toggled-others").send(sender, Prefix.CHALLENGES, targets.size());
+    if (otherPlayers)
+      Message.forName("command-fly-toggled-others").send(sender, Prefix.CHALLENGES, targets.size());
 
-	}
+  }
 
-	@Nullable
-	@Override
-	public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
-		return CommandHelper.getCompletions(sender);
-	}
+  @Nullable
+  @Override
+  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
+    return CommandHelper.getCompletions(sender);
+  }
 
 }

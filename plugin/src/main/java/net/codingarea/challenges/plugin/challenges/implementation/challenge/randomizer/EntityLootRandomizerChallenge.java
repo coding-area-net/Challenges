@@ -33,151 +33,151 @@ import java.util.stream.Collectors;
 @Since("2.2.0")
 public class EntityLootRandomizerChallenge extends RandomizerSetting implements SenderCommand, Completer {
 
-	protected Map<EntityType, LootTable> randomization;
+  protected Map<EntityType, LootTable> randomization;
 
-	public EntityLootRandomizerChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.RANDOMIZER);
-	}
+  public EntityLootRandomizerChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.RANDOMIZER);
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.FURNACE_MINECART, Message.forName("item-entity-loot-randomizer-challenge"));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.FURNACE_MINECART, Message.forName("item-entity-loot-randomizer-challenge"));
+  }
 
-	@Override
-	protected void reloadRandomization() {
-		randomization = new HashMap<>();
+  @Override
+  protected void reloadRandomization() {
+    randomization = new HashMap<>();
 
-		List<EntityType> from = new ArrayList<>(Arrays.asList(EntityType.values()));
-		from.removeIf(entityType -> !getLootableEntities().contains(entityType));
-		random.shuffle(from);
-		from.removeIf(Objects::isNull);
+    List<EntityType> from = new ArrayList<>(Arrays.asList(EntityType.values()));
+    from.removeIf(entityType -> !getLootableEntities().contains(entityType));
+    random.shuffle(from);
+    from.removeIf(Objects::isNull);
 
-		List<EntityType> entityTypesToRemove = new ArrayList<>();
-		List<LootTable> to = from.stream().map(entityType -> {
-			if (entityType == null) return null;
-			try {
-				return LootTables.valueOf(entityType.name()).getLootTable();
-			} catch (IllegalArgumentException exception) {
-				entityTypesToRemove.add(entityType);
-				return null;
-			}
-		}).filter(Objects::nonNull).collect(Collectors.toList());
-		from.removeAll(entityTypesToRemove);
-		random.shuffle(to);
+    List<EntityType> entityTypesToRemove = new ArrayList<>();
+    List<LootTable> to = from.stream().map(entityType -> {
+      if (entityType == null) return null;
+      try {
+        return LootTables.valueOf(entityType.name()).getLootTable();
+      } catch (IllegalArgumentException exception) {
+        entityTypesToRemove.add(entityType);
+        return null;
+      }
+    }).filter(Objects::nonNull).collect(Collectors.toList());
+    from.removeAll(entityTypesToRemove);
+    random.shuffle(to);
 
-		while (!from.isEmpty()) {
-			EntityType entityType = from.remove(0);
-			LootTable lootTable = to.remove(0);
+    while (!from.isEmpty()) {
+      EntityType entityType = from.remove(0);
+      LootTable lootTable = to.remove(0);
 
-			randomization.put(entityType, lootTable);
-		}
-	}
+      randomization.put(entityType, lootTable);
+    }
+  }
 
-	public List<EntityType> getLootableEntities() {
-		return new ListBuilder<>(EntityType.values())
-				.removeIf(type -> !type.isSpawnable())
-				.removeIf(type -> !type.isAlive())
-				.remove(EntityType.ENDER_DRAGON)
-				.remove(EntityType.GIANT)
-				.remove(EntityType.ILLUSIONER)
-				.remove(EntityType.ZOMBIE_HORSE)
-				.build();
-	}
+  public List<EntityType> getLootableEntities() {
+    return new ListBuilder<>(EntityType.values())
+      .removeIf(type -> !type.isSpawnable())
+      .removeIf(type -> !type.isAlive())
+      .remove(EntityType.ENDER_DRAGON)
+      .remove(EntityType.GIANT)
+      .remove(EntityType.ILLUSIONER)
+      .remove(EntityType.ZOMBIE_HORSE)
+      .build();
+  }
 
-	@Override
-	protected void onDisable() {
-		randomization.clear();
-	}
+  @Override
+  protected void onDisable() {
+    randomization.clear();
+  }
 
-	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-	public void onEntityDeath(EntityDeathEvent event) {
-		if (!isEnabled()) return;
-		LivingEntity entity = event.getEntity();
-		if (!getLootableEntities().contains(entity.getType())) return;
-		event.getDrops().clear();
-		if (!randomization.containsKey(entity.getType())) return;
+  @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+  public void onEntityDeath(EntityDeathEvent event) {
+    if (!isEnabled()) return;
+    LivingEntity entity = event.getEntity();
+    if (!getLootableEntities().contains(entity.getType())) return;
+    event.getDrops().clear();
+    if (!randomization.containsKey(entity.getType())) return;
 
-		LootTable lootTable = randomization.get(entity.getType());
-		LootContext.Builder builder = new LootContext.Builder(entity.getLocation())
-				.lootedEntity(entity);
+    LootTable lootTable = randomization.get(entity.getType());
+    LootContext.Builder builder = new LootContext.Builder(entity.getLocation())
+      .lootedEntity(entity);
 
-		if (entity.getKiller() == null) {
-			builder.lootingModifier(0);
-		} else {
-			builder.killer(entity.getKiller());
-		}
+    if (entity.getKiller() == null) {
+      builder.lootingModifier(0);
+    } else {
+      builder.killer(entity.getKiller());
+    }
 
-		Collection<ItemStack> newDrops = lootTable.populateLoot(random.asRandom(), builder.build());
-		event.getDrops().addAll(newDrops);
-	}
+    Collection<ItemStack> newDrops = lootTable.populateLoot(random.asRandom(), builder.build());
+    event.getDrops().addAll(newDrops);
+  }
 
-	public LootTable getLootTableForEntity(EntityType entityType) {
-		return randomization.get(entityType);
-	}
+  public LootTable getLootTableForEntity(EntityType entityType) {
+    return randomization.get(entityType);
+  }
 
-	public Optional<EntityType> getEntityForLootTable(LootTable lootTable) {
-		return randomization.entrySet().stream()
-				.filter(entry -> entry.getValue().equals(lootTable))
-				.map(Map.Entry::getKey)
-				.findFirst();
-	}
+  public Optional<EntityType> getEntityForLootTable(LootTable lootTable) {
+    return randomization.entrySet().stream()
+      .filter(entry -> entry.getValue().equals(lootTable))
+      .map(Map.Entry::getKey)
+      .findFirst();
+  }
 
-	@Override
-	public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) throws Exception {
+  @Override
+  public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) throws Exception {
 
-		if (!isEnabled()) {
-			Message.forName("command-searchloot-disabled").send(sender, Prefix.CHALLENGES);
-			return;
-		}
+    if (!isEnabled()) {
+      Message.forName("command-searchloot-disabled").send(sender, Prefix.CHALLENGES);
+      return;
+    }
 
-		if (args.length == 0) {
-			Message.forName("syntax").send(sender, Prefix.CHALLENGES, "searchloot <entity>");
-			return;
-		}
+    if (args.length == 0) {
+      Message.forName("syntax").send(sender, Prefix.CHALLENGES, "searchloot <entity>");
+      return;
+    }
 
-		String input = String.join("_", args).toUpperCase();
-		EntityType entityType = Utils.getEntityType(input);
+    String input = String.join("_", args).toUpperCase();
+    EntityType entityType = Utils.getEntityType(input);
 
-		if (entityType == null) {
-			Message.forName("no-such-entity").send(sender, Prefix.CHALLENGES);
-			return;
-		}
-		if (!entityType.isAlive()) {
-			Message.forName("not-alive").send(sender, Prefix.CHALLENGES, entityType);
-			return;
-		}
+    if (entityType == null) {
+      Message.forName("no-such-entity").send(sender, Prefix.CHALLENGES);
+      return;
+    }
+    if (!entityType.isAlive()) {
+      Message.forName("not-alive").send(sender, Prefix.CHALLENGES, entityType);
+      return;
+    }
 
-		LootTable givenLootTable;
-		try {
-			givenLootTable = LootTables.valueOf(entityType.name()).getLootTable();
-		} catch (IllegalArgumentException exception) {
-			Message.forName("no-loot").send(sender, Prefix.CHALLENGES, entityType);
-			return;
-		}
+    LootTable givenLootTable;
+    try {
+      givenLootTable = LootTables.valueOf(entityType.name()).getLootTable();
+    } catch (IllegalArgumentException exception) {
+      Message.forName("no-loot").send(sender, Prefix.CHALLENGES, entityType);
+      return;
+    }
 
-		Optional<EntityType> optionalEntity = getEntityForLootTable(givenLootTable);
-		LootTable droppedLootTable = getLootTableForEntity(entityType);
+    Optional<EntityType> optionalEntity = getEntityForLootTable(givenLootTable);
+    LootTable droppedLootTable = getLootTableForEntity(entityType);
 
-		if (optionalEntity.isPresent()) {
-			Message.forName("command-searchloot-result").send(sender, Prefix.CHALLENGES, entityType, droppedLootTable, optionalEntity.get());
-		} else {
-			Message.forName("command-searchloot-nothing").send(sender, Prefix.CHALLENGES, entityType);
-		}
+    if (optionalEntity.isPresent()) {
+      Message.forName("command-searchloot-result").send(sender, Prefix.CHALLENGES, entityType, droppedLootTable, optionalEntity.get());
+    } else {
+      Message.forName("command-searchloot-nothing").send(sender, Prefix.CHALLENGES, entityType);
+    }
 
-	}
+  }
 
-	@Nullable
-	@Override
-	public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
-		EntityLootRandomizerChallenge instance = AbstractChallenge.getFirstInstance(EntityLootRandomizerChallenge.class);
-		return args.length != 1 ? null :
-				instance.getLootableEntities().stream()
-						.map(material -> material.name().toLowerCase())
-						.collect(Collectors.toList()
-						);
-	}
+  @Nullable
+  @Override
+  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
+    EntityLootRandomizerChallenge instance = AbstractChallenge.getFirstInstance(EntityLootRandomizerChallenge.class);
+    return args.length != 1 ? null :
+      instance.getLootableEntities().stream()
+        .map(material -> material.name().toLowerCase())
+        .collect(Collectors.toList()
+        );
+  }
 
 }

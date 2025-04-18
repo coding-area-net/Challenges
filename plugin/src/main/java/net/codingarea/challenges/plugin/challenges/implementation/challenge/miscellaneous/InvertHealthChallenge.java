@@ -20,50 +20,50 @@ import javax.annotation.Nullable;
 @ExcludeFromRandomChallenges
 public class InvertHealthChallenge extends TimedChallenge {
 
-	public InvertHealthChallenge() {
-		super(MenuType.CHALLENGES, 1, 10, 5, false);
-	}
+  public InvertHealthChallenge() {
+    super(MenuType.CHALLENGES, 1, 10, 5, false);
+  }
 
-	public static void invertHealth(Player player) {
-		double health = player.getMaxHealth() - player.getHealth();
-		if (health <= 0) {
-			ChallengeHelper.kill(player);
-			return;
-		}
-		player.setHealth(health);
-	}
+  public static void invertHealth(Player player) {
+    double health = player.getMaxHealth() - player.getHealth();
+    if (health <= 0) {
+      ChallengeHelper.kill(player);
+      return;
+    }
+    player.setHealth(health);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.POPPY, Message.forName("item-invert-health-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.POPPY, Message.forName("item-invert-health-challenge"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-time-seconds-range-description").asArray(getValue() * 60 - 20, getValue() * 60 + 20);
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-time-seconds-range-description").asArray(getValue() * 60 - 20, getValue() * 60 + 20);
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 - 20, getValue() * 60 + 20);
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 - 20, getValue() * 60 + 20);
+  }
 
-	@Override
-	protected int getSecondsUntilNextActivation() {
-		return globalRandom.around(getValue() * 60, 20);
-	}
+  @Override
+  protected int getSecondsUntilNextActivation() {
+    return globalRandom.around(getValue() * 60, 20);
+  }
 
-	@Override
-	protected void onTimeActivation() {
-		SoundSample.PLOP.broadcast();
-		Message.forName("health-inverted").broadcast(Prefix.CHALLENGES);
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (ignorePlayer(player)) continue;
-			invertHealth(player);
-		}
-		restartTimer();
-	}
+  @Override
+  protected void onTimeActivation() {
+    SoundSample.PLOP.broadcast();
+    Message.forName("health-inverted").broadcast(Prefix.CHALLENGES);
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      if (ignorePlayer(player)) continue;
+      invertHealth(player);
+    }
+    restartTimer();
+  }
 
 }

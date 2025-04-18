@@ -18,45 +18,45 @@ import javax.annotation.Nullable;
 @Since("2.0")
 public class RandomItemRemovingChallenge extends TimedChallenge {
 
-	public RandomItemRemovingChallenge() {
-		super(MenuType.CHALLENGES, 1, 30, 30);
-		setCategory(SettingCategory.RANDOMIZER);
-	}
+  public RandomItemRemovingChallenge() {
+    super(MenuType.CHALLENGES, 1, 30, 30);
+    setCategory(SettingCategory.RANDOMIZER);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.DROPPER, Message.forName("item-random-removing-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.DROPPER, Message.forName("item-random-removing-challenge"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-time-seconds-description").asArray(getValue() * 10);
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-time-seconds-description").asArray(getValue() * 10);
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeSecondsValueChangeTitle(this, getValue() * 10);
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeSecondsValueChangeTitle(this, getValue() * 10);
+  }
 
-	@Override
-	protected int getSecondsUntilNextActivation() {
-		return getValue();
-	}
+  @Override
+  protected int getSecondsUntilNextActivation() {
+    return getValue();
+  }
 
-	@Override
-	protected void onTimeActivation() {
-		restartTimer();
+  @Override
+  protected void onTimeActivation() {
+    restartTimer();
 
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (ignorePlayer(player)) continue;
-			if (player.getInventory().getContents().length == 0) continue;
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      if (ignorePlayer(player)) continue;
+      if (player.getInventory().getContents().length == 0) continue;
 
-			Bukkit.getScheduler().runTask(plugin, () -> {
-				InventoryUtils.removeRandomItem(player.getInventory());
-			});
-		}
-	}
+      Bukkit.getScheduler().runTask(plugin, () -> {
+        InventoryUtils.removeRandomItem(player.getInventory());
+      });
+    }
+  }
 
 }

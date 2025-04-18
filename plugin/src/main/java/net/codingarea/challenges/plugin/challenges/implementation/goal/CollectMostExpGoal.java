@@ -16,27 +16,27 @@ import javax.annotation.Nonnull;
 @Since("2.0")
 public class CollectMostExpGoal extends PointsGoal {
 
-	public CollectMostExpGoal() {
-		super();
-		setCategory(SettingCategory.SCORE_POINTS);
-	}
+  public CollectMostExpGoal() {
+    super();
+    setCategory(SettingCategory.SCORE_POINTS);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.EXPERIENCE_BOTTLE, Message.forName("item-most-xp-goal"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.EXPERIENCE_BOTTLE, Message.forName("item-most-xp-goal"));
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onExpChange(@Nonnull PlayerExpChangeEvent event) {
-		if (!shouldExecuteEffect()) return;
-		collect(event.getPlayer(), event.getAmount());
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onExpChange(@Nonnull PlayerExpChangeEvent event) {
+    if (!shouldExecuteEffect()) return;
+    collect(event.getPlayer(), event.getAmount());
+  }
 
-	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-	public void onPlayerDeath(@Nonnull PlayerDeathEvent event) {
-		if (!shouldExecuteEffect()) return;
-		event.setKeepLevel(true);
-	}
+  @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+  public void onPlayerDeath(@Nonnull PlayerDeathEvent event) {
+    if (!shouldExecuteEffect()) return;
+    event.setKeepLevel(true);
+  }
 
 }

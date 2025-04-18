@@ -9,32 +9,32 @@ import java.io.File;
 
 public final class PrefixLoader extends ContentLoader {
 
-	@Override
-	protected void load() {
-		try {
+  @Override
+  protected void load() {
+    try {
 
-			File file = getMessageFile("prefix", "properties");
-			FileUtils.createFilesIfNecessary(file);
+      File file = getMessageFile("prefix", "properties");
+      FileUtils.createFilesIfNecessary(file);
 
-			FileDocument document = FileDocument.readPropertiesFile(file);
-			boolean changed = false;
+      FileDocument document = FileDocument.readPropertiesFile(file);
+      boolean changed = false;
 
-			for (Prefix prefix : Prefix.values()) {
-				if (!document.contains(prefix.getName())) {
-					document.set(prefix.getName(), prefix.toString());
-					changed = true;
-					continue;
-				}
+      for (Prefix prefix : Prefix.values()) {
+        if (!document.contains(prefix.getName())) {
+          document.set(prefix.getName(), prefix.toString());
+          changed = true;
+          continue;
+        }
 
-				prefix.setValue(document.getString(prefix.getName()));
-			}
+        prefix.setValue(document.getString(prefix.getName()));
+      }
 
-			if (changed) document.save();
-			Logger.info("Successfully loaded {} prefixes from config file", Prefix.values().size());
+      if (changed) document.save();
+      Logger.info("Successfully loaded {} prefixes from config file", Prefix.values().size());
 
-		} catch (Exception ex) {
-			Logger.error("Could not load prefixes", ex);
-		}
-	}
+    } catch (Exception ex) {
+      Logger.error("Could not load prefixes", ex);
+    }
+  }
 
 }

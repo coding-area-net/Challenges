@@ -12,21 +12,21 @@ import javax.annotation.Nonnull;
 
 public interface PlayerCommand extends CommandExecutor {
 
-	@Override
-	default boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
-		if (sender instanceof Player) {
-			try {
-				onCommand((Player) sender, args);
-			} catch (Exception ex) {
-				sender.sendMessage(Prefix.CHALLENGES + "§cSomething went wrong while executing the command");
-				Logger.error("Something went wrong while processing the command '{}'", label, ex);
-			}
-		} else {
-			Message.forName("player-command").send(sender, Prefix.CHALLENGES);
-		}
-		return true;
-	}
+  @Override
+  default boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
+    if (sender instanceof Player) {
+      try {
+        onCommand((Player) sender, args);
+      } catch (Exception ex) {
+        sender.sendMessage(Prefix.CHALLENGES + "§cSomething went wrong while executing the command");
+        Logger.error("Something went wrong while processing the command '{}'", label, ex);
+      }
+    } else {
+      Message.forName("player-command").send(sender, Prefix.CHALLENGES);
+    }
+    return true;
+  }
 
-	void onCommand(@Nonnull Player player, @Nonnull String[] args) throws Exception;
+  void onCommand(@Nonnull Player player, @Nonnull String[] args) throws Exception;
 
 }

@@ -15,21 +15,21 @@ import javax.annotation.Nonnull;
 @Since("2.0")
 public class KillElderGuardianGoal extends KillEntityGoal {
 
-	public KillElderGuardianGoal() {
-		super(EntityType.ELDER_GUARDIAN);
-		setCategory(SettingCategory.KILL_ENTITY);
-	}
+  public KillElderGuardianGoal() {
+    super(EntityType.ELDER_GUARDIAN);
+    setCategory(SettingCategory.KILL_ENTITY);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.PRISMARINE_SHARD, Message.forName("item-elder-guardian-goal"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.PRISMARINE_SHARD, Message.forName("item-elder-guardian-goal"));
+  }
 
-	@Nonnull
-	@Override
-	public SoundSample getStartSound() {
-		return new SoundSample().addSound(Sound.ENTITY_ELDER_GUARDIAN_CURSE, 1);
-	}
+  @Nonnull
+  @Override
+  public SoundSample getStartSound() {
+    return new SoundSample().addSound(Sound.ENTITY_ELDER_GUARDIAN_CURSE, 1);
+  }
 
 }

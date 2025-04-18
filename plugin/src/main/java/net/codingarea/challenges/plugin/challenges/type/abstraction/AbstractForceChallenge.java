@@ -14,87 +14,87 @@ import java.util.function.BiConsumer;
 @Setter
 public abstract class AbstractForceChallenge extends TimedChallenge {
 
-	public static final int WAITING = 0,
-			COUNTDOWN = 1;
+  public static final int WAITING = 0,
+    COUNTDOWN = 1;
 
-	private int state = WAITING;
+  private int state = WAITING;
 
-	public AbstractForceChallenge(@Nonnull MenuType menu) {
-		super(menu, false);
-	}
+  public AbstractForceChallenge(@Nonnull MenuType menu) {
+    super(menu, false);
+  }
 
-	public AbstractForceChallenge(@Nonnull MenuType menu, int max) {
-		super(menu, max, false);
-	}
+  public AbstractForceChallenge(@Nonnull MenuType menu, int max) {
+    super(menu, max, false);
+  }
 
-	public AbstractForceChallenge(@Nonnull MenuType menu, int min, int max) {
-		super(menu, min, max, false);
-	}
+  public AbstractForceChallenge(@Nonnull MenuType menu, int min, int max) {
+    super(menu, min, max, false);
+  }
 
-	public AbstractForceChallenge(@Nonnull MenuType menu, int min, int max, int defaultValue) {
-		super(menu, min, max, defaultValue, false);
-	}
+  public AbstractForceChallenge(@Nonnull MenuType menu, int min, int max, int defaultValue) {
+    super(menu, min, max, defaultValue, false);
+  }
 
-	@Override
-	protected void onTimeActivation() {
-		switch (state) {
-			case WAITING:
-				state = COUNTDOWN;
-				chooseForcing();
-				restartTimer(getForcingTime());
-				SoundSample.BASS_ON.broadcast();
-				bossbar.update();
-				break;
-			case COUNTDOWN:
-				state = WAITING;
-				restartTimer();
-				handleCountdownEnd();
-				bossbar.update();
-				break;
-		}
-	}
+  @Override
+  protected void onTimeActivation() {
+    switch (state) {
+      case WAITING:
+        state = COUNTDOWN;
+        chooseForcing();
+        restartTimer(getForcingTime());
+        SoundSample.BASS_ON.broadcast();
+        bossbar.update();
+        break;
+      case COUNTDOWN:
+        state = WAITING;
+        restartTimer();
+        handleCountdownEnd();
+        bossbar.update();
+        break;
+    }
+  }
 
-	protected final void endForcing() {
-		state = WAITING;
-		restartTimer();
-		bossbar.update();
-	}
+  protected final void endForcing() {
+    state = WAITING;
+    restartTimer();
+    bossbar.update();
+  }
 
-	protected abstract void handleCountdownEnd();
+  protected abstract void handleCountdownEnd();
 
-	@Override
-	protected void handleCountdown() {
-		bossbar.update();
-	}
+  @Override
+  protected void handleCountdown() {
+    bossbar.update();
+  }
 
-	@Override
-	protected void onEnable() {
-		bossbar.setContent(setupBossbar());
-		bossbar.show();
-	}
+  @Override
+  protected void onEnable() {
+    bossbar.setContent(setupBossbar());
+    bossbar.show();
+  }
 
-	@Override
-	protected void onDisable() {
-		bossbar.hide();
-	}
+  @Override
+  protected void onDisable() {
+    bossbar.hide();
+  }
 
-	@Override
-	public void loadGameState(@NotNull Document document) {
-		super.loadGameState(document);
-		if (document.isEmpty()) {
-			state = WAITING;
-		}
-	}
+  @Override
+  public void loadGameState(@NotNull Document document) {
+    super.loadGameState(document);
+    if (document.isEmpty()) {
+      state = WAITING;
+    }
+  }
 
-	protected abstract void chooseForcing();
+  protected abstract void chooseForcing();
 
-	protected abstract int getForcingTime();
+  protected abstract int getForcingTime();
 
-	@Nonnull
-	protected abstract BiConsumer<BossBarInstance, Player> setupBossbar();
+  @Nonnull
+  protected abstract BiConsumer<BossBarInstance, Player> setupBossbar();
 
-	public final int getState() {
-		return state;
-	}
+  public final int getState() {
+    return state;
+  }
 
 }

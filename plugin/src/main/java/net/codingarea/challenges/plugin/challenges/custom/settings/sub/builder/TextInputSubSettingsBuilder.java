@@ -19,73 +19,73 @@ import java.util.function.Predicate;
 
 public class TextInputSubSettingsBuilder extends SubSettingsBuilder {
 
-	private final Consumer<Player> onOpen;
-	private final Predicate<AsyncPlayerChatEvent> isValid;
+  private final Consumer<Player> onOpen;
+  private final Predicate<AsyncPlayerChatEvent> isValid;
 
-	public TextInputSubSettingsBuilder(String key) {
-		this(key, null);
-	}
+  public TextInputSubSettingsBuilder(String key) {
+    this(key, null);
+  }
 
-	public TextInputSubSettingsBuilder(String key, SubSettingsBuilder parent) {
-		this(key, parent, event -> {
-		}, event -> true);
-	}
+  public TextInputSubSettingsBuilder(String key, SubSettingsBuilder parent) {
+    this(key, parent, event -> {
+    }, event -> true);
+  }
 
-	public TextInputSubSettingsBuilder(String key,
-									   Consumer<Player> onOpen,
-									   Predicate<AsyncPlayerChatEvent> isValid) {
-		super(key);
-		this.onOpen = onOpen;
-		this.isValid = isValid;
-	}
+  public TextInputSubSettingsBuilder(String key,
+                                     Consumer<Player> onOpen,
+                                     Predicate<AsyncPlayerChatEvent> isValid) {
+    super(key);
+    this.onOpen = onOpen;
+    this.isValid = isValid;
+  }
 
-	public TextInputSubSettingsBuilder(String key,
-									   SubSettingsBuilder parent,
-									   Consumer<Player> onOpen,
-									   Predicate<AsyncPlayerChatEvent> isValid) {
-		super(key, parent);
-		this.onOpen = onOpen;
-		this.isValid = isValid;
-	}
+  public TextInputSubSettingsBuilder(String key,
+                                     SubSettingsBuilder parent,
+                                     Consumer<Player> onOpen,
+                                     Predicate<AsyncPlayerChatEvent> isValid) {
+    super(key, parent);
+    this.onOpen = onOpen;
+    this.isValid = isValid;
+  }
 
-	@Override
-	public boolean open(Player player, IParentCustomGenerator parentGenerator, String title) {
-		player.closeInventory();
-		onOpen.accept(player);
+  @Override
+  public boolean open(Player player, IParentCustomGenerator parentGenerator, String title) {
+    player.closeInventory();
+    onOpen.accept(player);
 
-		ChatInputListener.setInputAction(player, event -> {
-			if (!isValid.test(event)) {
-				Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
-					parentGenerator.decline(player);
-				});
-				return;
-			}
-			Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
-				parentGenerator.accept(player, null, MapUtils.createStringArrayMap(getKey(), event.getMessage()));
-			});
-		});
+    ChatInputListener.setInputAction(player, event -> {
+      if (!isValid.test(event)) {
+        Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
+          parentGenerator.decline(player);
+        });
+        return;
+      }
+      Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
+        parentGenerator.accept(player, null, MapUtils.createStringArrayMap(getKey(), event.getMessage()));
+      });
+    });
 
-		return true;
-	}
+    return true;
+  }
 
-	@Override
-	public List<String> getDisplay(Map<String, String[]> activated) {
-		List<String> display = Lists.newLinkedList();
+  @Override
+  public List<String> getDisplay(Map<String, String[]> activated) {
+    List<String> display = Lists.newLinkedList();
 
-		for (Entry<String, String[]> entry : activated.entrySet()) {
-			if (entry.getKey().equals(getKey())) {
-				for (String value : entry.getValue()) {
-					display.add("§7" + getKeyTranslation() + " " + DefaultItem.getItemPrefix() + value);
-				}
-			}
-		}
+    for (Entry<String, String[]> entry : activated.entrySet()) {
+      if (entry.getKey().equals(getKey())) {
+        for (String value : entry.getValue()) {
+          display.add("§7" + getKeyTranslation() + " " + DefaultItem.getItemPrefix() + value);
+        }
+      }
+    }
 
-		return display;
-	}
+    return display;
+  }
 
-	@Override
-	public boolean hasSettings() {
-		return true;
-	}
+  @Override
+  public boolean hasSettings() {
+    return true;
+  }
 
 }

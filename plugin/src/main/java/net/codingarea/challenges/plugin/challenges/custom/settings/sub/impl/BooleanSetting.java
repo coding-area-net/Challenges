@@ -8,19 +8,19 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 public class BooleanSetting extends ValueSetting {
 
 
-	public BooleanSetting(String key, ItemBuilder itemBuilder) {
-		super(key, itemBuilder);
-	}
+  public BooleanSetting(String key, ItemBuilder itemBuilder) {
+    super(key, itemBuilder);
+  }
 
-	@Override
-	public String onClick(MenuClickInfo info, String value,
-						  int slotIndex) {
-		return value.equals("enabled") ? "disabled" : "enabled";
-	}
+  @Override
+  public String onClick(MenuClickInfo info, String value,
+                        int slotIndex) {
+    return value.equals("enabled") ? "disabled" : "enabled";
+  }
 
-	@Override
-	public ItemBuilder getSettingsItem(String value) {
-		return value.equals("enabled") ? DefaultItem.enabled() : DefaultItem.disabled();
-	}
+  @Override
+  public ItemBuilder getSettingsItem(String value) {
+    return value.equals("enabled") ? DefaultItem.enabled() : DefaultItem.disabled();
+  }
 
 }

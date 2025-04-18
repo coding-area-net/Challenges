@@ -23,74 +23,74 @@ import javax.annotation.Nullable;
 
 public class WaterMLGChallenge extends WorldDependentChallenge {
 
-	public WaterMLGChallenge() {
-		super(MenuType.CHALLENGES, 1, 10, 5, false);
-		setCategory(SettingCategory.EXTRA_WORLD);
-	}
+  public WaterMLGChallenge() {
+    super(MenuType.CHALLENGES, 1, 10, 5, false);
+    setCategory(SettingCategory.EXTRA_WORLD);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.WATER_BUCKET, Message.forName("item-water-mlg-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.WATER_BUCKET, Message.forName("item-water-mlg-challenge"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-time-seconds-range-description").asArray(getValue() * 60 - 10, getValue() * 60 + 10);
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-time-seconds-range-description").asArray(getValue() * 60 - 10, getValue() * 60 + 10);
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 - 10, getValue() * 60 + 10);
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 - 10, getValue() * 60 + 10);
+  }
 
-	@Override
-	protected int getSecondsUntilNextActivation() {
-		return globalRandom.around(getValue() * 60, 10);
-	}
+  @Override
+  protected int getSecondsUntilNextActivation() {
+    return globalRandom.around(getValue() * 60, 10);
+  }
 
-	@Override
-	public void startWorldChallenge() {
-		Location currentLocation = new Location(getExtraWorld(), 0, 150, 0);
+  @Override
+  public void startWorldChallenge() {
+    Location currentLocation = new Location(getExtraWorld(), 0, 150, 0);
 
-		teleportToWorld(false, (player, index) -> {
-			currentLocation.add(100, 0, 0);
-			player.getInventory().setHeldItemSlot(4);
-			player.getInventory().setItem(4, new ItemStack(Material.WATER_BUCKET));
-			player.teleport(currentLocation);
-		});
+    teleportToWorld(false, (player, index) -> {
+      currentLocation.add(100, 0, 0);
+      player.getInventory().setHeldItemSlot(4);
+      player.getInventory().setItem(4, new ItemStack(Material.WATER_BUCKET));
+      player.teleport(currentLocation);
+    });
 
-		Bukkit.getScheduler().runTaskLater(plugin, () -> {
-			teleportBack();
-			restartTimer();
-		}, 10 * 20);
-	}
+    Bukkit.getScheduler().runTaskLater(plugin, () -> {
+      teleportBack();
+      restartTimer();
+    }, 10 * 20);
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onPlayerBucketEmpty(@Nonnull PlayerBucketEmptyEvent event) {
-		if (!isInExtraWorld()) return;
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onPlayerBucketEmpty(@Nonnull PlayerBucketEmptyEvent event) {
+    if (!isInExtraWorld()) return;
 
-		Bukkit.getScheduler().runTaskLater(plugin, () -> {
-			event.getBlock().setType(Material.AIR);
-			Bukkit.getScheduler().runTaskLater(plugin, () -> {
-				teleportBack(event.getPlayer());
-			}, 40);
-		}, 10);
+    Bukkit.getScheduler().runTaskLater(plugin, () -> {
+      event.getBlock().setType(Material.AIR);
+      Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        teleportBack(event.getPlayer());
+      }, 40);
+    }, 10);
 
-	}
+  }
 
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onEntityDamage(@Nonnull EntityDamageEvent event) {
-		if (!(event.getEntity() instanceof Player)) return;
-		if (!isInExtraWorld()) return;
+  @EventHandler(priority = EventPriority.HIGH)
+  public void onEntityDamage(@Nonnull EntityDamageEvent event) {
+    if (!(event.getEntity() instanceof Player)) return;
+    if (!isInExtraWorld()) return;
 
-		if (AbstractChallenge.getFirstInstance(OneTeamLifeSetting.class).isEnabled()) {
-			teleportBack();
-		} else {
-			Player player = (Player) event.getEntity();
-			teleportBack(player);
-		}
-	}
+    if (AbstractChallenge.getFirstInstance(OneTeamLifeSetting.class).isEnabled()) {
+      teleportBack();
+    } else {
+      Player player = (Player) event.getEntity();
+      teleportBack(player);
+    }
+  }
 
 }

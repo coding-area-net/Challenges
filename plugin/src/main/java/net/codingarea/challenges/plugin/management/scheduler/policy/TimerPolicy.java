@@ -7,19 +7,19 @@ import java.util.function.BooleanSupplier;
 
 public enum TimerPolicy implements IPolicy {
 
-	ALWAYS(() -> true),
-	PAUSED(ChallengeAPI::isPaused),
-	STARTED(ChallengeAPI::isStarted);
+  ALWAYS(() -> true),
+  PAUSED(ChallengeAPI::isPaused),
+  STARTED(ChallengeAPI::isStarted);
 
-	private final BooleanSupplier check;
+  private final BooleanSupplier check;
 
-	TimerPolicy(@Nonnull BooleanSupplier check) {
-		this.check = check;
-	}
+  TimerPolicy(@Nonnull BooleanSupplier check) {
+    this.check = check;
+  }
 
-	@Override
-	public boolean check(@Nonnull Object holder) {
-		return check.getAsBoolean();
-	}
+  @Override
+  public boolean check(@Nonnull Object holder) {
+    return check.getAsBoolean();
+  }
 
 }

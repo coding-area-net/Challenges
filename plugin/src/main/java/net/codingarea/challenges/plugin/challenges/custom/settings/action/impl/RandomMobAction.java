@@ -16,33 +16,33 @@ import java.util.stream.Collectors;
 
 public class RandomMobAction extends EntityTargetAction {
 
-	@Getter
-	private static final EntityType[] spawnableMobs;
-	@Getter
-	private static final EntityType[] livingMobs;
+  @Getter
+  private static final EntityType[] spawnableMobs;
+  @Getter
+  private static final EntityType[] livingMobs;
 
-	static {
-		List<EntityType> list = new LinkedList<>(Arrays.asList(EntityType.values()));
-		list = list.stream().filter(EntityType::isSpawnable).collect(Collectors.toList());
-		spawnableMobs = list.toArray(new EntityType[0]);
-		list = list.stream().filter(EntityType::isAlive).collect(Collectors.toList());
-		livingMobs = list.toArray(new EntityType[0]);
-	}
+  static {
+    List<EntityType> list = new LinkedList<>(Arrays.asList(EntityType.values()));
+    list = list.stream().filter(EntityType::isSpawnable).collect(Collectors.toList());
+    spawnableMobs = list.toArray(new EntityType[0]);
+    list = list.stream().filter(EntityType::isAlive).collect(Collectors.toList());
+    livingMobs = list.toArray(new EntityType[0]);
+  }
 
-	public RandomMobAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false));
-	}
+  public RandomMobAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false));
+  }
 
-	@Override
-	public void executeFor(Entity entity, Map<String, String[]> subActions) {
-		if (entity.getLocation().getWorld() == null) return;
-		EntityType value = ChallengeAction.random.choose(spawnableMobs);
-		entity.getLocation().getWorld().spawnEntity(entity.getLocation(), value);
-	}
+  @Override
+  public void executeFor(Entity entity, Map<String, String[]> subActions) {
+    if (entity.getLocation().getWorld() == null) return;
+    EntityType value = ChallengeAction.random.choose(spawnableMobs);
+    entity.getLocation().getWorld().spawnEntity(entity.getLocation(), value);
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.BLAZE_SPAWN_EGG;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.BLAZE_SPAWN_EGG;
+  }
 
 }

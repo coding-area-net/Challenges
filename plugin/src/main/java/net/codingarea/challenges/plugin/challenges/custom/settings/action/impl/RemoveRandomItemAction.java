@@ -10,18 +10,18 @@ import java.util.Map;
 
 public class RemoveRandomItemAction extends PlayerTargetAction {
 
-	public RemoveRandomItemAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
-	}
+  public RemoveRandomItemAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.DROPPER;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.DROPPER;
+  }
 
-	@Override
-	public void executeForPlayer(Player player, Map<String, String[]> subActions) {
-		InventoryUtils.removeRandomItem(player.getInventory());
-	}
+  @Override
+  public void executeForPlayer(Player player, Map<String, String[]> subActions) {
+    InventoryUtils.removeRandomItem(player.getInventory());
+  }
 
 }

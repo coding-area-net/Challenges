@@ -19,62 +19,62 @@ import java.util.Objects;
 
 public class MobTarget extends ForceTarget<EntityType> {
 
-    public MobTarget(EntityType target) {
-        super(target);
-    }
+  public MobTarget(EntityType target) {
+    super(target);
+  }
 
-    @Override
-    public boolean check(Player player) {
-        return false;
-    }
+  @Override
+  public boolean check(Player player) {
+    return false;
+  }
 
-    public static List<EntityType> getPossibleMobs() {
-        List<EntityType> entityTypes = new ArrayList<>(Arrays.asList(EntityType.values()));
-        entityTypes.removeIf(entityType -> !entityType.isSpawnable());
-        entityTypes.removeIf(entityType -> !entityType.isAlive());
-        Utils.removeEnums(entityTypes, "ILLUSIONER", "ARMOR_STAND", "ZOMBIE_HORSE", "GIANT");
+  public static List<EntityType> getPossibleMobs() {
+    List<EntityType> entityTypes = new ArrayList<>(Arrays.asList(EntityType.values()));
+    entityTypes.removeIf(entityType -> !entityType.isSpawnable());
+    entityTypes.removeIf(entityType -> !entityType.isAlive());
+    Utils.removeEnums(entityTypes, "ILLUSIONER", "ARMOR_STAND", "ZOMBIE_HORSE", "GIANT");
 
-        return entityTypes;
-    }
+    return entityTypes;
+  }
 
-    @Override
-    public Object toMessage() {
-        return target;
-    }
+  @Override
+  public Object toMessage() {
+    return target;
+  }
 
-    @Override
-    public String getName() {
-        return BukkitStringUtils.getEntityName(target).toPlainText();
-    }
+  @Override
+  public String getName() {
+    return BukkitStringUtils.getEntityName(target).toPlainText();
+  }
 
-    @Override
-    public Message getNewTargetMessage() {
-        return Message.forName("force-mob-battle-new-mob");
-    }
+  @Override
+  public Message getNewTargetMessage() {
+    return Message.forName("force-mob-battle-new-mob");
+  }
 
-    @Override
-    public Message getCompletedMessage() {
-        return Message.forName("force-mob-battle-killed");
-    }
+  @Override
+  public Message getCompletedMessage() {
+    return Message.forName("force-mob-battle-killed");
+  }
 
-    @Override
-    public ExtremeForceBattleGoal.TargetType getType() {
-        return ExtremeForceBattleGoal.TargetType.MOB;
-    }
+  @Override
+  public ExtremeForceBattleGoal.TargetType getType() {
+    return ExtremeForceBattleGoal.TargetType.MOB;
+  }
 
-    @Override
-    public Message getScoreboardDisplayMessage() {
-        return Message.forName("force-battle-mob-target-display");
-    }
+  @Override
+  public Message getScoreboardDisplayMessage() {
+    return Message.forName("force-battle-mob-target-display");
+  }
 
-    @Override
-    public void updateDisplayStand(@NotNull ArmorStand armorStand) {
-        Material spawnEgg = EntityUtils.getSpawnEgg(target);
-        if (spawnEgg == null) {
-            Objects.requireNonNull(armorStand.getEquipment()).setHelmet(null);
-        } else {
-            Objects.requireNonNull(armorStand.getEquipment()).setHelmet(new ItemStack(spawnEgg));
-        }
+  @Override
+  public void updateDisplayStand(@NotNull ArmorStand armorStand) {
+    Material spawnEgg = EntityUtils.getSpawnEgg(target);
+    if (spawnEgg == null) {
+      Objects.requireNonNull(armorStand.getEquipment()).setHelmet(null);
+    } else {
+      Objects.requireNonNull(armorStand.getEquipment()).setHelmet(new ItemStack(spawnEgg));
     }
+  }
 
 }

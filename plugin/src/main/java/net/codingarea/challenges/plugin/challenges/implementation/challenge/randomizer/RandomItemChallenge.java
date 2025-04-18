@@ -16,37 +16,37 @@ import javax.annotation.Nullable;
 @Since("2.0")
 public class RandomItemChallenge extends TimedChallenge {
 
-	public RandomItemChallenge() {
-		super(MenuType.CHALLENGES, 1, 60, 30, false);
-		setCategory(SettingCategory.RANDOMIZER);
-	}
+  public RandomItemChallenge() {
+    super(MenuType.CHALLENGES, 1, 60, 30, false);
+    setCategory(SettingCategory.RANDOMIZER);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.BEACON, Message.forName("item-random-item-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.BEACON, Message.forName("item-random-item-challenge"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-time-seconds-description").asArray(getValue());
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-time-seconds-description").asArray(getValue());
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeSecondsValueChangeTitle(this, getValue());
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeSecondsValueChangeTitle(this, getValue());
+  }
 
-	@Override
-	protected int getSecondsUntilNextActivation() {
-		return getValue();
-	}
+  @Override
+  protected int getSecondsUntilNextActivation() {
+    return getValue();
+  }
 
-	@Override
-	protected void onTimeActivation() {
-		restartTimer();
-		broadcastFiltered(RandomItemAction::giveRandomItemToPlayer);
-	}
+  @Override
+  protected void onTimeActivation() {
+    restartTimer();
+    broadcastFiltered(RandomItemAction::giveRandomItemToPlayer);
+  }
 
 }

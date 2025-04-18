@@ -23,84 +23,84 @@ import javax.annotation.Nullable;
 
 public class SplitHealthSetting extends Setting {
 
-	public SplitHealthSetting() {
-		super(MenuType.SETTINGS);
-	}
+  public SplitHealthSetting() {
+    super(MenuType.SETTINGS);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new PotionBuilder(Material.TIPPED_ARROW, Message.forName("item-split-health-setting")).color(Color.RED);
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new PotionBuilder(Material.TIPPED_ARROW, Message.forName("item-split-health-setting")).color(Color.RED);
+  }
 
-	@Override
-	protected void onEnable() {
-		setHealth();
-	}
+  @Override
+  protected void onEnable() {
+    setHealth();
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onEntityRegainHealth(@Nonnull EntityRegainHealthEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (!(event.getEntity() instanceof Player)) return;
-		Player player = (Player) event.getEntity();
-		if (ignorePlayer(player)) return;
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onEntityRegainHealth(@Nonnull EntityRegainHealthEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (!(event.getEntity() instanceof Player)) return;
+    Player player = (Player) event.getEntity();
+    if (ignorePlayer(player)) return;
 
-		Bukkit.getScheduler().runTaskLater(plugin, () -> setHealth(player, null), 1);
-	}
+    Bukkit.getScheduler().runTaskLater(plugin, () -> setHealth(player, null), 1);
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onDamage(EntityDamageEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (!(event.getEntity() instanceof Player)) return;
-		Player player = (Player) event.getEntity();
-		if (ignorePlayer(player)) return;
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onDamage(EntityDamageEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (!(event.getEntity() instanceof Player)) return;
+    Player player = (Player) event.getEntity();
+    if (ignorePlayer(player)) return;
 
-		Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), () -> setHealth(player, event), 1);
-	}
+    Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), () -> setHealth(player, event), 1);
+  }
 
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onJoin(@Nonnull PlayerJoinEvent event) {
-		if (ignorePlayer(event.getPlayer())) return;
-		setHealth();
-	}
+  @EventHandler(priority = EventPriority.HIGH)
+  public void onJoin(@Nonnull PlayerJoinEvent event) {
+    if (ignorePlayer(event.getPlayer())) return;
+    setHealth();
+  }
 
-	/**
-	 * Calls {@link SplitHealthSetting#setHealth(Player, EntityDamageEvent)} for the player with the lowest health
-	 */
-	private void setHealth() {
-		Player player = null;
+  /**
+   * Calls {@link SplitHealthSetting#setHealth(Player, EntityDamageEvent)} for the player with the lowest health
+   */
+  private void setHealth() {
+    Player player = null;
 
-		for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
-			if (player == null || player.getHealth() > currentPlayer.getHealth()) {
-				player = currentPlayer;
-			}
+    for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
+      if (player == null || player.getHealth() > currentPlayer.getHealth()) {
+        player = currentPlayer;
+      }
 
-		}
-		if (player == null) return;
-		setHealth(player, null);
-	}
+    }
+    if (player == null) return;
+    setHealth(player, null);
+  }
 
-	public void setHealth(@Nonnull Player player, @Nullable EntityDamageEvent damageEvent) {
-		if (!shouldExecuteEffect()) return;
+  public void setHealth(@Nonnull Player player, @Nullable EntityDamageEvent damageEvent) {
+    if (!shouldExecuteEffect()) return;
 
-		for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
-			if (ignorePlayer(currentPlayer)) continue;
-			if (currentPlayer.equals(player)) continue;
+    for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
+      if (ignorePlayer(currentPlayer)) continue;
+      if (currentPlayer.equals(player)) continue;
 
-			double health = player.getHealth();
-			AttributeInstance attribute = player.getAttribute(AttributeWrapper.MAX_HEALTH);
-			if (attribute == null) return;
-			if (health > attribute.getValue()) {
-				health = attribute.getValue();
-			}
+      double health = player.getHealth();
+      AttributeInstance attribute = player.getAttribute(AttributeWrapper.MAX_HEALTH);
+      if (attribute == null) return;
+      if (health > attribute.getValue()) {
+        health = attribute.getValue();
+      }
 
-			if (health <= 0 && damageEvent != null) {
-				currentPlayer.setLastDamageCause(damageEvent);
-			}
+      if (health <= 0 && damageEvent != null) {
+        currentPlayer.setLastDamageCause(damageEvent);
+      }
 
-			currentPlayer.setHealth(health);
-		}
+      currentPlayer.setHealth(health);
+    }
 
-	}
+  }
 
 }

@@ -21,64 +21,64 @@ import java.util.concurrent.ThreadLocalRandom;
 @Since("2.0.2")
 public class DamageTeleportChallenge extends SettingModifier {
 
-	private static final int PLAYER = 1, EVERYONE = 2;
+  private static final int PLAYER = 1, EVERYONE = 2;
 
-	public DamageTeleportChallenge() {
-		super(MenuType.CHALLENGES, 1, 2);
-	}
+  public DamageTeleportChallenge() {
+    super(MenuType.CHALLENGES, 1, 2);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.SHULKER_SHELL, Message.forName("item-damage-teleport-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.SHULKER_SHELL, Message.forName("item-damage-teleport-challenge"));
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createSettingsItem() {
-		if (getValue() == 1) {
-			return DefaultItem.create(Material.ENDER_CHEST, Message.forName("everyone"));
-		} else {
-			return DefaultItem.create(Material.PLAYER_HEAD, Message.forName("player"));
-		}
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createSettingsItem() {
+    if (getValue() == 1) {
+      return DefaultItem.create(Material.ENDER_CHEST, Message.forName("everyone"));
+    } else {
+      return DefaultItem.create(Material.PLAYER_HEAD, Message.forName("player"));
+    }
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChangeChallengeValueTitle(this, getValue() == 0 ? Message.forName("everyone").asString() : Message.forName("player").asString());
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChangeChallengeValueTitle(this, getValue() == 0 ? Message.forName("everyone").asString() : Message.forName("player").asString());
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onDamage(@Nonnull EntityDamageEvent event) {
-		if (!(event.getEntity() instanceof Player)) return;
-		if (!shouldExecuteEffect()) return;
-		if (ChallengeHelper.finalDamageIsNull(event)) return;
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onDamage(@Nonnull EntityDamageEvent event) {
+    if (!(event.getEntity() instanceof Player)) return;
+    if (!shouldExecuteEffect()) return;
+    if (ChallengeHelper.finalDamageIsNull(event)) return;
 
-		handleDamage(((Player) event.getEntity()));
-	}
+    handleDamage(((Player) event.getEntity()));
+  }
 
-	private void handleDamage(@Nonnull Player player) {
+  private void handleDamage(@Nonnull Player player) {
 
-		Location location = player.getWorld().getHighestBlockAt(getRandomLocation(player.getWorld())).getLocation();
-		location.setY(location.getY() + 1);
-		location.getChunk().load(true);
+    Location location = player.getWorld().getHighestBlockAt(getRandomLocation(player.getWorld())).getLocation();
+    location.setY(location.getY() + 1);
+    location.getChunk().load(true);
 
-		if (getValue() == PLAYER) {
-			player.teleport(location);
-		} else {
-			broadcastFiltered(player1 -> player1.teleport(location));
-		}
+    if (getValue() == PLAYER) {
+      player.teleport(location);
+    } else {
+      broadcastFiltered(player1 -> player1.teleport(location));
+    }
 
-	}
+  }
 
-	public Location getRandomLocation(World world) {
-		double size = world.getWorldBorder().getSize() / 2;
-		size--;
+  public Location getRandomLocation(World world) {
+    double size = world.getWorldBorder().getSize() / 2;
+    size--;
 
-		final double randomX = ThreadLocalRandom.current().nextDouble(-size, size);
-		final double randomY = ThreadLocalRandom.current().nextDouble(-size, size);
+    final double randomX = ThreadLocalRandom.current().nextDouble(-size, size);
+    final double randomY = ThreadLocalRandom.current().nextDouble(-size, size);
 
-		return world.getWorldBorder().getCenter().add(randomX, 0, randomY);
-	}
+    return world.getWorldBorder().getCenter().add(randomX, 0, randomY);
+  }
 
 }

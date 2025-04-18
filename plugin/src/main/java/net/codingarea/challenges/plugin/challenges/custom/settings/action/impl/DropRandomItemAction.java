@@ -10,18 +10,18 @@ import java.util.Map;
 
 public class DropRandomItemAction extends PlayerTargetAction {
 
-	public DropRandomItemAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
-	}
+  public DropRandomItemAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.DISPENSER;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.DISPENSER;
+  }
 
-	@Override
-	public void executeForPlayer(Player player, Map<String, String[]> subActions) {
-		RandomItemDroppingChallenge.dropRandomItem(player);
-	}
+  @Override
+  public void executeForPlayer(Player player, Map<String, String[]> subActions) {
+    RandomItemDroppingChallenge.dropRandomItem(player);
+  }
 
 }

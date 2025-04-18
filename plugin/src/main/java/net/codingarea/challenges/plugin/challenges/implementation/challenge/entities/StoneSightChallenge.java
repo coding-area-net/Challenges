@@ -23,63 +23,63 @@ import java.util.Random;
 @Since("2.0")
 public class StoneSightChallenge extends Setting {
 
-	private final Random random = new Random();
+  private final Random random = new Random();
 
-	public StoneSightChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.ENTITIES);
-	}
+  public StoneSightChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.ENTITIES);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.COBBLESTONE, Message.forName("item-stone-sight-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.COBBLESTONE, Message.forName("item-stone-sight-challenge"));
+  }
 
-	@ScheduledTask(ticks = 1, async = false)
-	public void onTick() {
+  @ScheduledTask(ticks = 1, async = false)
+  public void onTick() {
 
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (ignorePlayer(player)) continue;
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      if (ignorePlayer(player)) continue;
 
-			RayTraceResult result = player.getWorld().rayTraceEntities(
-					player.getEyeLocation(),
-					player.getLocation().getDirection(),
-					30,
-					0.01,
-					entity -> !(entity instanceof Player) && !(entity instanceof EnderDragon) && entity instanceof LivingEntity
-			);
-			if (result == null) continue;
+      RayTraceResult result = player.getWorld().rayTraceEntities(
+        player.getEyeLocation(),
+        player.getLocation().getDirection(),
+        30,
+        0.01,
+        entity -> !(entity instanceof Player) && !(entity instanceof EnderDragon) && entity instanceof LivingEntity
+      );
+      if (result == null) continue;
 
-			Location location = result.getHitPosition().toLocation(player.getWorld());
-			LivingEntity entity = ((LivingEntity) result.getHitEntity());
-			if (entity == null) continue;
+      Location location = result.getHitPosition().toLocation(player.getWorld());
+      LivingEntity entity = ((LivingEntity) result.getHitEntity());
+      if (entity == null) continue;
 
-			double distance = entity.getEyeLocation().distance(location) * 5;
+      double distance = entity.getEyeLocation().distance(location) * 5;
 
-			BoundingBox box = entity.getBoundingBox();
-			double volume = box.getWidthX() + box.getWidthZ() + box.getHeight();
-			if (distance > volume) continue;
+      BoundingBox box = entity.getBoundingBox();
+      double volume = box.getWidthX() + box.getWidthZ() + box.getHeight();
+      if (distance > volume) continue;
 
-			entity.getLocation().getBlock().setType(getRandomStone(), false);
-			entity.remove();
-			SoundSample.BREAK.play(player);
+      entity.getLocation().getBlock().setType(getRandomStone(), false);
+      entity.remove();
+      SoundSample.BREAK.play(player);
 
-		}
+    }
 
-	}
+  }
 
-	@Nonnull
-	private Material getRandomStone() {
-		Material[] materials = {
-				Material.STONE,
-				Material.STONE,
-				Material.STONE,
-				Material.COBBLESTONE,
-				Material.COBBLESTONE,
-				Material.MOSSY_COBBLESTONE
-		};
-		return materials[random.nextInt(materials.length)];
-	}
+  @Nonnull
+  private Material getRandomStone() {
+    Material[] materials = {
+      Material.STONE,
+      Material.STONE,
+      Material.STONE,
+      Material.COBBLESTONE,
+      Material.COBBLESTONE,
+      Material.MOSSY_COBBLESTONE
+    };
+    return materials[random.nextInt(materials.length)];
+  }
 
 }

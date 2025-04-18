@@ -7,8 +7,8 @@ import javax.annotation.Nonnull;
 
 public class HelpCommand implements SenderCommand {
 
-	@Override
-	public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) {
-	}
+  @Override
+  public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  }
 
 }

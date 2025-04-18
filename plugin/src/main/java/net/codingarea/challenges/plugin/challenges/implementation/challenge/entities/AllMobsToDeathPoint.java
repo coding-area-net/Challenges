@@ -18,36 +18,36 @@ import java.util.Collection;
 @Since("2.0")
 public class AllMobsToDeathPoint extends Setting {
 
-	public AllMobsToDeathPoint() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.ENTITIES);
-	}
+  public AllMobsToDeathPoint() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.ENTITIES);
+  }
 
-	@EventHandler
-	public void onEntityDeath(@Nonnull EntityDeathByPlayerEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (event.getEntity() instanceof EnderDragon || event.getEntity() instanceof Player) return;
-		if (!(event.getEntity() instanceof LivingEntity)) return;
-		if (ignorePlayer(event.getKiller())) return;
+  @EventHandler
+  public void onEntityDeath(@Nonnull EntityDeathByPlayerEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (event.getEntity() instanceof EnderDragon || event.getEntity() instanceof Player) return;
+    if (!(event.getEntity() instanceof LivingEntity)) return;
+    if (ignorePlayer(event.getKiller())) return;
 
-		teleportAllMobsOfType(event.getEntityType(), event.getEntity().getLocation());
-	}
+    teleportAllMobsOfType(event.getEntityType(), event.getEntity().getLocation());
+  }
 
-	private void teleportAllMobsOfType(@Nonnull EntityType entityType, @Nonnull Location location) {
-		if (location.getWorld() == null) return;
-		Collection<Entity> entities = location.getWorld().getEntitiesByClasses(entityType.getEntityClass());
-		for (Entity entity : entities) {
-			if (!(entity instanceof LivingEntity)) return;
-			((LivingEntity) entity).setNoDamageTicks(20);
-			entity.teleport(location);
-		}
+  private void teleportAllMobsOfType(@Nonnull EntityType entityType, @Nonnull Location location) {
+    if (location.getWorld() == null) return;
+    Collection<Entity> entities = location.getWorld().getEntitiesByClasses(entityType.getEntityClass());
+    for (Entity entity : entities) {
+      if (!(entity instanceof LivingEntity)) return;
+      ((LivingEntity) entity).setNoDamageTicks(20);
+      entity.teleport(location);
+    }
 
-	}
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.SPAWNER, Message.forName("item-all-mobs-to-death-position-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.SPAWNER, Message.forName("item-all-mobs-to-death-position-challenge"));
+  }
 
 }

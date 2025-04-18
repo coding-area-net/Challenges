@@ -11,24 +11,24 @@ import javax.annotation.Nonnull;
 
 public class EntityDamageByPlayerTrigger extends ChallengeTrigger {
 
-	public EntityDamageByPlayerTrigger(String name) {
-		super(name, SubSettingsHelper.createEntityTypeSettingsBuilder(true, true));
-	}
+  public EntityDamageByPlayerTrigger(String name) {
+    super(name, SubSettingsHelper.createEntityTypeSettingsBuilder(true, true));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.WOODEN_SWORD;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.WOODEN_SWORD;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onDeath(@Nonnull EntityDamageByPlayerEvent event) {
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onDeath(@Nonnull EntityDamageByPlayerEvent event) {
 
-		createData()
-				.entity(event.getDamager())
-				.event(event)
-				.entityType(event.getEntityType())
-				.execute();
+    createData()
+      .entity(event.getDamager())
+      .event(event)
+      .entityType(event.getEntityType())
+      .execute();
 
-	}
+  }
 
 }

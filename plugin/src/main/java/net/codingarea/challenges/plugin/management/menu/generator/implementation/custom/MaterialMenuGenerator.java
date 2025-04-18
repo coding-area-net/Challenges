@@ -13,38 +13,38 @@ import java.util.LinkedHashMap;
 
 public class MaterialMenuGenerator extends ChooseItemGenerator {
 
-	private final IParentCustomGenerator parent;
+  private final IParentCustomGenerator parent;
 
-	public MaterialMenuGenerator(IParentCustomGenerator parent) {
-		super(createMaterialsMap());
-		this.parent = parent;
-	}
+  public MaterialMenuGenerator(IParentCustomGenerator parent) {
+    super(createMaterialsMap());
+    this.parent = parent;
+  }
 
-	public static LinkedHashMap<String, ItemStack> createMaterialsMap() {
-		LinkedHashMap<String, ItemStack> map = new LinkedHashMap<>();
+  public static LinkedHashMap<String, ItemStack> createMaterialsMap() {
+    LinkedHashMap<String, ItemStack> map = new LinkedHashMap<>();
 
-		for (Material material : ExperimentalUtils.getMaterials()) {
-			if (BukkitReflectionUtils.isAir(material)) continue;
-			if (!material.isItem()) continue;
-			map.put(material.name(), new ItemStack(material));
-		}
+    for (Material material : ExperimentalUtils.getMaterials()) {
+      if (BukkitReflectionUtils.isAir(material)) continue;
+      if (!material.isItem()) continue;
+      map.put(material.name(), new ItemStack(material));
+    }
 
-		return map;
-	}
+    return map;
+  }
 
-	@Override
-	public String[] getSubTitles(int page) {
-		return new String[]{"Material"};
-	}
+  @Override
+  public String[] getSubTitles(int page) {
+    return new String[]{"Material"};
+  }
 
-	@Override
-	public void onItemClick(Player player, String itemKey) {
-		parent.accept(player, SettingType.MATERIAL, MapUtils.createStringArrayMap("material", itemKey));
-	}
+  @Override
+  public void onItemClick(Player player, String itemKey) {
+    parent.accept(player, SettingType.MATERIAL, MapUtils.createStringArrayMap("material", itemKey));
+  }
 
-	@Override
-	public void onBackToMenuItemClick(Player player) {
-		parent.decline(player);
-	}
+  @Override
+  public void onBackToMenuItemClick(Player player) {
+    parent.decline(player);
+  }
 
 }

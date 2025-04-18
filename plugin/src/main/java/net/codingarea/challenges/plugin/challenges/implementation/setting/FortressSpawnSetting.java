@@ -13,14 +13,14 @@ import javax.annotation.Nonnull;
 @Since("2.0")
 public class FortressSpawnSetting extends NetherPortalSpawnSetting {
 
-	public FortressSpawnSetting() {
-		super(MenuType.SETTINGS, StructureType.NETHER_FORTRESS, "unable-to-find-fortress", Material.NETHER_BRICKS);
-	}
+  public FortressSpawnSetting() {
+    super(MenuType.SETTINGS, StructureType.NETHER_FORTRESS, "unable-to-find-fortress", Material.NETHER_BRICKS);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.NETHER_BRICK_STAIRS, Message.forName("item-fortress-spawn-setting"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.NETHER_BRICK_STAIRS, Message.forName("item-fortress-spawn-setting"));
+  }
 
 }

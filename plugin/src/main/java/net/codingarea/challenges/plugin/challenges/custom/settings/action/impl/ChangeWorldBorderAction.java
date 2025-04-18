@@ -15,37 +15,37 @@ import java.util.Map;
 
 public class ChangeWorldBorderAction extends ChallengeAction {
 
-	public ChangeWorldBorderAction(String name) {
-		super(name, SubSettingsBuilder.createValueItem()
-				.addModifierSetting(
-						"change",
-						new ItemBuilder(Material.MAGENTA_GLAZED_TERRACOTTA, Message.forName("item-custom-action-modify_border-change")),
-						1, -10, 10
-				));
-	}
+  public ChangeWorldBorderAction(String name) {
+    super(name, SubSettingsBuilder.createValueItem()
+      .addModifierSetting(
+        "change",
+        new ItemBuilder(Material.MAGENTA_GLAZED_TERRACOTTA, Message.forName("item-custom-action-modify_border-change")),
+        1, -10, 10
+      ));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.STRUCTURE_VOID;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.STRUCTURE_VOID;
+  }
 
-	@Override
-	public void execute(ChallengeExecutionData executionData, Map<String, String[]> subActions) {
+  @Override
+  public void execute(ChallengeExecutionData executionData, Map<String, String[]> subActions) {
 
-		try {
-			int change = Integer.parseInt(subActions.get("change")[0]);
+    try {
+      int change = Integer.parseInt(subActions.get("change")[0]);
 
-			for (World world : ChallengeAPI.getGameWorlds()) {
-				WorldBorder border = world.getWorldBorder();
-				if (border.getSize() + change >= 1) { // Don't change if it gets under 1
-					border.setSize(border.getSize() + change);
-				}
-			}
+      for (World world : ChallengeAPI.getGameWorlds()) {
+        WorldBorder border = world.getWorldBorder();
+        if (border.getSize() + change >= 1) { // Don't change if it gets under 1
+          border.setSize(border.getSize() + change);
+        }
+      }
 
-		} catch (NumberFormatException | IndexOutOfBoundsException ex) {
-			Logger.error("Error while accessing change border action values", ex);
-		}
+    } catch (NumberFormatException | IndexOutOfBoundsException ex) {
+      Logger.error("Error while accessing change border action values", ex);
+    }
 
-	}
+  }
 
 }

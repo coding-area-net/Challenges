@@ -16,21 +16,21 @@ import javax.annotation.Nonnull;
 @Since("2.0")
 public class TotemSaveDeathSetting extends Setting {
 
-	public TotemSaveDeathSetting() {
-		super(MenuType.SETTINGS);
-	}
+  public TotemSaveDeathSetting() {
+    super(MenuType.SETTINGS);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.TOTEM_OF_UNDYING, Message.forName("item-totem-save-setting"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.TOTEM_OF_UNDYING, Message.forName("item-totem-save-setting"));
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onEntityResurrect(@Nonnull EntityResurrectEvent event) {
-		if (ChallengeHelper.isInInstantKill() && !isEnabled()) {
-			event.setCancelled(true);
-		}
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onEntityResurrect(@Nonnull EntityResurrectEvent event) {
+    if (ChallengeHelper.isInInstantKill() && !isEnabled()) {
+      event.setCancelled(true);
+    }
+  }
 
 }

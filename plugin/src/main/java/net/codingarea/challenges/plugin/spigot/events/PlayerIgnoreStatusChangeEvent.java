@@ -7,32 +7,32 @@ import org.jetbrains.annotations.NotNull;
 
 public class PlayerIgnoreStatusChangeEvent extends PlayerEvent {
 
-	private static final HandlerList handlers = new HandlerList();
+  private static final HandlerList handlers = new HandlerList();
 
-	private final boolean isIgnored;
+  private final boolean isIgnored;
 
-	public PlayerIgnoreStatusChangeEvent(@NotNull Player who, boolean isIgnored) {
-		super(who);
-		this.isIgnored = isIgnored;
-	}
+  public PlayerIgnoreStatusChangeEvent(@NotNull Player who, boolean isIgnored) {
+    super(who);
+    this.isIgnored = isIgnored;
+  }
 
-	@NotNull
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+  @NotNull
+  public static HandlerList getHandlerList() {
+    return handlers;
+  }
 
-	public boolean isIgnored() {
-		return isIgnored;
-	}
+  public boolean isIgnored() {
+    return isIgnored;
+  }
 
-	public boolean isNotIgnored() {
-		return !isIgnored;
-	}
+  public boolean isNotIgnored() {
+    return !isIgnored;
+  }
 
-	@NotNull
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+  @NotNull
+  @Override
+  public HandlerList getHandlers() {
+    return handlers;
+  }
 
 }

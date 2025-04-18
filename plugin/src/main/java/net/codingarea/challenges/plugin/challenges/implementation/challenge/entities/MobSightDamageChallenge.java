@@ -22,56 +22,56 @@ import javax.annotation.Nullable;
 @Since("2.0")
 public class MobSightDamageChallenge extends SettingModifier {
 
-	public MobSightDamageChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.ENTITIES);
-	}
+  public MobSightDamageChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.ENTITIES);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.SPIDER_EYE, Message.forName("item-no-mob-sight-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.SPIDER_EYE, Message.forName("item-no-mob-sight-challenge"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
+  }
 
-	@ScheduledTask(ticks = 1, async = false)
-	public void onTick() {
+  @ScheduledTask(ticks = 1, async = false)
+  public void onTick() {
 
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (ignorePlayer(player)) continue;
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      if (ignorePlayer(player)) continue;
 
-			RayTraceResult result = player.getWorld().rayTraceEntities(
-					player.getEyeLocation(),
-					player.getLocation().getDirection(),
-					30,
-					0.01,
-					entity -> !(entity instanceof Player) && entity instanceof LivingEntity
-			);
-			if (result == null) continue;
+      RayTraceResult result = player.getWorld().rayTraceEntities(
+        player.getEyeLocation(),
+        player.getLocation().getDirection(),
+        30,
+        0.01,
+        entity -> !(entity instanceof Player) && entity instanceof LivingEntity
+      );
+      if (result == null) continue;
 
-			Location location = result.getHitPosition().toLocation(player.getWorld());
-			LivingEntity entity = ((LivingEntity) result.getHitEntity());
-			if (entity == null) continue;
+      Location location = result.getHitPosition().toLocation(player.getWorld());
+      LivingEntity entity = ((LivingEntity) result.getHitEntity());
+      if (entity == null) continue;
 
-			double distance = entity.getEyeLocation().distance(location) * 5;
+      double distance = entity.getEyeLocation().distance(location) * 5;
 
-			BoundingBox box = entity.getBoundingBox();
-			double volume = box.getWidthX() + box.getWidthZ() + box.getHeight();
-			if (distance > volume) continue;
+      BoundingBox box = entity.getBoundingBox();
+      double volume = box.getWidthX() + box.getWidthZ() + box.getHeight();
+      if (distance > volume) continue;
 
-			player.damage(getValue());
-		}
+      player.damage(getValue());
+    }
 
-	}
+  }
 
 }

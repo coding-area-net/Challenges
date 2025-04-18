@@ -18,40 +18,40 @@ import javax.annotation.Nonnull;
 
 public class PlayerGlowSetting extends Setting {
 
-	public PlayerGlowSetting() {
-		super(MenuType.SETTINGS);
-	}
+  public PlayerGlowSetting() {
+    super(MenuType.SETTINGS);
+  }
 
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.GLASS_BOTTLE, Message.forName("item-glow-setting"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.GLASS_BOTTLE, Message.forName("item-glow-setting"));
+  }
 
-	@Override
-	protected void onEnable() {
-		updateEffects();
-	}
+  @Override
+  protected void onEnable() {
+    updateEffects();
+  }
 
-	@Override
-	protected void onDisable() {
-		updateEffects();
-	}
+  @Override
+  protected void onDisable() {
+    updateEffects();
+  }
 
-	@TimerTask(status = {TimerStatus.PAUSED, TimerStatus.RUNNING}, async = false)
-	@ScheduledTask(ticks = 50, async = false, timerPolicy = TimerPolicy.ALWAYS)
-	public void updateEffects() {
-		if (!shouldExecuteEffect()) {
-			broadcast(player -> player.removePotionEffect(PotionEffectType.GLOWING));
-			return;
-		}
-		broadcast(player -> player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 1, true, false, false)));
-	}
+  @TimerTask(status = {TimerStatus.PAUSED, TimerStatus.RUNNING}, async = false)
+  @ScheduledTask(ticks = 50, async = false, timerPolicy = TimerPolicy.ALWAYS)
+  public void updateEffects() {
+    if (!shouldExecuteEffect()) {
+      broadcast(player -> player.removePotionEffect(PotionEffectType.GLOWING));
+      return;
+    }
+    broadcast(player -> player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 1, true, false, false)));
+  }
 
-	@EventHandler
-	public void onPlayerJoin(@Nonnull PlayerJoinEvent event) {
-		updateEffects();
-	}
+  @EventHandler
+  public void onPlayerJoin(@Nonnull PlayerJoinEvent event) {
+    updateEffects();
+  }
 
 }

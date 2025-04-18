@@ -32,82 +32,82 @@ import java.util.Map.Entry;
 @CanInstaKillOnEnable
 public class NoDupedItemsChallenge extends Setting {
 
-	public NoDupedItemsChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.INVENTORY);
-	}
+  public NoDupedItemsChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.INVENTORY);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.OBSERVER, Message.forName("item-no-duped-items-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.OBSERVER, Message.forName("item-no-duped-items-challenge"));
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onInventoryClick(@Nonnull PlayerInventoryClickEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		checkInventories();
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onInventoryClick(@Nonnull PlayerInventoryClickEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    checkInventories();
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onEntityPickUpItem(@Nonnull PlayerPickupItemEvent event) {
-		Bukkit.getScheduler().runTaskLater(plugin, () -> {
-			if (!shouldExecuteEffect()) return;
-			if (ignorePlayer(event.getPlayer())) return;
-			checkInventories();
-		}, 1);
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onEntityPickUpItem(@Nonnull PlayerPickupItemEvent event) {
+    Bukkit.getScheduler().runTaskLater(plugin, () -> {
+      if (!shouldExecuteEffect()) return;
+      if (ignorePlayer(event.getPlayer())) return;
+      checkInventories();
+    }, 1);
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onInteract(@Nonnull PlayerInteractEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		if (event.getClickedBlock() == null) return;
-		checkInventories();
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onInteract(@Nonnull PlayerInteractEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    if (event.getClickedBlock() == null) return;
+    checkInventories();
+  }
 
-	private void checkInventories() {
-		Map<Player, List<Material>> blackList = new HashMap<>();
+  private void checkInventories() {
+    Map<Player, List<Material>> blackList = new HashMap<>();
 
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			Triple<Player, Player, Material> result = checkInventory(player, blackList);
-			if (result != null) {
-				Message.forName("no-duped-items-failed").broadcast(
-						Prefix.CHALLENGES,
-						NameHelper.getName(result.getFirst()),
-						NameHelper.getName(result.getSecond()),
-						result.getThird()
-				);
-				ChallengeHelper.kill(result.getFirst());
-				ChallengeHelper.kill(result.getSecond());
-			}
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      Triple<Player, Player, Material> result = checkInventory(player, blackList);
+      if (result != null) {
+        Message.forName("no-duped-items-failed").broadcast(
+          Prefix.CHALLENGES,
+          NameHelper.getName(result.getFirst()),
+          NameHelper.getName(result.getSecond()),
+          result.getThird()
+        );
+        ChallengeHelper.kill(result.getFirst());
+        ChallengeHelper.kill(result.getSecond());
+      }
 
-		}
+    }
 
-	}
+  }
 
-	private Triple<Player, Player, Material> checkInventory(@Nonnull Player player, Map<Player, List<Material>> blacklist) {
-		List<Material> localBlacklist = new ArrayList<>();
-		List<Material> playerBlacklist = blacklist.getOrDefault(player, new ArrayList<>());
-		blacklist.put(player, playerBlacklist);
+  private Triple<Player, Player, Material> checkInventory(@Nonnull Player player, Map<Player, List<Material>> blacklist) {
+    List<Material> localBlacklist = new ArrayList<>();
+    List<Material> playerBlacklist = blacklist.getOrDefault(player, new ArrayList<>());
+    blacklist.put(player, playerBlacklist);
 
-		for (ItemStack item : player.getInventory().getContents()) {
-			if (item == null) continue;
-			if (localBlacklist.contains(item.getType())) continue;
-			localBlacklist.add(item.getType());
+    for (ItemStack item : player.getInventory().getContents()) {
+      if (item == null) continue;
+      if (localBlacklist.contains(item.getType())) continue;
+      localBlacklist.add(item.getType());
 
-			for (Entry<Player, List<Material>> entry : blacklist.entrySet()) {
-				List<Material> currentBlacklist = entry.getValue();
-				if (currentBlacklist.contains(item.getType())) {
-					return new Triple<>(player, entry.getKey(), item.getType());
-				}
+      for (Entry<Player, List<Material>> entry : blacklist.entrySet()) {
+        List<Material> currentBlacklist = entry.getValue();
+        if (currentBlacklist.contains(item.getType())) {
+          return new Triple<>(player, entry.getKey(), item.getType());
+        }
 
-			}
-			playerBlacklist.add(item.getType());
-		}
+      }
+      playerBlacklist.add(item.getType());
+    }
 
-		return null;
-	}
+    return null;
+  }
 
 }

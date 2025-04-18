@@ -23,27 +23,27 @@ import java.util.List;
 @RequireVersion(MinecraftVersion.V1_16)
 public class FinishRaidGoal extends SettingGoal {
 
-	public FinishRaidGoal() {
-		super();
-		setCategory(SettingCategory.FASTEST_TIME);
-	}
+  public FinishRaidGoal() {
+    super();
+    setCategory(SettingCategory.FASTEST_TIME);
+  }
 
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.CROSSBOW, Message.forName("item-finish-raid-goal"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.CROSSBOW, Message.forName("item-finish-raid-goal"));
+  }
 
-	@Override
-	public void getWinnersOnEnd(@Nonnull List<Player> winners) {
-	}
+  @Override
+  public void getWinnersOnEnd(@Nonnull List<Player> winners) {
+  }
 
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onRaidFinish(@Nonnull RaidFinishEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (event.getRaid().getStatus() != RaidStatus.VICTORY) return;
-		ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, event::getWinners);
-	}
+  @EventHandler(priority = EventPriority.HIGH)
+  public void onRaidFinish(@Nonnull RaidFinishEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (event.getRaid().getStatus() != RaidStatus.VICTORY) return;
+    ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, event::getWinners);
+  }
 
 }

@@ -5,8 +5,8 @@ import org.bukkit.event.Listener;
 
 public interface IChallengeTrigger extends Listener {
 
-	default ChallengeExecutionData createData() {
-		return new ChallengeExecutionData(this);
-	}
+  default ChallengeExecutionData createData() {
+    return new ChallengeExecutionData(this);
+  }
 
 }

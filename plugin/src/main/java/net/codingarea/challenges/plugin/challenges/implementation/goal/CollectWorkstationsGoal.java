@@ -14,20 +14,20 @@ import org.jetbrains.annotations.NotNull;
 @RequireVersion(MinecraftVersion.V1_14)
 public class CollectWorkstationsGoal extends ItemCollectionGoal {
 
-	public CollectWorkstationsGoal() {
-		super(
-				Material.LECTERN, Material.COMPOSTER, Material.GRINDSTONE, Material.BLAST_FURNACE,
-				Material.SMOKER, Material.FLETCHING_TABLE, Material.CARTOGRAPHY_TABLE,
-				Material.BREWING_STAND, Material.SMITHING_TABLE, Material.CAULDRON,
-				Material.LOOM, Material.STONECUTTER, Material.BARREL
-		);
-		setCategory(SettingCategory.FASTEST_TIME);
-	}
+  public CollectWorkstationsGoal() {
+    super(
+      Material.LECTERN, Material.COMPOSTER, Material.GRINDSTONE, Material.BLAST_FURNACE,
+      Material.SMOKER, Material.FLETCHING_TABLE, Material.CARTOGRAPHY_TABLE,
+      Material.BREWING_STAND, Material.SMITHING_TABLE, Material.CAULDRON,
+      Material.LOOM, Material.STONECUTTER, Material.BARREL
+    );
+    setCategory(SettingCategory.FASTEST_TIME);
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.FLETCHING_TABLE, Message.forName("item-collect-workstations-item"));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.FLETCHING_TABLE, Message.forName("item-collect-workstations-item"));
+  }
 
 }

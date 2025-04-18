@@ -14,22 +14,22 @@ import javax.annotation.Nullable;
 
 public class KillEnderDragonGoal extends KillEntityGoal {
 
-	public KillEnderDragonGoal() {
-		super(EntityType.ENDER_DRAGON, Environment.THE_END, true);
-		setCategory(SettingCategory.KILL_ENTITY);
-		setOneWinner(false);
-	}
+  public KillEnderDragonGoal() {
+    super(EntityType.ENDER_DRAGON, Environment.THE_END, true);
+    setCategory(SettingCategory.KILL_ENTITY);
+    setOneWinner(false);
+  }
 
-	@Nullable
-	@Override
-	public SoundSample getWinSound() {
-		return null;
-	}
+  @Nullable
+  @Override
+  public SoundSample getWinSound() {
+    return null;
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.DRAGON_EGG, Message.forName("item-dragon-goal"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.DRAGON_EGG, Message.forName("item-dragon-goal"));
+  }
 
 }

@@ -8,22 +8,22 @@ import org.bukkit.event.player.PlayerLevelChangeEvent;
 
 public class LevelUpTrigger extends ChallengeTrigger {
 
-	public LevelUpTrigger(String name) {
-		super(name);
-	}
+  public LevelUpTrigger(String name) {
+    super(name);
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.ENCHANTING_TABLE;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.ENCHANTING_TABLE;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onLevelUp(PlayerLevelChangeEvent event) {
-		if (event.getNewLevel() > event.getOldLevel()) {
-			createData()
-					.entity(event.getPlayer())
-					.execute();
-		}
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onLevelUp(PlayerLevelChangeEvent event) {
+    if (event.getNewLevel() > event.getOldLevel()) {
+      createData()
+        .entity(event.getPlayer())
+        .execute();
+    }
+  }
 
 }

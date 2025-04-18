@@ -8,19 +8,19 @@ import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 
 public class AdvancementTrigger extends ChallengeTrigger {
 
-	public AdvancementTrigger(String name) {
-		super(name);
-	}
+  public AdvancementTrigger(String name) {
+    super(name);
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.KNOWLEDGE_BOOK;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.KNOWLEDGE_BOOK;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onPickup(PlayerAdvancementDoneEvent event) {
-		if (event.getAdvancement().getKey().toString().contains(":recipes/")) return;
-		createData().entity(event.getPlayer()).execute();
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onPickup(PlayerAdvancementDoneEvent event) {
+    if (event.getAdvancement().getKey().toString().contains(":recipes/")) return;
+    createData().entity(event.getPlayer()).execute();
+  }
 
 }

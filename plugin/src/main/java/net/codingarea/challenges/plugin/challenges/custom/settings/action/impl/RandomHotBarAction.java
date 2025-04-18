@@ -10,18 +10,18 @@ import java.util.Map;
 
 public class RandomHotBarAction extends PlayerTargetAction {
 
-	public RandomHotBarAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true, true));
-	}
+  public RandomHotBarAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true, true));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.ARMOR_STAND;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.ARMOR_STAND;
+  }
 
-	@Override
-	public void executeForPlayer(Player player, Map<String, String[]> subActions) {
-		HotBarRandomizerChallenge.addItems(player, true);
-	}
+  @Override
+  public void executeForPlayer(Player player, Map<String, String[]> subActions) {
+    HotBarRandomizerChallenge.addItems(player, true);
+  }
 
 }

@@ -22,48 +22,48 @@ import java.util.stream.Collectors;
 @Since("2.2.0")
 public class ForceMobBattleGoal extends ForceBattleDisplayGoal<MobTarget> {
 
-	public ForceMobBattleGoal() {
-		super(Message.forName("menu-force-mob-battle-goal-settings"));
-	}
+  public ForceMobBattleGoal() {
+    super(Message.forName("menu-force-mob-battle-goal-settings"));
+  }
 
-	@Override
-	protected MobTarget[] getTargetsPossibleToFind() {
-		List<EntityType> entityTypes = MobTarget.getPossibleMobs();
-		return entityTypes.stream().map(MobTarget::new).toArray(MobTarget[]::new);
-	}
+  @Override
+  protected MobTarget[] getTargetsPossibleToFind() {
+    List<EntityType> entityTypes = MobTarget.getPossibleMobs();
+    return entityTypes.stream().map(MobTarget::new).toArray(MobTarget[]::new);
+  }
 
-	@Override
-	protected Message getLeaderboardTitleMessage() {
-		return Message.forName("force-mob-battle-leaderboard");
-	}
+  @Override
+  protected Message getLeaderboardTitleMessage() {
+    return Message.forName("force-mob-battle-leaderboard");
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.BOW, Message.forName("item-force-mob-battle-goal"));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.BOW, Message.forName("item-force-mob-battle-goal"));
+  }
 
-	@Override
-	public MobTarget getTargetFromDocument(Document document, String path) {
-		return new MobTarget(document.getEnum(path, EntityType.class));
-	}
+  @Override
+  public MobTarget getTargetFromDocument(Document document, String path) {
+    return new MobTarget(document.getEnum(path, EntityType.class));
+  }
 
-	@Override
-	public List<MobTarget> getListFromDocument(Document document, String path) {
-		return document.getEnumList(path, EntityType.class).stream().map(MobTarget::new).collect(Collectors.toList());
-	}
+  @Override
+  public List<MobTarget> getListFromDocument(Document document, String path) {
+    return document.getEnumList(path, EntityType.class).stream().map(MobTarget::new).collect(Collectors.toList());
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onKill(@Nonnull EntityDeathEvent event) {
-		if (!shouldExecuteEffect()) return;
-		LivingEntity entity = event.getEntity();
-		Player killer = entity.getKiller();
-		if (killer == null) return;
-		if (ignorePlayer(killer)) return;
-		if (currentTarget.get(killer.getUniqueId()) == null) return;
-		if (entity.getType() == currentTarget.get(killer.getUniqueId()).getTarget()) {
-			handleTargetFound(killer);
-		}
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onKill(@Nonnull EntityDeathEvent event) {
+    if (!shouldExecuteEffect()) return;
+    LivingEntity entity = event.getEntity();
+    Player killer = entity.getKiller();
+    if (killer == null) return;
+    if (ignorePlayer(killer)) return;
+    if (currentTarget.get(killer.getUniqueId()) == null) return;
+    if (entity.getType() == currentTarget.get(killer.getUniqueId()).getTarget()) {
+      handleTargetFound(killer);
+    }
+  }
 
 }

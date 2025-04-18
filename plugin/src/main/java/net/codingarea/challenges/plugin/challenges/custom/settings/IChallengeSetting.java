@@ -5,12 +5,12 @@ import org.bukkit.Material;
 
 public interface IChallengeSetting {
 
-	SubSettingsBuilder getSubSettingsBuilder();
+  SubSettingsBuilder getSubSettingsBuilder();
 
-	String getName();
+  String getName();
 
-	Material getMaterial();
+  Material getMaterial();
 
-	String getMessage();
+  String getMessage();
 
 }

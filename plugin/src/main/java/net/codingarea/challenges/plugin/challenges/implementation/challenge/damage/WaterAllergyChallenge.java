@@ -18,37 +18,37 @@ import javax.annotation.Nullable;
 @Since("2.0")
 public class WaterAllergyChallenge extends SettingModifier {
 
-	public WaterAllergyChallenge() {
-		super(MenuType.CHALLENGES, 1, 40);
-		setCategory(SettingCategory.DAMAGE);
-	}
+  public WaterAllergyChallenge() {
+    super(MenuType.CHALLENGES, 1, 40);
+    setCategory(SettingCategory.DAMAGE);
+  }
 
-	@ScheduledTask(ticks = 5, async = false)
-	public void onFifthTick() {
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (ignorePlayer(player)) return;
-			if (player.getLocation().getBlock().getType() == Material.WATER) {
-				player.damage(getValue());
-			}
-		}
+  @ScheduledTask(ticks = 5, async = false)
+  public void onFifthTick() {
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      if (ignorePlayer(player)) return;
+      if (player.getLocation().getBlock().getType() == Material.WATER) {
+        player.damage(getValue());
+      }
+    }
 
-	}
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.CYAN_GLAZED_TERRACOTTA, Message.forName("item-water-allergy-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.CYAN_GLAZED_TERRACOTTA, Message.forName("item-water-allergy-challenge"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
+  }
 
 }
