@@ -45,7 +45,7 @@ public final class InventoryTitleManager {
 
   @Nonnull
   public static String getMenuSettingTitle(@Nonnull MenuType menu, @Nonnull String name, int page, boolean showPages) {
-    return getTitle(menu.getName() + getTitleSplitter() + name + (false ? " §8• " + Message.forName("inventory-color") + (page + 1) : ""));
+    return getTitle(menu.getName() + getTitleSplitter() + name + (""));
   }
 
   @Nonnull
