@@ -144,11 +144,9 @@ public final class BlockUtils {
 
 		if (!upperBlock.getType().isSolid()) {
 			upperBlock.breakNaturally();
-			if (playSound) {
-				// TODO: PLAY THE RIGHT BREAKING SOUND FOR THE BLOCK
-			}
+            // TODO: PLAY THE RIGHT BREAKING SOUND FOR THE BLOCK
 
-		}
+        }
 
 		block.setType(type, blockUpdate);
 	}

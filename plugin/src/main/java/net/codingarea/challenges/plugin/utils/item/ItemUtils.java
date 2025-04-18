@@ -65,9 +65,7 @@ public class ItemUtils {
         }
 
         if (MinecraftVersion.current().isOlderThan(MinecraftVersion.V1_19)) {
-            if (name.equals("SCULK_SENSOR")) {
-                return false;
-            }
+            return !name.equals("SCULK_SENSOR");
         }
 
         return true;

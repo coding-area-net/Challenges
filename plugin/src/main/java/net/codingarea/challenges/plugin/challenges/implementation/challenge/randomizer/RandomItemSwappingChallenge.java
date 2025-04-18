@@ -26,7 +26,7 @@ public class RandomItemSwappingChallenge extends TimedChallenge {
 	}
 
 	public static void swapRandomItems(Player player) {
-		if (player.getInventory().getContents().length <= 0) return;
+		if (player.getInventory().getContents().length == 0) return;
 		int slot = InventoryUtils.getRandomFullSlot(player.getInventory());
 		if (slot == -1) return;
 		swapItemToRandomSlot(

@@ -63,7 +63,8 @@ public class BukkitStringUtils {
 			} else {
 				if (lastWasParagraph) {
 					ChatColor newColor = ChatColor.getByChar(c);
-					if (!newColor.isColor()) {
+                    assert newColor != null;
+                    if (!newColor.isColor()) {
 						if (newColor == ChatColor.RESET) {
 							currentFormatting.clear();
 							currentColor = null;

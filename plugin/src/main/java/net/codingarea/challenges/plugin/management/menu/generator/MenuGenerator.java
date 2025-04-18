@@ -3,6 +3,9 @@ package net.codingarea.challenges.plugin.management.menu.generator;
 import java.util.List;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+
+import lombok.Getter;
+import lombok.Setter;
 import net.anweisen.utilities.bukkit.utils.menu.MenuPosition;
 import net.anweisen.utilities.bukkit.utils.misc.CompatibilityUtils;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -12,9 +15,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 
+@Setter
+@Getter
 public abstract class MenuGenerator {
 
-	private MenuType menuType;
+    // ONLY MODIFY IF YOU KNOW WHAT YOU ARE DOING
+    private MenuType menuType;
 
 	public abstract void generateInventories();
 
@@ -52,15 +58,6 @@ public abstract class MenuGenerator {
 		Inventory inventory = inventories.get(page);
 		MenuPosition.set(player, getMenuPosition(page));
 		player.openInventory(inventory);
-	}
-
-	public MenuType getMenuType() {
-		return menuType;
-	}
-
-	// ONLY MODIFY IF YOU KNOW WHAT YOU ARE DOING
-	public void setMenuType(MenuType menuType) {
-		this.menuType = menuType;
 	}
 
 }

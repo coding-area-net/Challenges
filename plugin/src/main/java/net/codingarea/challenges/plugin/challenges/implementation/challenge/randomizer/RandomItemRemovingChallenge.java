@@ -51,7 +51,7 @@ public class RandomItemRemovingChallenge extends TimedChallenge {
 
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			if (ignorePlayer(player)) continue;
-			if (player.getInventory().getContents().length <= 0) continue;
+			if (player.getInventory().getContents().length == 0) continue;
 
 			Bukkit.getScheduler().runTask(plugin, () -> {
 				InventoryUtils.removeRandomItem(player.getInventory());

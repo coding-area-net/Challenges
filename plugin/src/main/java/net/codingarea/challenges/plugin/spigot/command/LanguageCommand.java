@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LanguageCommand implements SenderCommand, Completer {
 
@@ -25,12 +26,12 @@ public class LanguageCommand implements SenderCommand, Completer {
             case "german":
             case "deutsch":
             case "de":
-                Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).reload("de");
+                Objects.requireNonNull(Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class)).reload("de");
                 break;
             case "english":
             case "englisch":
             case "en":
-                Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).reload("en");
+                Objects.requireNonNull(Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class)).reload("en");
                 break;
             default:
                 Message.forName("unsuported-language").send(sender, Prefix.CHALLENGES, args[0]);

@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
+import lombok.Setter;
 import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
 import net.anweisen.utilities.common.config.Document;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import java.util.function.BiConsumer;
 
+@Setter
 public abstract class AbstractForceChallenge extends TimedChallenge {
 
 	public static final int WAITING = 0,
@@ -93,10 +95,6 @@ public abstract class AbstractForceChallenge extends TimedChallenge {
 
 	public final int getState() {
 		return state;
-	}
-
-	public void setState(int state) {
-		this.state = state;
 	}
 
 }

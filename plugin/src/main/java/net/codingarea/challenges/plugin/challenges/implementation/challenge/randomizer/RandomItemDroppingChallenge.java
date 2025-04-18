@@ -27,7 +27,7 @@ public class RandomItemDroppingChallenge extends TimedChallenge {
 	}
 
 	public static void dropRandomItem(Player player) {
-		if (player.getInventory().getContents().length <= 0) return;
+		if (player.getInventory().getContents().length == 0) return;
 		dropRandomItem(player.getLocation(), player.getInventory());
 	}
 

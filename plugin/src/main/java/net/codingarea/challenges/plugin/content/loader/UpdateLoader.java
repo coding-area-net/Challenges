@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.content.loader;
 
+import lombok.Getter;
 import net.anweisen.utilities.bukkit.utils.logging.Logger;
 import net.anweisen.utilities.common.collection.IOUtils;
 import net.anweisen.utilities.common.version.Version;
@@ -12,28 +13,16 @@ public final class UpdateLoader extends ContentLoader {
 
 	public static final int RESOURCE_ID = 80548;
 
-	private static boolean newestPluginVersion = true;
-	private static boolean newestConfigVersion = true;
-	private static Version defaultConfigVersion;
-	private static Version currentConfigVersion;
+	@Getter
+    private static boolean newestPluginVersion = true;
+	@Getter
+    private static boolean newestConfigVersion = true;
+	@Getter
+    private static Version defaultConfigVersion;
+	@Getter
+    private static Version currentConfigVersion;
 
-	public static Version getDefaultConfigVersion() {
-		return defaultConfigVersion;
-	}
-
-	public static Version getCurrentConfigVersion() {
-		return currentConfigVersion;
-	}
-
-	public static boolean isNewestConfigVersion() {
-		return newestConfigVersion;
-	}
-
-	public static boolean isNewestPluginVersion() {
-		return newestPluginVersion;
-	}
-
-	@Override
+    @Override
 	protected void load() {
 		try {
 			URL url = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + RESOURCE_ID);

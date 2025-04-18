@@ -12,8 +12,8 @@ import net.codingarea.challenges.plugin.Challenges;
 import org.bukkit.Bukkit;
 
 /**
- * @author TobiasDeBruijn | https://github.com/TobiasDeBruijn
- * @source https://github.com/TobiasDeBruijn/BukkitReflectionUtil
+ * @author TobiasDeBruijn | <a href="https://github.com/TobiasDeBruijn">.<a href="..</a>
+">* @source https://github.com/TobiasDeBruijn/Bu</a>kkitReflectionUtil
  */
 public class ReflectionUtil {
 
@@ -27,7 +27,6 @@ public class ReflectionUtil {
    *  (<=1.16) or
    *  (>=1.17).
    *
-   * @return Returns true if it is, false if it is now
    */
   @Getter
   private static boolean useNewSpigotPackaging;
@@ -38,7 +37,6 @@ public class ReflectionUtil {
    *  <p>
    *  E.g for Minecraft 1.18 this is 18.
    *
-   * @return The current major Minecraft version
    */
   @Getter
   private static int majorVersion;
@@ -48,7 +46,6 @@ public class ReflectionUtil {
    *  <p>
    *  E.g. for Minecraft 1.18.2 this is 2.
    *
-   * @return The current minor Minecraft version
    */
   @Getter
   private static int minorVersion;
@@ -193,9 +190,7 @@ public class ReflectionUtil {
 	 * @param instance The instance of the class in which the field is defined
 	 * @param fieldName The name of the field
 	 * @param value The value the field should be set to
-	 * @throws NoSuchFieldException
-	 * @throws IllegalAccessException
-	 */
+     */
 	public static void setFieldValue(Object instance, String fieldName, Object value) throws NoSuchFieldException, IllegalAccessException {
 		Field field = instance.getClass().getDeclaredField(fieldName);
 		field.setAccessible(true);
@@ -209,8 +204,7 @@ public class ReflectionUtil {
 	 * @param methodName The name of the method
 	 * @param args       The argument types the method takes
 	 * @return Returns the Method
-	 * @throws NoSuchMethodException
-	 */
+     */
 	public static Method getMethod(Class<?> clazz, String methodName, Class<?>... args) throws NoSuchMethodException {
 		Method m = clazz.getDeclaredMethod(methodName, args);
 		m.setAccessible(true);
@@ -223,11 +217,7 @@ public class ReflectionUtil {
 	 * @param obj        The object to invoke the method on
 	 * @param methodName The name of the Method
 	 * @return Returns the result of the method, can be null if the method returns void
-	 * @throws NoSuchMethodException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
+     */
 	public static Object invokeMethod(Object obj, String methodName) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		return invokeMethod(obj.getClass(), obj, methodName);
 	}
@@ -239,11 +229,7 @@ public class ReflectionUtil {
 	 * @param methodName The name of the Method
 	 * @param args       The arguments to pass to the Method
 	 * @return Returns the result of the method, can be null if the method returns void
-	 * @throws NoSuchMethodException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
+     */
 	public static Object invokeMethod(Object obj, String methodName, Object[] args) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		return invokeMethod(obj.getClass(), obj, methodName, args);
 	}
@@ -256,11 +242,7 @@ public class ReflectionUtil {
 	 * @param argTypes   The types of arguments as a Class array
 	 * @param args       The arguments as an object array
 	 * @return Returns the result of the method, can be null if the method returns void
-	 * @throws NoSuchMethodException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
+     */
 	public static Object invokeMethod(Object obj, String methodName, Class<?>[] argTypes, Object[] args) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		return invokeMethod(obj.getClass(), obj, methodName, argTypes, args);
 	}
@@ -273,11 +255,7 @@ public class ReflectionUtil {
 	 * @param methodName The name of the method
 	 * @param args       The arguments to be passed to the method
 	 * @return Returns the result of the method, can be null if the method returns void
-	 * @throws NoSuchMethodException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
+     */
 	public static Object invokeMethod(Class<?> clazz, Object obj, String methodName, Object... args) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?>[] argTypes = new Class<?>[args.length];
 		for (int i = 0; i < args.length; i++) {
@@ -296,11 +274,7 @@ public class ReflectionUtil {
 	 * @param argTypes   Argument types
 	 * @param args       Arguments to pass to the method
 	 * @return Returns the result of the method, can be null if the method returns void
-	 * @throws NoSuchMethodException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
+     */
 	public static Object invokeMethod(Class<?> clazz, Object obj, String methodName, Class<?>[] argTypes, Object[] args) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Method m = getMethod(clazz, methodName, argTypes);
 		return m.invoke(obj, args);
@@ -312,10 +286,7 @@ public class ReflectionUtil {
 	 * @param obj  The object in which the field is located, and from which to get the value
 	 * @param name The name of the Field to get the value from
 	 * @return Returns the value of the Field
-	 * @throws NoSuchFieldException
-	 * @throws IllegalArgumentException
-	 * @throws IllegalAccessException
-	 */
+     */
 	public static Object getObject(Object obj, String name) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 		return getObject(obj.getClass(), obj, name);
 	}
@@ -327,9 +298,6 @@ public class ReflectionUtil {
 	 * @param clazz The Class in which the Field is defined
 	 * @param name  The name of the Field
 	 * @return Returns the value of the Field
-	 * @throws NoSuchFieldException
-	 * @throws IllegalArgumentException
-	 * @throws IllegalAccessException
 	 * @deprecated Use {@link #getObject(Class, Object, String)} instead
 	 */
 	@Deprecated
@@ -344,10 +312,7 @@ public class ReflectionUtil {
 	 * @param obj   The Object to get the value from
 	 * @param name  The name of the Field
 	 * @return Returns the value of the Field
-	 * @throws NoSuchFieldException
-	 * @throws IllegalArgumentException
-	 * @throws IllegalAccessException
-	 */
+     */
 	public static Object getObject(Class<?> clazz, Object obj, String name) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 		Field f = getField(clazz, name);
 		f.setAccessible(true);
@@ -360,12 +325,7 @@ public class ReflectionUtil {
 	 * @param clazz The Class in which the Constructor is defined
 	 * @param args  The arguments to pass to the Constructor
 	 * @return Returns an instance of the provided Class in which the Constructor is located
-	 * @throws NoSuchMethodException
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
+     */
 	public static Object invokeConstructor(Class<?> clazz, Object... args) throws NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?>[] argTypes = new Class<?>[args.length];
 		for (int i = 0; i < args.length; i++) {
@@ -382,12 +342,7 @@ public class ReflectionUtil {
 	 * @param argTypes The argument types
 	 * @param args     The arguments to pass to the constructor
 	 * @return Returns an instance of the provided Class in which the Constructor is located
-	 * @throws NoSuchMethodException
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
+     */
 	public static Object invokeConstructor(Class<?> clazz, Class<?>[] argTypes, Object[] args) throws NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Constructor<?> con = getConstructor(clazz, argTypes);
 		return con.newInstance(args);
