@@ -70,6 +70,7 @@ public final class LanguageLoader extends ContentLoader {
 
   @Override
 	protected void load() {
+		migrateLanguageConfig();
 
 		Document config = getLanguageProperties();
 
