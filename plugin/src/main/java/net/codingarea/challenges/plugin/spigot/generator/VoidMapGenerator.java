@@ -15,53 +15,11 @@ public class VoidMapGenerator extends ChunkGenerator {
 
 	private static final boolean generateEndPortal = MinecraftVersion.current().getMinor() == 18;
 
-//  private static class PortalInfo {
-//
-//    private final int chunkX;
-//    private final int y;
-//    private final int chunkZ;
-//
-//    public PortalInfo(int chunkX, int y, int chunkZ) {
-//      this.chunkX = chunkX;
-//      this.y = y;
-//      this.chunkZ = chunkZ;
-//    }
-//
-//  }
-
-//  private List<PortalInfo> portalChunks;
-//
-//  public void loadStrongholds(World world) {
-//
-//    for (int i = 0; i < 3; i++) {
-//      Bukkit.getScheduler().runTaskLater(Challenges.getInstance().getPlugin(), () -> {
-//        Location portal = world
-//            .locateNearestStructure(new Location(world, 0, 0, 0), StructureType.STRONGHOLD, 180,
-//                true);
-//        if (portal != null) {
-//          Chunk chunk = portal.getChunk();
-//          chunk.load(true);
-//          portalChunks.add(new PortalInfo(chunk.getX(), portal.getBlockY(), chunk.getZ()));
-//        }
-//      }, i*5);
-//
-//    }
-//
-//
-//  }
-
-	@Override
+    @Override
 	@Nonnull
 	public ChunkData generateChunkData(@Nonnull World world, @Nonnull Random random, int x, int z, @Nonnull BiomeGrid biome) {
 
-//    if (portalChunks == null) {
-//      portalChunks = Lists.newLinkedList();
-//      Bukkit.getScheduler().runTask(Challenges.getInstance().getPlugin(), () -> {
-//        loadStrongholds(world);
-//      });
-//    }
-
-		ChunkData chunkData = createChunkData(world);
+        ChunkData chunkData = createChunkData(world);
 		if (x == 0 && z == 0) {
 			chunkData.setBlock(0, 59, 0, Material.BEDROCK);
 		}

@@ -56,12 +56,7 @@ public abstract class EndingForceChallenge extends AbstractForceChallenge {
 		failed.forEach(ChallengeHelper::kill);
 	}
 
-	@Override
-	protected void handleCountdown() {
-		bossbar.update();
-	}
-
-	protected abstract boolean isFailing(@Nonnull Player player);
+    protected abstract boolean isFailing(@Nonnull Player player);
 
 	protected abstract void broadcastFailedMessage(@Nonnull Player player);
 

@@ -17,6 +17,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Since("2.0.2")
 public class UncraftItemsChallenge extends TimedChallenge {
@@ -105,8 +106,8 @@ public class UncraftItemsChallenge extends TimedChallenge {
 			ingredients.add(furnace.getInput());
 		} else if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_14) && recipe instanceof SmithingRecipe) {
 			SmithingRecipe smithing = (SmithingRecipe) recipe;
-			ingredients.add(smithing.getBase().getItemStack());
-			ingredients.add(smithing.getAddition().getItemStack());
+			ingredients.add(Objects.requireNonNull(smithing.getBase()).getItemStack());
+			ingredients.add(Objects.requireNonNull(smithing.getAddition()).getItemStack());
 		}
 
 		return ingredients;

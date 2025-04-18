@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
+import lombok.Getter;
 import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
 import net.codingarea.challenges.plugin.utils.item.ItemUtils;
 import net.anweisen.utilities.common.annotations.Since;
@@ -36,11 +37,15 @@ import java.util.stream.Collectors;
 @Since("2.0")
 public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
 
-	private final int totalItemsCount;
+	@Getter
+    private final int totalItemsCount;
 	private SeededRandomWrapper random;
-	private List<Material> allItemsToFind;
-	private List<Material> itemsToFind;
-	private Material currentItem;
+	@Getter
+    private List<Material> allItemsToFind;
+	@Getter
+    private List<Material> itemsToFind;
+	@Getter
+    private Material currentItem;
 
 	public CollectAllItemsGoal() {
 		random = new SeededRandomWrapper();
@@ -168,23 +173,7 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
 		document.set("found", totalItemsCount - itemsToFind.size());
 	}
 
-	public Material getCurrentItem() {
-		return currentItem;
-	}
-
-	public List<Material> getItemsToFind() {
-		return itemsToFind;
-	}
-
-	public List<Material> getAllItemsToFind() {
-		return allItemsToFind;
-	}
-
-	public int getTotalItemsCount() {
-		return totalItemsCount;
-	}
-
-	private String getItemDisplayName(@Nullable Material material) {
+    private String getItemDisplayName(@Nullable Material material) {
 		if (material == null) return "Unbekannt";
 
 		String name = material.name();

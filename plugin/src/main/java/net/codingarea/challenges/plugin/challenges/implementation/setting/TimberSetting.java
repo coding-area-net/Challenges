@@ -21,6 +21,7 @@ import org.bukkit.inventory.ItemStack;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TimberSetting extends SettingModifier {
 
@@ -60,7 +61,7 @@ public class TimberSetting extends SettingModifier {
 
 		final int[] index = {0};
 
-		boolean damageItem = !item.getItemMeta().isUnbreakable() && !AbstractChallenge.getFirstInstance(NoItemDamageSetting.class).isEnabled();
+		boolean damageItem = !Objects.requireNonNull(item.getItemMeta()).isUnbreakable() && !AbstractChallenge.getFirstInstance(NoItemDamageSetting.class).isEnabled();
 
 		Bukkit.getScheduler().runTaskTimer(plugin, timer -> {
 			for (int i = 0; i < 2 && !treeBlocks.isEmpty(); i++) {

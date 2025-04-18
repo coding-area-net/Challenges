@@ -102,7 +102,7 @@ public final class GoalHelper {
 						if (displayed >= LEADERBOARD_SIZE) break;
 						scoreboard.addLine(Message.forName("scoreboard-leaderboard").asString(place, NameHelper.getName(current), NumberFormatter.MIDDLE_NUMBER.format(entry.getKey())));
 					}
-					if (displayed >= LEADERBOARD_SIZE) break;
+					if (displayed == LEADERBOARD_SIZE) break;
 					place++;
 				}
 			}

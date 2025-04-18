@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
 import javax.annotation.Nonnull;
-import net.anweisen.utilities.bukkit.utils.misc.MinecraftVersion;
+
 import net.anweisen.utilities.common.annotations.Since;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.RenderType;

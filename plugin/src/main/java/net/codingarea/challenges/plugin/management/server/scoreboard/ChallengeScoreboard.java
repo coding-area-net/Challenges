@@ -88,16 +88,16 @@ public final class ChallengeScoreboard {
 		}
 	}
 
-	public final void show() {
+	public void show() {
 		Challenges.getInstance().getScoreboardManager().setCurrentScoreboard(this);
 	}
 
-	public final void hide() {
+	public void hide() {
 		if (Challenges.getInstance().getScoreboardManager().getCurrentScoreboard() != this) return;
 		Challenges.getInstance().getScoreboardManager().setCurrentScoreboard(null);
 	}
 
-	public final boolean isShown() {
+	public boolean isShown() {
 		return Challenges.getInstance().getScoreboardManager().isShown(this);
 	}
 

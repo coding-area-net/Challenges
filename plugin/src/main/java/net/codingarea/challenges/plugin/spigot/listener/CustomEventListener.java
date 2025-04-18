@@ -81,8 +81,7 @@ public class CustomEventListener implements Listener {
 			isIgnored = true;
 		} else if (!AbstractChallenge.ignoreGameMode(event.getNewGameMode()) && AbstractChallenge.ignoreGameMode(event.getPlayer().getGameMode())) {
 			execute = true;
-			isIgnored = false;
-		}
+        }
 
 		if (execute) {
 			PlayerIgnoreStatusChangeEvent statusEvent = new PlayerIgnoreStatusChangeEvent(event.getPlayer(), isIgnored);
