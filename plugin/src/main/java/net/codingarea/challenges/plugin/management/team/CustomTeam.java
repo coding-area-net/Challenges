@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Player;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
