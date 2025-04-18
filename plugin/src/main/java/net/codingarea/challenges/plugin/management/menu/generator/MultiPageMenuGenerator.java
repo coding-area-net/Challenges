@@ -14,10 +14,6 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public abstract class MultiPageMenuGenerator extends MenuGenerator {
 
 	protected final List<Inventory> inventories = new ArrayList<>();

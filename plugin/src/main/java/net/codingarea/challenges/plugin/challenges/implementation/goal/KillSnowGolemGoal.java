@@ -11,10 +11,6 @@ import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @Since("2.0")
 public class KillSnowGolemGoal extends KillEntityGoal {
 

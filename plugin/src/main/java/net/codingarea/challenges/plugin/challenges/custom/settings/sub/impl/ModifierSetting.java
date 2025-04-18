@@ -10,10 +10,6 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 
 import java.util.function.Function;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class ModifierSetting extends ValueSetting implements IModifier {
 
 	private final int min, max;

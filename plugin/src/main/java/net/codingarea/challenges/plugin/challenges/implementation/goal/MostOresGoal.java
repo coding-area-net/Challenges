@@ -16,10 +16,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.1
- */
 @Since("2.1.1")
 public class MostOresGoal extends PointsGoal {
 

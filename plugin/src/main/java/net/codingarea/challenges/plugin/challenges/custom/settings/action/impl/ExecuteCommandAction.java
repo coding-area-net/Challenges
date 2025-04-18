@@ -13,10 +13,6 @@ import org.bukkit.entity.Player;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.2
- */
 public class ExecuteCommandAction extends PlayerTargetAction {
 
 	// Static because cannot be accessed before super has been called

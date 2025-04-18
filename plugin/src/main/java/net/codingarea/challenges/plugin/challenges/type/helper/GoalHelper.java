@@ -21,10 +21,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.ToIntBiFunction;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class GoalHelper {
 
 	public static final int LEADERBOARD_SIZE = 9;

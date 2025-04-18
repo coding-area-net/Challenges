@@ -13,10 +13,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class DatabaseHelper {
 
 	private static final Map<UUID, String> cachedTextures = new HashMap<>();

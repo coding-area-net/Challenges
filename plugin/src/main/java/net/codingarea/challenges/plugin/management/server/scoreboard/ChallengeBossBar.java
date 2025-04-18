@@ -19,10 +19,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class ChallengeBossBar {
 
 	private final Map<Player, BossBar> bossbars = new ConcurrentHashMap<>();

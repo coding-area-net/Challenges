@@ -20,10 +20,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class WorldCommand implements PlayerCommand, TabCompleter {
 
 	@Override

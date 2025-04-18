@@ -15,10 +15,6 @@ import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.Map.Entry;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 public class TimeCommand implements PlayerCommand, Completer {
 
 	private final Map<Long, String> names;

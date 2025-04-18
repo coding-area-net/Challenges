@@ -34,10 +34,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 import java.util.Map.Entry;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.1
- */
 @Since("2.1.1")
 public class RepeatInChunkChallenge extends Setting {
 

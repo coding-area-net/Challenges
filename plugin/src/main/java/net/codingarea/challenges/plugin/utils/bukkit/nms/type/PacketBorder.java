@@ -11,8 +11,6 @@ import java.util.function.Function;
 
 /**
  * Provides a WorldBorder that can be sent to the client via packets
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
  */
 public abstract class PacketBorder extends AbstractNMSClass {
 

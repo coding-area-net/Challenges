@@ -18,10 +18,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.0
- */
 public abstract class ForceBattleDisplayGoal<T extends ForceTarget<?>> extends ForceBattleGoal<T> {
 
     private Map<Player, ArmorStand> displayStands;

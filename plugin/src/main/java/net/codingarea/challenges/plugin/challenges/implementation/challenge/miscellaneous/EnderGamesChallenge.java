@@ -20,10 +20,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class EnderGamesChallenge extends TimedChallenge {
 

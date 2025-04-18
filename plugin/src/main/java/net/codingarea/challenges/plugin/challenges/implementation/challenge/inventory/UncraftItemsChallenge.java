@@ -18,10 +18,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0.2
- */
 @Since("2.0.2")
 public class UncraftItemsChallenge extends TimedChallenge {
 

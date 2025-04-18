@@ -23,10 +23,6 @@ import org.bukkit.potion.PotionEffectType;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class InvisibleMobsChallenge extends Setting {
 

@@ -6,10 +6,6 @@ import net.md_5.bungee.chat.ComponentSerializer;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Entity;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.0
- */
 public final class NMSUtils {
 
     public static void setEntityName(Entity entity, BaseComponent baseComponent) {

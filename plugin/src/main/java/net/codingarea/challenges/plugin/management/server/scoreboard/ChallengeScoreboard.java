@@ -18,10 +18,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class ChallengeScoreboard {
 
 	private final Map<Player, Objective> objectives = new ConcurrentHashMap<>();

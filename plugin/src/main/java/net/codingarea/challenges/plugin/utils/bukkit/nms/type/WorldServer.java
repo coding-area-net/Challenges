@@ -2,10 +2,6 @@ package net.codingarea.challenges.plugin.utils.bukkit.nms.type;
 
 import org.bukkit.World;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public abstract class WorldServer extends BukkitNMSClass<World> {
 	/**
 	 * @param object   The instance of the specified bukkit type

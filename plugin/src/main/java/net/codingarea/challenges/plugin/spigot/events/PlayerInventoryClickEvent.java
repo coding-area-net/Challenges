@@ -7,10 +7,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 public class PlayerInventoryClickEvent extends InventoryClickEventWrapper {
 
 	private static final HandlerList handlers = new HandlerList();

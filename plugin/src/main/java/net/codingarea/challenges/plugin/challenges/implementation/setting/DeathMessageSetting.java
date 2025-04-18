@@ -20,10 +20,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class DeathMessageSetting extends Modifier {
 
 	public static final int ENABLED = 2,

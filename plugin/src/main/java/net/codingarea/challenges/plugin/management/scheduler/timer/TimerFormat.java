@@ -5,10 +5,6 @@ import net.anweisen.utilities.common.config.Document;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class TimerFormat {
 
 	private final String seconds, minutes, hours, day, days;

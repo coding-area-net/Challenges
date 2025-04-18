@@ -6,10 +6,6 @@ import net.codingarea.challenges.plugin.utils.bukkit.nms.ReflectionUtil;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.implementations.v1_13.PacketBorder_1_13;
 import org.bukkit.World;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class PacketBorder_1_17 extends PacketBorder_1_13 {
 
     public PacketBorder_1_17(World world) {

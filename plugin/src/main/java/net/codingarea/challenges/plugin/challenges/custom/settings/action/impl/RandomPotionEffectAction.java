@@ -11,10 +11,6 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class RandomPotionEffectAction extends EntityTargetAction {
 
 	public RandomPotionEffectAction(String name) {

@@ -7,11 +7,6 @@ import org.bukkit.scheduler.BukkitTask;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @see ScheduleManager
- * @since 2.0
- */
 final class ScheduledTaskExecutor extends AbstractTaskExecutor {
 
 	private final ScheduledTaskConfig config;

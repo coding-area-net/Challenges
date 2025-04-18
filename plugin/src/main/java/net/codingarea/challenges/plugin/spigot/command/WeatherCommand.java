@@ -14,10 +14,6 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 public class WeatherCommand implements PlayerCommand, Completer {
 
 	@Override

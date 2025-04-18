@@ -19,10 +19,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public class MaxHealthSetting extends Modifier {
 
 	/**

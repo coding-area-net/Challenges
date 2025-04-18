@@ -24,10 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class WorldManager {
 
 	private static final String customSeedWorldPrefix = "pregenerated_";

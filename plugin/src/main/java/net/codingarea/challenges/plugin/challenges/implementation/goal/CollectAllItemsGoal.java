@@ -33,10 +33,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @Since("2.0")
 public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
 

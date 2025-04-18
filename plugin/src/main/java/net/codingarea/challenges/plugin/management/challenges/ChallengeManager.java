@@ -22,10 +22,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class ChallengeManager {
 
 	private final List<IChallenge> challenges = new LinkedList<>();

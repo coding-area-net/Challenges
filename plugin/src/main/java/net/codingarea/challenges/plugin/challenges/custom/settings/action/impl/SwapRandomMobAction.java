@@ -16,10 +16,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class SwapRandomMobAction extends ChallengeAction {
 
 	public SwapRandomMobAction(String name) {

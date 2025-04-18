@@ -7,10 +7,6 @@ import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class RandomJumpGenerator implements IJumpGenerator {
 
 	@Nonnull

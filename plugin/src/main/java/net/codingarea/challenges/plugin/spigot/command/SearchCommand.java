@@ -22,10 +22,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class SearchCommand implements SenderCommand, Completer {
 
 	@Override

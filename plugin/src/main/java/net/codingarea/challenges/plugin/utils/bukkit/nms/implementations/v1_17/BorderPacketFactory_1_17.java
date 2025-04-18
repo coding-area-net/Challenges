@@ -6,10 +6,6 @@ import net.codingarea.challenges.plugin.utils.bukkit.nms.ReflectionUtil;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.type.BorderPacketFactory;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.type.PacketBorder;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class BorderPacketFactory_1_17 extends BorderPacketFactory {
 
     @Override

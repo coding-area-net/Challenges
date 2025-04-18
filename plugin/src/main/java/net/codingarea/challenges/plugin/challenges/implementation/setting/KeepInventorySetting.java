@@ -11,10 +11,6 @@ import org.bukkit.World;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class KeepInventorySetting extends Setting {
 
 	public KeepInventorySetting() {

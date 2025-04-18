@@ -11,10 +11,6 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class ScheduleManager {
 
 	private final Map<ScheduledTaskConfig, ScheduledTaskExecutor> scheduledTaskExecutorsByConfig = new ConcurrentHashMap<>();

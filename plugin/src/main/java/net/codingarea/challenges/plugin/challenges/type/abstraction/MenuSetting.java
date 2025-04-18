@@ -29,10 +29,6 @@ import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public abstract class MenuSetting extends Setting {
 
 	private final Map<String, SubSetting> settings = new LinkedHashMap<>();

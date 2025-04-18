@@ -5,10 +5,6 @@ import javax.annotation.Nullable;
 import lombok.Getter;
 import net.codingarea.challenges.plugin.content.Message;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 @Getter
 public enum ChallengeEndCause {
 

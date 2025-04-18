@@ -8,10 +8,6 @@ import org.bukkit.entity.Player;
 
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class DropRandomItemAction extends PlayerTargetAction {
 
 	public DropRandomItemAction(String name) {

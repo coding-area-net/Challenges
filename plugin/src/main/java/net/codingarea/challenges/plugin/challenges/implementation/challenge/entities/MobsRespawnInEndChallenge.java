@@ -26,10 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.2
- */
 @Since("2.1.2")
 public class MobsRespawnInEndChallenge extends Setting {
 

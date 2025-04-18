@@ -16,10 +16,6 @@ import org.bukkit.entity.Player;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @Since("2.0")
 @ExcludeFromRandomChallenges
 public class InvertHealthChallenge extends TimedChallenge {

@@ -12,10 +12,6 @@ import org.bukkit.util.Vector;
 
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class BoostEntityInAirAction extends EntityTargetAction {
 
 	public BoostEntityInAirAction(String name) {

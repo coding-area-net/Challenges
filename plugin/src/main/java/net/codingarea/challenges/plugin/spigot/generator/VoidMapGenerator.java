@@ -11,10 +11,6 @@ import org.bukkit.generator.ChunkGenerator;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class VoidMapGenerator extends ChunkGenerator {
 
 	private static final boolean generateEndPortal = MinecraftVersion.current().getMinor() == 18;

@@ -15,10 +15,6 @@ import org.bukkit.inventory.ItemStack;
 import javax.annotation.Nonnull;
 import java.util.*;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class CraftingRandomizerChallenge extends RandomizerSetting {
 
 	protected final Map<Material, Material> randomization = new HashMap<>();

@@ -7,10 +7,6 @@ import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class TitleManager {
 
 	private static final int fadein = 5, duration = 20, fadeout = 10;

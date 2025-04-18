@@ -4,10 +4,6 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettin
 
 import java.util.function.Supplier;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public abstract class EntityTargetAction extends ChallengeAction implements IEntityTargetAction {
 
 	public EntityTargetAction(String name,

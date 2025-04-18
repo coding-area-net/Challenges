@@ -20,10 +20,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @Since("2.0")
 public class RandomChallengeChallenge extends TimedChallenge {
 

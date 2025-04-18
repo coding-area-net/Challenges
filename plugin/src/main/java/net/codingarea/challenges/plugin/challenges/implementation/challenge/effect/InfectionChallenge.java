@@ -20,10 +20,6 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class InfectionChallenge extends Setting {
 
 	public InfectionChallenge() {

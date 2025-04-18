@@ -17,10 +17,6 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class FoodOnceChallenge extends SettingModifier {
 
 	public FoodOnceChallenge() {

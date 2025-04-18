@@ -6,10 +6,6 @@ import org.bukkit.Bukkit;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class ConsolePrint {
 
 	private ConsolePrint() {

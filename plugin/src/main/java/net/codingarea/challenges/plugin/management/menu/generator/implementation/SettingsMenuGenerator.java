@@ -7,10 +7,6 @@ import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickI
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class SettingsMenuGenerator extends ChallengeMenuGenerator {
 
 	public static final int[] SLOTS = {10, 11, 12, 13, 14, 15, 16};

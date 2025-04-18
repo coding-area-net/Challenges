@@ -18,10 +18,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.2
- */
 @Since("2.1.2")
 public class EntityRandomEffectChallenge extends Setting {
 

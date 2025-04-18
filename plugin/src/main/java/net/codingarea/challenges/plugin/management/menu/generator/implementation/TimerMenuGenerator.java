@@ -29,10 +29,6 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class TimerMenuGenerator extends MenuGenerator {
 
 	public static final int SIZE = 5 * 9;

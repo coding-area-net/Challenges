@@ -19,10 +19,6 @@ import javax.annotation.Nonnull;
 import java.lang.reflect.Constructor;
 import java.util.Optional;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class ModuleChallengeLoader {
 
 	protected final BukkitModule plugin;

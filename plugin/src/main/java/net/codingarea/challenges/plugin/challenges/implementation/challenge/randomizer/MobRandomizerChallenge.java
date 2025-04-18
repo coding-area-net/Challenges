@@ -34,10 +34,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntitySpawnEvent;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class MobRandomizerChallenge extends RandomizerSetting {
 

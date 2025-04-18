@@ -29,10 +29,6 @@ import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.Map.Entry;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class PositionSetting extends Setting implements PlayerCommand, TabCompleter {
 
 	private final Map<String, Location> positions = new HashMap<>();

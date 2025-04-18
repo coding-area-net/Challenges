@@ -16,10 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class ChallengeAPI {
 
 	private ChallengeAPI() {

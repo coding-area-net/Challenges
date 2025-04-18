@@ -33,10 +33,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 @Since("2.2.3")
 @ExcludeFromRandomChallenges
 public class LevelBorderChallenge extends Setting {

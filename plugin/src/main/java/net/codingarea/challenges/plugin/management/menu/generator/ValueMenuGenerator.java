@@ -18,10 +18,6 @@ import org.bukkit.inventory.Inventory;
 import javax.annotation.Nonnull;
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 @Getter
 public abstract class ValueMenuGenerator extends MultiPageMenuGenerator {
 

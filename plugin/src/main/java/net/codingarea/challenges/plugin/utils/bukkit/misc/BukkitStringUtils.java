@@ -18,10 +18,6 @@ import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.2.0
- */
 public class BukkitStringUtils {
 
 	@Nonnull

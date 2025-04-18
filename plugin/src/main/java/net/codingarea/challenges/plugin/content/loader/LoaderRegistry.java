@@ -8,10 +8,6 @@ import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class LoaderRegistry {
 
 	private static final AtomicInteger loading = new AtomicInteger(); // Keeps track of how many loaders are still loading

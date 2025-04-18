@@ -13,10 +13,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 public abstract class HydraChallenge extends Setting {
 
 	public HydraChallenge(@Nonnull MenuType menu) {

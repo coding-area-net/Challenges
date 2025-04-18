@@ -24,10 +24,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
 
 	protected final List<IChallenge> challenges = new LinkedList<>();

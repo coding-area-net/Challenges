@@ -6,10 +6,6 @@ import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class TimerTaskConfig extends AbstractTaskConfig {
 
 	private final TimerStatus[] status;

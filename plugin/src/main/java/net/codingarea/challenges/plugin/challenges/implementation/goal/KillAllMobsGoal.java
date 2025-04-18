@@ -13,10 +13,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.3
- */
 @Since("2.1.3")
 public class KillAllMobsGoal extends KillMobsGoal {
 

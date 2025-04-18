@@ -16,10 +16,6 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public class HelpListener implements Listener {
 
 	@EventHandler(priority = EventPriority.MONITOR)

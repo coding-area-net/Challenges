@@ -23,11 +23,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/KxmischesDomi
- * @since 2.0
- */
 public final class StatsManager implements Listener {
 
 	@Getter

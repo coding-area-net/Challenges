@@ -30,11 +30,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class CutCleanSetting extends MenuSetting {
 

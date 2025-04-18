@@ -7,10 +7,6 @@ import org.bukkit.Material;
 
 import java.util.function.Supplier;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.2.0
- */
 public class SettingCategory {
 
 	//Challenges

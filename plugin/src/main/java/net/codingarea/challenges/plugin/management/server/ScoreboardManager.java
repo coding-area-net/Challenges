@@ -15,10 +15,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class ScoreboardManager {
 
 	private final List<ChallengeBossBar> bossbars = new ArrayList<>();

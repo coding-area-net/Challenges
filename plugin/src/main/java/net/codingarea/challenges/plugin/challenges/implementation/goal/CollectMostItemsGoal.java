@@ -18,10 +18,6 @@ import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class CollectMostItemsGoal extends CollectionGoal {
 
 	public CollectMostItemsGoal() {

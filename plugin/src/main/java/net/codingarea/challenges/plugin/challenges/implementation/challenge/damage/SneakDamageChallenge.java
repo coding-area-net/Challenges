@@ -18,10 +18,6 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class SneakDamageChallenge extends SettingModifier {
 
 	public SneakDamageChallenge() {

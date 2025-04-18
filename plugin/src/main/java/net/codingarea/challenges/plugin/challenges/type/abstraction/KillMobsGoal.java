@@ -17,10 +17,6 @@ import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.3
- */
 public abstract class KillMobsGoal extends SettingGoal {
 
 	protected static List<EntityType> entitiesKilled;

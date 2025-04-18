@@ -28,10 +28,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class AllBlocksDisappearChallenge extends MenuSetting {
 

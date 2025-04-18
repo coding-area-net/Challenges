@@ -7,10 +7,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.2
- */
 public class ScoreboardUpdateListener implements Listener {
 
 	@EventHandler

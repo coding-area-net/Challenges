@@ -24,10 +24,6 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class DatabaseManager {
 
 	private final Map<String, Tuple<String, JavaPlugin>> registry = new HashMap<>();

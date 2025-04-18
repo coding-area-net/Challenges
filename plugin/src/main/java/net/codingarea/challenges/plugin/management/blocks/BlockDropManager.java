@@ -15,10 +15,6 @@ import java.util.Map.Entry;
 import java.util.function.BooleanSupplier;
 import java.util.stream.Collectors;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class BlockDropManager {
 
 	private final Map<Material, RegisteredDrops> drops = new HashMap<>();

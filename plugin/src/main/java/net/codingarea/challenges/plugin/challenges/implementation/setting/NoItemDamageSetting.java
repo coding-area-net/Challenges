@@ -10,10 +10,6 @@ import org.bukkit.event.player.PlayerItemDamageEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class NoItemDamageSetting extends Setting {
 
 	public NoItemDamageSetting() {

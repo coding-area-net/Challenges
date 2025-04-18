@@ -10,10 +10,6 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.2
- */
 @Since("2.1.2")
 @RequireVersion(MinecraftVersion.V1_14)
 public class CollectWorkstationsGoal extends ItemCollectionGoal {

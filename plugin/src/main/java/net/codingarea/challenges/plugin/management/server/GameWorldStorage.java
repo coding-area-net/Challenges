@@ -17,10 +17,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class GameWorldStorage implements GamestateSaveable {
 
 	private final List<World> worlds = new LinkedList<>();

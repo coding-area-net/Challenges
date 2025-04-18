@@ -25,10 +25,6 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.function.BiConsumer;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @ExcludeFromRandomChallenges
 public class ForceBlockChallenge extends EndingForceChallenge {
 

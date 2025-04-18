@@ -2,10 +2,6 @@ package net.codingarea.challenges.plugin.utils.misc;
 
 import org.bukkit.Material;
 
-/**
- * @author KxmischesDomi | https://github.com/KxmischesDomi
- * @since 2.0
- */
 public final class ArmorUtils {
 
 	private ArmorUtils() {

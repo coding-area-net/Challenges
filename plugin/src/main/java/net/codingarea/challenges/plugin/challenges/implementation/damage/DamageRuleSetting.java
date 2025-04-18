@@ -16,10 +16,6 @@ import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class DamageRuleSetting extends Setting {
 
 	private final List<DamageCause> causes;

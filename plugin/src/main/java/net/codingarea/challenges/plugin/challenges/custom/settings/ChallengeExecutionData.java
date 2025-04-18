@@ -15,10 +15,6 @@ import org.bukkit.event.Cancellable;
 
 import java.util.*;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class ChallengeExecutionData {
 
 	@Getter

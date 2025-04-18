@@ -23,10 +23,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public final class ServerManager {
 
 	private final boolean setSpectatorOnWin;

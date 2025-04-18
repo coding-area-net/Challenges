@@ -11,10 +11,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class MineMostBlocksGoal extends PointsGoal {
 
 	public MineMostBlocksGoal() {

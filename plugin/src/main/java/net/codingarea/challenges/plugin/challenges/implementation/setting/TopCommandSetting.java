@@ -16,10 +16,6 @@ import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class TopCommandSetting extends Setting implements PlayerCommand {
 
 	public TopCommandSetting() {

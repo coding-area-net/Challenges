@@ -34,10 +34,6 @@ import org.bukkit.inventory.Inventory;
 import javax.annotation.Nonnull;
 import java.util.*;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 @ToString
 public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGenerator {
 

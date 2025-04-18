@@ -20,10 +20,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class BlockMaterialSetting extends Setting {
 
 	private final String name;

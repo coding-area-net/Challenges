@@ -22,10 +22,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public class RespawnSetting extends Setting {
 
 	private final Map<Player, Location> locationsBeforeRespawn = new ConcurrentHashMap<>();

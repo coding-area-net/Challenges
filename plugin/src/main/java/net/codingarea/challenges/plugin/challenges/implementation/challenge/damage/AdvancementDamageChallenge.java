@@ -14,10 +14,6 @@ import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class AdvancementDamageChallenge extends SettingModifier {
 
 	public AdvancementDamageChallenge() {

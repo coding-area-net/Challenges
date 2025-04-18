@@ -14,10 +14,6 @@ import org.bukkit.entity.EntityType;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @Since("2.2.0")
 @RequireVersion(MinecraftVersion.V1_19)
 public class KillWardenGoal extends KillEntityGoal {

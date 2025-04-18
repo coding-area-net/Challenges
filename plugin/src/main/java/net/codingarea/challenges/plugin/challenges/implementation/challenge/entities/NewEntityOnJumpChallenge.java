@@ -18,10 +18,6 @@ import org.bukkit.event.EventPriority;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class NewEntityOnJumpChallenge extends Setting {
 

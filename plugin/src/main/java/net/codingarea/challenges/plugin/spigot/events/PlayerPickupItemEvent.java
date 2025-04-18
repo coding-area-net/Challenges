@@ -9,10 +9,6 @@ import org.bukkit.event.player.PlayerEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Getter
 public class PlayerPickupItemEvent extends PlayerEvent implements Cancellable {
 

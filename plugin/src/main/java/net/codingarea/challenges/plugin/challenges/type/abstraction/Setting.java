@@ -11,10 +11,6 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 
 public abstract class Setting extends AbstractChallenge {
 

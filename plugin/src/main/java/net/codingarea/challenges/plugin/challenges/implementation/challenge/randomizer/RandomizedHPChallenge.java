@@ -31,10 +31,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class RandomizedHPChallenge extends SettingModifier {
 
 	private final Random random = new Random();

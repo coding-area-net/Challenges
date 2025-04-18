@@ -16,11 +16,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class FloorIsLavaChallenge extends SettingModifier {
 
 	public FloorIsLavaChallenge() {

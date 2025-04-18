@@ -5,10 +5,6 @@ import net.codingarea.challenges.plugin.Challenges;
 import javax.annotation.Nonnull;
 import java.io.File;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public abstract class ContentLoader {
 
 	@Nonnull

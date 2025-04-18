@@ -25,11 +25,6 @@ import net.codingarea.challenges.plugin.utils.bukkit.command.ForwardingCommand;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 @Getter
 public final class Challenges extends BukkitModule {
 

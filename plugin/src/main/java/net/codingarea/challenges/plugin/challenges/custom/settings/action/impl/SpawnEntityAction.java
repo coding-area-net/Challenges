@@ -10,10 +10,6 @@ import org.bukkit.entity.EntityType;
 
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.1
- */
 public class SpawnEntityAction extends EntityTargetAction {
 
 	public SpawnEntityAction(String name) {

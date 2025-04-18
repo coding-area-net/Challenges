@@ -20,10 +20,6 @@ import org.bukkit.util.RayTraceResult;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class StoneSightChallenge extends Setting {
 

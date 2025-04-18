@@ -21,10 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0.2
- */
 @Since("2.0.2")
 public class DontStopRunningChallenge extends SettingModifier {
 

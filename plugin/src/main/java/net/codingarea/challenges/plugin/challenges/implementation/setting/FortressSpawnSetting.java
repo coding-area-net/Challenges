@@ -10,10 +10,6 @@ import org.bukkit.StructureType;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @Since("2.0")
 public class FortressSpawnSetting extends NetherPortalSpawnSetting {
 

@@ -8,10 +8,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.net.URL;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class UpdateLoader extends ContentLoader {
 
 	public static final int RESOURCE_ID = 80548;

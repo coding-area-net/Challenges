@@ -16,10 +16,6 @@ import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.2
- */
 public abstract class ItemCollectionGoal extends CollectionGoal {
 
 	public ItemCollectionGoal(@NotNull Material... target) {
