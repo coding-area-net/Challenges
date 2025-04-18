@@ -14,10 +14,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public abstract class KillEntityGoal extends SettingGoal {
 
 	protected final EntityType entity;

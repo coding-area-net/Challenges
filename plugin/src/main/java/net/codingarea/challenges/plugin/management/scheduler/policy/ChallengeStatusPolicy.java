@@ -5,10 +5,6 @@ import net.codingarea.challenges.plugin.challenges.type.IChallenge;
 import javax.annotation.Nonnull;
 import java.util.function.Predicate;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public enum ChallengeStatusPolicy implements IPolicy {
 
 	ALWAYS(challenge -> true),

@@ -8,10 +8,6 @@ import org.bukkit.inventory.Inventory;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @ToString
 public class ChallengeMenuClickInfo extends MenuClickInfo {
 

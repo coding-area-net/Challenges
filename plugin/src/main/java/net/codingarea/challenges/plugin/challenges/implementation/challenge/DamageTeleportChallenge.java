@@ -18,10 +18,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import javax.annotation.Nonnull;
 import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0.2
- */
 @Since("2.0.2")
 public class DamageTeleportChallenge extends SettingModifier {
 

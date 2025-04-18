@@ -26,11 +26,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/KxmischesDomi
- * @since 2.0
- */
 public class StatsCommand implements PlayerCommand {
 
 	private final Map<Player, Long> submitTimeByPlayer = new ConcurrentHashMap<>();

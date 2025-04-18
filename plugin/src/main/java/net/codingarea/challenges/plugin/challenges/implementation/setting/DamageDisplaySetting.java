@@ -23,10 +23,6 @@ import org.bukkit.projectiles.ProjectileSource;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class DamageDisplaySetting extends Setting {
 
 	public DamageDisplaySetting() {

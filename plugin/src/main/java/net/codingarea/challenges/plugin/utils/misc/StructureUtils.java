@@ -3,10 +3,6 @@ package net.codingarea.challenges.plugin.utils.misc;
 import org.bukkit.Material;
 import org.bukkit.StructureType;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class StructureUtils {
     public static Material getStructureIcon(StructureType structureType) {
 

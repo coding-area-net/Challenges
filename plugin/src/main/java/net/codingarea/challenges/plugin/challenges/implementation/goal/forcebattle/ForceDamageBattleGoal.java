@@ -17,10 +17,6 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class ForceDamageBattleGoal extends ForceBattleGoal<DamageTarget> {
 
     public ForceDamageBattleGoal() {

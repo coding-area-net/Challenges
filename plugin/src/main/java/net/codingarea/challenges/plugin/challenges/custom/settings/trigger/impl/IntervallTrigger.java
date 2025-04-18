@@ -12,10 +12,6 @@ import org.bukkit.Material;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class IntervallTrigger extends ChallengeTrigger {
 
 	public IntervallTrigger(String name) {

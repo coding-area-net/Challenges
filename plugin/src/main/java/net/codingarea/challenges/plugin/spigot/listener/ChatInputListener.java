@@ -12,10 +12,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1
- */
 public class ChatInputListener implements Listener {
 
 	private static Map<UUID, Consumer<AsyncPlayerChatEvent>> inputActions = new HashMap<>();

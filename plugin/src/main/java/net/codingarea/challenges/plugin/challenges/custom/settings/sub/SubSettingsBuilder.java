@@ -15,10 +15,6 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public abstract class SubSettingsBuilder {
 
 	private String key;

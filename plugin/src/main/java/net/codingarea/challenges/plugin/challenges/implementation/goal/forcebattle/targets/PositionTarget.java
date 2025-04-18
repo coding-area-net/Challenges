@@ -8,10 +8,6 @@ import net.codingarea.challenges.plugin.content.Message;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class PositionTarget extends ForceTarget<Tuple<Double, Double>> {
 
     public PositionTarget(double x, double z) {

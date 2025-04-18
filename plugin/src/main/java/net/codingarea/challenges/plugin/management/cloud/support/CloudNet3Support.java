@@ -12,10 +12,6 @@ import org.bukkit.entity.Player;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class CloudNet3Support implements CloudSupport {
 
 	@Nonnull

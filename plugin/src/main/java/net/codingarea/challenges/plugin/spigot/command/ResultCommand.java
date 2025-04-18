@@ -11,10 +11,6 @@ import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.1.4
- */
 public class ResultCommand implements PlayerCommand {
 	@Override
 	public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {

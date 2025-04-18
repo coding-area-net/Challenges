@@ -10,10 +10,6 @@ import org.bukkit.entity.EntityType;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class HydraNormalChallenge extends HydraChallenge {
 
 	public HydraNormalChallenge() {

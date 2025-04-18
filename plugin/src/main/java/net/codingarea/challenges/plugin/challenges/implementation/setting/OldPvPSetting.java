@@ -20,10 +20,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @Since("2.0")
 public class OldPvPSetting extends Setting {
 

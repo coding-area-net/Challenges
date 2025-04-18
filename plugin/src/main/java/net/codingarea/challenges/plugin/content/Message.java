@@ -13,10 +13,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public interface Message {
 
 	String NULL = "§r§fN/A";

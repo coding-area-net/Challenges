@@ -13,10 +13,6 @@ import org.bukkit.WorldBorder;
 
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.3
- */
 public class ChangeWorldBorderAction extends ChallengeAction {
 
 	public ChangeWorldBorderAction(String name) {

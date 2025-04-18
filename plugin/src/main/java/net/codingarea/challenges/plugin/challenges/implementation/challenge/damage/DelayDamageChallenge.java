@@ -20,11 +20,6 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author rollocraft | https://github.com/rollocraft
- * @since 2.3.2
- */
-
 @Since("2.3.2")
 public class DelayDamageChallenge extends TimedChallenge {
 

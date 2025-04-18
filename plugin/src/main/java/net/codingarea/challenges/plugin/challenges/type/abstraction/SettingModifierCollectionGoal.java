@@ -9,10 +9,6 @@ import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public abstract class SettingModifierCollectionGoal extends ModifierCollectionGoal {
 
 	public SettingModifierCollectionGoal(int min, int max, @Nonnull Object... target) {

@@ -14,10 +14,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1
- */
 public class CustomMainSettingsMenuGenerator extends ChooseItemGenerator implements IParentCustomGenerator {
 
 	@Getter

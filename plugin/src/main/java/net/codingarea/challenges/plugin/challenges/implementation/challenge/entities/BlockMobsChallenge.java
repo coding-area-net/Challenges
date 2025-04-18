@@ -23,10 +23,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.3
- */
 @Since("2.1.3")
 public class BlockMobsChallenge extends Setting {
 

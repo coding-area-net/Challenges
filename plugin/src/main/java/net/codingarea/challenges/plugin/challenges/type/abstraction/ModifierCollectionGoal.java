@@ -11,10 +11,6 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 public abstract class ModifierCollectionGoal extends CollectionGoal implements IModifier {
 
 	private final int max, min;

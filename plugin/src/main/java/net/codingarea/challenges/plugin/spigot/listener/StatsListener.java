@@ -33,11 +33,6 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @see net.codingarea.challenges.plugin.management.stats.StatsManager
- * @since 2.0
- */
 public class StatsListener implements Listener {
 
 	private final List<Player> dragonDamager = new ArrayList<>();

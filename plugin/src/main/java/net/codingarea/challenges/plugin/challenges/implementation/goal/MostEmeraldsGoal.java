@@ -18,10 +18,6 @@ import org.bukkit.inventory.PlayerInventory;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0.2
- */
 @Since("2.0.2")
 public class MostEmeraldsGoal extends PointsGoal {
 

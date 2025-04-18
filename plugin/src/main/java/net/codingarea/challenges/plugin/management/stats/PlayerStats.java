@@ -9,10 +9,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class PlayerStats {
 
 	private final Map<Statistic, Double> values = new EnumMap<>(Statistic.class);

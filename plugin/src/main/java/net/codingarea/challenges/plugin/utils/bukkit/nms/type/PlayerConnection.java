@@ -3,7 +3,6 @@ package net.codingarea.challenges.plugin.utils.bukkit.nms.type;
 /**
  * @author TobiasDeBruijn | https://github.com/TobiasDeBruijn
  * @source https://github.com/TobiasDeBruijn/BukkitReflectionUtil
- * @since 2.2.0
  */
 public abstract class PlayerConnection extends AbstractNMSClass {
 

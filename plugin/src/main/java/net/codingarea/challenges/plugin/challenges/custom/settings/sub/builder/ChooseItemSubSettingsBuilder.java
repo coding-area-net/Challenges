@@ -16,10 +16,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Consumer;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 @Getter
 public class ChooseItemSubSettingsBuilder extends GeneratorSubSettingsBuilder {
 

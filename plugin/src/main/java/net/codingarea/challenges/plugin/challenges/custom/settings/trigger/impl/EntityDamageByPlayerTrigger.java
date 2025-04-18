@@ -9,10 +9,6 @@ import org.bukkit.event.EventPriority;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class EntityDamageByPlayerTrigger extends ChallengeTrigger {
 
 	public EntityDamageByPlayerTrigger(String name) {

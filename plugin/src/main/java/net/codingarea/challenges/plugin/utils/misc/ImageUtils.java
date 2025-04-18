@@ -11,10 +11,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class ImageUtils {
 
 	public static final char IMAGE_CHAR = '█';

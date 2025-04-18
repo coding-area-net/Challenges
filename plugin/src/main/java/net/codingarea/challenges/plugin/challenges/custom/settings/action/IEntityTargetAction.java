@@ -15,10 +15,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public interface IEntityTargetAction extends IChallengeAction {
 
 	static List<Entity> getTargets(Entity triggerTarget, Map<String, String[]> subActions) {

@@ -20,10 +20,6 @@ import org.bukkit.event.EventPriority;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class CollectWoodGoal extends SettingModifierCollectionGoal {
 
 	private static final boolean newNether = MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_16);

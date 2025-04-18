@@ -19,10 +19,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.3
- */
 @Since("2.1.3")
 public class RandomTeleportOnHitChallenge extends Setting {
 

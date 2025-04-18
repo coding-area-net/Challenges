@@ -20,10 +20,6 @@ import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 @CanInstaKillOnEnable
 public class OnlyDirtChallenge extends Setting {
 

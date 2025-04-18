@@ -32,10 +32,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 @Since("2.1.0")
 public class RaceGoal extends SettingModifierGoal {
 

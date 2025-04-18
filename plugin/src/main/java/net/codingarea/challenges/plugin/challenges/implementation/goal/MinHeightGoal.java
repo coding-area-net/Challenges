@@ -11,10 +11,6 @@ import org.bukkit.Material;
 import org.bukkit.World.Environment;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 @Since("2.1.0")
 public class MinHeightGoal extends FirstPlayerAtHeightGoal {
 

@@ -10,10 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.LinkedHashMap;
 import java.util.function.Supplier;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public abstract class ChallengeTrigger extends ChallengeSetting implements
 		IChallengeTrigger {
 

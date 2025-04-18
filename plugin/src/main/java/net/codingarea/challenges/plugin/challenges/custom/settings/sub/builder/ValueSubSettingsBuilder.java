@@ -22,10 +22,6 @@ import java.util.Map.Entry;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 @Getter
 public class ValueSubSettingsBuilder extends GeneratorSubSettingsBuilder {
 

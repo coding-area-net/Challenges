@@ -10,10 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class ColorConversions {
 
 	private static final Map<ChatColor, Color> colorsByChatColor = new HashMap<>();

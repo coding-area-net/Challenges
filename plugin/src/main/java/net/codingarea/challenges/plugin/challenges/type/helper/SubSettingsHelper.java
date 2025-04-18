@@ -17,10 +17,6 @@ import org.bukkit.StructureType;
 import org.bukkit.entity.EntityType;
 import org.bukkit.potion.PotionEffectType;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.1
- */
 public class SubSettingsHelper {
 
 	public static final String

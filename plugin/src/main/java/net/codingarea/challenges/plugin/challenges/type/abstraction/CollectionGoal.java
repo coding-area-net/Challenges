@@ -15,10 +15,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public abstract class CollectionGoal extends SettingGoal {
 
 	private final Map<UUID, List<String>> collections = new HashMap<>();

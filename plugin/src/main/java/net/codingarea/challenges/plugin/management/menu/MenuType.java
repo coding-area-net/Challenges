@@ -14,10 +14,7 @@ import org.bukkit.Material;
 import javax.annotation.Nonnull;
 import java.util.function.Consumer;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
+
 public enum MenuType {
 
 	TIMER("timer", Material.CLOCK, new TimerMenuGenerator(), false),

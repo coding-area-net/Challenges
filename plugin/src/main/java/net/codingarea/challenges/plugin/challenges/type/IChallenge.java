@@ -11,11 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @see ChallengeManager
- * @since 2.0
- */
 public interface IChallenge extends GamestateSaveable {
 
 	/**

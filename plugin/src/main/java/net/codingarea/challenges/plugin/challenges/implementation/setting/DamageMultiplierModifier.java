@@ -14,10 +14,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public class DamageMultiplierModifier extends Modifier {
 
 	public DamageMultiplierModifier() {

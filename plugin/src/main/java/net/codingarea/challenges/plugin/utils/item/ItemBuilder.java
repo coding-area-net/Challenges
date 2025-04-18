@@ -29,10 +29,6 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public class ItemBuilder extends net.anweisen.utilities.bukkit.utils.item.ItemBuilder {
 
 	public static final ItemStack BLOCKED_ITEM = new ItemBuilder(Material.BARRIER, "§cBlocked").build();

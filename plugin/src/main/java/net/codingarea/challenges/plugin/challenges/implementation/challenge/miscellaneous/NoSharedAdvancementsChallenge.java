@@ -19,10 +19,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.2.0
- */
 @Since("2.2.0")
 public class NoSharedAdvancementsChallenge extends Setting {
 

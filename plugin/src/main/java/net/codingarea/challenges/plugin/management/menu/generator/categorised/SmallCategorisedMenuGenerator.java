@@ -1,9 +1,5 @@
 package net.codingarea.challenges.plugin.management.menu.generator.categorised;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.2.0
- */
 public class SmallCategorisedMenuGenerator extends CategorisedMenuGenerator {
 
 	@Override

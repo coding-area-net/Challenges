@@ -14,10 +14,6 @@ import org.bukkit.event.player.PlayerExpChangeEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class NoExpChallenge extends Setting {
 
 	public NoExpChallenge() {

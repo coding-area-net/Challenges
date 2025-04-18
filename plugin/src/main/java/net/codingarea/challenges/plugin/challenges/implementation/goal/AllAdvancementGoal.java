@@ -26,10 +26,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 @Since("2.1.0")
 public class AllAdvancementGoal extends PointsGoal {
 

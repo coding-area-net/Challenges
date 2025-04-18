@@ -10,10 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import java.util.function.BiConsumer;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public abstract class AbstractForceChallenge extends TimedChallenge {
 
 	public static final int WAITING = 0,

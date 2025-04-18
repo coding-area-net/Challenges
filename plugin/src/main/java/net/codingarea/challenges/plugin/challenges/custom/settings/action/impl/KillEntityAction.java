@@ -10,10 +10,6 @@ import org.bukkit.entity.Player;
 
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class KillEntityAction extends EntityTargetAction {
 
 	public KillEntityAction(String name) {

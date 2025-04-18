@@ -13,10 +13,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public abstract class PointsGoal extends SettingGoal {
 
 	private final Map<UUID, Integer> points = new HashMap<>();

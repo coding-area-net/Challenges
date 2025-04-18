@@ -10,10 +10,6 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class AdvancementTarget extends ForceTarget<Advancement> {
 
     public AdvancementTarget(Advancement target) {

@@ -18,10 +18,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.3
- */
 @Since("2.1.3")
 public class ForceItemBattleGoal extends ForceBattleDisplayGoal<ItemTarget> {
 

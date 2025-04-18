@@ -16,10 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class MobTarget extends ForceTarget<EntityType> {
 
     public MobTarget(EntityType target) {

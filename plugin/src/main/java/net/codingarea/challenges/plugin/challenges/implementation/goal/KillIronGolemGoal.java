@@ -12,10 +12,6 @@ import org.bukkit.entity.EntityType;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @Since("2.0")
 public class KillIronGolemGoal extends KillEntityGoal {
 

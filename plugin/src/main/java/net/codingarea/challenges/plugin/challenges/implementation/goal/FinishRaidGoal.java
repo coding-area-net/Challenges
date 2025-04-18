@@ -19,10 +19,6 @@ import org.bukkit.event.raid.RaidFinishEvent;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 @RequireVersion(MinecraftVersion.V1_16)
 public class FinishRaidGoal extends SettingGoal {

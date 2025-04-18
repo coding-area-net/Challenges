@@ -8,10 +8,6 @@ import org.bukkit.Material;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class StatsHelper {
 
 	private StatsHelper() {

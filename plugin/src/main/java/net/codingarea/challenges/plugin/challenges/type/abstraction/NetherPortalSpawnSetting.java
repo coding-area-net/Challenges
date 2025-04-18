@@ -18,11 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 public abstract class NetherPortalSpawnSetting extends OneEnabledSetting {
 
 	private static final String id = "netherportal_handle";

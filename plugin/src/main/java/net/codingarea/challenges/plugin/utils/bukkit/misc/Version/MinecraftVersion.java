@@ -5,10 +5,6 @@ import org.bukkit.Bukkit;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public enum MinecraftVersion implements Version {
 
     V1_0,       // 1.0

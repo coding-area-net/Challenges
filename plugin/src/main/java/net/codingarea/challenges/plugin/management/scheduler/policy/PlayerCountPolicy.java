@@ -5,10 +5,6 @@ import org.bukkit.Bukkit;
 import javax.annotation.Nonnull;
 import java.util.function.BiPredicate;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public enum PlayerCountPolicy implements IPolicy {
 
 	ALWAYS((online, max) -> true),

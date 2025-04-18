@@ -15,10 +15,6 @@ import org.bukkit.event.EventHandler;
 import javax.annotation.Nonnull;
 import java.util.Collection;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class AllMobsToDeathPoint extends Setting {
 

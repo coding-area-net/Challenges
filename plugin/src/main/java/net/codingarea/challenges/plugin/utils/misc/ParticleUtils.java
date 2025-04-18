@@ -18,13 +18,6 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * This class contains util methods to create fancy particles.
- * Most of these methods were found in {@link Utils} previously (pre 2.0).
- *
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class ParticleUtils {
 
 	private static final IRandom iRandom = IRandom.create();

@@ -5,10 +5,6 @@ import org.bukkit.Bukkit;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 final class TimerTaskExecutor extends AbstractTaskExecutor {
 
 	private final TimerTaskConfig config;

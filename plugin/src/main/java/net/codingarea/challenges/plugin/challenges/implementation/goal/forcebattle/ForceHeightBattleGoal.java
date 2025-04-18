@@ -16,10 +16,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class ForceHeightBattleGoal extends ForceBattleGoal<HeightTarget> {
 
     public ForceHeightBattleGoal() {

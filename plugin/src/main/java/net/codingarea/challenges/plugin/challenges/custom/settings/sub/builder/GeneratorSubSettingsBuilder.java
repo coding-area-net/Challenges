@@ -6,10 +6,6 @@ import net.codingarea.challenges.plugin.management.menu.generator.MenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.IParentCustomGenerator;
 import org.bukkit.entity.Player;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.2
- */
 public abstract class GeneratorSubSettingsBuilder extends SubSettingsBuilder {
 
 	public GeneratorSubSettingsBuilder(String key) {

@@ -15,10 +15,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class CollectMostDeathsGoal extends CollectionGoal {
 
 	public CollectMostDeathsGoal() {

@@ -14,10 +14,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 public abstract class InventoryClickEventWrapper extends Event {
 
 	private final InventoryClickEvent event;

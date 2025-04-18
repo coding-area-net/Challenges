@@ -21,10 +21,6 @@ import org.bukkit.inventory.ItemStack;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class WaterMLGChallenge extends WorldDependentChallenge {
 
 	public WaterMLGChallenge() {

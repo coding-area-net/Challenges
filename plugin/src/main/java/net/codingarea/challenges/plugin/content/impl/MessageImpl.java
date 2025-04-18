@@ -22,10 +22,6 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class MessageImpl implements Message {
 
 	protected final String name;

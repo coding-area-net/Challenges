@@ -10,10 +10,6 @@ import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickI
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public abstract class SettingModifierGoal extends SettingModifier implements IGoal {
 
 	public SettingModifierGoal(@Nonnull MenuType menu) {

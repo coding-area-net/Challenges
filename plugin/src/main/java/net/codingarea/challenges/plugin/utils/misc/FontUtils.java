@@ -4,10 +4,6 @@ import org.bukkit.ChatColor;
 
 import java.util.LinkedList;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class FontUtils {
 
 	private static final char[] SMALL_CAPS_ALPHABET = "ᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ".toCharArray();

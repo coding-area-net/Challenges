@@ -5,10 +5,6 @@ import net.anweisen.utilities.common.collection.NumberFormatter;
 import javax.annotation.Nonnull;
 import java.util.function.Function;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public enum Statistic {
 
 	DRAGON_KILLED(Display.INTEGER),

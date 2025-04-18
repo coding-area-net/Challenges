@@ -7,10 +7,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.LinkedHashMap;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class SubSettingChooseMultipleMenuGenerator extends ChooseMultipleItemGenerator {
 
 	private final IParentCustomGenerator parent;

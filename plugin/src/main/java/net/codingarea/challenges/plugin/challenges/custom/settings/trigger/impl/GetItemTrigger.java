@@ -7,10 +7,6 @@ import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.3
- */
 public class GetItemTrigger extends ChallengeTrigger {
 
 	public GetItemTrigger(String name) {

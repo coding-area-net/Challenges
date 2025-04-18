@@ -17,10 +17,6 @@ import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class RegenerationSetting extends Modifier {
 
 	public RegenerationSetting() {

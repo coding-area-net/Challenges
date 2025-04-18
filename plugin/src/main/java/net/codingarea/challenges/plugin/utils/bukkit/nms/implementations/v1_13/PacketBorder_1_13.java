@@ -9,10 +9,6 @@ import net.codingarea.challenges.plugin.utils.bukkit.nms.type.PacketBorder;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class PacketBorder_1_13 extends PacketBorder {
     /**
      * Creates a new packet border.

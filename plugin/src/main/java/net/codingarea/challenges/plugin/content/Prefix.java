@@ -8,10 +8,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.2
- */
 public class Prefix {
 
 	private static final Map<String, Prefix> values = new HashMap<>();

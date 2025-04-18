@@ -20,10 +20,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public class PlayerConnectionListener implements Listener {
 
 	private final boolean messages;

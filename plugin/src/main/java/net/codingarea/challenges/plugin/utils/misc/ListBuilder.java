@@ -7,10 +7,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 public final class ListBuilder<T> {
 
 	private final List<T> list = new ArrayList<>();
