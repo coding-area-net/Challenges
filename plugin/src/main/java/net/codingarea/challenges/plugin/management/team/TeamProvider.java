@@ -4,6 +4,7 @@ import net.anweisen.utilities.bukkit.utils.logging.Logger;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -26,6 +27,10 @@ public class TeamProvider {
       }
     }
     return new PlayerTeam(player);
+  }
+
+  Optional<Team> getTeam(UUID uuid) {
+    return Optional.ofNullable(customTeams.get(uuid));
   }
 
   public void setTeam(Player player, UUID teamId) {
