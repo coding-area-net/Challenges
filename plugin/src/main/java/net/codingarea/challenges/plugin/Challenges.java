@@ -22,6 +22,7 @@ import net.codingarea.challenges.plugin.management.scheduler.ScheduleManager;
 import net.codingarea.challenges.plugin.management.scheduler.timer.ChallengeTimer;
 import net.codingarea.challenges.plugin.management.server.*;
 import net.codingarea.challenges.plugin.management.stats.StatsManager;
+import net.codingarea.challenges.plugin.management.team.TeamProvider;
 import net.codingarea.challenges.plugin.spigot.command.*;
 import net.codingarea.challenges.plugin.spigot.listener.*;
 import net.codingarea.challenges.plugin.utils.bukkit.command.ForwardingCommand;
@@ -53,6 +54,7 @@ public final class Challenges extends BukkitModule {
   private MetricsLoader metricsLoader;
   private GameWorldStorage gameWorldStorage;
   private GeneratorWorldPortalManager generatorWorldPortalManager;
+  private TeamProvider teamProvider;
 
   @Nonnull
   public static Challenges getInstance() {
