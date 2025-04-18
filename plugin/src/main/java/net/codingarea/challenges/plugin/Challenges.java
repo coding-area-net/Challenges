@@ -105,6 +105,7 @@ public final class Challenges extends BukkitModule {
     titleManager = new TitleManager();
     challengeTimer = new ChallengeTimer();
     blockDropManager = new BlockDropManager();
+    teamProvider = new TeamProvider();
     challengeManager = new ChallengeManager();
     challengeLoader = new ChallengeLoader();
     customChallengesLoader = new CustomChallengesLoader();
@@ -115,7 +116,6 @@ public final class Challenges extends BukkitModule {
     metricsLoader = new MetricsLoader();
     gameWorldStorage = new GameWorldStorage();
     generatorWorldPortalManager = new GeneratorWorldPortalManager();
-
   }
 
   private void loadManagers() {
