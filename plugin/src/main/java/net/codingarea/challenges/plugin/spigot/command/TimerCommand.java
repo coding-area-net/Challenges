@@ -78,10 +78,7 @@ public class TimerCommand implements SenderCommand, Completer {
 					break;
 				}
 				switch (args[1].toLowerCase()) {
-					default:
-						Message.forName("syntax").send(sender, Prefix.TIMER, "timer mode <up/down>");
-						break;
-					case "up":
+                    case "up":
 					case "forward":
 						Challenges.getInstance().getChallengeTimer().setCountingUp(true);
 						break;
@@ -90,7 +87,10 @@ public class TimerCommand implements SenderCommand, Completer {
 					case "backwards":
 						Challenges.getInstance().getChallengeTimer().setCountingUp(false);
 						break;
-				}
+                    default:
+                        Message.forName("syntax").send(sender, Prefix.TIMER, "timer mode <up/down>");
+                        break;
+                }
 
 		}
 

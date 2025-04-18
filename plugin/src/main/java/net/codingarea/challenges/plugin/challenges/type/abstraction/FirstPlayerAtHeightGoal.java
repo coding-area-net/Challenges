@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
+import lombok.Getter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
+@Getter
 public abstract class FirstPlayerAtHeightGoal extends SettingGoal {
 
 	private int heightToGetTo;
@@ -47,11 +49,7 @@ public abstract class FirstPlayerAtHeightGoal extends SettingGoal {
 		}
 	}
 
-	public int getHeightToGetTo() {
-		return heightToGetTo;
-	}
-
-	protected void setHeightToGetTo(int heightToGetTo) {
+    protected void setHeightToGetTo(int heightToGetTo) {
 		this.heightToGetTo = heightToGetTo;
 	}
 

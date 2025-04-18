@@ -21,7 +21,7 @@ public class HungerTrigger extends ChallengeTrigger {
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
 	public void onPickup(FoodLevelChangeEvent event) {
 		if (!(event.getEntity() instanceof Player)) return;
-		if (event.getFoodLevel() < ((Player) event.getEntity()).getFoodLevel()) {
+		if (event.getFoodLevel() < event.getEntity().getFoodLevel()) {
 			createData()
 					.entity(event.getEntity())
 					.event(event)

@@ -41,12 +41,7 @@ public class CustomMainSettingsMenuGenerator extends ChooseItemGenerator impleme
 		return new String[]{title};
 	}
 
-	@Override
-	public int[] getNavigationSlots(int page) {
-		return MainCustomMenuGenerator.NAVIGATION_SLOTS;
-	}
-
-  @Override
+    @Override
 	public void accept(Player player, SettingType type, Map<String, String[]> data) {
 
 		subSettings.putAll(data);

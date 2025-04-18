@@ -30,7 +30,7 @@ public final class ServerManager {
 	private final boolean winSounds;
 
 	private boolean isFresh; // This indicated if the timer was never started before
-	private boolean hasCheated = false;
+	private boolean hasCheated;
 
 	public ServerManager() {
 		Document sessionConfig = Challenges.getInstance().getConfigManager().getSessionConfig();

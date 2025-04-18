@@ -17,7 +17,6 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder.SkullBuilder;
 import net.codingarea.challenges.plugin.utils.misc.StatsHelper;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;

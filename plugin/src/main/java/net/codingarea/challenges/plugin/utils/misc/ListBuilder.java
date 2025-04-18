@@ -26,7 +26,7 @@ public final class ListBuilder<T> {
 		return addAll(Arrays.asList(t));
 	}
 
-	public final ListBuilder<T> addAll(Collection<T> collection) {
+	public ListBuilder<T> addAll(Collection<T> collection) {
 		list.addAll(collection);
 		return this;
 	}
@@ -36,7 +36,7 @@ public final class ListBuilder<T> {
 		return addAllIfNotContains(Arrays.asList(t));
 	}
 
-	public final ListBuilder<T> addAllIfNotContains(Collection<T> collection) {
+	public ListBuilder<T> addAllIfNotContains(Collection<T> collection) {
 		for (T t : collection) {
 			if (!list.contains(t)) list.add(t);
 		}

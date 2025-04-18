@@ -22,7 +22,7 @@ public class GamemodeCommand implements SenderCommand, Completer {
 	public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 		List<Player> targets = new ArrayList<>();
 
-		if (args.length <= 0) {
+		if (args.length == 0) {
 			Message.forName("syntax").send(sender, Prefix.CHALLENGES, "gm <gamemode> [player]");
 			return;
 		}

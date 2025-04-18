@@ -39,12 +39,7 @@ public class SnakeChallenge extends Setting {
 		return new ItemBuilder(Material.BLUE_TERRACOTTA, Message.forName("item-snake-challenge"));
 	}
 
-	@Override
-	protected void onEnable() {
-
-	}
-
-	@Override
+    @Override
 	protected void onDisable() {
 		blocks.clear();
 	}

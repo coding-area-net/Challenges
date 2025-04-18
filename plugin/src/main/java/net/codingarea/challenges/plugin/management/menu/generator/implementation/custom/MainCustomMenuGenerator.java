@@ -64,7 +64,7 @@ public class MainCustomMenuGenerator extends ChallengeMenuGenerator {
 	@Override
 	public void onPreChallengePageClicking(@Nonnull MenuClickInfo info, int page) {
 		if (info.getSlot() == VIEW_SLOT) {
-			if (Challenges.getInstance().getCustomChallengesLoader().getCustomChallenges().size() == 0) {
+			if (Challenges.getInstance().getCustomChallengesLoader().getCustomChallenges().isEmpty()) {
 				Message.forName("custom-not-loaded").send(info.getPlayer(), Prefix.CUSTOM);
 				return;
 			}

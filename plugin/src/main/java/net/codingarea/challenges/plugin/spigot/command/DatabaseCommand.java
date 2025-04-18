@@ -144,7 +144,7 @@ public class DatabaseCommand implements PlayerCommand, TabCompleter {
 
 		if (args.length <= 1) {
 			return Utils.filterRecommendations(args[0], "save", "load", "reset");
-		} else if (args.length <= 2) {
+		} else if (args.length == 2) {
 			return Utils.filterRecommendations(args[1], databaseExecutors.keySet().toArray(new String[0]));
 		}
 		return Lists.newLinkedList();
