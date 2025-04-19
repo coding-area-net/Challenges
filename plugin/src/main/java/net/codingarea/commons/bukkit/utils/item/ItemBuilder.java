@@ -14,10 +14,7 @@ import org.bukkit.potion.PotionEffect;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class ItemBuilder {
 
@@ -67,7 +64,7 @@ public class ItemBuilder {
 	@Nonnull
 	@SuppressWarnings("unchecked")
 	public final <M> M getCastedMeta() {
-		return (M) (meta == null ? meta = item.getItemMeta() : meta);
+		return (M) (meta == null ? Objects.requireNonNull(meta = item.getItemMeta()) : meta);
 	}
 
 	@Nonnull
@@ -254,7 +251,8 @@ public class ItemBuilder {
 
 	@Override
 	public ItemBuilder clone() {
-		return new ItemBuilder(item.clone(), getMeta().clone());
+        ItemBuilder itemBuilder = (ItemBuilder) super.clone();
+        return new ItemBuilder(item.clone(), getMeta().clone());
 	}
 
 	public static class BannerBuilder extends ItemBuilder {

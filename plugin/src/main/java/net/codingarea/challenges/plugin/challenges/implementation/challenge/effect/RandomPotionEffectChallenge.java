@@ -65,7 +65,7 @@ public class RandomPotionEffectChallenge extends MenuSetting {
 
   @Nullable
   public static PotionEffectType getNewRandomEffect(@Nonnull LivingEntity entity) {
-    List<PotionEffectType> activeEffects = entity.getActivePotionEffects().stream().map(PotionEffect::getType).collect(Collectors.toList());
+    List<PotionEffectType> activeEffects = entity.getActivePotionEffects().stream().map(PotionEffect::getType).toList();
 
     ArrayList<PotionEffectType> possibleEffects = new ArrayList<>(Arrays.asList(PotionEffectType.values()));
     possibleEffects.removeAll(activeEffects);
