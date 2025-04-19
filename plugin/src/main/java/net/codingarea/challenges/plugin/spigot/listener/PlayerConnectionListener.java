@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.spigot.listener;
 
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
@@ -127,7 +127,7 @@ public class PlayerConnectionListener implements Listener {
         Message.forName("quit-message").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
       }
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Error while handling disconnect", exception);
+      Challenges.getInstance().getILogger().error("Error while handling disconnect", exception);
     }
 
     if (Bukkit.getOnlinePlayers().size() <= 1) {

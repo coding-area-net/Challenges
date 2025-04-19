@@ -1,10 +1,10 @@
 package net.codingarea.challenges.plugin.management.bstats;
 
-import net.anweisen.utilities.bukkit.utils.bstats.Metrics;
-import net.anweisen.utilities.bukkit.utils.bstats.chart.AdvancedPie;
-import net.anweisen.utilities.bukkit.utils.bstats.chart.SimplePie;
-import net.anweisen.utilities.bukkit.utils.bstats.chart.SingleLineChart;
-import net.anweisen.utilities.common.misc.StringUtils;
+import net.codingarea.commons.bukkit.utils.bstats.Metrics;
+import net.codingarea.commons.bukkit.utils.bstats.chart.AdvancedPie;
+import net.codingarea.commons.bukkit.utils.bstats.chart.SimplePie;
+import net.codingarea.commons.bukkit.utils.bstats.chart.SingleLineChart;
+import net.codingarea.commons.common.misc.StringUtils;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.utils.misc.MemoryConverter;

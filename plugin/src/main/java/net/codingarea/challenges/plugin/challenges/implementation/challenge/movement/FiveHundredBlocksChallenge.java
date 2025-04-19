@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.movement;
 
-import net.anweisen.utilities.common.annotations.Since;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
@@ -57,7 +57,7 @@ public class FiveHundredBlocksChallenge extends SettingModifier {
 
       Challenges.getInstance().registerListener(listener);
     } catch (NoClassDefFoundError noClassDefFoundError) {
-      Challenges.getInstance().getLogger().warning("Loot Generation couldn't be blocked in FiveHundredBlocks Challenge: Please Use 1.15 or higher");
+      Challenges.getInstance().getILogger().warning("Loot Generation couldn't be blocked in FiveHundredBlocks Challenge: Please Use 1.15 or higher");
     }
 
 
@@ -176,7 +176,7 @@ public class FiveHundredBlocksChallenge extends SettingModifier {
       } catch (IllegalArgumentException exception) {
         plugin.getLogger().severe("Error while loading 500 Blocks Challenge, "
           + "key '" + key + "' is not a valid uuid");
-        Challenges.getInstance().getLogger().error("", exception);
+        Challenges.getInstance().getILogger().error("", exception);
       }
     }
   }

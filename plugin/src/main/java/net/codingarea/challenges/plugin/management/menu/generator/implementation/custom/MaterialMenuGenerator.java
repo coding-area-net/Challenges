@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.management.menu.generator.implementation.custom;
 
-import net.anweisen.utilities.bukkit.utils.misc.BukkitReflectionUtils;
+import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.challenges.plugin.challenges.custom.settings.SettingType;
 import net.codingarea.challenges.plugin.management.menu.generator.ChooseItemGenerator;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;

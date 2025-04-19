@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.management.menu.info;
 
 import lombok.ToString;
-import net.anweisen.utilities.bukkit.utils.menu.MenuClickInfo;
+import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 

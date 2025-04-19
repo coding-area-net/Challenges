@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.utils.bukkit.jumpgeneration;
 
-import net.anweisen.utilities.common.collection.IRandom;
+import net.codingarea.commons.common.collection.IRandom;
 import org.bukkit.block.Block;
 
 import javax.annotation.CheckReturnValue;

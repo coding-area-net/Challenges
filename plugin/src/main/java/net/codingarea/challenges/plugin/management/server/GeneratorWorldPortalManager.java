@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.management.server;
 
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.management.challenges.entities.GamestateSaveable;
 import org.bukkit.Location;
@@ -61,8 +61,8 @@ public class GeneratorWorldPortalManager implements GamestateSaveable {
         UUID uuid = UUID.fromString(key);
         lastWorldLocations.put(uuid, location);
       } catch (Exception exception) {
-        Challenges.getInstance().getLogger().error("Couldn't load last location of: " + key);
-        Challenges.getInstance().getLogger().error("", exception);
+        Challenges.getInstance().getILogger().error("Couldn't load last location of: " + key);
+        Challenges.getInstance().getILogger().error("", exception);
       }
     }
   }

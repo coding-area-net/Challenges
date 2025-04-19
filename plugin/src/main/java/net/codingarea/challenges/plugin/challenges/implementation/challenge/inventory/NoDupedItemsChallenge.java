@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.inventory;
 
-import net.anweisen.utilities.common.annotations.Since;
-import net.anweisen.utilities.common.collection.pair.Triple;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.collection.pair.Triple;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;

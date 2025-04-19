@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.management.challenges.entities;
 
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.config.Document;
 
 import javax.annotation.Nonnull;
 

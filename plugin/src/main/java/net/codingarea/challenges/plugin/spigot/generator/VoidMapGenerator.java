@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.spigot.generator;
 
-import net.anweisen.utilities.bukkit.utils.misc.MinecraftVersion;
+import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -36,7 +36,7 @@ public class VoidMapGenerator extends ChunkGenerator {
     }
 
 //      if (portalChunk.chunkX == x && portalChunk.chunkZ == z) {
-//        Challenges.getInstance().getLogger().info("Generating End Portal");
+//        Challenges.getInstance().getILogger().info("Generating End Portal");
 //        generateEndPortal(chunkData);
 //        break;
 //      }

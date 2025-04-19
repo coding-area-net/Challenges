@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.utils.bukkit.nms;
 
 import lombok.Getter;
-import net.anweisen.utilities.bukkit.utils.misc.MinecraftVersion;
+import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.implementations.v1_13.*;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.implementations.v1_17.BorderPacketFactory_1_17;
@@ -48,7 +48,7 @@ public class NMSProvider {
         return new WorldServer_1_13(world);
       }
     } catch (ClassNotFoundException exception) {
-      Challenges.getInstance().getLogger().error("Failed to create WorldServer instance for version {}:", majorVersion, exception);
+      Challenges.getInstance().getILogger().error("Failed to create WorldServer instance for version {}:", majorVersion, exception);
     }
     throw new IllegalStateException("Could not find a WorldServer implementation for version " + getFormattedVersion());
   }
@@ -68,7 +68,7 @@ public class NMSProvider {
         return new CraftPlayer_1_13(player);
       }
     } catch (ClassNotFoundException exception) {
-      Challenges.getInstance().getLogger().error("Failed to create CraftPlayer instance for version {}:", majorVersion, exception);
+      Challenges.getInstance().getILogger().error("Failed to create CraftPlayer instance for version {}:", majorVersion, exception);
     }
     throw new IllegalStateException("Could not find a CraftServer implementation for version " + getFormattedVersion());
   }
@@ -88,7 +88,7 @@ public class NMSProvider {
         return new PlayerConnection_1_13(player.getPlayerConnectionObject());
       }
     } catch (ClassNotFoundException exception) {
-      Challenges.getInstance().getLogger().error("Failed to create PlayerConnection instance for version {}:", majorVersion, exception);
+      Challenges.getInstance().getILogger().error("Failed to create PlayerConnection instance for version {}:", majorVersion, exception);
     }
 
     throw new IllegalStateException("Could not find a PlayerConnection implementation for version " + getFormattedVersion());

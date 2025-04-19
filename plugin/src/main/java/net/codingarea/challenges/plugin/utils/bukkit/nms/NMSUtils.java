@@ -20,7 +20,7 @@ public final class NMSUtils {
       Object entityObject = ReflectionUtil.invokeMethod(craftEntityClass, entity, "getHandle");
       ReflectionUtil.invokeMethod(entityClass, entityObject, "a", new Class[]{componentClass}, new Object[]{componentObject});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("", exception);
+      Challenges.getInstance().getILogger().error("", exception);
     }
   }
 
@@ -33,7 +33,7 @@ public final class NMSUtils {
       Object bossBattleObject = ReflectionUtil.invokeMethod(craftBossBarClass, bossBar, "getHandle");
       ReflectionUtil.invokeMethod(bossBattleClass, bossBattleObject, "a", new Class[]{getComponentClass()}, new Object[]{component});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("", exception);
+      Challenges.getInstance().getILogger().error("", exception);
     }
 
   }
@@ -44,7 +44,7 @@ public final class NMSUtils {
       Class<?> componentSerializerClass = getClass("network.chat.IChatBaseComponent$ChatSerializer");
       return ReflectionUtil.invokeMethod(componentSerializerClass, null, "a", new Class[]{String.class}, new Object[]{json});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("", exception);
+      Challenges.getInstance().getILogger().error("", exception);
     }
     return null;
   }
@@ -63,7 +63,7 @@ public final class NMSUtils {
         return ReflectionUtil.getNmsClass(className);
       }
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("", exception);
+      Challenges.getInstance().getILogger().error("", exception);
     }
     return null;
   }

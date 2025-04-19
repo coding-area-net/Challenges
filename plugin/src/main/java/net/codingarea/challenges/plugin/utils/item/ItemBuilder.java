@@ -2,7 +2,7 @@ package net.codingarea.challenges.plugin.utils.item;
 
 import com.google.gson.JsonParser;
 import lombok.NonNull;
-import net.anweisen.utilities.bukkit.utils.item.BannerPattern;
+import net.codingarea.commons.bukkit.utils.item.BannerPattern;
 import net.codingarea.challenges.plugin.content.ItemDescription;
 import net.codingarea.challenges.plugin.content.Message;
 import org.bukkit.*;
@@ -27,7 +27,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-public class ItemBuilder extends net.anweisen.utilities.bukkit.utils.item.ItemBuilder {
+public class ItemBuilder extends net.codingarea.commons.bukkit.utils.item.ItemBuilder {
 
   public static final ItemStack BLOCKED_ITEM = new ItemBuilder(Material.BARRIER, "§cBlocked").build();
 

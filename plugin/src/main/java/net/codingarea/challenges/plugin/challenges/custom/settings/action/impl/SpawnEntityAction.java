@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.action.impl;
 
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.EntityTargetAction;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
 import org.bukkit.Material;

@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.type.helper;
 
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 
 import javax.annotation.CheckReturnValue;

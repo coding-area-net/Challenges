@@ -1,11 +1,11 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
 import com.google.common.collect.Lists;
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.common.annotations.Since;
-import net.anweisen.utilities.common.collection.pair.Triple;
-import net.anweisen.utilities.common.config.Document;
-import net.anweisen.utilities.common.config.document.GsonDocument;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.collection.pair.Triple;
+import net.codingarea.commons.common.config.Document;
+import net.codingarea.commons.common.config.document.GsonDocument;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;

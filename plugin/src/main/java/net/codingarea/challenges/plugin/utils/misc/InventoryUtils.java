@@ -1,9 +1,9 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
-import net.anweisen.utilities.bukkit.utils.animation.AnimationFrame;
-import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
-import net.anweisen.utilities.bukkit.utils.menu.MenuClickInfo;
-import net.anweisen.utilities.common.collection.IRandom;
+import net.codingarea.commons.bukkit.utils.animation.AnimationFrame;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
+import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.management.menu.generator.MenuGenerator;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;

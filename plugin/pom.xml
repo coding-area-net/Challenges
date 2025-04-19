@@ -20,17 +20,19 @@
 
     <dependencies>
 
+        <!-- Common java logging library -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.32</version>
+        </dependency>
+
         <!-- Minecraft Dependencies -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>${spigot.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.anweisen.Utility</groupId>
-            <artifactId>bukkit-utils</artifactId>
-            <version>${utilities.version}</version>
         </dependency>
         <dependency>
             <groupId>com.mojang</groupId>
@@ -59,18 +61,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Database API -->
-        <dependency>
-            <groupId>com.github.anweisen.Utility</groupId>
-            <artifactId>database-api</artifactId>
-            <version>${utilities.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.anweisen.Utility</groupId>
-            <artifactId>database-sql</artifactId>
-            <version>${utilities.version}</version>
-        </dependency>
-
         <!-- Annotations -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -87,12 +77,6 @@
     </dependencies>
 
     <repositories>
-
-        <!-- Jitpack for Utilities Dependencies -->
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
 
         <!-- Minecraft Repositories -->
         <repository>
@@ -171,11 +155,7 @@
                         <configuration>
                             <artifactSet>
                                 <includes>
-                                    <include>com.github.anweisen.Utility:commons</include>
-                                    <include>com.github.anweisen.Utility:common-utils</include>
-                                    <include>com.github.anweisen.Utility:bukkit-utils</include>
-                                    <include>com.github.anweisen.Utility:database-api</include>
-                                    <include>com.github.anweisen.Utility:database-sql</include>
+                                    <include>net.kyori:adventure-api</include>
                                 </includes>
                             </artifactSet>
                         </configuration>

@@ -16,7 +16,7 @@ public class PacketBorder_1_18 extends PacketBorder_1_17 {
     try {
       ReflectionUtil.invokeMethod(worldBorder, "c", new Class[]{double.class, double.class}, new Object[]{x, z});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to set center:", exception);
+      Challenges.getInstance().getILogger().error("Failed to set center:", exception);
     }
   }
 
@@ -25,7 +25,7 @@ public class PacketBorder_1_18 extends PacketBorder_1_17 {
     try {
       ReflectionUtil.invokeMethod(worldBorder, "a", new Class[]{double.class}, new Object[]{size});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to set size:", exception);
+      Challenges.getInstance().getILogger().error("Failed to set size:", exception);
     }
   }
 
@@ -34,7 +34,7 @@ public class PacketBorder_1_18 extends PacketBorder_1_17 {
     try {
       ReflectionUtil.invokeMethod(worldBorder, "c", new Class[]{int.class}, new Object[]{warningDistance});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to set warning distance:", exception);
+      Challenges.getInstance().getILogger().error("Failed to set warning distance:", exception);
     }
   }
 
@@ -43,7 +43,7 @@ public class PacketBorder_1_18 extends PacketBorder_1_17 {
     try {
       ReflectionUtil.invokeMethod(worldBorder, "b", new Class[]{int.class}, new Object[]{warningTime});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to set warning time:", exception);
+      Challenges.getInstance().getILogger().error("Failed to set warning time:", exception);
     }
   }
 
@@ -52,7 +52,7 @@ public class PacketBorder_1_18 extends PacketBorder_1_17 {
     try {
       ReflectionUtil.invokeMethod(worldBorder, "a", new Class[]{double.class, double.class, long.class}, new Object[]{oldSize, newSize, animationTime});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to set size:", exception);
+      Challenges.getInstance().getILogger().error("Failed to set size:", exception);
     }
   }
 }

@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
-import net.anweisen.utilities.common.collection.IOUtils;
-import net.anweisen.utilities.common.config.Document;
-import net.anweisen.utilities.common.misc.ReflectionUtils;
+import net.codingarea.commons.common.collection.IOUtils;
+import net.codingarea.commons.common.config.Document;
+import net.codingarea.commons.common.misc.ReflectionUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 

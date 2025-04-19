@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.management.menu.generator;
 
-import net.anweisen.utilities.bukkit.utils.menu.MenuPosition;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;

@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.utils.logging;
 
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
 import org.bukkit.Bukkit;
 
 import javax.annotation.Nonnull;

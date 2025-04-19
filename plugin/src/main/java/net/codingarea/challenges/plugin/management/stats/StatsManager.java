@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.management.stats;
 
 import lombok.Getter;
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.database.exceptions.DatabaseException;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.database.exceptions.DatabaseException;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.management.scheduler.policy.ChallengeStatusPolicy;

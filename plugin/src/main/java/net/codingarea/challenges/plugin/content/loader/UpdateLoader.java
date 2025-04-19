@@ -1,9 +1,9 @@
 package net.codingarea.challenges.plugin.content.loader;
 
 import lombok.Getter;
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.common.collection.IOUtils;
-import net.anweisen.utilities.common.version.Version;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.collection.IOUtils;
+import net.codingarea.commons.common.version.Version;
 import net.codingarea.challenges.plugin.Challenges;
 import org.bukkit.configuration.file.YamlConfiguration;
 

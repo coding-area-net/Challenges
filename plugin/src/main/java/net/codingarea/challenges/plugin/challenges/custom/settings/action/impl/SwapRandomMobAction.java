@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.action.impl;
 
-import net.anweisen.utilities.common.collection.IRandom;
+import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeExecutionData;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.ChallengeAction;

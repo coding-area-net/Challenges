@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.content.impl;
 
-import net.anweisen.utilities.common.collection.IRandom;
-import net.anweisen.utilities.common.misc.StringUtils;
+import net.codingarea.commons.common.collection.IRandom;
+import net.codingarea.commons.common.misc.StringUtils;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.ItemDescription;
 import net.codingarea.challenges.plugin.content.Message;

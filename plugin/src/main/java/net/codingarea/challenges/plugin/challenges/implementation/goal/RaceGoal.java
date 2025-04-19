@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
-import net.anweisen.utilities.common.annotations.Since;
-import net.anweisen.utilities.common.collection.IRandom;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.collection.IRandom;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifierGoal;

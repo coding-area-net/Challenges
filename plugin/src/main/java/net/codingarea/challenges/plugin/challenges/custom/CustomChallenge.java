@@ -2,7 +2,7 @@ package net.codingarea.challenges.plugin.challenges.custom;
 
 import lombok.Getter;
 import lombok.ToString;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeExecutionData;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.ChallengeAction;

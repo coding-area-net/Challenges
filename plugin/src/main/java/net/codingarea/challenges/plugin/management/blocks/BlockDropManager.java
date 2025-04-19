@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.management.blocks;
 
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.challenges.plugin.challenges.implementation.setting.CutCleanSetting;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.MenuSetting.SubSetting;

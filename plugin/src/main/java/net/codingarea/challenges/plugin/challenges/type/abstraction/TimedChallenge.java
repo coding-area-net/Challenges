@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import lombok.Setter;
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import org.bukkit.Bukkit;

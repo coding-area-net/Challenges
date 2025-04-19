@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.management.scheduler;
 
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.common.misc.ReflectionUtils;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.misc.ReflectionUtils;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;

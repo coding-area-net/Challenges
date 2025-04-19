@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
-import net.anweisen.utilities.common.config.FileDocument;
+import net.codingarea.commons.common.config.FileDocument;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;

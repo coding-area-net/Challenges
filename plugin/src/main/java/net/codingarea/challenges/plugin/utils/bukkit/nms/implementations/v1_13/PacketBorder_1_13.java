@@ -41,7 +41,7 @@ public class PacketBorder_1_13 extends PacketBorder {
     try {
       return ReflectionUtil.invokeConstructor(nmsClass);
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to create world border:", exception);
+      Challenges.getInstance().getILogger().error("Failed to create world border:", exception);
       return null;
     }
   }
@@ -56,7 +56,7 @@ public class PacketBorder_1_13 extends PacketBorder {
     try {
       ReflectionUtil.setFieldValue(worldBorder, "world", getWorldServer(world));
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to set world:", exception);
+      Challenges.getInstance().getILogger().error("Failed to set world:", exception);
     }
   }
 
@@ -65,7 +65,7 @@ public class PacketBorder_1_13 extends PacketBorder {
     try {
       ReflectionUtil.invokeMethod(worldBorder, "setSize", new Class[]{double.class}, new Object[]{size});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to set border size:", exception);
+      Challenges.getInstance().getILogger().error("Failed to set border size:", exception);
     }
   }
 
@@ -74,7 +74,7 @@ public class PacketBorder_1_13 extends PacketBorder {
     try {
       ReflectionUtil.invokeMethod(worldBorder, "transitionSizeBetween", new Class[]{double.class, double.class, long.class}, new Object[]{oldSize, newSize, animationTime});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to set border size:", exception);
+      Challenges.getInstance().getILogger().error("Failed to set border size:", exception);
     }
   }
 
@@ -83,7 +83,7 @@ public class PacketBorder_1_13 extends PacketBorder {
     try {
       ReflectionUtil.invokeMethod(worldBorder, "setCenter", new Class[]{double.class, double.class}, new Object[]{x, z});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to set border center:", exception);
+      Challenges.getInstance().getILogger().error("Failed to set border center:", exception);
     }
   }
 
@@ -92,7 +92,7 @@ public class PacketBorder_1_13 extends PacketBorder {
     try {
       ReflectionUtil.invokeMethod(worldBorder, "setWarningTime", new Class[]{int.class}, new Object[]{warningTime});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to set border warning time:", exception);
+      Challenges.getInstance().getILogger().error("Failed to set border warning time:", exception);
     }
   }
 
@@ -101,7 +101,7 @@ public class PacketBorder_1_13 extends PacketBorder {
     try {
       ReflectionUtil.invokeMethod(worldBorder, "setWarningDistance", new Class[]{int.class}, new Object[]{warningDistance});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to set border warning distance:", exception);
+      Challenges.getInstance().getILogger().error("Failed to set border warning distance:", exception);
     }
   }
 
@@ -112,7 +112,7 @@ public class PacketBorder_1_13 extends PacketBorder {
       CraftPlayer craftPlayer = NMSProvider.createCraftPlayer(player);
       craftPlayer.getConnection().sendPacket(packet);
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to send update {} to player {}:", updateType.name(), player.getName(), exception);
+      Challenges.getInstance().getILogger().error("Failed to send update {} to player {}:", updateType.name(), player.getName(), exception);
     }
   }
 

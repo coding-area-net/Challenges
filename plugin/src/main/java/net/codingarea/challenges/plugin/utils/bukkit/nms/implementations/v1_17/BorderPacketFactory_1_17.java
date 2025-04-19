@@ -33,7 +33,7 @@ public class BorderPacketFactory_1_17 extends BorderPacketFactory {
     try {
       return ReflectionUtil.invokeConstructor(clazz, new Class[]{packetBorder.getNMSClass()}, new Object[]{packetBorder.getWorldBorderObject()});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to create packet {}:", className, exception);
+      Challenges.getInstance().getILogger().error("Failed to create packet {}:", className, exception);
       return null;
     }
   }

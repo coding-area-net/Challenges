@@ -1,9 +1,9 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.effect;
 
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.common.annotations.Since;
-import net.anweisen.utilities.common.collection.pair.Tuple;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.collection.pair.Tuple;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;

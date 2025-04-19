@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
-import net.anweisen.utilities.bukkit.utils.menu.MenuPosition;
-import net.anweisen.utilities.bukkit.utils.menu.positions.SlottedMenuPosition;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
+import net.codingarea.commons.bukkit.utils.menu.positions.SlottedMenuPosition;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;

@@ -2,8 +2,8 @@ package net.codingarea.challenges.plugin.management.server.scoreboard;
 
 import lombok.Getter;
 import lombok.ToString;
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.common.misc.StringUtils;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.misc.StringUtils;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
 import org.bukkit.Bukkit;

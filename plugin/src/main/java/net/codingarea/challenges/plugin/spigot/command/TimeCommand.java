@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
-import net.anweisen.utilities.common.collection.NumberFormatter;
+import net.codingarea.commons.common.collection.NumberFormatter;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;

@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets;
 
-import net.anweisen.utilities.common.collection.IRandom;
-import net.anweisen.utilities.common.collection.pair.Tuple;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.collection.IRandom;
+import net.codingarea.commons.common.collection.pair.Tuple;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.ExtremeForceBattleGoal;
 import net.codingarea.challenges.plugin.content.Message;
 import org.bukkit.Location;

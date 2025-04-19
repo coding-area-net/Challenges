@@ -76,7 +76,7 @@ public class ReflectionUtil {
 
     } catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InvocationTargetException |
              NoSuchMethodException e) {
-      Challenges.getInstance().getLogger().error("Failed to initialize the ReflectionUtil:", e);
+      Challenges.getInstance().getILogger().error("Failed to initialize the ReflectionUtil:", e);
     }
   }
 
