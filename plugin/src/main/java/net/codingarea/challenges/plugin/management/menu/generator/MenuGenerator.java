@@ -14,6 +14,7 @@ import org.bukkit.inventory.Inventory;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -31,7 +32,7 @@ public abstract class MenuGenerator {
   public boolean hasInventoryOpen(Player player) {
     MenuPosition menuPosition = MenuPosition.get(player);
     return menuPosition instanceof GeneratorMenuPosition
-      && CompatibilityUtils.getTopInventory(player).getType() != InventoryType.CRAFTING
+      && Objects.requireNonNull(CompatibilityUtils.getTopInventory(player)).getType() != InventoryType.CRAFTING
       && ((GeneratorMenuPosition) menuPosition).getGenerator() == this;
   }
 
