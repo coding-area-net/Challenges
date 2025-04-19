@@ -138,8 +138,7 @@ public interface NumberFormatter {
 				long seconds = (long) (value);
 				long minutes = seconds / 60;
 				long hours = minutes / 60;
-				seconds %= 60;
-				minutes %= 60;
+                minutes %= 60;
 
 				return hours > 0 ? (hours == 1 ? "1 Stunde" : hours + " Stunden") : (minutes == 1 ? "1 Minute" : minutes + " Minuten");
 			},
@@ -330,13 +329,13 @@ public interface NumberFormatter {
 
 	@Nonnull
 	@CheckReturnValue
-	public static NumberFormatter fromPattern(@Nonnull String pattern, String ending, boolean positive) {
+    static NumberFormatter fromPattern(@Nonnull String pattern, String ending, boolean positive) {
 		return fromPattern(pattern, ending, positive, null);
 	}
 
 	@Nonnull
 	@CheckReturnValue
-	public static NumberFormatter fromPattern(@Nonnull String pattern, String ending, boolean positive, Consumer<? super DecimalFormat> init) {
+    static NumberFormatter fromPattern(@Nonnull String pattern, String ending, boolean positive, Consumer<? super DecimalFormat> init) {
 		DecimalFormat format = new DecimalFormat(pattern);
 		if (init != null) init.accept(format);
 		return value -> Double.isNaN(value) ? "NaN" : format.format(positive ? (value > 0 ? value : 0) : value) + (ending != null ? ending : "");
@@ -344,13 +343,13 @@ public interface NumberFormatter {
 
 	@Nonnull
 	@CheckReturnValue
-	public static DecimalFormatSymbols updateSymbols(@Nonnull DecimalFormatSymbols symbols, @Nonnull Consumer<? super DecimalFormatSymbols> action) {
+    static DecimalFormatSymbols updateSymbols(@Nonnull DecimalFormatSymbols symbols, @Nonnull Consumer<? super DecimalFormatSymbols> action) {
 		action.accept(symbols);
 		return symbols;
 	}
 
 	@CheckReturnValue
-	public static void updateSymbols(@Nonnull DecimalFormat format, @Nonnull Consumer<? super DecimalFormatSymbols> action) {
+    static void updateSymbols(@Nonnull DecimalFormat format, @Nonnull Consumer<? super DecimalFormatSymbols> action) {
 		format.setDecimalFormatSymbols(updateSymbols(format.getDecimalFormatSymbols(), action));
 	}
 

@@ -18,7 +18,6 @@ import org.bukkit.entity.Player;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Since("2.0")
 public class EnderGamesChallenge extends TimedChallenge {

@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @Since("2.0")
 public class RandomPotionEffectChallenge extends MenuSetting {
