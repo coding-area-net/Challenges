@@ -53,7 +53,8 @@ public class YamlDocument extends AbstractDocument {
 	@Nonnull
 	@Override
 	public String getString(@Nonnull String path, @Nonnull String def) {
-        return config.getString(path, def);
+		String string = config.getString(path, def);
+		return string;
 	}
 
 	@Nullable
@@ -65,7 +66,8 @@ public class YamlDocument extends AbstractDocument {
 	@Nonnull
 	@Override
 	public Object getObject(@Nonnull String path, @Nonnull Object def) {
-        return config.get(path, def);
+		Object value = config.get(path, def);
+		return value;
 	}
 
 	@Override
