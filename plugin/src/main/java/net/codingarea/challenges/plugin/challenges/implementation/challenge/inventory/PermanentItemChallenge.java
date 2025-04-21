@@ -17,7 +17,6 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.Inventory;
 
 import javax.annotation.Nonnull;
-import java.util.Objects;
 
 @Since("2.0")
 public class PermanentItemChallenge extends Setting {
@@ -41,7 +40,7 @@ public class PermanentItemChallenge extends Setting {
     Inventory clickedInventory = event.getClickedInventory();
     if (event.getCursor() == null) return;
     if (clickedInventory == null) return;
-    InventoryType type = Objects.requireNonNull(CompatibilityUtils.getTopInventory(player)).getType();
+    InventoryType type = CompatibilityUtils.getTopInventory(player).getType();
     if (type == InventoryType.WORKBENCH || type == InventoryType.CRAFTING) return;
     if (clickedInventory.getType() == InventoryType.CRAFTING) return;
     if (clickedInventory.getType() == InventoryType.PLAYER) {

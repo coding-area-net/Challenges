@@ -1,6 +1,5 @@
 package net.codingarea.commons.database;
 
-import lombok.Getter;
 import net.codingarea.commons.common.concurrent.task.Task;
 import net.codingarea.commons.database.action.*;
 import net.codingarea.commons.database.exceptions.DatabaseException;
@@ -12,7 +11,6 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-@Getter
 public class EmptyDatabase implements Database {
 
 	private final boolean silent;
@@ -21,7 +19,11 @@ public class EmptyDatabase implements Database {
 		this.silent = silent;
 	}
 
-    protected void exception(@Nonnull String message) {
+	public boolean isSilent() {
+		return silent;
+	}
+
+	protected void exception(@Nonnull String message) {
 		throw new UnsupportedOperationException(message);
 	}
 

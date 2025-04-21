@@ -1,7 +1,6 @@
 package net.codingarea.commons.bukkit.core;
 
 import com.google.common.base.Charsets;
-import lombok.Getter;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import net.codingarea.commons.bukkit.utils.menu.MenuPositionListener;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
@@ -55,8 +54,7 @@ public abstract class BukkitModule extends JavaPlugin {
 	private ExecutorService executorService;
 	private Document config, pluginConfig;
 	private Version version;
-	@Getter
-    private boolean devMode;
+	private boolean devMode;
 	private boolean firstInstall;
 	private boolean isReloaded;
 	private boolean isLoaded;
@@ -77,10 +75,10 @@ public abstract class BukkitModule extends JavaPlugin {
 		ILogger.setConstantFactory(this.getILogger());
 		trySaveDefaultConfig();
 		if (wasShutdown) isReloaded = true;
-		if (firstInstall == !getDataFolder().exists()) {
+		if (firstInstall = !getDataFolder().exists()) {
 			getILogger().info("Detected first install!");
 		}
-		if (devMode == getConfigDocument().getBoolean("dev-mode") || getConfigDocument().getBoolean("dev-mode.enabled")) {
+		if (devMode = getConfigDocument().getBoolean("dev-mode") || getConfigDocument().getBoolean("dev-mode.enabled")) {
 			getILogger().setLevel(Level.ALL);
 			getILogger().debug("Devmode is enabled: Showing debug messages. This can be disabled in the plugin.yml ('dev-mode')");
 		} else {
@@ -144,7 +142,11 @@ public abstract class BukkitModule extends JavaPlugin {
 	protected void handleEnable() throws Exception {}
 	protected void handleDisable() throws Exception {}
 
-    public final boolean isFirstInstall() {
+	public boolean isDevMode() {
+		return devMode;
+	}
+
+	public final boolean isFirstInstall() {
 		return firstInstall;
 	}
 
@@ -183,7 +185,7 @@ public abstract class BukkitModule extends JavaPlugin {
 	@Nonnull
 	public Document getPluginDocument() {
 		return pluginConfig != null ? pluginConfig :
-			  (pluginConfig = new YamlDocument(YamlConfiguration.loadConfiguration(new InputStreamReader(Objects.requireNonNull(getResource("plugin.yml")), Charsets.UTF_8))));
+			  (pluginConfig = new YamlDocument(YamlConfiguration.loadConfiguration(new InputStreamReader(getResource("plugin.yml"), Charsets.UTF_8))));
 	}
 
 	@Nonnull
@@ -342,7 +344,7 @@ public abstract class BukkitModule extends JavaPlugin {
 			Field instanceField = this.getClass().getDeclaredField("instance");
 			instanceField.setAccessible(true);
 			instanceField.set(null, this);
-		} catch (Throwable ignored) {
+		} catch (Throwable ex) {
 		}
 	}
 

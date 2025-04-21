@@ -30,4 +30,14 @@ public class ChallengeMenuClickInfo extends MenuClickInfo {
     return !upperItem;
   }
 
+  @Nonnull
+  public Player getPlayer() {
+    return player;
+  }
+
+  @Nonnull
+  public Inventory getInventory() {
+    return inventory;
+  }
+
 }

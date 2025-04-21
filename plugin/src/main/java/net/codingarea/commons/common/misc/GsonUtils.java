@@ -118,7 +118,7 @@ public final class GsonUtils {
 	public static int getSize(@Nonnull JsonObject object) {
 		try {
 			return object.size();
-		} catch (NoSuchMethodError ignored) {
+		} catch (NoSuchMethodError ex) {
 		}
 
 		return object.entrySet().size();

@@ -121,7 +121,7 @@ public class SQLQuery implements DatabaseQuery {
 			command.append(" ORDER BY ");
 			command.append(orderBy);
 			if (order != null)
-				command.append(" ").append(order == Order.HIGHEST ? "DESC" : "ASC");
+				command.append(" " + (order == Order.HIGHEST ? "DESC" : "ASC"));
 			command.append(" ");
 		}
 

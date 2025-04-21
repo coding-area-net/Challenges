@@ -46,7 +46,7 @@ public abstract class AbstractConfig implements Config {
 	@Override
 	public char getChar(@Nonnull String path, char def) {
 		try {
-			return Objects.requireNonNull(getString(path)).charAt(0);
+			return getString(path).charAt(0);
 		} catch (NullPointerException | IndexOutOfBoundsException ex) {
 			return def;
 		}
@@ -175,7 +175,7 @@ public abstract class AbstractConfig implements Config {
 	@Nonnull
 	@Override
 	public List<Character> getCharacterList(@Nonnull String path) {
-		return mapList(path, string -> string == null || string.isEmpty() ? (char) 0 : string.charAt(0));
+		return mapList(path, string -> string == null || string.length() == 0 ? (char) 0 : string.charAt(0));
 	}
 
 	@Nonnull

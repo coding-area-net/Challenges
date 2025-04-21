@@ -35,7 +35,7 @@ public final class SimpleCollectionUtils {
 	public static <K, V> String convertMapToString(@Nonnull Map<K, V> map, @Nonnull Function<K, String> key, @Nonnull Function<V, String> value) {
 		StringBuilder builder = new StringBuilder();
 		for (Entry<K, V> entry : map.entrySet()) {
-			if (!builder.isEmpty()) builder.append(REGEX_1);
+			if (builder.length() != 0) builder.append(REGEX_1);
 			builder.append(key.apply(entry.getKey()));
 			builder.append(REGEX_2);
 			builder.append(value.apply(entry.getValue()));

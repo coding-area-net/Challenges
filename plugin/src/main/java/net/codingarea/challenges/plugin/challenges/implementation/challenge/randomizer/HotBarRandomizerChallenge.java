@@ -29,7 +29,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 @Since("2.1.2")
 public class HotBarRandomizerChallenge extends TimedChallenge {
@@ -118,7 +117,7 @@ public class HotBarRandomizerChallenge extends TimedChallenge {
     Inventory clickedInventory = event.getClickedInventory();
     if (event.getCursor() == null) return;
     if (clickedInventory == null) return;
-    InventoryType type = Objects.requireNonNull(CompatibilityUtils.getTopInventory(player)).getType();
+    InventoryType type = CompatibilityUtils.getTopInventory(player).getType();
     if (type == InventoryType.WORKBENCH || type == InventoryType.CRAFTING) return;
     if (clickedInventory.getType() == InventoryType.CRAFTING) return;
     if (clickedInventory.getType() == InventoryType.PLAYER) {

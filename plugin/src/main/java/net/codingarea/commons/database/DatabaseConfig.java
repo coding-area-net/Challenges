@@ -1,26 +1,18 @@
 package net.codingarea.commons.database;
 
-import lombok.Getter;
 import net.codingarea.commons.common.config.Propertyable;
 
 import javax.annotation.Nonnull;
 
 public final class DatabaseConfig {
 
-	@Getter
-    private final String host;
-	@Getter
-    private final String database;
-	@Getter
-    private final String authDatabase;
-	@Getter
-    private final String password;
-	@Getter
-    private final String user;
-	@Getter
-    private final String file;
-	@Getter
-    private final int port;
+	private final String host;
+	private final String database;
+	private final String authDatabase;
+	private final String password;
+	private final String user;
+	private final String file;
+	private final int port;
 	private final boolean portIsSet;
 
 	public DatabaseConfig(String host, String database, String password, String user, int port) {
@@ -65,11 +57,39 @@ public final class DatabaseConfig {
 		);
 	}
 
-    public boolean isPortSet() {
+	public int getPort() {
+		return port;
+	}
+
+	public String getAuthDatabase() {
+		return authDatabase;
+	}
+
+	public String getDatabase() {
+		return database;
+	}
+
+	public String getHost() {
+		return host;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public boolean isPortSet() {
 		return portIsSet;
 	}
 
-    @Override
+	public String getFile() {
+		return file;
+	}
+
+	@Override
 	public String toString() {
 		return "DatabaseConfig{" +
 				"host='" + host + '\'' +

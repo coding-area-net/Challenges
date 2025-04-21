@@ -160,15 +160,14 @@ public class JsonObjectBuilder {
 	}
 
 	/**
-     * Escapes the given string like stated in <a href="https://www.ietf.org/rfc/rfc4627.txt">...</a>.
-     *
-     * <p>This method escapes only the necessary characters '"', '\'. and '\u0000' - '\u001F'.
-     * Compact escapes are not used (e.g., '\n' is escaped as "
-     " and not as "\n").
-     *
-     * @param value The value to escape.
-     * @return The escaped value.
-     */
+	 * Escapes the given string like stated in https://www.ietf.org/rfc/rfc4627.txt.
+	 *
+	 * <p>This method escapes only the necessary characters '"', '\'. and '\u0000' - '\u001F'.
+	 * Compact escapes are not used (e.g., '\n' is escaped as "\u000a" and not as "\n").
+	 *
+	 * @param value The value to escape.
+	 * @return The escaped value.
+	 */
 	private static String escape(String value) {
 		final StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < value.length(); i++) {

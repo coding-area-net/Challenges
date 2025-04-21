@@ -56,7 +56,7 @@ public class SnakeChallenge extends Setting {
   public void loadGameState(@Nonnull Document document) {
     super.loadGameState(document);
 
-    blocks.addAll(document.getSerializableList("blocks", Location.class).stream().map(Location::getBlock).toList());
+    blocks.addAll(document.getSerializableList("blocks", Location.class).stream().map(Location::getBlock).collect(Collectors.toList()));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

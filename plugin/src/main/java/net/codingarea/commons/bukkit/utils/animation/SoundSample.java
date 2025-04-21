@@ -1,6 +1,5 @@
 package net.codingarea.commons.bukkit.utils.animation;
 
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -36,9 +35,7 @@ public final class SoundSample {
 
 	private static final class SoundFrame {
 
-		@Getter
-        @Getter
-        private final float pitch, volume;
+		private final float pitch, volume;
 		private final Sound sound;
 
 		public SoundFrame(@Nonnull Sound sound, float volume, float pitch) {
@@ -55,7 +52,15 @@ public final class SoundSample {
 			player.playSound(location, sound, volume, pitch);
 		}
 
-        @Nonnull
+		public float getPitch() {
+			return pitch;
+		}
+
+		public float getVolume() {
+			return volume;
+		}
+
+		@Nonnull
 		public Sound getSound() {
 			return sound;
 		}

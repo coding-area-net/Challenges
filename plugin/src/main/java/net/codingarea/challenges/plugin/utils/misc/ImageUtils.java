@@ -1,6 +1,5 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
-import net.codingarea.commons.common.collection.IOUtils;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
@@ -21,7 +20,8 @@ public final class ImageUtils {
 
   @Nullable
   public static BufferedImage getImage(@Nonnull String url) throws IOException {
-      HttpURLConnection connection = IOUtils.createConnection(url);
+    HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+    connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36");
     return ImageIO.read(connection.getInputStream());
   }
 

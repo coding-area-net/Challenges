@@ -64,7 +64,7 @@ public class CompletableTask<V> implements Task<V> {
 			} else if (failure != null) {
 				listener.onFailure(this, failure);
 			} else {
-				listener.onComplete(this, null);
+				listener.onComplete(this, value);
 			}
 			return this;
 		}

@@ -54,7 +54,7 @@ public class YamlDocument extends AbstractDocument {
 	@Override
 	public String getString(@Nonnull String path, @Nonnull String def) {
 		String string = config.getString(path, def);
-		return string;
+		return string == null ? def : string;
 	}
 
 	@Nullable
@@ -67,7 +67,7 @@ public class YamlDocument extends AbstractDocument {
 	@Override
 	public Object getObject(@Nonnull String path, @Nonnull Object def) {
 		Object value = config.get(path, def);
-		return value;
+		return value == null ? def : value;
 	}
 
 	@Override
@@ -147,7 +147,7 @@ public class YamlDocument extends AbstractDocument {
 	@Override
 	public char getChar(@Nonnull String path, char def) {
 		try {
-			return Objects.requireNonNull(getString(path)).charAt(0);
+			return getString(path).charAt(0);
 		} catch (NullPointerException | StringIndexOutOfBoundsException ex) {
 			return def;
 		}
@@ -193,7 +193,7 @@ public class YamlDocument extends AbstractDocument {
 	@Override
 	public UUID getUUID(@Nonnull String path) {
 		try {
-			return UUID.fromString(Objects.requireNonNull(getString(path)));
+			return UUID.fromString(getString(path));
 		} catch (Exception ex) {
 			return null;
 		}
@@ -213,7 +213,7 @@ public class YamlDocument extends AbstractDocument {
 	@Override
 	public OffsetDateTime getDateTime(@Nonnull String path) {
 		try {
-			return OffsetDateTime.parse(Objects.requireNonNull(getString(path)));
+			return OffsetDateTime.parse(getString(path));
 		} catch (Exception ex) {
 			return null;
 		}
@@ -223,7 +223,7 @@ public class YamlDocument extends AbstractDocument {
 	@Override
 	public Color getColor(@Nonnull String path) {
 		try {
-			return Color.decode(Objects.requireNonNull(getString(path)));
+			return Color.decode(getString(path));
 		} catch (Exception ex) {
 			return null;
 		}

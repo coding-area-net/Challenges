@@ -136,7 +136,7 @@ public final class BukkitReflectionUtils {
 	 */
 	@Nullable
 	public static NamespacedKey fromString(@Nonnull String string, @Nullable Plugin defaultNamespace) {
-		Preconditions.checkArgument(!string.isEmpty(), "Input string must not be empty or null");
+		Preconditions.checkArgument(string != null && !string.isEmpty(), "Input string must not be empty or null");
 
 		String[] components = string.split(":", 3);
 		if (components.length > 2) {

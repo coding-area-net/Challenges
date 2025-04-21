@@ -19,6 +19,7 @@ public class NMSProvider {
   /**
    * -- GETTER --
    *
+   * @return A border packet factory
    */
   @Getter
   private static final BorderPacketFactory borderPacketFactory;

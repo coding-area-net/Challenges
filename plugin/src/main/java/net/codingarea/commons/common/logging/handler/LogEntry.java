@@ -8,11 +8,11 @@ import java.time.Instant;
 
 public class LogEntry {
 
-	private final Instant timestamp;
-	private final String threadName;
-	private final String message;
-	private final LogLevel level;
-	private final Throwable exception;
+	private Instant timestamp;
+	private String threadName;
+	private String message;
+	private LogLevel level;
+	private Throwable exception;
 
 	public LogEntry(@Nonnull Instant timestamp, @Nonnull String threadName, @Nonnull String message, @Nonnull LogLevel level, @Nullable Throwable exception) {
 		this.timestamp = timestamp;

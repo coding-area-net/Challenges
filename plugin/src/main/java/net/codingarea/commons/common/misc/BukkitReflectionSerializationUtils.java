@@ -12,7 +12,7 @@ public final class BukkitReflectionSerializationUtils {
 
 	private BukkitReflectionSerializationUtils() {}
 
-	private static final ILogger logger = ILogger.forThisClass();
+	protected static final ILogger logger = ILogger.forThisClass();
 
 	public static boolean isSerializable(@Nonnull Class<?> clazz) {
 		try {
@@ -56,7 +56,7 @@ public final class BukkitReflectionSerializationUtils {
 
 			return (T) object;
 
-		} catch (Throwable ignored) {
+		} catch (Throwable ex) {
 		}
 
 		if (classOfT == null)

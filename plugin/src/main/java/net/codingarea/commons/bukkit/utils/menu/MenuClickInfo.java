@@ -1,6 +1,5 @@
 package net.codingarea.commons.bukkit.utils.menu;
 
-import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -14,12 +13,9 @@ public class MenuClickInfo {
 
 	protected final Player player;
 	protected final Inventory inventory;
-	@Getter
-    protected final boolean shiftClick;
-	@Getter
-    protected final boolean rightClick;
-	@Getter
-    protected final int slot;
+	protected final boolean shiftClick;
+	protected final boolean rightClick;
+	protected final int slot;
 
 	public MenuClickInfo(@Nonnull Player player, @Nonnull Inventory inventory, boolean shiftClick, boolean rightClick, @Nonnegative int slot) {
 		this.player = player;
@@ -39,11 +35,23 @@ public class MenuClickInfo {
 		return inventory;
 	}
 
-    public boolean isLeftClick() {
+	public boolean isRightClick() {
+		return rightClick;
+	}
+
+	public boolean isLeftClick() {
 		return !rightClick;
 	}
 
-    @Nullable
+	public boolean isShiftClick() {
+		return shiftClick;
+	}
+
+	public int getSlot() {
+		return slot;
+	}
+
+	@Nullable
 	public ItemStack getClickedItem() {
 		return inventory.getItem(slot);
 	}

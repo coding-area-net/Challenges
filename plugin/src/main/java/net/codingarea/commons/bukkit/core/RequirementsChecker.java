@@ -6,7 +6,6 @@ import net.codingarea.commons.common.version.Version;
 import org.bukkit.Bukkit;
 
 import javax.annotation.Nonnull;
-import java.util.Objects;
 
 public final class RequirementsChecker {
 
@@ -19,7 +18,7 @@ public final class RequirementsChecker {
 	public void checkExceptionally(@Nonnull Document requirements) throws IllegalStateException {
 		if (requirements.getBoolean("spigot")) requireSpigot();
 		if (requirements.getBoolean("paper")) requirePaper();
-		if (requirements.contains("version")) requireVersion(Objects.requireNonNull(requirements.getVersion("version")));
+		if (requirements.contains("version")) requireVersion(requirements.getVersion("version"));
 	}
 
 	public boolean checkBoolean(@Nonnull Document requirements) {

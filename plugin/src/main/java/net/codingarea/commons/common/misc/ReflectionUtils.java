@@ -49,7 +49,7 @@ public final class ReflectionUtils {
 		for (Class<?> current : ClassWalker.walk(clazz)) {
 			try {
 				return current.getDeclaredMethod(name, parameterTypes);
-			} catch (Throwable ignored) {
+			} catch (Throwable ex) {
 			}
 		}
 
@@ -61,7 +61,7 @@ public final class ReflectionUtils {
 		for (Class<?> current : ClassWalker.walk(clazz)) {
 			try {
 				return current.getDeclaredField(name);
-			} catch (Throwable ignored) {
+			} catch (Throwable ex) {
 			}
 		}
 
@@ -77,7 +77,7 @@ public final class ReflectionUtils {
 		for (String name : names) {
 			try {
 				return Enum.valueOf(classOfEnum, name);
-			} catch (IllegalArgumentException | NoSuchFieldError ignored) { }
+			} catch (IllegalArgumentException | NoSuchFieldError ex) { }
 		}
 		throw new IllegalArgumentException("No enum found in " + classOfEnum.getName() + " for " + Arrays.toString(names));
 	}
@@ -234,8 +234,7 @@ public final class ReflectionUtils {
 	public static <E extends Enum<?>> E getEnumByAlternateNames(@Nonnull Class<E> classOfE, @Nonnull String input) {
 		E[] values = invokeStaticMethodOrNull(classOfE, "values");
 		String[] methodNames = { "getName", "getNames", "getAlias", "getAliases", "getKey", "getKeys", "name", "toString", "ordinal", "getId", "id" };
-        assert values != null;
-        for (E value : values) {
+		for (E value : values) {
 			for (String method : methodNames) {
 				if (check(input, invokeMethodOrNull(value, method)))
 					return value;

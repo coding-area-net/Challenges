@@ -1,12 +1,10 @@
 package net.codingarea.commons.common.version;
 
-import lombok.Getter;
 import net.codingarea.commons.common.logging.ILogger;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
 
-@Getter
 public class VersionInfo implements Version {
 
 	protected static final ILogger logger = ILogger.forThisClass();
@@ -23,7 +21,19 @@ public class VersionInfo implements Version {
 		this.revision = revision;
 	}
 
-    @Override
+	public int getMajor() {
+		return major;
+	}
+
+	public int getMinor() {
+		return minor;
+	}
+
+	public int getRevision() {
+		return revision;
+	}
+
+	@Override
 	public boolean equals(Object other) {
 		if (this == other) return true;
 		if (!(other instanceof Version)) return false;

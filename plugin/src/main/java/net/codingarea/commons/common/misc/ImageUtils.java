@@ -73,8 +73,7 @@ public final class ImageUtils {
 
 	public static BufferedImage loadResource(@Nonnull String path) throws IOException {
 		InputStream stream = ImageUtils.class.getClassLoader().getResourceAsStream(path);
-        assert stream != null;
-        return ImageIO.read(stream);
+		return ImageIO.read(stream);
 	}
 
 	public static BufferedImage loadFile(@Nonnull File file) throws IOException {

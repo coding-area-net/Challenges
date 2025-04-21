@@ -423,7 +423,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
           }
         }
 
-        List<String> newAnswers = answers.stream().map(StringUtils::getEnumName).toList();
+        List<String> newAnswers = answers.stream().map(StringUtils::getEnumName).collect(Collectors.toList());
         answers.clear();
         answers.addAll(newAnswers);
 
