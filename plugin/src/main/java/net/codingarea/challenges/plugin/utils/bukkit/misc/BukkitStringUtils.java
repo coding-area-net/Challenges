@@ -149,7 +149,7 @@ public class BukkitStringUtils {
     if (!currentText.getText().isEmpty()) {
       results.add(currentText);
     }
-    if (argument.length() > 0) {
+    if (!argument.isEmpty()) {
       results.add(new TextComponent(String.valueOf(start)));
       results.add(new TextComponent(String.valueOf(argument)));
     }

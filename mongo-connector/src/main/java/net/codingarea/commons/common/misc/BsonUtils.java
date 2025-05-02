@@ -16,7 +16,7 @@ import java.util.Map.Entry;
 
 public final class BsonUtils {
 
-	protected static final ILogger logger = ILogger.forThisClass();
+	private static final ILogger logger = ILogger.forThisClass();
 
 	private BsonUtils() {
 	}

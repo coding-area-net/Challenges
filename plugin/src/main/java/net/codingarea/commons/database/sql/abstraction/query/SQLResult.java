@@ -8,6 +8,7 @@ import net.codingarea.commons.common.config.document.MapDocument;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Map;
+import java.util.Objects;
 
 public final class SQLResult extends MapDocument {
 
@@ -19,7 +20,7 @@ public final class SQLResult extends MapDocument {
 	@Override
 	public Document getDocument0(@Nonnull String path, @Nonnull Document root, @Nullable Document parent) {
 		try {
-			return new GsonDocument(getString(path), this, this).readonly();
+			return new GsonDocument(Objects.requireNonNull(getString(path)), this, this).readonly();
 		} catch (Exception ex) {
 			return new EmptyDocument(this, null);
 		}
