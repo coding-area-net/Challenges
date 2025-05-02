@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 /**
- * @author JDA | https://github.com/DV8FromTheWorld/JDA/blob/development/src/main/java/net/dv8tion/jda/internal/utils/ClassWalker.java
+ * @author JDA | <a href="https://github.com/DV8FromTheWorld/JDA/blob/development/src/main/java/net/dv8tion/jda/internal/utils/ClassWalker.java">...</a>
  */
 public class ClassWalker implements Iterable<Class<?>> {
 
