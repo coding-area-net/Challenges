@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -20,54 +20,50 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class BlocksDisappearAfterTimeChallenge extends SettingModifier {
 
-	private final Map<Block, BukkitTask> tasks = new HashMap<>();
+  private final Map<Block, BukkitTask> tasks = new HashMap<>();
 
-	public BlocksDisappearAfterTimeChallenge() {
-		super(MenuType.CHALLENGES, 60, 300);
-		setCategory(SettingCategory.WORLD);
-	}
+  public BlocksDisappearAfterTimeChallenge() {
+    super(MenuType.CHALLENGES, 60, 300);
+    setCategory(SettingCategory.WORLD);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.STRING, Message.forName("item-blocks-disappear-time-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.STRING, Message.forName("item-blocks-disappear-time-challenge"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-time-seconds-description").asArray(getValue());
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-time-seconds-description").asArray(getValue());
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onBlockPlace(@Nonnull BlockPlaceEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onBlockPlace(@Nonnull BlockPlaceEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
 
-		BukkitTask oldTask = tasks.remove(event.getBlock());
-		if (oldTask != null) oldTask.cancel();
-		tasks.put(event.getBlock(), runTask(event.getBlock()));
+    BukkitTask oldTask = tasks.remove(event.getBlock());
+    if (oldTask != null) oldTask.cancel();
+    tasks.put(event.getBlock(), runTask(event.getBlock()));
 
-	}
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onBlockPlace(@Nonnull BlockBreakEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onBlockPlace(@Nonnull BlockBreakEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
 
-		BukkitTask oldTask = tasks.remove(event.getBlock());
-		if (oldTask != null) oldTask.cancel();
-	}
+    BukkitTask oldTask = tasks.remove(event.getBlock());
+    if (oldTask != null) oldTask.cancel();
+  }
 
-	private BukkitTask runTask(@Nonnull Block block) {
-		return Bukkit.getScheduler().runTaskLater(plugin, () -> block.setType(Material.AIR), getValue() * 20L);
-	}
+  private BukkitTask runTask(@Nonnull Block block) {
+    return Bukkit.getScheduler().runTaskLater(plugin, () -> block.setType(Material.AIR), getValue() * 20L);
+  }
 
 }

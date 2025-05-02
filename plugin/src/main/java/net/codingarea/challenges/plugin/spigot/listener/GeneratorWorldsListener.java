@@ -12,48 +12,44 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class GeneratorWorldsListener implements Listener {
 
-	@EventHandler(priority = EventPriority.LOW)
-	public void onChangeWorld(PlayerTeleportEvent event) {
-		if (event.getTo() == null) return;
+  @EventHandler(priority = EventPriority.LOW)
+  public void onChangeWorld(PlayerTeleportEvent event) {
+    if (event.getTo() == null) return;
 
-		GeneratorWorldPortalManager worldManager = Challenges.getInstance().getGeneratorWorldPortalManager();
-		Player player = event.getPlayer();
-		World from = event.getFrom().getWorld();
-		World to = event.getTo().getWorld();
-		if (from == null || to == null) return;
-		if (from == to) return;
+    GeneratorWorldPortalManager worldManager = Challenges.getInstance().getGeneratorWorldPortalManager();
+    Player player = event.getPlayer();
+    World from = event.getFrom().getWorld();
+    World to = event.getTo().getWorld();
+    if (from == null || to == null) return;
+    if (from == to) return;
 
-		boolean wasCustomWorld = worldManager.isCustomWorld(from.getName());
-		boolean isCustomWorld = worldManager.isCustomWorld(to.getName());
+    boolean wasCustomWorld = worldManager.isCustomWorld(from.getName());
+    boolean isCustomWorld = worldManager.isCustomWorld(to.getName());
 
-		if (wasCustomWorld && !isCustomWorld) {
+    if (wasCustomWorld && !isCustomWorld) {
 
-			if (to.getEnvironment() == Environment.NETHER || to.getEnvironment() == Environment.THE_END) {
-				worldManager.setLastLocation(player, event.getFrom());
-			}
+      if (to.getEnvironment() == Environment.NETHER || to.getEnvironment() == Environment.THE_END) {
+        worldManager.setLastLocation(player, event.getFrom());
+      }
 
-		} else if (!wasCustomWorld) {
+    } else if (!wasCustomWorld) {
 
-			if (event.getCause() != TeleportCause.END_PORTAL && event.getCause() != TeleportCause.NETHER_PORTAL) {
-				return;
-			}
+      if (event.getCause() != TeleportCause.END_PORTAL && event.getCause() != TeleportCause.NETHER_PORTAL) {
+        return;
+      }
 
-			if (from.getEnvironment() == Environment.NETHER || from.getEnvironment() == Environment.THE_END) {
-				Location location = worldManager.getAndRemoveLastWorld(player);
-				if (location != null) {
-					location = location.getBlock().getLocation().clone();
-					event.setTo(location);
-				}
-			}
+      if (from.getEnvironment() == Environment.NETHER || from.getEnvironment() == Environment.THE_END) {
+        Location location = worldManager.getAndRemoveLastWorld(player);
+        if (location != null) {
+          location = location.getBlock().getLocation().clone();
+          event.setTo(location);
+        }
+      }
 
-		}
+    }
 
-	}
+  }
 
 }

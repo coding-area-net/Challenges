@@ -6,31 +6,27 @@ import org.bukkit.OfflinePlayer;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class NameHelper {
 
-	private NameHelper() {
-	}
+  private NameHelper() {
+  }
 
-	@Nonnull
-	public static String getName(@Nonnull OfflinePlayer player) {
-		CloudSupportManager cloudSupport = Challenges.getInstance().getCloudSupportManager();
-		if (cloudSupport.isNameSupport() && cloudSupport.hasNameFor(player.getUniqueId())) {
-			if (player.isOnline() && player.getPlayer() != null) {
-				return cloudSupport.getColoredName(player.getPlayer());
-			} else {
-				return cloudSupport.getColoredName(player.getUniqueId());
-			}
-		}
+  @Nonnull
+  public static String getName(@Nonnull OfflinePlayer player) {
+    CloudSupportManager cloudSupport = Challenges.getInstance().getCloudSupportManager();
+    if (cloudSupport.isNameSupport() && cloudSupport.hasNameFor(player.getUniqueId())) {
+      if (player.isOnline() && player.getPlayer() != null) {
+        return cloudSupport.getColoredName(player.getPlayer());
+      } else {
+        return cloudSupport.getColoredName(player.getUniqueId());
+      }
+    }
 
-		if (player.getName() == null) {
-			return "";
-		}
+    if (player.getName() == null) {
+      return "";
+    }
 
-		return player.getName();
-	}
+    return player.getName();
+  }
 
 }

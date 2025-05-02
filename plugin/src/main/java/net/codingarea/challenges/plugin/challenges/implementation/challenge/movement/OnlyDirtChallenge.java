@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.movement;
 
-import net.anweisen.utilities.bukkit.utils.misc.BukkitReflectionUtils;
+import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
@@ -20,53 +20,49 @@ import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 @CanInstaKillOnEnable
 public class OnlyDirtChallenge extends Setting {
 
-	public OnlyDirtChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.MOVEMENT);
-	}
+  public OnlyDirtChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.MOVEMENT);
+  }
 
-	@Nonnull
-	@Override
-	public ItemStack getSettingsItem() {
-		return super.getSettingsItem();
-	}
+  @Nonnull
+  @Override
+  public ItemStack getSettingsItem() {
+    return super.getSettingsItem();
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.DIRT, Message.forName("item-only-dirt-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.DIRT, Message.forName("item-only-dirt-challenge"));
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onPlayerMove(@Nonnull PlayerMoveEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		if (event.getTo() == null) return;
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onPlayerMove(@Nonnull PlayerMoveEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    if (event.getTo() == null) return;
 
-		Block blockBelow = BlockUtils.getBlockBelow(event.getTo());
-		if (blockBelow == null) return;
-		if (blockBelow.getType() != Material.DIRT && !BukkitReflectionUtils.isAir(blockBelow.getType())) {
-			Message.forName("only-dirt-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
-			kill(event.getPlayer());
-		}
+    Block blockBelow = BlockUtils.getBlockBelow(event.getTo());
+    if (blockBelow == null) return;
+    if (blockBelow.getType() != Material.DIRT && !BukkitReflectionUtils.isAir(blockBelow.getType())) {
+      Message.forName("only-dirt-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+      kill(event.getPlayer());
+    }
 
-	}
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onBlockSpread(@Nonnull BlockSpreadEvent event) {
-		if (!shouldExecuteEffect()) return;
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onBlockSpread(@Nonnull BlockSpreadEvent event) {
+    if (!shouldExecuteEffect()) return;
 
-		if (event.getNewState().getType() == Material.GRASS_BLOCK) {
-			event.setCancelled(true);
-		}
+    if (event.getNewState().getType() == Material.GRASS_BLOCK) {
+      event.setCancelled(true);
+    }
 
-	}
+  }
 
 }

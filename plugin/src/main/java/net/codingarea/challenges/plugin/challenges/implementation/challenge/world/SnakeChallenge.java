@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
@@ -24,91 +24,82 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class SnakeChallenge extends Setting {
 
-	private final ArrayList<Block> blocks = new ArrayList<>();
+  private final ArrayList<Block> blocks = new ArrayList<>();
 
-	public SnakeChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.WORLD);
-	}
+  public SnakeChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.WORLD);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.BLUE_TERRACOTTA, Message.forName("item-snake-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.BLUE_TERRACOTTA, Message.forName("item-snake-challenge"));
+  }
 
-	@Override
-	protected void onEnable() {
+  @Override
+  protected void onDisable() {
+    blocks.clear();
+  }
 
-	}
+  @Override
+  public void writeGameState(@Nonnull Document document) {
+    super.writeGameState(document);
 
-	@Override
-	protected void onDisable() {
-		blocks.clear();
-	}
+    List<Location> locations = blocks.stream().map(Block::getLocation).collect(Collectors.toList());
+    document.set("blocks", locations);
+  }
 
-	@Override
-	public void writeGameState(@Nonnull Document document) {
-		super.writeGameState(document);
+  @Override
+  public void loadGameState(@Nonnull Document document) {
+    super.loadGameState(document);
 
-		List<Location> locations = blocks.stream().map(Block::getLocation).collect(Collectors.toList());
-		document.set("blocks", locations);
-	}
+    blocks.addAll(document.getSerializableList("blocks", Location.class).stream().map(Location::getBlock).collect(Collectors.toList()));
+  }
 
-	@Override
-	public void loadGameState(@Nonnull Document document) {
-		super.loadGameState(document);
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onMove(@Nonnull PlayerMoveEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (event.getTo() == null) return;
+    if (event.getFrom().getBlock().equals(event.getTo().getBlock())) return;
+    if (event.getPlayer().getGameMode() == GameMode.SPECTATOR || event.getPlayer().getGameMode() == GameMode.CREATIVE)
+      return;
 
-		blocks.addAll(document.getSerializableList("blocks", Location.class).stream().map(Location::getBlock).collect(Collectors.toList()));
-	}
+    Block from = event.getFrom().clone().subtract(0, 1, 0).getBlock();
+    Block to = event.getTo().clone().subtract(0, 0.15, 0).getBlock();
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onMove(@Nonnull PlayerMoveEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (event.getTo() == null) return;
-		if (event.getFrom().getBlock().equals(event.getTo().getBlock())) return;
-		if (event.getPlayer().getGameMode() == GameMode.SPECTATOR || event.getPlayer().getGameMode() == GameMode.CREATIVE)
-			return;
+    if (from.getType().isSolid()) {
+      from.setType(BlockUtils.getTerracotta(getPlayersColor(event.getPlayer())), false);
+      blocks.add(from);
+    }
 
-		Block from = event.getFrom().clone().subtract(0, 1, 0).getBlock();
-		Block to = event.getTo().clone().subtract(0, 0.15, 0).getBlock();
+    if (blocks.contains(to)) {
+      Message.forName("snake-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+      kill(event.getPlayer());
+      return;
+    }
 
-		if (from.getType().isSolid()) {
-			from.setType(BlockUtils.getTerracotta(getPlayersColor(event.getPlayer())), false);
-			blocks.add(from);
-		}
+    if (to.getType().isSolid()) {
+      to.setType(Material.BLACK_TERRACOTTA, false);
 
-		if (blocks.contains(to)) {
-			Message.forName("snake-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
-			kill(event.getPlayer());
-			return;
-		}
+      Block block = event.getPlayer().getLocation().getBlock();
+      if (!block.getType().isSolid()) {
+        block.breakNaturally();
+      }
+    }
 
-		if (to.getType().isSolid()) {
-			to.setType(Material.BLACK_TERRACOTTA, false);
+  }
 
-			Block block = event.getPlayer().getLocation().getBlock();
-			if (!block.getType().isSolid()) {
-				block.breakNaturally();
-			}
-		}
-
-	}
-
-	public int getPlayersColor(Player player) {
-		int i = 0;
-		for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
-			i++;
-			if (i > 17) i = 0;
-			if (currentPlayer == player) return i;
-		}
-		return 0;
-	}
+  public int getPlayersColor(Player player) {
+    int i = 0;
+    for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
+      i++;
+      if (i > 17) i = 0;
+      if (currentPlayer == player) return i;
+    }
+    return 0;
+  }
 
 }

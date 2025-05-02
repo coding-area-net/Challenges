@@ -4,11 +4,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.common.collection.IOUtils;
-import net.anweisen.utilities.common.config.Document;
-import net.anweisen.utilities.common.misc.FileUtils;
-import net.anweisen.utilities.common.misc.GsonUtils;
+import lombok.Getter;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.collection.IOUtils;
+import net.codingarea.commons.common.config.Document;
+import net.codingarea.commons.common.config.FileDocument;
+import net.codingarea.commons.common.misc.FileUtils;
+import net.codingarea.commons.common.misc.GsonUtils;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.utils.logging.ConsolePrint;
@@ -18,145 +20,189 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map.Entry;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class LanguageLoader extends ContentLoader {
 
-	public static final String DEFAULT_LANGUAGE = "en";
-	public static final String DIRECT_FILE_PATH = "direct-language-file";
+  public static final String DEFAULT_LANGUAGE = "en";
 
-	private static final JsonParser parser = new JsonParser();
+  public static final String KEY_LANGUAGE = "language", KEY_SMALL_CAPS = "smallcaps", KEY_DIRECT_LANGUAGE_FILE = "manualfile";
 
-	private static volatile boolean loaded = false;
-	private String language;
-	private boolean smallCapsFont;
+  @Getter
+  private static volatile boolean loaded = false;
+  @Getter
+  private String language;
+  @Getter
+  private boolean smallCapsFont;
 
-	public static boolean isLoaded() {
-		return loaded;
-	}
+  public File getLanguagePropertiesFile() {
+    return getMessageFile("language", "properties");
+  }
 
-	@Override
-	protected void load() {
+  public Document getLanguageProperties() {
+    try {
+      FileUtils.createFilesIfNecessary(getLanguagePropertiesFile());
 
-		Document config = Challenges.getInstance().getConfigDocument();
+      FileDocument document = FileDocument.readPropertiesFile(getLanguagePropertiesFile());
+    } catch (Exception e) {
+      Logger.error("Could not read language properties", e);
+    }
+    return Document.empty();
+  }
 
-		smallCapsFont = config.getBoolean("small-caps", false);
+  public void migrateLanguageConfig() {
+    Document configDocument = Challenges.getInstance().getConfigDocument();
+    String oldLanguage = configDocument.getString("language");
+    String oldDirectFilePath = configDocument.getString("direct-language-file");
+    boolean oldSmallCapsFont = configDocument.getBoolean("small-caps");
 
-		if (config.contains(DIRECT_FILE_PATH)) {
-			language = Challenges.getInstance().getConfigDocument().getString("language", DEFAULT_LANGUAGE);
-			String path = config.getString(DIRECT_FILE_PATH);
-			if (path == null) return;
-			Logger.info("Using direct language file '{}'", path);
-			readLanguage(new File(path));
-			return;
-		}
+    Document languageProperties = getLanguageProperties();
+    languageProperties.set(KEY_LANGUAGE, oldLanguage);
+    languageProperties.set(KEY_SMALL_CAPS, oldSmallCapsFont);
 
-		loadDefault();
-	}
+    if (configDocument.contains("direct-language-file")) {
+      languageProperties.set(KEY_DIRECT_LANGUAGE_FILE, oldDirectFilePath);
+    }
+  }
 
-	private void loadDefault() {
-		download();
-		init();
-		read();
-	}
+  @Override
+  protected void load() {
+    migrateLanguageConfig();
 
-	private void init() {
+    Document config = getLanguageProperties();
 
-		language = Challenges.getInstance().getConfigDocument().getString("language", DEFAULT_LANGUAGE);
-		File file = getMessageFile(language, "json");
+    smallCapsFont = config.getBoolean(KEY_SMALL_CAPS, false);
 
-		if (!file.exists()) {
-			if (language.equalsIgnoreCase(DEFAULT_LANGUAGE)) return;
-			ConsolePrint.unknownLanguage(language);
-			language = DEFAULT_LANGUAGE;
-		}
+    if (config.contains(KEY_DIRECT_LANGUAGE_FILE)) {
+      language = config.getString(KEY_LANGUAGE, DEFAULT_LANGUAGE);
+      String path = config.getString(KEY_DIRECT_LANGUAGE_FILE);
+      if (path == null) return;
+      Logger.info("Using direct language file '{}'", path);
+      readLanguage(new File(path));
+      return;
+    }
 
-		Logger.debug("Language '{}' is currently selected", language);
+    loadDefault();
+  }
 
-	}
+  public void changeLanguage(@Nonnull String language) {
+    if (language.equalsIgnoreCase(this.language)) {
+      Logger.info("Language '{}' is already selected", language);
+      return;
+    }
 
-	private void download() {
-		try {
+    this.language = language;
+    Document properties = getLanguageProperties();
+    properties.set(KEY_LANGUAGE, language);
+    try {
+      properties.saveToFile(getLanguagePropertiesFile());
+    } catch (IOException e) {
+      Logger.error("Could not save language properties", e);
+    }
+    reload(language);
+    Logger.info("Language changed to '{}'", language);
+  }
 
-			JsonArray languages = parser.parse(IOUtils.toString(getGitHubUrl("language/languages.json"))).getAsJsonArray();
-			Logger.debug("Fetched languages {}", languages);
-			for (JsonElement element : languages) {
-				try {
-					String name = element.getAsString();
-					String url = getGitHubUrl("language/files/" + name + ".json");
+  public void reload(String language) {
+    this.language = language;
+    read();
+    download();
+    init();
+    Challenges.getInstance().getScoreboardManager().updateAll();
+    Challenges.getInstance().getConfigManager().getSettingsConfig().set("language", language);
+  }
 
-					Document language = Document.parseJson(IOUtils.toString(url));
-					File file = getMessageFile(name, "json");
+  private void loadDefault() {
+    download();
+    init();
+    read();
+  }
 
-					Logger.debug("Writing language {} to {}", name, file);
-					verifyLanguage(language, file, name);
-				} catch (Exception exception) {
-					Challenges.getInstance().getLogger().error("", exception);
-					Logger.error("Could not download language for {}. {}: {}", element, exception.getClass().getSimpleName(), exception.getMessage());
-				}
-			}
+  private void init() {
 
-		} catch (Exception ex) {
-			Logger.error("Could not download languages", ex);
-		}
-	}
+    language = Challenges.getInstance().getConfigDocument().getString("language", DEFAULT_LANGUAGE);
+    File file = getMessageFile(language, "json");
 
-	private void verifyLanguage(@Nonnull Document download, @Nonnull File file, @Nonnull String name) throws IOException {
-		Document existing = Document.readJsonFile(file);
-		FileUtils.createFilesIfNecessary(file);
-		download.forEach((key, value) -> {
-			if (!existing.contains(key)) {
-				Logger.debug("Overwriting message {} in {} with {}", key, name, String.valueOf(value).replace("\"", "§r\""));
-				existing.set(key, value);
-			}
-		});
-		existing.saveToFile(file);
-	}
+    if (!file.exists()) {
+      if (language.equalsIgnoreCase(DEFAULT_LANGUAGE)) return;
+      ConsolePrint.unknownLanguage(language);
+      language = DEFAULT_LANGUAGE;
+    }
 
-	private void read() {
-		readLanguage(getMessageFile(language, "json"));
-	}
+    Logger.debug("Language '{}' is currently selected", language);
 
-	private void readLanguage(@Nonnull File file) {
-		try {
+  }
 
-			if (!file.exists()) {
-				ConsolePrint.unableToGetLanguages();
-				return;
-			}
+  private void download() {
+    try {
 
-			int messages = 0;
-			JsonObject read = parser.parse(FileUtils.newBufferedReader(file)).getAsJsonObject();
-			for (Entry<String, JsonElement> entry : read.entrySet()) {
-				Message message = Message.forName(entry.getKey());
-				JsonElement element = entry.getValue();
-				if (element.isJsonPrimitive()) {
-					message.setValue(new String[]{element.getAsString()});
-					messages++;
-				} else if (element.isJsonArray()) {
-					message.setValue(GsonUtils.convertJsonArrayToStringArray(element.getAsJsonArray()));
-					messages++;
-				} else {
-					Logger.warn("Illegal type '{}' for {}", element.getClass().getName(), message.getName());
-				}
-			}
+      JsonArray languages = JsonParser.parseString(IOUtils.toString(getGitHubUrl("language/languages.json"))).getAsJsonArray();
+      Logger.debug("Fetched languages {}", languages);
+      for (JsonElement element : languages) {
+        try {
+          String name = element.getAsString();
+          String url = getGitHubUrl("language/files/" + name + ".json");
 
-			loaded = true;
-			Logger.info("Successfully loaded language '{}' from config file: {} message(s)", language, messages);
+          Document language = Document.parseJson(IOUtils.toString(url));
+          File file = getMessageFile(name, "json");
 
-		} catch (Exception ex) {
-			Logger.error("Could not read languages", ex);
-		}
-	}
+          Logger.debug("Writing language {} to {}", name, file);
+          verifyLanguage(language, file, name);
+        } catch (Exception exception) {
+          Challenges.getInstance().getILogger().error("", exception);
+          Logger.error("Could not download language for {}. {}: {}", element, exception.getClass().getSimpleName(), exception.getMessage());
+        }
+      }
 
-	public String getLanguage() {
-		return language;
-	}
+    } catch (Exception ex) {
+      Logger.error("Could not download languages", ex);
+    }
+  }
 
-	public boolean isSmallCapsFont() {
-		return smallCapsFont;
-	}
+  private void verifyLanguage(@Nonnull Document download, @Nonnull File file, @Nonnull String name) throws IOException {
+    Document existing = Document.readJsonFile(file);
+    FileUtils.createFilesIfNecessary(file);
+    download.forEach((key, value) -> {
+      if (!existing.contains(key)) {
+        Logger.debug("Overwriting message {} in {} with {}", key, name, String.valueOf(value).replace("\"", "§r\""));
+        existing.set(key, value);
+      }
+    });
+    existing.saveToFile(file);
+  }
+
+  private void read() {
+    readLanguage(getMessageFile(language, "json"));
+  }
+
+  private void readLanguage(@Nonnull File file) {
+    try {
+
+      if (!file.exists()) {
+        ConsolePrint.unableToGetLanguages();
+        return;
+      }
+
+      int messages = 0;
+      JsonObject read = JsonParser.parseReader(FileUtils.newBufferedReader(file)).getAsJsonObject();
+      for (Entry<String, JsonElement> entry : read.entrySet()) {
+        Message message = Message.forName(entry.getKey());
+        JsonElement element = entry.getValue();
+        if (element.isJsonPrimitive()) {
+          message.setValue(new String[]{element.getAsString()});
+          messages++;
+        } else if (element.isJsonArray()) {
+          message.setValue(GsonUtils.convertJsonArrayToStringArray(element.getAsJsonArray()));
+          messages++;
+        } else {
+          Logger.warn("Illegal type '{}' for {}", element.getClass().getName(), message.getName());
+        }
+      }
+
+      loaded = true;
+      Logger.info("Successfully loaded language '{}' from config file: {} message(s)", language, messages);
+
+    } catch (Exception ex) {
+      Logger.error("Could not read languages", ex);
+    }
+  }
 
 }

@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
@@ -13,28 +13,24 @@ import org.bukkit.event.entity.EntityResurrectEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class TotemSaveDeathSetting extends Setting {
 
-	public TotemSaveDeathSetting() {
-		super(MenuType.SETTINGS);
-	}
+  public TotemSaveDeathSetting() {
+    super(MenuType.SETTINGS);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.TOTEM_OF_UNDYING, Message.forName("item-totem-save-setting"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.TOTEM_OF_UNDYING, Message.forName("item-totem-save-setting"));
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onEntityResurrect(@Nonnull EntityResurrectEvent event) {
-		if (ChallengeHelper.isInInstantKill() && !isEnabled()) {
-			event.setCancelled(true);
-		}
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onEntityResurrect(@Nonnull EntityResurrectEvent event) {
+    if (ChallengeHelper.isInInstantKill() && !isEnabled()) {
+      event.setCancelled(true);
+    }
+  }
 
 }

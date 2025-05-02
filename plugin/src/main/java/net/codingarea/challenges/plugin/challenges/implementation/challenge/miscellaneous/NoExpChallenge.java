@@ -14,29 +14,25 @@ import org.bukkit.event.player.PlayerExpChangeEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class NoExpChallenge extends Setting {
 
-	public NoExpChallenge() {
-		super(MenuType.CHALLENGES);
-	}
+  public NoExpChallenge() {
+    super(MenuType.CHALLENGES);
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onExp(PlayerExpChangeEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		if (event.getAmount() <= 0) return;
-		Message.forName("exp-picked-up").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
-		ChallengeHelper.kill(event.getPlayer());
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onExp(PlayerExpChangeEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    if (event.getAmount() <= 0) return;
+    Message.forName("exp-picked-up").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+    ChallengeHelper.kill(event.getPlayer());
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.EXPERIENCE_BOTTLE, Message.forName("item-no-exp-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.EXPERIENCE_BOTTLE, Message.forName("item-no-exp-challenge"));
+  }
 
 }

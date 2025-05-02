@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.randomizer;
 
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.impl.RandomItemAction;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
@@ -13,44 +13,40 @@ import org.bukkit.Material;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class RandomItemChallenge extends TimedChallenge {
 
-	public RandomItemChallenge() {
-		super(MenuType.CHALLENGES, 1, 60, 30, false);
-		setCategory(SettingCategory.RANDOMIZER);
-	}
+  public RandomItemChallenge() {
+    super(MenuType.CHALLENGES, 1, 60, 30, false);
+    setCategory(SettingCategory.RANDOMIZER);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.BEACON, Message.forName("item-random-item-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.BEACON, Message.forName("item-random-item-challenge"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-time-seconds-description").asArray(getValue());
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-time-seconds-description").asArray(getValue());
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeSecondsValueChangeTitle(this, getValue());
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeSecondsValueChangeTitle(this, getValue());
+  }
 
-	@Override
-	protected int getSecondsUntilNextActivation() {
-		return getValue();
-	}
+  @Override
+  protected int getSecondsUntilNextActivation() {
+    return getValue();
+  }
 
-	@Override
-	protected void onTimeActivation() {
-		restartTimer();
-		broadcastFiltered(RandomItemAction::giveRandomItemToPlayer);
-	}
+  @Override
+  protected void onTimeActivation() {
+    restartTimer();
+    broadcastFiltered(RandomItemAction::giveRandomItemToPlayer);
+  }
 
 }

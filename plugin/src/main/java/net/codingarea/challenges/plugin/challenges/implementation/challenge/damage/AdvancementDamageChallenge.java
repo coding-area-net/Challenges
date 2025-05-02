@@ -14,42 +14,38 @@ import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class AdvancementDamageChallenge extends SettingModifier {
 
-	public AdvancementDamageChallenge() {
-		super(MenuType.CHALLENGES, 1, 40);
-		setCategory(SettingCategory.DAMAGE);
-	}
+  public AdvancementDamageChallenge() {
+    super(MenuType.CHALLENGES, 1, 40);
+    setCategory(SettingCategory.DAMAGE);
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.BOOK, Message.forName("item-advancement-damage-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.BOOK, Message.forName("item-advancement-damage-challenge"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onPlayerAdvancementDone(@Nonnull PlayerAdvancementDoneEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		if (event.getAdvancement().getKey().toString().contains(":recipes/")) return;
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onPlayerAdvancementDone(@Nonnull PlayerAdvancementDoneEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    if (event.getAdvancement().getKey().toString().contains(":recipes/")) return;
 
-		event.getPlayer().setNoDamageTicks(0);
-		event.getPlayer().damage(getValue());
-	}
+    event.getPlayer().setNoDamageTicks(0);
+    event.getPlayer().damage(getValue());
+  }
 
 }

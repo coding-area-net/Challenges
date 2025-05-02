@@ -8,40 +8,36 @@ import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
 
-	private static final HandlerList handlers = new HandlerList();
+  private static final HandlerList handlers = new HandlerList();
 
-	private final PlayerStatisticIncrementEvent event;
+  private final PlayerStatisticIncrementEvent event;
 
-	public PlayerJumpEvent(@Nonnull Player who, PlayerStatisticIncrementEvent statisticIncrementEvent) {
-		super(who);
-		this.event = statisticIncrementEvent;
-	}
+  public PlayerJumpEvent(@Nonnull Player who, PlayerStatisticIncrementEvent statisticIncrementEvent) {
+    super(who);
+    this.event = statisticIncrementEvent;
+  }
 
-	@Nonnull
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+  @Nonnull
+  public static HandlerList getHandlerList() {
+    return handlers;
+  }
 
-	@Override
-	public boolean isCancelled() {
-		return event.isCancelled();
-	}
+  @Override
+  public boolean isCancelled() {
+    return event.isCancelled();
+  }
 
-	@Override
-	public void setCancelled(boolean b) {
-		event.setCancelled(true);
-	}
+  @Override
+  public void setCancelled(boolean b) {
+    event.setCancelled(true);
+  }
 
-	@Nonnull
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+  @Nonnull
+  @Override
+  public HandlerList getHandlers() {
+    return handlers;
+  }
 
 }

@@ -10,39 +10,35 @@ import org.bukkit.inventory.ItemStack;
 import java.util.LinkedHashMap;
 import java.util.function.Supplier;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public abstract class ChallengeTrigger extends ChallengeSetting implements
-		IChallengeTrigger {
+  IChallengeTrigger {
 
-	public ChallengeTrigger(String name,
-							SubSettingsBuilder subSettingsBuilder) {
-		super(name, subSettingsBuilder);
-	}
+  public ChallengeTrigger(String name,
+                          SubSettingsBuilder subSettingsBuilder) {
+    super(name, subSettingsBuilder);
+  }
 
-	public ChallengeTrigger(String name) {
-		super(name);
-	}
+  public ChallengeTrigger(String name) {
+    super(name);
+  }
 
-	public ChallengeTrigger(String name, Supplier<SubSettingsBuilder> builderSupplier) {
-		super(name, builderSupplier);
-	}
+  public ChallengeTrigger(String name, Supplier<SubSettingsBuilder> builderSupplier) {
+    super(name, builderSupplier);
+  }
 
-	public static LinkedHashMap<String, ItemStack> getMenuItems() {
-		LinkedHashMap<String, ItemStack> map = new LinkedHashMap<>();
+  public static LinkedHashMap<String, ItemStack> getMenuItems() {
+    LinkedHashMap<String, ItemStack> map = new LinkedHashMap<>();
 
-		for (ChallengeTrigger value : Challenges.getInstance().getCustomSettingsLoader().getTriggers().values()) {
-			map.put(value.getName(), new ItemBuilder(value.getMaterial(), Message.forName(value.getMessage())).hideAttributes().build());
-		}
+    for (ChallengeTrigger value : Challenges.getInstance().getCustomSettingsLoader().getTriggers().values()) {
+      map.put(value.getName(), new ItemBuilder(value.getMaterial(), Message.forName(value.getMessage())).hideAttributes().build());
+    }
 
-		return map;
-	}
+    return map;
+  }
 
-	@Override
-	public final String getMessage() {
-		return "item-custom-trigger-" + getMessageSuffix();
-	}
+  @Override
+  public final String getMessage() {
+    return "item-custom-trigger-" + getMessageSuffix();
+  }
 
 }

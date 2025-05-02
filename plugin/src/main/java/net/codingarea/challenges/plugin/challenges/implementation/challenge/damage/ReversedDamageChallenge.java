@@ -12,30 +12,26 @@ import org.bukkit.event.EventPriority;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class ReversedDamageChallenge extends Setting {
 
-	public ReversedDamageChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.DAMAGE);
-	}
+  public ReversedDamageChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.DAMAGE);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.GOLDEN_SWORD, Message.forName("item-reversed-damage-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.GOLDEN_SWORD, Message.forName("item-reversed-damage-challenge"));
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onDamageByPlayer(@Nonnull EntityDamageByPlayerEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getDamager())) return;
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onDamageByPlayer(@Nonnull EntityDamageByPlayerEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getDamager())) return;
 
-		double damage = event.getFinalDamage();
-		event.getDamager().damage(damage);
-	}
+    double damage = event.getFinalDamage();
+    event.getDamager().damage(damage);
+  }
 
 }

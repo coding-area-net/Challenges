@@ -8,24 +8,20 @@ import org.bukkit.entity.Player;
 
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class DropRandomItemAction extends PlayerTargetAction {
 
-	public DropRandomItemAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
-	}
+  public DropRandomItemAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.DISPENSER;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.DISPENSER;
+  }
 
-	@Override
-	public void executeForPlayer(Player player, Map<String, String[]> subActions) {
-		RandomItemDroppingChallenge.dropRandomItem(player);
-	}
+  @Override
+  public void executeForPlayer(Player player, Map<String, String[]> subActions) {
+    RandomItemDroppingChallenge.dropRandomItem(player);
+  }
 
 }

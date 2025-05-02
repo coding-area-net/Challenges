@@ -7,36 +7,32 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.LinkedHashMap;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class SubSettingChooseMenuGenerator extends ChooseItemGenerator {
 
-	private final IParentCustomGenerator parent;
-	private final String key;
-	private final String title;
+  private final IParentCustomGenerator parent;
+  private final String key;
+  private final String title;
 
-	public SubSettingChooseMenuGenerator(String key, IParentCustomGenerator parent, LinkedHashMap<String, ItemStack> map, String title) {
-		super(map);
-		this.key = key;
-		this.title = title;
-		this.parent = parent;
-	}
+  public SubSettingChooseMenuGenerator(String key, IParentCustomGenerator parent, LinkedHashMap<String, ItemStack> map, String title) {
+    super(map);
+    this.key = key;
+    this.title = title;
+    this.parent = parent;
+  }
 
-	@Override
-	public String[] getSubTitles(int page) {
-		return new String[]{title};
-	}
+  @Override
+  public String[] getSubTitles(int page) {
+    return new String[]{title};
+  }
 
-	@Override
-	public void onItemClick(Player player, String itemKey) {
-		parent.accept(player, null, MapUtils.createStringArrayMap(key, itemKey));
-	}
+  @Override
+  public void onItemClick(Player player, String itemKey) {
+    parent.accept(player, null, MapUtils.createStringArrayMap(key, itemKey));
+  }
 
-	@Override
-	public void onBackToMenuItemClick(Player player) {
-		parent.decline(player);
-	}
+  @Override
+  public void onBackToMenuItemClick(Player player) {
+    parent.decline(player);
+  }
 
 }

@@ -9,30 +9,26 @@ import org.bukkit.event.EventPriority;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class EntityDamageByPlayerTrigger extends ChallengeTrigger {
 
-	public EntityDamageByPlayerTrigger(String name) {
-		super(name, SubSettingsHelper.createEntityTypeSettingsBuilder(true, true));
-	}
+  public EntityDamageByPlayerTrigger(String name) {
+    super(name, SubSettingsHelper.createEntityTypeSettingsBuilder(true, true));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.WOODEN_SWORD;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.WOODEN_SWORD;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onDeath(@Nonnull EntityDamageByPlayerEvent event) {
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onDeath(@Nonnull EntityDamageByPlayerEvent event) {
 
-		createData()
-				.entity(event.getDamager())
-				.event(event)
-				.entityType(event.getEntityType())
-				.execute();
+    createData()
+      .entity(event.getDamager())
+      .event(event)
+      .entityType(event.getEntityType())
+      .execute();
 
-	}
+  }
 
 }

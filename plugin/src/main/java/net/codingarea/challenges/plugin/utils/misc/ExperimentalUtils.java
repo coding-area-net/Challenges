@@ -1,11 +1,12 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
-import java.util.LinkedList;
-import java.util.List;
 import net.codingarea.challenges.plugin.Challenges;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class ExperimentalUtils {
 
@@ -27,7 +28,8 @@ public class ExperimentalUtils {
         if (!material.isEnabledByFeature(Challenges.getInstance().getGameWorldStorage().getWorld(World.Environment.NORMAL))) {
           continue;
         }
-      } catch (NoSuchMethodError ignored) {} // only NoSuchMethodException
+      } catch (NoSuchMethodError ignored) {
+      } // only NoSuchMethodException
 
       materials.add(material);
     }
@@ -49,7 +51,8 @@ public class ExperimentalUtils {
         if (!type.isEnabledByFeature(Challenges.getInstance().getGameWorldStorage().getWorld(World.Environment.NORMAL))) {
           continue;
         }
-      } catch (NoSuchMethodError | IllegalArgumentException ignored) {} // only NoSuchMethodException
+      } catch (NoSuchMethodError | IllegalArgumentException ignored) {
+      } // only NoSuchMethodException
 
       entityTypes.add(type);
     }

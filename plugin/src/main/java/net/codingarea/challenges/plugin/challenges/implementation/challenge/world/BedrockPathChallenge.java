@@ -15,31 +15,26 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class BedrockPathChallenge extends Setting {
 
-	public BedrockPathChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.WORLD);
-	}
+  public BedrockPathChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.WORLD);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-bedrock-path-challenge")).setColor(Color.GRAY);
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-bedrock-path-challenge")).setColor(Color.GRAY);
+  }
 
-	@EventHandler
-	public void onMove(@Nonnull PlayerMoveEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (event.getPlayer().getGameMode() == GameMode.CREATIVE || event.getPlayer().getGameMode() == GameMode.SPECTATOR)
-			return;
+  @EventHandler
+  public void onMove(@Nonnull PlayerMoveEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (event.getPlayer().getGameMode() == GameMode.CREATIVE || event.getPlayer().getGameMode() == GameMode.SPECTATOR)
+      return;
 
-		BlockUtils.createBlockPath(event.getFrom(), event.getTo(), Material.BEDROCK);
-	}
+    BlockUtils.createBlockPath(event.getFrom(), event.getTo(), Material.BEDROCK);
+  }
 
 }

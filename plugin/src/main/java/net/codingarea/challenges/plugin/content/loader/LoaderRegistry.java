@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.content.loader;
 
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.utils.logging.ConsolePrint;
 
@@ -8,106 +8,103 @@ import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public final class LoaderRegistry {
 
-	private static final AtomicInteger loading = new AtomicInteger(); // Keeps track of how many loaders are still loading
-	private final Map<Class<? extends ContentLoader>, Subscribers> subscribers = new HashMap<>();
-	private final Collection<ContentLoader> loaders;
-	public LoaderRegistry(@Nonnull ContentLoader... loaders) {
-		this.loaders = Arrays.asList(loaders);
-	}
+  private static final AtomicInteger loading = new AtomicInteger(); // Keeps track of how many loaders are still loading
+  private final Map<Class<? extends ContentLoader>, Subscribers> subscribers = new HashMap<>();
+  private final Collection<ContentLoader> loaders;
 
-	private static void execute(@Nonnull Class<? extends ContentLoader> classOfLoader, @Nonnull Runnable action) {
-		try {
-			action.run();
-		} catch (Exception ex) {
-			Logger.error("Could not execute subscriber for {}", classOfLoader.getSimpleName(), ex);
-		}
-	}
+  public LoaderRegistry(@Nonnull ContentLoader... loaders) {
+    this.loaders = Arrays.asList(loaders);
+  }
 
-	public void load() {
-		if (isLoading()) {
-			ConsolePrint.alreadyExecutingContentLoader();
-			return;
-		}
+  private static void execute(@Nonnull Class<? extends ContentLoader> classOfLoader, @Nonnull Runnable action) {
+    try {
+      action.run();
+    } catch (Exception ex) {
+      Logger.error("Could not execute subscriber for {}", classOfLoader.getSimpleName(), ex);
+    }
+  }
 
-		loaders.forEach(this::executeLoader);
-	}
+  public void load() {
+    if (isLoading()) {
+      ConsolePrint.alreadyExecutingContentLoader();
+      return;
+    }
 
-	private void executeLoader(@Nonnull ContentLoader loader) {
-		loading.incrementAndGet();
-		loader.load();
-		loading.decrementAndGet();
-		handleCompleteLoading(loader.getClass());
-	}
+    loaders.forEach(this::executeLoader);
+  }
 
-	private void handleCompleteLoading(@Nonnull Class<? extends ContentLoader> classOfLoader) {
-		Logger.debug("{} finished loading. {} loader(s) left", classOfLoader.getSimpleName(), loading);
+  private void executeLoader(@Nonnull ContentLoader loader) {
+    loading.incrementAndGet();
+    loader.load();
+    loading.decrementAndGet();
+    handleCompleteLoading(loader.getClass());
+  }
 
-		if (loading.get() == 0)
-			Logger.info("All loaders finished loading");
+  private void handleCompleteLoading(@Nonnull Class<? extends ContentLoader> classOfLoader) {
+    Logger.debug("{} finished loading. {} loader(s) left", classOfLoader.getSimpleName(), loading);
 
-		if (Challenges.getInstance().isEnabled()) {
-			Subscribers subscribers = this.subscribers.get(classOfLoader);
-			if (subscribers == null) return;
-			subscribers.execute();
-		}
-	}
+    if (loading.get() == 0)
+      Logger.info("All loaders finished loading");
 
-	public void enable() {
-		for (Subscribers subscribers : subscribers.values()) {
-			if (subscribers.executed) continue;
-			subscribers.execute();
-		}
-	}
+    if (Challenges.getInstance().isEnabled()) {
+      Subscribers subscribers = this.subscribers.get(classOfLoader);
+      if (subscribers == null) return;
+      subscribers.execute();
+    }
+  }
 
-	public void disable() {
-		subscribers.clear();
-	}
+  public void enable() {
+    for (Subscribers subscribers : subscribers.values()) {
+      if (subscribers.executed) continue;
+      subscribers.execute();
+    }
+  }
 
-	public boolean isLoading() {
-		return loading.get() > 0;
-	}
+  public void disable() {
+    subscribers.clear();
+  }
 
-	public void subscribe(@Nonnull Class<? extends ContentLoader> classOfLoader, @Nonnull Runnable action) {
-		Subscribers subscribers = this.subscribers.computeIfAbsent(classOfLoader, key -> new Subscribers(classOfLoader));
-		subscribers.actions.add(action);
+  public boolean isLoading() {
+    return loading.get() > 0;
+  }
 
-		if (subscribers.executed)
-			execute(classOfLoader, action);
-	}
+  public void subscribe(@Nonnull Class<? extends ContentLoader> classOfLoader, @Nonnull Runnable action) {
+    Subscribers subscribers = this.subscribers.computeIfAbsent(classOfLoader, key -> new Subscribers(classOfLoader));
+    subscribers.actions.add(action);
 
-	@SuppressWarnings("unchecked")
-	public <T extends ContentLoader> T getFirstLoaderByClass(@Nonnull Class<T> clazz) {
-		for (ContentLoader loader : loaders) {
-			if (loader.getClass().equals(clazz)) {
-				return (T) loader;
-			}
-		}
-		return null;
-	}
+    if (subscribers.executed)
+      execute(classOfLoader, action);
+  }
 
-	private static class Subscribers {
+  @SuppressWarnings("unchecked")
+  public <T extends ContentLoader> T getFirstLoaderByClass(@Nonnull Class<T> clazz) {
+    for (ContentLoader loader : loaders) {
+      if (loader.getClass().equals(clazz)) {
+        return (T) loader;
+      }
+    }
+    return null;
+  }
 
-		private final Class<? extends ContentLoader> loader;
-		private final Collection<Runnable> actions = new ArrayList<>(1);
-		private boolean executed = false;
+  private static class Subscribers {
 
-		public Subscribers(Class<? extends ContentLoader> loader) {
-			this.loader = loader;
-		}
+    private final Class<? extends ContentLoader> loader;
+    private final Collection<Runnable> actions = new ArrayList<>(1);
+    private boolean executed = false;
 
-		public void execute() {
-			Logger.debug("Executing subscribers for {}", loader.getSimpleName());
-			executed = true;
-			for (Runnable subscriber : actions) {
-				LoaderRegistry.execute(loader, subscriber);
-			}
-		}
+    public Subscribers(Class<? extends ContentLoader> loader) {
+      this.loader = loader;
+    }
 
-	}
+    public void execute() {
+      Logger.debug("Executing subscribers for {}", loader.getSimpleName());
+      executed = true;
+      for (Runnable subscriber : actions) {
+        LoaderRegistry.execute(loader, subscriber);
+      }
+    }
+
+  }
 }

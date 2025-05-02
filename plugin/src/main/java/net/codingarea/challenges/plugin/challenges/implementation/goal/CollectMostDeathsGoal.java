@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
-import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
-import net.anweisen.utilities.common.misc.StringUtils;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.common.misc.StringUtils;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.CollectionGoal;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
@@ -15,37 +15,33 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class CollectMostDeathsGoal extends CollectionGoal {
 
-	public CollectMostDeathsGoal() {
-		super(DamageCause.values());
-		setCategory(SettingCategory.SCORE_POINTS);
-	}
+  public CollectMostDeathsGoal() {
+    super(DamageCause.values());
+    setCategory(SettingCategory.SCORE_POINTS);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.LAVA_BUCKET, Message.forName("item-most-deaths-goal"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.LAVA_BUCKET, Message.forName("item-most-deaths-goal"));
+  }
 
-	@EventHandler
-	public void onDeath(@Nonnull PlayerDeathEvent event) {
-		if (!shouldExecuteEffect()) return;
+  @EventHandler
+  public void onDeath(@Nonnull PlayerDeathEvent event) {
+    if (!shouldExecuteEffect()) return;
 
-		EntityDamageEvent lastCause = event.getEntity().getLastDamageCause();
-		if (lastCause == null) return;
+    EntityDamageEvent lastCause = event.getEntity().getLastDamageCause();
+    if (lastCause == null) return;
 
-		DamageCause cause = lastCause.getCause();
-		if (cause == DamageCause.CUSTOM) return;
+    DamageCause cause = lastCause.getCause();
+    if (cause == DamageCause.CUSTOM) return;
 
-		collect(event.getEntity(), cause, () -> {
-			Message.forName("death-collected").send(event.getEntity(), Prefix.CHALLENGES, StringUtils.getEnumName(cause));
-			SoundSample.PLING.play(event.getEntity());
-		});
-	}
+    collect(event.getEntity(), cause, () -> {
+      Message.forName("death-collected").send(event.getEntity(), Prefix.CHALLENGES, StringUtils.getEnumName(cause));
+      SoundSample.PLING.play(event.getEntity());
+    });
+  }
 
 }

@@ -8,24 +8,20 @@ import org.bukkit.entity.Player;
 
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class SwapRandomItemAction extends PlayerTargetAction {
 
-	public SwapRandomItemAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
-	}
+  public SwapRandomItemAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.HOPPER;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.HOPPER;
+  }
 
-	@Override
-	public void executeForPlayer(Player player, Map<String, String[]> subActions) {
-		RandomItemSwappingChallenge.swapRandomItems(player);
-	}
+  @Override
+  public void executeForPlayer(Player player, Map<String, String[]> subActions) {
+    RandomItemSwappingChallenge.swapRandomItems(player);
+  }
 
 }

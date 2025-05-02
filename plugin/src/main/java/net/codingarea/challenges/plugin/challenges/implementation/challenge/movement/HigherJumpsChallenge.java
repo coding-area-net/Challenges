@@ -13,33 +13,29 @@ import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class HigherJumpsChallenge extends Setting {
 
-	public HigherJumpsChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.MOVEMENT);
-	}
+  public HigherJumpsChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.MOVEMENT);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.RABBIT_FOOT, Message.forName("item-higher-jumps-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.RABBIT_FOOT, Message.forName("item-higher-jumps-challenge"));
+  }
 
-	@EventHandler(priority = EventPriority.NORMAL)
-	public void onJump(@Nonnull PlayerJumpEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
+  @EventHandler(priority = EventPriority.NORMAL)
+  public void onJump(@Nonnull PlayerJumpEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
 
-		int jumps = getPlayerData(event.getPlayer()).getInt("jumps") + 1;
-		getPlayerData(event.getPlayer()).set("jumps", jumps);
+    int jumps = getPlayerData(event.getPlayer()).getInt("jumps") + 1;
+    getPlayerData(event.getPlayer()).set("jumps", jumps);
 
-		float y = jumps / 7f;
-		event.getPlayer().setVelocity(new Vector().setY(y));
-	}
+    float y = jumps / 7f;
+    event.getPlayer().setVelocity(new Vector().setY(y));
+  }
 
 }

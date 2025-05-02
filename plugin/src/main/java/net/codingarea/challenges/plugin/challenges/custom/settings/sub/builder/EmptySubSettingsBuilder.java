@@ -8,29 +8,25 @@ import org.bukkit.entity.Player;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class EmptySubSettingsBuilder extends SubSettingsBuilder {
 
-	public EmptySubSettingsBuilder() {
-		super("none");
-	}
+  public EmptySubSettingsBuilder() {
+    super("none");
+  }
 
-	@Override
-	public List<String> getDisplay(Map<String, String[]> activated) {
-		return Lists.newLinkedList();
-	}
+  @Override
+  public List<String> getDisplay(Map<String, String[]> activated) {
+    return Lists.newLinkedList();
+  }
 
-	@Override
-	public boolean hasSettings() {
-		return false;
-	}
+  @Override
+  public boolean hasSettings() {
+    return false;
+  }
 
-	@Override
-	public boolean open(Player player, IParentCustomGenerator parentGenerator, String title) {
-		return false;
-	}
+  @Override
+  public boolean open(Player player, IParentCustomGenerator parentGenerator, String title) {
+    return false;
+  }
 
 }

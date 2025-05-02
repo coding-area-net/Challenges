@@ -7,28 +7,24 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class BreakBlockTrigger extends ChallengeTrigger {
 
-	public BreakBlockTrigger(String name) {
-		super(name, SubSettingsHelper.createBlockSettingsBuilder());
-	}
+  public BreakBlockTrigger(String name) {
+    super(name, SubSettingsHelper.createBlockSettingsBuilder());
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.GOLDEN_PICKAXE;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.GOLDEN_PICKAXE;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onBlockBreak(BlockBreakEvent event) {
-		createData()
-				.entity(event.getPlayer())
-				.event(event)
-				.block(event.getBlock().getType())
-				.execute();
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onBlockBreak(BlockBreakEvent event) {
+    createData()
+      .entity(event.getPlayer())
+      .event(event)
+      .block(event.getBlock().getType())
+      .execute();
+  }
 
 }

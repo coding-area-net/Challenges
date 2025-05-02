@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
-import net.anweisen.utilities.bukkit.utils.misc.MinecraftVersion;
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingGoal;
 import net.codingarea.challenges.plugin.content.Message;
@@ -19,35 +19,31 @@ import org.bukkit.event.raid.RaidFinishEvent;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 @RequireVersion(MinecraftVersion.V1_16)
 public class FinishRaidGoal extends SettingGoal {
 
-	public FinishRaidGoal() {
-		super();
-		setCategory(SettingCategory.FASTEST_TIME);
-	}
+  public FinishRaidGoal() {
+    super();
+    setCategory(SettingCategory.FASTEST_TIME);
+  }
 
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.CROSSBOW, Message.forName("item-finish-raid-goal"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.CROSSBOW, Message.forName("item-finish-raid-goal"));
+  }
 
-	@Override
-	public void getWinnersOnEnd(@Nonnull List<Player> winners) {
-	}
+  @Override
+  public void getWinnersOnEnd(@Nonnull List<Player> winners) {
+  }
 
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onRaidFinish(@Nonnull RaidFinishEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (event.getRaid().getStatus() != RaidStatus.VICTORY) return;
-		ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, event::getWinners);
-	}
+  @EventHandler(priority = EventPriority.HIGH)
+  public void onRaidFinish(@Nonnull RaidFinishEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (event.getRaid().getStatus() != RaidStatus.VICTORY) return;
+    ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, event::getWinners);
+  }
 
 }

@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.movement;
 
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
@@ -15,32 +15,28 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class OnlyDownChallenge extends Setting {
 
-	public OnlyDownChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.MOVEMENT);
-	}
+  public OnlyDownChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.MOVEMENT);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.ACACIA_SLAB, Message.forName("item-only-down-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.ACACIA_SLAB, Message.forName("item-only-down-challenge"));
+  }
 
-	@EventHandler
-	public void onPlayerMove(@Nonnull PlayerMoveEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		if (event.getTo() == null) return;
-		if (event.getTo().getBlockY() <= event.getFrom().getBlockY()) return;
-		Message.forName("only-down-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
-		ChallengeHelper.kill(event.getPlayer());
-	}
+  @EventHandler
+  public void onPlayerMove(@Nonnull PlayerMoveEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    if (event.getTo() == null) return;
+    if (event.getTo().getBlockY() <= event.getFrom().getBlockY()) return;
+    Message.forName("only-down-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+    ChallengeHelper.kill(event.getPlayer());
+  }
 
 }

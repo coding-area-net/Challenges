@@ -8,25 +8,21 @@ import org.bukkit.entity.Player;
 
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class InvertHealthAction extends PlayerTargetAction {
 
-	public InvertHealthAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
-	}
+  public InvertHealthAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.REDSTONE;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.REDSTONE;
+  }
 
 
-	@Override
-	public void executeForPlayer(Player player, Map<String, String[]> subActions) {
-		InvertHealthChallenge.invertHealth(player);
-	}
+  @Override
+  public void executeForPlayer(Player player, Map<String, String[]> subActions) {
+    InvertHealthChallenge.invertHealth(player);
+  }
 
 }

@@ -11,33 +11,29 @@ import org.bukkit.World;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class KeepInventorySetting extends Setting {
 
-	public KeepInventorySetting() {
-		super(MenuType.SETTINGS);
-	}
+  public KeepInventorySetting() {
+    super(MenuType.SETTINGS);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.ENDER_EYE, Message.forName("item-keep-inventory-setting"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.ENDER_EYE, Message.forName("item-keep-inventory-setting"));
+  }
 
-	@Override
-	protected void onEnable() {
-		for (World world : Bukkit.getWorlds()) {
-			world.setGameRule(GameRule.KEEP_INVENTORY, true);
-		}
-	}
+  @Override
+  protected void onEnable() {
+    for (World world : Bukkit.getWorlds()) {
+      world.setGameRule(GameRule.KEEP_INVENTORY, true);
+    }
+  }
 
-	@Override
-	protected void onDisable() {
-		for (World world : Bukkit.getWorlds()) {
-			world.setGameRule(GameRule.KEEP_INVENTORY, false);
-		}
-	}
+  @Override
+  protected void onDisable() {
+    for (World world : Bukkit.getWorlds()) {
+      world.setGameRule(GameRule.KEEP_INVENTORY, false);
+    }
+  }
 }

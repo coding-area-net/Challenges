@@ -7,31 +7,27 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
+@Getter
 public class PlayerInventoryClickEvent extends InventoryClickEventWrapper {
 
-	private static final HandlerList handlers = new HandlerList();
+  private static final HandlerList handlers = new HandlerList();
 
-	@Getter
-	private final Player player;
+  private final Player player;
 
-	public PlayerInventoryClickEvent(@Nonnull InventoryClickEvent event) {
-		super(event);
-		player = ((Player) event.getWhoClicked());
-	}
+  public PlayerInventoryClickEvent(@Nonnull InventoryClickEvent event) {
+    super(event);
+    player = ((Player) event.getWhoClicked());
+  }
 
-	@Nonnull
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+  @Nonnull
+  public static HandlerList getHandlerList() {
+    return handlers;
+  }
 
-	@Nonnull
-	@Override
-	public HandlerList getHandlers() {
-		return getHandlerList();
-	}
+  @Nonnull
+  @Override
+  public HandlerList getHandlers() {
+    return getHandlerList();
+  }
 
 }

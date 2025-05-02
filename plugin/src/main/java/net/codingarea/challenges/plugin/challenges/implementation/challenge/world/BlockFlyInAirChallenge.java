@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -17,50 +17,46 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.1
- */
 @Since("2.1.1")
 public class BlockFlyInAirChallenge extends Setting {
 
-	public BlockFlyInAirChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.WORLD);
-	}
+  public BlockFlyInAirChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.WORLD);
+  }
 
-	@NotNull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.FERN, Message.forName("item-blocks-fly-challenge"));
-	}
+  @NotNull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.FERN, Message.forName("item-blocks-fly-challenge"));
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onMove(PlayerMoveEvent event) {
-		if (event.getTo() == null) return;
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onMove(PlayerMoveEvent event) {
+    if (event.getTo() == null) return;
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
 
-		Block blockBelow = BlockUtils.getBlockBelow(event.getTo());
-		if (blockBelow == null) return;
-		if (!blockBelow.getType().isSolid()) return;
+    Block blockBelow = BlockUtils.getBlockBelow(event.getTo());
+    if (blockBelow == null) return;
+    if (!blockBelow.getType().isSolid()) return;
 
-		Bukkit.getScheduler().runTaskLater(plugin, () -> {
-			boostBlockInAir(blockBelow);
-		}, 20);
+    Bukkit.getScheduler().runTaskLater(plugin, () -> {
+      boostBlockInAir(blockBelow);
+    }, 20);
 
-	}
+  }
 
-	private void boostBlockInAir(Block block) {
-		if (!block.getType().isSolid()) return;
+  private void boostBlockInAir(Block block) {
+    if (!block.getType().isSolid()) return;
 
-		FallingBlock fallingBlock = block.getWorld()
-				.spawnFallingBlock(block.getLocation().add(0.5, 0, 0.5), block.getBlockData());
-		fallingBlock.setInvulnerable(true);
-		fallingBlock.setVelocity(new Vector(0, 1, 0));
+    FallingBlock fallingBlock = block.getWorld()
+      .spawnFallingBlock(block.getLocation().add(0.5, 0, 0.5), block.getBlockData());
+    fallingBlock.setInvulnerable(true);
+    fallingBlock.setVelocity(new Vector(0, 1, 0));
 
-		block.setType(Material.AIR);
-	}
+    block.setType(Material.AIR);
+  }
 
 
 }

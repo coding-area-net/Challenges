@@ -9,27 +9,23 @@ import org.bukkit.entity.Player;
 
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class UncraftInventoryAction extends EntityTargetAction {
 
-	public UncraftInventoryAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false));
-	}
+  public UncraftInventoryAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false));
+  }
 
-	@Override
-	public void executeFor(Entity entity, Map<String, String[]> subActions) {
-		if (entity instanceof Player) {
-			Player player = (Player) entity;
-			UncraftItemsChallenge.uncraftInventory(player);
-		}
-	}
+  @Override
+  public void executeFor(Entity entity, Map<String, String[]> subActions) {
+    if (entity instanceof Player) {
+      Player player = (Player) entity;
+      UncraftItemsChallenge.uncraftInventory(player);
+    }
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.CRAFTING_TABLE;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.CRAFTING_TABLE;
+  }
 
 }

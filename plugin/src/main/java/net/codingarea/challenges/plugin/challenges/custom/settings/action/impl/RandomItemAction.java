@@ -12,37 +12,33 @@ import org.bukkit.entity.Player;
 import javax.annotation.Nonnull;
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class RandomItemAction extends ChallengeAction {
 
-	public RandomItemAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
-	}
+  public RandomItemAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
+  }
 
-	public static void giveRandomItemToPlayer(@Nonnull Player player) {
-		InventoryUtils.giveItem(player.getInventory(),
-				player.getLocation(), InventoryUtils.getRandomItem(true, false));
-	}
+  public static void giveRandomItemToPlayer(@Nonnull Player player) {
+    InventoryUtils.giveItem(player.getInventory(),
+      player.getLocation(), InventoryUtils.getRandomItem(true, false));
+  }
 
-	@Override
-	public void execute(
-			ChallengeExecutionData executionData,
-			Map<String, String[]> subActions) {
+  @Override
+  public void execute(
+    ChallengeExecutionData executionData,
+    Map<String, String[]> subActions) {
 
-		for (Entity target : IEntityTargetAction.getTargets(executionData.getEntity(), subActions)) {
-			if (target instanceof Player) {
-				Player player = (Player) target;
-				giveRandomItemToPlayer(player);
-			}
-		}
-	}
+    for (Entity target : IEntityTargetAction.getTargets(executionData.getEntity(), subActions)) {
+      if (target instanceof Player) {
+        Player player = (Player) target;
+        giveRandomItemToPlayer(player);
+      }
+    }
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.BEACON;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.BEACON;
+  }
 
 }

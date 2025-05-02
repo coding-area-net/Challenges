@@ -12,34 +12,30 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class ConsumeItemTrigger extends ChallengeTrigger {
 
-	public ConsumeItemTrigger(String name) {
-		super(name, SubSettingsBuilder.createChooseMultipleItem(SubSettingsHelper.ITEM).fill(builder -> {
-			for (Material material : ExperimentalUtils.getMaterials()) {
-				if (material.isEdible()) {
-					builder.addSetting(material.name(), new ItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemName(material).toPlainText()).build());
-				}
-			}
-		}));
-	}
+  public ConsumeItemTrigger(String name) {
+    super(name, SubSettingsBuilder.createChooseMultipleItem(SubSettingsHelper.ITEM).fill(builder -> {
+      for (Material material : ExperimentalUtils.getMaterials()) {
+        if (material.isEdible()) {
+          builder.addSetting(material.name(), new ItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemName(material).toPlainText()).build());
+        }
+      }
+    }));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.COOKED_BEEF;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.COOKED_BEEF;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onConsumeItem(PlayerItemConsumeEvent event) {
-		createData()
-				.entity(event.getPlayer())
-				.event(event)
-				.data(SubSettingsHelper.ITEM, SubSettingsHelper.ANY, event.getItem().getType().name())
-				.execute();
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onConsumeItem(PlayerItemConsumeEvent event) {
+    createData()
+      .entity(event.getPlayer())
+      .event(event)
+      .data(SubSettingsHelper.ITEM, SubSettingsHelper.ANY, event.getItem().getType().name())
+      .execute();
+  }
 
 }

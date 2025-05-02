@@ -13,45 +13,41 @@ import org.bukkit.entity.Player;
 
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class ModifyMaxHealthAction extends PlayerTargetAction {
 
-	public ModifyMaxHealthAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true)
-				.createValueChild().fill(builder -> {
-					builder.addModifierSetting("health_offset",
-							new ItemBuilder(MinecraftNameWrapper.RED_DYE,
-									Message.forName("item-custom-action-max_health-offset")),
-							0, -20, 20,
-							integer -> "", integer -> "HP §8(§e" + (integer / 2f) + " §c❤§8)");
-				}));
-	}
+  public ModifyMaxHealthAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true)
+      .createValueChild().fill(builder -> {
+        builder.addModifierSetting("health_offset",
+          new ItemBuilder(MinecraftNameWrapper.RED_DYE,
+            Message.forName("item-custom-action-max_health-offset")),
+          0, -20, 20,
+          integer -> "", integer -> "HP §8(§e" + (integer / 2f) + " §c❤§8)");
+      }));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return MinecraftNameWrapper.RED_DYE;
-	}
+  @Override
+  public Material getMaterial() {
+    return MinecraftNameWrapper.RED_DYE;
+  }
 
-	@Override
-	public void executeForPlayer(Player player, Map<String, String[]> subActions) {
-		int healthOffset = Integer.parseInt(subActions.get("health_offset")[0]);
-		MaxHealthSetting instance = AbstractChallenge.getFirstInstance(MaxHealthSetting.class);
+  @Override
+  public void executeForPlayer(Player player, Map<String, String[]> subActions) {
+    int healthOffset = Integer.parseInt(subActions.get("health_offset")[0]);
+    MaxHealthSetting instance = AbstractChallenge.getFirstInstance(MaxHealthSetting.class);
 
-		int oldMaxHealth = instance.getMaxHealth(player);
-		if (oldMaxHealth <= 0) {
-			ChallengeHelper.kill(player);
-			return;
-		}
+    int oldMaxHealth = instance.getMaxHealth(player);
+    if (oldMaxHealth <= 0) {
+      ChallengeHelper.kill(player);
+      return;
+    }
 
-		instance.addHealth(player, healthOffset);
+    instance.addHealth(player, healthOffset);
 
-		int newMaxHealth = instance.getMaxHealth(player);
-		if (newMaxHealth <= 0) {
-			ChallengeHelper.kill(player);
-		}
-	}
+    int newMaxHealth = instance.getMaxHealth(player);
+    if (newMaxHealth <= 0) {
+      ChallengeHelper.kill(player);
+    }
+  }
 
 }

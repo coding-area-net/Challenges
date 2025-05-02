@@ -9,27 +9,23 @@ import org.bukkit.event.entity.EntityDeathEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class EntityDeathTrigger extends ChallengeTrigger {
 
-	public EntityDeathTrigger(String name) {
-		super(name, SubSettingsHelper.createEntityTypeSettingsBuilder(true, true));
-	}
+  public EntityDeathTrigger(String name) {
+    super(name, SubSettingsHelper.createEntityTypeSettingsBuilder(true, true));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.BONE;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.BONE;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onDeath(@Nonnull EntityDeathEvent event) {
-		createData()
-				.entity(event.getEntity())
-				.entityType(event.getEntityType())
-				.execute();
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onDeath(@Nonnull EntityDeathEvent event) {
+    createData()
+      .entity(event.getEntity())
+      .entityType(event.getEntityType())
+      .execute();
+  }
 
 }

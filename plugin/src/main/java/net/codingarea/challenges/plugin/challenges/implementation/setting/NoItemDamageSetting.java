@@ -10,29 +10,25 @@ import org.bukkit.event.player.PlayerItemDamageEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class NoItemDamageSetting extends Setting {
 
-	public NoItemDamageSetting() {
-		super(MenuType.SETTINGS);
-	}
+  public NoItemDamageSetting() {
+    super(MenuType.SETTINGS);
+  }
 
-	@EventHandler
-	public void onItemDamage(PlayerItemDamageEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
+  @EventHandler
+  public void onItemDamage(PlayerItemDamageEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
 
-		event.setCancelled(true);
-		event.getPlayer().updateInventory();
-	}
+    event.setCancelled(true);
+    event.getPlayer().updateInventory();
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.ANVIL, Message.forName("item-no-item-damage-setting"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.ANVIL, Message.forName("item-no-item-damage-setting"));
+  }
 
 }

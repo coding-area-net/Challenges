@@ -20,79 +20,75 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public class DeathMessageSetting extends Modifier {
 
-	public static final int ENABLED = 2,
-			VANILLA = 3;
+  public static final int ENABLED = 2,
+    VANILLA = 3;
 
-	private boolean hide;
+  private boolean hide;
 
-	public DeathMessageSetting() {
-		super(MenuType.SETTINGS, 1, 3, 2);
-	}
+  public DeathMessageSetting() {
+    super(MenuType.SETTINGS, 1, 3, 2);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.BOW, Message.forName("item-death-message-setting"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.BOW, Message.forName("item-death-message-setting"));
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createSettingsItem() {
-		switch (getValue()) {
-			default:
-				return DefaultItem.disabled();
-			case ENABLED:
-				return DefaultItem.enabled();
-			case VANILLA:
-				return DefaultItem.create(MinecraftNameWrapper.SIGN, Message.forName("item-death-message-setting-vanilla"));
-		}
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createSettingsItem() {
+    switch (getValue()) {
+      default:
+        return DefaultItem.disabled();
+      case ENABLED:
+        return DefaultItem.enabled();
+      case VANILLA:
+        return DefaultItem.create(MinecraftNameWrapper.SIGN, Message.forName("item-death-message-setting-vanilla"));
+    }
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		switch (getValue()) {
-			case ENABLED:
-				ChallengeHelper.playToggleChallengeTitle(this, true);
-				return;
-			case VANILLA:
-				ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("item-death-message-setting-vanilla"));
-				return;
-			default:
-				ChallengeHelper.playToggleChallengeTitle(this, false);
-		}
-	}
+  @Override
+  public void playValueChangeTitle() {
+    switch (getValue()) {
+      case ENABLED:
+        ChallengeHelper.playToggleChallengeTitle(this, true);
+        return;
+      case VANILLA:
+        ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("item-death-message-setting-vanilla"));
+        return;
+      default:
+        ChallengeHelper.playToggleChallengeTitle(this, false);
+    }
+  }
 
-	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-	public void onDeath(@Nonnull PlayerDeathEvent event) {
-		event.setDeathMessage(null);
-		if (hide) return;
+  @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+  public void onDeath(@Nonnull PlayerDeathEvent event) {
+    event.setDeathMessage(null);
+    if (hide) return;
 
-		String original = event.getDeathMessage();
-		Player entity = event.getEntity();
-		switch (getValue()) {
-			case ENABLED:
-				EntityDamageEvent cause = entity.getLastDamageCause();
-				if (cause != null && cause.getCause() != DamageCause.CUSTOM) {
-					Message.forName("death-message-cause").broadcast(Prefix.CHALLENGES, NameHelper.getName(entity), DamageDisplaySetting.getCause(cause));
-				} else {
-					Message.forName("death-message").broadcast(Prefix.CHALLENGES, NameHelper.getName(entity));
-				}
-				return;
-			case VANILLA:
-				if (original != null) {
-					Bukkit.broadcastMessage(Prefix.CHALLENGES + "§7" + original);
-				}
-		}
-	}
+    String original = event.getDeathMessage();
+    Player entity = event.getEntity();
+    switch (getValue()) {
+      case ENABLED:
+        EntityDamageEvent cause = entity.getLastDamageCause();
+        if (cause != null && cause.getCause() != DamageCause.CUSTOM) {
+          Message.forName("death-message-cause").broadcast(Prefix.CHALLENGES, NameHelper.getName(entity), DamageDisplaySetting.getCause(cause));
+        } else {
+          Message.forName("death-message").broadcast(Prefix.CHALLENGES, NameHelper.getName(entity));
+        }
+        return;
+      case VANILLA:
+        if (original != null) {
+          Bukkit.broadcastMessage(Prefix.CHALLENGES + "§7" + original);
+        }
+    }
+  }
 
-	public void setHideMessagesTemporarily(boolean hide) {
-		this.hide = hide;
-	}
+  public void setHideMessagesTemporarily(boolean hide) {
+    this.hide = hide;
+  }
 
 }

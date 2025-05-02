@@ -14,29 +14,25 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 public class NoHitDelaySetting extends Setting {
 
-	public NoHitDelaySetting() {
-		super(MenuType.SETTINGS);
-	}
+  public NoHitDelaySetting() {
+    super(MenuType.SETTINGS);
+  }
 
-	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-	public void onDamageByEntity(@Nonnull EntityDamageEvent event) {
-		if (!(event.getEntity() instanceof LivingEntity)) return;
-		if (!shouldExecuteEffect()) return;
-		Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), () -> {
-			((LivingEntity) event.getEntity()).setNoDamageTicks(0);
-		}, 1);
-	}
+  @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+  public void onDamageByEntity(@Nonnull EntityDamageEvent event) {
+    if (!(event.getEntity() instanceof LivingEntity)) return;
+    if (!shouldExecuteEffect()) return;
+    Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), () -> {
+      ((LivingEntity) event.getEntity()).setNoDamageTicks(0);
+    }, 1);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.FEATHER, Message.forName("item-no-hit-delay-setting"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.FEATHER, Message.forName("item-no-hit-delay-setting"));
+  }
 
 }

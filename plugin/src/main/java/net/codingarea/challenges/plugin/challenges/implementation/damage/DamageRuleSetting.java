@@ -16,45 +16,41 @@ import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class DamageRuleSetting extends Setting {
 
-	private final List<DamageCause> causes;
+  private final List<DamageCause> causes;
 
-	private final String name;
-	private final ItemBuilder preset;
+  private final String name;
+  private final ItemBuilder preset;
 
-	public DamageRuleSetting(@Nonnull ItemBuilder preset, @Nonnull String name, @Nonnull DamageCause... causes) {
-		super(MenuType.DAMAGE, true);
-		this.causes = Arrays.asList(causes);
-		this.name = name;
-		this.preset = preset;
-	}
+  public DamageRuleSetting(@Nonnull ItemBuilder preset, @Nonnull String name, @Nonnull DamageCause... causes) {
+    super(MenuType.DAMAGE, true);
+    this.causes = Arrays.asList(causes);
+    this.name = name;
+    this.preset = preset;
+  }
 
-	@NotNull
-	@Override
-	public String getUniqueName() {
-		return super.getUniqueName() + name;
-	}
+  @NotNull
+  @Override
+  public String getUniqueName() {
+    return super.getUniqueName() + name;
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return preset.clone().applyFormat(Message.forName("item-damage-rule-" + name).asItemDescription());
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return preset.clone().applyFormat(Message.forName("item-damage-rule-" + name).asItemDescription());
+  }
 
-	@EventHandler(priority = EventPriority.NORMAL)
-	public void onDamage(@Nonnull EntityDamageEvent event) {
-		if (ChallengeAPI.isWorldInUse()) return;
-		if (isEnabled()) return;
-		if (!(event.getEntity() instanceof Player)) return;
-		if (event.getCause() == DamageCause.VOID || event.getCause() == DamageCause.CUSTOM)
-			return; // Never ignore void or custom to prevent different issues
-		if (!causes.contains(event.getCause())) return;
-		event.setCancelled(true);
-	}
+  @EventHandler(priority = EventPriority.NORMAL)
+  public void onDamage(@Nonnull EntityDamageEvent event) {
+    if (ChallengeAPI.isWorldInUse()) return;
+    if (isEnabled()) return;
+    if (!(event.getEntity() instanceof Player)) return;
+    if (event.getCause() == DamageCause.VOID || event.getCause() == DamageCause.CUSTOM)
+      return; // Never ignore void or custom to prevent different issues
+    if (!causes.contains(event.getCause())) return;
+    event.setCancelled(true);
+  }
 
 }

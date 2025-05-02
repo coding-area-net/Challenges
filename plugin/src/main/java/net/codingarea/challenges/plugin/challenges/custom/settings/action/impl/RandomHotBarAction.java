@@ -8,24 +8,20 @@ import org.bukkit.entity.Player;
 
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.3
- */
 public class RandomHotBarAction extends PlayerTargetAction {
 
-	public RandomHotBarAction(String name) {
-		super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true, true));
-	}
+  public RandomHotBarAction(String name) {
+    super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true, true));
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.ARMOR_STAND;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.ARMOR_STAND;
+  }
 
-	@Override
-	public void executeForPlayer(Player player, Map<String, String[]> subActions) {
-		HotBarRandomizerChallenge.addItems(player, true);
-	}
+  @Override
+  public void executeForPlayer(Player player, Map<String, String[]> subActions) {
+    HotBarRandomizerChallenge.addItems(player, true);
+  }
 
 }

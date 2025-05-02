@@ -18,43 +18,39 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 1.0
- */
 public class SneakDamageChallenge extends SettingModifier {
 
-	public SneakDamageChallenge() {
-		super(MenuType.CHALLENGES, 1, 60);
-		setCategory(SettingCategory.DAMAGE);
-	}
+  public SneakDamageChallenge() {
+    super(MenuType.CHALLENGES, 1, 60);
+    setCategory(SettingCategory.DAMAGE);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-sneak-damage-challenge")).setColor(Color.YELLOW);
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-sneak-damage-challenge")).setColor(Color.YELLOW);
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeHeartsValueChangeTitle(this, getValue() / 2);
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeHeartsValueChangeTitle(this, getValue() / 2);
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onSneak(@Nonnull PlayerToggleSneakEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		if (!event.isSneaking()) return;
-		Message.forName("sneak-damage-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
-		event.getPlayer().setNoDamageTicks(0);
-		event.getPlayer().damage(getValue());
-		event.getPlayer().setNoDamageTicks(0);
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onSneak(@Nonnull PlayerToggleSneakEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    if (!event.isSneaking()) return;
+    Message.forName("sneak-damage-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+    event.getPlayer().setNoDamageTicks(0);
+    event.getPlayer().damage(getValue());
+    event.getPlayer().setNoDamageTicks(0);
+  }
 
 }

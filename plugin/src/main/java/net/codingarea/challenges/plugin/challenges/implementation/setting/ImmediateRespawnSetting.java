@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -15,58 +15,54 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class ImmediateRespawnSetting extends Setting {
 
-	private boolean respawnWithEvent;
+  private boolean respawnWithEvent;
 
-	public ImmediateRespawnSetting() {
-		super(MenuType.SETTINGS);
-	}
+  public ImmediateRespawnSetting() {
+    super(MenuType.SETTINGS);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.GOLDEN_APPLE, Message.forName("item-immediate-respawn-setting"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.GOLDEN_APPLE, Message.forName("item-immediate-respawn-setting"));
+  }
 
-	@Override
-	protected void onEnable() {
-		if (respawnWithEvent) {
-			return;
-		}
-		try {
-			for (World world : Bukkit.getWorlds()) {
-				world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
-			}
-		} catch (NoSuchFieldError ignored) {
-			respawnWithEvent = true;
-		}
-	}
+  @Override
+  protected void onEnable() {
+    if (respawnWithEvent) {
+      return;
+    }
+    try {
+      for (World world : Bukkit.getWorlds()) {
+        world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
+      }
+    } catch (NoSuchFieldError ignored) {
+      respawnWithEvent = true;
+    }
+  }
 
-	@Override
-	protected void onDisable() {
-		if (respawnWithEvent) {
-			return;
-		}
-		try {
-			for (World world : Bukkit.getWorlds()) {
-				world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, false);
-			}
-		} catch (NoSuchFieldError ignored) {
-		}
-	}
+  @Override
+  protected void onDisable() {
+    if (respawnWithEvent) {
+      return;
+    }
+    try {
+      for (World world : Bukkit.getWorlds()) {
+        world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, false);
+      }
+    } catch (NoSuchFieldError ignored) {
+    }
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onPlayerDeath(@Nonnull PlayerDeathEvent event) {
-		if (!isEnabled()) return;
-		if (!respawnWithEvent) return;
-		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> event.getEntity().spigot().respawn(), 1);
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onPlayerDeath(@Nonnull PlayerDeathEvent event) {
+    if (!isEnabled()) return;
+    if (!respawnWithEvent) return;
+    Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> event.getEntity().spigot().respawn(), 1);
+  }
 
 
 }

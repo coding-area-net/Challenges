@@ -6,32 +6,28 @@ import net.codingarea.challenges.plugin.management.menu.generator.MenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.IParentCustomGenerator;
 import org.bukkit.entity.Player;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.2
- */
 public abstract class GeneratorSubSettingsBuilder extends SubSettingsBuilder {
 
-	public GeneratorSubSettingsBuilder(String key) {
-		super(key);
-	}
+  public GeneratorSubSettingsBuilder(String key) {
+    super(key);
+  }
 
-	public GeneratorSubSettingsBuilder(String key, SubSettingsBuilder parent) {
-		super(key, parent);
-	}
+  public GeneratorSubSettingsBuilder(String key, SubSettingsBuilder parent) {
+    super(key, parent);
+  }
 
-	public boolean open(Player player, IParentCustomGenerator parentGenerator, String title) {
+  public boolean open(Player player, IParentCustomGenerator parentGenerator, String title) {
 
-		if (hasSettings()) {
-			MenuGenerator generator = getGenerator(player, parentGenerator, title + InventoryTitleManager.getTitleSplitter() + getKeyTranslation());
-			if (generator == null) return false;
-			generator.open(player, 0);
-			return true;
-		}
+    if (hasSettings()) {
+      MenuGenerator generator = getGenerator(player, parentGenerator, title + InventoryTitleManager.getTitleSplitter() + getKeyTranslation());
+      if (generator == null) return false;
+      generator.open(player, 0);
+      return true;
+    }
 
-		return false;
-	}
+    return false;
+  }
 
-	public abstract MenuGenerator getGenerator(Player player, IParentCustomGenerator parentGenerator, String title);
+  public abstract MenuGenerator getGenerator(Player player, IParentCustomGenerator parentGenerator, String title);
 
 }

@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
-import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -11,64 +11,55 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 public abstract class EndingForceChallenge extends AbstractForceChallenge {
 
-	public EndingForceChallenge(@Nonnull MenuType menu) {
-		super(menu);
-	}
+  public EndingForceChallenge(@Nonnull MenuType menu) {
+    super(menu);
+  }
 
-	public EndingForceChallenge(@Nonnull MenuType menu, int max) {
-		super(menu, max);
-	}
+  public EndingForceChallenge(@Nonnull MenuType menu, int max) {
+    super(menu, max);
+  }
 
-	public EndingForceChallenge(@Nonnull MenuType menu, int min, int max) {
-		super(menu, min, max);
-	}
+  public EndingForceChallenge(@Nonnull MenuType menu, int min, int max) {
+    super(menu, min, max);
+  }
 
-	public EndingForceChallenge(@Nonnull MenuType menu, int min, int max, int defaultValue) {
-		super(menu, min, max, defaultValue);
-	}
+  public EndingForceChallenge(@Nonnull MenuType menu, int min, int max, int defaultValue) {
+    super(menu, min, max, defaultValue);
+  }
 
-	@Override
-	protected final void handleCountdownEnd() {
-		checkAllPlayers();
-	}
+  @Override
+  protected final void handleCountdownEnd() {
+    checkAllPlayers();
+  }
 
-	private void checkAllPlayers() {
-		List<Player> failed = new ArrayList<>();
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (!ignorePlayer(player) && isFailing(player)) {
-				broadcastFailedMessage(player);
-				failed.add(player);
-			}
-		}
-		if (!failed.isEmpty()) {
-			killFailedPlayers(failed);
-			return;
-		}
+  private void checkAllPlayers() {
+    List<Player> failed = new ArrayList<>();
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      if (!ignorePlayer(player) && isFailing(player)) {
+        broadcastFailedMessage(player);
+        failed.add(player);
+      }
+    }
+    if (!failed.isEmpty()) {
+      killFailedPlayers(failed);
+      return;
+    }
 
-		broadcastSuccessMessage();
-		SoundSample.LEVEL_UP.broadcast();
-	}
+    broadcastSuccessMessage();
+    SoundSample.LEVEL_UP.broadcast();
+  }
 
-	private void killFailedPlayers(@Nonnull Iterable<? extends Player> failed) {
-		if (!ChallengeAPI.isStarted()) return;
-		failed.forEach(ChallengeHelper::kill);
-	}
+  private void killFailedPlayers(@Nonnull Iterable<? extends Player> failed) {
+    if (!ChallengeAPI.isStarted()) return;
+    failed.forEach(ChallengeHelper::kill);
+  }
 
-	@Override
-	protected void handleCountdown() {
-		bossbar.update();
-	}
+  protected abstract boolean isFailing(@Nonnull Player player);
 
-	protected abstract boolean isFailing(@Nonnull Player player);
+  protected abstract void broadcastFailedMessage(@Nonnull Player player);
 
-	protected abstract void broadcastFailedMessage(@Nonnull Player player);
-
-	protected abstract void broadcastSuccessMessage();
+  protected abstract void broadcastSuccessMessage();
 
 }

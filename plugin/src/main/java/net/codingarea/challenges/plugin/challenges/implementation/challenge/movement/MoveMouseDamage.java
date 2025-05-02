@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.movement;
 
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
@@ -23,66 +23,62 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class MoveMouseDamage extends SettingModifier {
 
-	private final Map<UUID, Entry<Float, Float>> lastView = new HashMap<>();
+  private final Map<UUID, Entry<Float, Float>> lastView = new HashMap<>();
 
-	public MoveMouseDamage() {
-		super(MenuType.CHALLENGES, 60);
-		setCategory(SettingCategory.MOVEMENT);
-	}
+  public MoveMouseDamage() {
+    super(MenuType.CHALLENGES, 60);
+    setCategory(SettingCategory.MOVEMENT);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.COMPASS, Message.forName("item-no-mouse-move-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.COMPASS, Message.forName("item-no-mouse-move-challenge"));
+  }
 
-	@Nullable
-	@Override
-	protected String[] getSettingsDescription() {
-		return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
-	}
+  @Nullable
+  @Override
+  protected String[] getSettingsDescription() {
+    return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
+  }
 
-	@Override
-	public void playValueChangeTitle() {
-		ChallengeHelper.playChallengeHeartsValueChangeTitle(this, getValue() / 2);
-	}
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChallengeHeartsValueChangeTitle(this, getValue() / 2);
+  }
 
-	@ScheduledTask(ticks = 1, timerPolicy = TimerPolicy.ALWAYS)
-	public void onTick() {
-		if (!shouldExecuteEffect()) {
-			lastView.clear();
-			return;
-		}
+  @ScheduledTask(ticks = 1, timerPolicy = TimerPolicy.ALWAYS)
+  public void onTick() {
+    if (!shouldExecuteEffect()) {
+      lastView.clear();
+      return;
+    }
 
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (ignorePlayer(player)) {
-				lastView.remove(player.getUniqueId());
-				continue;
-			}
-			if (player.getNoDamageTicks() > 0) continue;
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      if (ignorePlayer(player)) {
+        lastView.remove(player.getUniqueId());
+        continue;
+      }
+      if (player.getNoDamageTicks() > 0) continue;
 
-			float yaw = player.getLocation().getYaw();
-			float pitch = player.getLocation().getPitch();
-			Entry<Float, Float> pair = lastView.getOrDefault(player.getUniqueId(), new SimpleEntry<>(yaw, pitch));
-			lastView.put(player.getUniqueId(), pair);
+      float yaw = player.getLocation().getYaw();
+      float pitch = player.getLocation().getPitch();
+      Entry<Float, Float> pair = lastView.getOrDefault(player.getUniqueId(), new SimpleEntry<>(yaw, pitch));
+      lastView.put(player.getUniqueId(), pair);
 
-			if (yaw != pair.getKey() || pitch != pair.getValue()) {
-				Bukkit.getScheduler().runTask(plugin, () -> {
-					if (player.getNoDamageTicks() > 0) return;
-					Message.forName("no-mouse-move-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(player));
-					player.damage(getValue());
-					player.setNoDamageTicks(5);
-					Bukkit.getScheduler().runTaskLater(plugin, () -> lastView.remove(player.getUniqueId()), 3);
-				});
-			}
-		}
-	}
+      if (yaw != pair.getKey() || pitch != pair.getValue()) {
+        Bukkit.getScheduler().runTask(plugin, () -> {
+          if (player.getNoDamageTicks() > 0) return;
+          Message.forName("no-mouse-move-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(player));
+          player.damage(getValue());
+          player.setNoDamageTicks(5);
+          Bukkit.getScheduler().runTaskLater(plugin, () -> lastView.remove(player.getUniqueId()), 3);
+        });
+      }
+    }
+  }
 
 }

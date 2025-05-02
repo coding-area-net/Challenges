@@ -12,27 +12,23 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.2.0
- */
 public class SkipTimerCommand implements SenderCommand, Completer {
 
-	@Override
-	public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
-		for (IChallenge challenge : Challenges.getInstance().getChallengeManager().getChallenges()) {
-			if (!challenge.isEnabled()) continue;
-			if (challenge instanceof TimedChallenge) {
-				TimedChallenge timedChallenge = (TimedChallenge) challenge;
-				timedChallenge.setSecondsUntilActivation(0);
-			}
-		}
-	}
+  @Override
+  public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
+    for (IChallenge challenge : Challenges.getInstance().getChallengeManager().getChallenges()) {
+      if (!challenge.isEnabled()) continue;
+      if (challenge instanceof TimedChallenge) {
+        TimedChallenge timedChallenge = (TimedChallenge) challenge;
+        timedChallenge.setSecondsUntilActivation(0);
+      }
+    }
+  }
 
-	@Nullable
-	@Override
-	public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
-		return Collections.emptyList();
-	}
+  @Nullable
+  @Override
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
+    return Collections.emptyList();
+  }
 
 }

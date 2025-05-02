@@ -16,49 +16,45 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 1.0
- */
 public class HelpListener implements Listener {
 
-	@EventHandler(priority = EventPriority.MONITOR)
-	public void onCommand(@Nonnull PlayerCommandPreprocessEvent event) {
+  @EventHandler(priority = EventPriority.MONITOR)
+  public void onCommand(@Nonnull PlayerCommandPreprocessEvent event) {
 
-		String message = event.getMessage().toLowerCase();
-		if (message.isEmpty()) return;
+    String message = event.getMessage().toLowerCase();
+    if (message.isEmpty()) return;
 
-		String[] args = message.substring(1).trim().split(" ");
-		String commandName = args[0];
-		if (commandName.contains(":")) {
-			commandName = commandName.substring(commandName.indexOf(':') + 1);
-		}
+    String[] args = message.substring(1).trim().split(" ");
+    String commandName = args[0];
+    if (commandName.contains(":")) {
+      commandName = commandName.substring(commandName.indexOf(':') + 1);
+    }
 
-		PluginCommand command = Challenges.getInstance().getCommand("help");
-		if (command == null) return;
-		List<String> names = new ArrayList<>(command.getAliases());
-		names.add("help");
+    PluginCommand command = Challenges.getInstance().getCommand("help");
+    if (command == null) return;
+    List<String> names = new ArrayList<>(command.getAliases());
+    names.add("help");
 
-		if (!names.contains(commandName)) return;
+    if (!names.contains(commandName)) return;
 
-		Player sender = event.getPlayer();
+    Player sender = event.getPlayer();
 
-		sendMessage(sender, "§7This server is running §e§lChallenges §ev" + Challenges.getInstance().getVersion());
-		sendMessage(sender, "");
-		sendMessage(sender, "§7Made by §eCodingArea §8(§eanweisen & KxmischesDomi§8)");
-		sendMessage(sender, "§7Visit the source at §egithub.com/anweisen/Challenges");
-		sendMessage(sender, "§7Download at §espigotmc.org/resources/80548");
-		sendMessage(sender, "§7For more join our discord §ediscord.gg/74Ay5zF");
+    sendMessage(sender, "§7This server is running §e§lChallenges §ev" + Challenges.getInstance().getVersion());
+    sendMessage(sender, "");
+    sendMessage(sender, "§7Made by §eCodingArea §8(§eanweisen & KxmischesDomi§8)");
+    sendMessage(sender, "§7Visit the source at §egithub.com/anweisen/Challenges");
+    sendMessage(sender, "§7Download at §espigotmc.org/resources/80548");
+    sendMessage(sender, "§7For more join our discord §ediscord.gg/74Ay5zF");
 
-	}
+  }
 
-	public void sendMessage(CommandSender sender, String msg) {
-		LanguageLoader languageLoader = Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class);
-		if (languageLoader != null && languageLoader.isSmallCapsFont()) {
-			msg = FontUtils.toSmallCaps(msg);
-		}
-		sender.sendMessage(Prefix.CHALLENGES + msg);
+  public void sendMessage(CommandSender sender, String msg) {
+    LanguageLoader languageLoader = Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class);
+    if (languageLoader != null && languageLoader.isSmallCapsFont()) {
+      msg = FontUtils.toSmallCaps(msg);
+    }
+    sender.sendMessage(Prefix.CHALLENGES + msg);
 
-	}
+  }
 
 }

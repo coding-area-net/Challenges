@@ -9,32 +9,28 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * @author anweisen | https://github.com/anweisen
- * @since 2.0
- */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ScheduledTask {
 
-	@Nonnegative
-	int ticks();
+  @Nonnegative
+  int ticks();
 
-	boolean async() default true;
+  boolean async() default true;
 
-	@Nonnull
-	TimerPolicy timerPolicy() default TimerPolicy.STARTED;
+  @Nonnull
+  TimerPolicy timerPolicy() default TimerPolicy.STARTED;
 
-	@Nonnull
-	ChallengeStatusPolicy challengePolicy() default ChallengeStatusPolicy.ENABLED;
+  @Nonnull
+  ChallengeStatusPolicy challengePolicy() default ChallengeStatusPolicy.ENABLED;
 
-	@Nonnull
-	PlayerCountPolicy playerPolicy() default PlayerCountPolicy.SOMEONE;
+  @Nonnull
+  PlayerCountPolicy playerPolicy() default PlayerCountPolicy.SOMEONE;
 
-	@Nonnull
-	ExtraWorldPolicy worldPolicy() default ExtraWorldPolicy.NOT_USED;
+  @Nonnull
+  ExtraWorldPolicy worldPolicy() default ExtraWorldPolicy.NOT_USED;
 
-	@Nonnull
-	FreshnessPolicy freshnessPolicy() default FreshnessPolicy.ALWAYS;
+  @Nonnull
+  FreshnessPolicy freshnessPolicy() default FreshnessPolicy.ALWAYS;
 
 }

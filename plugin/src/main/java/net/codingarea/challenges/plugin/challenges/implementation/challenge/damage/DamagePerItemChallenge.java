@@ -17,37 +17,37 @@ import javax.annotation.Nonnull;
 
 public class DamagePerItemChallenge extends Setting {
 
-	public DamagePerItemChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.DAMAGE);
-	}
+  public DamagePerItemChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.DAMAGE);
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onPickup(@Nonnull PlayerPickupItemEvent event) {
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		applyDamage(event.getPlayer(), event.getItem().getItemStack().getAmount());
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onPickup(@Nonnull PlayerPickupItemEvent event) {
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    applyDamage(event.getPlayer(), event.getItem().getItemStack().getAmount());
+  }
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onClick(@Nonnull PlayerInventoryClickEvent event) {
-		if (event.isCancelled()) return; // ignoreCancelled not working on own event
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(event.getPlayer())) return;
-		if (event.getAction() == InventoryAction.NOTHING) return;
-		if (event.getCurrentItem() == null) return;
-		applyDamage(event.getPlayer(), event.getCurrentItem().getAmount());
-	}
+  @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+  public void onClick(@Nonnull PlayerInventoryClickEvent event) {
+    if (event.isCancelled()) return; // ignoreCancelled not working on own event
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(event.getPlayer())) return;
+    if (event.getAction() == InventoryAction.NOTHING) return;
+    if (event.getCurrentItem() == null) return;
+    applyDamage(event.getPlayer(), event.getCurrentItem().getAmount());
+  }
 
-	private void applyDamage(@Nonnull Player player, int amount) {
-		player.setNoDamageTicks(0);
-		player.damage(amount);
-	}
+  private void applyDamage(@Nonnull Player player, int amount) {
+    player.setNoDamageTicks(0);
+    player.damage(amount);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.SHEARS, Message.forName("item-damage-item-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.SHEARS, Message.forName("item-damage-item-challenge"));
+  }
 
 }

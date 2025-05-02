@@ -1,5 +1,5 @@
 name: Challenges
-version: 2.3.2
+version: 2.3.3
 author: CodingArea
 authors:
   - anweisen
@@ -225,3 +225,10 @@ commands:
     permission: "challenges.godmode"
     aliases:
       - "god"
+  setlanguage:
+    usage: "/setlanguage [language]"
+    description: "Changes the language"
+    permission: "challenges.setlanguage"
+    aliases:
+      - "setlang"
+      - "language"

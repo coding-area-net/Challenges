@@ -10,65 +10,61 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author sehrschlechtYT | https://github.com/sehrschlechtYT
- * @since 2.2.3
- */
 public class AdvancementTarget extends ForceTarget<Advancement> {
 
-    public AdvancementTarget(Advancement target) {
-        super(target);
-    }
+  public AdvancementTarget(Advancement target) {
+    super(target);
+  }
 
-    @Override
-    public boolean check(Player player) {
-        return player.getAdvancementProgress(target).isDone();
-    }
+  @Override
+  public boolean check(Player player) {
+    return player.getAdvancementProgress(target).isDone();
+  }
 
-    public static List<Advancement> getPossibleAdvancements() {
-        List<Advancement> advancements = new ArrayList<>();
-        Bukkit.getServer().advancementIterator().forEachRemaining(advancement -> {
-            String string = advancement.getKey().toString();
-            if (!string.contains(":recipes/") && !string.endsWith("root")) {
-                advancements.add(advancement);
-            }
-        });
-        return advancements;
-    }
+  public static List<Advancement> getPossibleAdvancements() {
+    List<Advancement> advancements = new ArrayList<>();
+    Bukkit.getServer().advancementIterator().forEachRemaining(advancement -> {
+      String string = advancement.getKey().toString();
+      if (!string.contains(":recipes/") && !string.endsWith("root")) {
+        advancements.add(advancement);
+      }
+    });
+    return advancements;
+  }
 
-    @Override
-    public Object toMessage() {
-        return target;
-    }
+  @Override
+  public Object toMessage() {
+    return target;
+  }
 
-    @Override
-    public String getName() {
-        return BukkitStringUtils.getAdvancementTitle(target).toPlainText();
-    }
+  @Override
+  public String getName() {
+    return BukkitStringUtils.getAdvancementTitle(target).toPlainText();
+  }
 
-    @Override
-    public Message getNewTargetMessage() {
-        return Message.forName("force-advancement-battle-new-advancement");
-    }
+  @Override
+  public Message getNewTargetMessage() {
+    return Message.forName("force-advancement-battle-new-advancement");
+  }
 
-    @Override
-    public Message getCompletedMessage() {
-        return Message.forName("force-advancement-battle-completed");
-    }
+  @Override
+  public Message getCompletedMessage() {
+    return Message.forName("force-advancement-battle-completed");
+  }
 
-    @Override
-    public ExtremeForceBattleGoal.TargetType getType() {
-        return ExtremeForceBattleGoal.TargetType.ADVANCEMENT;
-    }
+  @Override
+  public ExtremeForceBattleGoal.TargetType getType() {
+    return ExtremeForceBattleGoal.TargetType.ADVANCEMENT;
+  }
 
-    @Override
-    public Message getScoreboardDisplayMessage() {
-        return Message.forName("force-battle-advancement-target-display");
-    }
+  @Override
+  public Message getScoreboardDisplayMessage() {
+    return Message.forName("force-battle-advancement-target-display");
+  }
 
-    @Override
-    public Object getTargetSaveObject() {
-        return target.getKey().toString();
-    }
+  @Override
+  public Object getTargetSaveObject() {
+    return target.getKey().toString();
+  }
 
 }

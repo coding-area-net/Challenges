@@ -6,38 +6,34 @@ import org.bukkit.Material;
 
 import java.util.Map;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class CancelEventAction extends ChallengeAction {
 
-	public static boolean inCanceling;
+  public static boolean inCanceling;
 
-	public CancelEventAction(String name) {
-		super(name);
-	}
+  public CancelEventAction(String name) {
+    super(name);
+  }
 
-	public static void onPreTrigger() {
-		inCanceling = false;
-	}
+  public static void onPreTrigger() {
+    inCanceling = false;
+  }
 
-	public static boolean shouldCancel() {
-		if (inCanceling) {
-			inCanceling = false;
-			return true;
-		}
-		return false;
-	}
+  public static boolean shouldCancel() {
+    if (inCanceling) {
+      inCanceling = false;
+      return true;
+    }
+    return false;
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.BARRIER;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.BARRIER;
+  }
 
-	@Override
-	public void execute(ChallengeExecutionData executionData, Map<String, String[]> subActions) {
-		inCanceling = true;
-	}
+  @Override
+  public void execute(ChallengeExecutionData executionData, Map<String, String[]> subActions) {
+    inCanceling = true;
+  }
 
 }

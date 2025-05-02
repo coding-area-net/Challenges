@@ -8,24 +8,20 @@ import org.bukkit.event.EventPriority;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.1.0
- */
 public class PlayerJumpTrigger extends ChallengeTrigger {
 
-	public PlayerJumpTrigger(String name) {
-		super(name);
-	}
+  public PlayerJumpTrigger(String name) {
+    super(name);
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.RABBIT_FOOT;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.RABBIT_FOOT;
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onJump(@Nonnull PlayerJumpEvent event) {
-		createData().entity(event.getPlayer()).execute();
-	}
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onJump(@Nonnull PlayerJumpEvent event) {
+    createData().entity(event.getPlayer()).execute();
+  }
 
 }

@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.inventory;
 
-import net.anweisen.utilities.bukkit.utils.misc.CompatibilityUtils;
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.bukkit.utils.misc.CompatibilityUtils;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -18,47 +18,43 @@ import org.bukkit.inventory.Inventory;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class PermanentItemChallenge extends Setting {
 
-	public PermanentItemChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.INVENTORY);
-	}
+  public PermanentItemChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.INVENTORY);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new ItemBuilder(Material.VINE, Message.forName("item-permanent-item-challenge"));
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new ItemBuilder(Material.VINE, Message.forName("item-permanent-item-challenge"));
+  }
 
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onInventoryClick(@Nonnull PlayerInventoryClickEvent event) {
-		Player player = event.getPlayer();
-		if (!shouldExecuteEffect()) return;
-		if (ignorePlayer(player)) return;
-		Inventory clickedInventory = event.getClickedInventory();
-		if (event.getCursor() == null) return;
-		if (clickedInventory == null) return;
-		InventoryType type = CompatibilityUtils.getTopInventory(player).getType();
-		if (type == InventoryType.WORKBENCH || type == InventoryType.CRAFTING) return;
-		if (clickedInventory.getType() == InventoryType.CRAFTING) return;
-		if (clickedInventory.getType() == InventoryType.PLAYER) {
-			if (event.getInventory().getType() != InventoryType.PLAYER) {
-				event.setCancelled(true);
-			}
-		}
+  @EventHandler(priority = EventPriority.HIGH)
+  public void onInventoryClick(@Nonnull PlayerInventoryClickEvent event) {
+    Player player = event.getPlayer();
+    if (!shouldExecuteEffect()) return;
+    if (ignorePlayer(player)) return;
+    Inventory clickedInventory = event.getClickedInventory();
+    if (event.getCursor() == null) return;
+    if (clickedInventory == null) return;
+    InventoryType type = CompatibilityUtils.getTopInventory(player).getType();
+    if (type == InventoryType.WORKBENCH || type == InventoryType.CRAFTING) return;
+    if (clickedInventory.getType() == InventoryType.CRAFTING) return;
+    if (clickedInventory.getType() == InventoryType.PLAYER) {
+      if (event.getInventory().getType() != InventoryType.PLAYER) {
+        event.setCancelled(true);
+      }
+    }
 
-	}
+  }
 
-	@EventHandler
-	public void onPlayerDropItem(@Nonnull PlayerDropItemEvent event) {
-		if (!shouldExecuteEffect()) return;
-		event.setCancelled(true);
-	}
+  @EventHandler
+  public void onPlayerDropItem(@Nonnull PlayerDropItemEvent event) {
+    if (!shouldExecuteEffect()) return;
+    event.setCancelled(true);
+  }
 
 }

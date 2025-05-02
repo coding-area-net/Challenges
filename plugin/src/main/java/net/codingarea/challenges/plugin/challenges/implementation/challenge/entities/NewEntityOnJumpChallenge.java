@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.entities;
 
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.impl.RandomMobAction;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
@@ -18,35 +18,31 @@ import org.bukkit.event.EventPriority;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author KxmischesDomi | https://github.com/kxmischesdomi
- * @since 2.0
- */
 @Since("2.0")
 public class NewEntityOnJumpChallenge extends Setting {
 
-	public NewEntityOnJumpChallenge() {
-		super(MenuType.CHALLENGES);
-		setCategory(SettingCategory.ENTITIES);
-	}
+  public NewEntityOnJumpChallenge() {
+    super(MenuType.CHALLENGES);
+    setCategory(SettingCategory.ENTITIES);
+  }
 
-	@Nonnull
-	@Override
-	public ItemBuilder createDisplayItem() {
-		return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-jump-entity-challenge")).setColor(Color.GREEN);
-	}
+  @Nonnull
+  @Override
+  public ItemBuilder createDisplayItem() {
+    return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-jump-entity-challenge")).setColor(Color.GREEN);
+  }
 
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onJump(@Nonnull PlayerJumpEvent event) {
-		if (ignorePlayer(event.getPlayer())) return;
-		if (!shouldExecuteEffect()) return;
-		spawnRandomEntity(event.getPlayer().getLocation());
-	}
+  @EventHandler(priority = EventPriority.HIGH)
+  public void onJump(@Nonnull PlayerJumpEvent event) {
+    if (ignorePlayer(event.getPlayer())) return;
+    if (!shouldExecuteEffect()) return;
+    spawnRandomEntity(event.getPlayer().getLocation());
+  }
 
-	private void spawnRandomEntity(@Nonnull Location location) {
-		if (location.getWorld() == null) return;
-		EntityType type = globalRandom.choose(RandomMobAction.getSpawnableMobs());
-		location.getWorld().spawnEntity(location, type);
-	}
+  private void spawnRandomEntity(@Nonnull Location location) {
+    if (location.getWorld() == null) return;
+    EntityType type = globalRandom.choose(RandomMobAction.getSpawnableMobs());
+    location.getWorld().spawnEntity(location, type);
+  }
 
 }
