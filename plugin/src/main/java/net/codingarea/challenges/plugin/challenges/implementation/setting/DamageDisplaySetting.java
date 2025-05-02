@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
-import net.anweisen.utilities.common.misc.StringUtils;
+import net.codingarea.commons.common.misc.StringUtils;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;

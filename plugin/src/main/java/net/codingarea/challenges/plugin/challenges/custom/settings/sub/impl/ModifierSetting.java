@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.sub.impl;
 
-import net.anweisen.utilities.bukkit.utils.menu.MenuClickInfo;
+import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSetting;
 import net.codingarea.challenges.plugin.challenges.type.IModifier;
@@ -86,9 +86,9 @@ public class ModifierSetting extends ValueSetting implements IModifier {
     try {
       return Integer.parseInt(value);
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().severe("Something went wrong while parsing the "
+      Challenges.getInstance().getILogger().severe("Something went wrong while parsing the "
         + "value of subsetting " + getKey() + " with value " + value);
-      Challenges.getInstance().getLogger().error("", exception);
+      Challenges.getInstance().getILogger().error("", exception);
     }
 
     return 0;

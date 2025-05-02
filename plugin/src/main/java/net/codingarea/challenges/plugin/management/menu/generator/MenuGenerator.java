@@ -2,8 +2,8 @@ package net.codingarea.challenges.plugin.management.menu.generator;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.anweisen.utilities.bukkit.utils.menu.MenuPosition;
-import net.anweisen.utilities.bukkit.utils.misc.CompatibilityUtils;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
+import net.codingarea.commons.bukkit.utils.misc.CompatibilityUtils;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.position.GeneratorMenuPosition;
 import org.bukkit.Bukkit;

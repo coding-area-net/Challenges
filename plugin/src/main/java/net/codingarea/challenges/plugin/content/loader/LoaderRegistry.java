@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.content.loader;
 
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.utils.logging.ConsolePrint;
 

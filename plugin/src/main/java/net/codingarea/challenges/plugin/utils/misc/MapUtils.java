@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 
 import java.util.*;
@@ -37,7 +37,7 @@ public class MapUtils {
       try {
         map.put(entry.getKey(), document.getStringArray(entry.getKey()));
       } catch (Exception exception) {
-        Challenges.getInstance().getLogger().error("", exception);
+        Challenges.getInstance().getILogger().error("", exception);
       }
     }
     return map;

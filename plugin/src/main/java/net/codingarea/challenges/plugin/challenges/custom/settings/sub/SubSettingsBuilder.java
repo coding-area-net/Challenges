@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.sub;
 
 import lombok.Getter;
-import net.anweisen.utilities.common.misc.StringUtils;
+import net.codingarea.commons.common.misc.StringUtils;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder.*;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.impl.MessageManager;

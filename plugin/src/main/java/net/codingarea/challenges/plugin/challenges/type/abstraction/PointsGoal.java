@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
 import org.bukkit.entity.Player;
 

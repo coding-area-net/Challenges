@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.force;
 
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.bukkit.utils.item.ItemUtils;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.EndingForceChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
@@ -11,7 +12,6 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBossBar.BossBarInstance;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.challenges.plugin.utils.item.ItemUtils;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;

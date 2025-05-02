@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.utils.bukkit.misc;
 
-import net.anweisen.utilities.bukkit.utils.misc.MinecraftVersion;
-import net.anweisen.utilities.common.collection.WrappedException;
-import net.anweisen.utilities.common.logging.ILogger;
+import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
+import net.codingarea.commons.common.collection.WrappedException;
+import net.codingarea.commons.common.logging.ILogger;
 import net.codingarea.challenges.plugin.content.Prefix;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;

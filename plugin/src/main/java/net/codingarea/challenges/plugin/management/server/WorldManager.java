@@ -2,10 +2,10 @@ package net.codingarea.challenges.plugin.management.server;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.common.config.Document;
-import net.anweisen.utilities.common.config.FileDocument;
-import net.anweisen.utilities.common.misc.FileUtils;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.config.Document;
+import net.codingarea.commons.common.config.FileDocument;
+import net.codingarea.commons.common.misc.FileUtils;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;

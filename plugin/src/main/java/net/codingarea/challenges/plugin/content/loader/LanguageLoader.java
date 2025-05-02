@@ -5,12 +5,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.Getter;
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.common.collection.IOUtils;
-import net.anweisen.utilities.common.config.Document;
-import net.anweisen.utilities.common.config.FileDocument;
-import net.anweisen.utilities.common.misc.FileUtils;
-import net.anweisen.utilities.common.misc.GsonUtils;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.collection.IOUtils;
+import net.codingarea.commons.common.config.Document;
+import net.codingarea.commons.common.config.FileDocument;
+import net.codingarea.commons.common.misc.FileUtils;
+import net.codingarea.commons.common.misc.GsonUtils;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.utils.logging.ConsolePrint;
@@ -147,7 +147,7 @@ public final class LanguageLoader extends ContentLoader {
           Logger.debug("Writing language {} to {}", name, file);
           verifyLanguage(language, file, name);
         } catch (Exception exception) {
-          Challenges.getInstance().getLogger().error("", exception);
+          Challenges.getInstance().getILogger().error("", exception);
           Logger.error("Could not download language for {}. {}: {}", element, exception.getClass().getSimpleName(), exception.getMessage());
         }
       }

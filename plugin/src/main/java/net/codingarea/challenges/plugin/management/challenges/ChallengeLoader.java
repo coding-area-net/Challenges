@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.management.challenges;
 
-import net.anweisen.utilities.bukkit.utils.misc.MinecraftVersion;
+import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.damage.*;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.effect.*;

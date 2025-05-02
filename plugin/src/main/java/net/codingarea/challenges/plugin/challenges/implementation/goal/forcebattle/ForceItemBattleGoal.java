@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle;
 
-import net.anweisen.utilities.common.annotations.Since;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets.ItemTarget;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleDisplayGoal;
 import net.codingarea.challenges.plugin.content.Message;

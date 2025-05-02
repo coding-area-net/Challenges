@@ -4,7 +4,7 @@ import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
-import net.codingarea.challenges.plugin.utils.bukkit.misc.wrapper.AttributeWrapper;
+import net.codingarea.commons.bukkit.utils.wrapper.AttributeWrapper;
 import net.codingarea.challenges.plugin.utils.misc.CommandHelper;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.command.CommandSender;

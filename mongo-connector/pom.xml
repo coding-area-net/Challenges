@@ -20,6 +20,13 @@
 
     <dependencies>
 
+        <!-- Common java logging library -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.32</version>
+        </dependency>
+
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
@@ -43,12 +50,6 @@
             <groupId>net.codingarea.challenges</groupId>
             <artifactId>plugin</artifactId>
             <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.anweisen.Utility</groupId>
-            <artifactId>database-mongodb</artifactId>
-            <version>${utilities.version}</version>
         </dependency>
 
     </dependencies>

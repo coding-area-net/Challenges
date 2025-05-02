@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.action;
 
-import net.anweisen.utilities.common.collection.IRandom;
+import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeExecutionData;
 
 import java.util.Map;

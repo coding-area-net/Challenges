@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
@@ -67,7 +67,7 @@ public class HealthDisplaySetting extends Setting {
     try {
       objective.setRenderType(RenderType.HEARTS);
     } catch (Exception ex) {
-      Challenges.getInstance().getLogger().severe("Tablist Health could not be updated. You are using an outdated version of spigot.");
+      Challenges.getInstance().getILogger().severe("Tablist Health could not be updated. You are using an outdated version of spigot.");
       // In some versions of spigot RenderType does not exist
     }
 
@@ -82,7 +82,7 @@ public class HealthDisplaySetting extends Setting {
     try {
       objective.unregister();
     } catch (Exception ex) {
-      Challenges.getInstance().getLogger().severe("Error while unregistering tablist hearts objective");
+      Challenges.getInstance().getILogger().severe("Error while unregistering tablist hearts objective");
     }
 
   }

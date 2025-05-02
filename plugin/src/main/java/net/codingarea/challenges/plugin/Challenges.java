@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin;
 
 import lombok.Getter;
-import net.anweisen.utilities.bukkit.core.BukkitModule;
-import net.anweisen.utilities.common.version.Version;
+import net.codingarea.commons.bukkit.core.BukkitModule;
+import net.codingarea.commons.common.version.Version;
 import net.codingarea.challenges.plugin.challenges.custom.settings.CustomSettingsLoader;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.content.loader.LoaderRegistry;

@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.management.server;
 
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.management.challenges.entities.GamestateSaveable;
 import net.codingarea.challenges.plugin.spigot.generator.VoidMapGenerator;

@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.entities;
 
-import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
-import net.anweisen.utilities.common.annotations.Since;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;

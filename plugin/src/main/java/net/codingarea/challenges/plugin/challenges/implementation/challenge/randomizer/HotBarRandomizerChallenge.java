@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.randomizer;
 
-import net.anweisen.utilities.bukkit.utils.misc.CompatibilityUtils;
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.bukkit.utils.misc.CompatibilityUtils;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;

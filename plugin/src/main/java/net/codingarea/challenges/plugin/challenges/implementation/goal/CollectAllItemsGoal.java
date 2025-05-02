@@ -1,10 +1,11 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import lombok.Getter;
-import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
-import net.anweisen.utilities.common.annotations.Since;
-import net.anweisen.utilities.common.collection.SeededRandomWrapper;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.item.ItemUtils;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.collection.SeededRandomWrapper;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingGoal;
 import net.codingarea.challenges.plugin.content.Message;
@@ -14,7 +15,6 @@ import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.challenges.plugin.utils.item.ItemUtils;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import org.bukkit.Bukkit;

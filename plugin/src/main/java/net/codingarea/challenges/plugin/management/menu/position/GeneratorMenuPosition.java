@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.management.menu.position;
 
 import lombok.Getter;
-import net.anweisen.utilities.bukkit.utils.menu.MenuPosition;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import net.codingarea.challenges.plugin.management.menu.generator.MenuGenerator;
 
 @Getter

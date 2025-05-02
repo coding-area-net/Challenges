@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
@@ -68,7 +68,7 @@ public abstract class Modifier extends AbstractChallenge implements IModifier {
     try {
       if (isEnabled()) onValueChange();
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Error while modifying value of Setting {}", getClass().getSimpleName(), exception);
+      Challenges.getInstance().getILogger().error("Error while modifying value of Setting {}", getClass().getSimpleName(), exception);
     }
 
     updateItems();

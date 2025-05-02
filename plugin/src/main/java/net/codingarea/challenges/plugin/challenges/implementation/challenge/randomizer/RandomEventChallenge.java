@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.randomizer;
 
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.bukkit.utils.misc.BukkitReflectionUtils;
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;

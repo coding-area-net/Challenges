@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.management.stats;
 
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.config.Document;
 
 import javax.annotation.Nonnull;
 import java.util.EnumMap;

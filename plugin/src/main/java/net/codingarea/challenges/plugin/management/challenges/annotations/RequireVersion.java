@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.management.challenges.annotations;
 
-import net.anweisen.utilities.bukkit.utils.misc.MinecraftVersion;
+import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 
 import javax.annotation.Nonnull;
 import java.lang.annotation.ElementType;

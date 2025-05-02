@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
-import net.anweisen.utilities.bukkit.utils.misc.BukkitReflectionUtils;
+import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;

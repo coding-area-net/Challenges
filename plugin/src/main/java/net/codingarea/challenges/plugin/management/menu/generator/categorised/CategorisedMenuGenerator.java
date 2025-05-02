@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.management.menu.generator.categorised;
 
-import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
-import net.anweisen.utilities.bukkit.utils.menu.MenuPosition;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
 import net.codingarea.challenges.plugin.content.Message;

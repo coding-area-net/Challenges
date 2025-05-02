@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.management.server;
 
 import lombok.Getter;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
 import org.bukkit.entity.Player;

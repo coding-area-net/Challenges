@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
-import net.anweisen.utilities.bukkit.utils.misc.MinecraftVersion;
-import net.anweisen.utilities.common.collection.IRandom;
+import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
+import net.codingarea.commons.common.collection.IRandom;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;

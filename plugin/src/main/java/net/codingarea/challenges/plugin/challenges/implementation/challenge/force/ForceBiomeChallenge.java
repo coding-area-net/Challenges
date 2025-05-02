@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.force;
 
-import net.anweisen.utilities.common.annotations.Since;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.CompletableForceChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;

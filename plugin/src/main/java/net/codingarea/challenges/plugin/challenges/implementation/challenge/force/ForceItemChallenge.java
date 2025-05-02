@@ -1,7 +1,8 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.force;
 
-import net.anweisen.utilities.common.annotations.Since;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.bukkit.utils.item.ItemUtils;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.CompletableForceChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
@@ -14,7 +15,6 @@ import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBo
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.challenges.plugin.utils.item.ItemUtils;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;

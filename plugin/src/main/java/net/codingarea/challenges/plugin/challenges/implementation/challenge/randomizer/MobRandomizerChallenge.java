@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.randomizer;
 
-import net.anweisen.utilities.bukkit.utils.misc.MinecraftVersion;
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.RandomizerSetting;
@@ -207,7 +207,7 @@ public class MobRandomizerChallenge extends RandomizerSetting {
           try {
             return useSpawnCategories ? world.getSpawnLimit(SpawnCategory.WATER_AMBIENT) : world.getWaterAmbientSpawnLimit();
           } catch (Throwable throwable) {
-            Challenges.getInstance().getLogger().error("", throwable);
+            Challenges.getInstance().getILogger().error("", throwable);
           }
         }
         case WATER_ANIMAL:

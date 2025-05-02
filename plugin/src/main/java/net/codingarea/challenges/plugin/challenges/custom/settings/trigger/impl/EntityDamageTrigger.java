@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.trigger.impl;
 
-import net.anweisen.utilities.bukkit.utils.item.ItemBuilder.PotionBuilder;
-import net.anweisen.utilities.common.misc.StringUtils;
+import net.codingarea.commons.bukkit.utils.item.ItemBuilder.PotionBuilder;
+import net.codingarea.commons.common.misc.StringUtils;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
 import net.codingarea.challenges.plugin.content.Message;

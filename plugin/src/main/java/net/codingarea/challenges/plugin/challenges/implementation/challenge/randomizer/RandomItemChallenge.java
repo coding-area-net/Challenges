@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.randomizer;
 
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.impl.RandomItemAction;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;

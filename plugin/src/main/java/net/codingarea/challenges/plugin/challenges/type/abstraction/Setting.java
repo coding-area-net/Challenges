@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
-import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -76,7 +76,7 @@ public abstract class Setting extends AbstractChallenge {
       if (enabled) onEnable();
       else onDisable();
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Error while {} Setting {}", enabled ? "enabling" : "disabling", getClass().getSimpleName(), exception);
+      Challenges.getInstance().getILogger().error("Error while {} Setting {}", enabled ? "enabling" : "disabling", getClass().getSimpleName(), exception);
     }
 
     updateItems();

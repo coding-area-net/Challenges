@@ -15,7 +15,7 @@ public class PlayerConnection_1_13 extends PlayerConnection {
     try {
       ReflectionUtil.invokeMethod(this.connection, "sendPacket", new Class<?>[]{nmsClass}, new Object[]{packet});
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to send packet {}:", packet.getClass().getSimpleName(), exception);
+      Challenges.getInstance().getILogger().error("Failed to send packet {}:", packet.getClass().getSimpleName(), exception);
     }
   }
 }

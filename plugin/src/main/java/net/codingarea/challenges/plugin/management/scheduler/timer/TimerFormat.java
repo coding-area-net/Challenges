@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.management.scheduler.timer;
 
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.config.Document;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;

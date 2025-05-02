@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.effect;
 
-import net.anweisen.utilities.common.annotations.Since;
-import net.anweisen.utilities.common.collection.IRandom;
-import net.anweisen.utilities.common.collection.SeededRandomWrapper;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.collection.IRandom;
+import net.codingarea.commons.common.collection.SeededRandomWrapper;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;

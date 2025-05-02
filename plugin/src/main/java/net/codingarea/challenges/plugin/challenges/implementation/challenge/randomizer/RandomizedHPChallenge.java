@@ -6,7 +6,7 @@ import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.bukkit.misc.wrapper.AttributeWrapper;
+import net.codingarea.commons.bukkit.utils.wrapper.AttributeWrapper;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder.PotionBuilder;
 import org.bukkit.Color;

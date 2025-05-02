@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.management.challenges;
 
 import lombok.Getter;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.CustomChallenge;
 import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeExecutionData;
@@ -70,8 +70,8 @@ public class CustomChallengesLoader extends ModuleChallengeLoader {
         challenge.setEnabled(doc.getBoolean("enabled"));
 
       } catch (Exception exception) {
-        Challenges.getInstance().getLogger().error("Something went wrong while initializing custom challenge {} :: {}", key, exception.getMessage());
-        Challenges.getInstance().getLogger().error("", exception);
+        Challenges.getInstance().getILogger().error("Something went wrong while initializing custom challenge {} :: {}", key, exception.getMessage());
+        Challenges.getInstance().getILogger().error("", exception);
       }
 
     }

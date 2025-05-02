@@ -26,7 +26,7 @@ public class WorldServer_1_13 extends WorldServer {
     try {
       worldServer = ReflectionUtil.invokeMethod(nmsClass, world, "getHandle");
     } catch (Exception exception) {
-      Challenges.getInstance().getLogger().error("Failed to get WorldServer:", exception);
+      Challenges.getInstance().getILogger().error("Failed to get WorldServer:", exception);
       worldServer = null;
     }
     return worldServer;

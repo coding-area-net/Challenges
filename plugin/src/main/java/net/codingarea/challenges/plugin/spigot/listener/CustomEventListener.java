@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.spigot.listener;
 
-import net.anweisen.utilities.bukkit.utils.misc.BukkitReflectionUtils;
+import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.spigot.events.*;
 import org.bukkit.Bukkit;

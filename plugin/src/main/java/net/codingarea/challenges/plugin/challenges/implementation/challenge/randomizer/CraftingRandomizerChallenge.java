@@ -4,8 +4,8 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.RandomizerSe
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.challenges.plugin.utils.item.ItemUtils;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
+import net.codingarea.commons.bukkit.utils.item.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

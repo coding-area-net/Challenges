@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.type;
 
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.management.challenges.ChallengeManager;
 import net.codingarea.challenges.plugin.management.challenges.entities.GamestateSaveable;
 import net.codingarea.challenges.plugin.management.menu.MenuType;

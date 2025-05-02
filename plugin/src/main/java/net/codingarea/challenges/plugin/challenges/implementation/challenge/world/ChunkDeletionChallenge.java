@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
-import net.anweisen.utilities.common.collection.pair.Tuple;
+import net.codingarea.commons.common.collection.pair.Tuple;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;

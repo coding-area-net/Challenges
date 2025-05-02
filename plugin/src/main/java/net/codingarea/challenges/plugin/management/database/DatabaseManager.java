@@ -1,19 +1,19 @@
 package net.codingarea.challenges.plugin.management.database;
 
 import lombok.Getter;
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.common.collection.pair.Tuple;
-import net.anweisen.utilities.common.config.Document;
-import net.anweisen.utilities.database.Database;
-import net.anweisen.utilities.database.DatabaseConfig;
-import net.anweisen.utilities.database.SQLColumn;
-import net.anweisen.utilities.database.action.ExecutedQuery;
-import net.anweisen.utilities.database.exceptions.DatabaseException;
-import net.anweisen.utilities.database.internal.sql.abstraction.AbstractSQLDatabase;
-import net.anweisen.utilities.database.internal.sql.mysql.MySQLDatabase;
-import net.anweisen.utilities.database.internal.sql.sqlite.SQLiteDatabase;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.collection.pair.Tuple;
+import net.codingarea.commons.common.config.Document;
+import net.codingarea.commons.database.Database;
+import net.codingarea.commons.database.DatabaseConfig;
+import net.codingarea.commons.database.SQLColumn;
+import net.codingarea.commons.database.action.ExecutedQuery;
+import net.codingarea.commons.database.exceptions.DatabaseException;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.utils.logging.ConsolePrint;
+import net.codingarea.commons.database.sql.abstraction.AbstractSQLDatabase;
+import net.codingarea.commons.database.sql.mysql.MySQLDatabase;
+import net.codingarea.commons.database.sql.sqlite.SQLiteDatabase;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -107,10 +107,10 @@ public final class DatabaseManager {
       } catch (DatabaseException databaseException) {
         try {
           sqlDatabase.prepare("ALTER TABLE `challenges` ADD COLUMN `custom_challenges` text(60000)").execute();
-          Challenges.getInstance().getLogger().info("Creating not existing column 'custom_challenges' in SQL Database");
+          Challenges.getInstance().getILogger().info("Creating not existing column 'custom_challenges' in SQL Database");
         } catch (Exception exception) {
-          Challenges.getInstance().getLogger().error("Failed to create non existing column 'custom_challenges' in SQL Database");
-          Challenges.getInstance().getLogger().error("", exception);
+          Challenges.getInstance().getILogger().error("Failed to create non existing column 'custom_challenges' in SQL Database");
+          Challenges.getInstance().getILogger().error("", exception);
         }
       }
 

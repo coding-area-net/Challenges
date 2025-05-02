@@ -1,13 +1,13 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
-import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.CollectionGoal;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.challenges.plugin.utils.item.ItemUtils;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
+import net.codingarea.commons.bukkit.utils.item.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

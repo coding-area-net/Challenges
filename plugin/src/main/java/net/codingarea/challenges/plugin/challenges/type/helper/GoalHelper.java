@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.type.helper;
 
-import net.anweisen.utilities.common.collection.NumberFormatter;
+import net.codingarea.commons.common.collection.NumberFormatter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IGoal;

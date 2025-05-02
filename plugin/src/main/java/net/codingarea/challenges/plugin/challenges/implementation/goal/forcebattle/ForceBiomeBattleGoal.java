@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle;
 
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets.BiomeTarget;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleGoal;
 import net.codingarea.challenges.plugin.content.Message;

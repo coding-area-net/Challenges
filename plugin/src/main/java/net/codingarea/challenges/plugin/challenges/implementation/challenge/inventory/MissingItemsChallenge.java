@@ -1,10 +1,11 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.inventory;
 
-import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
-import net.anweisen.utilities.bukkit.utils.menu.MenuClickInfo;
-import net.anweisen.utilities.bukkit.utils.menu.MenuPosition;
-import net.anweisen.utilities.common.annotations.Since;
-import net.anweisen.utilities.common.collection.pair.Tuple;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.item.ItemUtils;
+import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.collection.pair.Tuple;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
@@ -15,7 +16,6 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.challenges.plugin.utils.item.ItemUtils;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -197,7 +197,7 @@ public class MissingItemsChallenge extends TimedChallenge implements PlayerComma
         inventory.setItem(slot, getRandomItem(itemStack));
       } catch (Exception exception) {
         inventory.setItem(slot, new ItemStack(Material.BARRIER));
-        Challenges.getInstance().getLogger().error("", exception);
+        Challenges.getInstance().getILogger().error("", exception);
       }
 
     }

@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
-import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.KillEntityGoal;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;

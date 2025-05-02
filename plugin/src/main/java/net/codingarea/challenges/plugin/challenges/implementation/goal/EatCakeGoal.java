@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
-import net.anweisen.utilities.common.annotations.Since;
+import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingGoal;
 import net.codingarea.challenges.plugin.content.Message;

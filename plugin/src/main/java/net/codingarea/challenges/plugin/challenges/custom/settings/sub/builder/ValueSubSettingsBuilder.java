@@ -2,7 +2,7 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder;
 
 import com.google.common.collect.Lists;
 import lombok.Getter;
-import net.anweisen.utilities.common.misc.StringUtils;
+import net.codingarea.commons.common.misc.StringUtils;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSetting;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.impl.BooleanSetting;

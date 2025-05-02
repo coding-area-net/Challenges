@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
-import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
-import net.anweisen.utilities.common.config.Document;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;

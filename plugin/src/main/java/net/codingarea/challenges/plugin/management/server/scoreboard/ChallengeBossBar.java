@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.management.server.scoreboard;
 
-import net.anweisen.utilities.bukkit.utils.logging.Logger;
-import net.anweisen.utilities.bukkit.utils.misc.MinecraftVersion;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;

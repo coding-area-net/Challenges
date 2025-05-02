@@ -2,10 +2,10 @@ package net.codingarea.challenges.plugin.management.menu.generator.implementatio
 
 import lombok.Getter;
 import lombok.ToString;
-import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
-import net.anweisen.utilities.bukkit.utils.menu.MenuClickInfo;
-import net.anweisen.utilities.bukkit.utils.menu.MenuPosition;
-import net.anweisen.utilities.common.collection.IRandom;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
+import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.CustomChallenge;
 import net.codingarea.challenges.plugin.challenges.custom.settings.SettingType;
