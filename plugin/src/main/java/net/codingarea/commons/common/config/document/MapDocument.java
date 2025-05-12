@@ -129,7 +129,7 @@ public class MapDocument extends AbstractDocument {
 	@Override
 	public long getLong(@Nonnull String path, long def) {
 		try {
-			return Long.parseLong(getString(path));
+			return Long.parseLong(Objects.requireNonNull(getString(path)));
 		} catch (Exception ex) {
 			return def;
 		}
@@ -138,7 +138,7 @@ public class MapDocument extends AbstractDocument {
 	@Override
 	public int getInt(@Nonnull String path, int def) {
 		try {
-			return Integer.parseInt(getString(path));
+			return Integer.parseInt(Objects.requireNonNull(getString(path)));
 		} catch (Exception ex) {
 			return def;
 		}
@@ -147,7 +147,7 @@ public class MapDocument extends AbstractDocument {
 	@Override
 	public short getShort(@Nonnull String path, short def) {
 		try {
-			return Short.parseShort(getString(path));
+			return Short.parseShort(Objects.requireNonNull(getString(path)));
 		} catch (Exception ex) {
 			return def;
 		}
@@ -156,7 +156,7 @@ public class MapDocument extends AbstractDocument {
 	@Override
 	public byte getByte(@Nonnull String path, byte def) {
 		try {
-			return Byte.parseByte(getString(path));
+			return Byte.parseByte(Objects.requireNonNull(getString(path)));
 		} catch (Exception ex) {
 			return def;
 		}
@@ -165,7 +165,7 @@ public class MapDocument extends AbstractDocument {
 	@Override
 	public float getFloat(@Nonnull String path, float def) {
 		try {
-			return Float.parseFloat(getString(path));
+			return Float.parseFloat(Objects.requireNonNull(getString(path)));
 		} catch (Exception ex) {
 			return def;
 		}
@@ -174,7 +174,7 @@ public class MapDocument extends AbstractDocument {
 	@Override
 	public double getDouble(@Nonnull String path, double def) {
 		try {
-			return Double.parseDouble(getString(path));
+			return Double.parseDouble(Objects.requireNonNull(getString(path)));
 		} catch (Exception ex) {
 			return def;
 		}
@@ -184,7 +184,7 @@ public class MapDocument extends AbstractDocument {
 	public boolean getBoolean(@Nonnull String path, boolean def) {
 		try {
 			if (!contains(path)) return def;
-			switch (getString(path).toLowerCase()) {
+			switch (Objects.requireNonNull(getString(path)).toLowerCase()) {
 				case "true":
 				case "1":
 					return true;

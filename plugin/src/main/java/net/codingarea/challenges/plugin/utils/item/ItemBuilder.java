@@ -214,7 +214,8 @@ public class ItemBuilder extends net.codingarea.commons.bukkit.utils.item.ItemBu
 
   @Override
   public ItemBuilder clone() {
-    ItemBuilder builder = new ItemBuilder(item.clone(), getMeta().clone());
+      ItemBuilder itemBuilder = (ItemBuilder) super.clone();
+      ItemBuilder builder = new ItemBuilder(item.clone(), getMeta().clone());
     builder.builtByItemDescription = builtByItemDescription;
     return builder;
   }
