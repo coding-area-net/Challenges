@@ -41,7 +41,7 @@ public class ItemTarget extends ForceTarget<Material> {
 
     @Override
     public String getName() {
-        return BukkitStringUtils.getItemName(target).toPlainText();
+        return BukkitStringUtils.getServerSideItemComponent(target).toPlainText();
     }
 
     @Override

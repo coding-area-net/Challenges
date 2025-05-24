@@ -61,7 +61,7 @@ public class SubSettingsHelper {
 			builder.addSetting(ANY, new ItemBuilder(Material.NETHER_STAR, Message.forName("item-custom-setting-block-any")).build());
 			for (Material material : ExperimentalUtils.getMaterials()) {
 				if (material.isBlock() && material.isItem() && !BukkitReflectionUtils.isAir(material)) {
-					builder.addSetting(material.name(), new ItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemName(material).toPlainText()).build());
+					builder.addSetting(material.name(), new ItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemComponent(material).toPlainText()).build());
 				}
 			}
 		});
@@ -72,7 +72,7 @@ public class SubSettingsHelper {
 			builder.addSetting(ANY, new ItemBuilder(Material.NETHER_STAR, Message.forName("item-custom-setting-item-any")).build());
 			for (Material material : ExperimentalUtils.getMaterials()) {
 				if (material.isItem() && !BukkitReflectionUtils.isAir(material)) {
-					builder.addSetting(material.name(), new ItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemName(material).toPlainText()).build());
+					builder.addSetting(material.name(), new ItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemComponent(material).toPlainText()).build());
 				}
 			}
 		});

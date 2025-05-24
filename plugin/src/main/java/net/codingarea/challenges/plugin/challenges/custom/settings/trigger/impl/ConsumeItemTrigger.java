@@ -22,7 +22,7 @@ public class ConsumeItemTrigger extends ChallengeTrigger {
 		super(name, SubSettingsBuilder.createChooseMultipleItem(SubSettingsHelper.ITEM).fill(builder -> {
 			for (Material material : ExperimentalUtils.getMaterials()) {
 				if (material.isEdible()) {
-					builder.addSetting(material.name(), new ItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemName(material).toPlainText()).build());
+					builder.addSetting(material.name(), new ItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemComponent(material).toPlainText()).build());
 				}
 			}
 		}));

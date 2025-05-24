@@ -1,6 +1,9 @@
 package net.codingarea.challenges.plugin.spigot.listener;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import javax.annotation.Nonnull;
 import net.anweisen.utilities.common.config.Document;
 import net.codingarea.challenges.plugin.ChallengeAPI;
@@ -32,6 +35,10 @@ public class PlayerConnectionListener implements Listener {
 	private final boolean resetOnLastQuit;
 	private final boolean pauseOnLastQuit;
 	private final boolean restoreDefaultsOnLastQuit;
+	private final boolean permissionInfo;
+
+	private final Set<UUID> playersJoinedAlready = new HashSet<>();
+	boolean playerWithPermissionJoinedBefore = false;
 
 	public PlayerConnectionListener() {
 		Document config = Challenges.getInstance().getConfigDocument();
@@ -41,6 +48,7 @@ public class PlayerConnectionListener implements Listener {
 		resetOnLastQuit = config.getBoolean("reset-on-last-leave");
 		pauseOnLastQuit = config.getBoolean("pause-on-last-leave");
 		restoreDefaultsOnLastQuit = config.getBoolean("restore-defaults-on-last-leave");
+		permissionInfo = config.getBoolean("permission-info");
 	}
 
 	@EventHandler(priority = EventPriority.HIGH)
@@ -53,18 +61,31 @@ public class PlayerConnectionListener implements Listener {
 			MinecraftNameWrapper.ENTITY_EFFECT, 17, 1, 2);
 		Challenges.getInstance().getScoreboardManager().handleJoin(player);
 
-		if (player.hasPermission("challenges.gui")) {
+		if (!playersJoinedAlready.contains(player.getUniqueId())) {
+			playersJoinedAlready.add(player.getUniqueId());
 			if (Challenges.getInstance().isFirstInstall()) {
 				player.sendMessage("");
 				player.sendMessage(Prefix.CHALLENGES + "§7Thanks for downloading §e§lChallenges§7!");
 				player.sendMessage(Prefix.CHALLENGES + "§7You can change the language in the §econfig.yml");
 				player.sendMessage(Prefix.CHALLENGES + "§7For more join our discord §ediscord.gg/74Ay5zF");
-			}
-
-			if (timerPausedInfo && !startTimerOnJoin && ChallengeAPI.isPaused()) {
 				player.sendMessage("");
-				Message.forName("timer-paused-message").send(player, Prefix.CHALLENGES);
 			}
+		}
+
+		if (!player.hasPermission("challenges.gui")) {
+			if (permissionInfo && !playerWithPermissionJoinedBefore) {
+				player.sendMessage("");
+				player.sendMessage(Prefix.CHALLENGES + "§7To configure the settings you need operator permissions. Type '§e/op " + player.getName() + "§7' in the console.");
+				player.sendMessage("");
+			}
+		} else {
+			playerWithPermissionJoinedBefore = true;
+		}
+
+		if (timerPausedInfo && !startTimerOnJoin && ChallengeAPI.isPaused()) {
+			player.sendMessage("");
+			Message.forName("timer-paused-message").send(player, Prefix.CHALLENGES);
+			player.sendMessage("");
 		}
 
 		if (Challenges.getInstance().getStatsManager().isNoStatsAfterCheating() && Challenges.getInstance().getServerManager().hasCheated()) {

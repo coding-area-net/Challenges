@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.utils.item;
 
 import net.anweisen.utilities.bukkit.utils.misc.BukkitReflectionUtils;
 import net.anweisen.utilities.bukkit.utils.misc.MinecraftVersion;
+import net.anweisen.utilities.common.version.VersionInfo;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -24,11 +25,10 @@ public class ItemUtils {
         }
     }
 
-    public static boolean isObtainableInSurvival(@Nonnull Material material) {
+    public static boolean isMaterialObtainable(@Nonnull Material material) {
         String name = material.name();
         if (BukkitReflectionUtils.isAir(material)) return false;
         if (name.endsWith("_SPAWN_EGG")) return false;
-        if (name.startsWith("INFESTED_")) return false;
         if (name.startsWith("LEGACY_")) return false; // Legacy items should not be obtainable
         switch (name) { // Use name instead of enum its self, to prevent NoSuchFieldErrors in older versions where this specific enum does not exist
             case "CHAIN_COMMAND_BLOCK":
@@ -58,12 +58,14 @@ public class ItemUtils {
             case "PLAYER_HEAD":
             case "GLOBE_BANNER_PATTERN":
             case "SPAWNER":
+            case "VAULT":
             case "AMETHYST_CLUSTER":
             case "BUDDING_AMETHYST":
             case "POWDER_SNOW":
             case "LIGHT":
             case "BUNDLE":
             case "REINFORCED_DEEPSLATE":
+            case "TEST":
             case "FROGSPAWN":
                 return false;
         }
@@ -74,36 +76,24 @@ public class ItemUtils {
             }
         }
 
+        if (MinecraftVersion.current().isNewerOrEqualThan(new VersionInfo(1, 21, 2))) {
+            if (name.contains("BUNDLE")) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean isObtainableInSurvival(@Nonnull Material material) {
+        if (!isMaterialObtainable(material)) return false;
+        if (material.name().startsWith("INFESTED_")) return false;
         return true;
     }
 
     public static boolean blockIsAvailableInSurvival(@Nonnull Material material) {
+        if (!isMaterialObtainable(material)) return false;
         if (!material.isBlock()) return false;
-        String name = material.name();
-        if (BukkitReflectionUtils.isAir(material)) return false;
-        if (name.startsWith("LEGACY_")) return false; // Legacy items should not be obtainable
-        switch (name) { // Use name instead of enum its self, to prevent NoSuchFieldErrors in older versions where this specific enum does not exist
-            case "CHAIN_COMMAND_BLOCK":
-            case "REPEATING_COMMAND_BLOCK":
-            case "COMMAND_BLOCK":
-            case "COMMAND_BLOCK_MINECART":
-            case "JIGSAW":
-            case "STRUCTURE_BLOCK":
-            case "STRUCTURE_VOID":
-            case "BARRIER":
-            case "KNOWLEDGE_BOOK":
-            case "DEBUG_STICK":
-            case "END_PORTAL":
-            case "NETHER_PORTAL":
-            case "END_GATEWAY":
-            case "PETRIFIED_OAK_SLAB":
-            case "PLAYER_HEAD":
-            case "GLOBE_BANNER_PATTERN":
-            case "LIGHT":
-            case "BUNDLE":
-                return false;
-        }
-
         return true;
     }
 

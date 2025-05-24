@@ -22,7 +22,7 @@
 # The config-version is even with the version of the default config.
 # You will be notified, when this version is older than the of the default in the plugin jar.
 # We recommend regenerating the config to get access to new features / settings.
-config-version: "2.2.0"
+config-version: "2.3.3"
 
 # Currently supported by default
 # - en (English)
@@ -80,6 +80,9 @@ design:
 # Toggles join and quit messages
 # These can be edited in the corresponding language file
 join-quit-messages: true
+
+# Send players a permission info message when they join the server when noone with the permission 'challenges.gui' has joined before
+permission-info: true
 
 # Players with the permission 'challenges.gui' will get a message if the timer is paused when they join
 timer-is-paused-info: true

@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import net.anweisen.utilities.bukkit.utils.animation.SoundSample;
+import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
 import net.codingarea.challenges.plugin.utils.item.ItemUtils;
 import net.anweisen.utilities.common.annotations.Since;
 import net.anweisen.utilities.common.collection.SeededRandomWrapper;
@@ -84,8 +85,8 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
 				bossbar.setTitle(Message.forName("bossbar-all-items-finished").asString());
 				return;
 			}
-      
-			bossbar.setTitle(Message.forName("bossbar-all-items-current-max").asComponent(currentItem, totalItemsCount - itemsToFind.size() + 1, totalItemsCount));
+
+			bossbar.setTitle(Message.forName("bossbar-all-items-current-max").asComponent(BukkitStringUtils.getServerSideItemComponent(currentItem), totalItemsCount - itemsToFind.size() + 1, totalItemsCount));
 		});
 		bossbar.show();
 	}

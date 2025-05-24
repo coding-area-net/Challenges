@@ -41,7 +41,7 @@ public class BlockTarget extends ForceTarget<Material> {
 
     @Override
     public String getName() {
-        return BukkitStringUtils.getItemName(target).toPlainText();
+        return BukkitStringUtils.getItemComponent(target).toPlainText();
     }
 
     @Override

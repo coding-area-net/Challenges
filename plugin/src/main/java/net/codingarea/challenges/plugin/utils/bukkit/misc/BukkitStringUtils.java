@@ -182,15 +182,32 @@ public class BukkitStringUtils {
 		return args;
 	}
 
-	public static TranslatableComponent getItemName(@Nonnull Material material) {
+	private static TranslatableComponent getItemName(@Nonnull Material material) {
 		NamespacedKey key = material.getKey();
 		return new TranslatableComponent((material.isBlock() ? "block" : "item") + "." + key.getNamespace() + "." + key.getKey());
 	}
 
-	public static @Nullable BaseComponent getMusicDiscName(@Nonnull Material material) {
+	private static @Nullable BaseComponent getMusicDiscName(@Nonnull Material material) {
 		if (!material.name().startsWith("MUSIC_DISC")) return null;
 		String key = "item.minecraft." + material.name().toLowerCase() + ".desc";
 		return new TranslatableComponent(key);
+	}
+
+	public static @Nullable BaseComponent getSmithingTemplateName(@Nonnull Material material) {
+		if (!material.name().contains("SMITHING_TEMPLATE")) {
+			return null;
+		}
+
+		String name = material.name().toLowerCase();
+		if (name.contains("armor_trim")) {
+			String pattern = name.replace("_armor_trim_smithing_template", "");
+			return new TranslatableComponent("trim_pattern.minecraft." + pattern);
+		} else if (name.contains("upgrade")) {
+			String type = name.replace("_upgrade_smithing_template", "");
+			return new TranslatableComponent("upgrade.minecraft." + type + "_upgrade");
+		}
+
+		return null;
 	}
 
 	public static BaseComponent getItemComponent(@Nonnull Material material) {
@@ -204,6 +221,16 @@ public class BukkitStringUtils {
 		return component;
 	}
 
+	public static BaseComponent getServerSideItemComponent(@Nonnull Material material) {
+		BaseComponent component = getItemComponent(material);
+		BaseComponent smithingTemplateName = getSmithingTemplateName(material);
+		if (smithingTemplateName != null) {
+			component.addExtra(" (");
+			component.addExtra(smithingTemplateName);
+			component.addExtra(")");
+		}
+		return component;
+	}
 
 	public static TranslatableComponent getEntityName(@Nonnull EntityType type) {
 
