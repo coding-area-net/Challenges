@@ -1,0 +1,45 @@
+[versions]
+
+# minecraft
+spigot = "1.21.4-R0.1-SNAPSHOT"
+authlib = "1.5.21"
+
+# logging
+slf4j = "1.7.32"
+
+# annotations, compile time processing
+lombok = "1.18.38"
+jsr305 = "3.0.2" # TODO replace with jetbrains annotations
+
+# database
+mongodb = "3.12.14"
+
+# cloudnet
+cloudnet3 = "3.4.5-RELEASE"
+cloudnet2 = "2.1.17"
+
+[libraries]
+
+# minecraft
+spigot-api = { group = "org.spigotmc", name = "spigot-api", version.ref = "spigot" }
+authlib = { group = "com.mojang", name = "authlib", version.ref = "authlib" }
+
+# logging
+slf4j-api = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
+
+# annotations, compile time processing
+lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
+jsr305 = { group = "com.google.code.findbugs", name = "jsr305", version.ref = "jsr305" }
+
+# database
+mongodb-driver = { group = "org.mongodb", name = "mongodb-driver", version.ref = "mongodb" }
+
+# cloudnet
+cloudnet3-driver = { group = "de.dytanic.cloudnet", name = "cloudnet-driver", version.ref = "cloudnet3" }
+cloudnet3-bridge = { group = "de.dytanic.cloudnet", name = "cloudnet-bridge", version.ref = "cloudnet3" }
+cloudnet2-bridge = { group = "de.dytanic.cloudnet", name = "cloudnet-api-bridge", version.ref = "cloudnet2" }
+
+[bundles]
+
+cloudnet = ["cloudnet3-driver", "cloudnet3-bridge", "cloudnet2-bridge"]
+

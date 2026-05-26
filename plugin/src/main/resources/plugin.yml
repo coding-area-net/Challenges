@@ -1,5 +1,5 @@
 name: Challenges
-version: 2.3.3
+version: ${version}
 author: CodingArea
 authors:
   - anweisen
