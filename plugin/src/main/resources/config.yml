@@ -24,6 +24,15 @@
 # We recommend regenerating the config to get access to new features / settings.
 config-version: "2.4"
 
+# Currently supported by default
+# - en (English)
+# - de (German / Deutsch)
+language: "de"
+
+# Makes text from the plugin appear in the 'small caps' font
+# Example: ᴛʜɪs ɪs sᴍᴀʟʟ ᴄᴀᴘs
+small-caps: false
+
 timer:
   format:
     seconds: "{mm}:{ss}"
@@ -68,6 +77,9 @@ design:
 # Toggles join and quit messages
 # These can be edited in the corresponding language file
 join-quit-messages: true
+
+# Send players a permission info message when they join the server when noone with the permission 'challenges.gui' has joined before
+permission-info: true
 
 # Players with the permission 'challenges.gui' will get a message if the timer is paused when they join
 timer-is-paused-info: true

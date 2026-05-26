@@ -28,6 +28,7 @@ import net.codingarea.challenges.plugin.spigot.listener.*;
 import net.codingarea.challenges.plugin.utils.bukkit.command.ForwardingCommand;
 
 import javax.annotation.Nonnull;
+import java.io.File;
 
 @Getter
 public final class Challenges extends BukkitModule {

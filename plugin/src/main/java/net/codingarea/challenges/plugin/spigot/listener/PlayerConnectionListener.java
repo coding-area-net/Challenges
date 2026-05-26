@@ -1,6 +1,8 @@
 package net.codingarea.challenges.plugin.spigot.listener;
 
-import net.codingarea.commons.common.config.Document;
+import java.util.List;
+import javax.annotation.Nonnull;
+
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
@@ -10,6 +12,7 @@ import net.codingarea.challenges.plugin.utils.misc.DatabaseHelper;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.ParticleUtils;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,9 +20,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-
-import javax.annotation.Nonnull;
-import java.util.List;
 
 public class PlayerConnectionListener implements Listener {
 
