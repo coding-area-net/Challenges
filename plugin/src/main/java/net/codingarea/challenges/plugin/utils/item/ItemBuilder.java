@@ -316,7 +316,7 @@ public class ItemBuilder extends net.codingarea.commons.bukkit.utils.item.ItemBu
       String textureUrlJson = new String(Base64.getDecoder().decode(base64Texture),
         StandardCharsets.UTF_8);
 
-      String textureUrl = JsonParser.parseString(textureUrlJson)
+      String textureUrl = JsonParser.parseString(textureUrlJson) // TODO fix(deps) version ambiguity
         .getAsJsonObject()
         .get("textures").getAsJsonObject()
         .get("SKIN").getAsJsonObject()

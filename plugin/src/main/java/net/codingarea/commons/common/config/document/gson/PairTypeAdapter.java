@@ -17,7 +17,7 @@ public class PairTypeAdapter implements GsonTypeAdapter<Pair> {
 	@Override
 	public void write(@Nonnull Gson gson, @Nonnull JsonWriter writer, @Nonnull Pair object) throws IOException {
 		Object[] values = object.values();
-		JsonArray array = new JsonArray(values.length);
+		JsonArray array = new JsonArray(values.length); // TODO fix(deps) version ambiguity
 		for (Object value : values) {
 			array.add(gson.toJsonTree(value));
 		}

@@ -134,7 +134,7 @@ public final class LanguageLoader extends ContentLoader {
   private void download() {
     try {
 
-      JsonArray languages = JsonParser.parseString(IOUtils.toString(getGitHubUrl("language/languages.json"))).getAsJsonArray();
+      JsonArray languages = JsonParser.parseString(IOUtils.toString(getGitHubUrl("language/languages.json"))).getAsJsonArray(); // TODO fix(deps) version ambiguity
       Logger.debug("Fetched languages {}", languages);
       for (JsonElement element : languages) {
         try {
@@ -182,7 +182,7 @@ public final class LanguageLoader extends ContentLoader {
       }
 
       int messages = 0;
-      JsonObject read = JsonParser.parseReader(FileUtils.newBufferedReader(file)).getAsJsonObject();
+      JsonObject read = JsonParser.parseReader(FileUtils.newBufferedReader(file)).getAsJsonObject(); // TODO fix(deps) version ambiguity
       for (Entry<String, JsonElement> entry : read.entrySet()) {
         Message message = Message.forName(entry.getKey());
         JsonElement element = entry.getValue();
