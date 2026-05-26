@@ -20,6 +20,7 @@ dependencies {
 
   // bundle cloud impl modules
   // TODO abstract to register dynamically
+  implementation(project(":cloud-support:api"))
   implementation(project(":cloud-support:cloudnet2"))
   implementation(project(":cloud-support:cloudnet3"))
 }

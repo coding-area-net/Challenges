@@ -4,8 +4,9 @@ plugins {
 
 dependencies {
   compileOnly(libs.spigot.api)
+  compileOnly(libs.cloudnet3.driver)
   compileOnly(libs.cloudnet3.bridge)
-  compileOnly(project(":plugin"))
+  compileOnly(project(":cloud-support:api"))
 }
 
 tasks {
