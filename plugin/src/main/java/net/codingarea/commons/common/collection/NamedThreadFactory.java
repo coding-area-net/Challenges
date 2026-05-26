@@ -15,9 +15,8 @@ public class NamedThreadFactory implements ThreadFactory {
 	protected final AtomicInteger threadNumber = new AtomicInteger(1);
 
 	public NamedThreadFactory(@Nonnull IntFunction<String> nameFunction) {
-		SecurityManager securityManager = System.getSecurityManager();
-		this.group = (securityManager != null) ? securityManager.getThreadGroup() : Thread.currentThread().getThreadGroup();
-		this.nameFunction = nameFunction;
+    this.group = Thread.currentThread().getThreadGroup();
+    this.nameFunction = nameFunction;
 	}
 
 	public NamedThreadFactory(@Nonnull String prefix) {

@@ -106,19 +106,16 @@ public final class ReflectionUtils {
 		return ArrayWalker.walk(array);
 	}
 
-	@CheckReturnValue
-	public static Class<?> getCaller(int index) {
-		try {
-			return new PublicSecurityManager().getPublicClassContext()[index + 2];
-		} catch (Exception ex) {
-			throw new WrappedException(ex);
-		}
-	}
-
-	@CheckReturnValue
-	public static Class<?> getCaller() {
-		return getCaller(2);
-	}
+  @CheckReturnValue
+  public static Class<?> getCaller() {
+    return StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
+      .walk(stream -> stream
+        .skip(2) // skip frame 0 (getCaller) and frame 1 (the intermediate method)
+        .findFirst()
+        .map(StackWalker.StackFrame::getDeclaringClass)
+        .orElseThrow(() -> new IllegalStateException("Stack not deep enough to find caller"))
+      );
+  }
 
 	@Nonnull
 	public static String getCallerName() {
