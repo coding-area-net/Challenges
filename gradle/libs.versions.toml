@@ -41,8 +41,3 @@ mongodb-driver = { group = "org.mongodb", name = "mongodb-driver", version.ref =
 cloudnet3-driver = { group = "de.dytanic.cloudnet", name = "cloudnet-driver", version.ref = "cloudnet3" }
 cloudnet3-bridge = { group = "de.dytanic.cloudnet", name = "cloudnet-bridge", version.ref = "cloudnet3" }
 cloudnet2-bridge = { group = "de.dytanic.cloudnet", name = "cloudnet-api-bridge", version.ref = "cloudnet2" }
-
-
-[bundles]
-
-cloudnet = ["cloudnet3-driver", "cloudnet3-bridge", "cloudnet2-bridge"]

@@ -16,11 +16,12 @@ dependencies {
   // consider bundling relocated impl if version compatibility becomes unmanageable
   compileOnly(libs.gson)
 
-  compileOnly(libs.cloudnet3.driver)
-  compileOnly(libs.cloudnet3.bridge)
-  compileOnly(libs.cloudnet2.bridge)
-
   annotationProcessor(libs.lombok)
+
+  // bundle cloud impl modules
+  // TODO abstract to register dynamically
+  implementation(project(":cloud-support:cloudnet2"))
+  implementation(project(":cloud-support:cloudnet3"))
 }
 
 tasks {
