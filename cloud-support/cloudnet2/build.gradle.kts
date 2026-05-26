@@ -12,8 +12,4 @@ tasks {
   jar {
     archiveClassifier = "plain"
   }
-
-  build {
-    dependsOn(shadowJar)
-  }
 }
