@@ -1,6 +1,5 @@
 package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
-import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
@@ -8,6 +7,7 @@ import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 

@@ -1,7 +1,5 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
-import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifierCollectionGoal;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
@@ -13,6 +11,8 @@ import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.ListBuilder;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

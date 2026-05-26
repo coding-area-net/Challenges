@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
+import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.config.Document;
-import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
 import org.bukkit.entity.Player;
 
 import javax.annotation.CheckReturnValue;

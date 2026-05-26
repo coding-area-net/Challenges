@@ -1,9 +1,9 @@
 package net.codingarea.challenges.plugin.spigot.listener;
 
-import net.codingarea.commons.bukkit.utils.logging.Logger;
-import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;

@@ -1,13 +1,13 @@
 package net.codingarea.challenges.plugin.management.menu.generator;
 
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
-import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
-import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.MainCustomMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.position.GeneratorMenuPosition;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;

@@ -1,6 +1,5 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.entities;
 
-import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.impl.RandomMobAction;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
@@ -9,6 +8,7 @@ import net.codingarea.challenges.plugin.management.menu.generator.categorised.Se
 import net.codingarea.challenges.plugin.spigot.events.PlayerJumpEvent;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder.LeatherArmorBuilder;
+import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;

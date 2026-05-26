@@ -10,11 +10,11 @@ import javax.annotation.Nullable;
 @Deprecated
 public class Triple<F, S, T> extends net.codingarea.commons.common.collection.pair.Triple<F, S, T> {
 
-	public Triple() {
-	}
+  public Triple() {
+  }
 
-	public Triple(@Nullable F first, @Nullable S second, @Nullable T third) {
-		super(first, second, third);
-	}
+  public Triple(@Nullable F first, @Nullable S second, @Nullable T third) {
+    super(first, second, third);
+  }
 
 }

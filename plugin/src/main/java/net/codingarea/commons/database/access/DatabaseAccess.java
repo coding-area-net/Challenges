@@ -9,25 +9,25 @@ import java.util.Optional;
 
 public interface DatabaseAccess<V> {
 
-	@Nullable
-	V getValue(@Nonnull String key) throws DatabaseException;
+  @Nullable
+  V getValue(@Nonnull String key) throws DatabaseException;
 
-	@Nonnull
-	V getValue(@Nonnull String key, @Nonnull V def) throws DatabaseException;
+  @Nonnull
+  V getValue(@Nonnull String key, @Nonnull V def) throws DatabaseException;
 
-	@Nonnull
-	Optional<V> getValueOptional(@Nonnull String key) throws DatabaseException;
+  @Nonnull
+  Optional<V> getValueOptional(@Nonnull String key) throws DatabaseException;
 
-	void setValue(@Nonnull String key, @Nullable V value) throws DatabaseException;
+  void setValue(@Nonnull String key, @Nullable V value) throws DatabaseException;
 
-	default boolean hasValue(@Nonnull String key) throws DatabaseException {
-		return getValueOptional(key).isPresent();
-	}
+  default boolean hasValue(@Nonnull String key) throws DatabaseException {
+    return getValueOptional(key).isPresent();
+  }
 
-	@Nonnull
-	Database getDatabase();
+  @Nonnull
+  Database getDatabase();
 
-	@Nonnull
-	DatabaseAccessConfig getConfig();
+  @Nonnull
+  DatabaseAccessConfig getConfig();
 
 }

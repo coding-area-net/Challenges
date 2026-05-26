@@ -10,23 +10,23 @@ import javax.annotation.Nonnull;
  */
 public interface Pair {
 
-	/**
-	 * @return The amount of values
-	 */
-	@Nonnegative
-	int amount();
+  /**
+   * @return The amount of values
+   */
+  @Nonnegative
+  int amount();
 
-	@Nonnull
-	Object[] values();
+  @Nonnull
+  Object[] values();
 
-	/**
-	 * @return {@code true} when all of the values are null, {@code false} otherwise
-	 */
-	boolean allNull();
+  /**
+   * @return {@code true} when all of the values are null, {@code false} otherwise
+   */
+  boolean allNull();
 
-	/**
-	 * @return {@code true} when none of the values are null, {@code false} otherwise
-	 */
-	boolean noneNull();
+  /**
+   * @return {@code true} when none of the values are null, {@code false} otherwise
+   */
+  boolean noneNull();
 
 }

@@ -1,11 +1,11 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.action.impl;
 
-import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.EntityTargetAction;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.EntityUtils;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;

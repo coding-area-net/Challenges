@@ -1,10 +1,5 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.quiz;
 
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
-import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
-import net.codingarea.commons.common.collection.IRandom;
-import net.codingarea.commons.common.config.Document;
-import net.codingarea.commons.common.misc.StringUtils;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.quiz.QuizChallenge.IQuestion.Question;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
@@ -15,11 +10,16 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.spigot.events.PlayerJumpEvent;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
-import net.codingarea.commons.bukkit.utils.wrapper.AttributeWrapper;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.TriFunction;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
+import net.codingarea.commons.bukkit.utils.wrapper.AttributeWrapper;
+import net.codingarea.commons.common.collection.IRandom;
+import net.codingarea.commons.common.config.Document;
+import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.boss.BarColor;

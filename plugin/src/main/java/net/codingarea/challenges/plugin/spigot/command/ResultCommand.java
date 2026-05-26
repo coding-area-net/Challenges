@@ -1,6 +1,5 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IGoal;
@@ -8,6 +7,7 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleG
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 

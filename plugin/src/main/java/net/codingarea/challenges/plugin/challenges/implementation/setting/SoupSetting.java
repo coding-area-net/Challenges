@@ -1,11 +1,11 @@
 package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

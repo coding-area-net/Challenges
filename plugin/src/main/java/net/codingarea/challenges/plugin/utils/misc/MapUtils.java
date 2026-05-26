@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.commons.common.config.Document;
 
 import java.util.*;
 import java.util.Map.Entry;

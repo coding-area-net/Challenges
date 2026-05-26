@@ -1,8 +1,5 @@
 package net.codingarea.challenges.plugin.spigot.listener;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
@@ -20,6 +17,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class PlayerConnectionListener implements Listener {
 

@@ -3,9 +3,9 @@ package net.codingarea.challenges.plugin.utils.misc;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.mojang.authlib.properties.PropertyMap;
+import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.bukkit.utils.misc.GameProfileUtils;
-import net.codingarea.challenges.plugin.Challenges;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

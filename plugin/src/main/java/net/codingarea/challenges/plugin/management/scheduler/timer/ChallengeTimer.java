@@ -1,9 +1,6 @@
 package net.codingarea.challenges.plugin.management.scheduler.timer;
 
 import lombok.Getter;
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
-import net.codingarea.commons.common.config.Document;
-import net.codingarea.commons.common.config.FileDocument;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IGoal;
@@ -17,6 +14,9 @@ import net.codingarea.challenges.plugin.management.scheduler.policy.PlayerCountP
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.common.config.Document;
+import net.codingarea.commons.common.config.FileDocument;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;

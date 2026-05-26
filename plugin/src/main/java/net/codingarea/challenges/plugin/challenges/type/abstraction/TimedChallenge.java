@@ -1,10 +1,10 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import lombok.Setter;
-import net.codingarea.commons.bukkit.utils.logging.Logger;
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 

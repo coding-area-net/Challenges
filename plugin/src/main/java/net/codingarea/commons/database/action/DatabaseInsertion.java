@@ -15,12 +15,12 @@ import javax.annotation.Nullable;
  */
 public interface DatabaseInsertion extends DatabaseAction<Void>, SetAction {
 
-	@Nonnull
-	@CheckReturnValue
-	DatabaseInsertion set(@Nonnull String field, @Nullable Object value);
+  @Nonnull
+  @CheckReturnValue
+  DatabaseInsertion set(@Nonnull String field, @Nullable Object value);
 
-	@Nullable
-	@Override
-	Void execute() throws DatabaseException;
+  @Nullable
+  @Override
+  Void execute() throws DatabaseException;
 
 }

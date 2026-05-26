@@ -2,7 +2,6 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder;
 
 import com.google.common.collect.Lists;
 import lombok.Getter;
-import net.codingarea.commons.common.misc.StringUtils;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSetting;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.impl.BooleanSetting;
@@ -13,6 +12,7 @@ import net.codingarea.challenges.plugin.management.menu.generator.MenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.IParentCustomGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.SubSettingValueMenuGenerator;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.entity.Player;
 
 import java.util.LinkedHashMap;

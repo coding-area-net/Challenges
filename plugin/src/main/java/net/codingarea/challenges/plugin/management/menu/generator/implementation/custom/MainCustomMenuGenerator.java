@@ -1,7 +1,5 @@
 package net.codingarea.challenges.plugin.management.menu.generator.implementation.custom;
 
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
-import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.CustomChallenge;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
@@ -12,6 +10,8 @@ import net.codingarea.challenges.plugin.management.menu.generator.ChallengeMenuG
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 

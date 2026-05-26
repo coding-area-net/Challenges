@@ -1,7 +1,5 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.force;
 
-import net.codingarea.commons.bukkit.utils.item.ItemUtils;
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.EndingForceChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
@@ -15,6 +13,8 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
+import net.codingarea.commons.bukkit.utils.item.ItemUtils;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;

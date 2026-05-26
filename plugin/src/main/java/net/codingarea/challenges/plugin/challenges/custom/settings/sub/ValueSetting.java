@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.sub;
 
 import lombok.Getter;
-import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 
 public abstract class ValueSetting {
 

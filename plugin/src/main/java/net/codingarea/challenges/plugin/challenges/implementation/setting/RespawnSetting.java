@@ -1,6 +1,5 @@
 package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
@@ -10,6 +9,7 @@ import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.ParticleUtils;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;

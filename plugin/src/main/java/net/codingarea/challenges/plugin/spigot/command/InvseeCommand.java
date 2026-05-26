@@ -1,7 +1,5 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
-import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
-import net.codingarea.commons.bukkit.utils.menu.positions.SlottedMenuPosition;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
@@ -10,6 +8,8 @@ import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
+import net.codingarea.commons.bukkit.utils.menu.positions.SlottedMenuPosition;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;

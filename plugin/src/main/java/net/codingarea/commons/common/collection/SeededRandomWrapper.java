@@ -8,28 +8,28 @@ import java.util.Random;
  */
 public class SeededRandomWrapper extends Random implements IRandom {
 
-	protected long seed;
+  protected long seed;
 
-	public SeededRandomWrapper() {
-		super();
-	}
+  public SeededRandomWrapper() {
+    super();
+  }
 
-	public SeededRandomWrapper(long seed) {
-		super(seed);
-	}
+  public SeededRandomWrapper(long seed) {
+    super(seed);
+  }
 
-	@Override
-	public void setSeed(long seed) {
-		super.setSeed(seed);
-		this.seed = seed;
-	}
+  @Override
+  public void setSeed(long seed) {
+    super.setSeed(seed);
+    this.seed = seed;
+  }
 
-	public long getSeed() {
-		return seed;
-	}
+  public long getSeed() {
+    return seed;
+  }
 
-	@Override
-	public String toString() {
-		return "Random[seed=" + seed + "]";
-	}
+  @Override
+  public String toString() {
+    return "Random[seed=" + seed + "]";
+  }
 }

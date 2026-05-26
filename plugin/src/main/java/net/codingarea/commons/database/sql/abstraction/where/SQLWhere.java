@@ -4,10 +4,10 @@ import javax.annotation.Nonnull;
 
 public interface SQLWhere {
 
-	@Nonnull
-	Object[] getArgs();
+  @Nonnull
+  Object[] getArgs();
 
-	@Nonnull
-	String getAsSQLString();
+  @Nonnull
+  String getAsSQLString();
 
 }

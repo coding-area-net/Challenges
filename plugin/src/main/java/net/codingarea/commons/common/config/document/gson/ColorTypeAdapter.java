@@ -12,16 +12,16 @@ import java.io.IOException;
 
 public class ColorTypeAdapter implements GsonTypeAdapter<Color> {
 
-	@Override
-	public void write(@Nonnull Gson gson, @Nonnull JsonWriter writer, @Nonnull Color color) throws IOException {
-		TypeAdapters.STRING.write(writer, Colors.asHex(color));
-	}
+  @Override
+  public void write(@Nonnull Gson gson, @Nonnull JsonWriter writer, @Nonnull Color color) throws IOException {
+    TypeAdapters.STRING.write(writer, Colors.asHex(color));
+  }
 
-	@Override
-	public Color read(@Nonnull Gson gson, @Nonnull JsonReader reader) throws IOException {
-		String value = TypeAdapters.STRING.read(reader);
-		if (value == null) return null;
-		return Color.decode(value);
-	}
+  @Override
+  public Color read(@Nonnull Gson gson, @Nonnull JsonReader reader) throws IOException {
+    String value = TypeAdapters.STRING.read(reader);
+    if (value == null) return null;
+    return Color.decode(value);
+  }
 
 }

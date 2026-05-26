@@ -1,11 +1,11 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle;
 
-import net.codingarea.commons.common.annotations.Since;
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets.MobTarget;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleDisplayGoal;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;

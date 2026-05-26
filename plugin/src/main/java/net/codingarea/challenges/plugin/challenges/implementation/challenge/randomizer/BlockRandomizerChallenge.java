@@ -1,7 +1,5 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.randomizer;
 
-import net.codingarea.commons.bukkit.utils.item.ItemUtils;
-import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.RandomizerSetting;
 import net.codingarea.challenges.plugin.content.Message;
@@ -10,6 +8,8 @@ import net.codingarea.challenges.plugin.management.blocks.BlockDropManager.DropP
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
+import net.codingarea.commons.bukkit.utils.item.ItemUtils;
+import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import org.bukkit.Material;
 
 import javax.annotation.Nonnull;

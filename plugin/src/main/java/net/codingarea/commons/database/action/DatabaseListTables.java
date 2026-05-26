@@ -11,8 +11,8 @@ import java.util.List;
  */
 public interface DatabaseListTables extends DatabaseAction<List<String>> {
 
-	@Nonnull
-	@Override
-	List<String> execute() throws DatabaseException;
+  @Nonnull
+  @Override
+  List<String> execute() throws DatabaseException;
 
 }

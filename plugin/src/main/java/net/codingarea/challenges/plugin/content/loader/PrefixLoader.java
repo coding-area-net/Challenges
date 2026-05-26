@@ -1,9 +1,9 @@
 package net.codingarea.challenges.plugin.content.loader;
 
+import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.config.FileDocument;
 import net.codingarea.commons.common.misc.FileUtils;
-import net.codingarea.challenges.plugin.content.Prefix;
 
 import java.io.File;
 

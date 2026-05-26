@@ -1,7 +1,6 @@
 package net.codingarea.challenges.plugin.management.challenges;
 
 import lombok.Getter;
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.CustomChallenge;
 import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeExecutionData;
@@ -12,6 +11,7 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.ChallengeMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.MenuGenerator;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
 
 import javax.annotation.Nonnull;

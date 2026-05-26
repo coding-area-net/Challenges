@@ -1,13 +1,13 @@
 package net.codingarea.challenges.plugin.management.files;
 
 import lombok.Getter;
+import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.FileDocument;
 import net.codingarea.commons.common.config.document.GsonDocument;
 import net.codingarea.commons.common.config.document.YamlDocument;
 import net.codingarea.commons.common.misc.FileUtils;
-import net.codingarea.challenges.plugin.Challenges;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 

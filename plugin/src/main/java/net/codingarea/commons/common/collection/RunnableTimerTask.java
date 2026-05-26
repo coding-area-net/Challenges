@@ -5,15 +5,15 @@ import java.util.TimerTask;
 
 public class RunnableTimerTask extends TimerTask {
 
-	protected final Runnable action;
+  protected final Runnable action;
 
-	public RunnableTimerTask(@Nonnull Runnable action) {
-		this.action = action;
-	}
+  public RunnableTimerTask(@Nonnull Runnable action) {
+    this.action = action;
+  }
 
-	@Override
-	public void run() {
-		action.run();
-	}
+  @Override
+  public void run() {
+    action.run();
+  }
 
 }

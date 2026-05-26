@@ -1,7 +1,5 @@
 package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
@@ -15,6 +13,8 @@ import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.ParticleUtils;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.*;
 import org.bukkit.Particle.DustOptions;
 import org.bukkit.World.Environment;

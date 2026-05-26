@@ -1,9 +1,9 @@
 package net.codingarea.challenges.plugin.management.server;
 
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.management.challenges.entities.GamestateSaveable;
 import net.codingarea.challenges.plugin.spigot.generator.VoidMapGenerator;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.World.Environment;

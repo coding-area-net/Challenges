@@ -1,10 +1,10 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.KillEntityGoal;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.Material;
 import org.bukkit.World.Environment;
 import org.bukkit.entity.EntityType;

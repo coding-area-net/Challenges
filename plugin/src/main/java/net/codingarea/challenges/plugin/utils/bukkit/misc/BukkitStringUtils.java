@@ -1,9 +1,9 @@
 package net.codingarea.challenges.plugin.utils.bukkit.misc;
 
+import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.commons.common.collection.WrappedException;
 import net.codingarea.commons.common.logging.ILogger;
-import net.codingarea.challenges.plugin.content.Prefix;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.advancement.Advancement;
@@ -90,8 +90,8 @@ public class BukkitStringUtils {
           BaseComponent replacement =
             current instanceof BaseComponent ? (BaseComponent) current :
               current instanceof Supplier ? new TextComponent(String.valueOf(((Supplier<?>) current).get())) :
-                current instanceof Callable ? new TextComponent(String.valueOf(((Callable<?>) current).call())) :
-                  new TextComponent(String.valueOf(current));
+              current instanceof Callable ? new TextComponent(String.valueOf(((Callable<?>) current).call())) :
+              new TextComponent(String.valueOf(current));
 
           if (replacement instanceof TextComponent) {
             currentText.setText(currentText.getText() + ((TextComponent) replacement).getText());
@@ -163,13 +163,13 @@ public class BukkitStringUtils {
 
       arg = arg instanceof Material ? getItemComponent((Material) arg) :
         arg instanceof EntityType ? getEntityName((EntityType) arg) :
-          arg instanceof PotionEffectType ? getPotionEffectName((PotionEffectType) arg) :
-            arg instanceof Biome ? getBiomeName((Biome) arg) :
-              arg instanceof GameMode ? getGameModeName((GameMode) arg) :
-                arg instanceof Advancement ? getAdvancementComponent((Advancement) arg) :
-                  arg instanceof LootTable ? getEntityName((LootTable) arg) :
-                    arg instanceof Difficulty ? getDifficultyName((Difficulty) arg) :
-                      arg;
+        arg instanceof PotionEffectType ? getPotionEffectName((PotionEffectType) arg) :
+        arg instanceof Biome ? getBiomeName((Biome) arg) :
+        arg instanceof GameMode ? getGameModeName((GameMode) arg) :
+        arg instanceof Advancement ? getAdvancementComponent((Advancement) arg) :
+        arg instanceof LootTable ? getEntityName((LootTable) arg) :
+        arg instanceof Difficulty ? getDifficultyName((Difficulty) arg) :
+        arg;
 
       if (toStrings) {
         if (arg instanceof BaseComponent) {

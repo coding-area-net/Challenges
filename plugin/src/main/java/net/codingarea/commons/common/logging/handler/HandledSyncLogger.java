@@ -6,12 +6,12 @@ import javax.annotation.Nonnull;
 
 public class HandledSyncLogger extends HandledLogger {
 
-	public HandledSyncLogger(@Nonnull LogLevel initialLevel) {
-		super(initialLevel);
-	}
+  public HandledSyncLogger(@Nonnull LogLevel initialLevel) {
+    super(initialLevel);
+  }
 
-	@Override
-	protected void log0(@Nonnull LogEntry entry) {
-		logNow(entry);
-	}
+  @Override
+  protected void log0(@Nonnull LogEntry entry) {
+    logNow(entry);
+  }
 }

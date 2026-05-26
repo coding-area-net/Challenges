@@ -1,11 +1,11 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
-import net.codingarea.commons.common.collection.NumberFormatter;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
+import net.codingarea.commons.common.collection.NumberFormatter;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

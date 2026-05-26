@@ -1,11 +1,11 @@
 package net.codingarea.challenges.plugin.management.menu.generator;
 
-import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils.InventorySetter;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 

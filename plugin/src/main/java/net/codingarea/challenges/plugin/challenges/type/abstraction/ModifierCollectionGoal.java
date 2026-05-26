@@ -1,10 +1,10 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
+import net.codingarea.commons.common.config.Document;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;

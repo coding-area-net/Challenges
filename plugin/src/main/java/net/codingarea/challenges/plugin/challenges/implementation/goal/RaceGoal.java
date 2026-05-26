@@ -1,8 +1,5 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
-import net.codingarea.commons.common.annotations.Since;
-import net.codingarea.commons.common.collection.IRandom;
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifierGoal;
@@ -18,6 +15,9 @@ import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.ParticleUtils;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.collection.IRandom;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;

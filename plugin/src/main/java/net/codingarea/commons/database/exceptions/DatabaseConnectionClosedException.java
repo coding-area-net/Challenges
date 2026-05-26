@@ -5,8 +5,8 @@ package net.codingarea.commons.database.exceptions;
  */
 public class DatabaseConnectionClosedException extends DatabaseException {
 
-	public DatabaseConnectionClosedException() {
-		super("Database connection closed");
-	}
+  public DatabaseConnectionClosedException() {
+    super("Database connection closed");
+  }
 
 }

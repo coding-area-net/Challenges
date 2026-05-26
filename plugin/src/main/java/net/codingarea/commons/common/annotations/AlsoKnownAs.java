@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
 public @interface AlsoKnownAs {
 
-	@Nonnull
-	String[] value();
+  @Nonnull
+  String[] value();
 
 }

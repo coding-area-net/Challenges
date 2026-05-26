@@ -13,35 +13,35 @@ import javax.annotation.Nonnull;
 
 public final class MenuPositionListener implements Listener {
 
-	@EventHandler(priority = EventPriority.LOW)
-	public void onClick(@Nonnull InventoryClickEvent event) {
+  @EventHandler(priority = EventPriority.LOW)
+  public void onClick(@Nonnull InventoryClickEvent event) {
 
-		HumanEntity human = event.getWhoClicked();
-		if (!(human instanceof Player)) return;
-		Player player = (Player) human;
+    HumanEntity human = event.getWhoClicked();
+    if (!(human instanceof Player)) return;
+    Player player = (Player) human;
 
-		Inventory inventory = event.getClickedInventory();
-		if (inventory == null) return;
+    Inventory inventory = event.getClickedInventory();
+    if (inventory == null) return;
 
-		if (inventory == CompatibilityUtils.getTopInventory(event)) {
+    if (inventory == CompatibilityUtils.getTopInventory(event)) {
 
-			if (inventory.getHolder() != MenuPosition.HOLDER) return; // No menu inventory
+      if (inventory.getHolder() != MenuPosition.HOLDER) return; // No menu inventory
 
-			MenuPosition position = MenuPosition.get(player);
-			if (position == null) return; // Currently in no menu
+      MenuPosition position = MenuPosition.get(player);
+      if (position == null) return; // Currently in no menu
 
-			event.setCancelled(true);
-			position.handleClick(new MenuClickInfo(player, inventory, event.isShiftClick(), event.isRightClick(), event.getSlot()));
+      event.setCancelled(true);
+      position.handleClick(new MenuClickInfo(player, inventory, event.isShiftClick(), event.isRightClick(), event.getSlot()));
 
-		} else if (event.isShiftClick()) { // Player inventory was clicked
+    } else if (event.isShiftClick()) { // Player inventory was clicked
 
-			Inventory topInventory = event.getInventory();
-			if (topInventory.getHolder() != MenuPosition.HOLDER) return; // No menu inventory
+      Inventory topInventory = event.getInventory();
+      if (topInventory.getHolder() != MenuPosition.HOLDER) return; // No menu inventory
 
-			event.setCancelled(true);
+      event.setCancelled(true);
 
-		}
+    }
 
-	}
+  }
 
 }

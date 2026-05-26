@@ -1,10 +1,10 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.challenges.plugin.challenges.type.IGoal;
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;

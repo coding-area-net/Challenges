@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.management.menu.position;
 
 import lombok.Getter;
-import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import net.codingarea.challenges.plugin.management.menu.generator.MenuGenerator;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 
 @Getter
 public abstract class GeneratorMenuPosition implements MenuPosition {

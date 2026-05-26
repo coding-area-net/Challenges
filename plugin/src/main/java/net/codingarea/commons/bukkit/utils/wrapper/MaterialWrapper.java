@@ -12,16 +12,17 @@ import javax.annotation.Nonnull;
  */
 public final class MaterialWrapper {
 
-	private MaterialWrapper() {}
+  private MaterialWrapper() {
+  }
 
-	public static final Material GREEN_DYE  = getMaterialByNames("CACTUS_GREEN", "GREEN_DYE");
-	public static final Material RED_DYE    = getMaterialByNames("ROSE_RED", "RED_DYE");
-	public static final Material YELLOW_DYE = getMaterialByNames("DANDELION_YELLOW", "YELLOW_DYE");
-	public static final Material SIGN       = getMaterialByNames("SIGN", "OAK_SIGN");
+  public static final Material GREEN_DYE = getMaterialByNames("CACTUS_GREEN", "GREEN_DYE");
+  public static final Material RED_DYE = getMaterialByNames("ROSE_RED", "RED_DYE");
+  public static final Material YELLOW_DYE = getMaterialByNames("DANDELION_YELLOW", "YELLOW_DYE");
+  public static final Material SIGN = getMaterialByNames("SIGN", "OAK_SIGN");
 
-	@Nonnull
-	private static Material getMaterialByNames(@Nonnull String... names) {
-		return ReflectionUtils.getFirstEnumByNames(Material.class, names);
-	}
+  @Nonnull
+  private static Material getMaterialByNames(@Nonnull String... names) {
+    return ReflectionUtils.getFirstEnumByNames(Material.class, names);
+  }
 
 }

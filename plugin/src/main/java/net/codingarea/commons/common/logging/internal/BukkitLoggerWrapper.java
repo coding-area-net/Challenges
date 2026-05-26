@@ -10,16 +10,16 @@ import java.util.logging.Logger;
  */
 public class BukkitLoggerWrapper extends JavaLoggerWrapper {
 
-	public BukkitLoggerWrapper(@Nonnull Logger logger) {
-		super(logger);
-	}
+  public BukkitLoggerWrapper(@Nonnull Logger logger) {
+    super(logger);
+  }
 
-	@Nonnull
-	@Override
-	protected Level mapLevel(@Nonnull Level level) {
-		if (isLoggable(level) && level.intValue() < Level.INFO.intValue())
-			return Level.INFO;
-		return level;
-	}
+  @Nonnull
+  @Override
+  protected Level mapLevel(@Nonnull Level level) {
+    if (isLoggable(level) && level.intValue() < Level.INFO.intValue())
+      return Level.INFO;
+    return level;
+  }
 
 }

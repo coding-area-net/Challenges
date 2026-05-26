@@ -1,10 +1,10 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
+import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.commons.common.collection.SeededRandomWrapper;
 import net.codingarea.commons.common.config.Document;
-import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 
 import javax.annotation.Nonnull;
 

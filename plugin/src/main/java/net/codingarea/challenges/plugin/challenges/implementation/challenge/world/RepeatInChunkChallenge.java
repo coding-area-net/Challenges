@@ -1,11 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
 import com.google.common.collect.Lists;
-import net.codingarea.commons.bukkit.utils.logging.Logger;
-import net.codingarea.commons.common.annotations.Since;
-import net.codingarea.commons.common.collection.pair.Triple;
-import net.codingarea.commons.common.config.Document;
-import net.codingarea.commons.common.config.document.GsonDocument;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
@@ -13,6 +8,11 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.PlayerIgnoreStatusChangeEvent;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.annotations.Since;
+import net.codingarea.commons.common.collection.pair.Triple;
+import net.codingarea.commons.common.config.Document;
+import net.codingarea.commons.common.config.document.GsonDocument;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Material;

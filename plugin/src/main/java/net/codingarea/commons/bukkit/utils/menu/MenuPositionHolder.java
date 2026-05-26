@@ -7,10 +7,10 @@ import javax.annotation.Nonnull;
 
 class MenuPositionHolder implements InventoryHolder {
 
-	@Nonnull
-	@Override
-	public Inventory getInventory() {
-		return null;
-	}
+  @Nonnull
+  @Override
+  public Inventory getInventory() {
+    return null;
+  }
 
 }

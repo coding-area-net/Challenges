@@ -1,14 +1,14 @@
 package net.codingarea.challenges.plugin.management.challenges;
 
-import net.codingarea.commons.bukkit.core.BukkitModule;
-import net.codingarea.commons.bukkit.utils.logging.Logger;
-import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.implementation.damage.DamageRuleSetting;
 import net.codingarea.challenges.plugin.challenges.implementation.material.BlockMaterialSetting;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
 import net.codingarea.challenges.plugin.management.challenges.annotations.RequireVersion;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.commons.bukkit.core.BukkitModule;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Material;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.HandlerList;

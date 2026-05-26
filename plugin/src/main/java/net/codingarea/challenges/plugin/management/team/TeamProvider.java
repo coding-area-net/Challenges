@@ -2,7 +2,6 @@ package net.codingarea.challenges.plugin.management.team;
 
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -9,40 +9,40 @@ import java.util.function.Supplier;
  */
 public interface Json {
 
-	@Nonnull
-	String toJson();
+  @Nonnull
+  String toJson();
 
-	@Nonnull
-	String toPrettyJson();
+  @Nonnull
+  String toPrettyJson();
 
-	@Nonnull
-	@CheckReturnValue
-	static Json empty() {
-		return constant("{}", "{}");
-	}
+  @Nonnull
+  @CheckReturnValue
+  static Json empty() {
+    return constant("{}", "{}");
+  }
 
-	@Nonnull
-	@CheckReturnValue
-	static Json supply(@Nonnull Supplier<String> normal, @Nonnull Supplier<String> pretty) {
-		return new Json() {
-			@Nonnull
-			@Override
-			public String toJson() {
-				return normal.get();
-			}
+  @Nonnull
+  @CheckReturnValue
+  static Json supply(@Nonnull Supplier<String> normal, @Nonnull Supplier<String> pretty) {
+    return new Json() {
+      @Nonnull
+      @Override
+      public String toJson() {
+        return normal.get();
+      }
 
-			@Nonnull
-			@Override
-			public String toPrettyJson() {
-				return pretty.get();
-			}
-		};
-	}
+      @Nonnull
+      @Override
+      public String toPrettyJson() {
+        return pretty.get();
+      }
+    };
+  }
 
-	@Nonnull
-	@CheckReturnValue
-	static Json constant(@Nonnull String json, @Nonnull String prettyJson) {
-		return supply(() -> json, () -> prettyJson);
-	}
+  @Nonnull
+  @CheckReturnValue
+  static Json constant(@Nonnull String json, @Nonnull String prettyJson) {
+    return supply(() -> json, () -> prettyJson);
+  }
 
 }

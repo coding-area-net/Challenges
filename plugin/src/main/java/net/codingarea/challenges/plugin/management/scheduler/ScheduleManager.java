@@ -1,10 +1,10 @@
 package net.codingarea.challenges.plugin.management.scheduler;
 
-import net.codingarea.commons.bukkit.utils.logging.Logger;
-import net.codingarea.commons.common.misc.ReflectionUtils;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.misc.ReflectionUtils;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Method;

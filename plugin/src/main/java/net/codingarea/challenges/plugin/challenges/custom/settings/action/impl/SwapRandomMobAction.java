@@ -1,12 +1,12 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.action.impl;
 
-import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeExecutionData;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.ChallengeAction;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.IEntityTargetAction;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.randomizer.RandomTeleportOnHitChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
+import net.codingarea.commons.common.collection.IRandom;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;

@@ -1,13 +1,13 @@
 package net.codingarea.challenges.plugin.management.bstats;
 
+import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
+import net.codingarea.challenges.plugin.utils.misc.MemoryConverter;
 import net.codingarea.commons.bukkit.utils.bstats.Metrics;
 import net.codingarea.commons.bukkit.utils.bstats.chart.AdvancedPie;
 import net.codingarea.commons.bukkit.utils.bstats.chart.SimplePie;
 import net.codingarea.commons.bukkit.utils.bstats.chart.SingleLineChart;
 import net.codingarea.commons.common.misc.StringUtils;
-import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
-import net.codingarea.challenges.plugin.utils.misc.MemoryConverter;
 
 import java.util.HashMap;
 

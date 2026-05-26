@@ -10,31 +10,30 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.BiConsumer;
 
 /**
- * @deprecated Use {@link com.google.common.cache.Cache} instead
- *
  * @see com.google.common.cache.Cache
+ * @deprecated Use {@link com.google.common.cache.Cache} instead
  */
 @Deprecated
 @ReplaceWith("com.google.common.cache.Cache")
 public interface ICache<K, V> {
 
-	ScheduledExecutorService EXECUTOR = Executors.newScheduledThreadPool(2, new NamedThreadFactory(threadId -> String.format("CacheTask-%s", threadId)));
+  ScheduledExecutorService EXECUTOR = Executors.newScheduledThreadPool(2, new NamedThreadFactory(threadId -> String.format("CacheTask-%s", threadId)));
 
-	boolean contains(@Nonnull K key);
+  boolean contains(@Nonnull K key);
 
-	int size();
+  int size();
 
-	default boolean isEmpty() {
-		return size() == 0;
-	}
+  default boolean isEmpty() {
+    return size() == 0;
+  }
 
-	void clear();
+  void clear();
 
-	@Nonnull
-	Map<K, V> values();
+  @Nonnull
+  Map<K, V> values();
 
-	default void forEach(@Nonnull BiConsumer<? super K, ? super V> action) {
-		values().forEach(action);
-	}
+  default void forEach(@Nonnull BiConsumer<? super K, ? super V> action) {
+    values().forEach(action);
+  }
 
 }

@@ -6,10 +6,10 @@ import javax.annotation.Nullable;
 
 public interface ILoggerFactory {
 
-	@Nonnull
-	@CheckReturnValue
+  @Nonnull
+  @CheckReturnValue
   ILogger forName(@Nullable String name);
 
-	void setDefaultLevel(@Nonnull LogLevel level);
+  void setDefaultLevel(@Nonnull LogLevel level);
 
 }

@@ -1,9 +1,9 @@
 package net.codingarea.challenges.plugin.challenges.type;
 
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
 import net.codingarea.challenges.plugin.management.challenges.ChallengeManager;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;

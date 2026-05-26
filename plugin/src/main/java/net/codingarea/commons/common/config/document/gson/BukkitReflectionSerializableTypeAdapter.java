@@ -16,45 +16,45 @@ import java.util.Optional;
 
 public class BukkitReflectionSerializableTypeAdapter implements GsonTypeAdapter<Object> {
 
-	public static final String ALTERNATE_KEY = "classOfType", KEY = "==";
+  public static final String ALTERNATE_KEY = "classOfType", KEY = "==";
 
-	@Override
-	public void write(@Nonnull Gson gson, @Nonnull JsonWriter writer, @Nonnull Object object) throws IOException {
+  @Override
+  public void write(@Nonnull Gson gson, @Nonnull JsonWriter writer, @Nonnull Object object) throws IOException {
 
-		Map<String, Object> map = BukkitReflectionSerializationUtils.serializeObject(object);
-		if (map == null) return;
+    Map<String, Object> map = BukkitReflectionSerializationUtils.serializeObject(object);
+    if (map == null) return;
 
-		JsonObject json = new JsonObject();
-		json.addProperty(KEY, BukkitReflectionSerializationUtils.getSerializationName(object.getClass()));
-		GsonUtils.setDocumentProperties(gson, json, map);
-		TypeAdapters.JSON_ELEMENT.write(writer, json);
+    JsonObject json = new JsonObject();
+    json.addProperty(KEY, BukkitReflectionSerializationUtils.getSerializationName(object.getClass()));
+    GsonUtils.setDocumentProperties(gson, json, map);
+    TypeAdapters.JSON_ELEMENT.write(writer, json);
 
-	}
+  }
 
-	@Override
-	public Object read(@Nonnull Gson gson, @Nonnull JsonReader reader) throws IOException {
+  @Override
+  public Object read(@Nonnull Gson gson, @Nonnull JsonReader reader) throws IOException {
 
-		JsonElement element = TypeAdapters.JSON_ELEMENT.read(reader);
-		if (element == null || !element.isJsonObject()) return null;
+    JsonElement element = TypeAdapters.JSON_ELEMENT.read(reader);
+    if (element == null || !element.isJsonObject()) return null;
 
-		JsonObject json = element.getAsJsonObject();
-		String classOfType = Optional.ofNullable(findClassContainer(json)).filter(JsonElement::isJsonPrimitive).map(JsonElement::getAsString).orElse(null);
+    JsonObject json = element.getAsJsonObject();
+    String classOfType = Optional.ofNullable(findClassContainer(json)).filter(JsonElement::isJsonPrimitive).map(JsonElement::getAsString).orElse(null);
 
-		Class<?> clazz = null;
-		try {
-			clazz = Class.forName(classOfType);
-		} catch (ClassNotFoundException | NullPointerException ex) {
-		}
+    Class<?> clazz = null;
+    try {
+      clazz = Class.forName(classOfType);
+    } catch (ClassNotFoundException | NullPointerException ex) {
+    }
 
-		Map<String, Object> map = GsonUtils.convertJsonObjectToMap(json);
-		return BukkitReflectionSerializationUtils.deserializeObject(map, clazz);
+    Map<String, Object> map = GsonUtils.convertJsonObjectToMap(json);
+    return BukkitReflectionSerializationUtils.deserializeObject(map, clazz);
 
-	}
+  }
 
-	private JsonElement findClassContainer(@Nonnull JsonObject json) {
-		if (json.has(ALTERNATE_KEY))
-			return json.get(ALTERNATE_KEY);
-		return json.get(KEY);
-	}
+  private JsonElement findClassContainer(@Nonnull JsonObject json) {
+    if (json.has(ALTERNATE_KEY))
+      return json.get(ALTERNATE_KEY);
+    return json.get(KEY);
+  }
 
 }

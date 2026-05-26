@@ -1,8 +1,5 @@
 package net.codingarea.challenges.plugin.challenges.type.helper;
 
-import net.codingarea.commons.bukkit.utils.item.ItemBuilder.PotionBuilder;
-import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
-import net.codingarea.commons.common.misc.StringUtils;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder.ChooseItemSubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder.ChooseMultipleItemSubSettingBuilder;
@@ -12,6 +9,9 @@ import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.StructureUtils;
+import net.codingarea.commons.bukkit.utils.item.ItemBuilder.PotionBuilder;
+import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
+import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.StructureType;
 import org.bukkit.entity.EntityType;

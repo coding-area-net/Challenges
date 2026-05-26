@@ -1,14 +1,14 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings;
 
 import lombok.Getter;
-import net.codingarea.commons.bukkit.utils.logging.Logger;
-import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.ChallengeAction;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.impl.*;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.impl.*;
 import net.codingarea.challenges.plugin.management.challenges.annotations.RequireVersion;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Bukkit;
 
 import javax.annotation.Nullable;

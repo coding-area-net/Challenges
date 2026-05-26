@@ -11,23 +11,23 @@ import java.util.Map;
 
 public final class SQLResult extends MapDocument {
 
-	public SQLResult(@Nonnull Map<String, Object> values) {
-		super(values);
-	}
+  public SQLResult(@Nonnull Map<String, Object> values) {
+    super(values);
+  }
 
-	@Nonnull
-	@Override
-	public Document getDocument0(@Nonnull String path, @Nonnull Document root, @Nullable Document parent) {
-		try {
-			return new GsonDocument(getString(path), this, this).readonly();
-		} catch (Exception ex) {
-			return new EmptyDocument(this, null);
-		}
-	}
+  @Nonnull
+  @Override
+  public Document getDocument0(@Nonnull String path, @Nonnull Document root, @Nullable Document parent) {
+    try {
+      return new GsonDocument(getString(path), this, this).readonly();
+    } catch (Exception ex) {
+      return new EmptyDocument(this, null);
+    }
+  }
 
-	@Override
-	public boolean isReadonly() {
-		return true;
-	}
+  @Override
+  public boolean isReadonly() {
+    return true;
+  }
 
 }

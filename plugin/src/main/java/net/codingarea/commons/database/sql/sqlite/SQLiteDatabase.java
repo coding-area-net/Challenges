@@ -13,41 +13,41 @@ import java.io.IOException;
 
 public class SQLiteDatabase extends AbstractSQLDatabase {
 
-	static {
-		try {
-			Class.forName("org.sqlite.JDBC");
-		} catch (ClassNotFoundException ex) {
-			LOGGER.error("Could not load sqlite driver");
-		}
-	}
+  static {
+    try {
+      Class.forName("org.sqlite.JDBC");
+    } catch (ClassNotFoundException ex) {
+      LOGGER.error("Could not load sqlite driver");
+    }
+  }
 
-	protected final File file;
+  protected final File file;
 
-	public SQLiteDatabase(@Nonnull DatabaseConfig config) {
-		super(config);
-		file = new File(config.getFile());
-	}
+  public SQLiteDatabase(@Nonnull DatabaseConfig config) {
+    super(config);
+    file = new File(config.getFile());
+  }
 
-	@Override
-	public void connect() throws DatabaseException {
-		try {
-			FileUtils.createFilesIfNecessary(file);
-		} catch (IOException ex) {
-			throw new DatabaseException(ex);
-		}
+  @Override
+  public void connect() throws DatabaseException {
+    try {
+      FileUtils.createFilesIfNecessary(file);
+    } catch (IOException ex) {
+      throw new DatabaseException(ex);
+    }
 
-		super.connect();
-	}
+    super.connect();
+  }
 
-	@Override
-	protected String createUrl() {
-		return "jdbc:sqlite:" + file;
-	}
+  @Override
+  protected String createUrl() {
+    return "jdbc:sqlite:" + file;
+  }
 
-	@Nonnull
-	@Override
-	public DatabaseListTables listTables() {
-		return new SQLiteListTables(this);
-	}
+  @Nonnull
+  @Override
+  public DatabaseListTables listTables() {
+    return new SQLiteListTables(this);
+  }
 
 }

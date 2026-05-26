@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.METHOD, ElementType.PACKAGE, ElementType.PARAMETER, ElementType.TYPE})
 public @interface ReplaceWith {
 
-	@Nonnull
-	String value();
+  @Nonnull
+  String value();
 
 }

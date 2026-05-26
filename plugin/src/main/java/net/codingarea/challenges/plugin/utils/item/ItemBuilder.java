@@ -2,9 +2,9 @@ package net.codingarea.challenges.plugin.utils.item;
 
 import com.google.gson.JsonParser;
 import lombok.NonNull;
-import net.codingarea.commons.bukkit.utils.item.BannerPattern;
 import net.codingarea.challenges.plugin.content.ItemDescription;
 import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.commons.bukkit.utils.item.BannerPattern;
 import org.bukkit.*;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;

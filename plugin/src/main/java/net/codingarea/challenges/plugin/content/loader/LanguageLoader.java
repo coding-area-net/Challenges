@@ -5,15 +5,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.Getter;
+import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.utils.logging.ConsolePrint;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.collection.IOUtils;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.FileDocument;
 import net.codingarea.commons.common.misc.FileUtils;
 import net.codingarea.commons.common.misc.GsonUtils;
-import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.utils.logging.ConsolePrint;
 
 import javax.annotation.Nonnull;
 import java.io.File;

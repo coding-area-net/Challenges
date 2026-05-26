@@ -1,13 +1,13 @@
 package net.codingarea.challenges.plugin.management.stats;
 
 import lombok.Getter;
-import net.codingarea.commons.bukkit.utils.logging.Logger;
-import net.codingarea.commons.database.exceptions.DatabaseException;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.management.scheduler.policy.ChallengeStatusPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.spigot.listener.StatsListener;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.database.exceptions.DatabaseException;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

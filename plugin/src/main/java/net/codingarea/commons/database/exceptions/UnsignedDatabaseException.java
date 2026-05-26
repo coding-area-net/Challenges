@@ -7,18 +7,17 @@ import javax.annotation.Nonnull;
 
 /**
  * @see DatabaseException
- *
  * @see DatabaseAction#executeUnsigned()
  */
 public class UnsignedDatabaseException extends WrappedException {
 
-	public UnsignedDatabaseException(@Nonnull DatabaseException cause) {
-		super(cause);
-	}
+  public UnsignedDatabaseException(@Nonnull DatabaseException cause) {
+    super(cause);
+  }
 
-	@Nonnull
-	@Override
-	public DatabaseException getCause() {
-		return (DatabaseException) super.getCause();
-	}
+  @Nonnull
+  @Override
+  public DatabaseException getCause() {
+    return (DatabaseException) super.getCause();
+  }
 }

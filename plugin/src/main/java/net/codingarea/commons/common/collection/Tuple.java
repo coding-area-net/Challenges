@@ -9,11 +9,11 @@ import javax.annotation.Nullable;
 @Deprecated
 public class Tuple<F, S> extends net.codingarea.commons.common.collection.pair.Tuple<F, S> {
 
-	public Tuple() {
-	}
+  public Tuple() {
+  }
 
-	public Tuple(@Nullable F first, @Nullable S second) {
-		super(first, second);
-	}
+  public Tuple(@Nullable F first, @Nullable S second) {
+    super(first, second);
+  }
 
 }

@@ -9,15 +9,15 @@ import java.util.concurrent.Executors;
 
 public class HandledAsyncLogger extends HandledLogger {
 
-	protected final Executor executor = Executors.newSingleThreadExecutor(new NamedThreadFactory("AsyncLogTask"));
+  protected final Executor executor = Executors.newSingleThreadExecutor(new NamedThreadFactory("AsyncLogTask"));
 
-	public HandledAsyncLogger(@Nonnull LogLevel initialLevel) {
-		super(initialLevel);
-	}
+  public HandledAsyncLogger(@Nonnull LogLevel initialLevel) {
+    super(initialLevel);
+  }
 
-	@Override
-	protected void log0(@Nonnull LogEntry entry) {
-		executor.execute(() -> logNow(entry));
-	}
+  @Override
+  protected void log0(@Nonnull LogEntry entry) {
+    executor.execute(() -> logNow(entry));
+  }
 
 }

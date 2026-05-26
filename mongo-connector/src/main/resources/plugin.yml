@@ -8,4 +8,4 @@ main: net.codingarea.challenges.mongoconnector.MongoConnector
 depend:
   - Challenges
 description: |
-  Provides the needed depedencies to the ChallengesPlugin to conntent to a MongoDB database
+  Provides the needed dependencies to the ChallengesPlugin to connect to a MongoDB database

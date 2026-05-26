@@ -7,7 +7,7 @@ import net.codingarea.commons.database.action.hierarchy.OrderedAction;
  */
 public enum Order {
 
-	HIGHEST,
-	LOWEST
+  HIGHEST,
+  LOWEST
 
 }

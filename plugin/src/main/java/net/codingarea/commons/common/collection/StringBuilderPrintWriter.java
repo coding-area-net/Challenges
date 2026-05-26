@@ -8,21 +8,21 @@ import java.io.PrintWriter;
  */
 public class StringBuilderPrintWriter extends PrintWriter {
 
-	protected final StringBuilderWriter writer;
+  protected final StringBuilderWriter writer;
 
-	public StringBuilderPrintWriter() {
-		super(new StringBuilderWriter());
-		writer = (StringBuilderWriter) out;
-	}
+  public StringBuilderPrintWriter() {
+    super(new StringBuilderWriter());
+    writer = (StringBuilderWriter) out;
+  }
 
-	@Nonnull
-	public StringBuilder getBuilder() {
-		return writer.getBuilder();
-	}
+  @Nonnull
+  public StringBuilder getBuilder() {
+    return writer.getBuilder();
+  }
 
-	@Override
-	public String toString() {
-		return getBuilder().toString();
-	}
+  @Override
+  public String toString() {
+    return getBuilder().toString();
+  }
 
 }

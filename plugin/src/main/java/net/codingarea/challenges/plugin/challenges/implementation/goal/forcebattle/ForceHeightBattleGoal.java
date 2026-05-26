@@ -1,13 +1,13 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle;
 
-import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets.HeightTarget;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleGoal;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;

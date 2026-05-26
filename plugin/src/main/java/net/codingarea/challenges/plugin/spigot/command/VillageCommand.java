@@ -1,10 +1,10 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.StructureType;

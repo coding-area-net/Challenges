@@ -1,7 +1,5 @@
 package net.codingarea.challenges.plugin.content.impl;
 
-import net.codingarea.commons.common.collection.IRandom;
-import net.codingarea.commons.common.misc.StringUtils;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.ItemDescription;
 import net.codingarea.challenges.plugin.content.Message;
@@ -9,6 +7,8 @@ import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
 import net.codingarea.challenges.plugin.utils.misc.FontUtils;
+import net.codingarea.commons.common.collection.IRandom;
+import net.codingarea.commons.common.misc.StringUtils;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;

@@ -1,11 +1,6 @@
 package net.codingarea.challenges.plugin.management.inventory;
 
 import lombok.Getter;
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
-import net.codingarea.commons.bukkit.utils.logging.Logger;
-import net.codingarea.commons.common.collection.pair.Triple;
-import net.codingarea.commons.common.config.Document;
-import net.codingarea.commons.common.config.FileDocument;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
@@ -14,6 +9,11 @@ import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder.SkullBuilder;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.collection.pair.Triple;
+import net.codingarea.commons.common.config.Document;
+import net.codingarea.commons.common.config.FileDocument;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;

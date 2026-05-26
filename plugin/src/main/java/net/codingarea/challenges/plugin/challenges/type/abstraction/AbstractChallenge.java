@@ -2,9 +2,6 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.codingarea.commons.common.annotations.DeprecatedSince;
-import net.codingarea.commons.common.collection.IRandom;
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
@@ -14,6 +11,9 @@ import net.codingarea.challenges.plugin.management.menu.generator.categorised.Se
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBossBar;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeScoreboard;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.commons.common.annotations.DeprecatedSince;
+import net.codingarea.commons.common.collection.IRandom;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;

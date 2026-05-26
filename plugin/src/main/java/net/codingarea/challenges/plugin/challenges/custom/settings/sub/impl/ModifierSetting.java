@@ -1,12 +1,12 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.sub.impl;
 
-import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSetting;
 import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 
 import java.util.function.Function;
 

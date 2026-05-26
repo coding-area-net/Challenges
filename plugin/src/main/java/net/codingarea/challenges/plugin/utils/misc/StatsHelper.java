@@ -1,9 +1,9 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
-import net.codingarea.commons.bukkit.utils.animation.AnimatedInventory;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.stats.Statistic;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.commons.bukkit.utils.animation.AnimatedInventory;
 import org.bukkit.Material;
 
 import javax.annotation.Nonnull;

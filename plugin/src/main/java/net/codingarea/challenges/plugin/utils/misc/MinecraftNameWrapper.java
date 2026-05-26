@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
-import net.codingarea.commons.common.misc.ReflectionUtils;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.ReflectionUtil;
+import net.codingarea.commons.common.misc.ReflectionUtils;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.enchantments.Enchantment;

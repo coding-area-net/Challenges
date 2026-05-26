@@ -1,10 +1,10 @@
 package net.codingarea.challenges.plugin.content.loader;
 
 import lombok.Getter;
+import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.collection.IOUtils;
 import net.codingarea.commons.common.version.Version;
-import net.codingarea.challenges.plugin.Challenges;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.net.URL;

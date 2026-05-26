@@ -1,9 +1,9 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets.ForceTarget;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.spigot.events.PlayerIgnoreStatusChangeEvent;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;

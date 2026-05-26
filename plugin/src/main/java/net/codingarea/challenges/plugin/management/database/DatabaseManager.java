@@ -1,6 +1,8 @@
 package net.codingarea.challenges.plugin.management.database;
 
 import lombok.Getter;
+import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.challenges.plugin.utils.logging.ConsolePrint;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.collection.pair.Tuple;
 import net.codingarea.commons.common.config.Document;
@@ -9,8 +11,6 @@ import net.codingarea.commons.database.DatabaseConfig;
 import net.codingarea.commons.database.SQLColumn;
 import net.codingarea.commons.database.action.ExecutedQuery;
 import net.codingarea.commons.database.exceptions.DatabaseException;
-import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.utils.logging.ConsolePrint;
 import net.codingarea.commons.database.sql.abstraction.AbstractSQLDatabase;
 import net.codingarea.commons.database.sql.mysql.MySQLDatabase;
 import net.codingarea.commons.database.sql.sqlite.SQLiteDatabase;

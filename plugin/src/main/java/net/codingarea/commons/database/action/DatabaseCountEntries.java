@@ -13,9 +13,9 @@ import javax.annotation.Nonnull;
  */
 public interface DatabaseCountEntries extends DatabaseAction<Long> {
 
-	@Nonnull
-	@Override
-	@Nonnegative
-	Long execute() throws DatabaseException;
+  @Nonnull
+  @Override
+  @Nonnegative
+  Long execute() throws DatabaseException;
 
 }

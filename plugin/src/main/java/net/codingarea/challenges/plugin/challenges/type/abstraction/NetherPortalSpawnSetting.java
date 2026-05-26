@@ -1,9 +1,9 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.*;
 import org.bukkit.World.Environment;
 import org.bukkit.event.EventHandler;

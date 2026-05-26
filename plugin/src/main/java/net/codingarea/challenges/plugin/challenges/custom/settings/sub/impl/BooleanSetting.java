@@ -1,9 +1,9 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.sub.impl;
 
-import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSetting;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 
 public class BooleanSetting extends ValueSetting {
 

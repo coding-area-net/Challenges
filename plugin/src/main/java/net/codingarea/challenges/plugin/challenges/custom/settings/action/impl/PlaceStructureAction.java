@@ -1,11 +1,11 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.action.impl;
 
-import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
-import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.challenges.plugin.challenges.custom.settings.FallbackNames;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.EntityTargetAction;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
 import net.codingarea.challenges.plugin.management.challenges.annotations.RequireVersion;
+import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
+import net.codingarea.commons.common.collection.IRandom;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 

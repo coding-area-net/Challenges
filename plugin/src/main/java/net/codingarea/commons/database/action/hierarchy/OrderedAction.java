@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 public interface OrderedAction {
 
-	@Nullable
-	OrderedAction orderBy(@Nonnull String field, @Nonnull Order order);
+  @Nullable
+  OrderedAction orderBy(@Nonnull String field, @Nonnull Order order);
 
 }

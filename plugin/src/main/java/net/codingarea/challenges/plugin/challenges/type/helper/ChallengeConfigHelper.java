@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.type.helper;
 
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.commons.common.config.Document;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;

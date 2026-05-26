@@ -1,8 +1,6 @@
 package net.codingarea.challenges.plugin;
 
 import lombok.Getter;
-import net.codingarea.commons.bukkit.core.BukkitModule;
-import net.codingarea.commons.common.version.Version;
 import net.codingarea.challenges.plugin.challenges.custom.settings.CustomSettingsLoader;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.content.loader.LoaderRegistry;
@@ -26,9 +24,10 @@ import net.codingarea.challenges.plugin.management.team.TeamProvider;
 import net.codingarea.challenges.plugin.spigot.command.*;
 import net.codingarea.challenges.plugin.spigot.listener.*;
 import net.codingarea.challenges.plugin.utils.bukkit.command.ForwardingCommand;
+import net.codingarea.commons.bukkit.core.BukkitModule;
+import net.codingarea.commons.common.version.Version;
 
 import javax.annotation.Nonnull;
-import java.io.File;
 
 @Getter
 public final class Challenges extends BukkitModule {

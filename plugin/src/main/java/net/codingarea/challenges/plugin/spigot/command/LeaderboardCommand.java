@@ -1,9 +1,5 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
-import net.codingarea.commons.bukkit.utils.animation.AnimatedInventory;
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
-import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
-import net.codingarea.commons.bukkit.utils.menu.positions.SlottedMenuPosition;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
@@ -16,6 +12,10 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder.SkullBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.challenges.plugin.utils.misc.StatsHelper;
+import net.codingarea.commons.bukkit.utils.animation.AnimatedInventory;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
+import net.codingarea.commons.bukkit.utils.menu.positions.SlottedMenuPosition;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

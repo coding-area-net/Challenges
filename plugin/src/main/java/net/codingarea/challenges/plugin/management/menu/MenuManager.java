@@ -1,11 +1,6 @@
 package net.codingarea.challenges.plugin.management.menu;
 
 import lombok.Getter;
-import net.codingarea.commons.bukkit.utils.animation.AnimatedInventory;
-import net.codingarea.commons.bukkit.utils.animation.AnimationFrame;
-import net.codingarea.commons.bukkit.utils.animation.SoundSample;
-import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
-import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
@@ -15,6 +10,11 @@ import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.management.menu.generator.ChallengeMenuGenerator;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.commons.bukkit.utils.animation.AnimatedInventory;
+import net.codingarea.commons.bukkit.utils.animation.AnimationFrame;
+import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;

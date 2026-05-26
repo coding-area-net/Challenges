@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.content;
 
-import net.codingarea.commons.common.config.Document;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.utils.misc.ColorConversions;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.ChatColor;
 
 import javax.annotation.Nonnull;

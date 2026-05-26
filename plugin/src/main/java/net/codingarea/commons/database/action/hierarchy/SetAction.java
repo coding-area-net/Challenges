@@ -5,7 +5,7 @@ import javax.annotation.Nullable;
 
 public interface SetAction {
 
-	@Nonnull
-	SetAction set(@Nonnull String field, @Nullable Object value);
+  @Nonnull
+  SetAction set(@Nonnull String field, @Nullable Object value);
 
 }

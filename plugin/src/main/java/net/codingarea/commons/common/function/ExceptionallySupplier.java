@@ -8,20 +8,20 @@ import java.util.function.Supplier;
 @FunctionalInterface
 public interface ExceptionallySupplier<T> extends Supplier<T>, Callable<T> {
 
-	@Override
-	default T get() {
-		try {
-			return getExceptionally();
-		} catch (Exception ex) {
-			throw WrappedException.rethrow(ex);
-		}
-	}
+  @Override
+  default T get() {
+    try {
+      return getExceptionally();
+    } catch (Exception ex) {
+      throw WrappedException.rethrow(ex);
+    }
+  }
 
-	@Override
-	default T call() throws Exception {
-		return getExceptionally();
-	}
+  @Override
+  default T call() throws Exception {
+    return getExceptionally();
+  }
 
-	T getExceptionally() throws Exception;
+  T getExceptionally() throws Exception;
 
 }

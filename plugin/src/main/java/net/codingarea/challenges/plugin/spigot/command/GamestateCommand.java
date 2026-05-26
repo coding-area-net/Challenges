@@ -1,12 +1,12 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
-import net.codingarea.commons.common.config.FileDocument;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
+import net.codingarea.commons.common.config.FileDocument;
 import org.bukkit.command.CommandSender;
 
 import javax.annotation.Nonnull;

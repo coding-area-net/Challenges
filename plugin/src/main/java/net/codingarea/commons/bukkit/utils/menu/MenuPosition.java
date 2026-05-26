@@ -12,33 +12,34 @@ import java.util.concurrent.ConcurrentHashMap;
 @FunctionalInterface
 public interface MenuPosition {
 
-	final class Holder {
+  final class Holder {
 
-		private Holder() {}
+    private Holder() {
+    }
 
-		private static final Map<Player, MenuPosition> positions = new ConcurrentHashMap<>();
+    private static final Map<Player, MenuPosition> positions = new ConcurrentHashMap<>();
 
-	}
+  }
 
-	InventoryHolder HOLDER = new MenuPositionHolder();
+  InventoryHolder HOLDER = new MenuPositionHolder();
 
-	static void set(@Nonnull Player player, @Nullable MenuPosition position) {
-		Holder.positions.put(player, position);
-	}
+  static void set(@Nonnull Player player, @Nullable MenuPosition position) {
+    Holder.positions.put(player, position);
+  }
 
-	static void remove(@Nonnull Player player) {
-		Holder.positions.remove(player);
-	}
+  static void remove(@Nonnull Player player) {
+    Holder.positions.remove(player);
+  }
 
-	@Nullable
-	static MenuPosition get(@Nonnull Player player) {
-		return Holder.positions.get(player);
-	}
+  @Nullable
+  static MenuPosition get(@Nonnull Player player) {
+    return Holder.positions.get(player);
+  }
 
-	static void setEmpty(@Nonnull Player player) {
-		set(player, new EmptyMenuPosition());
-	}
+  static void setEmpty(@Nonnull Player player) {
+    set(player, new EmptyMenuPosition());
+  }
 
-	void handleClick(@Nonnull MenuClickInfo info);
+  void handleClick(@Nonnull MenuClickInfo info);
 
 }

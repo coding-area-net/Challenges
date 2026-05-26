@@ -4,11 +4,11 @@ import javax.annotation.Nonnull;
 
 public class DatabaseUnsupportedFeatureException extends DatabaseException {
 
-	public DatabaseUnsupportedFeatureException() {
-	}
+  public DatabaseUnsupportedFeatureException() {
+  }
 
-	public DatabaseUnsupportedFeatureException(@Nonnull String message) {
-		super(message);
-	}
+  public DatabaseUnsupportedFeatureException(@Nonnull String message) {
+    super(message);
+  }
 
 }

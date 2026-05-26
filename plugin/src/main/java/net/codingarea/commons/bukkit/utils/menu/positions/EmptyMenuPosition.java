@@ -8,9 +8,9 @@ import javax.annotation.Nonnull;
 
 public class EmptyMenuPosition implements MenuPosition {
 
-	@Override
-	public void handleClick(@Nonnull MenuClickInfo info) {
-		SoundSample.CLICK.play(info.getPlayer());
-	}
+  @Override
+  public void handleClick(@Nonnull MenuClickInfo info) {
+    SoundSample.CLICK.play(info.getPlayer());
+  }
 
 }

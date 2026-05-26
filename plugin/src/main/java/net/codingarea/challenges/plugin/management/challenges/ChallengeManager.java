@@ -1,17 +1,17 @@
 package net.codingarea.challenges.plugin.management.challenges;
 
-import net.codingarea.commons.bukkit.utils.logging.Logger;
-import net.codingarea.commons.common.config.Document;
-import net.codingarea.commons.common.config.FileDocument;
-import net.codingarea.commons.common.config.document.GsonDocument;
-import net.codingarea.commons.common.config.document.wrapper.FileDocumentWrapper;
-import net.codingarea.commons.database.exceptions.DatabaseException;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.CustomChallenge;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
 import net.codingarea.challenges.plugin.challenges.type.IGoal;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.management.challenges.entities.GamestateSaveable;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.config.Document;
+import net.codingarea.commons.common.config.FileDocument;
+import net.codingarea.commons.common.config.document.GsonDocument;
+import net.codingarea.commons.common.config.document.wrapper.FileDocumentWrapper;
+import net.codingarea.commons.database.exceptions.DatabaseException;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;

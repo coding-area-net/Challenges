@@ -9,21 +9,21 @@ import javax.annotation.Nullable;
 
 public class ConstantLoggerFactory implements ILoggerFactory {
 
-	protected final ILogger logger;
+  protected final ILogger logger;
 
-	public ConstantLoggerFactory(@Nonnull ILogger logger) {
-		this.logger = logger;
-	}
+  public ConstantLoggerFactory(@Nonnull ILogger logger) {
+    this.logger = logger;
+  }
 
-	@Nonnull
-	@Override
-	public ILogger forName(@Nullable String name) {
-		return logger;
-	}
+  @Nonnull
+  @Override
+  public ILogger forName(@Nullable String name) {
+    return logger;
+  }
 
-	@Override
-	public void setDefaultLevel(@Nonnull LogLevel level) {
-		logger.setMinLevel(level);
-	}
+  @Override
+  public void setDefaultLevel(@Nonnull LogLevel level) {
+    logger.setMinLevel(level);
+  }
 
 }

@@ -4,8 +4,8 @@ import javax.annotation.Nonnull;
 
 public final class ConfigReadOnlyException extends IllegalStateException {
 
-	public ConfigReadOnlyException(@Nonnull String action) {
-		super("Config." + action);
-	}
+  public ConfigReadOnlyException(@Nonnull String action) {
+    super("Config." + action);
+  }
 
 }

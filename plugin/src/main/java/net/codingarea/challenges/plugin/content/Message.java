@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.content;
 
+import net.codingarea.challenges.plugin.content.impl.MessageManager;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.collection.IRandom;
-import net.codingarea.challenges.plugin.content.impl.MessageManager;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
