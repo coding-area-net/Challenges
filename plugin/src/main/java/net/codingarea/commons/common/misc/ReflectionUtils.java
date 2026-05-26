@@ -2,7 +2,6 @@ package net.codingarea.commons.common.misc;
 
 import net.codingarea.commons.common.collection.ArrayWalker;
 import net.codingarea.commons.common.collection.ClassWalker;
-import net.codingarea.commons.common.collection.PublicSecurityManager;
 import net.codingarea.commons.common.collection.WrappedException;
 
 import javax.annotation.CheckReturnValue;
