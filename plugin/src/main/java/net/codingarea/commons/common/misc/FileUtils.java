@@ -531,7 +531,7 @@ public final class FileUtils {
 				if (filePath.getParent() != null)
 					Files.createDirectories(filePath.getParent());
 				Files.createFile(filePath);
-			} catch (IOException ex) {
+			} catch (IOException ignored) {
 			}
 		}
 	}

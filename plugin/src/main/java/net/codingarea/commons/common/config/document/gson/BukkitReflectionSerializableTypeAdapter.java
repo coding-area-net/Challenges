@@ -43,7 +43,7 @@ public class BukkitReflectionSerializableTypeAdapter implements GsonTypeAdapter<
 		Class<?> clazz = null;
 		try {
 			clazz = Class.forName(classOfType);
-		} catch (ClassNotFoundException | NullPointerException ex) {
+		} catch (ClassNotFoundException | NullPointerException ignored) {
 		}
 
 		Map<String, Object> map = GsonUtils.convertJsonObjectToMap(json);

@@ -33,8 +33,7 @@ public class CheatListener implements Listener {
 
   @EventHandler(priority = EventPriority.MONITOR)
   public void onSneak(PlayerToggleSneakEvent event) {
-    if (!event.isSneaking()) {
-    }
+      event.isSneaking();
 ////		Structure structure = entry.getValue();
 
   }

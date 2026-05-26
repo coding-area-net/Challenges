@@ -80,7 +80,7 @@ public class BsonDocument extends AbstractDocument {
 	@Override
 	public long getLong(@Nonnull String path, long def) {
 		try {
-			return Long.parseLong(getString(path));
+			return Long.parseLong(Objects.requireNonNull(getString(path)));
 		} catch (Exception ex) {
 			return def;
 		}
@@ -89,7 +89,7 @@ public class BsonDocument extends AbstractDocument {
 	@Override
 	public int getInt(@Nonnull String path, int def) {
 		try {
-			return Integer.parseInt(getString(path));
+			return Integer.parseInt(Objects.requireNonNull(getString(path)));
 		} catch (Exception ex) {
 			return def;
 		}
@@ -98,7 +98,7 @@ public class BsonDocument extends AbstractDocument {
 	@Override
 	public short getShort(@Nonnull String path, short def) {
 		try {
-			return Short.parseShort(getString(path));
+			return Short.parseShort(Objects.requireNonNull(getString(path)));
 		} catch (Exception ex) {
 			return def;
 		}
@@ -107,7 +107,7 @@ public class BsonDocument extends AbstractDocument {
 	@Override
 	public byte getByte(@Nonnull String path, byte def) {
 		try {
-			return Byte.parseByte(getString(path));
+			return Byte.parseByte(Objects.requireNonNull(getString(path)));
 		} catch (Exception ex) {
 			return def;
 		}
@@ -116,7 +116,7 @@ public class BsonDocument extends AbstractDocument {
 	@Override
 	public double getDouble(@Nonnull String path, double def) {
 		try {
-			return Double.parseDouble(getString(path));
+			return Double.parseDouble(Objects.requireNonNull(getString(path)));
 		} catch (Exception ex) {
 			return def;
 		}
@@ -125,7 +125,7 @@ public class BsonDocument extends AbstractDocument {
 	@Override
 	public float getFloat(@Nonnull String path, float def) {
 		try {
-			return Float.parseFloat(getString(path));
+			return Float.parseFloat(Objects.requireNonNull(getString(path)));
 		} catch (Exception ex) {
 			return def;
 		}
@@ -137,7 +137,7 @@ public class BsonDocument extends AbstractDocument {
 			Object value = bsonDocument.get(path);
 			if (value instanceof Boolean) return (Boolean) value;
 			if (value instanceof String) return Boolean.parseBoolean((String) value);
-		} catch (Exception ex) {
+		} catch (Exception ignored) {
 		}
 		return def;
 	}
@@ -161,7 +161,7 @@ public class BsonDocument extends AbstractDocument {
 			Object value = bsonDocument.get(path);
 			if (value instanceof UUID) return (UUID) value;
 			if (value instanceof String) return UUID.fromString((String) value);
-		} catch (Exception ex) {
+		} catch (Exception ignored) {
 		}
 		return null;
 	}

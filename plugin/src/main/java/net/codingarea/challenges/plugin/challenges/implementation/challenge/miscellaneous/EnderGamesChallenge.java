@@ -64,7 +64,7 @@ public class EnderGamesChallenge extends TimedChallenge {
     List<Entity> list = player.getWorld().getNearbyEntities(player.getLocation(), 200, 200, 200).stream()
       .filter(entity -> !(entity instanceof Player))
       .filter(entity -> entity instanceof LivingEntity)
-      .collect(Collectors.toList());
+      .toList();
 
     Entity targetEntity = list.get(globalRandom.nextInt(list.size()));
 

@@ -1,5 +1,6 @@
 package net.codingarea.commons.bukkit.utils.wrapper;
 
+import lombok.Getter;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -13,7 +14,8 @@ public final class ActionListener<E extends Event> implements Listener {
 	private final Class<E> classOfEvent;
 	private final Consumer<? super E> listener;
 	private final EventPriority priority;
-	private final boolean ignoreCancelled;
+	@Getter
+    private final boolean ignoreCancelled;
 
 	public ActionListener(@Nonnull Class<E> classOfEvent, @Nonnull Consumer<? super E> listener, @Nonnull EventPriority priority, boolean ignoreCancelled) {
 		this.classOfEvent = classOfEvent;
@@ -48,10 +50,6 @@ public final class ActionListener<E extends Event> implements Listener {
 	@Nonnull
 	public Class<E> getClassOfEvent() {
 		return classOfEvent;
-	}
-
-	public boolean isIgnoreCancelled() {
-		return ignoreCancelled;
 	}
 
 }

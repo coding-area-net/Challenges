@@ -1,5 +1,7 @@
 package net.codingarea.commons.common.collection.pair;
 
+import lombok.Getter;
+
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -12,6 +14,7 @@ import java.util.function.Function;
  * @param <T> The type of the third value
  * @param <FF> The type of the fourth value
  */
+@Getter
 public class Quadro<F, S, T, FF> implements Pair {
 
 	protected F first;
@@ -40,23 +43,7 @@ public class Quadro<F, S, T, FF> implements Pair {
 		return new Object[] { first, second, third, first };
 	}
 
-	public F getFirst() {
-		return first;
-	}
-
-	public S getSecond() {
-		return second;
-	}
-
-	public T getThird() {
-		return third;
-	}
-
-	public FF getFourth() {
-		return fourth;
-	}
-
-	public void setFirst(@Nullable F first) {
+    public void setFirst(@Nullable F first) {
 		this.first = first;
 	}
 

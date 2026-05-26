@@ -260,7 +260,7 @@ public interface ILogger {
 	@CheckReturnValue
 	default PrintStream asPrintStream(@Nonnull LogLevel level) {
 		try {
-			return new PrintStream(new LogOutputStream(this, level), true, StandardCharsets.UTF_8.name());
+			return new PrintStream(new LogOutputStream(this, level), true, StandardCharsets.UTF_8);
 		} catch (Exception ex) {
 			throw new WrappedException(ex);
 		}

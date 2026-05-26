@@ -1,5 +1,7 @@
 package net.codingarea.commons.common.collection.pair;
 
+import lombok.Getter;
+
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -10,6 +12,7 @@ import java.util.function.Function;
  * @param <F> The type of the first value
  * @param <S> The type of the second value
  */
+@Getter
 public class Tuple<F, S> implements Pair {
 
 	protected F first;
@@ -34,15 +37,7 @@ public class Tuple<F, S> implements Pair {
 		return new Object[] { first, second };
 	}
 
-	public F getFirst() {
-		return first;
-	}
-
-	public S getSecond() {
-		return second;
-	}
-
-	public void setFirst(@Nullable F first) {
+    public void setFirst(@Nullable F first) {
 		this.first = first;
 	}
 

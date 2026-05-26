@@ -57,7 +57,7 @@ public final class MongoUtils {
 			BsonUtils.setDocumentProperties(bson, values);
 			return bson;
 		} else if (value instanceof UUID) {
-			return ((UUID) value).toString();
+			return value.toString();
 		} else {
 			return value;
 		}

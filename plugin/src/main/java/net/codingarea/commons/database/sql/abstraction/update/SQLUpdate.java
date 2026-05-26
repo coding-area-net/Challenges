@@ -92,7 +92,7 @@ public class SQLUpdate implements DatabaseUpdate {
 			int index = 0;
 			for (Entry<String, Object> entry : values.entrySet()) {
 				if (index > 0) command.append(", ");
-				command.append("`" + entry.getKey() + "` = ?");
+				command.append("`").append(entry.getKey()).append("` = ?");
 				args.add(entry.getValue());
 				index++;
 			}

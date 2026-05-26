@@ -1,5 +1,6 @@
 package net.codingarea.commons.common.discord;
 
+import lombok.Getter;
 import net.codingarea.commons.common.config.Document;
 
 import javax.annotation.Nonnull;
@@ -214,7 +215,8 @@ public class DiscordWebhook {
 		return this;
 	}
 
-	public static class EmbedObject {
+	@Getter
+    public static class EmbedObject {
 
 		protected String title;
 		protected String description;
@@ -244,43 +246,7 @@ public class DiscordWebhook {
 			this.fields = fields;
 		}
 
-		public String getTitle() {
-			return title;
-		}
-
-		public String getDescription() {
-			return description;
-		}
-
-		public String getUrl() {
-			return url;
-		}
-
-		public Color getColor() {
-			return color;
-		}
-
-		public Footer getFooter() {
-			return footer;
-		}
-
-		public Thumbnail getThumbnail() {
-			return thumbnail;
-		}
-
-		public Image getImage() {
-			return image;
-		}
-
-		public Author getAuthor() {
-			return author;
-		}
-
-		public List<Field> getFields() {
-			return fields;
-		}
-
-		@Nonnull
+        @Nonnull
 		public EmbedObject setTitle(String title) {
 			this.title = title;
 			return this;
@@ -336,7 +302,8 @@ public class DiscordWebhook {
 
 		@Override
 		public EmbedObject clone() {
-			return new EmbedObject(
+            EmbedObject embedObject = (EmbedObject) super.clone();
+            return new EmbedObject(
 				title, description, url, color,
 				footer == null ? null : footer.clone(),
 				thumbnail == null ? null : thumbnail.clone(),
@@ -368,8 +335,9 @@ public class DiscordWebhook {
 			}
 
 			@Override
-			protected Footer clone() {
-				return new Footer(text, iconUrl);
+			protected Footer clone() throws CloneNotSupportedException {
+                Footer footer1 = (Footer) super.clone();
+                return new Footer(text, iconUrl);
 			}
 		}
 
@@ -389,8 +357,9 @@ public class DiscordWebhook {
 			}
 
 			@Override
-			protected Thumbnail clone() {
-				return new Thumbnail(url);
+			protected Thumbnail clone() throws CloneNotSupportedException {
+                Thumbnail thumbnail1 = (Thumbnail) super.clone();
+                return new Thumbnail(url);
 			}
 		}
 
@@ -411,7 +380,8 @@ public class DiscordWebhook {
 
 			@Override
 			public Image clone() {
-				return new Image(url);
+                Image image1 = (Image) super.clone();
+                return new Image(url);
 			}
 		}
 
@@ -443,8 +413,9 @@ public class DiscordWebhook {
 			}
 
 			@Override
-			protected Author clone() {
-				return new Author(name, url, iconUrl);
+			protected Author clone() throws CloneNotSupportedException {
+                Author author1 = (Author) super.clone();
+                return new Author(name, url, iconUrl);
 			}
 		}
 
@@ -476,15 +447,17 @@ public class DiscordWebhook {
 			}
 
 			@Override
-			protected Field clone() {
-				return new Field(name, value, inline);
+			protected Field clone() throws CloneNotSupportedException {
+                Field field = (Field) super.clone();
+                return new Field(name, value, inline);
 			}
 		}
 	}
 
 	@Override
 	public DiscordWebhook clone() {
-		return new DiscordWebhook(url, username, avatarUrl, content, clone(embeds, EmbedObject::clone), tts);
+        DiscordWebhook discordWebhook = (DiscordWebhook) super.clone();
+        return new DiscordWebhook(url, username, avatarUrl, content, clone(embeds, EmbedObject::clone), tts);
 	}
 
 	@Nonnull

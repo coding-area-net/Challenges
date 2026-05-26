@@ -1,5 +1,7 @@
 package net.codingarea.commons.common.collection.pair;
 
+import lombok.Getter;
+
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -11,6 +13,7 @@ import java.util.function.Function;
  * @param <S> The type of the second value
  * @param <T> The type of the third value
  */
+@Getter
 public class Triple<F, S, T> implements Pair {
 
 	protected F first;
@@ -37,19 +40,7 @@ public class Triple<F, S, T> implements Pair {
 		return new Object[] { first, second, third };
 	}
 
-	public F getFirst() {
-		return first;
-	}
-
-	public S getSecond() {
-		return second;
-	}
-
-	public T getThird() {
-		return third;
-	}
-
-	public void setFirst(@Nullable F first) {
+    public void setFirst(@Nullable F first) {
 		this.first = first;
 	}
 

@@ -1,5 +1,7 @@
 package net.codingarea.commons.common.logging;
 
+import lombok.Getter;
+
 import javax.annotation.Nonnull;
 import java.util.logging.Level;
 
@@ -15,8 +17,10 @@ public enum LogLevel {
 
 	private final String uppercaseName, lowercaseName;
 	private final Level javaLevel;
-	private final int value;
-	private final boolean highlighted;
+	@Getter
+    private final int value;
+	@Getter
+    private final boolean highlighted;
 
 	LogLevel(int value, @Nonnull String uppercaseName, @Nonnull String lowercaseName, @Nonnull Level javaLevel, boolean highlighted) {
 		this.uppercaseName = uppercaseName;
@@ -35,11 +39,7 @@ public enum LogLevel {
 		return this.getValue() >= loggerLevel.getValue();
 	}
 
-	public int getValue() {
-		return value;
-	}
-
-	@Nonnull
+    @Nonnull
 	public String getLowerCaseName() {
 		return lowercaseName;
 	}
@@ -49,11 +49,7 @@ public enum LogLevel {
 		return uppercaseName;
 	}
 
-	public boolean isHighlighted() {
-		return highlighted;
-	}
-
-	@Nonnull
+    @Nonnull
 	public static LogLevel fromJavaLevel(@Nonnull Level level) {
 		for (LogLevel logLevel : values()) {
 			if (logLevel.getJavaUtilLevel().intValue() == level.intValue())

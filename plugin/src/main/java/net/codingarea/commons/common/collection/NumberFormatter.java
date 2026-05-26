@@ -48,7 +48,7 @@ public interface NumberFormatter {
 		return format(number.doubleValue());
 	}
 
-	public static final NumberFormatter
+	NumberFormatter
 			DEFAULT = fromPattern("0.##", null, false),
 			INTEGER = value -> (int) value + "",
 			SPACE_SPLIT = fromPattern("###,##0.###############", null, false,

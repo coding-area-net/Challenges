@@ -70,7 +70,7 @@ public abstract class CollectionGoal extends SettingGoal {
   }
 
   protected List<String> getCollectionFiltered(@Nonnull UUID uuid) {
-    List<String> targetStringList = Arrays.stream(target).map(Object::toString).collect(Collectors.toList());
+    List<String> targetStringList = Arrays.stream(target).map(Object::toString).toList();
     return collections.computeIfAbsent(uuid, key -> new ArrayList<>()).stream().filter(targetStringList::contains).collect(Collectors.toList());
   }
 

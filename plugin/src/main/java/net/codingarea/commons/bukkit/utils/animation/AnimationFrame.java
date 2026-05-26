@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class AnimationFrame implements Cloneable {
 
@@ -59,7 +60,7 @@ public class AnimationFrame implements Cloneable {
 
 	@Nullable
 	public Material getItemType(int slot) {
-		return getItem(slot) == null ? Material.AIR : getItem(slot).getType();
+		return getItem(slot) == null ? Material.AIR : Objects.requireNonNull(getItem(slot)).getType();
 	}
 
 	@Nonnull
@@ -78,7 +79,8 @@ public class AnimationFrame implements Cloneable {
 	@Nonnull
 	@Override
 	public AnimationFrame clone() {
-		return new AnimationFrame(content);
+        AnimationFrame animationFrame = (AnimationFrame) super.clone();
+        return new AnimationFrame(content);
 	}
 
 }
