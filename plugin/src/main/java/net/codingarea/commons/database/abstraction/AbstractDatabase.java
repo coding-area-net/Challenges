@@ -7,14 +7,13 @@ import net.codingarea.commons.database.SpecificDatabase;
 import net.codingarea.commons.database.exceptions.DatabaseAlreadyConnectedException;
 import net.codingarea.commons.database.exceptions.DatabaseConnectionClosedException;
 import net.codingarea.commons.database.exceptions.DatabaseException;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractDatabase implements Database {
 
   protected final DatabaseConfig config;
 
-  public AbstractDatabase(@Nonnull DatabaseConfig config) {
+  public AbstractDatabase(@NotNull DatabaseConfig config) {
     this.config = config;
   }
 
@@ -68,7 +67,7 @@ public abstract class AbstractDatabase implements Database {
   protected abstract void connect0() throws Exception;
 
   @Override
-  public void createTableSafely(@Nonnull String name, @Nonnull SQLColumn... columns) {
+  public void createTableSafely(@NotNull String name, @NotNull SQLColumn... columns) {
     try {
       createTable(name, columns);
     } catch (DatabaseException ex) {
@@ -76,13 +75,13 @@ public abstract class AbstractDatabase implements Database {
     }
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public SpecificDatabase getSpecificDatabase(@Nonnull String name) {
+  public SpecificDatabase getSpecificDatabase(@NotNull String name) {
     return new DefaultSpecificDatabase(this, name);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DatabaseConfig getConfig() {
     return config;

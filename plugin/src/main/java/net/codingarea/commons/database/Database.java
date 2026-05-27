@@ -6,21 +6,20 @@ import net.codingarea.commons.database.action.*;
 import net.codingarea.commons.database.exceptions.DatabaseAlreadyConnectedException;
 import net.codingarea.commons.database.exceptions.DatabaseConnectionClosedException;
 import net.codingarea.commons.database.exceptions.DatabaseException;
-
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
 
 public interface Database {
 
   ILogger LOGGER = ILogger.forThisClass();
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   static Database empty() {
     return new EmptyDatabase(true);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   static Database unsupported() {
     return new EmptyDatabase(false);
@@ -60,48 +59,48 @@ public interface Database {
    */
   boolean disconnectSafely();
 
-  void createTable(@Nonnull String name, @Nonnull SQLColumn... columns) throws DatabaseException;
+  void createTable(@NotNull String name, @NotNull SQLColumn... columns) throws DatabaseException;
 
-  void createTableSafely(@Nonnull String name, @Nonnull SQLColumn... columns);
+  void createTableSafely(@NotNull String name, @NotNull SQLColumn... columns);
 
-  @Nonnull
-  default Task<Void> createTableAsync(@Nonnull String name, @Nonnull SQLColumn... columns) {
+  @NotNull
+  default Task<Void> createTableAsync(@NotNull String name, @NotNull SQLColumn... columns) {
     return Task.asyncRunExceptionally(() -> createTable(name, columns));
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   DatabaseListTables listTables();
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseCountEntries countEntries(@Nonnull String table);
+  DatabaseCountEntries countEntries(@NotNull String table);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseQuery query(@Nonnull String table);
+  DatabaseQuery query(@NotNull String table);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseUpdate update(@Nonnull String table);
+  DatabaseUpdate update(@NotNull String table);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseInsertion insert(@Nonnull String table);
+  DatabaseInsertion insert(@NotNull String table);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseInsertionOrUpdate insertOrUpdate(@Nonnull String table);
+  DatabaseInsertionOrUpdate insertOrUpdate(@NotNull String table);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseDeletion delete(@Nonnull String table);
+  DatabaseDeletion delete(@NotNull String table);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  SpecificDatabase getSpecificDatabase(@Nonnull String name);
+  SpecificDatabase getSpecificDatabase(@NotNull String name);
 
-  @Nonnull
+  @NotNull
   DatabaseConfig getConfig();
 
 }

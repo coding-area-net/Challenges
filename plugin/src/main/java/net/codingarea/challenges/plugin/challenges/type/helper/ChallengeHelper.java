@@ -27,10 +27,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,7 +41,7 @@ public final class ChallengeHelper {
   private ChallengeHelper() {
   }
 
-  public static void kill(@Nonnull Player player) {
+  public static void kill(@NotNull Player player) {
 
     if (!Bukkit.isPrimaryThread()) {
       Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> kill(player));
@@ -54,23 +53,23 @@ public final class ChallengeHelper {
     inInstantKill = false;
   }
 
-  public static void kill(@Nonnull Player player, int delay) {
+  public static void kill(@NotNull Player player, int delay) {
     Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), () -> kill(player), delay);
   }
 
-  public static void updateItems(@Nonnull IChallenge challenge) {
+  public static void updateItems(@NotNull IChallenge challenge) {
     challenge.getType().executeWithGenerator(ChallengeMenuGenerator.class, gen -> gen.updateItem(challenge));
   }
 
-  public static boolean canInstaKillOnEnable(@Nonnull IChallenge challenge) {
+  public static boolean canInstaKillOnEnable(@NotNull IChallenge challenge) {
     return challenge.getClass().isAnnotationPresent(CanInstaKillOnEnable.class);
   }
 
-  public static boolean isExcludedFromRandomChallenges(@Nonnull IChallenge challenge) {
+  public static boolean isExcludedFromRandomChallenges(@NotNull IChallenge challenge) {
     return challenge.getClass().isAnnotationPresent(ExcludeFromRandomChallenges.class);
   }
 
-  public static void handleModifierClick(@Nonnull MenuClickInfo info, @Nonnull IModifier modifier) {
+  public static void handleModifierClick(@NotNull MenuClickInfo info, @NotNull IModifier modifier) {
     int newValue = modifier.getValue();
     int amount = info.isShiftClick()
       ? (modifier.getValue() == modifier.getMinValue() || info.isRightClick() && modifier.getValue() == (10 - (modifier.getMinValue() - 1)) ? 9 : 10)
@@ -87,19 +86,19 @@ public final class ChallengeHelper {
     SoundSample.CLICK.play(info.getPlayer());
   }
 
-  @Nonnull
-  public static String getColoredChallengeName(@Nonnull AbstractChallenge challenge) {
+  @NotNull
+  public static String getColoredChallengeName(@NotNull AbstractChallenge challenge) {
     ItemBuilder item = challenge.createDisplayItem();
     ItemDescription description = item.getBuiltByItemDescription();
     if (description == null) return Message.NULL;
     return description.getOriginalName();
   }
 
-  public static void breakBlock(@Nonnull Block block, @Nullable ItemStack tool) {
+  public static void breakBlock(@NotNull Block block, @Nullable ItemStack tool) {
     breakBlock(block, tool, null);
   }
 
-  public static void breakBlock(@Nonnull Block block, @Nullable ItemStack tool, @Nullable Inventory targetInventory) {
+  public static void breakBlock(@NotNull Block block, @Nullable ItemStack tool, @Nullable Inventory targetInventory) {
 
     if (!ChallengeAPI.getDropChance(block.getType())) return;
     boolean putIntoInventory = ChallengeAPI.getItemsDirectIntoInventory() && targetInventory != null;
@@ -126,7 +125,7 @@ public final class ChallengeHelper {
 
   }
 
-  public static void dropItem(@Nonnull ItemStack itemStack, @Nonnull Location dropLocation, @Nonnull Inventory inventory) {
+  public static void dropItem(@NotNull ItemStack itemStack, @NotNull Location dropLocation, @NotNull Inventory inventory) {
     boolean directIntoInventory = Challenges.getInstance().getBlockDropManager().isItemsDirectIntoInventory();
 
     if (directIntoInventory) {
@@ -139,13 +138,13 @@ public final class ChallengeHelper {
 
   }
 
-  public static boolean ignoreDamager(@Nonnull Entity damager) {
+  public static boolean ignoreDamager(@NotNull Entity damager) {
     Player damagerPlayer = getDamagerPlayer(damager);
     if (damagerPlayer == null) return false;
     return AbstractChallenge.ignorePlayer(damagerPlayer);
   }
 
-  public static Player getDamagerPlayer(@Nonnull Entity damager) {
+  public static Player getDamagerPlayer(@NotNull Entity damager) {
     if (damager instanceof Player) return ((Player) damager);
     if (damager instanceof Projectile && ((Projectile) damager).getShooter() instanceof Player)
       return ((Player) ((Projectile) damager).getShooter());
@@ -156,61 +155,61 @@ public final class ChallengeHelper {
     return Bukkit.getOnlinePlayers().stream().filter(player -> !AbstractChallenge.ignorePlayer(player)).collect(Collectors.toList());
   }
 
-  public static void playToggleChallengeTitle(@Nonnull AbstractChallenge challenge) {
+  public static void playToggleChallengeTitle(@NotNull AbstractChallenge challenge) {
     playToggleChallengeTitle(challenge, challenge.isEnabled());
   }
 
-  public static void playToggleChallengeTitle(@Nonnull AbstractChallenge challenge, boolean enabled) {
+  public static void playToggleChallengeTitle(@NotNull AbstractChallenge challenge, boolean enabled) {
     Challenges.getInstance().getTitleManager().sendChallengeStatusTitle(enabled ? Message.forName("title-challenge-enabled") : Message.forName("title-challenge-disabled"), getColoredChallengeName(challenge));
   }
 
-  public static void playChangeChallengeValueTitle(@Nonnull AbstractChallenge challenge, @Nonnull IModifier modifier) {
+  public static void playChangeChallengeValueTitle(@NotNull AbstractChallenge challenge, @NotNull IModifier modifier) {
     playChangeChallengeValueTitle(challenge, modifier.getValue());
   }
 
-  public static void playChangeChallengeValueTitle(@Nonnull Modifier modifier) {
+  public static void playChangeChallengeValueTitle(@NotNull Modifier modifier) {
     playChangeChallengeValueTitle(modifier, modifier.getValue());
   }
 
-  public static void playChangeChallengeValueTitle(@Nonnull AbstractChallenge modifier, @Nullable Object value) {
+  public static void playChangeChallengeValueTitle(@NotNull AbstractChallenge modifier, @Nullable Object value) {
     Challenges.getInstance().getTitleManager().sendChallengeStatusTitle(Message.forName("title-challenge-value-changed"), getColoredChallengeName(modifier), value);
   }
 
-  public static void playChallengeHeartsValueChangeTitle(@Nonnull AbstractChallenge challenge, int health) {
+  public static void playChallengeHeartsValueChangeTitle(@NotNull AbstractChallenge challenge, int health) {
     playChangeChallengeValueTitle(challenge, (health / 2f) + " §c❤");
   }
 
-  public static void playChallengeHeartsValueChangeTitle(@Nonnull Modifier modifier) {
+  public static void playChallengeHeartsValueChangeTitle(@NotNull Modifier modifier) {
     playChallengeHeartsValueChangeTitle(modifier, modifier.getValue());
   }
 
-  public static void playChallengeSecondsValueChangeTitle(@Nonnull AbstractChallenge challenge, int seconds) {
+  public static void playChallengeSecondsValueChangeTitle(@NotNull AbstractChallenge challenge, int seconds) {
     playChangeChallengeValueTitle(challenge, Message.forName("subtitle-time-seconds").asString(seconds));
   }
 
-  public static void playChallengeSecondsRangeValueChangeTitle(@Nonnull AbstractChallenge challenge, int min, int max) {
+  public static void playChallengeSecondsRangeValueChangeTitle(@NotNull AbstractChallenge challenge, int min, int max) {
     playChangeChallengeValueTitle(challenge, Message.forName("subtitle-time-seconds-range").asString(min, max));
   }
 
-  public static void playChallengeMinutesValueChangeTitle(@Nonnull AbstractChallenge challenge, int seconds) {
+  public static void playChallengeMinutesValueChangeTitle(@NotNull AbstractChallenge challenge, int seconds) {
     playChangeChallengeValueTitle(challenge, Message.forName("subtitle-time-minutes").asString(seconds));
   }
 
-  @Nonnull
-  public static String[] getTimeRangeSettingsDescription(@Nonnull Modifier modifier, @Nonnegative int multiplier, @Nonnegative int range) {
+  @NotNull
+  public static String[] getTimeRangeSettingsDescription(@NotNull Modifier modifier, int multiplier, int range) {
     return Message.forName("item-time-seconds-range-description").asArray(modifier.getValue() * multiplier - range, modifier.getValue() * multiplier + range);
   }
 
-  @Nonnull
-  public static String[] getTimeRangeSettingsDescription(@Nonnull Modifier modifier, @Nonnegative int range) {
+  @NotNull
+  public static String[] getTimeRangeSettingsDescription(@NotNull Modifier modifier, int range) {
     return getTimeRangeSettingsDescription(modifier, 1, range);
   }
 
-  public static boolean finalDamageIsNull(@Nonnull EntityDamageEvent event) {
+  public static boolean finalDamageIsNull(@NotNull EntityDamageEvent event) {
     return getFinalDamage(event) == 0;
   }
 
-  public static double getFinalDamage(@Nonnull EntityDamageEvent event) {
+  public static double getFinalDamage(@NotNull EntityDamageEvent event) {
     return event.getFinalDamage() + event.getDamage(DamageModifier.ABSORPTION);
   }
 

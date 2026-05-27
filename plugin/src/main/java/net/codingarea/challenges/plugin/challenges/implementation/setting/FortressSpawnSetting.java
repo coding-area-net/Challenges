@@ -7,8 +7,7 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Material;
 import org.bukkit.StructureType;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class FortressSpawnSetting extends NetherPortalSpawnSetting {
@@ -17,7 +16,7 @@ public class FortressSpawnSetting extends NetherPortalSpawnSetting {
     super(MenuType.SETTINGS, StructureType.NETHER_FORTRESS, "unable-to-find-fortress", Material.NETHER_BRICKS);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.NETHER_BRICK_STAIRS, Message.forName("item-fortress-spawn-setting"));

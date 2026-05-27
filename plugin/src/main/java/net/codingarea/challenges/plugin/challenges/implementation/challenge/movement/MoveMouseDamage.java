@@ -14,9 +14,9 @@ import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class MoveMouseDamage extends SettingModifier {
     setCategory(SettingCategory.MOVEMENT);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.COMPASS, Message.forName("item-no-mouse-move-challenge"));

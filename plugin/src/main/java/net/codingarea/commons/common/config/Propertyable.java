@@ -1,10 +1,9 @@
 package net.codingarea.commons.common.config;
 
 import net.codingarea.commons.common.version.Version;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.awt.*;
 import java.time.OffsetDateTime;
 import java.util.*;
@@ -21,179 +20,178 @@ import java.util.function.Function;
  */
 public interface Propertyable {
 
-  <T> T getInstance(@Nonnull String path, @Nonnull Class<T> classOfT);
+  <T> T getInstance(@NotNull String path, @NotNull Class<T> classOfT);
 
   @Nullable
-  Object getObject(@Nonnull String path);
+  Object getObject(@NotNull String path);
 
-  @Nonnull
-  Object getObject(@Nonnull String path, @Nonnull Object def);
+  @NotNull
+  Object getObject(@NotNull String path, @NotNull Object def);
 
-  @Nonnull
+  @NotNull
   @SuppressWarnings("unchecked")
-  default <T, O extends Propertyable> Optional<T> getOptional(@Nonnull String key, @Nonnull BiFunction<O, ? super String, ? extends T> extractor) {
+  default <T, O extends Propertyable> Optional<T> getOptional(@NotNull String key, @NotNull BiFunction<O, ? super String, ? extends T> extractor) {
     return Optional.ofNullable(extractor.apply((O) this, key));
   }
 
-  @Nonnull
+  @NotNull
   @SuppressWarnings("unchecked")
-  default <O extends Propertyable> Propertyable apply(@Nonnull Consumer<O> action) {
+  default <O extends Propertyable> Propertyable apply(@NotNull Consumer<O> action) {
     action.accept((O) this);
     return this;
   }
 
-  @Nonnull
-  default <O extends Propertyable> Propertyable applyIf(boolean expression, @Nonnull Consumer<O> action) {
+  @NotNull
+  default <O extends Propertyable> Propertyable applyIf(boolean expression, @NotNull Consumer<O> action) {
     if (expression)
       apply(action);
     return this;
   }
 
   @Nullable
-  String getString(@Nonnull String path);
+  String getString(@NotNull String path);
 
-  @Nonnull
-  String getString(@Nonnull String path, @Nonnull String def);
-
-  @Nullable
-  byte[] getBinary(@Nonnull String path);
-
-  char getChar(@Nonnull String path);
-
-  char getChar(@Nonnull String path, char def);
-
-  long getLong(@Nonnull String path);
-
-  long getLong(@Nonnull String path, long def);
-
-  int getInt(@Nonnull String path);
-
-  int getInt(@Nonnull String path, int def);
-
-  short getShort(@Nonnull String path);
-
-  short getShort(@Nonnull String path, short def);
-
-  byte getByte(@Nonnull String path);
-
-  byte getByte(@Nonnull String path, byte def);
-
-  float getFloat(@Nonnull String path);
-
-  float getFloat(@Nonnull String path, float def);
-
-  double getDouble(@Nonnull String path);
-
-  double getDouble(@Nonnull String path, double def);
-
-  boolean getBoolean(@Nonnull String path);
-
-  boolean getBoolean(@Nonnull String path, boolean def);
-
-  @Nonnull
-  List<String> getStringList(@Nonnull String path);
-
-  @Nonnull
-  String[] getStringArray(@Nonnull String path);
-
-  @Nonnull
-  <E extends Enum<E>> List<E> getEnumList(@Nonnull String path, @Nonnull Class<E> classOfEnum);
-
-  @Nonnull
-  List<UUID> getUUIDList(@Nonnull String path);
-
-  @Nonnull
-  List<Character> getCharacterList(@Nonnull String path);
-
-  @Nonnull
-  List<Byte> getByteList(@Nonnull String path);
-
-  @Nonnull
-  List<Short> getShortList(@Nonnull String path);
-
-  @Nonnull
-  List<Integer> getIntegerList(@Nonnull String path);
-
-  @Nonnull
-  List<Long> getLongList(@Nonnull String path);
-
-  @Nonnull
-  List<Float> getFloatList(@Nonnull String path);
-
-  @Nonnull
-  List<Double> getDoubleList(@Nonnull String path);
+  @NotNull
+  String getString(@NotNull String path, @NotNull String def);
 
   @Nullable
-  UUID getUUID(@Nonnull String path);
+  byte[] getBinary(@NotNull String path);
 
-  @Nonnull
-  UUID getUUID(@Nonnull String path, @Nonnull UUID def);
+  char getChar(@NotNull String path);
+
+  char getChar(@NotNull String path, char def);
+
+  long getLong(@NotNull String path);
+
+  long getLong(@NotNull String path, long def);
+
+  int getInt(@NotNull String path);
+
+  int getInt(@NotNull String path, int def);
+
+  short getShort(@NotNull String path);
+
+  short getShort(@NotNull String path, short def);
+
+  byte getByte(@NotNull String path);
+
+  byte getByte(@NotNull String path, byte def);
+
+  float getFloat(@NotNull String path);
+
+  float getFloat(@NotNull String path, float def);
+
+  double getDouble(@NotNull String path);
+
+  double getDouble(@NotNull String path, double def);
+
+  boolean getBoolean(@NotNull String path);
+
+  boolean getBoolean(@NotNull String path, boolean def);
+
+  @NotNull
+  List<String> getStringList(@NotNull String path);
+
+  @NotNull
+  String[] getStringArray(@NotNull String path);
+
+  @NotNull
+  <E extends Enum<E>> List<E> getEnumList(@NotNull String path, @NotNull Class<E> classOfEnum);
+
+  @NotNull
+  List<UUID> getUUIDList(@NotNull String path);
+
+  @NotNull
+  List<Character> getCharacterList(@NotNull String path);
+
+  @NotNull
+  List<Byte> getByteList(@NotNull String path);
+
+  @NotNull
+  List<Short> getShortList(@NotNull String path);
+
+  @NotNull
+  List<Integer> getIntegerList(@NotNull String path);
+
+  @NotNull
+  List<Long> getLongList(@NotNull String path);
+
+  @NotNull
+  List<Float> getFloatList(@NotNull String path);
+
+  @NotNull
+  List<Double> getDoubleList(@NotNull String path);
 
   @Nullable
-  OffsetDateTime getDateTime(@Nonnull String path);
+  UUID getUUID(@NotNull String path);
 
-  @Nonnull
-  OffsetDateTime getDateTime(@Nonnull String path, @Nonnull OffsetDateTime def);
-
-  @Nullable
-  Date getDate(@Nonnull String path);
-
-  @Nonnull
-  Date getDate(@Nonnull String path, @Nonnull Date def);
+  @NotNull
+  UUID getUUID(@NotNull String path, @NotNull UUID def);
 
   @Nullable
-  Color getColor(@Nonnull String path);
+  OffsetDateTime getDateTime(@NotNull String path);
 
-  @Nonnull
-  Color getColor(@Nonnull String path, @Nonnull Color def);
-
-  @Nullable
-  <E extends Enum<E>> E getEnum(@Nonnull String path, @Nonnull Class<E> classOfEnum);
-
-  @Nonnull
-  <E extends Enum<E>> E getEnum(@Nonnull String path, @Nonnull E def);
+  @NotNull
+  OffsetDateTime getDateTime(@NotNull String path, @NotNull OffsetDateTime def);
 
   @Nullable
-  Class<?> getClass(@Nonnull String path);
+  Date getDate(@NotNull String path);
 
-  @Nonnull
-  Class<?> getClass(@Nonnull String path, @Nonnull Class<?> def);
+  @NotNull
+  Date getDate(@NotNull String path, @NotNull Date def);
 
   @Nullable
-  Version getVersion(@Nonnull String path);
+  Color getColor(@NotNull String path);
 
-  @Nonnull
-  Version getVersion(@Nonnull String path, @Nonnull Version def);
+  @NotNull
+  Color getColor(@NotNull String path, @NotNull Color def);
 
-  boolean isList(@Nonnull String path);
+  @Nullable
+  <E extends Enum<E>> E getEnum(@NotNull String path, @NotNull Class<E> classOfEnum);
 
-  boolean isObject(@Nonnull String path);
+  @NotNull
+  <E extends Enum<E>> E getEnum(@NotNull String path, @NotNull E def);
 
-  boolean contains(@Nonnull String path);
+  @Nullable
+  Class<?> getClass(@NotNull String path);
+
+  @NotNull
+  Class<?> getClass(@NotNull String path, @NotNull Class<?> def);
+
+  @Nullable
+  Version getVersion(@NotNull String path);
+
+  @NotNull
+  Version getVersion(@NotNull String path, @NotNull Version def);
+
+  boolean isList(@NotNull String path);
+
+  boolean isObject(@NotNull String path);
+
+  boolean contains(@NotNull String path);
 
   boolean isEmpty();
 
-  @Nonnegative
   int size();
 
-  @Nonnull
+  @NotNull
   Map<String, Object> values();
 
-  @Nonnull
+  @NotNull
   Map<String, String> valuesAsStrings();
 
-  @Nonnull
-  <K, V> Map<K, V> mapValues(@Nonnull Function<? super String, ? extends K> keyMapper, @Nonnull Function<? super String, ? extends V> valueMapper);
+  @NotNull
+  <K, V> Map<K, V> mapValues(@NotNull Function<? super String, ? extends K> keyMapper, @NotNull Function<? super String, ? extends V> valueMapper);
 
-  @Nonnull
-  <T> List<T> mapList(@Nonnull String path, @Nonnull Function<String, ? extends T> mapper);
+  @NotNull
+  <T> List<T> mapList(@NotNull String path, @NotNull Function<String, ? extends T> mapper);
 
-  @Nonnull
+  @NotNull
   Collection<String> keys();
 
-  @Nonnull
+  @NotNull
   Set<Entry<String, Object>> entrySet();
 
-  void forEach(@Nonnull BiConsumer<? super String, ? super Object> action);
+  void forEach(@NotNull BiConsumer<? super String, ? super Object> action);
 
 }

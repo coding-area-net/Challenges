@@ -4,9 +4,8 @@ import net.codingarea.challenges.plugin.challenges.type.IGoal;
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class SettingGoal extends Setting implements IGoal {
 
@@ -18,7 +17,7 @@ public abstract class SettingGoal extends Setting implements IGoal {
     super(MenuType.GOAL, enabledByDefault);
   }
 
-  @Nonnull
+  @NotNull
   public SoundSample getStartSound() {
     return SoundSample.DRAGON_BREATH;
   }

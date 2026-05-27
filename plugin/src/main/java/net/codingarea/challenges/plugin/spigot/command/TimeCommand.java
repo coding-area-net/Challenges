@@ -9,9 +9,9 @@ import net.codingarea.commons.common.collection.NumberFormatter;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -28,7 +28,7 @@ public class TimeCommand implements PlayerCommand, Completer {
   }
 
   @Override
-  public void onCommand(@Nonnull Player player, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
 
     if (args.length == 0) {
       Message.forName("syntax").send(player, Prefix.CHALLENGES, "time <set/add/remove/query/day/night/noon/midnight>");
@@ -104,14 +104,14 @@ public class TimeCommand implements PlayerCommand, Completer {
 
   }
 
-  private String getNearestTime(@Nonnull World world) {
+  private String getNearestTime(@NotNull World world) {
     return names.entrySet().stream()
       .min(Comparator.comparingLong(entry -> Math.abs(world.getTime() - entry.getKey())))
       .map(Entry::getValue)
       .orElse("Day");
   }
 
-  private long getTime(@Nonnull String input) {
+  private long getTime(@NotNull String input) {
     for (Entry<Long, String> entry : names.entrySet()) {
       if (entry.getValue().equalsIgnoreCase(input))
         return entry.getKey();
@@ -119,7 +119,7 @@ public class TimeCommand implements PlayerCommand, Completer {
     return getLongFromString(input);
   }
 
-  private long getLongFromString(@Nonnull String input) {
+  private long getLongFromString(@NotNull String input) {
     try {
       return Long.parseLong(input);
     } catch (NumberFormatException ex) {
@@ -129,7 +129,7 @@ public class TimeCommand implements PlayerCommand, Completer {
 
   @Nullable
   @Override
-  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
     if (args.length <= 1)
       return Utils.filterRecommendations(args[0], "set", "subtract", "query", "day", "night", "noon", "midnight");
     if (args[0].equalsIgnoreCase("set"))

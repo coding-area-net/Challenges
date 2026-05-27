@@ -3,19 +3,18 @@ package net.codingarea.commons.common.logging.internal;
 import net.codingarea.commons.common.logging.ILogger;
 import net.codingarea.commons.common.logging.WrappedILogger;
 import net.codingarea.commons.common.logging.lib.Slf4jILogger;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.helpers.MarkerIgnoringBase;
-
-import javax.annotation.Nonnull;
 
 public class Slf4jILoggerWrapper extends MarkerIgnoringBase implements WrappedILogger, Slf4jILogger {
 
   private final ILogger logger;
 
-  public Slf4jILoggerWrapper(@Nonnull ILogger logger) {
+  public Slf4jILoggerWrapper(@NotNull ILogger logger) {
     this.logger = logger;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ILogger getWrappedLogger() {
     return logger;

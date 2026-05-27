@@ -17,9 +17,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -46,7 +45,7 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
     this(0);
   }
 
-  public static boolean playNoPermissionsEffect(@Nonnull Player player) {
+  public static boolean playNoPermissionsEffect(@NotNull Player player) {
     MenuManager menuManager = Challenges.getInstance().getMenuManager();
     if (!menuManager.permissionToManageGUI()) return false;
     if (mayManageSettings(player)) return false;
@@ -54,7 +53,7 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
     return true;
   }
 
-  private static boolean mayManageSettings(@Nonnull Player player) {
+  private static boolean mayManageSettings(@NotNull Player player) {
     return player.hasPermission(MenuManager.MANAGE_GUI_PERMISSION);
   }
 
@@ -69,7 +68,7 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
   }
 
   @Override
-  public void generatePage(@Nonnull Inventory inventory, int page) {
+  public void generatePage(@NotNull Inventory inventory, int page) {
 
   }
 
@@ -112,7 +111,7 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
     return page;
   }
 
-  public void setSettingsItems(@Nonnull Inventory inventory, @Nonnull IChallenge challenge, int topSlot) {
+  public void setSettingsItems(@NotNull Inventory inventory, @NotNull IChallenge challenge, int topSlot) {
     inventory.setItem(getSlots()[topSlot], getDisplayItem(challenge));
     inventory.setItem(getSlots()[topSlot] + 9, getSettingsItem(challenge));
   }
@@ -121,11 +120,11 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
     this.challenges.clear();
   }
 
-  public boolean isInChallengeCache(@Nonnull IChallenge challenge) {
+  public boolean isInChallengeCache(@NotNull IChallenge challenge) {
     return challenges.contains(challenge);
   }
 
-  public void addChallengeToCache(@Nonnull IChallenge challenge) {
+  public void addChallengeToCache(@NotNull IChallenge challenge) {
     if (isNew(challenge) && Challenges.getInstance().getMenuManager().isDisplayNewInFront()) {
       challenges.add(countNewChallenges(), challenge);
     } else {
@@ -133,15 +132,15 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
     }
   }
 
-  public void removeChallengeFromCache(@Nonnull IChallenge challenge) {
+  public void removeChallengeFromCache(@NotNull IChallenge challenge) {
     challenges.remove(challenge);
   }
 
-  protected ItemStack getDisplayItem(@Nonnull IChallenge challenge) {
+  protected ItemStack getDisplayItem(@NotNull IChallenge challenge) {
     return getDisplayItemBuilder(challenge).build();
   }
 
-  protected ItemBuilder getDisplayItemBuilder(@Nonnull IChallenge challenge) {
+  protected ItemBuilder getDisplayItemBuilder(@NotNull IChallenge challenge) {
     try {
       ItemBuilder item = new ItemBuilder(challenge.getDisplayItem()).hideAttributes();
       if (newSuffix && isNew(challenge)) {
@@ -155,7 +154,7 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
     }
   }
 
-  protected ItemStack getSettingsItem(@Nonnull IChallenge challenge) {
+  protected ItemStack getSettingsItem(@NotNull IChallenge challenge) {
     try {
       ItemBuilder item = new ItemBuilder(challenge.getSettingsItem()).hideAttributes();
       return item.build();
@@ -165,7 +164,7 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
     }
   }
 
-  protected boolean isNew(@Nonnull IChallenge challenge) {
+  protected boolean isNew(@NotNull IChallenge challenge) {
     Version version = Challenges.getInstance().getVersion();
     Version since = Version.getAnnotatedSince(challenge);
     return since.isNewerOrEqualThan(version);
@@ -177,9 +176,9 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
 
   public abstract int[] getSlots();
 
-  public abstract void executeClickAction(@Nonnull IChallenge challenge, @Nonnull MenuClickInfo info, int itemIndex);
+  public abstract void executeClickAction(@NotNull IChallenge challenge, @NotNull MenuClickInfo info, int itemIndex);
 
-  public void onPreChallengePageClicking(@Nonnull MenuClickInfo clickInfo, @Nonnegative int page) {
+  public void onPreChallengePageClicking(@NotNull MenuClickInfo clickInfo, int page) {
 
   }
 
@@ -194,7 +193,7 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
     }
 
     @Override
-    public void handleClick(@Nonnull MenuClickInfo info) {
+    public void handleClick(@NotNull MenuClickInfo info) {
 
       if (InventoryUtils.handleNavigationClicking(generator, getNavigationSlots(page), page, info, () -> onLeaveClick.accept(info.getPlayer()))) {
         return;

@@ -9,13 +9,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.StructureType;
 import org.bukkit.entity.Player;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class VillageCommand implements PlayerCommand {
 
   @Override
-  public void onCommand(@Nonnull Player player, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
     player.setNoDamageTicks(10);
     Message.forName("command-village-search").send(player, Prefix.CHALLENGES);
 

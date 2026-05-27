@@ -8,9 +8,8 @@ import net.codingarea.challenges.plugin.utils.misc.InventoryUtils.InventorySette
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public abstract class MultiPageMenuGenerator extends MenuGenerator {
 
   protected final List<Inventory> inventories = new ArrayList<>();
 
-  @Nonnull
+  @NotNull
   protected Inventory createNewInventory(int page) {
     Inventory inventory = Bukkit.createInventory(MenuPosition.HOLDER, getSize(), getTitle(page));
     InventoryUtils.fillInventory(inventory, ItemBuilder.FILL_ITEM);
@@ -26,7 +25,7 @@ public abstract class MultiPageMenuGenerator extends MenuGenerator {
     return inventory;
   }
 
-  protected String getTitle(@Nonnegative int page) {
+  protected String getTitle(int page) {
     return InventoryTitleManager.getTitle(getMenuType(), page);
   }
 
@@ -34,9 +33,9 @@ public abstract class MultiPageMenuGenerator extends MenuGenerator {
 
   public abstract int getPagesCount();
 
-  public abstract void generatePage(@Nonnull Inventory inventory, int page);
+  public abstract void generatePage(@NotNull Inventory inventory, int page);
 
-  public abstract int[] getNavigationSlots(@Nonnegative int page);
+  public abstract int[] getNavigationSlots(int page);
 
   @Override
   public void generateInventories() {
@@ -60,7 +59,7 @@ public abstract class MultiPageMenuGenerator extends MenuGenerator {
     return inventories;
   }
 
-  public void addNavigationItems(@Nonnull Inventory inventory, int page) {
+  public void addNavigationItems(@NotNull Inventory inventory, int page) {
     InventoryUtils.setNavigationItems(inventory,
       getNavigationSlots(page), true,
       InventorySetter.INVENTORY, page, inventories.size(),

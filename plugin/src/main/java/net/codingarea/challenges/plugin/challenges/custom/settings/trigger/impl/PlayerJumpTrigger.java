@@ -5,8 +5,7 @@ import net.codingarea.challenges.plugin.spigot.events.PlayerJumpEvent;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class PlayerJumpTrigger extends ChallengeTrigger {
 
@@ -20,7 +19,7 @@ public class PlayerJumpTrigger extends ChallengeTrigger {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onJump(@Nonnull PlayerJumpEvent event) {
+  public void onJump(@NotNull PlayerJumpEvent event) {
     createData().entity(event.getPlayer()).execute();
   }
 

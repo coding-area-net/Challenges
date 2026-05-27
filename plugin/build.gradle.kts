@@ -5,11 +5,11 @@ plugins {
 
 dependencies {
   implementation(libs.slf4j.api)
-  implementation(libs.jsr305)
 
   compileOnly(libs.spigot.api)
   compileOnly(libs.authlib)
 
+  compileOnly(libs.jetbrains.annotations)
   compileOnly(libs.lombok)
 
   // gson is already bundled by mojang, accessing it saves on artifact size but might cause compatibilty issues

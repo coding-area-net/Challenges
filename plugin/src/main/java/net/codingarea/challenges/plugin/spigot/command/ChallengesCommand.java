@@ -12,14 +12,13 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.List;
 
 public class ChallengesCommand implements PlayerCommand, Completer {
 
   @Override
-  public void onCommand(@Nonnull Player player, @Nonnull String[] args) {
+  public void onCommand(@NotNull Player player, @NotNull String[] args) {
     if (args.length > 1) {
       Message.forName("syntax").send(player, Prefix.CHALLENGES, "challenges [menu]");
       return;

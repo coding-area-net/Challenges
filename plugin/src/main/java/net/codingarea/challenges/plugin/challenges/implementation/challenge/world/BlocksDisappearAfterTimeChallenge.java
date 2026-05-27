@@ -14,9 +14,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +30,7 @@ public class BlocksDisappearAfterTimeChallenge extends SettingModifier {
     setCategory(SettingCategory.WORLD);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.STRING, Message.forName("item-blocks-disappear-time-challenge"));
@@ -43,7 +43,7 @@ public class BlocksDisappearAfterTimeChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onBlockPlace(@Nonnull BlockPlaceEvent event) {
+  public void onBlockPlace(@NotNull BlockPlaceEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
 
@@ -54,7 +54,7 @@ public class BlocksDisappearAfterTimeChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onBlockPlace(@Nonnull BlockBreakEvent event) {
+  public void onBlockPlace(@NotNull BlockBreakEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
 
@@ -62,7 +62,7 @@ public class BlocksDisappearAfterTimeChallenge extends SettingModifier {
     if (oldTask != null) oldTask.cancel();
   }
 
-  private BukkitTask runTask(@Nonnull Block block) {
+  private BukkitTask runTask(@NotNull Block block) {
     return Bukkit.getScheduler().runTaskLater(plugin, () -> block.setType(Material.AIR), getValue() * 20L);
   }
 

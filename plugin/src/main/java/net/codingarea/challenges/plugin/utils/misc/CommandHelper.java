@@ -5,9 +5,9 @@ import org.bukkit.Location;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -31,7 +31,7 @@ public final class CommandHelper {
     return list;
   }
 
-  public static List<Player> getPlayers(@Nonnull CommandSender sender, @Nonnull String input) {
+  public static List<Player> getPlayers(@NotNull CommandSender sender, @NotNull String input) {
     ArrayList<Player> list = new ArrayList<>();
     Location senderLocation = getSenderLocation(sender);
 
@@ -66,7 +66,7 @@ public final class CommandHelper {
   }
 
   @Nullable
-  public static Location getSenderLocation(@Nonnull CommandSender sender) {
+  public static Location getSenderLocation(@NotNull CommandSender sender) {
     if (sender instanceof Player) return ((Player) sender).getLocation();
     if (sender instanceof BlockCommandSender)
       return ((BlockCommandSender) sender).getBlock().getLocation();
@@ -74,7 +74,7 @@ public final class CommandHelper {
   }
 
   @Nullable
-  public static Player getNearestPlayer(@Nonnull Location location) {
+  public static Player getNearestPlayer(@NotNull Location location) {
     if (location.getWorld() == null) return null;
     Player currentPlayer = null;
     double playersDistance = -1;

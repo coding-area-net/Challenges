@@ -10,8 +10,8 @@ import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Material;
 import org.bukkit.StructureType;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -24,7 +24,7 @@ public class BastionSpawnSetting extends NetherPortalSpawnSetting {
       Arrays.stream(ExperimentalUtils.getMaterials()).filter(material -> material.name().contains("BASALT")).collect(Collectors.toList()));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.POLISHED_BLACKSTONE_BRICKS, Message.forName("item-bastion-spawn-setting"));

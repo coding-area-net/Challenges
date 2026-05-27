@@ -19,9 +19,8 @@ import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.function.BiConsumer;
 
@@ -35,7 +34,7 @@ public class ForceBlockChallenge extends EndingForceChallenge {
     setCategory(SettingCategory.FORCE);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.GOLDEN_BOOTS, Message.forName("item-force-block-challenge"));
@@ -52,7 +51,7 @@ public class ForceBlockChallenge extends EndingForceChallenge {
     ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 - 30, getValue() * 60 + 30);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   protected BiConsumer<BossBarInstance, Player> setupBossbar() {
     return (bossbar, player) -> {
@@ -68,7 +67,7 @@ public class ForceBlockChallenge extends EndingForceChallenge {
   }
 
   @Override
-  protected boolean isFailing(@Nonnull Player player) {
+  protected boolean isFailing(@NotNull Player player) {
     for (int x = -1; x <= 1; x++) {
       for (int z = -1; z <= 1; z++) {
         for (int y = -1; y <= 1; y++) {
@@ -81,7 +80,7 @@ public class ForceBlockChallenge extends EndingForceChallenge {
   }
 
   @Override
-  protected void broadcastFailedMessage(@Nonnull Player player) {
+  protected void broadcastFailedMessage(@NotNull Player player) {
     Message.forName("force-block-fail").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), player.getLocation().subtract(0, 1, 0).getBlock().getType());
   }
 

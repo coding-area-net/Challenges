@@ -17,8 +17,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-
 public class MaxHealthSetting extends Modifier {
 
   /**
@@ -33,13 +31,13 @@ public class MaxHealthSetting extends Modifier {
     super(MenuType.SETTINGS, 1, 200 * 2, 20);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(MaterialWrapper.RED_DYE, Message.forName("item-max-health-setting"));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     return DefaultItem.value(getValue(), "§e").appendName(" §7HP §8(§e" + (getValue() / 2f) + " §c❤§8)");
@@ -69,7 +67,7 @@ public class MaxHealthSetting extends Modifier {
   }
 
   @EventHandler
-  public void onJoin(@Nonnull PlayerJoinEvent event) {
+  public void onJoin(@NotNull PlayerJoinEvent event) {
     updateHealth(event.getPlayer());
   }
 
@@ -118,4 +116,3 @@ public class MaxHealthSetting extends Modifier {
   }
 
 }
-

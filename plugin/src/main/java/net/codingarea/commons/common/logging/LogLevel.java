@@ -1,6 +1,7 @@
 package net.codingarea.commons.common.logging;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.logging.Level;
 
 public enum LogLevel {
@@ -18,7 +19,7 @@ public enum LogLevel {
   private final int value;
   private final boolean highlighted;
 
-  LogLevel(int value, @Nonnull String uppercaseName, @Nonnull String lowercaseName, @Nonnull Level javaLevel, boolean highlighted) {
+  LogLevel(int value, @NotNull String uppercaseName, @NotNull String lowercaseName, @NotNull Level javaLevel, boolean highlighted) {
     this.uppercaseName = uppercaseName;
     this.lowercaseName = lowercaseName;
     this.javaLevel = javaLevel;
@@ -26,12 +27,12 @@ public enum LogLevel {
     this.highlighted = highlighted;
   }
 
-  @Nonnull
+  @NotNull
   public Level getJavaUtilLevel() {
     return javaLevel;
   }
 
-  public boolean isShownAtLoggerLevel(@Nonnull LogLevel loggerLevel) {
+  public boolean isShownAtLoggerLevel(@NotNull LogLevel loggerLevel) {
     return this.getValue() >= loggerLevel.getValue();
   }
 
@@ -39,12 +40,12 @@ public enum LogLevel {
     return value;
   }
 
-  @Nonnull
+  @NotNull
   public String getLowerCaseName() {
     return lowercaseName;
   }
 
-  @Nonnull
+  @NotNull
   public String getUpperCaseName() {
     return uppercaseName;
   }
@@ -53,8 +54,8 @@ public enum LogLevel {
     return highlighted;
   }
 
-  @Nonnull
-  public static LogLevel fromJavaLevel(@Nonnull Level level) {
+  @NotNull
+  public static LogLevel fromJavaLevel(@NotNull Level level) {
     for (LogLevel logLevel : values()) {
       if (logLevel.getJavaUtilLevel().intValue() == level.intValue())
         return logLevel;
@@ -62,7 +63,7 @@ public enum LogLevel {
     return INFO;
   }
 
-  @Nonnull
+  @NotNull
   public static LogLevel fromValue(int value) {
     for (LogLevel level : values()) {
       if (level.getValue() == value)
@@ -71,8 +72,8 @@ public enum LogLevel {
     return INFO;
   }
 
-  @Nonnull
-  public static LogLevel fromName(@Nonnull String name) {
+  @NotNull
+  public static LogLevel fromName(@NotNull String name) {
     for (LogLevel level : values()) {
       if (level.getUpperCaseName().equalsIgnoreCase(name))
         return level;

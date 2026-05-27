@@ -27,9 +27,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,7 +45,7 @@ public class ForceItemChallenge extends CompletableForceChallenge {
     setCategory(SettingCategory.FORCE);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.LEATHER_BOOTS, Message.forName("item-force-item-challenge"));
@@ -63,7 +62,7 @@ public class ForceItemChallenge extends CompletableForceChallenge {
     ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 - 30, getValue() * 60 + 30);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   protected BiConsumer<BossBarInstance, Player> setupBossbar() {
     return (bossbar, player) -> {
@@ -84,7 +83,7 @@ public class ForceItemChallenge extends CompletableForceChallenge {
   }
 
   @Override
-  protected void broadcastSuccessMessage(@Nonnull Player player) {
+  protected void broadcastSuccessMessage(@NotNull Player player) {
     Message.forName("force-item-success").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), item);
   }
 
@@ -109,7 +108,7 @@ public class ForceItemChallenge extends CompletableForceChallenge {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onClick(@Nonnull PlayerInventoryClickEvent event) {
+  public void onClick(@NotNull PlayerInventoryClickEvent event) {
     ItemStack item = event.getCurrentItem();
     if (item == null) return;
     if (item.getType() != this.item) return;
@@ -117,14 +116,14 @@ public class ForceItemChallenge extends CompletableForceChallenge {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onPickUp(@Nonnull PlayerPickupItemEvent event) {
+  public void onPickUp(@NotNull PlayerPickupItemEvent event) {
     Material material = event.getItem().getItemStack().getType();
     if (material != item) return;
     completeForcing(event.getPlayer());
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onInteract(@Nonnull PlayerInteractEvent event) {
+  public void onInteract(@NotNull PlayerInteractEvent event) {
     Bukkit.getScheduler().runTaskLater(plugin, () -> {
       ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
       Material material = item.getType();

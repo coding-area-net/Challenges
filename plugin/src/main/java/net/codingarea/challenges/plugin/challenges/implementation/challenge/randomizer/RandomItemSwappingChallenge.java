@@ -13,9 +13,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Since("2.0")
 public class RandomItemSwappingChallenge extends TimedChallenge {
@@ -36,7 +35,7 @@ public class RandomItemSwappingChallenge extends TimedChallenge {
     );
   }
 
-  private static void swapItemToRandomSlot(@Nonnull Inventory inventory, int slot1, int slot2) {
+  private static void swapItemToRandomSlot(@NotNull Inventory inventory, int slot1, int slot2) {
     if (slot1 == -1 || slot2 == -1) return;
     ItemStack item1 = inventory.getItem(slot1);
     ItemStack item2 = inventory.getItem(slot2);
@@ -44,7 +43,7 @@ public class RandomItemSwappingChallenge extends TimedChallenge {
     inventory.setItem(slot2, item1);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.HOPPER, Message.forName("item-random-swapping-challenge"));

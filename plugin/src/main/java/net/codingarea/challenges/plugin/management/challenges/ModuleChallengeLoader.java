@@ -14,8 +14,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.lang.reflect.Constructor;
 import java.util.Optional;
 
@@ -23,11 +23,11 @@ public class ModuleChallengeLoader {
 
   protected final BukkitModule plugin;
 
-  public ModuleChallengeLoader(@Nonnull BukkitModule plugin) {
+  public ModuleChallengeLoader(@NotNull BukkitModule plugin) {
     this.plugin = plugin;
   }
 
-  public final void registerWithCommand(@Nonnull IChallenge challenge, @Nonnull String... commandNames) {
+  public final void registerWithCommand(@NotNull IChallenge challenge, @NotNull String... commandNames) {
     try {
 
       Challenges.getInstance().getChallengeManager().register(challenge);
@@ -45,11 +45,11 @@ public class ModuleChallengeLoader {
     }
   }
 
-  public final void register(@Nonnull IChallenge challenge) {
+  public final void register(@NotNull IChallenge challenge) {
     registerWithCommand(challenge);
   }
 
-  public final void registerWithCommand(@Nonnull Class<? extends IChallenge> classOfChallenge, @Nonnull String[] commandNames, @Nonnull Class<?>[] parameterClasses, @Nonnull Object... parameters) {
+  public final void registerWithCommand(@NotNull Class<? extends IChallenge> classOfChallenge, @NotNull String[] commandNames, @NotNull Class<?>[] parameterClasses, @NotNull Object... parameters) {
     try {
 
       if (classOfChallenge.isAnnotationPresent(RequireVersion.class)) {
@@ -72,11 +72,11 @@ public class ModuleChallengeLoader {
     }
   }
 
-  public final void register(@Nonnull Class<? extends IChallenge> classOfChallenge, @Nonnull Class<?>[] parameterClasses, @Nonnull Object... parameters) {
+  public final void register(@NotNull Class<? extends IChallenge> classOfChallenge, @NotNull Class<?>[] parameterClasses, @NotNull Object... parameters) {
     registerWithCommand(classOfChallenge, new String[0], parameterClasses, parameters);
   }
 
-  public final void register(@Nonnull Class<? extends IChallenge> classOfChallenge, @Nonnull Object... parameters) {
+  public final void register(@NotNull Class<? extends IChallenge> classOfChallenge, @NotNull Object... parameters) {
 
     Class<?>[] parameterClasses = new Class[parameters.length];
     for (int i = 0; i < parameters.length; i++) {
@@ -87,27 +87,27 @@ public class ModuleChallengeLoader {
 
   }
 
-  public final void registerWithCommand(@Nonnull Class<? extends IChallenge> classOfChallenge, @Nonnull String... commandNames) {
+  public final void registerWithCommand(@NotNull Class<? extends IChallenge> classOfChallenge, @NotNull String... commandNames) {
     registerWithCommand(classOfChallenge, commandNames, new Class[0]);
   }
 
-  public final void registerDamageRule(@Nonnull String name, @Nonnull Material material, @Nonnull DamageCause... causes) {
+  public final void registerDamageRule(@NotNull String name, @NotNull Material material, @NotNull DamageCause... causes) {
     registerDamageRule(name, new ItemBuilder(material), causes);
   }
 
-  public final void registerDamageRule(@Nonnull String name, @Nonnull ItemBuilder preset, @Nonnull DamageCause... causes) {
+  public final void registerDamageRule(@NotNull String name, @NotNull ItemBuilder preset, @NotNull DamageCause... causes) {
     register(DamageRuleSetting.class, new Class[]{ItemBuilder.class, String.class, DamageCause[].class}, preset, name, causes);
   }
 
-  public final void registerMaterialRule(@Nonnull String title, @Nonnull String replacement, @Nonnull Material... materials) {
+  public final void registerMaterialRule(@NotNull String title, @NotNull String replacement, @NotNull Material... materials) {
     registerMaterialRule("item-block-material", new Object[]{title, replacement}, materials);
   }
 
-  public final void registerMaterialRule(@Nonnull String name, Object[] replacements, @Nonnull Material... materials) {
+  public final void registerMaterialRule(@NotNull String name, Object[] replacements, @NotNull Material... materials) {
     registerMaterialRule(name, new ItemBuilder(materials[0]), replacements, materials);
   }
 
-  public final void registerMaterialRule(@Nonnull String name, @Nonnull ItemBuilder preset, Object[] replacements, @Nonnull Material... materials) {
+  public final void registerMaterialRule(@NotNull String name, @NotNull ItemBuilder preset, Object[] replacements, @NotNull Material... materials) {
     register(BlockMaterialSetting.class, new Class[]{String.class, ItemBuilder.class, Object[].class, Material[].class}, name, preset, replacements, materials);
   }
 
@@ -116,7 +116,7 @@ public class ModuleChallengeLoader {
    * Unregisters an existing challenge and deletes its settings.
    * It does not unregister commands!
    */
-  public final void unregister(@Nonnull IChallenge challenge) {
+  public final void unregister(@NotNull IChallenge challenge) {
     Challenges.getInstance().getChallengeManager().unregister(challenge);
     Challenges.getInstance().getScheduler().unregister(challenge);
     Challenges.getInstance().getConfigManager().getSettingsConfig().remove(challenge.getUniqueName());

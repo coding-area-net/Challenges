@@ -25,9 +25,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -53,7 +53,7 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
     totalItemsCount = itemsToFind.size();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.GRASS_BLOCK, Message.forName("item-all-items-goal"));
@@ -100,7 +100,7 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
   }
 
   @Override
-  public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
     if (!isEnabled()) {
       Message.forName("challenge-disabled").send(sender, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.playIfPlayer(sender);
@@ -120,7 +120,7 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onClick(@Nonnull PlayerInventoryClickEvent event) {
+  public void onClick(@NotNull PlayerInventoryClickEvent event) {
     if (event.isCancelled()) return;
     ItemStack item = event.getCurrentItem();
     if (item == null) return;
@@ -128,13 +128,13 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onPickUp(@Nonnull PlayerPickupItemEvent event) {
+  public void onPickUp(@NotNull PlayerPickupItemEvent event) {
     Material material = event.getItem().getItemStack().getType();
     handleNewItem(material, event.getPlayer());
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onInteract(@Nonnull PlayerInteractEvent event) {
+  public void onInteract(@NotNull PlayerInteractEvent event) {
     Bukkit.getScheduler().runTaskLater(plugin, () -> {
       ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
       Material material = item.getType();
@@ -142,7 +142,7 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
     }, 1);
   }
 
-  protected void handleNewItem(@Nullable Material material, @Nonnull Player player) {
+  protected void handleNewItem(@Nullable Material material, @NotNull Player player) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(player)) return;
     if (currentItem != material) return;
@@ -153,11 +153,11 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
   }
 
   @Override
-  public void getWinnersOnEnd(@Nonnull List<Player> winners) {
+  public void getWinnersOnEnd(@NotNull List<Player> winners) {
   }
 
   @Override
-  public void loadGameState(@Nonnull Document document) {
+  public void loadGameState(@NotNull Document document) {
     super.loadGameState(document);
     random = new SeededRandomWrapper(document.getLong("seed"));
     reloadItemsToFind();
@@ -167,7 +167,7 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
   }
 
   @Override
-  public void writeGameState(@Nonnull Document document) {
+  public void writeGameState(@NotNull Document document) {
     super.writeGameState(document);
     document.set("seed", random.getSeed());
     document.set("found", totalItemsCount - itemsToFind.size());

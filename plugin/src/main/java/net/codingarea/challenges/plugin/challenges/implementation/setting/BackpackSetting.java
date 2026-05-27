@@ -20,8 +20,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,13 +42,13 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
     sharedBackpack = createInventory("§5Team Backpack");
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.CHEST, Message.forName("item-backpack-setting"));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     if (getValue() == SHARED)
@@ -72,7 +72,7 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
   }
 
   @Override
-  public void onCommand(@Nonnull Player player, @Nonnull String[] args) {
+  public void onCommand(@NotNull Player player, @NotNull String[] args) {
     if (ChallengeAPI.isPaused()) {
       Message.forName("timer-not-started").send(player, Prefix.BACKPACK);
       SoundSample.BASS_OFF.play(player);
@@ -96,7 +96,7 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
   }
 
   @Override
-  public void loadGameState(@Nonnull Document document) {
+  public void loadGameState(@NotNull Document document) {
     super.loadGameState(document);
 
     loadChecked(document, "shared", sharedBackpack);
@@ -108,7 +108,7 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
 
   }
 
-  protected void loadChecked(@Nonnull Document document, @Nonnull String key, @Nonnull Inventory inventory) {
+  protected void loadChecked(@NotNull Document document, @NotNull String key, @NotNull Inventory inventory) {
 
     if (document.isDocument(key)) {
       loadLegacy(document.getDocument(key), inventory);
@@ -124,7 +124,7 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
 
   }
 
-  protected void loadLegacy(@Nonnull Document document, @Nonnull Inventory inventory) {
+  protected void loadLegacy(@NotNull Document document, @NotNull Inventory inventory) {
 
     for (String key : document.keys()) {
       try {
@@ -137,7 +137,7 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
   }
 
   @Override
-  public void writeGameState(@Nonnull Document document) {
+  public void writeGameState(@NotNull Document document) {
     super.writeGameState(document);
 
     write(document, "shared", sharedBackpack);
@@ -148,17 +148,17 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
     });
   }
 
-  protected void write(@Nonnull Document document, @Nonnull String key, @Nonnull Inventory inventory) {
+  protected void write(@NotNull Document document, @NotNull String key, @NotNull Inventory inventory) {
     document.set(key, BukkitSerialization.toBase64(inventory));
   }
 
-  @Nonnull
-  protected Inventory createInventory(@Nonnull String title) {
+  @NotNull
+  protected Inventory createInventory(@NotNull String title) {
     return Bukkit.createInventory(null, size, InventoryTitleManager.getTitle(title));
   }
 
-  @Nonnull
-  protected Inventory getCurrentBackpack(@Nonnull Player player) {
+  @NotNull
+  protected Inventory getCurrentBackpack(@NotNull Player player) {
     return (getValue() == SHARED) ? sharedBackpack : backpacks.computeIfAbsent(player.getUniqueId(), key -> createInventory("§6Backpack"));
   }
 

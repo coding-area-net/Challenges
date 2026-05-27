@@ -16,8 +16,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
 
 @Since("2.0")
@@ -30,7 +30,7 @@ public class StoneSightChallenge extends Setting {
     setCategory(SettingCategory.ENTITIES);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.COBBLESTONE, Message.forName("item-stone-sight-challenge"));
@@ -69,7 +69,7 @@ public class StoneSightChallenge extends Setting {
 
   }
 
-  @Nonnull
+  @NotNull
   private Material getRandomStone() {
     Material[] materials = {
       Material.STONE,

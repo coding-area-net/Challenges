@@ -4,8 +4,8 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventException;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.EventExecutor;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.function.Consumer;
 
 public class SimpleEventExecutor implements EventExecutor {
@@ -13,13 +13,13 @@ public class SimpleEventExecutor implements EventExecutor {
   private final Class<?> classOfEvent;
   private final Consumer action;
 
-  public <E extends Event> SimpleEventExecutor(@Nonnull Class<?> classOfEvent, @Nonnull Consumer<?> action) {
+  public <E extends Event> SimpleEventExecutor(@NotNull Class<?> classOfEvent, @NotNull Consumer<?> action) {
     this.classOfEvent = classOfEvent;
     this.action = action;
   }
 
   @Override
-  public void execute(@Nonnull Listener listener, @Nonnull Event event) throws EventException {
+  public void execute(@NotNull Listener listener, @NotNull Event event) throws EventException {
     if (!classOfEvent.isAssignableFrom(event.getClass())) return;
     try {
       action.accept(event);

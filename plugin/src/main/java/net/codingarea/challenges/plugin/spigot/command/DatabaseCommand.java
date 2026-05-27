@@ -15,7 +15,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -128,7 +127,7 @@ public class DatabaseCommand implements PlayerCommand, TabCompleter {
   /**
    * Checks for disabled features and sends a proper messages to indicate that
    */
-  private boolean checkFeatureDisabled(boolean enabled, @Nonnull Player player) {
+  private boolean checkFeatureDisabled(boolean enabled, @NotNull Player player) {
     if (!enabled) {
       Message.forName("feature-disabled").send(player, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.play(player);

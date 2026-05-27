@@ -3,8 +3,8 @@ package net.codingarea.challenges.plugin.utils.misc;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,8 +36,8 @@ public final class ColorConversions {
   private ColorConversions() {
   }
 
-  @Nonnull
-  public static ChatColor convertDyeColorToChatColor(@Nonnull DyeColor color) {
+  @NotNull
+  public static ChatColor convertDyeColorToChatColor(@NotNull DyeColor color) {
     switch (color) {
       case RED:
         return ChatColor.RED;
@@ -73,8 +73,8 @@ public final class ColorConversions {
     }
   }
 
-  @Nonnull
-  public static Material convertDyeColorToMaterial(@Nonnull DyeColor color) {
+  @NotNull
+  public static Material convertDyeColorToMaterial(@NotNull DyeColor color) {
     switch (color) {
       case YELLOW:
         return MinecraftNameWrapper.YELLOW_DYE;
@@ -112,25 +112,25 @@ public final class ColorConversions {
     }
   }
 
-  @Nonnull
-  public static ChatColor convertAwtColorToChatColor(@Nonnull Color color) {
+  @NotNull
+  public static ChatColor convertAwtColorToChatColor(@NotNull Color color) {
     return colorsByChatColor.entrySet().stream()
       .min((o1, o2) -> (int) ((calculateDifferenceBetweenColors(color, o1.getValue()) - calculateDifferenceBetweenColors(color, o2.getValue())) * 100))
       .orElseThrow(() -> new IllegalStateException("Could not find a ChatColor for the given input"))
       .getKey();
   }
 
-  @Nonnull
-  public static Color convertChatColorToAwtColor(@Nonnull ChatColor color) {
+  @NotNull
+  public static Color convertChatColorToAwtColor(@NotNull ChatColor color) {
     return Optional.ofNullable(colorsByChatColor.get(color)).orElseThrow(() -> new IllegalStateException("Could not find a color for ChatColor." + color.name()));
   }
 
-  @Nonnull
-  public static float[] convertAwtColorToHSB(@Nonnull Color color) {
+  @NotNull
+  public static float[] convertAwtColorToHSB(@NotNull Color color) {
     return Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), null);
   }
 
-  public static double calculateDifferenceBetweenColors(@Nonnull Color color1, @Nonnull Color color2) {
+  public static double calculateDifferenceBetweenColors(@NotNull Color color1, @NotNull Color color2) {
 
     int diffRed = Math.abs(color1.getRed() - color2.getRed());
     int diffGreen = Math.abs(color1.getGreen() - color2.getGreen());
@@ -151,7 +151,7 @@ public final class ColorConversions {
     return false;
   }
 
-  public static boolean isValidColorCode(@Nonnull String code) {
+  public static boolean isValidColorCode(@NotNull String code) {
     if (code.length() != 1) return false;
     return isValidColorCode(code.toCharArray()[0]);
   }

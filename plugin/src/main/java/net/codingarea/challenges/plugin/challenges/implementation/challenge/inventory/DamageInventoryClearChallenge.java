@@ -12,8 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class DamageInventoryClearChallenge extends SettingModifier {
 
@@ -23,7 +22,7 @@ public class DamageInventoryClearChallenge extends SettingModifier {
   }
 
   @EventHandler
-  public void onDamage(@Nonnull EntityDamageEvent event) {
+  public void onDamage(@NotNull EntityDamageEvent event) {
     if (!(event.getEntity() instanceof Player)) return;
     if (!shouldExecuteEffect()) return;
     if (ChallengeHelper.finalDamageIsNull(event)) return;
@@ -36,13 +35,13 @@ public class DamageInventoryClearChallenge extends SettingModifier {
     }
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.CHEST, Message.forName("item-damage-inv-clear-challenge"));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     if (getValue() == 1) {

@@ -8,7 +8,6 @@ import net.codingarea.commons.common.config.Document;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.function.BiConsumer;
 
 @Setter
@@ -19,19 +18,19 @@ public abstract class AbstractForceChallenge extends TimedChallenge {
 
   private int state = WAITING;
 
-  public AbstractForceChallenge(@Nonnull MenuType menu) {
+  public AbstractForceChallenge(@NotNull MenuType menu) {
     super(menu, false);
   }
 
-  public AbstractForceChallenge(@Nonnull MenuType menu, int max) {
+  public AbstractForceChallenge(@NotNull MenuType menu, int max) {
     super(menu, max, false);
   }
 
-  public AbstractForceChallenge(@Nonnull MenuType menu, int min, int max) {
+  public AbstractForceChallenge(@NotNull MenuType menu, int min, int max) {
     super(menu, min, max, false);
   }
 
-  public AbstractForceChallenge(@Nonnull MenuType menu, int min, int max, int defaultValue) {
+  public AbstractForceChallenge(@NotNull MenuType menu, int min, int max, int defaultValue) {
     super(menu, min, max, defaultValue, false);
   }
 
@@ -90,7 +89,7 @@ public abstract class AbstractForceChallenge extends TimedChallenge {
 
   protected abstract int getForcingTime();
 
-  @Nonnull
+  @NotNull
   protected abstract BiConsumer<BossBarInstance, Player> setupBossbar();
 
   public final int getState() {

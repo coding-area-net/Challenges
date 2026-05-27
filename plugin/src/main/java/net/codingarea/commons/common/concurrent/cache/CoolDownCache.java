@@ -2,9 +2,8 @@ package net.codingarea.commons.common.concurrent.cache;
 
 import net.codingarea.commons.common.collection.RunnableTimerTask;
 import net.codingarea.commons.common.logging.ILogger;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -19,7 +18,7 @@ public class CoolDownCache<K> {
   protected final ToLongFunction<? super K> cooldownTime;
   protected final long cleanInterval;
 
-  public CoolDownCache(@Nonnull ILogger logger, @Nonnegative long cleanInterval, @Nonnull String taskName, @Nonnull ToLongFunction<? super K> cooldownTime) {
+  public CoolDownCache(@NotNull ILogger logger, long cleanInterval, @NotNull String taskName, @NotNull ToLongFunction<? super K> cooldownTime) {
     this.logger = logger;
     this.cooldownTime = cooldownTime;
     this.cleanInterval = cleanInterval;
@@ -41,38 +40,38 @@ public class CoolDownCache<K> {
     remove.forEach(cache::remove);
   }
 
-  public boolean isOnCoolDown(long now, long suspect, @Nonnull K key) {
+  public boolean isOnCoolDown(long now, long suspect, @NotNull K key) {
     long difference = now - suspect;
     return difference < getCoolDownTime(key);
   }
 
-  public boolean isOnCoolDown(@Nonnull K key) {
+  public boolean isOnCoolDown(@NotNull K key) {
     Long time = cache.get(key);
     if (time == null) return false;
     return isOnCoolDown(System.currentTimeMillis(), time, key);
   }
 
-  public boolean checkCoolDown(@Nonnull K key) {
+  public boolean checkCoolDown(@NotNull K key) {
     boolean cooldown = isOnCoolDown(key);
     if (!cooldown) setOnCoolDown(key);
     return cooldown;
   }
 
-  public void setOnCoolDown(@Nonnull K key) {
+  public void setOnCoolDown(@NotNull K key) {
     cache.put(key, System.currentTimeMillis());
   }
 
-  public long getCoolDown(@Nonnull K key) {
+  public long getCoolDown(@NotNull K key) {
     Long time = cache.get(key);
     if (time == null) return 0;
     return System.currentTimeMillis() - time;
   }
 
-  public float getCoolDownSeconds(@Nonnull K key) {
+  public float getCoolDownSeconds(@NotNull K key) {
     return getCoolDown(key) / 1000f;
   }
 
-  public long getCoolDownTime(@Nonnull K key) {
+  public long getCoolDownTime(@NotNull K key) {
     return cooldownTime.applyAsLong(key);
   }
 

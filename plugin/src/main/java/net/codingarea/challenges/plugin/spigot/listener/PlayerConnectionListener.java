@@ -17,8 +17,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public class PlayerConnectionListener implements Listener {
@@ -41,7 +41,7 @@ public class PlayerConnectionListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onJoin(@Nonnull PlayerJoinEvent event) {
+  public void onJoin(@NotNull PlayerJoinEvent event) {
 
     Player player = event.getPlayer();
 
@@ -113,7 +113,7 @@ public class PlayerConnectionListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onQuit(@Nonnull PlayerQuitEvent event) {
+  public void onQuit(@NotNull PlayerQuitEvent event) {
 
     try {
       Player player = event.getPlayer();

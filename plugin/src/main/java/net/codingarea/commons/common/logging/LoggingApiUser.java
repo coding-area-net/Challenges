@@ -1,38 +1,38 @@
 package net.codingarea.commons.common.logging;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface LoggingApiUser {
 
-  @Nonnull
+  @NotNull
   ILogger getTargetLogger();
 
-  default void error(@Nullable Object message, @Nonnull Object... args) {
+  default void error(@Nullable Object message, @NotNull Object... args) {
     getTargetLogger().error(message, args);
   }
 
-  default void warn(@Nullable Object message, @Nonnull Object... args) {
+  default void warn(@Nullable Object message, @NotNull Object... args) {
     getTargetLogger().warn(message, args);
   }
 
-  default void info(@Nullable Object message, @Nonnull Object... args) {
+  default void info(@Nullable Object message, @NotNull Object... args) {
     getTargetLogger().info(message, args);
   }
 
-  default void status(@Nullable Object message, @Nonnull Object... args) {
+  default void status(@Nullable Object message, @NotNull Object... args) {
     getTargetLogger().status(message, args);
   }
 
-  default void extended(@Nullable Object message, @Nonnull Object... args) {
+  default void extended(@Nullable Object message, @NotNull Object... args) {
     getTargetLogger().extended(message, args);
   }
 
-  default void debug(@Nullable Object message, @Nonnull Object... args) {
+  default void debug(@Nullable Object message, @NotNull Object... args) {
     getTargetLogger().debug(message, args);
   }
 
-  default void trace(@Nullable Object message, @Nonnull Object... args) {
+  default void trace(@Nullable Object message, @NotNull Object... args) {
     getTargetLogger().trace(message, args);
   }
 

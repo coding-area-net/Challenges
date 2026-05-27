@@ -1,9 +1,9 @@
 package net.codingarea.commons.common.misc;
 
 import com.google.gson.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -46,22 +46,22 @@ public final class GsonUtils {
     return element.toString();
   }
 
-  @Nonnull
-  public static Map<String, Object> convertJsonObjectToMap(@Nonnull JsonObject object) {
+  @NotNull
+  public static Map<String, Object> convertJsonObjectToMap(@NotNull JsonObject object) {
     Map<String, Object> map = new LinkedHashMap<>();
     convertJsonObjectToMap(object, map);
     return map;
   }
 
-  public static void convertJsonObjectToMap(@Nonnull JsonObject object, @Nonnull Map<String, Object> map) {
+  public static void convertJsonObjectToMap(@NotNull JsonObject object, @NotNull Map<String, Object> map) {
     for (Entry<String, JsonElement> entry : object.entrySet()) {
       map.put(entry.getKey(), unpackJsonElement(entry.getValue()));
     }
   }
 
 
-  @Nonnull
-  public static List<String> convertJsonArrayToStringList(@Nonnull JsonArray array) {
+  @NotNull
+  public static List<String> convertJsonArrayToStringList(@NotNull JsonArray array) {
     List<String> list = new ArrayList<>(array.size());
     for (JsonElement element : array) {
       list.add(convertJsonElementToString(element));
@@ -69,8 +69,8 @@ public final class GsonUtils {
     return list;
   }
 
-  @Nonnull
-  public static String[] convertJsonArrayToStringArray(@Nonnull JsonArray array) {
+  @NotNull
+  public static String[] convertJsonArrayToStringArray(@NotNull JsonArray array) {
     String[] list = new String[array.size()];
     for (int i = 0; i < array.size(); i++) {
       list[i] = convertJsonElementToString(array.get(i));
@@ -78,21 +78,21 @@ public final class GsonUtils {
     return list;
   }
 
-  @Nonnull
-  public static JsonArray convertIterableToJsonArray(@Nonnull Gson gson, @Nonnull Iterable<?> iterable) {
+  @NotNull
+  public static JsonArray convertIterableToJsonArray(@NotNull Gson gson, @NotNull Iterable<?> iterable) {
     JsonArray array = new JsonArray();
     iterable.forEach(object -> array.add(gson.toJsonTree(object)));
     return array;
   }
 
-  @Nonnull
-  public static JsonArray convertArrayToJsonArray(@Nonnull Gson gson, @Nonnull Object array) {
+  @NotNull
+  public static JsonArray convertArrayToJsonArray(@NotNull Gson gson, @NotNull Object array) {
     JsonArray jsonArray = new JsonArray();
     ReflectionUtils.forEachInArray(array, object -> jsonArray.add(gson.toJsonTree(object)));
     return jsonArray;
   }
 
-  public static void setDocumentProperties(@Nonnull Gson gson, @Nonnull JsonObject object, @Nonnull Map<String, Object> values) {
+  public static void setDocumentProperties(@NotNull Gson gson, @NotNull JsonObject object, @NotNull Map<String, Object> values) {
     for (Entry<String, Object> entry : values.entrySet()) {
       Object value = entry.getValue();
 
@@ -116,7 +116,7 @@ public final class GsonUtils {
     }
   }
 
-  public static int getSize(@Nonnull JsonObject object) {
+  public static int getSize(@NotNull JsonObject object) {
     try {
       return object.size();
     } catch (NoSuchMethodError ignored) {

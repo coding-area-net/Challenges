@@ -7,10 +7,10 @@ import net.codingarea.commons.common.config.document.GsonDocument;
 import net.codingarea.commons.common.config.document.PropertiesDocument;
 import net.codingarea.commons.common.misc.FileUtils;
 import net.codingarea.commons.common.misc.GsonUtils;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -32,8 +32,8 @@ public interface Document extends Config, Json {
    *
    * @return the document assigned to this path
    */
-  @Nonnull
-  Document getDocument(@Nonnull String path);
+  @NotNull
+  Document getDocument(@NotNull String path);
 
   /**
    * Returns the list of documents located at the given path.
@@ -45,11 +45,11 @@ public interface Document extends Config, Json {
    *
    * @return the list of documents assigned to this path
    */
-  @Nonnull
-  List<Document> getDocumentList(@Nonnull String path);
+  @NotNull
+  List<Document> getDocumentList(@NotNull String path);
 
-  @Nonnull
-  default <T> List<T> getInstanceList(@Nonnull String path, @Nonnull Class<T> classOfT) {
+  @NotNull
+  default <T> List<T> getInstanceList(@NotNull String path, @NotNull Class<T> classOfT) {
     List<Document> documents = getDocumentList(path);
     List<T> result = new ArrayList<>(documents.size());
     for (Document document : documents) {
@@ -58,26 +58,26 @@ public interface Document extends Config, Json {
     return result;
   }
 
-  @Nonnull
-  <T> List<T> getSerializableList(@Nonnull String path, @Nonnull Class<T> classOfT);
+  @NotNull
+  <T> List<T> getSerializableList(@NotNull String path, @NotNull Class<T> classOfT);
 
   @Nullable
-  <T> T getSerializable(@Nonnull String path, @Nonnull Class<T> classOfT);
+  <T> T getSerializable(@NotNull String path, @NotNull Class<T> classOfT);
 
-  @Nonnull
-  <T> T getSerializable(@Nonnull String path, @Nonnull T def);
+  @NotNull
+  <T> T getSerializable(@NotNull String path, @NotNull T def);
 
-  @Nonnull
-  <K, V> Map<K, V> mapDocuments(@Nonnull Function<? super String, ? extends K> keyMapper, @Nonnull Function<? super Document, ? extends V> valueMapper);
+  @NotNull
+  <K, V> Map<K, V> mapDocuments(@NotNull Function<? super String, ? extends K> keyMapper, @NotNull Function<? super Document, ? extends V> valueMapper);
 
-  @Nonnull
-  <R> R mapDocument(@Nonnull String path, @Nonnull Function<? super Document, ? extends R> mapper);
-
-  @Nullable
-  <R> R mapDocumentNullable(@Nonnull String path, @Nonnull Function<? super Document, ? extends R> mapper);
+  @NotNull
+  <R> R mapDocument(@NotNull String path, @NotNull Function<? super Document, ? extends R> mapper);
 
   @Nullable
-  <T> T toInstanceOf(@Nonnull Class<T> classOfT);
+  <R> R mapDocumentNullable(@NotNull String path, @NotNull Function<? super Document, ? extends R> mapper);
+
+  @Nullable
+  <T> T toInstanceOf(@NotNull Class<T> classOfT);
 
   /**
    * Returns the parent document of this document.
@@ -94,75 +94,75 @@ public interface Document extends Config, Json {
    *
    * @return the root document of this document
    */
-  @Nonnull
+  @NotNull
   Document getRoot();
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NotNull
   @Override
-  Document set(@Nonnull String path, @Nullable Object value);
+  Document set(@NotNull String path, @Nullable Object value);
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NotNull
   @Override
   Document clear();
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NotNull
   @Override
-  Document remove(@Nonnull String path);
+  Document remove(@NotNull String path);
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NotNull
   @Override
-  default <O extends Propertyable> Document apply(@Nonnull Consumer<O> action) {
+  default <O extends Propertyable> Document apply(@NotNull Consumer<O> action) {
     return (Document) Config.super.apply(action);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  default <O extends Propertyable> Document applyIf(boolean expression, @Nonnull Consumer<O> action) {
+  default <O extends Propertyable> Document applyIf(boolean expression, @NotNull Consumer<O> action) {
     return (Document) Config.super.applyIf(expression, action);
   }
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NotNull
   @Override
-  default Document setIfAbsent(@Nonnull String path, @Nonnull Object defaultValue) {
+  default Document setIfAbsent(@NotNull String path, @NotNull Object defaultValue) {
     return (Document) Config.super.setIfAbsent(path, defaultValue);
   }
 
-  @Nonnull
-  Document set(@Nonnull Object value);
+  @NotNull
+  Document set(@NotNull Object value);
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NotNull
   @Override
   @CheckReturnValue
   Document readonly();
 
-  @Nonnull
+  @NotNull
   Map<String, Document> children();
 
-  boolean isDocument(@Nonnull String path);
+  boolean isDocument(@NotNull String path);
 
-  boolean hasChildren(@Nonnull String path);
+  boolean hasChildren(@NotNull String path);
 
-  void write(@Nonnull Writer writer) throws IOException;
+  void write(@NotNull Writer writer) throws IOException;
 
-  default void saveToFile(@Nonnull File file) throws IOException {
+  default void saveToFile(@NotNull File file) throws IOException {
     FileUtils.createFilesIfNecessary(file);
     Writer writer = FileUtils.newBufferedWriter(file);
     write(writer);
@@ -170,7 +170,7 @@ public interface Document extends Config, Json {
     writer.close();
   }
 
-  default void saveToFile(@Nonnull Path file) throws IOException {
+  default void saveToFile(@NotNull Path file) throws IOException {
     FileUtils.createFile(file);
     Writer writer = FileUtils.newBufferedWriter(file);
     write(writer);
@@ -178,20 +178,20 @@ public interface Document extends Config, Json {
     writer.close();
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  default FileDocument asFileDocument(@Nonnull File file) {
+  default FileDocument asFileDocument(@NotNull File file) {
     return (this instanceof FileDocument && ((FileDocument) this).getFile().equals(file))
       ? (FileDocument) this : FileDocument.wrap(this, file);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  default FileDocument asFileDocument(@Nonnull Path file) {
+  default FileDocument asFileDocument(@NotNull Path file) {
     return asFileDocument(file.toFile());
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   default Document copyJson() {
     Document document = create();
@@ -203,15 +203,15 @@ public interface Document extends Config, Json {
    * @return an empty and immutable document
    * @see EmptyDocument
    */
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   static Document empty() {
     return EmptyDocument.ROOT;
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static Document readFile(@Nonnull Class<? extends Document> classOfDocument, @Nonnull File file) {
+  static Document readFile(@NotNull Class<? extends Document> classOfDocument, @NotNull File file) {
     try {
       if (file.exists()) {
         Constructor<? extends Document> constructor = classOfDocument.getConstructor(File.class);
@@ -227,9 +227,9 @@ public interface Document extends Config, Json {
     }
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static Document readFile(@Nonnull Class<? extends Document> classOfDocument, @Nonnull Path file) {
+  static Document readFile(@NotNull Class<? extends Document> classOfDocument, @NotNull Path file) {
     return readFile(classOfDocument, file.toFile());
   }
 
@@ -237,37 +237,37 @@ public interface Document extends Config, Json {
    * @return a json document parsed by the input
    * @see GsonDocument
    */
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static Document parseJson(@Nonnull String jsonInput) {
+  static Document parseJson(@NotNull String jsonInput) {
     return new GsonDocument(jsonInput);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static Document parseJson(@Nonnull Reader reader) throws IOException {
+  static Document parseJson(@NotNull Reader reader) throws IOException {
     return new GsonDocument(reader);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static Document parseJson(@Nonnull InputStream input) throws IOException {
+  static Document parseJson(@NotNull InputStream input) throws IOException {
     return new GsonDocument(new InputStreamReader(input, StandardCharsets.UTF_8));
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static List<Document> parseJsonArray(@Nonnull String jsonInput) {
+  static List<Document> parseJsonArray(@NotNull String jsonInput) {
     return GsonDocument.convertArrayToDocuments(GsonDocument.GSON.fromJson(jsonInput, JsonArray.class));
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static List<String> parseStringArray(@Nonnull String jsonInput) {
+  static List<String> parseStringArray(@NotNull String jsonInput) {
     return GsonDocument.convertArrayToStrings(GsonDocument.GSON.fromJson(jsonInput, JsonArray.class));
   }
 
-  static void saveArray(@Nonnull Iterable<?> objects, @Nonnull Path file) throws IOException {
+  static void saveArray(@NotNull Iterable<?> objects, @NotNull Path file) throws IOException {
     FileUtils.createFile(file);
     Writer writer = FileUtils.newBufferedWriter(file);
     JsonArray array = GsonUtils.convertIterableToJsonArray(GsonDocument.GSON, objects);
@@ -276,21 +276,21 @@ public interface Document extends Config, Json {
     writer.close();
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static Document readJsonFile(@Nonnull File file) {
+  static Document readJsonFile(@NotNull File file) {
     return readFile(GsonDocument.class, file);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static Document readJsonFile(@Nonnull Path file) {
+  static Document readJsonFile(@NotNull Path file) {
     return readJsonFile(file.toFile());
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static List<Document> readJsonArrayFile(@Nonnull Path file) {
+  static List<Document> readJsonArrayFile(@NotNull Path file) {
     try {
       JsonArray array = GsonDocument.GSON.fromJson(FileUtils.newBufferedReader(file), JsonArray.class);
       if (array == null) return new ArrayList<>();
@@ -302,27 +302,27 @@ public interface Document extends Config, Json {
     }
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static Document readPropertiesFile(@Nonnull File file) {
+  static Document readPropertiesFile(@NotNull File file) {
     return readFile(PropertiesDocument.class, file);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static Document readPropertiesFile(@Nonnull Path file) {
+  static Document readPropertiesFile(@NotNull Path file) {
     return readPropertiesFile(file.toFile());
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   static Document create() {
     return new GsonDocument();
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static Document of(@Nonnull Object object) {
+  static Document of(@NotNull Object object) {
     return new GsonDocument(object);
   }
 
@@ -332,9 +332,9 @@ public interface Document extends Config, Json {
     return object == null ? null : of(object);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static List<Document> arrayOf(@Nonnull Collection<?> objects) {
+  static List<Document> arrayOf(@NotNull Collection<?> objects) {
     List<Document> documents = new ArrayList<>(objects.size());
     objects.forEach(object -> documents.add(Document.of(object)));
     return documents;

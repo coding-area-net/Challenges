@@ -20,13 +20,12 @@ import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleDestroyEvent;
 import org.bukkit.event.weather.ThunderChangeEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class RestrictionListener implements Listener {
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onEntityDamage(@Nonnull EntityDamageEvent event) {
+  public void onEntityDamage(@NotNull EntityDamageEvent event) {
     if (ChallengeAPI.isStarted()) return;
     Entity entity = event.getEntity();
     if (entity instanceof Player && ((Player) entity).getGameMode() == GameMode.CREATIVE) {
@@ -41,7 +40,7 @@ public class RestrictionListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onEntityDeath(@Nonnull EntityDeathEvent event) {
+  public void onEntityDeath(@NotNull EntityDeathEvent event) {
     if (ChallengeAPI.isStarted()) return;
     if (!(event.getEntity() instanceof Player)) return;
     event.getDrops().clear();
@@ -49,31 +48,31 @@ public class RestrictionListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onBlockBreak(@Nonnull BlockBreakEvent event) {
+  public void onBlockBreak(@NotNull BlockBreakEvent event) {
     if (ChallengeAPI.isPaused() && event.getPlayer().getGameMode() != GameMode.CREATIVE)
       event.setCancelled(true);
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onBlockPlace(@Nonnull BlockPlaceEvent event) {
+  public void onBlockPlace(@NotNull BlockPlaceEvent event) {
     if (ChallengeAPI.isPaused() && event.getPlayer().getGameMode() != GameMode.CREATIVE)
       event.setCancelled(true);
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onFoodLevelChange(@Nonnull FoodLevelChangeEvent event) {
+  public void onFoodLevelChange(@NotNull FoodLevelChangeEvent event) {
     if (ChallengeAPI.isPaused())
       event.setCancelled(true);
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onEntityRegainHealth(@Nonnull EntityRegainHealthEvent event) {
+  public void onEntityRegainHealth(@NotNull EntityRegainHealthEvent event) {
     if (ChallengeAPI.isPaused())
       event.setCancelled(true);
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onItemPickup(@Nonnull EntityPickupItemEvent event) {
+  public void onItemPickup(@NotNull EntityPickupItemEvent event) {
     if (ChallengeAPI.isStarted()) return;
     if (!(event.getEntity() instanceof Player)) return;
     Player player = (Player) event.getEntity();
@@ -82,38 +81,38 @@ public class RestrictionListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onDrop(@Nonnull PlayerDropItemEvent event) {
+  public void onDrop(@NotNull PlayerDropItemEvent event) {
     if (ChallengeAPI.isStarted()) return;
     if (event.getPlayer().getGameMode() != GameMode.CREATIVE)
       event.setCancelled(true);
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onInteract(@Nonnull PlayerInteractEvent event) {
+  public void onInteract(@NotNull PlayerInteractEvent event) {
     if (ChallengeAPI.isPaused() && event.getPlayer().getGameMode() != GameMode.CREATIVE)
       event.setCancelled(true);
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onInteract(@Nonnull PlayerInteractAtEntityEvent event) {
+  public void onInteract(@NotNull PlayerInteractAtEntityEvent event) {
     if (ChallengeAPI.isPaused() && event.getPlayer().getGameMode() != GameMode.CREATIVE)
       event.setCancelled(true);
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onInteract(@Nonnull PlayerInteractEntityEvent event) {
+  public void onInteract(@NotNull PlayerInteractEntityEvent event) {
     if (ChallengeAPI.isPaused() && event.getPlayer().getGameMode() != GameMode.CREATIVE)
       event.setCancelled(true);
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onOffHandItemSwitch(@Nonnull PlayerSwapHandItemsEvent event) {
+  public void onOffHandItemSwitch(@NotNull PlayerSwapHandItemsEvent event) {
     if (ChallengeAPI.isPaused() && event.getPlayer().getGameMode() != GameMode.CREATIVE)
       event.setCancelled(true);
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onDamage(@Nonnull VehicleDamageEvent event) {
+  public void onDamage(@NotNull VehicleDamageEvent event) {
     if (ChallengeAPI.isStarted()) return;
     Entity entity = event.getVehicle();
     event.setCancelled(true);
@@ -125,31 +124,31 @@ public class RestrictionListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onDamage(@Nonnull VehicleDestroyEvent event) {
+  public void onDamage(@NotNull VehicleDestroyEvent event) {
     if (ChallengeAPI.isPaused() && !(event.getAttacker() instanceof Player && ((Player) event.getAttacker()).getGameMode() == GameMode.CREATIVE))
       event.setCancelled(true);
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onWeatherChange(@Nonnull WeatherChangeEvent event) {
+  public void onWeatherChange(@NotNull WeatherChangeEvent event) {
     if (ChallengeAPI.isPaused() && event.toWeatherState())
       event.setCancelled(true);
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onThunderChange(@Nonnull ThunderChangeEvent event) {
+  public void onThunderChange(@NotNull ThunderChangeEvent event) {
     if (ChallengeAPI.isPaused() && event.toThunderState())
       event.setCancelled(true);
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onTarget(@Nonnull EntityTargetEvent event) {
+  public void onTarget(@NotNull EntityTargetEvent event) {
     if (ChallengeAPI.isPaused() && event.getTarget() != null)
       event.setCancelled(true);
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onClick(@Nonnull InventoryClickEvent event) {
+  public void onClick(@NotNull InventoryClickEvent event) {
     if (!(event.getWhoClicked() instanceof Player)) return;
     Player player = (Player) event.getWhoClicked();
     if (ChallengeAPI.isPaused() && player.getGameMode() != GameMode.CREATIVE)
@@ -157,7 +156,7 @@ public class RestrictionListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onBlockSpread(@Nonnull BlockSpreadEvent event) {
+  public void onBlockSpread(@NotNull BlockSpreadEvent event) {
     if (ChallengeAPI.isStarted()) return;
     event.setCancelled(true);
 

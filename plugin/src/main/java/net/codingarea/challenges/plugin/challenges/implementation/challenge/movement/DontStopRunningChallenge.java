@@ -15,8 +15,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,7 +55,7 @@ public class DontStopRunningChallenge extends SettingModifier {
     bossbar.hide();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.SADDLE, Message.forName("item-dont-stop-running-challenge"));
@@ -91,7 +91,7 @@ public class DontStopRunningChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onPlayerMove(@Nonnull PlayerMoveEvent event) {
+  public void onPlayerMove(@NotNull PlayerMoveEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (event.getTo() == null) return;

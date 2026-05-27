@@ -12,8 +12,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class BedrockPathChallenge extends Setting {
 
@@ -22,14 +21,14 @@ public class BedrockPathChallenge extends Setting {
     setCategory(SettingCategory.WORLD);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-bedrock-path-challenge")).setColor(Color.GRAY);
   }
 
   @EventHandler
-  public void onMove(@Nonnull PlayerMoveEvent event) {
+  public void onMove(@NotNull PlayerMoveEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.getPlayer().getGameMode() == GameMode.CREATIVE || event.getPlayer().getGameMode() == GameMode.SPECTATOR)
       return;

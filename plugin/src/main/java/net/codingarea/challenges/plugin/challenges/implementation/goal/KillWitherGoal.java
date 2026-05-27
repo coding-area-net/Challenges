@@ -8,8 +8,7 @@ import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class KillWitherGoal extends KillEntityGoal {
 
@@ -18,13 +17,13 @@ public class KillWitherGoal extends KillEntityGoal {
     setCategory(SettingCategory.KILL_ENTITY);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.NETHER_STAR, Message.forName("item-wither-goal"));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public SoundSample getStartSound() {
     return new SoundSample().addSound(Sound.ENTITY_WITHER_SPAWN, 1);

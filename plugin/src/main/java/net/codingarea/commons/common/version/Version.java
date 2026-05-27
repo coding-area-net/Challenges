@@ -1,45 +1,40 @@
 package net.codingarea.commons.common.version;
 
 import net.codingarea.commons.common.annotations.Since;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 
 public interface Version {
 
-  @Nonnegative
   int getMajor();
 
-  @Nonnegative
   int getMinor();
 
-  @Nonnegative
   int getRevision();
 
-  default boolean isNewerThan(@Nonnull Version other) {
+  default boolean isNewerThan(@NotNull Version other) {
     return this.intValue() > other.intValue();
   }
 
-  default boolean isNewerOrEqualThan(@Nonnull Version other) {
+  default boolean isNewerOrEqualThan(@NotNull Version other) {
     return this.intValue() >= other.intValue();
   }
 
-  default boolean isOlderThan(@Nonnull Version other) {
+  default boolean isOlderThan(@NotNull Version other) {
     return this.intValue() < other.intValue();
   }
 
-  default boolean isOlderOrEqualThan(@Nonnull Version other) {
+  default boolean isOlderOrEqualThan(@NotNull Version other) {
     return this.intValue() <= other.intValue();
   }
 
-  default boolean equals(@Nonnull Version other) {
+  default boolean equals(@NotNull Version other) {
     return this.intValue() == other.intValue();
   }
 
-  @Nonnull
+  @NotNull
   default String format() {
     int revision = getRevision();
     return revision > 0 ? String.format("%s.%s.%s", getMajor(), getMinor(), revision)
@@ -60,33 +55,28 @@ public interface Version {
       + major * 10000;
   }
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   static Version parse(@Nullable String input) {
     return parse(input, new VersionInfo(1, 0, 0));
   }
 
-  @CheckReturnValue
   static Version parse(@Nullable String input, Version def) {
     return VersionInfo.parse(input, def);
   }
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   static Version parseExceptionally(@Nullable String input) {
     return VersionInfo.parseExceptionally(input);
   }
 
-  @Nonnull
-  @CheckReturnValue
-  static Version getAnnotatedSince(@Nonnull Object object) {
+  @NotNull
+  static Version getAnnotatedSince(@NotNull Object object) {
     if (!object.getClass().isAnnotationPresent(Since.class)) return new VersionInfo(1, 0, 0);
     return parse(object.getClass().getAnnotation(Since.class).value());
   }
 
-  @Nonnull
-  @CheckReturnValue
-  static <V extends Version> V findNearest(@Nonnull Version target, @Nonnull V[] sortedVersionsArray) {
+  @NotNull
+  static <V extends Version> V findNearest(@NotNull Version target, @NotNull V[] sortedVersionsArray) {
     List<V> versions = new ArrayList<>(Arrays.asList(sortedVersionsArray));
     Collections.reverse(versions);
     for (V version : versions) {
@@ -96,8 +86,7 @@ public interface Version {
     throw new IllegalArgumentException("No version found for '" + target + "'");
   }
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   static Comparator<Version> comparator() {
     return new VersionComparator();
   }

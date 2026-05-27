@@ -12,8 +12,8 @@ import net.codingarea.commons.database.sql.abstraction.insertorupdate.SQLInserti
 import net.codingarea.commons.database.sql.abstraction.query.SQLQuery;
 import net.codingarea.commons.database.sql.abstraction.update.SQLUpdate;
 import net.codingarea.commons.database.sql.abstraction.where.SQLWhere;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,7 +24,7 @@ public abstract class AbstractSQLDatabase extends AbstractDatabase {
 
   protected Connection connection;
 
-  public AbstractSQLDatabase(@Nonnull DatabaseConfig config) {
+  public AbstractSQLDatabase(@NotNull DatabaseConfig config) {
     super(config);
   }
 
@@ -54,7 +54,7 @@ public abstract class AbstractSQLDatabase extends AbstractDatabase {
   }
 
   @Override
-  public void createTable(@Nonnull String name, @Nonnull SQLColumn... columns) throws DatabaseException {
+  public void createTable(@NotNull String name, @NotNull SQLColumn... columns) throws DatabaseException {
     try {
       StringBuilder command = new StringBuilder();
       command.append("CREATE TABLE IF NOT EXISTS `");
@@ -77,54 +77,54 @@ public abstract class AbstractSQLDatabase extends AbstractDatabase {
     }
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseCountEntries countEntries(@Nonnull String table) {
+  public DatabaseCountEntries countEntries(@NotNull String table) {
     return new SQLCountEntries(this, table);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseQuery query(@Nonnull String table) {
+  public DatabaseQuery query(@NotNull String table) {
     return new SQLQuery(this, table);
   }
 
-  @Nonnull
-  public DatabaseQuery query(@Nonnull String table, @Nonnull Map<String, SQLWhere> where) {
+  @NotNull
+  public DatabaseQuery query(@NotNull String table, @NotNull Map<String, SQLWhere> where) {
     return new SQLQuery(this, table, where);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseUpdate update(@Nonnull String table) {
+  public DatabaseUpdate update(@NotNull String table) {
     return new SQLUpdate(this, table);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseInsertion insert(@Nonnull String table) {
+  public DatabaseInsertion insert(@NotNull String table) {
     return new SQLInsertion(this, table);
   }
 
-  @Nonnull
-  public DatabaseInsertion insert(@Nonnull String table, @Nonnull Map<String, Object> values) {
+  @NotNull
+  public DatabaseInsertion insert(@NotNull String table, @NotNull Map<String, Object> values) {
     return new SQLInsertion(this, table, values);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseInsertionOrUpdate insertOrUpdate(@Nonnull String table) {
+  public DatabaseInsertionOrUpdate insertOrUpdate(@NotNull String table) {
     return new SQLInsertionOrUpdate(this, table);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseDeletion delete(@Nonnull String table) {
+  public DatabaseDeletion delete(@NotNull String table) {
     return new SQLDeletion(this, table);
   }
 
-  @Nonnull
-  public PreparedStatement prepare(@Nonnull CharSequence command, @Nonnull Object... args) throws SQLException, DatabaseException {
+  @NotNull
+  public PreparedStatement prepare(@NotNull CharSequence command, @NotNull Object... args) throws SQLException, DatabaseException {
     checkConnection();
     PreparedStatement statement = connection.prepareStatement(command.toString());
     SQLHelper.fillParams(statement, args);

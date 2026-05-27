@@ -6,8 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDeathEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class EntityDeathTrigger extends ChallengeTrigger {
 
@@ -21,7 +20,7 @@ public class EntityDeathTrigger extends ChallengeTrigger {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onDeath(@Nonnull EntityDeathEvent event) {
+  public void onDeath(@NotNull EntityDeathEvent event) {
     createData()
       .entity(event.getEntity())
       .entityType(event.getEntityType())

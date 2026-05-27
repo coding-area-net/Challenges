@@ -14,9 +14,9 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +27,7 @@ public class EnderGamesChallenge extends TimedChallenge {
     super(MenuType.CHALLENGES, 1, 10, 5, false);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.ENDER_PEARL, Message.forName("item-ender-games-challenge"));
@@ -59,7 +59,7 @@ public class EnderGamesChallenge extends TimedChallenge {
     SoundSample.TELEPORT.broadcast();
   }
 
-  private void teleportRandom(@Nonnull Player player) {
+  private void teleportRandom(@NotNull Player player) {
 
     List<Entity> list = player.getWorld().getNearbyEntities(player.getLocation(), 200, 200, 200).stream()
       .filter(entity -> !(entity instanceof Player))

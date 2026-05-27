@@ -11,8 +11,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 
 public class CraftingRandomizerChallenge extends RandomizerSetting {
@@ -23,7 +23,7 @@ public class CraftingRandomizerChallenge extends RandomizerSetting {
     super(MenuType.CHALLENGES);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.CHEST_MINECART, Message.forName("item-crafting-randomizer-challenge"));
@@ -55,7 +55,7 @@ public class CraftingRandomizerChallenge extends RandomizerSetting {
   }
 
   @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-  public void onCraftItem(@Nonnull CraftItemEvent event) {
+  public void onCraftItem(@NotNull CraftItemEvent event) {
     if (!isEnabled()) return;
     ItemStack item = event.getCurrentItem();
     if (item == null) return;

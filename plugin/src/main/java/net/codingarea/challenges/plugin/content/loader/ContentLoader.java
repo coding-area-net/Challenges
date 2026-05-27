@@ -1,24 +1,24 @@
 package net.codingarea.challenges.plugin.content.loader;
 
 import net.codingarea.challenges.plugin.Challenges;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.io.File;
 
 public abstract class ContentLoader {
 
-  @Nonnull
+  @NotNull
   protected final File getMessagesFolder() {
     return Challenges.getInstance().getDataFile("messages");
   }
 
-  @Nonnull
-  protected final File getMessageFile(@Nonnull String name, @Nonnull String extension) {
+  @NotNull
+  protected final File getMessageFile(@NotNull String name, @NotNull String extension) {
     return new File(getMessagesFolder(), name + "." + extension);
   }
 
-  @Nonnull
-  protected final String getGitHubUrl(@Nonnull String path) {
+  @NotNull
+  protected final String getGitHubUrl(@NotNull String path) {
     return "https://raw.githubusercontent.com/anweisen/Challenges/" + (Challenges.getInstance().isDevMode() ? "development" : "master") + "/" + path;
   }
 

@@ -8,13 +8,12 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class MenuPositionListener implements Listener {
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onClick(@Nonnull InventoryClickEvent event) {
+  public void onClick(@NotNull InventoryClickEvent event) {
 
     HumanEntity human = event.getWhoClicked();
     if (!(human instanceof Player)) return;

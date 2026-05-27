@@ -10,9 +10,9 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -25,7 +25,7 @@ public class LowDropRateChallenge extends SettingModifier {
     super(MenuType.CHALLENGES, 9);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.WOODEN_AXE, Message.forName("item-low-drop-rate-challenge"));

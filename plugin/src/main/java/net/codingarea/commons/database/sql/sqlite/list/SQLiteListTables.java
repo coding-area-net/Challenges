@@ -3,8 +3,8 @@ package net.codingarea.commons.database.sql.sqlite.list;
 import net.codingarea.commons.database.action.DatabaseListTables;
 import net.codingarea.commons.database.exceptions.DatabaseException;
 import net.codingarea.commons.database.sql.abstraction.AbstractSQLDatabase;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -14,11 +14,11 @@ public class SQLiteListTables implements DatabaseListTables {
 
   protected final AbstractSQLDatabase database;
 
-  public SQLiteListTables(@Nonnull AbstractSQLDatabase database) {
+  public SQLiteListTables(@NotNull AbstractSQLDatabase database) {
     this.database = database;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public List<String> execute() throws DatabaseException {
     try {

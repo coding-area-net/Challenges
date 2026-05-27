@@ -7,8 +7,7 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemDamageEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class NoItemDamageSetting extends Setting {
 
@@ -25,7 +24,7 @@ public class NoItemDamageSetting extends Setting {
     event.getPlayer().updateInventory();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.ANVIL, Message.forName("item-no-item-damage-setting"));

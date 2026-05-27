@@ -1,6 +1,6 @@
 package net.codingarea.commons.database.access;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class DatabaseAccessConfig {
 
@@ -8,23 +8,23 @@ public final class DatabaseAccessConfig {
   private final String keyField;
   private final String valueField;
 
-  public DatabaseAccessConfig(@Nonnull String table, @Nonnull String keyField, @Nonnull String valueField) {
+  public DatabaseAccessConfig(@NotNull String table, @NotNull String keyField, @NotNull String valueField) {
     this.table = table;
     this.keyField = keyField;
     this.valueField = valueField;
   }
 
-  @Nonnull
+  @NotNull
   public String getTable() {
     return table;
   }
 
-  @Nonnull
+  @NotNull
   public String getKeyField() {
     return keyField;
   }
 
-  @Nonnull
+  @NotNull
   public String getValueField() {
     return valueField;
   }

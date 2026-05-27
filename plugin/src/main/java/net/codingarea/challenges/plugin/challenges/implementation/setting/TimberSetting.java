@@ -17,8 +17,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,13 +32,13 @@ public class TimberSetting extends SettingModifier {
     super(MenuType.SETTINGS, 2);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.DIAMOND_AXE, Message.forName("item-timber-setting"));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     if (getValue() == LOGS_LEAVES)
@@ -52,7 +52,7 @@ public class TimberSetting extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onBreak(@Nonnull BlockBreakEvent event) {
+  public void onBreak(@NotNull BlockBreakEvent event) {
     if (!shouldExecuteEffect()) return;
     if (!isLog(event.getBlock().getType())) return;
 
@@ -78,7 +78,7 @@ public class TimberSetting extends SettingModifier {
 
   }
 
-  private void breakBlock(@Nonnull Block block, @Nonnull ItemStack item, boolean damageItem) {
+  private void breakBlock(@NotNull Block block, @NotNull ItemStack item, boolean damageItem) {
     if (isLog(block.getType())) {
       ChallengeHelper.breakBlock(block, item);
       if (damageItem) {
@@ -89,7 +89,7 @@ public class TimberSetting extends SettingModifier {
     }
   }
 
-  private List<Block> getAllTreeBlocks(@Nonnull Block block, boolean leaves) {
+  private List<Block> getAllTreeBlocks(@NotNull Block block, boolean leaves) {
     List<Block> allBlocks = new ArrayList<>();
 
     List<Block> currentBlocks = new ArrayList<>();
@@ -129,7 +129,7 @@ public class TimberSetting extends SettingModifier {
     return material.name().endsWith("LEAVES") || material.name().endsWith("WART_BLOCK");
   }
 
-  public boolean isLeaveMaterial(@Nonnull Material logMaterial, @Nonnull Material leaveMaterial) {
+  public boolean isLeaveMaterial(@NotNull Material logMaterial, @NotNull Material leaveMaterial) {
     // Exceptions like nether wood
     if (logMaterial.name().equals("CRIMSON_STEM"))
       return leaveMaterial.name().equals("NETHER_WART_BLOCK") || leaveMaterial.name().equals("SHROOMLIGHT");

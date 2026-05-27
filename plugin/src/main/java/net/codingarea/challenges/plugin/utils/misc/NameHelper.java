@@ -3,16 +3,15 @@ package net.codingarea.challenges.plugin.utils.misc;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.management.cloud.CloudSupportManager;
 import org.bukkit.OfflinePlayer;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class NameHelper {
 
   private NameHelper() {
   }
 
-  @Nonnull
-  public static String getName(@Nonnull OfflinePlayer player) {
+  @NotNull
+  public static String getName(@NotNull OfflinePlayer player) {
     CloudSupportManager cloudSupport = Challenges.getInstance().getCloudSupportManager();
     if (cloudSupport.isNameSupport() && cloudSupport.hasNameFor(player.getUniqueId())) {
       if (player.isOnline() && player.getPlayer() != null) {

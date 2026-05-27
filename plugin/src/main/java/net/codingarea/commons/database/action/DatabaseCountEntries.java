@@ -3,9 +3,7 @@ package net.codingarea.commons.database.action;
 import net.codingarea.commons.database.Database;
 import net.codingarea.commons.database.SpecificDatabase;
 import net.codingarea.commons.database.exceptions.DatabaseException;
-
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @see Database#countEntries(String)
@@ -13,9 +11,8 @@ import javax.annotation.Nonnull;
  */
 public interface DatabaseCountEntries extends DatabaseAction<Long> {
 
-  @Nonnull
+  @NotNull
   @Override
-  @Nonnegative
   Long execute() throws DatabaseException;
 
 }

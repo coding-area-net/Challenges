@@ -5,9 +5,7 @@ import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
 import net.codingarea.commons.common.config.Document;
-
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class ModifierCollectionGoal extends CollectionGoal implements IModifier {
 
@@ -15,11 +13,11 @@ public abstract class ModifierCollectionGoal extends CollectionGoal implements I
   private final int defaultValue;
   private int value;
 
-  public ModifierCollectionGoal(int min, int max, @Nonnull Object[] target) {
+  public ModifierCollectionGoal(int min, int max, @NotNull Object[] target) {
     this(min, max, min, target);
   }
 
-  public ModifierCollectionGoal(int min, int max, int defaultValue, @Nonnull Object[] target) {
+  public ModifierCollectionGoal(int min, int max, int defaultValue, @NotNull Object[] target) {
     super(target);
     if (max < min) throw new IllegalArgumentException("max < min");
     if (min < 0) throw new IllegalArgumentException("min < 0");
@@ -37,7 +35,7 @@ public abstract class ModifierCollectionGoal extends CollectionGoal implements I
   }
 
   @Override
-  public void handleClick(@Nonnull ChallengeMenuClickInfo info) {
+  public void handleClick(@NotNull ChallengeMenuClickInfo info) {
     ChallengeHelper.handleModifierClick(info, this);
   }
 
@@ -54,7 +52,6 @@ public abstract class ModifierCollectionGoal extends CollectionGoal implements I
   }
 
   @Override
-  @Nonnegative
   public final int getValue() {
     return value;
   }
@@ -71,13 +68,11 @@ public abstract class ModifierCollectionGoal extends CollectionGoal implements I
   }
 
   @Override
-  @Nonnegative
   public final int getMaxValue() {
     return max;
   }
 
   @Override
-  @Nonnegative
   public final int getMinValue() {
     return min;
   }
@@ -91,12 +86,12 @@ public abstract class ModifierCollectionGoal extends CollectionGoal implements I
   }
 
   @Override
-  public void loadSettings(@Nonnull Document document) {
+  public void loadSettings(@NotNull Document document) {
     setValue(document.getInt("value", value));
   }
 
   @Override
-  public void writeSettings(@Nonnull Document document) {
+  public void writeSettings(@NotNull Document document) {
     document.set("value", value);
   }
 

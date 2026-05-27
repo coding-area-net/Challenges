@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.management.challenges.annotations;
 
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RequireVersion {
 
-  @Nonnull
+  @NotNull
   MinecraftVersion value();
 
 }

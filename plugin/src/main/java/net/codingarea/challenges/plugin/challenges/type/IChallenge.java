@@ -7,9 +7,8 @@ import net.codingarea.challenges.plugin.management.menu.generator.categorised.Se
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface IChallenge extends GamestateSaveable {
 
@@ -47,7 +46,7 @@ public interface IChallenge extends GamestateSaveable {
    *
    * @return the internal name of this challenge
    */
-  @Nonnull
+  @NotNull
   String getUniqueName();
 
   /**
@@ -57,22 +56,22 @@ public interface IChallenge extends GamestateSaveable {
    *
    * @return the target menu for the challenge
    */
-  @Nonnull
+  @NotNull
   MenuType getType();
 
   @Nullable
   SettingCategory getCategory();
 
-  @Nonnull
+  @NotNull
   ItemStack getDisplayItem();
 
-  @Nonnull
+  @NotNull
   ItemStack getSettingsItem();
 
-  void handleClick(@Nonnull ChallengeMenuClickInfo info);
+  void handleClick(@NotNull ChallengeMenuClickInfo info);
 
-  void writeSettings(@Nonnull Document document);
+  void writeSettings(@NotNull Document document);
 
-  void loadSettings(@Nonnull Document document);
+  void loadSettings(@NotNull Document document);
 
 }

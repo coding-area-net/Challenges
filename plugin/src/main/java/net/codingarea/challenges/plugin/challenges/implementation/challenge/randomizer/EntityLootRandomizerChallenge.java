@@ -24,9 +24,8 @@ import org.bukkit.loot.LootContext;
 import org.bukkit.loot.LootTable;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -126,7 +125,7 @@ public class EntityLootRandomizerChallenge extends RandomizerSetting implements 
   }
 
   @Override
-  public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 
     if (!isEnabled()) {
       Message.forName("command-searchloot-disabled").send(sender, Prefix.CHALLENGES);
@@ -171,7 +170,7 @@ public class EntityLootRandomizerChallenge extends RandomizerSetting implements 
 
   @Nullable
   @Override
-  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
     EntityLootRandomizerChallenge instance = AbstractChallenge.getFirstInstance(EntityLootRandomizerChallenge.class);
     return args.length != 1 ? null :
       instance.getLootableEntities().stream()

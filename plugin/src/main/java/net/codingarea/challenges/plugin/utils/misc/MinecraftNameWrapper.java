@@ -7,8 +7,8 @@ import org.bukkit.Particle;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
@@ -37,34 +37,34 @@ public class MinecraftNameWrapper {
   private MinecraftNameWrapper() {
   }
 
-  @Nonnull
-  private static Material getItemByNames(@Nonnull String... names) {
+  @NotNull
+  private static Material getItemByNames(@NotNull String... names) {
     return ReflectionUtils.getFirstEnumByNames(Material.class, names);
   }
 
-  @Nonnull
-  private static EntityType getEntityByNames(@Nonnull String... names) {
+  @NotNull
+  private static EntityType getEntityByNames(@NotNull String... names) {
     return ReflectionUtils.getFirstEnumByNames(EntityType.class, names);
   }
 
-  @Nonnull
-  private static Particle getParticleByNames(@Nonnull String... names) {
+  @NotNull
+  private static Particle getParticleByNames(@NotNull String... names) {
     return ReflectionUtils.getFirstEnumByNames(Particle.class, names);
   }
 
-  @Nonnull
-  private static PotionEffectType getPotionByNames(@Nonnull String... names) {
+  @NotNull
+  private static PotionEffectType getPotionByNames(@NotNull String... names) {
     return getFirstAttributeByNames(PotionEffectType.class, names);
   }
 
-  @Nonnull
-  private static Enchantment getEnchantByNames(@Nonnull String... names) {
+  @NotNull
+  private static Enchantment getEnchantByNames(@NotNull String... names) {
     return getFirstAttributeByNames(Enchantment.class, names);
   }
 
   @SuppressWarnings("unchecked")
-  @Nonnull
-  public static <T> T getFirstAttributeByNames(@Nonnull Class<?> clazz, @Nonnull String... names) {
+  @NotNull
+  public static <T> T getFirstAttributeByNames(@NotNull Class<?> clazz, @NotNull String... names) {
     for (String name : names) {
       try {
         Field field = ReflectionUtil.getField(clazz, name);

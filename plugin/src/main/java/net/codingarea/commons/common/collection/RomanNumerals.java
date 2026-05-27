@@ -1,6 +1,7 @@
 package net.codingarea.commons.common.collection;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.TreeMap;
 
 public final class RomanNumerals {
@@ -34,7 +35,7 @@ public final class RomanNumerals {
   private RomanNumerals() {
   }
 
-  @Nonnull
+  @NotNull
   public static String forNumber(int number) {
     if (number < 0 || number > 3999) throw new IllegalRomanNumeralException(number);
     if (number == 0) return "";

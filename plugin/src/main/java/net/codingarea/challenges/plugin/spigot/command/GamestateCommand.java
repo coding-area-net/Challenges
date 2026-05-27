@@ -8,16 +8,16 @@ import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
 import net.codingarea.commons.common.config.FileDocument;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
 public class GamestateCommand implements SenderCommand, Completer {
 
   @Override
-  public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 
     if (args.length != 1) {
       Message.forName("syntax").send(sender, Prefix.CHALLENGES, "gamestate <reset/reload>");
@@ -45,7 +45,7 @@ public class GamestateCommand implements SenderCommand, Completer {
 
   @Nullable
   @Override
-  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
     return args.length == 1 ? Utils.filterRecommendations(args[0], "reset", "reload") : Collections.emptyList();
   }
 

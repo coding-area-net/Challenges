@@ -4,10 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class MenuClickInfo {
 
@@ -17,7 +15,7 @@ public class MenuClickInfo {
   protected final boolean rightClick;
   protected final int slot;
 
-  public MenuClickInfo(@Nonnull Player player, @Nonnull Inventory inventory, boolean shiftClick, boolean rightClick, @Nonnegative int slot) {
+  public MenuClickInfo(@NotNull Player player, @NotNull Inventory inventory, boolean shiftClick, boolean rightClick, int slot) {
     this.player = player;
     this.inventory = inventory;
     this.shiftClick = shiftClick;
@@ -25,12 +23,12 @@ public class MenuClickInfo {
     this.slot = slot;
   }
 
-  @Nonnull
+  @NotNull
   public Player getPlayer() {
     return player;
   }
 
-  @Nonnull
+  @NotNull
   public Inventory getInventory() {
     return inventory;
   }
@@ -56,7 +54,7 @@ public class MenuClickInfo {
     return inventory.getItem(slot);
   }
 
-  @Nonnull
+  @NotNull
   public Material getClickedMaterial() {
     return getClickedItem() == null ? Material.AIR : getClickedItem().getType();
   }

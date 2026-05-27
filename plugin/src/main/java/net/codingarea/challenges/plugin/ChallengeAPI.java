@@ -9,9 +9,9 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -49,11 +49,11 @@ public final class ChallengeAPI {
     Challenges.getInstance().getChallengeTimer().reset();
   }
 
-  public static void endChallenge(@Nonnull ChallengeEndCause endCause) {
+  public static void endChallenge(@NotNull ChallengeEndCause endCause) {
     Challenges.getInstance().getServerManager().endChallenge(endCause, null);
   }
 
-  public static void endChallenge(@Nonnull ChallengeEndCause endCause, Supplier<List<Player>> winnerGetter) {
+  public static void endChallenge(@NotNull ChallengeEndCause endCause, Supplier<List<Player>> winnerGetter) {
     Challenges.getInstance().getServerManager().endChallenge(endCause, winnerGetter);
   }
 
@@ -66,20 +66,20 @@ public final class ChallengeAPI {
     return Challenges.getInstance().getServerManager().isFresh();
   }
 
-  public static void registerScheduler(@Nonnull Object... scheduler) {
+  public static void registerScheduler(@NotNull Object... scheduler) {
     Challenges.getInstance().getScheduler().register(scheduler);
   }
 
-  public static void subscribeLoader(@Nonnull Class<? extends ContentLoader> classOfLoader, @Nonnull Runnable action) {
+  public static void subscribeLoader(@NotNull Class<? extends ContentLoader> classOfLoader, @NotNull Runnable action) {
     Challenges.getInstance().getLoaderRegistry().subscribe(classOfLoader, action);
   }
 
-  @Nonnull
-  public static List<Material> getCustomDrops(@Nonnull Material block) {
+  @NotNull
+  public static List<Material> getCustomDrops(@NotNull Material block) {
     return Challenges.getInstance().getBlockDropManager().getCustomDrops(block);
   }
 
-  public static boolean getDropChance(@Nonnull Material block) {
+  public static boolean getDropChance(@NotNull Material block) {
     return Challenges.getInstance().getBlockDropManager().getDropChance(block).getAsBoolean();
   }
 
@@ -87,7 +87,7 @@ public final class ChallengeAPI {
     return Challenges.getInstance().getBlockDropManager().isItemsDirectIntoInventory();
   }
 
-  @Nonnull
+  @NotNull
   public static String formatTime(long seconds) {
     return Challenges.getInstance().getChallengeTimer().getFormat().format(seconds);
   }
@@ -95,7 +95,7 @@ public final class ChallengeAPI {
   /**
    * @return all players that aren't ignored by the plugin
    */
-  @Nonnull
+  @NotNull
   public static List<Player> getIngamePlayers() {
     List<Player> list = new ArrayList<>();
     for (Player player : Bukkit.getOnlinePlayers()) {
@@ -114,7 +114,7 @@ public final class ChallengeAPI {
     return Challenges.getInstance().getGameWorldStorage().getWorld(environment);
   }
 
-  public static boolean isPlayerInGameWorld(@Nonnull Environment environment) {
+  public static boolean isPlayerInGameWorld(@NotNull Environment environment) {
     World world = getGameWorld(environment);
     for (Player player : world.getPlayers()) {
       if (!AbstractChallenge.ignorePlayer(player)) {

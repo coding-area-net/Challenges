@@ -16,8 +16,7 @@ import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import org.bukkit.entity.Player;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class MenuManager {
 
@@ -90,13 +89,13 @@ public final class MenuManager {
     generated = true;
   }
 
-  public void openGUI(@Nonnull Player player) {
+  public void openGUI(@NotNull Player player) {
     SoundSample.PLOP.play(player);
     MenuPosition.set(player, new MainMenuPosition());
     gui.open(player, Challenges.getInstance());
   }
 
-  public void openGUIInstantly(@Nonnull Player player) {
+  public void openGUIInstantly(@NotNull Player player) {
     MenuPosition.set(player, new MainMenuPosition());
     gui.openNotAnimated(player, true, Challenges.getInstance());
   }
@@ -105,7 +104,7 @@ public final class MenuManager {
    * @return If the specified menu page could be opened.
    * The menu may not be opened, when there are no challenges registered to that menu or the languages are not loaded
    */
-  public boolean openMenu(@Nonnull Player player, @Nonnull MenuType type, int page) {
+  public boolean openMenu(@NotNull Player player, @NotNull MenuType type, int page) {
     if (!generated) {
       SoundSample.BASS_OFF.play(player);
       player.sendMessage(Prefix.CHALLENGES + "§cCould not open gui, languages are not loaded");
@@ -118,7 +117,7 @@ public final class MenuManager {
     return true;
   }
 
-  public void playNoPermissionsEffect(@Nonnull Player player) {
+  public void playNoPermissionsEffect(@NotNull Player player) {
     SoundSample.BASS_OFF.play(player);
     Message.forName("no-permission").send(player, Prefix.CHALLENGES);
   }
@@ -130,7 +129,7 @@ public final class MenuManager {
   private class MainMenuPosition implements MenuPosition {
 
     @Override
-    public void handleClick(@Nonnull MenuClickInfo info) {
+    public void handleClick(@NotNull MenuClickInfo info) {
 
       for (int i = 0; i < GUI_SLOTS.length; i++) {
         int current = GUI_SLOTS[i];

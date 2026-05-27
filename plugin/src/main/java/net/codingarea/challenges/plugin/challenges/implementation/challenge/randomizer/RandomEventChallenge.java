@@ -20,9 +20,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Since("2.0")
 public class RandomEventChallenge extends TimedChallenge {
@@ -43,7 +42,7 @@ public class RandomEventChallenge extends TimedChallenge {
     };
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.CLOCK, Message.forName("item-random-event-challenge").asItemDescription(events.length));
@@ -76,23 +75,23 @@ public class RandomEventChallenge extends TimedChallenge {
 
   public interface Event {
 
-    @Nonnull
+    @NotNull
     Message getActivationMessage();
 
-    void run(@Nonnull Player player);
+    void run(@NotNull Player player);
 
   }
 
   public static class SpeedEvent implements Event {
 
-    @Nonnull
+    @NotNull
     @Override
     public Message getActivationMessage() {
       return Message.forName("random-event-speed");
     }
 
     @Override
-    public void run(@Nonnull Player player) {
+    public void run(@NotNull Player player) {
       player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10 * 20, 99));
     }
 
@@ -100,14 +99,14 @@ public class RandomEventChallenge extends TimedChallenge {
 
   public static class HoleEvent implements Event {
 
-    @Nonnull
+    @NotNull
     @Override
     public Message getActivationMessage() {
       return Message.forName("random-event-hole");
     }
 
     @Override
-    public void run(@Nonnull Player player) {
+    public void run(@NotNull Player player) {
       Location location = player.getLocation().getBlock().getLocation();
       for (int x = -1; x <= 1; x++) {
         for (int z = -1; z <= 1; z++) {
@@ -122,14 +121,14 @@ public class RandomEventChallenge extends TimedChallenge {
 
   public static class FlyEvent implements Event {
 
-    @Nonnull
+    @NotNull
     @Override
     public Message getActivationMessage() {
       return Message.forName("random-event-fly");
     }
 
     @Override
-    public void run(@Nonnull Player player) {
+    public void run(@NotNull Player player) {
       player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 3 * 20, 5));
     }
 
@@ -137,14 +136,14 @@ public class RandomEventChallenge extends TimedChallenge {
 
   public static class ReplaceOresEvent implements Event {
 
-    @Nonnull
+    @NotNull
     @Override
     public Message getActivationMessage() {
       return Message.forName("random-event-ores");
     }
 
     @Override
-    public void run(@Nonnull Player player) {
+    public void run(@NotNull Player player) {
       Location location = player.getLocation();
       Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
         for (int x = -100; x <= 100; x++) {
@@ -172,14 +171,14 @@ public class RandomEventChallenge extends TimedChallenge {
 
   public static class SicknessEvent implements Event {
 
-    @Nonnull
+    @NotNull
     @Override
     public Message getActivationMessage() {
       return Message.forName("random-event-sickness");
     }
 
     @Override
-    public void run(@Nonnull Player player) {
+    public void run(@NotNull Player player) {
       player.addPotionEffect(new PotionEffect(MinecraftNameWrapper.NAUSEA, 7 * 20, 0));
       player.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 3 * 20, 1));
       player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 5 * 20, 1));
@@ -188,14 +187,14 @@ public class RandomEventChallenge extends TimedChallenge {
 
   public static class SpawnEntitiesEvent implements Event {
 
-    @Nonnull
+    @NotNull
     @Override
     public Message getActivationMessage() {
       return Message.forName("random-event-entities");
     }
 
     @Override
-    public void run(@Nonnull Player player) {
+    public void run(@NotNull Player player) {
       EntityType type = globalRandom.choose(EntityType.PIG, EntityType.CHICKEN, EntityType.CAT, EntityType.SILVERFISH, EntityType.WOLF);
 
       for (int i = 0; i < globalRandom.nextInt(5) + 5; i++) {
@@ -212,14 +211,14 @@ public class RandomEventChallenge extends TimedChallenge {
 
   public static class CobWebEvent implements Event {
 
-    @Nonnull
+    @NotNull
     @Override
     public Message getActivationMessage() {
       return Message.forName("random-event-webs");
     }
 
     @Override
-    public void run(@Nonnull Player player) {
+    public void run(@NotNull Player player) {
       for (int i = 0; i < 13; i++) {
         Location randomLocation = player.getLocation().add(globalRandom.nextInt(10) - 5, -20, globalRandom.nextInt(10 - 5));
         if (randomLocation.getWorld() == null) return;

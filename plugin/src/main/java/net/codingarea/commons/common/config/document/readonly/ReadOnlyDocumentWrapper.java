@@ -2,14 +2,13 @@ package net.codingarea.commons.common.config.document.readonly;
 
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.document.wrapper.WrappedDocument;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class ReadOnlyDocumentWrapper implements WrappedDocument<Document> {
 
   private final Document document;
 
-  public ReadOnlyDocumentWrapper(@Nonnull Document document) {
+  public ReadOnlyDocumentWrapper(@NotNull Document document) {
     this.document = document;
   }
 

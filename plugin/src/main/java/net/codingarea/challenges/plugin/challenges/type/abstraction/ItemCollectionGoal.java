@@ -12,7 +12,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -26,7 +25,7 @@ public abstract class ItemCollectionGoal extends CollectionGoal {
     super(enabledByDefault, target);
   }
 
-  protected void handleCollect(@Nonnull Player player, @Nonnull Material material) {
+  protected void handleCollect(@NotNull Player player, @NotNull Material material) {
     collect(player, material, () -> {
       Message.forName("item-collected").send(player, Prefix.CHALLENGES, material);
       SoundSample.PLING.play(player);
@@ -41,7 +40,7 @@ public abstract class ItemCollectionGoal extends CollectionGoal {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPickupItem(@Nonnull PlayerPickupItemEvent event) {
+  public void onPickupItem(@NotNull PlayerPickupItemEvent event) {
     if (!shouldExecuteEffect()) return;
     Material material = event.getItem().getItemStack().getType();
     Player player = event.getPlayer();
@@ -49,7 +48,7 @@ public abstract class ItemCollectionGoal extends CollectionGoal {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerInventoryClick(@Nonnull PlayerInventoryClickEvent event) {
+  public void onPlayerInventoryClick(@NotNull PlayerInventoryClickEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.isCancelled()) return;
     if (event.getClickedInventory() == null) return;

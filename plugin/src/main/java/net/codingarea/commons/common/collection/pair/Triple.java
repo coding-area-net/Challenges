@@ -1,8 +1,9 @@
 package net.codingarea.commons.common.collection.pair;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -31,7 +32,7 @@ public class Triple<F, S, T> implements Pair {
     return 3;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public final Object[] values() {
     return new Object[]{first, second, third};
@@ -61,11 +62,11 @@ public class Triple<F, S, T> implements Pair {
     this.third = third;
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  public <ToF, ToS, ToT> Triple<ToF, ToS, ToT> map(@Nonnull Function<? super F, ? extends ToF> firstMapper,
-                                                   @Nonnull Function<? super S, ? extends ToS> secondMapper,
-                                                   @Nonnull Function<? super T, ? extends ToT> thirdMapper) {
+  public <ToF, ToS, ToT> Triple<ToF, ToS, ToT> map(@NotNull Function<? super F, ? extends ToF> firstMapper,
+                                                   @NotNull Function<? super S, ? extends ToS> secondMapper,
+                                                   @NotNull Function<? super T, ? extends ToT> thirdMapper) {
     return of(firstMapper.apply(first), secondMapper.apply(second), thirdMapper.apply(third));
   }
 
@@ -95,27 +96,27 @@ public class Triple<F, S, T> implements Pair {
     return "Triple[" + first + ", " + second + ", " + third + "]";
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S, T> Triple<F, S, T> ofFirst(@Nullable F first) {
     return of(first, null, null);
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S, T> Triple<F, S, T> ofSecond(@Nullable S second) {
     return of(null, second, null);
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S, T> Triple<F, S, T> ofThird(@Nullable T third) {
     return of(null, null, third);
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S, T> Triple<F, S, T> of(@Nullable F first, @Nullable S second, @Nullable T third) {
     return new Triple<>(first, second, third);
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S, T> Triple<F, S, T> empty() {
     return new Triple<>();
   }

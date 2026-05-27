@@ -4,8 +4,7 @@ import net.codingarea.challenges.plugin.challenges.type.IChallenge;
 import net.codingarea.challenges.plugin.management.menu.generator.ChallengeMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class SettingsMenuGenerator extends ChallengeMenuGenerator {
 
@@ -29,7 +28,7 @@ public class SettingsMenuGenerator extends ChallengeMenuGenerator {
   }
 
   @Override
-  public void executeClickAction(@Nonnull IChallenge challenge, @Nonnull MenuClickInfo info, int itemIndex) {
+  public void executeClickAction(@NotNull IChallenge challenge, @NotNull MenuClickInfo info, int itemIndex) {
     if (itemIndex <= 1) {
       challenge.handleClick(new ChallengeMenuClickInfo(info, itemIndex == 0));
     }

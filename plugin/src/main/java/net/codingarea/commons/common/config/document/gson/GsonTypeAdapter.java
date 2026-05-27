@@ -6,19 +6,19 @@ import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.util.function.Predicate;
 
 @SuppressWarnings("unchecked")
 public interface GsonTypeAdapter<T> {
 
-  void write(@Nonnull Gson gson, @Nonnull JsonWriter writer, @Nonnull T object) throws IOException;
+  void write(@NotNull Gson gson, @NotNull JsonWriter writer, @NotNull T object) throws IOException;
 
-  T read(@Nonnull Gson gson, @Nonnull JsonReader reader) throws IOException;
+  T read(@NotNull Gson gson, @NotNull JsonReader reader) throws IOException;
 
-  default TypeAdapter<T> toTypeAdapter(@Nonnull Gson gson) {
+  default TypeAdapter<T> toTypeAdapter(@NotNull Gson gson) {
     return new TypeAdapter<T>() {
       @Override
       public void write(JsonWriter writer, T object) throws IOException {
@@ -36,8 +36,8 @@ public interface GsonTypeAdapter<T> {
     };
   }
 
-  @Nonnull
-  static TypeAdapterFactory newTypeHierarchyFactory(@Nonnull Class<?> clazz, @Nonnull GsonTypeAdapter<?> adapter) {
+  @NotNull
+  static TypeAdapterFactory newTypeHierarchyFactory(@NotNull Class<?> clazz, @NotNull GsonTypeAdapter<?> adapter) {
     return new TypeAdapterFactory() {
       @Override
       public <R> TypeAdapter<R> create(Gson gson, TypeToken<R> token) {
@@ -49,8 +49,8 @@ public interface GsonTypeAdapter<T> {
     };
   }
 
-  @Nonnull
-  static TypeAdapterFactory newPredictableFactory(@Nonnull Predicate<Class<?>> predicate, @Nonnull GsonTypeAdapter<?> adapter) {
+  @NotNull
+  static TypeAdapterFactory newPredictableFactory(@NotNull Predicate<Class<?>> predicate, @NotNull GsonTypeAdapter<?> adapter) {
     return new TypeAdapterFactory() {
       @Override
       public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {

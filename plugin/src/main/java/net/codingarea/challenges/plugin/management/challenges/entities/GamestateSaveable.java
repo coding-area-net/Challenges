@@ -1,15 +1,14 @@
 package net.codingarea.challenges.plugin.management.challenges.entities;
 
 import net.codingarea.commons.common.config.Document;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public interface GamestateSaveable {
 
   String getUniqueGamestateName();
 
-  void writeGameState(@Nonnull Document document);
+  void writeGameState(@NotNull Document document);
 
-  void loadGameState(@Nonnull Document document);
+  void loadGameState(@NotNull Document document);
 
 }

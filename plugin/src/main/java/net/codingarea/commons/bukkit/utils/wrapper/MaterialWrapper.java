@@ -2,8 +2,7 @@ package net.codingarea.commons.bukkit.utils.wrapper;
 
 import net.codingarea.commons.common.misc.ReflectionUtils;
 import org.bukkit.Material;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This class allows you to use materials, whose names are changed at some point, in most versions.
@@ -20,8 +19,8 @@ public final class MaterialWrapper {
   public static final Material YELLOW_DYE = getMaterialByNames("DANDELION_YELLOW", "YELLOW_DYE");
   public static final Material SIGN = getMaterialByNames("SIGN", "OAK_SIGN");
 
-  @Nonnull
-  private static Material getMaterialByNames(@Nonnull String... names) {
+  @NotNull
+  private static Material getMaterialByNames(@NotNull String... names) {
     return ReflectionUtils.getFirstEnumByNames(Material.class, names);
   }
 

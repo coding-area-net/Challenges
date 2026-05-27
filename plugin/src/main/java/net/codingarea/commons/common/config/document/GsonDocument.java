@@ -12,9 +12,9 @@ import net.codingarea.commons.common.config.document.gson.*;
 import net.codingarea.commons.common.misc.BukkitReflectionSerializationUtils;
 import net.codingarea.commons.common.misc.FileUtils;
 import net.codingarea.commons.common.misc.GsonUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.awt.*;
 import java.io.*;
 import java.time.OffsetDateTime;
@@ -85,8 +85,8 @@ public class GsonDocument extends AbstractDocument {
     return writePrettyJson;
   }
 
-  @Nonnull
-  public static List<Document> convertArrayToDocuments(@Nonnull JsonArray array) {
+  @NotNull
+  public static List<Document> convertArrayToDocuments(@NotNull JsonArray array) {
     List<Document> list = new ArrayList<>(array.size());
     for (JsonElement element : array) {
       if (!element.isJsonObject()) continue;
@@ -95,8 +95,8 @@ public class GsonDocument extends AbstractDocument {
     return list;
   }
 
-  @Nonnull
-  public static List<String> convertArrayToStrings(@Nonnull JsonArray array) {
+  @NotNull
+  public static List<String> convertArrayToStrings(@NotNull JsonArray array) {
     List<String> list = new ArrayList<>(array.size());
     for (JsonElement element : array) {
       if (!element.isJsonObject()) continue;
@@ -107,23 +107,23 @@ public class GsonDocument extends AbstractDocument {
 
   protected JsonObject jsonObject;
 
-  public GsonDocument(@Nonnull File file) throws IOException {
+  public GsonDocument(@NotNull File file) throws IOException {
     this(FileUtils.newBufferedReader(file));
   }
 
-  public GsonDocument(@Nonnull Reader reader) throws IOException {
+  public GsonDocument(@NotNull Reader reader) throws IOException {
     this(new BufferedReader(reader));
   }
 
-  public GsonDocument(@Nonnull BufferedReader reader) throws IOException {
+  public GsonDocument(@NotNull BufferedReader reader) throws IOException {
     this(reader.ready() ? GSON.fromJson(reader, JsonObject.class) : new JsonObject());
   }
 
-  public GsonDocument(@Nonnull String json) {
+  public GsonDocument(@NotNull String json) {
     this(GSON.fromJson(json, JsonObject.class));
   }
 
-  public GsonDocument(@Nonnull String json, @Nonnull Document root, @Nullable Document parent) {
+  public GsonDocument(@NotNull String json, @NotNull Document root, @Nullable Document parent) {
     this(GSON.fromJson(json, JsonObject.class), root, parent);
   }
 
@@ -131,12 +131,12 @@ public class GsonDocument extends AbstractDocument {
     this.jsonObject = jsonObject == null ? new JsonObject() : jsonObject;
   }
 
-  public GsonDocument(@Nullable JsonObject jsonObject, @Nonnull Document root, @Nullable Document parent) {
+  public GsonDocument(@Nullable JsonObject jsonObject, @NotNull Document root, @Nullable Document parent) {
     super(root, parent);
     this.jsonObject = jsonObject == null ? new JsonObject() : jsonObject;
   }
 
-  public GsonDocument(@Nonnull Map<String, Object> values) {
+  public GsonDocument(@NotNull Map<String, Object> values) {
     this();
     GsonUtils.setDocumentProperties(GSON, jsonObject, values);
   }
@@ -145,54 +145,54 @@ public class GsonDocument extends AbstractDocument {
     this(new JsonObject());
   }
 
-  public GsonDocument(@Nonnull Object object) {
+  public GsonDocument(@NotNull Object object) {
     this(GSON.toJsonTree(object).getAsJsonObject());
   }
 
   @Nullable
   @Override
-  public String getString(@Nonnull String path) {
+  public String getString(@NotNull String path) {
     JsonElement element = getElement(path).orElse(null);
     return GsonUtils.convertJsonElementToString(element);
   }
 
   @Nullable
   @Override
-  public Object getObject(@Nonnull String path) {
+  public Object getObject(@NotNull String path) {
     JsonElement element = getElement(path).orElse(null);
     return GsonUtils.unpackJsonElement(element);
   }
 
   @Nullable
   @Override
-  public <T> T getInstance(@Nonnull String path, @Nonnull Class<T> classOfType) {
+  public <T> T getInstance(@NotNull String path, @NotNull Class<T> classOfType) {
     JsonElement element = getElement(path).orElse(null);
     return GSON.fromJson(element, classOfType);
   }
 
   @Override
-  public <T> T toInstanceOf(@Nonnull Class<T> classOfT) {
+  public <T> T toInstanceOf(@NotNull Class<T> classOfT) {
     if (isEmpty()) return null;
     return GSON.fromJson(jsonObject, classOfT);
   }
 
   @Nullable
   @Override
-  public <T> T getSerializable(@Nonnull String path, @Nonnull Class<T> classOfT) {
+  public <T> T getSerializable(@NotNull String path, @NotNull Class<T> classOfT) {
     return getInstance(path, classOfT);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Document getDocument0(@Nonnull String path, @Nonnull Document root, @Nullable Document parent) {
+  public Document getDocument0(@NotNull String path, @NotNull Document root, @Nullable Document parent) {
     JsonElement element = getElement(path).orElse(null);
     if (element == null || !element.isJsonObject()) setElement(path, element = new JsonObject());
     return new GsonDocument(element.getAsJsonObject(), root, parent);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Document> getDocumentList(@Nonnull String path) {
+  public List<Document> getDocumentList(@NotNull String path) {
     JsonElement element = getElement(path).orElse(new JsonArray());
     if (element.isJsonNull()) return new ArrayList<>();
     JsonArray array = element.getAsJsonArray();
@@ -205,53 +205,53 @@ public class GsonDocument extends AbstractDocument {
   }
 
   @Override
-  public char getChar(@Nonnull String path) {
+  public char getChar(@NotNull String path) {
     return getChar(path, (char) 0);
   }
 
   @Override
-  public char getChar(@Nonnull String path, char def) {
+  public char getChar(@NotNull String path, char def) {
     return getPrimitive(path).map(JsonPrimitive::getAsCharacter).orElse(def);
   }
 
   @Override
-  public long getLong(@Nonnull String path, long def) {
+  public long getLong(@NotNull String path, long def) {
     return getPrimitive(path).map(JsonPrimitive::getAsLong).orElse(def);
   }
 
   @Override
-  public int getInt(@Nonnull String path, int def) {
+  public int getInt(@NotNull String path, int def) {
     return getPrimitive(path).map(JsonPrimitive::getAsInt).orElse(def);
   }
 
   @Override
-  public short getShort(@Nonnull String path, short def) {
+  public short getShort(@NotNull String path, short def) {
     return getPrimitive(path).map(JsonPrimitive::getAsShort).orElse(def);
   }
 
   @Override
-  public byte getByte(@Nonnull String path, byte def) {
+  public byte getByte(@NotNull String path, byte def) {
     return getPrimitive(path).map(JsonPrimitive::getAsByte).orElse(def);
   }
 
   @Override
-  public double getDouble(@Nonnull String path, double def) {
+  public double getDouble(@NotNull String path, double def) {
     return getPrimitive(path).map(JsonPrimitive::getAsDouble).orElse(def);
   }
 
   @Override
-  public float getFloat(@Nonnull String path, float def) {
+  public float getFloat(@NotNull String path, float def) {
     return getPrimitive(path).map(JsonPrimitive::getAsFloat).orElse(def);
   }
 
   @Override
-  public boolean getBoolean(@Nonnull String path, boolean def) {
+  public boolean getBoolean(@NotNull String path, boolean def) {
     return getPrimitive(path).map(JsonPrimitive::getAsBoolean).orElse(def);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<String> getStringList(@Nonnull String path) {
+  public List<String> getStringList(@NotNull String path) {
     JsonElement element = getElement(path).orElse(null);
     if (element == null || element.isJsonNull()) return new ArrayList<>();
     if (element.isJsonPrimitive())
@@ -263,55 +263,55 @@ public class GsonDocument extends AbstractDocument {
 
   @Nullable
   @Override
-  public UUID getUUID(@Nonnull String path) {
+  public UUID getUUID(@NotNull String path) {
     return getInstance(path, UUID.class);
   }
 
   @Nullable
   @Override
-  public Date getDate(@Nonnull String path) {
+  public Date getDate(@NotNull String path) {
     return getInstance(path, Date.class);
   }
 
   @Nullable
   @Override
-  public OffsetDateTime getDateTime(@Nonnull String path) {
+  public OffsetDateTime getDateTime(@NotNull String path) {
     return getInstance(path, OffsetDateTime.class);
   }
 
   @Nullable
   @Override
-  public Color getColor(@Nonnull String path) {
+  public Color getColor(@NotNull String path) {
     return getInstance(path, Color.class);
   }
 
   @Nullable
   @Override
-  public <E extends Enum<E>> E getEnum(@Nonnull String path, @Nonnull Class<E> classOfEnum) {
+  public <E extends Enum<E>> E getEnum(@NotNull String path, @NotNull Class<E> classOfEnum) {
     return getInstance(path, classOfEnum);
   }
 
   @Override
-  public boolean isList(@Nonnull String path) {
+  public boolean isList(@NotNull String path) {
     return checkElement(path, JsonElement::isJsonArray);
   }
 
   @Override
-  public boolean isDocument(@Nonnull String path) {
+  public boolean isDocument(@NotNull String path) {
     return checkElement(path, JsonElement::isJsonObject);
   }
 
   @Override
-  public boolean isObject(@Nonnull String path) {
+  public boolean isObject(@NotNull String path) {
     return checkElement(path, JsonElement::isJsonPrimitive);
   }
 
-  private boolean checkElement(@Nonnull String path, @Nonnull Function<? super JsonElement, Boolean> check) {
+  private boolean checkElement(@NotNull String path, @NotNull Function<? super JsonElement, Boolean> check) {
     return getElement(path).map(check).orElse(false);
   }
 
   @Override
-  public boolean contains(@Nonnull String path) {
+  public boolean contains(@NotNull String path) {
     return getElement(path).isPresent();
   }
 
@@ -321,13 +321,13 @@ public class GsonDocument extends AbstractDocument {
   }
 
   @Override
-  public void set0(@Nonnull String path, @Nullable Object value) {
+  public void set0(@NotNull String path, @Nullable Object value) {
     setElement(path, value);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Document set(@Nonnull Object object) {
+  public Document set(@NotNull Object object) {
     JsonObject json = GSON.toJsonTree(object).getAsJsonObject();
     for (Entry<String, JsonElement> entry : json.entrySet()) {
       jsonObject.add(entry.getKey(), entry.getValue());
@@ -341,22 +341,22 @@ public class GsonDocument extends AbstractDocument {
   }
 
   @Override
-  public void remove0(@Nonnull String path) {
+  public void remove0(@NotNull String path) {
     setElement(path, null);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Map<String, Object> values() {
     return GsonUtils.convertJsonObjectToMap(jsonObject);
   }
 
   @Override
-  public void forEach(@Nonnull BiConsumer<? super String, ? super Object> action) {
+  public void forEach(@NotNull BiConsumer<? super String, ? super Object> action) {
     values().forEach(action);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Collection<String> keys() {
     Collection<String> keys = new ArrayList<>(size());
@@ -366,20 +366,20 @@ public class GsonDocument extends AbstractDocument {
     return keys;
   }
 
-  @Nonnull
-  private Optional<JsonPrimitive> getPrimitive(@Nonnull String path) {
+  @NotNull
+  private Optional<JsonPrimitive> getPrimitive(@NotNull String path) {
     return getElement(path)
       .filter(JsonPrimitive.class::isInstance)
       .map(JsonPrimitive.class::cast);
   }
 
-  @Nonnull
-  private Optional<JsonElement> getElement(@Nonnull String path) {
+  @NotNull
+  private Optional<JsonElement> getElement(@NotNull String path) {
     return getElement(path, jsonObject);
   }
 
-  @Nonnull
-  private Optional<JsonElement> getElement(@Nonnull String path, @Nonnull JsonObject object) {
+  @NotNull
+  private Optional<JsonElement> getElement(@NotNull String path, @NotNull JsonObject object) {
 
     JsonElement fullPathElement = object.get(path);
     if (fullPathElement != null) return Optional.of(fullPathElement);
@@ -397,7 +397,7 @@ public class GsonDocument extends AbstractDocument {
 
   }
 
-  private void setElement(@Nonnull String path, @Nullable Object value) {
+  private void setElement(@NotNull String path, @Nullable Object value) {
 
     LinkedList<String> paths = determinePath(path);
     JsonObject object = jsonObject;
@@ -429,8 +429,8 @@ public class GsonDocument extends AbstractDocument {
 
   }
 
-  @Nonnull
-  private LinkedList<String> determinePath(@Nonnull String path) {
+  @NotNull
+  private LinkedList<String> determinePath(@NotNull String path) {
 
     LinkedList<String> paths = new LinkedList<>();
     String pathCopy = path;
@@ -446,13 +446,13 @@ public class GsonDocument extends AbstractDocument {
 
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public String toJson() {
     return GSON.toJson(jsonObject);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public String toPrettyJson() {
     return GSON_PRETTY_PRINT.toJson(jsonObject);
@@ -477,12 +477,12 @@ public class GsonDocument extends AbstractDocument {
   }
 
   @Override
-  public void write(@Nonnull Writer writer) throws IOException {
+  public void write(@NotNull Writer writer) throws IOException {
     cleanup();
     (writePrettyJson ? GSON_PRETTY_PRINT : GSON).toJson(jsonObject, writer);
   }
 
-  @Nonnull
+  @NotNull
   public JsonObject getJsonObject() {
     return jsonObject;
   }
@@ -496,7 +496,7 @@ public class GsonDocument extends AbstractDocument {
     cleanup(jsonObject);
   }
 
-  public static void cleanup(@Nonnull JsonObject jsonObject) {
+  public static void cleanup(@NotNull JsonObject jsonObject) {
     Iterator<Entry<String, JsonElement>> iterator = jsonObject.entrySet().iterator();
     while (iterator.hasNext()) {
       Entry<String, JsonElement> entry = iterator.next();

@@ -15,8 +15,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +27,7 @@ public class InfectionChallenge extends Setting {
     setCategory(SettingCategory.EFFECT);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.SLIME_BALL, Message.forName("item-infection-challenge"));
@@ -47,7 +47,7 @@ public class InfectionChallenge extends Setting {
     Bukkit.getOnlinePlayers().forEach(this::updateSickness);
   }
 
-  private void updateSickness(@Nonnull Player player) {
+  private void updateSickness(@NotNull Player player) {
     if (ignorePlayer(player)) {
       removeEffects(player);
       return;
@@ -76,13 +76,13 @@ public class InfectionChallenge extends Setting {
 
   }
 
-  private void removeEffects(@Nonnull Player player) {
+  private void removeEffects(@NotNull Player player) {
     player.removePotionEffect(MinecraftNameWrapper.NAUSEA);
     player.removePotionEffect(PotionEffectType.POISON);
     player.removePotionEffect(PotionEffectType.WITHER);
   }
 
-  private List<Entity> getNearbyTargets(@Nonnull Player player, double range) {
+  private List<Entity> getNearbyTargets(@NotNull Player player, double range) {
     return player.getNearbyEntities(range, range, range).stream()
       .filter(entity -> entity != player)
       .filter(entity -> entity instanceof LivingEntity)

@@ -9,9 +9,9 @@ import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBo
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +25,7 @@ public final class ScoreboardManager {
     ChallengeAPI.registerScheduler(this);
   }
 
-  public void handleQuit(@Nonnull Player player) {
+  public void handleQuit(@NotNull Player player) {
     for (ChallengeBossBar bossbar : bossbars) {
       bossbar.applyHide(player);
     }
@@ -35,7 +35,7 @@ public final class ScoreboardManager {
     }
   }
 
-  public void handleJoin(@Nonnull Player player) {
+  public void handleJoin(@NotNull Player player) {
     updateAll();
   }
 
@@ -49,13 +49,13 @@ public final class ScoreboardManager {
     }
   }
 
-  public void showBossBar(@Nonnull ChallengeBossBar bossbar) {
+  public void showBossBar(@NotNull ChallengeBossBar bossbar) {
     if (bossbars.contains(bossbar)) return;
     bossbars.add(bossbar);
     bossbar.update();
   }
 
-  public void hideBossBar(@Nonnull ChallengeBossBar bossbar) {
+  public void hideBossBar(@NotNull ChallengeBossBar bossbar) {
     if (!bossbars.remove(bossbar)) return;
     Bukkit.getOnlinePlayers().forEach(bossbar::applyHide);
   }
@@ -87,11 +87,11 @@ public final class ScoreboardManager {
     setCurrentScoreboard(null);
   }
 
-  public boolean isShown(@Nonnull ChallengeBossBar bossbar) {
+  public boolean isShown(@NotNull ChallengeBossBar bossbar) {
     return bossbars.contains(bossbar);
   }
 
-  public boolean isShown(@Nonnull ChallengeScoreboard scoreboard) {
+  public boolean isShown(@NotNull ChallengeScoreboard scoreboard) {
     return currentScoreboard == scoreboard;
   }
 

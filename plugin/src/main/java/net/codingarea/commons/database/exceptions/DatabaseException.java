@@ -1,8 +1,7 @@
 package net.codingarea.commons.database.exceptions;
 
 import net.codingarea.commons.database.action.DatabaseAction;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @see DatabaseAlreadyConnectedException
@@ -16,15 +15,15 @@ public class DatabaseException extends Exception {
     super();
   }
 
-  public DatabaseException(@Nonnull String message) {
+  public DatabaseException(@NotNull String message) {
     super(message);
   }
 
-  public DatabaseException(@Nonnull Throwable cause) {
+  public DatabaseException(@NotNull Throwable cause) {
     super(cause);
   }
 
-  public DatabaseException(@Nonnull String message, @Nonnull Throwable cause) {
+  public DatabaseException(@NotNull String message, @NotNull Throwable cause) {
     super(message, cause);
   }
 }

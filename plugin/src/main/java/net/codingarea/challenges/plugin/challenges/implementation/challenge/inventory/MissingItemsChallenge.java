@@ -32,9 +32,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -66,7 +66,7 @@ public class MissingItemsChallenge extends TimedChallenge implements PlayerComma
     return globalRandom.around(getValue() * 60, 10);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.FISHING_ROD, Message.forName("item-missing-items-challenge"));
@@ -95,7 +95,7 @@ public class MissingItemsChallenge extends TimedChallenge implements PlayerComma
 
   }
 
-  private void startGuessingGame(@Nonnull Player player) {
+  private void startGuessingGame(@NotNull Player player) {
 
     BukkitTask task = new BukkitRunnable() {
 
@@ -132,7 +132,7 @@ public class MissingItemsChallenge extends TimedChallenge implements PlayerComma
 
   }
 
-  private void createMissingItemsInventory(@Nonnull Player player, Consumer<Void> onFinish) {
+  private void createMissingItemsInventory(@NotNull Player player, Consumer<Void> onFinish) {
 
     int targetSlot = InventoryUtils.getRandomFullSlot(player.getInventory());
     if (targetSlot == -1) return;
@@ -163,7 +163,7 @@ public class MissingItemsChallenge extends TimedChallenge implements PlayerComma
 
   }
 
-  private void sendInfoText(@Nonnull Player player) {
+  private void sendInfoText(@NotNull Player player) {
     String message = Message.forName("missing-items-inventory").asString("§7");
     String openMessage = Message.forName("missing-items-inventory-open").asString();
 
@@ -177,7 +177,7 @@ public class MissingItemsChallenge extends TimedChallenge implements PlayerComma
     player.spigot().sendMessage(messageComponent);
   }
 
-  private boolean openGameInventory(@Nonnull Player player) {
+  private boolean openGameInventory(@NotNull Player player) {
     Tuple<Inventory, MenuPosition> inventoryTuple = inventories.get(player.getUniqueId());
     if (inventoryTuple == null) return false;
     player.openInventory(inventoryTuple.getFirst());
@@ -185,7 +185,7 @@ public class MissingItemsChallenge extends TimedChallenge implements PlayerComma
     return true;
   }
 
-  private Tuple<Inventory, Integer> generateMissingItemsInventory(@Nonnull ItemStack itemStack) {
+  private Tuple<Inventory, Integer> generateMissingItemsInventory(@NotNull ItemStack itemStack) {
     Inventory inventory = Bukkit.createInventory(MenuPosition.HOLDER, 6 * 9, InventoryTitleManager.getTitle(Message.forName("missing-items-inventory").asString(Message.forName("inventory-color").asString())));
 
     int targetSlot = globalRandom.nextInt(inventory.getSize());
@@ -205,7 +205,7 @@ public class MissingItemsChallenge extends TimedChallenge implements PlayerComma
     return new Tuple<>(inventory, targetSlot);
   }
 
-  private ItemStack getRandomItem(@Nonnull ItemStack blacklisted) {
+  private ItemStack getRandomItem(@NotNull ItemStack blacklisted) {
     if (materials == null) onEnable();
 
     Material material = globalRandom.choose(materials);
@@ -225,7 +225,7 @@ public class MissingItemsChallenge extends TimedChallenge implements PlayerComma
   }
 
   @Override
-  public void onCommand(@Nonnull Player player, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
     if (openGameInventory(player)) {
       SoundSample.OPEN.play(player);
     } else {

@@ -1,7 +1,8 @@
 package net.codingarea.commons.common.concurrent.task;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.concurrent.*;
 import java.util.function.Function;
 
@@ -22,9 +23,9 @@ public class CompletedTask<V> implements Task<V> {
     this.failure = failure;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Task<V> addListener(@Nonnull TaskListener<V> listener) {
+  public Task<V> addListener(@NotNull TaskListener<V> listener) {
     if (failure != null) {
       listener.onFailure(this, failure);
     } else if (value != null) {
@@ -36,13 +37,13 @@ public class CompletedTask<V> implements Task<V> {
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Task<V> clearListeners() {
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public <R> Task<R> map(@Nullable Function<? super V, ? extends R> mapper) {
     if (failure != null)
@@ -52,7 +53,7 @@ public class CompletedTask<V> implements Task<V> {
   }
 
   @Override
-  public V getOrDefault(long timeout, @Nonnull TimeUnit unit, V def) {
+  public V getOrDefault(long timeout, @NotNull TimeUnit unit, V def) {
     if (value != null)
       return value;
 
@@ -85,11 +86,11 @@ public class CompletedTask<V> implements Task<V> {
   }
 
   @Override
-  public V get(long timeout, @Nonnull TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
+  public V get(long timeout, @NotNull TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
     return value;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public CompletionStage<V> stage() {
     if (future == null) {

@@ -1,6 +1,6 @@
 package net.codingarea.commons.common.collection;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @param <F> The type of the first value

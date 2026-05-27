@@ -14,8 +14,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Since("2.0.2")
@@ -27,13 +27,13 @@ public class DamageTeleportChallenge extends SettingModifier {
     super(MenuType.CHALLENGES, 1, 2);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.SHULKER_SHELL, Message.forName("item-damage-teleport-challenge"));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     if (getValue() == 1) {
@@ -49,7 +49,7 @@ public class DamageTeleportChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onDamage(@Nonnull EntityDamageEvent event) {
+  public void onDamage(@NotNull EntityDamageEvent event) {
     if (!(event.getEntity() instanceof Player)) return;
     if (!shouldExecuteEffect()) return;
     if (ChallengeHelper.finalDamageIsNull(event)) return;
@@ -57,7 +57,7 @@ public class DamageTeleportChallenge extends SettingModifier {
     handleDamage(((Player) event.getEntity()));
   }
 
-  private void handleDamage(@Nonnull Player player) {
+  private void handleDamage(@NotNull Player player) {
 
     Location location = player.getWorld().getHighestBlockAt(getRandomLocation(player.getWorld())).getLocation();
     location.setY(location.getY() + 1);

@@ -14,9 +14,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Since("2.0")
 public class RandomItemDroppingChallenge extends TimedChallenge {
@@ -31,7 +30,7 @@ public class RandomItemDroppingChallenge extends TimedChallenge {
     dropRandomItem(player.getLocation(), player.getInventory());
   }
 
-  public static void dropRandomItem(@Nonnull Location location, @Nonnull Inventory inventory) {
+  public static void dropRandomItem(@NotNull Location location, @NotNull Inventory inventory) {
     if (location.getWorld() == null) return;
     int slot = InventoryUtils.getRandomFullSlot(inventory);
     if (slot == -1) return;
@@ -41,7 +40,7 @@ public class RandomItemDroppingChallenge extends TimedChallenge {
     InventoryUtils.dropItemByPlayer(location, item);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.DISPENSER, Message.forName("item-random-dropping-challenge"));

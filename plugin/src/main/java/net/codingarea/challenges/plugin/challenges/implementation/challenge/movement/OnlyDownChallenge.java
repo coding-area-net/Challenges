@@ -12,8 +12,7 @@ import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class OnlyDownChallenge extends Setting {
@@ -23,14 +22,14 @@ public class OnlyDownChallenge extends Setting {
     setCategory(SettingCategory.MOVEMENT);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.ACACIA_SLAB, Message.forName("item-only-down-challenge"));
   }
 
   @EventHandler
-  public void onPlayerMove(@Nonnull PlayerMoveEvent event) {
+  public void onPlayerMove(@NotNull PlayerMoveEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (event.getTo() == null) return;

@@ -8,8 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class MineMostBlocksGoal extends PointsGoal {
 
@@ -18,14 +17,14 @@ public class MineMostBlocksGoal extends PointsGoal {
     setCategory(SettingCategory.SCORE_POINTS);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.GOLDEN_PICKAXE, Message.forName("item-mine-most-blocks-goal"));
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onBlockBreak(@Nonnull BlockBreakEvent event) {
+  public void onBlockBreak(@NotNull BlockBreakEvent event) {
     if (!isEnabled()) return;
     if (event.getBlock().isPassable()) return;
     collect(event.getPlayer());

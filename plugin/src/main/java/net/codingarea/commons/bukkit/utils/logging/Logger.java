@@ -3,37 +3,36 @@ package net.codingarea.commons.bukkit.utils.logging;
 import net.codingarea.commons.bukkit.core.BukkitModule;
 import net.codingarea.commons.common.logging.ILogger;
 import net.codingarea.commons.common.misc.ReflectionUtils;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public final class Logger {
 
   private Logger() {
   }
 
-  @Nonnull
+  @NotNull
   public static ILogger getInstance() {
     return BukkitModule.getProvidingModule(ReflectionUtils.getCaller()).getILogger();
   }
 
-  public static void error(@Nullable Object message, @Nonnull Object... args) {
+  public static void error(@Nullable Object message, @NotNull Object... args) {
     getInstance().error(message, args);
   }
 
-  public static void warn(@Nullable Object message, @Nonnull Object... args) {
+  public static void warn(@Nullable Object message, @NotNull Object... args) {
     getInstance().warn(message, args);
   }
 
-  public static void info(@Nullable Object message, @Nonnull Object... args) {
+  public static void info(@Nullable Object message, @NotNull Object... args) {
     getInstance().info(message, args);
   }
 
-  public static void debug(@Nullable Object message, @Nonnull Object... args) {
+  public static void debug(@Nullable Object message, @NotNull Object... args) {
     getInstance().debug(message, args);
   }
 
-  public static void trace(@Nullable Object message, @Nonnull Object... args) {
+  public static void trace(@Nullable Object message, @NotNull Object... args) {
     getInstance().trace(message, args);
   }
 

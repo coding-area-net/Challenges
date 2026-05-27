@@ -7,13 +7,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public interface PlayerCommand extends CommandExecutor {
 
   @Override
-  default boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
+  default boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
     if (sender instanceof Player) {
       try {
         onCommand((Player) sender, args);
@@ -27,6 +26,6 @@ public interface PlayerCommand extends CommandExecutor {
     return true;
   }
 
-  void onCommand(@Nonnull Player player, @Nonnull String[] args) throws Exception;
+  void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception;
 
 }

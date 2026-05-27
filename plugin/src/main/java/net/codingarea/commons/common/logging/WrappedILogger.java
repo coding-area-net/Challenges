@@ -2,98 +2,98 @@ package net.codingarea.commons.common.logging;
 
 import net.codingarea.commons.common.logging.lib.JavaILogger;
 import net.codingarea.commons.common.logging.lib.Slf4jILogger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.PrintStream;
 
 public interface WrappedILogger extends ILogger {
 
-  @Nonnull
+  @NotNull
   ILogger getWrappedLogger();
 
   @Override
-  default void log(@Nonnull LogLevel level, @Nullable String message, @Nonnull Object... args) {
+  default void log(@NotNull LogLevel level, @Nullable String message, @NotNull Object... args) {
     getWrappedLogger().log(level, message, args);
   }
 
   @Override
-  default void log(@Nonnull LogLevel level, @Nullable Object message, @Nonnull Object... args) {
+  default void log(@NotNull LogLevel level, @Nullable Object message, @NotNull Object... args) {
     getWrappedLogger().log(level, message, args);
   }
 
   @Override
-  default void error(@Nullable String message, @Nonnull Object... args) {
+  default void error(@Nullable String message, @NotNull Object... args) {
     getWrappedLogger().error(message, args);
   }
 
   @Override
-  default void error(@Nullable Object message, @Nonnull Object... args) {
+  default void error(@Nullable Object message, @NotNull Object... args) {
     getWrappedLogger().error(message, args);
   }
 
   @Override
-  default void warn(@Nullable String message, @Nonnull Object... args) {
+  default void warn(@Nullable String message, @NotNull Object... args) {
     getWrappedLogger().warn(message, args);
   }
 
   @Override
-  default void warn(@Nullable Object message, @Nonnull Object... args) {
+  default void warn(@Nullable Object message, @NotNull Object... args) {
     getWrappedLogger().warn(message, args);
   }
 
   @Override
-  default void info(@Nullable String message, @Nonnull Object... args) {
+  default void info(@Nullable String message, @NotNull Object... args) {
     getWrappedLogger().info(message, args);
   }
 
   @Override
-  default void info(@Nullable Object message, @Nonnull Object... args) {
+  default void info(@Nullable Object message, @NotNull Object... args) {
     getWrappedLogger().info(message, args);
   }
 
   @Override
-  default void status(@Nullable String message, @Nonnull Object... args) {
+  default void status(@Nullable String message, @NotNull Object... args) {
     getWrappedLogger().status(message, args);
   }
 
   @Override
-  default void status(@Nullable Object message, @Nonnull Object... args) {
+  default void status(@Nullable Object message, @NotNull Object... args) {
     getWrappedLogger().status(message, args);
   }
 
   @Override
-  default void extended(@Nullable String message, @Nonnull Object... args) {
+  default void extended(@Nullable String message, @NotNull Object... args) {
     getWrappedLogger().extended(message, args);
   }
 
   @Override
-  default void extended(@Nullable Object message, @Nonnull Object... args) {
+  default void extended(@Nullable Object message, @NotNull Object... args) {
     getWrappedLogger().extended(message, args);
   }
 
   @Override
-  default void debug(@Nullable String message, @Nonnull Object... args) {
+  default void debug(@Nullable String message, @NotNull Object... args) {
     getWrappedLogger().debug(message, args);
   }
 
   @Override
-  default void debug(@Nullable Object message, @Nonnull Object... args) {
+  default void debug(@Nullable Object message, @NotNull Object... args) {
     getWrappedLogger().debug(message, args);
   }
 
   @Override
-  default void trace(@Nullable String message, @Nonnull Object... args) {
+  default void trace(@Nullable String message, @NotNull Object... args) {
     getWrappedLogger().trace(message, args);
   }
 
   @Override
-  default void trace(@Nullable Object message, @Nonnull Object... args) {
+  default void trace(@Nullable Object message, @NotNull Object... args) {
     getWrappedLogger().trace(message, args);
   }
 
   @Override
-  default boolean isLevelEnabled(@Nonnull LogLevel level) {
+  default boolean isLevelEnabled(@NotNull LogLevel level) {
     return getWrappedLogger().isLevelEnabled(level);
   }
 
@@ -127,33 +127,33 @@ public interface WrappedILogger extends ILogger {
     return getWrappedLogger().isErrorEnabled();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   default LogLevel getMinLevel() {
     return getWrappedLogger().getMinLevel();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  default ILogger setMinLevel(@Nonnull LogLevel level) {
+  default ILogger setMinLevel(@NotNull LogLevel level) {
     return getWrappedLogger().setMinLevel(level);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   default Slf4jILogger slf4j() {
     return getWrappedLogger().slf4j();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   default JavaILogger java() {
     return getWrappedLogger().java();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  default PrintStream asPrintStream(@Nonnull LogLevel level) {
+  default PrintStream asPrintStream(@NotNull LogLevel level) {
     return getWrappedLogger().asPrintStream(level);
   }
 }

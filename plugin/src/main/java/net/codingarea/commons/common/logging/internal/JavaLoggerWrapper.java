@@ -3,9 +3,9 @@ package net.codingarea.commons.common.logging.internal;
 import net.codingarea.commons.common.logging.ILogger;
 import net.codingarea.commons.common.logging.LogLevel;
 import net.codingarea.commons.common.logging.lib.JavaILogger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ResourceBundle;
 import java.util.function.Supplier;
 import java.util.logging.*;
@@ -14,7 +14,7 @@ public class JavaLoggerWrapper extends JavaILogger {
 
   protected final Logger logger;
 
-  public JavaLoggerWrapper(@Nonnull Logger logger) {
+  public JavaLoggerWrapper(@NotNull Logger logger) {
     super(null, null);
     this.logger = logger;
   }
@@ -305,30 +305,30 @@ public class JavaLoggerWrapper extends JavaILogger {
     return logger.toString();
   }
 
-  protected void mapLevel(@Nonnull LogRecord record) {
+  protected void mapLevel(@NotNull LogRecord record) {
     record.setLevel(mapLevel(record.getLevel()));
   }
 
-  @Nonnull
-  protected Level mapLevel(@Nonnull Level level) {
+  @NotNull
+  protected Level mapLevel(@NotNull Level level) {
     return level;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public JavaILogger setMinLevel(@Nonnull LogLevel level) {
+  public JavaILogger setMinLevel(@NotNull LogLevel level) {
     setLevel(level.getJavaUtilLevel());
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public LogLevel getMinLevel() {
     return LogLevel.fromJavaLevel(logger.getLevel());
   }
 
   @Override
-  public void log(@Nonnull LogLevel level, @Nullable String message, @Nonnull Object... args) {
+  public void log(@NotNull LogLevel level, @Nullable String message, @NotNull Object... args) {
     Throwable thrown = null;
     for (Object arg : args) {
       if (arg instanceof Throwable)
@@ -338,57 +338,57 @@ public class JavaLoggerWrapper extends JavaILogger {
   }
 
   @Override
-  public void log(@Nonnull LogLevel level, @Nullable Object message, @Nonnull Object... args) {
+  public void log(@NotNull LogLevel level, @Nullable Object message, @NotNull Object... args) {
     log(level, String.valueOf(message), args);
   }
 
   @Override
-  public void error(@Nullable String message, @Nonnull Object... args) {
+  public void error(@Nullable String message, @NotNull Object... args) {
     log(LogLevel.ERROR, message, args);
   }
 
   @Override
-  public void error(@Nullable Object message, @Nonnull Object... args) {
+  public void error(@Nullable Object message, @NotNull Object... args) {
     log(LogLevel.ERROR, message, args);
   }
 
   @Override
-  public void warn(@Nullable String message, @Nonnull Object... args) {
+  public void warn(@Nullable String message, @NotNull Object... args) {
     log(LogLevel.WARN, message, args);
   }
 
   @Override
-  public void warn(@Nullable Object message, @Nonnull Object... args) {
+  public void warn(@Nullable Object message, @NotNull Object... args) {
     log(LogLevel.WARN, message, args);
   }
 
   @Override
-  public void info(@Nullable String message, @Nonnull Object... args) {
+  public void info(@Nullable String message, @NotNull Object... args) {
     log(LogLevel.INFO, message, args);
   }
 
   @Override
-  public void info(@Nullable Object message, @Nonnull Object... args) {
+  public void info(@Nullable Object message, @NotNull Object... args) {
     log(LogLevel.INFO, message, args);
   }
 
   @Override
-  public void status(@Nullable String message, @Nonnull Object... args) {
+  public void status(@Nullable String message, @NotNull Object... args) {
     log(LogLevel.STATUS, message, args);
   }
 
   @Override
-  public void status(@Nullable Object message, @Nonnull Object... args) {
+  public void status(@Nullable Object message, @NotNull Object... args) {
     log(LogLevel.STATUS, message, args);
   }
 
   @Override
-  public void debug(@Nullable String message, @Nonnull Object... args) {
+  public void debug(@Nullable String message, @NotNull Object... args) {
     log(LogLevel.DEBUG, message, args);
   }
 
   @Override
-  public void debug(@Nullable Object message, @Nonnull Object... args) {
+  public void debug(@Nullable Object message, @NotNull Object... args) {
     log(LogLevel.DEBUG, message, args);
   }
 

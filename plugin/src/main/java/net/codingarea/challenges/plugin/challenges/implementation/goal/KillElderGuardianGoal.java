@@ -9,8 +9,7 @@ import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class KillElderGuardianGoal extends KillEntityGoal {
@@ -20,13 +19,13 @@ public class KillElderGuardianGoal extends KillEntityGoal {
     setCategory(SettingCategory.KILL_ENTITY);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.PRISMARINE_SHARD, Message.forName("item-elder-guardian-goal"));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public SoundSample getStartSound() {
     return new SoundSample().addSound(Sound.ENTITY_ELDER_GUARDIAN_CURSE, 1);

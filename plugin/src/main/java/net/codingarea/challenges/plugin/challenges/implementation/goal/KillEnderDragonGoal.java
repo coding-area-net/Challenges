@@ -8,9 +8,8 @@ import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.Material;
 import org.bukkit.World.Environment;
 import org.bukkit.entity.EntityType;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class KillEnderDragonGoal extends KillEntityGoal {
 
@@ -26,7 +25,7 @@ public class KillEnderDragonGoal extends KillEntityGoal {
     return null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.DRAGON_EGG, Message.forName("item-dragon-goal"));

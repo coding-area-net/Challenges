@@ -1,13 +1,13 @@
 package net.codingarea.commons.database.exceptions;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class DatabaseUnsupportedFeatureException extends DatabaseException {
 
   public DatabaseUnsupportedFeatureException() {
   }
 
-  public DatabaseUnsupportedFeatureException(@Nonnull String message) {
+  public DatabaseUnsupportedFeatureException(@NotNull String message) {
     super(message);
   }
 

@@ -3,9 +3,9 @@ package net.codingarea.commons.database.sql.abstraction.insertion;
 import net.codingarea.commons.database.action.DatabaseInsertion;
 import net.codingarea.commons.database.exceptions.DatabaseException;
 import net.codingarea.commons.database.sql.abstraction.AbstractSQLDatabase;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.*;
@@ -16,26 +16,26 @@ public class SQLInsertion implements DatabaseInsertion {
   protected final AbstractSQLDatabase database;
   protected final String table;
 
-  public SQLInsertion(@Nonnull AbstractSQLDatabase database, @Nonnull String table) {
+  public SQLInsertion(@NotNull AbstractSQLDatabase database, @NotNull String table) {
     this.database = database;
     this.table = table;
     this.values = new HashMap<>();
   }
 
-  public SQLInsertion(@Nonnull AbstractSQLDatabase database, @Nonnull String table, @Nonnull Map<String, Object> values) {
+  public SQLInsertion(@NotNull AbstractSQLDatabase database, @NotNull String table, @NotNull Map<String, Object> values) {
     this.database = database;
     this.table = table;
     this.values = values;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseInsertion set(@Nonnull String field, @Nullable Object value) {
+  public DatabaseInsertion set(@NotNull String field, @Nullable Object value) {
     values.put(field, value);
     return this;
   }
 
-  @Nonnull
+  @NotNull
   protected PreparedStatement prepare() throws SQLException, DatabaseException {
     if (values.isEmpty()) throw new IllegalArgumentException("Cannot insert nothing");
 

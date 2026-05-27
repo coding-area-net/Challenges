@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.management.scheduler.policy;
 
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.function.Predicate;
 
 public enum ChallengeStatusPolicy implements IPolicy {
@@ -13,17 +13,17 @@ public enum ChallengeStatusPolicy implements IPolicy {
 
   private final Predicate<IChallenge> check;
 
-  ChallengeStatusPolicy(@Nonnull Predicate<IChallenge> check) {
+  ChallengeStatusPolicy(@NotNull Predicate<IChallenge> check) {
     this.check = check;
   }
 
   @Override
-  public boolean check(@Nonnull Object holder) {
+  public boolean check(@NotNull Object holder) {
     return check.test((IChallenge) holder);
   }
 
   @Override
-  public boolean isApplicable(@Nonnull Object holder) {
+  public boolean isApplicable(@NotNull Object holder) {
     return holder instanceof IChallenge;
   }
 

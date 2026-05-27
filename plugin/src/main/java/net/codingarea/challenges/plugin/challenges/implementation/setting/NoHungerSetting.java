@@ -8,8 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class NoHungerSetting extends Setting {
 
@@ -22,21 +21,21 @@ public class NoHungerSetting extends Setting {
     broadcastFiltered(this::feedPlayer);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.BREAD, Message.forName("no-hunger-setting"));
   }
 
   @EventHandler(ignoreCancelled = true)
-  public void onHunger(@Nonnull FoodLevelChangeEvent event) {
+  public void onHunger(@NotNull FoodLevelChangeEvent event) {
     if (!(event.getEntity() instanceof Player)) return;
     if (!shouldExecuteEffect()) return;
     feedPlayer(((Player) event.getEntity()));
     event.setCancelled(true);
   }
 
-  private void feedPlayer(@Nonnull Player player) {
+  private void feedPlayer(@NotNull Player player) {
     player.setFoodLevel(20);
     player.setSaturation(20);
   }

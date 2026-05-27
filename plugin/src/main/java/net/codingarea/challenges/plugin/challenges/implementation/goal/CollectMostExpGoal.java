@@ -10,8 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class CollectMostExpGoal extends PointsGoal {
@@ -21,20 +20,20 @@ public class CollectMostExpGoal extends PointsGoal {
     setCategory(SettingCategory.SCORE_POINTS);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.EXPERIENCE_BOTTLE, Message.forName("item-most-xp-goal"));
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onExpChange(@Nonnull PlayerExpChangeEvent event) {
+  public void onExpChange(@NotNull PlayerExpChangeEvent event) {
     if (!shouldExecuteEffect()) return;
     collect(event.getPlayer(), event.getAmount());
   }
 
   @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-  public void onPlayerDeath(@Nonnull PlayerDeathEvent event) {
+  public void onPlayerDeath(@NotNull PlayerDeathEvent event) {
     if (!shouldExecuteEffect()) return;
     event.setKeepLevel(true);
   }

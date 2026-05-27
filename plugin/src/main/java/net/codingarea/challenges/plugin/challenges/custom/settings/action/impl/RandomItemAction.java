@@ -8,8 +8,8 @@ import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Map;
 
 public class RandomItemAction extends ChallengeAction {
@@ -18,7 +18,7 @@ public class RandomItemAction extends ChallengeAction {
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
   }
 
-  public static void giveRandomItemToPlayer(@Nonnull Player player) {
+  public static void giveRandomItemToPlayer(@NotNull Player player) {
     InventoryUtils.giveItem(player.getInventory(),
       player.getLocation(), InventoryUtils.getRandomItem(true, false));
   }

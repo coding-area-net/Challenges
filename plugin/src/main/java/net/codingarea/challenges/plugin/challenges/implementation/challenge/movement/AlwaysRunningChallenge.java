@@ -11,8 +11,7 @@ import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.util.Vector;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class AlwaysRunningChallenge extends Setting {
@@ -22,7 +21,7 @@ public class AlwaysRunningChallenge extends Setting {
     setCategory(SettingCategory.MOVEMENT);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.CARROT_ON_A_STICK, Message.forName("item-always-running-challenge"));

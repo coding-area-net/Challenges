@@ -12,9 +12,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,7 +27,7 @@ public class UncraftItemsChallenge extends TimedChallenge {
     setCategory(SettingCategory.INVENTORY);
   }
 
-  public static void uncraftInventory(@Nonnull Player player) {
+  public static void uncraftInventory(@NotNull Player player) {
 
     PlayerInventory inventory = player.getInventory();
 
@@ -93,7 +93,7 @@ public class UncraftItemsChallenge extends TimedChallenge {
     return false;
   }
 
-  private static List<ItemStack> getIngredientsOfRecipe(@Nonnull Recipe recipe) {
+  private static List<ItemStack> getIngredientsOfRecipe(@NotNull Recipe recipe) {
     List<ItemStack> ingredients = new ArrayList<>();
     if (recipe instanceof ShapedRecipe) {
       ShapedRecipe shaped = (ShapedRecipe) recipe;
@@ -113,7 +113,7 @@ public class UncraftItemsChallenge extends TimedChallenge {
     return ingredients;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.CRAFTING_TABLE, Message.forName("item-uncraft-challenge"));

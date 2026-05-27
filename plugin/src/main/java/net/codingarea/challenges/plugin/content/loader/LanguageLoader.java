@@ -14,8 +14,8 @@ import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.FileDocument;
 import net.codingarea.commons.common.misc.FileUtils;
 import net.codingarea.commons.common.misc.GsonUtils;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map.Entry;
@@ -83,7 +83,7 @@ public final class LanguageLoader extends ContentLoader {
     loadDefault();
   }
 
-  public void changeLanguage(@Nonnull String language) {
+  public void changeLanguage(@NotNull String language) {
     if (language.equalsIgnoreCase(this.language)) {
       Logger.info("Language '{}' is already selected", language);
       return;
@@ -157,7 +157,7 @@ public final class LanguageLoader extends ContentLoader {
     }
   }
 
-  private void verifyLanguage(@Nonnull Document download, @Nonnull File file, @Nonnull String name) throws IOException {
+  private void verifyLanguage(@NotNull Document download, @NotNull File file, @NotNull String name) throws IOException {
     Document existing = Document.readJsonFile(file);
     FileUtils.createFilesIfNecessary(file);
     download.forEach((key, value) -> {
@@ -173,7 +173,7 @@ public final class LanguageLoader extends ContentLoader {
     readLanguage(getMessageFile(language, "json"));
   }
 
-  private void readLanguage(@Nonnull File file) {
+  private void readLanguage(@NotNull File file) {
     try {
 
       if (!file.exists()) {

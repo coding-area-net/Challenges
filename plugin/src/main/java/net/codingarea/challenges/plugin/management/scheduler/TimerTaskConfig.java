@@ -2,29 +2,29 @@ package net.codingarea.challenges.plugin.management.scheduler;
 
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Arrays;
 
 public final class TimerTaskConfig extends AbstractTaskConfig {
 
   private final TimerStatus[] status;
 
-  TimerTaskConfig(@Nonnull TimerTask annotation) {
+  TimerTaskConfig(@NotNull TimerTask annotation) {
     this(annotation.status(), annotation.async());
   }
 
-  TimerTaskConfig(@Nonnull TimerStatus[] status, boolean async) {
+  TimerTaskConfig(@NotNull TimerStatus[] status, boolean async) {
     super(async);
     this.status = status;
   }
 
-  @Nonnull
+  @NotNull
   public TimerStatus[] getStatus() {
     return status;
   }
 
-  public boolean acceptsStatus(@Nonnull TimerStatus status) {
+  public boolean acceptsStatus(@NotNull TimerStatus status) {
     return Arrays.asList(this.status).contains(status);
   }
 

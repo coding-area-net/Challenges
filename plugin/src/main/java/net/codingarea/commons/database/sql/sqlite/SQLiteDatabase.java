@@ -6,8 +6,8 @@ import net.codingarea.commons.database.action.DatabaseListTables;
 import net.codingarea.commons.database.exceptions.DatabaseException;
 import net.codingarea.commons.database.sql.abstraction.AbstractSQLDatabase;
 import net.codingarea.commons.database.sql.sqlite.list.SQLiteListTables;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
 
@@ -23,7 +23,7 @@ public class SQLiteDatabase extends AbstractSQLDatabase {
 
   protected final File file;
 
-  public SQLiteDatabase(@Nonnull DatabaseConfig config) {
+  public SQLiteDatabase(@NotNull DatabaseConfig config) {
     super(config);
     file = new File(config.getFile());
   }
@@ -44,7 +44,7 @@ public class SQLiteDatabase extends AbstractSQLDatabase {
     return "jdbc:sqlite:" + file;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DatabaseListTables listTables() {
     return new SQLiteListTables(this);

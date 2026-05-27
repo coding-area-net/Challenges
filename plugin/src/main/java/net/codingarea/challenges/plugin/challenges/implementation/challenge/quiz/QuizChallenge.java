@@ -37,9 +37,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
@@ -60,7 +60,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
     instance = this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.BARRIER);
@@ -107,7 +107,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
     return random.around(getValue() * 60 * 3, 60);
   }
 
-  private void broadcastMessage(@Nonnull String questionedPlayerMessage, @Nonnull String othersMessage, Object... args) {
+  private void broadcastMessage(@NotNull String questionedPlayerMessage, @NotNull String othersMessage, Object... args) {
     broadcast(player1 -> {
       if (currentQuestionedPlayer == player1) {
         Message.forName(questionedPlayerMessage).send(player1, prefix, args);
@@ -178,7 +178,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
   }
 
   @Override
-  public void onCommand(@Nonnull Player player, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
 
     if (currentQuestion == null || currentQuestionedPlayer != player) {
       // TODO: REMOVE RESTART TIMER HERE
@@ -208,19 +208,19 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
   }
 
   @Override
-  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String s, @Nonnull String[] strings) {
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
     return new ArrayList<>();
   }
 
   interface IQuestion {
 
-    List<String> createAnswers(@Nonnull SavedStatistic statistic, @Nonnull Player player);
+    List<String> createAnswers(@NotNull SavedStatistic statistic, @NotNull Player player);
 
     List<String> getRightAnswers();
 
-    boolean isRightAnswer(@Nonnull String answer);
+    boolean isRightAnswer(@NotNull String answer);
 
-    static void sendMessage(@Nonnull String question, @Nonnull List<String> answers) {
+    static void sendMessage(@NotNull String question, @NotNull List<String> answers) {
       Player player = instance.currentQuestionedPlayer;
 
       player.sendMessage(" ");
@@ -244,14 +244,14 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
       }
 
       @Override
-      public List<String> createAnswers(@Nonnull SavedStatistic statistic, @Nonnull Player player) {
+      public List<String> createAnswers(@NotNull SavedStatistic statistic, @NotNull Player player) {
         ArrayList<String> answers = new ArrayList<>();
         currentRightAnswers = questionCreator.apply(statistic, player, answers);
         return answers;
       }
 
       @Override
-      public boolean isRightAnswer(@Nonnull String answer) {
+      public boolean isRightAnswer(@NotNull String answer) {
         if (currentRightAnswers == null) return false;
 
         for (String currentRightAnswer : currentRightAnswers) {
@@ -353,15 +353,15 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
         return new Question[]{INTEGER_QUESTION};
       }
 
-      public void increaseStatistic(@Nonnull Player player) {
+      public void increaseStatistic(@NotNull Player player) {
         increaseStatistic(player, 1);
       }
 
-      public void increaseStatistic(@Nonnull Player player, int amount) {
+      public void increaseStatistic(@NotNull Player player, int amount) {
         instance.getPlayerData(player).set(key, getStatistic(player) + amount);
       }
 
-      public int getStatistic(@Nonnull Player player) {
+      public int getStatistic(@NotNull Player player) {
         return instance.getPlayerData(player).getInt(key);
       }
 
@@ -380,7 +380,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
         return key;
       }
 
-      public Document getDocument(@Nonnull Player player) {
+      public Document getDocument(@NotNull Player player) {
         return instance.getPlayerData(player).getDocument(key);
       }
 
@@ -466,15 +466,15 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
         this.questionVerb = questionVerb;
       }
 
-      public void increaseStatistic(@Nonnull Player player, @Nonnull String key) {
+      public void increaseStatistic(@NotNull Player player, @NotNull String key) {
         increaseStatistic(player, key, 1);
       }
 
-      public void increaseStatistic(@Nonnull Player player, @Nonnull String key, double amount) {
+      public void increaseStatistic(@NotNull Player player, @NotNull String key, double amount) {
         getDocument(player).set(key, getStatistic(player, key) + amount);
       }
 
-      public double getStatistic(@Nonnull Player player, @Nonnull String key) {
+      public double getStatistic(@NotNull Player player, @NotNull String key) {
         return getDocument(player).getDouble(key);
       }
 
@@ -503,14 +503,14 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onJump(@Nonnull PlayerJumpEvent event) {
+  public void onJump(@NotNull PlayerJumpEvent event) {
     if (!shouldExecuteEffect()) return;
     if (AbstractChallenge.ignorePlayer(event.getPlayer())) return;
     SavedStatistic.JUMPED.increaseStatistic(event.getPlayer());
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onJump(@Nonnull PlayerToggleSneakEvent event) {
+  public void onJump(@NotNull PlayerToggleSneakEvent event) {
     if (!shouldExecuteEffect()) return;
     if (!event.isSneaking()) return;
     if (AbstractChallenge.ignorePlayer(event.getPlayer())) return;
@@ -518,7 +518,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onEntityKill(@Nonnull EntityDamageByEntityEvent event) {
+  public void onEntityKill(@NotNull EntityDamageByEntityEvent event) {
     if (!shouldExecuteEffect()) return;
 
     if (!(event.getDamager() instanceof Player)) return;
@@ -536,14 +536,14 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onBlockPlace(@Nonnull BlockPlaceEvent event) {
+  public void onBlockPlace(@NotNull BlockPlaceEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     SavedStatistic.BLOCKS_PLACED.increaseStatistic(event.getPlayer(), event.getBlockPlaced().getType().name());
   }
 
   @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-  public void onBlockBreak(@Nonnull BlockBreakEvent event) {
+  public void onBlockBreak(@NotNull BlockBreakEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (BukkitReflectionUtils.isAir(event.getBlock().getType())) return;
@@ -551,7 +551,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onMove(@Nonnull PlayerMoveEvent event) {
+  public void onMove(@NotNull PlayerMoveEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (event.getTo() == null) return;
@@ -560,14 +560,14 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onMove(@Nonnull PlayerDropItemEvent event) {
+  public void onMove(@NotNull PlayerDropItemEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     SavedStatistic.ITEMS_DROPPED.increaseStatistic(event.getPlayer(), event.getItemDrop().getItemStack().getType().name());
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onMove(@Nonnull EntityDamageEvent event) {
+  public void onMove(@NotNull EntityDamageEvent event) {
     if (!shouldExecuteEffect()) return;
     if (!(event.getEntity() instanceof Player)) return;
     Player player = (Player) event.getEntity();

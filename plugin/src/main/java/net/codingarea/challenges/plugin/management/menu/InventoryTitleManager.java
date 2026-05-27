@@ -1,36 +1,35 @@
 package net.codingarea.challenges.plugin.management.menu;
 
 import net.codingarea.challenges.plugin.content.Message;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class InventoryTitleManager {
 
   private InventoryTitleManager() {
   }
 
-  @Nonnull
-  public static String getTitle(@Nonnull String name) {
+  @NotNull
+  public static String getTitle(@NotNull String name) {
     return "§8» " + Message.forName("inventory-color").asString() + name;
   }
 
-  @Nonnull
+  @NotNull
   public static String getMainMenuTitle() {
     return getTitle(Message.forName("menu-title").asString());
   }
 
-  @Nonnull
-  public static String getTitle(@Nonnull MenuType menu, int page) {
+  @NotNull
+  public static String getTitle(@NotNull MenuType menu, int page) {
     return getTitle(menu.getName(), String.valueOf(page + 1));
   }
 
-  @Nonnull
-  public static String getTitle(@Nonnull MenuType menu, String... sub) {
+  @NotNull
+  public static String getTitle(@NotNull MenuType menu, String... sub) {
     return getTitle(menu.getName(), sub);
   }
 
-  @Nonnull
-  public static String getTitle(@Nonnull String menu, String... sub) {
+  @NotNull
+  public static String getTitle(@NotNull String menu, String... sub) {
     StringBuilder name = new StringBuilder(menu);
     for (String s : sub) {
       name.append(getTitleSplitter()).append(s);
@@ -38,28 +37,28 @@ public final class InventoryTitleManager {
     return getTitle(name.toString());
   }
 
-  @Nonnull
+  @NotNull
   public static String getTitleSplitter() {
     return " §8┃ " + Message.forName("inventory-color").asString();
   }
 
-  @Nonnull
-  public static String getMenuSettingTitle(@Nonnull MenuType menu, @Nonnull String name, int page, boolean showPages) {
+  @NotNull
+  public static String getMenuSettingTitle(@NotNull MenuType menu, @NotNull String name, int page, boolean showPages) {
     return getTitle(menu.getName() + getTitleSplitter() + name + (showPages ? " §8• " + Message.forName("inventory-color") + (page + 1) : ""));
   }
 
-  @Nonnull
-  public static String getStatsTitle(@Nonnull String playerName) {
+  @NotNull
+  public static String getStatsTitle(@NotNull String playerName) {
     return getTitle("§2Stats §8┃ §2" + playerName);
   }
 
-  @Nonnull
+  @NotNull
   public static String getLeaderboardTitle() {
     return getTitle("§2Leaderboard");
   }
 
-  @Nonnull
-  public static String getLeaderboardTitle(@Nonnull String name, int page) {
+  @NotNull
+  public static String getLeaderboardTitle(@NotNull String name, int page) {
     return getTitle("§2" + name + " §8┃ §2" + page);
   }
 

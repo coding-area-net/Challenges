@@ -1,8 +1,7 @@
 package net.codingarea.commons.bukkit.utils.item;
 
 import org.bukkit.block.banner.PatternType;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public enum BannerPattern {
 
@@ -47,16 +46,16 @@ public enum BannerPattern {
 
   private final PatternType patternType;
 
-  BannerPattern(@Nonnull PatternType patternType) {
+  BannerPattern(@NotNull PatternType patternType) {
     this.patternType = patternType;
   }
 
-  @Nonnull
+  @NotNull
   public PatternType getPatternType() {
     return patternType;
   }
 
-  @Nonnull
+  @NotNull
   public String getIdentifier() {
     return patternType.getKeyOrThrow().getKey();
   }

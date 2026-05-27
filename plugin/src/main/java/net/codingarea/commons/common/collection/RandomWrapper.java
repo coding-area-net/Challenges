@@ -1,6 +1,7 @@
 package net.codingarea.commons.common.collection;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
@@ -10,7 +11,7 @@ public class RandomWrapper implements IRandom {
 
   private final Random random;
 
-  public RandomWrapper(@Nonnull Random random) {
+  public RandomWrapper(@NotNull Random random) {
     this.random = random;
   }
 
@@ -25,7 +26,7 @@ public class RandomWrapper implements IRandom {
   }
 
   @Override
-  public void nextBytes(@Nonnull byte[] bytes) {
+  public void nextBytes(@NotNull byte[] bytes) {
     random.nextBytes(bytes);
   }
 
@@ -44,31 +45,31 @@ public class RandomWrapper implements IRandom {
     return random.nextInt(bound);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public IntStream ints() {
     return random.ints();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public IntStream ints(long streamSize) {
     return random.ints(streamSize);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public IntStream ints(int randomNumberOrigin, int randomNumberBound) {
     return random.ints(randomNumberOrigin, randomNumberBound);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public IntStream ints(long streamSize, int randomNumberOrigin, int randomNumberBound) {
     return random.ints(streamSize, randomNumberOrigin, randomNumberBound);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public LongStream longs() {
     return random.longs();
@@ -79,19 +80,19 @@ public class RandomWrapper implements IRandom {
     return random.nextLong();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public LongStream longs(long streamSize) {
     return random.longs(streamSize);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public LongStream longs(long randomNumberOrigin, long randomNumberBound) {
     return random.longs(randomNumberOrigin, randomNumberBound);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public LongStream longs(long streamSize, long randomNumberOrigin, long randomNumberBound) {
     return random.longs(streamSize, randomNumberOrigin, randomNumberBound);
@@ -107,25 +108,25 @@ public class RandomWrapper implements IRandom {
     return random.nextGaussian();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DoubleStream doubles() {
     return random.doubles();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DoubleStream doubles(long streamSize) {
     return random.doubles(streamSize);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DoubleStream doubles(double randomNumberOrigin, double randomNumberBound) {
     return random.doubles(randomNumberOrigin, randomNumberBound);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DoubleStream doubles(long streamSize, double randomNumberOrigin, double randomNumberBound) {
     return random.doubles(streamSize, randomNumberOrigin, randomNumberBound);
@@ -136,7 +137,7 @@ public class RandomWrapper implements IRandom {
     return random.nextFloat();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Random asRandom() {
     return random;

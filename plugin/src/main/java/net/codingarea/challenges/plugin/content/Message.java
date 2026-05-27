@@ -6,10 +6,10 @@ import net.codingarea.commons.common.collection.IRandom;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -18,7 +18,7 @@ public interface Message {
   String NULL = "§r§fN/A";
   Collection<String> UNKNOWN_MESSAGES = new ArrayList<>();
 
-  static String unknown(@Nonnull String name) {
+  static String unknown(@NotNull String name) {
     if (!UNKNOWN_MESSAGES.contains(name)) {
       UNKNOWN_MESSAGES.add(name);
       Logger.warn("Tried accessing unknown messages '{}'", name);
@@ -27,57 +27,57 @@ public interface Message {
     return name;
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static Message forName(@Nonnull String name) {
+  static Message forName(@NotNull String name) {
     return MessageManager.getOrCreateMessage(name);
   }
 
-  @Nonnull
-  String asString(@Nonnull Object... args);
+  @NotNull
+  String asString(@NotNull Object... args);
 
-  @Nonnull
-  BaseComponent asComponent(@Nonnull Object... args);
+  @NotNull
+  BaseComponent asComponent(@NotNull Object... args);
 
-  @Nonnull
-  String asRandomString(@Nonnull IRandom random, @Nonnull Object... args);
+  @NotNull
+  String asRandomString(@NotNull IRandom random, @NotNull Object... args);
 
-  @Nonnull
-  BaseComponent asRandomComponent(@Nonnull IRandom random, @Nonnull Prefix prefix, @Nonnull Object... args);
+  @NotNull
+  BaseComponent asRandomComponent(@NotNull IRandom random, @NotNull Prefix prefix, @NotNull Object... args);
 
-  @Nonnull
-  String asRandomString(@Nonnull Object... args);
+  @NotNull
+  String asRandomString(@NotNull Object... args);
 
-  @Nonnull
-  String[] asArray(@Nonnull Object... args);
+  @NotNull
+  String[] asArray(@NotNull Object... args);
 
-  @Nonnull
-  BaseComponent[] asComponentArray(@Nullable Prefix prefix, @Nonnull Object... args);
+  @NotNull
+  BaseComponent[] asComponentArray(@Nullable Prefix prefix, @NotNull Object... args);
 
-  @Nonnull
-  ItemDescription asItemDescription(@Nonnull Object... args);
+  @NotNull
+  ItemDescription asItemDescription(@NotNull Object... args);
 
-  void send(@Nonnull CommandSender target, @Nonnull Prefix prefix, @Nonnull Object... args);
+  void send(@NotNull CommandSender target, @NotNull Prefix prefix, @NotNull Object... args);
 
-  void sendRandom(@Nonnull CommandSender target, @Nonnull Prefix prefix, @Nonnull Object... args);
+  void sendRandom(@NotNull CommandSender target, @NotNull Prefix prefix, @NotNull Object... args);
 
-  void sendRandom(@Nonnull IRandom random, @Nonnull CommandSender target, @Nonnull Prefix prefix, @Nonnull Object... args);
+  void sendRandom(@NotNull IRandom random, @NotNull CommandSender target, @NotNull Prefix prefix, @NotNull Object... args);
 
-  void broadcast(@Nonnull Prefix prefix, @Nonnull Object... args);
+  void broadcast(@NotNull Prefix prefix, @NotNull Object... args);
 
-  void broadcastRandom(@Nonnull Prefix prefix, @Nonnull Object... args);
+  void broadcastRandom(@NotNull Prefix prefix, @NotNull Object... args);
 
-  void broadcastRandom(@Nonnull IRandom random, @Nonnull Prefix prefix, @Nonnull Object... args);
+  void broadcastRandom(@NotNull IRandom random, @NotNull Prefix prefix, @NotNull Object... args);
 
-  void broadcastTitle(@Nonnull Object... args);
+  void broadcastTitle(@NotNull Object... args);
 
-  void sendTitle(@Nonnull Player player, @Nonnull Object... args);
+  void sendTitle(@NotNull Player player, @NotNull Object... args);
 
-  void sendTitleInstant(@Nonnull Player player, @Nonnull Object... args);
+  void sendTitleInstant(@NotNull Player player, @NotNull Object... args);
 
-  void setValue(@Nonnull String[] value);
+  void setValue(@NotNull String[] value);
 
-  @Nonnull
+  @NotNull
   String getName();
 
 }

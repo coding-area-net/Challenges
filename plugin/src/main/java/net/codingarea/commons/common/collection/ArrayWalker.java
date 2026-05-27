@@ -1,6 +1,7 @@
 package net.codingarea.commons.common.collection;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.reflect.Array;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -11,18 +12,18 @@ public class ArrayWalker<T> implements Iterable<T> {
   protected final Object array;
   protected final int length;
 
-  protected ArrayWalker(@Nonnull Object array) {
+  protected ArrayWalker(@NotNull Object array) {
     if (!array.getClass().isArray())
       throw new IllegalArgumentException(array.getClass().getName() + " is not an array");
     this.array = array;
     this.length = Array.getLength(array);
   }
 
-  public static <T> ArrayWalker<T> walk(@Nonnull Object array) {
+  public static <T> ArrayWalker<T> walk(@NotNull Object array) {
     return new ArrayWalker<>(array);
   }
 
-  public static <T> ArrayWalker<T> walk(@Nonnull T... array) {
+  public static <T> ArrayWalker<T> walk(@NotNull T... array) {
     return new ArrayWalker<>(array);
   }
 

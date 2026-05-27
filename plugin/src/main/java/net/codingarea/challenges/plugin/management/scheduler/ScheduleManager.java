@@ -5,8 +5,8 @@ import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.misc.ReflectionUtils;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,13 +17,13 @@ public final class ScheduleManager {
   private final Map<TimerTaskConfig, TimerTaskExecutor> timerTaskExecutorsByConfig = new ConcurrentHashMap<>();
   private boolean started = false;
 
-  public void register(@Nonnull Object... schedulers) {
+  public void register(@NotNull Object... schedulers) {
     for (Object scheduler : schedulers) {
       register(scheduler);
     }
   }
 
-  public void register(@Nonnull Object scheduler) {
+  public void register(@NotNull Object scheduler) {
     for (Method method : ReflectionUtils.getMethodsAnnotatedWith(scheduler.getClass(), ScheduledTask.class)) {
       if (method.getParameterCount() != 0) {
         Logger.warn("Could not register scheduler " + method);
@@ -50,13 +50,13 @@ public final class ScheduleManager {
     }
   }
 
-  public void unregister(@Nonnull Object object) {
+  public void unregister(@NotNull Object object) {
     for (ScheduledTaskExecutor scheduler : scheduledTaskExecutorsByConfig.values()) {
       scheduler.unregister(object);
     }
   }
 
-  private void register(@Nonnull ScheduledFunction function, @Nonnull AbstractTaskConfig config) {
+  private void register(@NotNull ScheduledFunction function, @NotNull AbstractTaskConfig config) {
     if (config instanceof ScheduledTaskConfig) {
       ScheduledTaskConfig taskConfig = (ScheduledTaskConfig) config;
       if (taskConfig.getRate() < 1) {
@@ -75,8 +75,8 @@ public final class ScheduleManager {
     }
   }
 
-  @Nonnull
-  private ScheduledTaskExecutor getOrCreateScheduledTaskExecutor(@Nonnull ScheduledTaskConfig config) {
+  @NotNull
+  private ScheduledTaskExecutor getOrCreateScheduledTaskExecutor(@NotNull ScheduledTaskConfig config) {
     ScheduledTaskExecutor executor = scheduledTaskExecutorsByConfig.get(config);
     if (executor != null) return executor;
 
@@ -87,8 +87,8 @@ public final class ScheduleManager {
     return executor;
   }
 
-  @Nonnull
-  private TimerTaskExecutor getOrCreateTimerTaskExecutor(@Nonnull TimerTaskConfig config) {
+  @NotNull
+  private TimerTaskExecutor getOrCreateTimerTaskExecutor(@NotNull TimerTaskConfig config) {
     TimerTaskExecutor executor = timerTaskExecutorsByConfig.get(config);
     if (executor != null) return executor;
 

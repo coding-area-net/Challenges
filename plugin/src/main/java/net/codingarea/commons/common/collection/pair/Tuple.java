@@ -1,8 +1,9 @@
 package net.codingarea.commons.common.collection.pair;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -28,7 +29,7 @@ public class Tuple<F, S> implements Pair {
     return 2;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public final Object[] values() {
     return new Object[]{first, second};
@@ -50,10 +51,10 @@ public class Tuple<F, S> implements Pair {
     this.second = second;
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  public <ToF, ToS> Tuple<ToF, ToS> map(@Nonnull Function<? super F, ? extends ToF> firstMapper,
-                                        @Nonnull Function<? super S, ? extends ToS> secondMapper) {
+  public <ToF, ToS> Tuple<ToF, ToS> map(@NotNull Function<? super F, ? extends ToF> firstMapper,
+                                        @NotNull Function<? super S, ? extends ToS> secondMapper) {
     return of(firstMapper.apply(first), secondMapper.apply(second));
   }
 
@@ -83,22 +84,22 @@ public class Tuple<F, S> implements Pair {
     return "Tuple[" + first + ", " + second + "]";
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S> Tuple<F, S> ofFirst(@Nullable F frist) {
     return new Tuple<>(frist, null);
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S> Tuple<F, S> ofSecond(@Nullable S second) {
     return new Tuple<>(null, second);
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S> Tuple<F, S> of(@Nullable F first, @Nullable S second) {
     return new Tuple<>(first, second);
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S> Tuple<F, S> empty() {
     return new Tuple<>();
   }

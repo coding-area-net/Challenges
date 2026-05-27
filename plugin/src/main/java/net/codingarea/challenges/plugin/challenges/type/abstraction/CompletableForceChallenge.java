@@ -5,24 +5,23 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.entity.Player;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class CompletableForceChallenge extends AbstractForceChallenge {
 
-  public CompletableForceChallenge(@Nonnull MenuType menu) {
+  public CompletableForceChallenge(@NotNull MenuType menu) {
     super(menu);
   }
 
-  public CompletableForceChallenge(@Nonnull MenuType menu, int max) {
+  public CompletableForceChallenge(@NotNull MenuType menu, int max) {
     super(menu, max);
   }
 
-  public CompletableForceChallenge(@Nonnull MenuType menu, int min, int max) {
+  public CompletableForceChallenge(@NotNull MenuType menu, int min, int max) {
     super(menu, min, max);
   }
 
-  public CompletableForceChallenge(@Nonnull MenuType menu, int min, int max, int defaultValue) {
+  public CompletableForceChallenge(@NotNull MenuType menu, int min, int max, int defaultValue) {
     super(menu, min, max, defaultValue);
   }
 
@@ -33,7 +32,7 @@ public abstract class CompletableForceChallenge extends AbstractForceChallenge {
     ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_FAILED);
   }
 
-  protected final void completeForcing(@Nonnull Player player) {
+  protected final void completeForcing(@NotNull Player player) {
     if (getState() != COUNTDOWN) return;
     broadcastSuccessMessage(player);
     endForcing();
@@ -42,6 +41,6 @@ public abstract class CompletableForceChallenge extends AbstractForceChallenge {
 
   protected abstract void broadcastFailedMessage();
 
-  protected abstract void broadcastSuccessMessage(@Nonnull Player player);
+  protected abstract void broadcastSuccessMessage(@NotNull Player player);
 
 }

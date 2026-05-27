@@ -10,8 +10,8 @@ import net.codingarea.challenges.plugin.management.menu.generator.implementation
 import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.MainCustomMenuGenerator;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.function.Consumer;
 
 
@@ -33,7 +33,7 @@ public enum MenuType {
   @Getter
   private final boolean usable;
 
-  MenuType(@Nonnull String key, @Nonnull Material displayItem, MenuGenerator menuGenerator, boolean usable) {
+  MenuType(@NotNull String key, @NotNull Material displayItem, MenuGenerator menuGenerator, boolean usable) {
     this.key = key;
     this.displayItem = displayItem;
     this.menuGenerator = menuGenerator;
@@ -42,16 +42,16 @@ public enum MenuType {
     menuGenerator.setMenuType(this);
   }
 
-  MenuType(@Nonnull String key, @Nonnull Material displayItem, MenuGenerator menuGenerator) {
+  MenuType(@NotNull String key, @NotNull Material displayItem, MenuGenerator menuGenerator) {
     this(key, displayItem, menuGenerator, true);
   }
 
-  @Nonnull
+  @NotNull
   public String getName() {
     return ChatColor.stripColor(getDisplayName());
   }
 
-  @Nonnull
+  @NotNull
   public String getDisplayName() {
     return Message.forName("menu-" + key).asString();
   }

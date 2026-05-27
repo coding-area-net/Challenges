@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.management.scheduler.policy;
 
 import org.bukkit.Bukkit;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.function.BiPredicate;
 
 public enum PlayerCountPolicy implements IPolicy {
@@ -14,12 +14,12 @@ public enum PlayerCountPolicy implements IPolicy {
 
   private final BiPredicate<Integer, Integer> check;
 
-  PlayerCountPolicy(@Nonnull BiPredicate<Integer, Integer> check) {
+  PlayerCountPolicy(@NotNull BiPredicate<Integer, Integer> check) {
     this.check = check;
   }
 
   @Override
-  public boolean check(@Nonnull Object holder) {
+  public boolean check(@NotNull Object holder) {
     return check.test(Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
   }
 

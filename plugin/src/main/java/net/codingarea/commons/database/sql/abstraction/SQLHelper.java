@@ -3,9 +3,9 @@ package net.codingarea.commons.database.sql.abstraction;
 import net.codingarea.commons.common.config.Json;
 import net.codingarea.commons.common.config.document.GsonDocument;
 import net.codingarea.commons.common.misc.GsonUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Map;
@@ -15,7 +15,7 @@ public final class SQLHelper {
   private SQLHelper() {
   }
 
-  public static void fillParams(@Nonnull PreparedStatement statement, @Nonnull Object... params) throws SQLException {
+  public static void fillParams(@NotNull PreparedStatement statement, @NotNull Object... params) throws SQLException {
     for (int i = 0; i < params.length; i++) {
       Object param = serializeObject(params[i]);
       statement.setObject(i + 1 /* in sql we count from 1 */, param);

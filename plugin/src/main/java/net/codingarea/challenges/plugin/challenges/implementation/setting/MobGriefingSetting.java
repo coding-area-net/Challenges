@@ -8,8 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.Material;
 import org.bukkit.World;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class MobGriefingSetting extends Setting {
 
@@ -17,7 +16,7 @@ public class MobGriefingSetting extends Setting {
     super(MenuType.SETTINGS);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.CREEPER_HEAD, Message.forName("item-mob-griefing-setting"));

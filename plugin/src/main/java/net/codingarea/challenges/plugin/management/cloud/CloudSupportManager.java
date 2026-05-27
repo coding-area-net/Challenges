@@ -15,8 +15,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandSendEvent;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -52,11 +52,11 @@ public final class CloudSupportManager implements Listener {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onCommandsUpdate(@Nonnull PlayerCommandSendEvent event) {
+  public void onCommandsUpdate(@NotNull PlayerCommandSendEvent event) {
     cachedColoredNames.remove(event.getPlayer().getUniqueId());
   }
 
-  private CloudSupport loadSupport(@Nonnull String name) {
+  private CloudSupport loadSupport(@NotNull String name) {
     switch (name) {
       default:
         return null;
@@ -68,8 +68,8 @@ public final class CloudSupportManager implements Listener {
     }
   }
 
-  @Nonnull
-  public String getColoredName(@Nonnull Player player) {
+  @NotNull
+  public String getColoredName(@NotNull Player player) {
     if (support == null)
       throw new IllegalStateException("No support loaded! Check compatibility before use");
     if (cachedColoredNames.containsKey(player.getUniqueId()))
@@ -83,8 +83,8 @@ public final class CloudSupportManager implements Listener {
     }
   }
 
-  @Nonnull
-  public String getColoredName(@Nonnull UUID uuid) {
+  @NotNull
+  public String getColoredName(@NotNull UUID uuid) {
     if (support == null)
       throw new IllegalStateException("No support loaded! Check compatibility before use");
     if (cachedColoredNames.containsKey(uuid)) return cachedColoredNames.get(uuid);
@@ -97,13 +97,13 @@ public final class CloudSupportManager implements Listener {
     }
   }
 
-  @Nonnull
-  private String cacheColoredName(@Nonnull UUID uuid, @Nonnull String name) {
+  @NotNull
+  private String cacheColoredName(@NotNull UUID uuid, @NotNull String name) {
     cachedColoredNames.put(uuid, name);
     return name;
   }
 
-  public boolean hasNameFor(@Nonnull UUID uuid) {
+  public boolean hasNameFor(@NotNull UUID uuid) {
     if (support == null) return false;
 
     try {

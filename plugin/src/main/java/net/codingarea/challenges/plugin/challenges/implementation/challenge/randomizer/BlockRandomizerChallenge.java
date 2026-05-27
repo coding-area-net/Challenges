@@ -11,8 +11,8 @@ import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.commons.bukkit.utils.item.ItemUtils;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +23,7 @@ public class BlockRandomizerChallenge extends RandomizerSetting {
     super(MenuType.CHALLENGES);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.MINECART, Message.forName("item-block-randomizer-challenge"));

@@ -2,9 +2,9 @@ package net.codingarea.commons.common.config.document.wrapper;
 
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.FileDocument;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.File;
 import java.nio.file.Path;
 
@@ -13,7 +13,7 @@ public class FileDocumentWrapper implements WrappedDocument<FileDocument>, FileD
   protected final Document document;
   protected final File file;
 
-  public FileDocumentWrapper(@Nonnull File file, @Nonnull Document document) {
+  public FileDocumentWrapper(@NotNull File file, @NotNull Document document) {
     this.file = file;
     this.document = document;
   }
@@ -23,39 +23,39 @@ public class FileDocumentWrapper implements WrappedDocument<FileDocument>, FileD
     return document;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public File getFile() {
     return file;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Path getPath() {
     return file.toPath();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public FileDocument set(@Nonnull String path, @Nullable Object value) {
+  public FileDocument set(@NotNull String path, @Nullable Object value) {
     return WrappedDocument.super.set(path, value);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public FileDocument set(@Nonnull Object value) {
+  public FileDocument set(@NotNull Object value) {
     return WrappedDocument.super.set(value);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public FileDocument clear() {
     return WrappedDocument.super.clear();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public FileDocument remove(@Nonnull String path) {
+  public FileDocument remove(@NotNull String path) {
     return WrappedDocument.super.remove(path);
   }
 

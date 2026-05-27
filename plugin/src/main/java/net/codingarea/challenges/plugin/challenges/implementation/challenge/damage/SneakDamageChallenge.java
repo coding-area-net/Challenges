@@ -14,9 +14,8 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class SneakDamageChallenge extends SettingModifier {
 
@@ -25,7 +24,7 @@ public class SneakDamageChallenge extends SettingModifier {
     setCategory(SettingCategory.DAMAGE);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-sneak-damage-challenge")).setColor(Color.YELLOW);
@@ -43,7 +42,7 @@ public class SneakDamageChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onSneak(@Nonnull PlayerToggleSneakEvent event) {
+  public void onSneak(@NotNull PlayerToggleSneakEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (!event.isSneaking()) return;

@@ -11,9 +11,9 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class SurfaceHoleChallenge extends SettingModifier {
   }
 
   @EventHandler
-  public void onMove(@Nonnull PlayerMoveEvent event) {
+  public void onMove(@NotNull PlayerMoveEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.getPlayer().getGameMode() == GameMode.CREATIVE || event.getPlayer().getGameMode() == GameMode.SPECTATOR)
       return;
@@ -56,7 +56,7 @@ public class SurfaceHoleChallenge extends SettingModifier {
 
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.BARRIER, Message.forName("item-surface-hole-challenge"));

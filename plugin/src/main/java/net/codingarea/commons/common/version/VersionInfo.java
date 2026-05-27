@@ -1,8 +1,8 @@
 package net.codingarea.commons.common.version;
 
 import net.codingarea.commons.common.logging.ILogger;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Objects;
 
 public class VersionInfo implements Version {

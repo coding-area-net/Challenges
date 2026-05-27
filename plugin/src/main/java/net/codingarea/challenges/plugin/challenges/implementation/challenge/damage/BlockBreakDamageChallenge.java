@@ -9,9 +9,8 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class BlockBreakDamageChallenge extends SettingModifier {
 
@@ -32,7 +31,7 @@ public class BlockBreakDamageChallenge extends SettingModifier {
     ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.GOLDEN_PICKAXE, Message.forName("item-block-break-damage-challenge"));

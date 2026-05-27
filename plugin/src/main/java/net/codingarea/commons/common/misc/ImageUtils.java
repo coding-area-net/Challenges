@@ -1,10 +1,10 @@
 package net.codingarea.commons.common.misc;
 
 import net.codingarea.commons.common.collection.IOUtils;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.font.TextLayout;
@@ -23,7 +23,7 @@ public final class ImageUtils {
    * @param height The y-position of the text
    * @return The width of the text added in pixels
    */
-  public static int addCenteredText(@Nonnull Graphics2D graphics, @Nonnull String text, int height) {
+  public static int addCenteredText(@NotNull Graphics2D graphics, @NotNull String text, int height) {
     TextLayout layout = getTextLayout(graphics, text);
     int lineWidth = (int) layout.getBounds().getWidth();
     graphics.drawString(text, graphics.getDeviceConfiguration().getBounds().width / 2 - lineWidth / 2, height);
@@ -34,7 +34,7 @@ public final class ImageUtils {
   /**
    * @return The ending position of the text
    */
-  public static int addText(@Nonnull Graphics2D graphics, @Nonnull String text, int height, int x) {
+  public static int addText(@NotNull Graphics2D graphics, @NotNull String text, int height, int x) {
     TextLayout layout = getTextLayout(graphics, text);
     graphics.drawString(text, x, height);
     return (int) (x + layout.getBounds().getWidth());
@@ -43,7 +43,7 @@ public final class ImageUtils {
   /**
    * @return Returns where the text has started
    */
-  public static int addTextEndingAt(@Nonnull Graphics2D graphics, @Nonnull String text, int height, int endX) {
+  public static int addTextEndingAt(@NotNull Graphics2D graphics, @NotNull String text, int height, int endX) {
     TextLayout layout = getTextLayout(graphics, text);
     int position = (int) (endX - layout.getBounds().getWidth());
     graphics.drawString(text, position, height);
@@ -53,7 +53,7 @@ public final class ImageUtils {
   /**
    * @param height The y-position of the text
    */
-  public static void addTextEndingAtMid(@Nonnull Graphics2D graphics, @Nonnull String text, int height) {
+  public static void addTextEndingAtMid(@NotNull Graphics2D graphics, @NotNull String text, int height) {
     TextLayout layout = getTextLayout(graphics, text);
     int lineWidth = (int) layout.getBounds().getWidth();
     graphics.drawString(text, graphics.getClipBounds().width / 2 - lineWidth, height);
@@ -65,26 +65,26 @@ public final class ImageUtils {
    * @param url The URL the image is stored to
    * @throws IOException When something goes wrong while connecting or reading the image
    */
-  public static BufferedImage loadUrl(@Nonnull String url) throws IOException {
+  public static BufferedImage loadUrl(@NotNull String url) throws IOException {
     URLConnection connection = IOUtils.createConnection(url);
     return ImageIO.read(connection.getInputStream());
   }
 
-  public static BufferedImage loadResource(@Nonnull String path) throws IOException {
+  public static BufferedImage loadResource(@NotNull String path) throws IOException {
     InputStream stream = ImageUtils.class.getClassLoader().getResourceAsStream(path);
     return ImageIO.read(stream);
   }
 
-  public static BufferedImage loadFile(@Nonnull File file) throws IOException {
+  public static BufferedImage loadFile(@NotNull File file) throws IOException {
     return ImageIO.read(file);
   }
 
-  @Nonnull
-  public static TextLayout getTextLayout(@Nonnull Graphics2D graphics, @Nonnull String text) {
+  @NotNull
+  public static TextLayout getTextLayout(@NotNull Graphics2D graphics, @NotNull String text) {
     return new TextLayout(text, graphics.getFont(), graphics.getFontRenderContext());
   }
 
-  public static void darkenImage(@Nonnull BufferedImage image) {
+  public static void darkenImage(@NotNull BufferedImage image) {
     for (int i = 0; i < image.getWidth(); i++) {
       for (int j = 0; j < image.getHeight(); j++) {
         image.setRGB(i, j, new Color(image.getRGB(i, j)).darker().getRGB());
@@ -92,9 +92,9 @@ public final class ImageUtils {
     }
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  public static BufferedImage replaceTransparency(@Nonnull BufferedImage image, @Nullable Color replacementColor) {
+  public static BufferedImage replaceTransparency(@NotNull BufferedImage image, @Nullable Color replacementColor) {
     if (replacementColor == null) replacementColor = new Color(0, 0, 0, 0);
     BufferedImage created = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
     Graphics2D graphics = created.createGraphics();

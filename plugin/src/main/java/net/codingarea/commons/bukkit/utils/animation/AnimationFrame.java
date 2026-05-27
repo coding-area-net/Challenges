@@ -3,9 +3,9 @@ package net.codingarea.commons.bukkit.utils.animation;
 import net.codingarea.commons.bukkit.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Arrays;
 
 public class AnimationFrame implements Cloneable {
@@ -13,7 +13,7 @@ public class AnimationFrame implements Cloneable {
   private final ItemStack[] content;
   private boolean sound = true;
 
-  public AnimationFrame(@Nonnull ItemStack[] content) {
+  public AnimationFrame(@NotNull ItemStack[] content) {
     this.content = Arrays.copyOf(content, content.length);
   }
 
@@ -21,13 +21,13 @@ public class AnimationFrame implements Cloneable {
     this.content = new ItemStack[size];
   }
 
-  @Nonnull
-  public AnimationFrame fill(@Nonnull ItemStack item) {
+  @NotNull
+  public AnimationFrame fill(@NotNull ItemStack item) {
     Arrays.fill(content, item);
     return this;
   }
 
-  @Nonnull
+  @NotNull
   public AnimationFrame setAccent(int... slots) {
     for (int slot : slots) {
       content[slot] = ItemBuilder.FILL_ITEM_2;
@@ -35,18 +35,18 @@ public class AnimationFrame implements Cloneable {
     return this;
   }
 
-  @Nonnull
-  public AnimationFrame setItem(int slot, @Nonnull ItemBuilder item) {
+  @NotNull
+  public AnimationFrame setItem(int slot, @NotNull ItemBuilder item) {
     return setItem(slot, item.build());
   }
 
-  @Nonnull
-  public AnimationFrame setItem(int slot, @Nonnull ItemStack item) {
+  @NotNull
+  public AnimationFrame setItem(int slot, @NotNull ItemStack item) {
     content[slot] = item;
     return this;
   }
 
-  @Nonnull
+  @NotNull
   public AnimationFrame setSound(boolean play) {
     this.sound = play;
     return this;
@@ -62,7 +62,7 @@ public class AnimationFrame implements Cloneable {
     return getItem(slot) == null ? Material.AIR : getItem(slot).getType();
   }
 
-  @Nonnull
+  @NotNull
   public ItemStack[] getContent() {
     return content;
   }
@@ -75,7 +75,7 @@ public class AnimationFrame implements Cloneable {
     return content.length;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public AnimationFrame clone() {
     return new AnimationFrame(content);

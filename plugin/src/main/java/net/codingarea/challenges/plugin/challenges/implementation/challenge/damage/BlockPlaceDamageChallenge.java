@@ -10,9 +10,8 @@ import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockPlaceEvent;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Since("2.0")
 public class BlockPlaceDamageChallenge extends SettingModifier {
@@ -34,7 +33,7 @@ public class BlockPlaceDamageChallenge extends SettingModifier {
     ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.GOLD_BLOCK, Message.forName("item-block-place-damage-challenge"));

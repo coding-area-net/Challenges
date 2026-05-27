@@ -1,15 +1,15 @@
 package net.codingarea.commons.common.logging;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface ILoggerFactory {
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   ILogger forName(@Nullable String name);
 
-  void setDefaultLevel(@Nonnull LogLevel level);
+  void setDefaultLevel(@NotNull LogLevel level);
 
 }

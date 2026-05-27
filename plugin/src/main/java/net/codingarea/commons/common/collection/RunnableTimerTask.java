@@ -1,13 +1,14 @@
 package net.codingarea.commons.common.collection;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.TimerTask;
 
 public class RunnableTimerTask extends TimerTask {
 
   protected final Runnable action;
 
-  public RunnableTimerTask(@Nonnull Runnable action) {
+  public RunnableTimerTask(@NotNull Runnable action) {
     this.action = action;
   }
 

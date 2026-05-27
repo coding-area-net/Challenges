@@ -4,9 +4,9 @@ import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.Propertyable;
 import net.codingarea.commons.database.Database;
 import net.codingarea.commons.database.exceptions.DatabaseException;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,13 +16,13 @@ public class CachedDatabaseAccess<V> extends DirectDatabaseAccess<V> {
 
   protected final Map<String, V> cache = new ConcurrentHashMap<>();
 
-  public CachedDatabaseAccess(@Nonnull Database database, @Nonnull DatabaseAccessConfig config, @Nonnull BiFunction<? super Document, ? super String, ? extends V> mapper) {
+  public CachedDatabaseAccess(@NotNull Database database, @NotNull DatabaseAccessConfig config, @NotNull BiFunction<? super Document, ? super String, ? extends V> mapper) {
     super(database, config, mapper);
   }
 
   @Nullable
   @Override
-  public V getValue(@Nonnull String key) throws DatabaseException {
+  public V getValue(@NotNull String key) throws DatabaseException {
     V value = cache.get(key);
     if (value != null) return value;
 
@@ -31,9 +31,9 @@ public class CachedDatabaseAccess<V> extends DirectDatabaseAccess<V> {
     return value;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public V getValue(@Nonnull String key, @Nonnull V def) throws DatabaseException {
+  public V getValue(@NotNull String key, @NotNull V def) throws DatabaseException {
     V value = cache.get(key);
     if (value != null) return value;
 
@@ -42,9 +42,9 @@ public class CachedDatabaseAccess<V> extends DirectDatabaseAccess<V> {
     return value;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Optional<V> getValueOptional(@Nonnull String key) throws DatabaseException {
+  public Optional<V> getValueOptional(@NotNull String key) throws DatabaseException {
     V cached = cache.get(key);
     if (cached != null) return Optional.of(cached);
 
@@ -52,33 +52,33 @@ public class CachedDatabaseAccess<V> extends DirectDatabaseAccess<V> {
   }
 
   @Override
-  public void setValue(@Nonnull String key, @Nullable V value) throws DatabaseException {
+  public void setValue(@NotNull String key, @Nullable V value) throws DatabaseException {
     cache.put(key, value);
     super.setValue(key, value);
   }
 
-  @Nonnull
-  public static CachedDatabaseAccess<String> newStringAccess(@Nonnull Database database, @Nonnull DatabaseAccessConfig config) {
+  @NotNull
+  public static CachedDatabaseAccess<String> newStringAccess(@NotNull Database database, @NotNull DatabaseAccessConfig config) {
     return new CachedDatabaseAccess<>(database, config, Propertyable::getString);
   }
 
-  @Nonnull
-  public static CachedDatabaseAccess<Integer> newIntAccess(@Nonnull Database database, @Nonnull DatabaseAccessConfig config) {
+  @NotNull
+  public static CachedDatabaseAccess<Integer> newIntAccess(@NotNull Database database, @NotNull DatabaseAccessConfig config) {
     return new CachedDatabaseAccess<>(database, config, Propertyable::getInt);
   }
 
-  @Nonnull
-  public static CachedDatabaseAccess<Long> newLongAccess(@Nonnull Database database, @Nonnull DatabaseAccessConfig config) {
+  @NotNull
+  public static CachedDatabaseAccess<Long> newLongAccess(@NotNull Database database, @NotNull DatabaseAccessConfig config) {
     return new CachedDatabaseAccess<>(database, config, Propertyable::getLong);
   }
 
-  @Nonnull
-  public static CachedDatabaseAccess<Double> newDoubleAccess(@Nonnull Database database, @Nonnull DatabaseAccessConfig config) {
+  @NotNull
+  public static CachedDatabaseAccess<Double> newDoubleAccess(@NotNull Database database, @NotNull DatabaseAccessConfig config) {
     return new CachedDatabaseAccess<>(database, config, Propertyable::getDouble);
   }
 
-  @Nonnull
-  public static CachedDatabaseAccess<Document> newDocumentAccess(@Nonnull Database database, @Nonnull DatabaseAccessConfig config) {
+  @NotNull
+  public static CachedDatabaseAccess<Document> newDocumentAccess(@NotNull Database database, @NotNull DatabaseAccessConfig config) {
     return new CachedDatabaseAccess<>(database, config, Document::getDocument);
   }
 

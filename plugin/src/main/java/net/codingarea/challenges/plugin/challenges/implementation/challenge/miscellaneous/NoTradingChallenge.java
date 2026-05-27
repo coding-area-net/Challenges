@@ -11,8 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class NoTradingChallenge extends Setting {
 
@@ -20,14 +19,14 @@ public class NoTradingChallenge extends Setting {
     super(MenuType.CHALLENGES);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.EMERALD, Message.forName("item-no-trading-challenge"));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onInteract(@Nonnull PlayerInteractEntityEvent event) {
+  public void onInteract(@NotNull PlayerInteractEntityEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.getRightClicked() instanceof Villager) {
       event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_VILLAGER_NO, 1F, 1F);
@@ -39,7 +38,7 @@ public class NoTradingChallenge extends Setting {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onEntityPickupItem(@Nonnull EntityPickupItemEvent event) {
+  public void onEntityPickupItem(@NotNull EntityPickupItemEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.getEntityType().name().equals("PIGLIN")) {
       event.setCancelled(true);

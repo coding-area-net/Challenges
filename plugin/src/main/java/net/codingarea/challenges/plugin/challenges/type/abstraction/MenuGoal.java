@@ -6,9 +6,7 @@ import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class MenuGoal extends MenuSetting implements IGoal {
   public MenuGoal(@NotNull MenuType menu, @NotNull Message title) {
@@ -22,7 +20,7 @@ public abstract class MenuGoal extends MenuSetting implements IGoal {
     super.setEnabled(enabled);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public SoundSample getStartSound() {
     return SoundSample.DRAGON_BREATH;

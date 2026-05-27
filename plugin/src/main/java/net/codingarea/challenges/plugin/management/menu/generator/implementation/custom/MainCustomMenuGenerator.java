@@ -14,8 +14,7 @@ import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class MainCustomMenuGenerator extends ChallengeMenuGenerator {
 
@@ -43,7 +42,7 @@ public class MainCustomMenuGenerator extends ChallengeMenuGenerator {
   }
 
   @Override
-  public void executeClickAction(@Nonnull IChallenge challenge, @Nonnull MenuClickInfo info, int itemIndex) {
+  public void executeClickAction(@NotNull IChallenge challenge, @NotNull MenuClickInfo info, int itemIndex) {
     if (itemIndex == 0 || itemIndex == 2) {
       challenge.handleClick(new ChallengeMenuClickInfo(info, itemIndex == 0));
     } else if (challenge instanceof CustomChallenge) {
@@ -54,7 +53,7 @@ public class MainCustomMenuGenerator extends ChallengeMenuGenerator {
   }
 
   @Override
-  public void generatePage(@Nonnull Inventory inventory, int page) {
+  public void generatePage(@NotNull Inventory inventory, int page) {
     if (page == 0) {
       inventory.setItem(VIEW_SLOT, new ItemBuilder(Material.BOOK, Message.forName("custom-main-view-challenges")).build());
       inventory.setItem(CREATE_SLOT, new ItemBuilder(Material.WRITABLE_BOOK, Message.forName("custom-main-create-challenge")).build());
@@ -62,7 +61,7 @@ public class MainCustomMenuGenerator extends ChallengeMenuGenerator {
   }
 
   @Override
-  public void onPreChallengePageClicking(@Nonnull MenuClickInfo info, int page) {
+  public void onPreChallengePageClicking(@NotNull MenuClickInfo info, int page) {
     if (info.getSlot() == VIEW_SLOT) {
       if (Challenges.getInstance().getCustomChallengesLoader().getCustomChallenges().isEmpty()) {
         Message.forName("custom-not-loaded").send(info.getPlayer(), Prefix.CUSTOM);
@@ -85,7 +84,7 @@ public class MainCustomMenuGenerator extends ChallengeMenuGenerator {
   }
 
   @Override
-  public void setSettingsItems(@Nonnull Inventory inventory, @Nonnull IChallenge challenge, int topSlot) {
+  public void setSettingsItems(@NotNull Inventory inventory, @NotNull IChallenge challenge, int topSlot) {
     inventory.setItem(getSlots()[topSlot], getDisplayItemBuilder(challenge).build());
     inventory.setItem(getSlots()[topSlot] + 9, DefaultItem.customize().build());
     inventory.setItem(getSlots()[topSlot] + 18, getSettingsItem(challenge));

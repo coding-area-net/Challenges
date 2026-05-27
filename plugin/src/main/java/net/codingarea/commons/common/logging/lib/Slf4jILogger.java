@@ -1,10 +1,9 @@
 package net.codingarea.commons.common.logging.lib;
 
 import net.codingarea.commons.common.logging.ILogger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public interface Slf4jILogger extends ILogger, Logger {
 
@@ -24,18 +23,18 @@ public interface Slf4jILogger extends ILogger, Logger {
   boolean isErrorEnabled();
 
   @Override
-  void trace(@Nullable String message, @Nonnull Object... args);
+  void trace(@Nullable String message, @NotNull Object... args);
 
   @Override
-  void debug(@Nullable String message, @Nonnull Object... args);
+  void debug(@Nullable String message, @NotNull Object... args);
 
   @Override
-  void info(@Nullable String message, @Nonnull Object... args);
+  void info(@Nullable String message, @NotNull Object... args);
 
   @Override
-  void warn(@Nullable String message, @Nonnull Object... args);
+  void warn(@Nullable String message, @NotNull Object... args);
 
   @Override
-  void error(@Nullable String message, @Nonnull Object... args);
+  void error(@Nullable String message, @NotNull Object... args);
 
 }

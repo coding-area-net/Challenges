@@ -6,9 +6,9 @@ import net.codingarea.commons.database.sql.abstraction.AbstractSQLDatabase;
 import net.codingarea.commons.database.sql.abstraction.where.ObjectWhere;
 import net.codingarea.commons.database.sql.abstraction.where.SQLWhere;
 import net.codingarea.commons.database.sql.abstraction.where.StringIgnoreCaseWhere;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.*;
@@ -21,63 +21,63 @@ public class SQLUpdate implements DatabaseUpdate {
   protected final Map<String, SQLWhere> where;
   protected final Map<String, Object> values;
 
-  public SQLUpdate(@Nonnull AbstractSQLDatabase database, @Nonnull String table) {
+  public SQLUpdate(@NotNull AbstractSQLDatabase database, @NotNull String table) {
     this.database = database;
     this.table = table;
     this.where = new HashMap<>();
     this.values = new HashMap<>();
   }
 
-  public SQLUpdate(@Nonnull AbstractSQLDatabase database, @Nonnull String table, @Nonnull Map<String, SQLWhere> where, @Nonnull Map<String, Object> values) {
+  public SQLUpdate(@NotNull AbstractSQLDatabase database, @NotNull String table, @NotNull Map<String, SQLWhere> where, @NotNull Map<String, Object> values) {
     this.database = database;
     this.table = table;
     this.where = where;
     this.values = values;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseUpdate where(@Nonnull String column, @Nullable Object value) {
+  public DatabaseUpdate where(@NotNull String column, @Nullable Object value) {
     where.put(column, new ObjectWhere(column, value, "="));
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseUpdate where(@Nonnull String column, @Nullable Number value) {
+  public DatabaseUpdate where(@NotNull String column, @Nullable Number value) {
     return where(column, (Object) value);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseUpdate where(@Nonnull String column, @Nullable String value) {
+  public DatabaseUpdate where(@NotNull String column, @Nullable String value) {
     return where(column, (Object) value);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseUpdate where(@Nonnull String column, @Nullable String value, boolean ignoreCase) {
+  public DatabaseUpdate where(@NotNull String column, @Nullable String value, boolean ignoreCase) {
     if (!ignoreCase) return where(column, value);
     if (value == null) throw new NullPointerException("Cannot use where ignore case with null value");
     where.put(column, new StringIgnoreCaseWhere(column, value));
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseUpdate whereNot(@Nonnull String column, @Nullable Object value) {
+  public DatabaseUpdate whereNot(@NotNull String column, @Nullable Object value) {
     where.put(column, new ObjectWhere(column, value, "!="));
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseUpdate set(@Nonnull String column, @Nullable Object value) {
+  public DatabaseUpdate set(@NotNull String column, @Nullable Object value) {
     values.put(column, value);
     return this;
   }
 
-  @Nonnull
+  @NotNull
   protected PreparedStatement prepare() throws SQLException, DatabaseException {
     if (values.isEmpty()) throw new IllegalArgumentException("Can't update nothing");
 

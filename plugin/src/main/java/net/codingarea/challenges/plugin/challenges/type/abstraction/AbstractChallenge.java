@@ -19,10 +19,9 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -53,45 +52,43 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
   private String name;
   private ItemStack cachedDisplayItem;
 
-  public AbstractChallenge(@Nonnull MenuType menu) {
+  public AbstractChallenge(@NotNull MenuType menu) {
     this.menu = menu;
     firstInstanceByClass.put(this.getClass(), this);
   }
 
-  @Nonnull
-  public static <C extends AbstractChallenge> C getFirstInstance(@Nonnull Class<C> classOfChallenge) {
+  @NotNull
+  public static <C extends AbstractChallenge> C getFirstInstance(@NotNull Class<C> classOfChallenge) {
     return classOfChallenge.cast(firstInstanceByClass.get(classOfChallenge));
   }
 
-  public static void broadcast(@Nonnull Consumer<? super Player> action) {
+  public static void broadcast(@NotNull Consumer<? super Player> action) {
     Bukkit.getOnlinePlayers().forEach(action);
   }
 
-  public static void broadcastFiltered(@Nonnull Consumer<? super Player> action) {
+  public static void broadcastFiltered(@NotNull Consumer<? super Player> action) {
     for (Player player : Bukkit.getOnlinePlayers()) {
       if (ignorePlayer(player)) continue;
       action.accept(player);
     }
   }
 
-  public static void broadcastIgnored(@Nonnull Consumer<? super Player> action) {
+  public static void broadcastIgnored(@NotNull Consumer<? super Player> action) {
     for (Player player : Bukkit.getOnlinePlayers()) {
       if (!ignorePlayer(player)) continue;
       action.accept(player);
     }
   }
 
-  @CheckReturnValue
-  public static boolean ignorePlayer(@Nonnull Player player) {
+  public static boolean ignorePlayer(@NotNull Player player) {
     return ignoreGameMode(player.getGameMode());
   }
 
-  @CheckReturnValue
-  public static boolean ignoreGameMode(@Nonnull GameMode gameMode) {
+  public static boolean ignoreGameMode(@NotNull GameMode gameMode) {
     return (isIgnoreSpectatorPlayers() && gameMode == GameMode.SPECTATOR) || (isIgnoreCreativePlayers() && gameMode == GameMode.CREATIVE);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public final MenuType getType() {
     return menu;
@@ -106,7 +103,7 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
     ChallengeHelper.updateItems(this);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemStack getDisplayItem() {
     if (cachedDisplayItem != null) return cachedDisplayItem.clone();
@@ -114,7 +111,7 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
     return cachedDisplayItem.clone();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemStack getSettingsItem() {
     ItemBuilder item = createSettingsItem();
@@ -132,19 +129,19 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
     return null;
   }
 
-  @Nonnull
+  @NotNull
   public abstract ItemBuilder createDisplayItem();
 
-  @Nonnull
+  @NotNull
   public abstract ItemBuilder createSettingsItem();
 
-  @Nonnull
+  @NotNull
   @Override
   public String getUniqueGamestateName() {
     return getUniqueName();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public String getUniqueName() {
     return name != null ? name : (name = getClass().getSimpleName().toLowerCase()
@@ -160,22 +157,21 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
   }
 
   @Override
-  public void writeGameState(@Nonnull Document document) {
+  public void writeGameState(@NotNull Document document) {
   }
 
   @Override
-  public void loadGameState(@Nonnull Document document) {
+  public void loadGameState(@NotNull Document document) {
   }
 
   @Override
-  public void writeSettings(@Nonnull Document document) {
+  public void writeSettings(@NotNull Document document) {
   }
 
   @Override
-  public void loadSettings(@Nonnull Document document) {
+  public void loadSettings(@NotNull Document document) {
   }
 
-  @CheckReturnValue
   protected boolean shouldExecuteEffect() {
     return isEnabled() && ChallengeAPI.isStarted() && !ChallengeAPI.isWorldInUse();
   }
@@ -185,7 +181,7 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
    */
   @Deprecated
   @DeprecatedSince("2.1.0")
-  public void kill(@Nonnull Player player) {
+  public void kill(@NotNull Player player) {
     ChallengeHelper.kill(player);
   }
 
@@ -194,23 +190,23 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
    */
   @Deprecated
   @DeprecatedSince("2.1.0")
-  public void kill(@Nonnull Player player, int delay) {
+  public void kill(@NotNull Player player, int delay) {
     ChallengeHelper.kill(player, delay);
 
   }
 
-  @Nonnull
+  @NotNull
   protected final Document getGameStateData() {
     return plugin.getConfigManager().getGamestateConfig().getDocument(this.getUniqueGamestateName());
   }
 
-  @Nonnull
-  protected final Document getPlayerData(@Nonnull UUID player) {
+  @NotNull
+  protected final Document getPlayerData(@NotNull UUID player) {
     return getGameStateData().getDocument("player").getDocument(player.toString());
   }
 
-  @Nonnull
-  protected final Document getPlayerData(@Nonnull Player player) {
+  @NotNull
+  protected final Document getPlayerData(@NotNull Player player) {
     return getPlayerData(player.getUniqueId());
   }
 

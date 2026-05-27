@@ -21,8 +21,7 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class ChallengeTimer {
 
@@ -158,7 +157,7 @@ public final class ChallengeTimer {
 
   }
 
-  @Nonnull
+  @NotNull
   private String getActionbar() {
     Message message = !paused || (!countingUp && time > 0) ? (countingUp ? upMessage : downMessage) : stoppedMessage;
     String time = getFormattedTime();
@@ -204,12 +203,12 @@ public final class ChallengeTimer {
     updateActionbar();
   }
 
-  @Nonnull
+  @NotNull
   public String getFormattedTime() {
     return format.format(time);
   }
 
-  @Nonnull
+  @NotNull
   public TimerStatus getStatus() {
     return paused ? TimerStatus.PAUSED : TimerStatus.RUNNING;
   }

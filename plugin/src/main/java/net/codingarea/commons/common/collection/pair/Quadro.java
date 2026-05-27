@@ -1,8 +1,9 @@
 package net.codingarea.commons.common.collection.pair;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -34,7 +35,7 @@ public class Quadro<F, S, T, FF> implements Pair {
     return 4;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public final Object[] values() {
     return new Object[]{first, second, third, first};
@@ -72,12 +73,12 @@ public class Quadro<F, S, T, FF> implements Pair {
     this.fourth = fourth;
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  public <ToF, ToS, ToT, ToFF> Quadro<ToF, ToS, ToT, ToFF> map(@Nonnull Function<? super F, ? extends ToF> firstMapper,
-                                                               @Nonnull Function<? super S, ? extends ToS> secondMapper,
-                                                               @Nonnull Function<? super T, ? extends ToT> thirdMapper,
-                                                               @Nonnull Function<? super FF, ? extends ToFF> fourthMapper) {
+  public <ToF, ToS, ToT, ToFF> Quadro<ToF, ToS, ToT, ToFF> map(@NotNull Function<? super F, ? extends ToF> firstMapper,
+                                                               @NotNull Function<? super S, ? extends ToS> secondMapper,
+                                                               @NotNull Function<? super T, ? extends ToT> thirdMapper,
+                                                               @NotNull Function<? super FF, ? extends ToFF> fourthMapper) {
     return of(firstMapper.apply(first), secondMapper.apply(second), thirdMapper.apply(third), fourthMapper.apply(fourth));
   }
 
@@ -107,32 +108,32 @@ public class Quadro<F, S, T, FF> implements Pair {
     return "Quadro[" + first + ", " + second + ", " + third + ", " + fourth + "]";
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S, T, FF> Quadro<F, S, T, FF> ofFirst(@Nullable F first) {
     return of(first, null, null, null);
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S, T, FF> Quadro<F, S, T, FF> ofSecond(@Nullable S second) {
     return of(null, second, null, null);
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S, T, FF> Quadro<F, S, T, FF> ofThird(@Nullable T third) {
     return of(null, null, third, null);
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S, T, FF> Quadro<F, S, T, FF> ofFourth(@Nullable FF fourth) {
     return of(null, null, null, fourth);
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S, T, FF> Quadro<F, S, T, FF> of(@Nullable F first, @Nullable S second, @Nullable T third, @Nullable FF fourth) {
     return new Quadro<>(first, second, third, fourth);
   }
 
-  @Nonnull
+  @NotNull
   public static <F, S, T, FF> Quadro<F, S, T, FF> empty() {
     return new Quadro<>();
   }

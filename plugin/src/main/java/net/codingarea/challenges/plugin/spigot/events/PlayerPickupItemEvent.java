@@ -6,8 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 public class PlayerPickupItemEvent extends PlayerEvent implements Cancellable {
@@ -18,13 +17,13 @@ public class PlayerPickupItemEvent extends PlayerEvent implements Cancellable {
   private final int remaining;
   private boolean cancel = false;
 
-  public PlayerPickupItemEvent(@Nonnull Player player, @Nonnull Item item, int remaining) {
+  public PlayerPickupItemEvent(@NotNull Player player, @NotNull Item item, int remaining) {
     super(player);
     this.item = item;
     this.remaining = remaining;
   }
 
-  @Nonnull
+  @NotNull
   public static HandlerList getHandlerList() {
     return handlers;
   }
@@ -39,7 +38,7 @@ public class PlayerPickupItemEvent extends PlayerEvent implements Cancellable {
     this.cancel = cancel;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public HandlerList getHandlers() {
     return handlers;

@@ -17,9 +17,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class SplitHealthSetting extends Setting {
 
@@ -27,7 +26,7 @@ public class SplitHealthSetting extends Setting {
     super(MenuType.SETTINGS);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new PotionBuilder(Material.TIPPED_ARROW, Message.forName("item-split-health-setting")).color(Color.RED);
@@ -39,7 +38,7 @@ public class SplitHealthSetting extends Setting {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onEntityRegainHealth(@Nonnull EntityRegainHealthEvent event) {
+  public void onEntityRegainHealth(@NotNull EntityRegainHealthEvent event) {
     if (!shouldExecuteEffect()) return;
     if (!(event.getEntity() instanceof Player)) return;
     Player player = (Player) event.getEntity();
@@ -59,7 +58,7 @@ public class SplitHealthSetting extends Setting {
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onJoin(@Nonnull PlayerJoinEvent event) {
+  public void onJoin(@NotNull PlayerJoinEvent event) {
     if (ignorePlayer(event.getPlayer())) return;
     setHealth();
   }
@@ -80,7 +79,7 @@ public class SplitHealthSetting extends Setting {
     setHealth(player, null);
   }
 
-  public void setHealth(@Nonnull Player player, @Nullable EntityDamageEvent damageEvent) {
+  public void setHealth(@NotNull Player player, @Nullable EntityDamageEvent damageEvent) {
     if (!shouldExecuteEffect()) return;
 
     for (Player currentPlayer : Bukkit.getOnlinePlayers()) {

@@ -15,8 +15,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class NewEntityOnJumpChallenge extends Setting {
@@ -26,20 +25,20 @@ public class NewEntityOnJumpChallenge extends Setting {
     setCategory(SettingCategory.ENTITIES);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-jump-entity-challenge")).setColor(Color.GREEN);
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onJump(@Nonnull PlayerJumpEvent event) {
+  public void onJump(@NotNull PlayerJumpEvent event) {
     if (ignorePlayer(event.getPlayer())) return;
     if (!shouldExecuteEffect()) return;
     spawnRandomEntity(event.getPlayer().getLocation());
   }
 
-  private void spawnRandomEntity(@Nonnull Location location) {
+  private void spawnRandomEntity(@NotNull Location location) {
     if (location.getWorld() == null) return;
     EntityType type = globalRandom.choose(RandomMobAction.getSpawnableMobs());
     location.getWorld().spawnEntity(location, type);

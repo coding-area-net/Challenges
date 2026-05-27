@@ -1,7 +1,8 @@
 package net.codingarea.commons.common.collection;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -11,68 +12,68 @@ public class FontBuilder {
 
   private Font font;
 
-  public FontBuilder(@Nonnull File file) throws IOException, FontFormatException {
+  public FontBuilder(@NotNull File file) throws IOException, FontFormatException {
     this(file, Font.TRUETYPE_FONT);
   }
 
-  public FontBuilder(@Nonnull File file, int type) throws IOException, FontFormatException {
+  public FontBuilder(@NotNull File file, int type) throws IOException, FontFormatException {
     this.font = Font.createFont(type, file);
   }
 
-  public FontBuilder(@Nonnull String resource) throws IOException, FontFormatException {
+  public FontBuilder(@NotNull String resource) throws IOException, FontFormatException {
     this(resource, Font.TRUETYPE_FONT);
   }
 
-  public FontBuilder(@Nonnull String resource, int type) throws IOException, FontFormatException {
+  public FontBuilder(@NotNull String resource, int type) throws IOException, FontFormatException {
     this.font = Font.createFont(type, Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(resource)));
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   public FontBuilder bold() {
     return style(Font.BOLD);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   public FontBuilder italic() {
     return style(Font.ITALIC);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   public FontBuilder style(int style) {
     font = font.deriveFont(style);
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   public FontBuilder size(float size) {
     font = font.deriveFont(size);
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   public FontBuilder derive(int style, float size) {
     font = font.deriveFont(style, size);
     return this;
   }
 
-  @Nonnull
+  @NotNull
   public Font build() {
     registerFont(font);
     return font;
   }
 
-  public static void registerFont(@Nonnull Font font) {
+  public static void registerFont(@NotNull Font font) {
     GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  public static FontBuilder fromFile(@Nonnull String filename) {
+  public static FontBuilder fromFile(@NotNull String filename) {
     try {
       return new FontBuilder(new File(filename));
     } catch (Exception ex) {
@@ -80,9 +81,9 @@ public class FontBuilder {
     }
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  public static FontBuilder fromResource(@Nonnull String resource) {
+  public static FontBuilder fromResource(@NotNull String resource) {
     try {
       return new FontBuilder(resource);
     } catch (Exception ex) {

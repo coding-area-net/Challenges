@@ -4,10 +4,10 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import net.codingarea.commons.common.collection.WrappedException;
 import net.codingarea.commons.common.function.ExceptionallyConsumer;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.*;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
@@ -43,86 +43,83 @@ public final class FileUtils {
     FileUtils.tempDirectory = tempDirectory;
   }
 
-  @Nonnull
-  public static BufferedWriter newBufferedWriter(@Nonnull File file) throws IOException {
+  @NotNull
+  public static BufferedWriter newBufferedWriter(@NotNull File file) throws IOException {
     return newBufferedWriter(file.toPath());
   }
 
-  @Nonnull
-  public static BufferedReader newBufferedReader(@Nonnull File file) throws IOException {
+  @NotNull
+  public static BufferedReader newBufferedReader(@NotNull File file) throws IOException {
     return newBufferedReader(file.toPath());
   }
 
-  @Nonnull
-  public static BufferedWriter newBufferedWriter(@Nonnull Path file) throws IOException {
+  @NotNull
+  public static BufferedWriter newBufferedWriter(@NotNull Path file) throws IOException {
     return Files.newBufferedWriter(file, StandardCharsets.UTF_8);
   }
 
-  @Nonnull
-  public static BufferedReader newBufferedReader(@Nonnull Path file) throws IOException {
+  @NotNull
+  public static BufferedReader newBufferedReader(@NotNull Path file) throws IOException {
     return Files.newBufferedReader(file, StandardCharsets.UTF_8);
   }
 
-  @Nonnull
-  public static String getFileExtension(@Nonnull File file) {
+  @NotNull
+  public static String getFileExtension(@NotNull File file) {
     return getFileExtension(file.getName());
   }
 
-  @Nonnull
-  public static String getFileExtension(@Nonnull Path file) {
+  @NotNull
+  public static String getFileExtension(@NotNull Path file) {
     return getFileExtension(file.toString());
   }
 
-  @Nonnull
-  public static String getFileExtension(@Nonnull String filename) {
+  @NotNull
+  public static String getFileExtension(@NotNull String filename) {
     return StringUtils.getAfterLastIndex(filename, ".").toLowerCase();
   }
 
-  @Nonnull
-  public static String getFileName(@Nonnull File file) {
+  @NotNull
+  public static String getFileName(@NotNull File file) {
     return getFileName(file.getName());
   }
 
-  @Nonnull
-  public static String getFileName(@Nonnull Path file) {
+  @NotNull
+  public static String getFileName(@NotNull Path file) {
     return getFileName(file.toString());
   }
 
-  @Nonnull
-  public static String getFileName(@Nonnull String filename) {
+  @NotNull
+  public static String getFileName(@NotNull String filename) {
     filename = stripFolders(filename);
     int index = filename.lastIndexOf('.');
     if (index == -1) return filename;
     return filename.substring(0, index);
   }
 
-  @Nonnull
-  @CheckReturnValue
-  public static String getRealFileName(@Nonnull File file) {
+  @NotNull
+  public static String getRealFileName(@NotNull File file) {
     return getRealFileName(file.getName());
   }
 
-  @Nonnull
-  @CheckReturnValue
-  public static String getRealFileName(@Nonnull Path file) {
+  @NotNull
+  public static String getRealFileName(@NotNull Path file) {
     return getRealFileName(file.toString());
   }
 
-  @Nonnull
-  @CheckReturnValue
-  public static String getRealFileName(@Nonnull String filename) {
+  @NotNull
+  public static String getRealFileName(@NotNull String filename) {
     return stripFolders(filename);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  private static String stripFolders(@Nonnull String filename) {
+  private static String stripFolders(@NotNull String filename) {
     int index = filename.lastIndexOf(File.pathSeparator);
     if (index == -1) return filename;
     return filename.substring(index + 1);
   }
 
-  public static void createFilesIfNecessary(@Nonnull File file) throws IOException {
+  public static void createFilesIfNecessary(@NotNull File file) throws IOException {
     if (file.exists()) return;
 
     if (file.isDirectory()) {
@@ -134,7 +131,7 @@ public final class FileUtils {
     file.createNewFile();
   }
 
-  public static void deleteWorldFolder(@Nonnull File path) {
+  public static void deleteWorldFolder(@NotNull File path) {
     if (path.exists()) {
       File[] files = path.listFiles();
       if (files == null) return;
@@ -169,7 +166,7 @@ public final class FileUtils {
     return null;
   }
 
-  public static void openZipFileSystem(@Nonnull Path path, @Nonnull ExceptionallyConsumer<? super FileSystem> consumer) {
+  public static void openZipFileSystem(@NotNull Path path, @NotNull ExceptionallyConsumer<? super FileSystem> consumer) {
     try (FileSystem fileSystem = FileSystems
       .newFileSystem(URI.create("jar:" + path.toUri()), ZIP_FILE_SYSTEM_PROPERTIES)) {
       consumer.accept(fileSystem);
@@ -257,7 +254,7 @@ public final class FileUtils {
     FileUtils.deleteFile(file);
   }
 
-  public static long size(@Nonnull Path path) {
+  public static long size(@NotNull Path path) {
     try {
       return Files.size(path);
     } catch (IOException ex) {
@@ -294,7 +291,7 @@ public final class FileUtils {
     return emptyZipByteArray();
   }
 
-  @Nonnull
+  @NotNull
   public static Path createTempFile() {
     if (tempDirectory != null)
       return createTempFile(UUID.randomUUID());
@@ -308,15 +305,15 @@ public final class FileUtils {
     }
   }
 
-  @Nonnull
-  public static Path createTempFile(@Nonnull UUID uuid) {
+  @NotNull
+  public static Path createTempFile(@NotNull UUID uuid) {
     Preconditions.checkNotNull(tempDirectory, "The temp directory cannot be null");
     Path file = tempDirectory.resolve(uuid.toString());
     createFile(file);
     return file;
   }
 
-  public static void setAttribute(@Nonnull Path path, @Nonnull String attribute, @Nullable Object value, @Nonnull LinkOption... options) {
+  public static void setAttribute(@NotNull Path path, @NotNull String attribute, @Nullable Object value, @NotNull LinkOption... options) {
     try {
       Files.setAttribute(path, attribute, value, options);
     } catch (IOException ex) {
@@ -324,17 +321,17 @@ public final class FileUtils {
     }
   }
 
-  public static void setHiddenAttribute(@Nonnull Path path, boolean hidden) {
+  public static void setHiddenAttribute(@NotNull Path path, boolean hidden) {
     setAttribute(path, "dos:hidden", hidden, LinkOption.NOFOLLOW_LINKS);
   }
 
-  @Nonnull
-  public static InputStream zipToStream(@Nonnull Path directory) throws IOException {
+  @NotNull
+  public static InputStream zipToStream(@NotNull Path directory) throws IOException {
     return zipToStream(directory, null);
   }
 
-  @Nonnull
-  public static InputStream zipToStream(@Nonnull Path directory, @Nullable Predicate<Path> fileFilter) throws IOException {
+  @NotNull
+  public static InputStream zipToStream(@NotNull Path directory, @Nullable Predicate<Path> fileFilter) throws IOException {
     Path target = createTempFile();
     zipToFile(directory, target, path -> !target.equals(path) && (fileFilter == null || fileFilter.test(path)));
     return Files.newInputStream(target, StandardOpenOption.DELETE_ON_CLOSE, LinkOption.NOFOLLOW_LINKS);
@@ -554,8 +551,8 @@ public final class FileUtils {
     }
   }
 
-  @Nonnull
-  public static Stream<Path> list(@Nonnull Path directory) {
+  @NotNull
+  public static Stream<Path> list(@NotNull Path directory) {
     try {
       return Files.list(directory);
     } catch (IOException ex) {

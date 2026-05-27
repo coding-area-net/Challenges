@@ -12,11 +12,11 @@ import net.codingarea.commons.common.logging.internal.factory.Slf4jLoggerFactory
 import net.codingarea.commons.common.logging.lib.JavaILogger;
 import net.codingarea.commons.common.logging.lib.Slf4jILogger;
 import net.codingarea.commons.common.misc.ReflectionUtils;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ServiceLoader;
@@ -32,7 +32,7 @@ public interface ILogger {
       private boolean slf4j, slf4jApi;
     }
 
-    @Nonnull
+    @NotNull
     private static Data getData() {
       if (data == null)
         createData();
@@ -67,7 +67,7 @@ public interface ILogger {
       data.slf4jApi = slf4jApi;
     }
 
-    @Nonnull
+    @NotNull
     public static ILoggerFactory getFactory() {
       if (factory == null)
         factory = getFallbackFactory();
@@ -75,7 +75,7 @@ public interface ILogger {
       return factory;
     }
 
-    @Nonnull
+    @NotNull
     private static ILoggerFactory getFallbackFactory() {
       return isSlf4jImplAvailable() ? new Slf4jLoggerFactory() :
         isSlf4jApiAvailable() ? new DefaultLoggerFactory(SimpleLogger::new) :
@@ -95,119 +95,119 @@ public interface ILogger {
     return Holder.getData().slf4jApi;
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   static ILogger forName(@Nullable String name) {
     return getFactory().forName(name);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   static ILogger forClass(@Nullable Class<?> clazz) {
     return forName(clazz == null ? null : clazz.getSimpleName());
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static ILogger forClassOf(@Nonnull Object object) {
+  static ILogger forClassOf(@NotNull Object object) {
     return forClass(object.getClass());
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   static ILogger forThisClass() {
     return forClass(ReflectionUtils.getCaller());
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static JavaILogger forJavaLogger(@Nonnull java.util.logging.Logger logger) {
+  static JavaILogger forJavaLogger(@NotNull java.util.logging.Logger logger) {
     return new JavaLoggerWrapper(logger);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static ILogger forSlf4jLogger(@Nonnull org.slf4j.Logger logger) {
+  static ILogger forSlf4jLogger(@NotNull org.slf4j.Logger logger) {
     return logger instanceof ILogger ? (ILogger) logger : new Slf4jLoggerWrapper(logger);
   }
 
-  static void setFactory(@Nonnull ILoggerFactory factory) {
+  static void setFactory(@NotNull ILoggerFactory factory) {
     Preconditions.checkNotNull(factory);
     Holder.factory = factory;
   }
 
-  static void setConstantFactory(@Nonnull ILogger logger) {
+  static void setConstantFactory(@NotNull ILogger logger) {
     setFactory(new ConstantLoggerFactory(logger));
   }
 
-  @Nonnull
+  @NotNull
   static ILoggerFactory getFactory() {
     return Holder.getFactory();
   }
 
-  void log(@Nonnull LogLevel level, @Nullable String message, @Nonnull Object... args);
+  void log(@NotNull LogLevel level, @Nullable String message, @NotNull Object... args);
 
-  default void log(@Nonnull LogLevel level, @Nullable Object message, @Nonnull Object... args) {
+  default void log(@NotNull LogLevel level, @Nullable Object message, @NotNull Object... args) {
     log(level, String.valueOf(message), args);
   }
 
-  default void error(@Nullable String message, @Nonnull Object... args) {
+  default void error(@Nullable String message, @NotNull Object... args) {
     log(LogLevel.ERROR, message, args);
   }
 
-  default void error(@Nullable Object message, @Nonnull Object... args) {
+  default void error(@Nullable Object message, @NotNull Object... args) {
     log(LogLevel.ERROR, message, args);
   }
 
-  default void warn(@Nullable String message, @Nonnull Object... args) {
+  default void warn(@Nullable String message, @NotNull Object... args) {
     log(LogLevel.WARN, message, args);
   }
 
-  default void warn(@Nullable Object message, @Nonnull Object... args) {
+  default void warn(@Nullable Object message, @NotNull Object... args) {
     log(LogLevel.WARN, message, args);
   }
 
-  default void info(@Nullable String message, @Nonnull Object... args) {
+  default void info(@Nullable String message, @NotNull Object... args) {
     log(LogLevel.INFO, message, args);
   }
 
-  default void info(@Nullable Object message, @Nonnull Object... args) {
+  default void info(@Nullable Object message, @NotNull Object... args) {
     log(LogLevel.INFO, message, args);
   }
 
-  default void status(@Nullable String message, @Nonnull Object... args) {
+  default void status(@Nullable String message, @NotNull Object... args) {
     log(LogLevel.STATUS, message, args);
   }
 
-  default void status(@Nullable Object message, @Nonnull Object... args) {
+  default void status(@Nullable Object message, @NotNull Object... args) {
     log(LogLevel.STATUS, message, args);
   }
 
-  default void extended(@Nullable String message, @Nonnull Object... args) {
+  default void extended(@Nullable String message, @NotNull Object... args) {
     log(LogLevel.EXTENDED, message, args);
   }
 
-  default void extended(@Nullable Object message, @Nonnull Object... args) {
+  default void extended(@Nullable Object message, @NotNull Object... args) {
     log(LogLevel.EXTENDED, message, args);
   }
 
-  default void debug(@Nullable String message, @Nonnull Object... args) {
+  default void debug(@Nullable String message, @NotNull Object... args) {
     log(LogLevel.DEBUG, message, args);
   }
 
-  default void debug(@Nullable Object message, @Nonnull Object... args) {
+  default void debug(@Nullable Object message, @NotNull Object... args) {
     log(LogLevel.DEBUG, message, args);
   }
 
-  default void trace(@Nullable String message, @Nonnull Object... args) {
+  default void trace(@Nullable String message, @NotNull Object... args) {
     log(LogLevel.TRACE, message, args);
   }
 
-  default void trace(@Nullable Object message, @Nonnull Object... args) {
+  default void trace(@Nullable Object message, @NotNull Object... args) {
     log(LogLevel.TRACE, message, args);
   }
 
-  default boolean isLevelEnabled(@Nonnull LogLevel level) {
+  default boolean isLevelEnabled(@NotNull LogLevel level) {
     return level.isShownAtLoggerLevel(getMinLevel());
   }
 
@@ -235,13 +235,13 @@ public interface ILogger {
     return isLevelEnabled(LogLevel.ERROR);
   }
 
-  @Nonnull
+  @NotNull
   LogLevel getMinLevel();
 
-  @Nonnull
-  ILogger setMinLevel(@Nonnull LogLevel level);
+  @NotNull
+  ILogger setMinLevel(@NotNull LogLevel level);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   default Slf4jILogger slf4j() {
     if (this instanceof Slf4jILogger)
@@ -249,7 +249,7 @@ public interface ILogger {
     throw new IllegalStateException(this.getClass().getName() + " cannot be converted to Slf4jILogger");
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   default JavaILogger java() {
     if (this instanceof JavaILogger)
@@ -257,9 +257,9 @@ public interface ILogger {
     throw new IllegalStateException(this.getClass().getName() + " cannot be converted to JavaILogger");
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  default PrintStream asPrintStream(@Nonnull LogLevel level) {
+  default PrintStream asPrintStream(@NotNull LogLevel level) {
     try {
       return new PrintStream(new LogOutputStream(this, level), true, StandardCharsets.UTF_8.name());
     } catch (Exception ex) {
@@ -267,9 +267,9 @@ public interface ILogger {
     }
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static String formatMessage(@Nullable Object messageObject, @Nonnull Object... args) {
+  static String formatMessage(@Nullable Object messageObject, @NotNull Object... args) {
     StringBuilder message = new StringBuilder(String.valueOf(messageObject));
     for (Object arg : args) {
       if (arg instanceof Throwable) continue;

@@ -7,8 +7,8 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Arrays;
 
 @Since("2.0")
@@ -24,7 +24,7 @@ public class KillAllBossesGoal extends KillMobsGoal {
     return Message.forName("bossbar-kill-all-bosses");
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.DIAMOND_SWORD, Message.forName("item-all-bosses-goal"));

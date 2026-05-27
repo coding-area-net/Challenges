@@ -2,17 +2,16 @@ package net.codingarea.challenges.plugin.utils.bukkit.jumpgeneration;
 
 import net.codingarea.commons.common.collection.IRandom;
 import org.bukkit.block.Block;
-
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
 
 
 public class RandomJumpGenerator implements IJumpGenerator {
 
-  @Nonnull
+  @NotNull
   @Override
   @CheckReturnValue
-  public Block next(@Nonnull IRandom random, @Nonnull Block startingPoint, boolean includeFourBlockJumps, boolean includeUpGoing) {
+  public Block next(@NotNull IRandom random, @NotNull Block startingPoint, boolean includeFourBlockJumps, boolean includeUpGoing) {
 
     int layer = random.nextInt(includeUpGoing ? 3 : 2) - 1;
     int range = layer == 0 ? 4 : 3;
@@ -29,7 +28,7 @@ public class RandomJumpGenerator implements IJumpGenerator {
 
   }
 
-  protected int determineSecondDirection(@Nonnull IRandom random, int mainDirection, int range) {
+  protected int determineSecondDirection(@NotNull IRandom random, int mainDirection, int range) {
     if (mainDirection == range || mainDirection == range - 1) {
       return random.choose(-1, 0, 1);
     } else if (mainDirection == range - 2) {
@@ -42,9 +41,9 @@ public class RandomJumpGenerator implements IJumpGenerator {
     throw new IllegalArgumentException("Could not determine second direction for main direction " + mainDirection + ", range " + range);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  protected Block translate(@Nonnull Block startingPoint, @Nonnull IRandom random, int layer, int mainDirection, int secondDirection) {
+  protected Block translate(@NotNull Block startingPoint, @NotNull IRandom random, int layer, int mainDirection, int secondDirection) {
 
     boolean intoX = random.nextBoolean();
 

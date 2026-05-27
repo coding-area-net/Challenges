@@ -23,8 +23,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -55,7 +55,7 @@ public class CutCleanSetting extends MenuSetting {
       new CookFoodSubSetting(() -> new ItemBuilder(Material.COOKED_BEEF, Message.forName("item-cut-clean-food-setting")), true));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.IRON_AXE, Message.forName("item-cut-clean-setting"));
@@ -67,11 +67,11 @@ public class CutCleanSetting extends MenuSetting {
 
   private class DirectIntoInventorySubSetting extends BooleanSubSetting {
 
-    public DirectIntoInventorySubSetting(@Nonnull Supplier<ItemBuilder> item) {
+    public DirectIntoInventorySubSetting(@NotNull Supplier<ItemBuilder> item) {
       super(item);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public BooleanSubSetting setEnabled(boolean enabled) {
       return super.setEnabled(enabled);
@@ -84,8 +84,8 @@ public class CutCleanSetting extends MenuSetting {
     protected final Material[] from;
     protected final Material to;
 
-    public ConvertDropSubSetting(@Nonnull Supplier<ItemBuilder> item, boolean enabledByDefault,
-                                 @Nonnull Material to, @Nonnull String... from) {
+    public ConvertDropSubSetting(@NotNull Supplier<ItemBuilder> item, boolean enabledByDefault,
+                                 @NotNull Material to, @NotNull String... from) {
       super(item, enabledByDefault);
 
       List<Material> materials = new ArrayList<>();
@@ -117,7 +117,7 @@ public class CutCleanSetting extends MenuSetting {
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-    public void onBlockBreak(@Nonnull BlockBreakEvent event) {
+    public void onBlockBreak(@NotNull BlockBreakEvent event) {
       if (!shouldExecuteEffect()) return;
       if (!directIntoInventory()) return;
       if (!event.isDropItems()) return;
@@ -137,12 +137,12 @@ public class CutCleanSetting extends MenuSetting {
 
   private class BreakOreVeinsSubSetting extends NumberAndBooleanSubSetting {
 
-    public BreakOreVeinsSubSetting(@Nonnull Supplier<ItemBuilder> item, int min, int max) {
+    public BreakOreVeinsSubSetting(@NotNull Supplier<ItemBuilder> item, int min, int max) {
       super(item, min, max);
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-    public void onBlockBreak(@Nonnull BlockBreakEvent event) {
+    public void onBlockBreak(@NotNull BlockBreakEvent event) {
       if (!shouldExecuteEffect()) return;
       ItemStack itemInMainHand = event.getPlayer().getInventory().getItemInMainHand();
       if (!canBeBroken(event.getBlock(), itemInMainHand)) return;
@@ -151,7 +151,7 @@ public class CutCleanSetting extends MenuSetting {
       breakBlockVein(event.getPlayer(), event.getBlock(), itemInMainHand);
     }
 
-    private void breakBlockVein(@Nonnull Player player, @Nonnull Block block, @Nonnull ItemStack tool) {
+    private void breakBlockVein(@NotNull Player player, @NotNull Block block, @NotNull ItemStack tool) {
       Material material = block.getType();
 
       List<Block> allBlocks = new ArrayList<>();
@@ -197,11 +197,11 @@ public class CutCleanSetting extends MenuSetting {
 
     }
 
-    private boolean canBeBroken(@Nonnull Block block, @Nonnull ItemStack tool) {
+    private boolean canBeBroken(@NotNull Block block, @NotNull ItemStack tool) {
       return !block.getDrops(tool).isEmpty();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public ItemBuilder getSettingsItem() {
       return getAsBoolean() ? DefaultItem.value(getValue(), "§7Max Vein Size: §e") : DefaultItem.disabled();
@@ -211,12 +211,12 @@ public class CutCleanSetting extends MenuSetting {
 
   private class CookFoodSubSetting extends BooleanSubSetting {
 
-    public CookFoodSubSetting(@Nonnull Supplier<ItemBuilder> item, boolean enabledByDefault) {
+    public CookFoodSubSetting(@NotNull Supplier<ItemBuilder> item, boolean enabledByDefault) {
       super(item, enabledByDefault);
     }
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-    public void onEntityKill(@Nonnull EntityDeathEvent event) {
+    public void onEntityKill(@NotNull EntityDeathEvent event) {
       if (!isEnabled()) return;
       event.getDrops().replaceAll(item -> new ItemBuilder(ItemUtils.convertFoodToCookedFood(item.getType())).amount(item.getAmount()).build());
 

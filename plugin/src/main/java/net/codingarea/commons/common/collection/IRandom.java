@@ -1,8 +1,8 @@
 package net.codingarea.commons.common.collection;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -12,37 +12,37 @@ import java.util.stream.LongStream;
 
 public interface IRandom {
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   static IRandom create() {
     return new SeededRandomWrapper();
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   static IRandom create(long seed) {
     return new SeededRandomWrapper(seed);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static IRandom wrap(@Nonnull Random random) {
+  static IRandom wrap(@NotNull Random random) {
     return new RandomWrapper(random);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   static IRandom threadLocal() {
     return wrap(ThreadLocalRandom.current());
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   static IRandom secure() {
     return wrap(new SecureRandom());
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   static IRandom singleton() {
     return SingletonRandom.INSTANCE;
@@ -52,7 +52,7 @@ public interface IRandom {
 
   void setSeed(long seed);
 
-  void nextBytes(@Nonnull byte[] bytes);
+  void nextBytes(@NotNull byte[] bytes);
 
   boolean nextBoolean();
 
@@ -60,79 +60,67 @@ public interface IRandom {
 
   int nextInt(int bound);
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   IntStream ints();
 
-  @Nonnull
-  @CheckReturnValue
-  IntStream ints(@Nonnegative long streamSize);
+  @NotNull
+  IntStream ints(long streamSize);
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   IntStream ints(int randomNumberOrigin, int randomNumberBound);
 
-  @Nonnull
-  @CheckReturnValue
-  IntStream ints(@Nonnegative long streamSize, int randomNumberOrigin, int randomNumberBound);
+  @NotNull
+  IntStream ints(long streamSize, int randomNumberOrigin, int randomNumberBound);
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   LongStream longs();
 
   long nextLong();
 
-  @Nonnull
-  @CheckReturnValue
-  LongStream longs(@Nonnegative long streamSize);
+  @NotNull
+  LongStream longs(long streamSize);
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   LongStream longs(long randomNumberOrigin, long randomNumberBound);
 
-  @Nonnull
-  @CheckReturnValue
-  LongStream longs(@Nonnegative long streamSize, long randomNumberOrigin, long randomNumberBound);
+  @NotNull
+  LongStream longs(long streamSize, long randomNumberOrigin, long randomNumberBound);
 
   double nextDouble();
 
   double nextGaussian();
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   DoubleStream doubles();
 
-  @Nonnull
-  @CheckReturnValue
-  DoubleStream doubles(@Nonnegative long streamSize);
+  @NotNull
+  DoubleStream doubles(long streamSize);
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   DoubleStream doubles(double randomNumberOrigin, double randomNumberBound);
 
-  @Nonnull
-  @CheckReturnValue
-  DoubleStream doubles(@Nonnegative long streamSize, double randomNumberOrigin, double randomNumberBound);
+  @NotNull
+  DoubleStream doubles(long streamSize, double randomNumberOrigin, double randomNumberBound);
 
   float nextFloat();
 
-  default <T> T choose(@Nonnull T... array) {
+  default <T> T choose(@NotNull T... array) {
     return array[nextInt(array.length)];
   }
 
-  default <T> T choose(@Nonnull List<? extends T> list) {
+  default <T> T choose(@NotNull List<? extends T> list) {
     return list.get(nextInt(list.size()));
   }
 
-  default <T> T choose(@Nonnull Collection<? extends T> collection) {
+  default <T> T choose(@NotNull Collection<? extends T> collection) {
     return choose(new ArrayList<>(collection));
   }
 
-  default void shuffle(@Nonnull List<?> list) {
+  default void shuffle(@NotNull List<?> list) {
     Collections.shuffle(list, asRandom());
   }
 
-  default int around(int value, @Nonnegative int range) {
+  default int around(int value, int range) {
     return range(value - range, value + range);
   }
 
@@ -141,7 +129,7 @@ public interface IRandom {
     return nextInt(max - min) + min;
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   default Random asRandom() {
     if (!(this instanceof Random))

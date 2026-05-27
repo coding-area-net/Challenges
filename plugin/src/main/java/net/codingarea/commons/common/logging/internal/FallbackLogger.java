@@ -2,10 +2,9 @@ package net.codingarea.commons.common.logging.internal;
 
 import net.codingarea.commons.common.logging.ILogger;
 import net.codingarea.commons.common.logging.LogLevel;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.PrintStream;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +25,7 @@ public class FallbackLogger implements ILogger {
   }
 
   @Override
-  public void log(@Nonnull LogLevel level, @Nullable String message, @Nonnull Object... args) {
+  public void log(@NotNull LogLevel level, @Nullable String message, @NotNull Object... args) {
     if (!isLevelEnabled(level)) return;
     stream.println(getLogMessage(level, ILogger.formatMessage(message, args), name));
     for (Object arg : args) {
@@ -35,22 +34,21 @@ public class FallbackLogger implements ILogger {
     }
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public FallbackLogger setMinLevel(@Nonnull LogLevel level) {
+  public FallbackLogger setMinLevel(@NotNull LogLevel level) {
     this.level = level;
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public LogLevel getMinLevel() {
     return level;
   }
 
-  @Nonnull
-  @CheckReturnValue
-  public static String getLogMessage(@Nonnull LogLevel level, @Nonnull String message, @Nullable String name) {
+  @NotNull
+  public static String getLogMessage(@NotNull LogLevel level, @NotNull String message, @Nullable String name) {
     Thread thread = Thread.currentThread();
     String threadName = thread.getName();
     String time = OffsetDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"));

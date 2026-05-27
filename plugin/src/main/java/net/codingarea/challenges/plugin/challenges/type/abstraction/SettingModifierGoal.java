@@ -6,25 +6,24 @@ import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class SettingModifierGoal extends SettingModifier implements IGoal {
 
-  public SettingModifierGoal(@Nonnull MenuType menu) {
+  public SettingModifierGoal(@NotNull MenuType menu) {
     super(menu);
   }
 
-  public SettingModifierGoal(@Nonnull MenuType menu, int max) {
+  public SettingModifierGoal(@NotNull MenuType menu, int max) {
     super(menu, max);
   }
 
-  public SettingModifierGoal(@Nonnull MenuType menu, int min, int max) {
+  public SettingModifierGoal(@NotNull MenuType menu, int min, int max) {
     super(menu, min, max);
   }
 
-  public SettingModifierGoal(@Nonnull MenuType menu, int min, int max, int defaultValue) {
+  public SettingModifierGoal(@NotNull MenuType menu, int min, int max, int defaultValue) {
     super(menu, min, max, defaultValue);
   }
 
@@ -35,7 +34,7 @@ public abstract class SettingModifierGoal extends SettingModifier implements IGo
     super.setEnabled(enabled);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public SoundSample getStartSound() {
     return SoundSample.DRAGON_BREATH;
@@ -48,7 +47,7 @@ public abstract class SettingModifierGoal extends SettingModifier implements IGo
   }
 
   @Override
-  public void handleClick(@Nonnull ChallengeMenuClickInfo info) {
+  public void handleClick(@NotNull ChallengeMenuClickInfo info) {
     if (info.isLowerItemClick() && isEnabled()) {
       ChallengeHelper.handleModifierClick(info, this);
     } else {

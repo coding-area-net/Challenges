@@ -15,9 +15,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Since("2.0")
 public class MobTransformationChallenge extends Setting {
@@ -43,14 +42,14 @@ public class MobTransformationChallenge extends Setting {
     bossbar.hide();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.STONE_SWORD, Message.forName("item-mob-transformation-challenge"));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onEntityDamageByPlayer(@Nonnull EntityDamageByPlayerEvent event) {
+  public void onEntityDamageByPlayer(@NotNull EntityDamageByPlayerEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.getEntity() instanceof Player || !(event.getEntity() instanceof LivingEntity) || event.getEntity() instanceof EnderDragon)
       return;
@@ -68,7 +67,7 @@ public class MobTransformationChallenge extends Setting {
     bossbar.update(player);
   }
 
-  private EntityType getType(@Nonnull Player player, @Nullable EntityType defaultType) {
+  private EntityType getType(@NotNull Player player, @Nullable EntityType defaultType) {
     EntityType type = getPlayerData(player).getEnum("type", EntityType.class);
     if (type == null) return defaultType;
     return type;

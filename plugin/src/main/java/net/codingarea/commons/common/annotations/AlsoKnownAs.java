@@ -1,6 +1,7 @@
 package net.codingarea.commons.common.annotations;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.annotation.*;
 
 /**
@@ -11,7 +12,7 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
 public @interface AlsoKnownAs {
 
-  @Nonnull
+  @NotNull
   String[] value();
 
 }

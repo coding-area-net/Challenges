@@ -3,10 +3,10 @@ package net.codingarea.commons.common.concurrent.task;
 import net.codingarea.commons.common.collection.WrappedException;
 import net.codingarea.commons.common.function.ExceptionallyFunction;
 import net.codingarea.commons.common.function.ExceptionallyRunnable;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.concurrent.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -23,161 +23,161 @@ import java.util.function.Supplier;
  */
 public interface Task<V> extends Future<V>, Callable<V> {
 
-  @Nonnull
+  @NotNull
   static ExecutorService getAsyncExecutor() {
     return CompletableTask.SERVICE;
   }
 
-  @Nonnull
+  @NotNull
   static <V> Task<V> empty() {
     return completed(null);
   }
 
-  @Nonnull
+  @NotNull
   static <V> Task<V> completed(@Nullable V value) {
     return new CompletedTask<>(value);
   }
 
-  @Nonnull
+  @NotNull
   static Task<Void> completedVoid() {
     return empty();
   }
 
-  @Nonnull
-  static <V> Task<V> failed(@Nonnull Throwable failure) {
+  @NotNull
+  static <V> Task<V> failed(@NotNull Throwable failure) {
     return new CompletedTask<>(failure);
   }
 
-  @Nonnull
+  @NotNull
   static <V> CompletableTask<V> completable() {
     return new CompletableTask<>();
   }
 
-  @Nonnull
-  static <V> Task<V> asyncCall(@Nonnull Callable<V> callable) {
+  @NotNull
+  static <V> Task<V> asyncCall(@NotNull Callable<V> callable) {
     return CompletableTask.callAsync(callable);
   }
 
-  @Nonnull
-  static <V> Task<V> asyncSupply(@Nonnull Supplier<V> supplier) {
+  @NotNull
+  static <V> Task<V> asyncSupply(@NotNull Supplier<V> supplier) {
     return asyncCall(supplier::get);
   }
 
-  @Nonnull
-  static Task<Void> asyncRun(@Nonnull Runnable runnable) {
+  @NotNull
+  static Task<Void> asyncRun(@NotNull Runnable runnable) {
     return asyncCall(() -> {
       runnable.run();
       return null;
     });
   }
 
-  @Nonnull
-  static Task<Void> asyncRunExceptionally(@Nonnull ExceptionallyRunnable runnable) {
+  @NotNull
+  static Task<Void> asyncRunExceptionally(@NotNull ExceptionallyRunnable runnable) {
     return asyncRun(runnable);
   }
 
-  @Nonnull
-  static <V> Task<V> syncCall(@Nonnull Callable<V> callable) {
+  @NotNull
+  static <V> Task<V> syncCall(@NotNull Callable<V> callable) {
     return CompletableTask.callSync(callable);
   }
 
-  @Nonnull
-  static <V> Task<V> syncSupply(@Nonnull Supplier<V> supplier) {
+  @NotNull
+  static <V> Task<V> syncSupply(@NotNull Supplier<V> supplier) {
     return syncCall(supplier::get);
   }
 
-  @Nonnull
-  static Task<Void> syncRun(@Nonnull Runnable runnable) {
+  @NotNull
+  static Task<Void> syncRun(@NotNull Runnable runnable) {
     return syncCall(() -> {
       runnable.run();
       return null;
     });
   }
 
-  @Nonnull
-  static Task<Void> syncRunExceptionally(@Nonnull ExceptionallyRunnable runnable) {
+  @NotNull
+  static Task<Void> syncRunExceptionally(@NotNull ExceptionallyRunnable runnable) {
     return syncRun(runnable);
   }
 
-  @Nonnull
-  default Task<V> onComplete(@Nonnull Runnable action) {
+  @NotNull
+  default Task<V> onComplete(@NotNull Runnable action) {
     return onComplete(v -> action.run());
   }
 
-  @Nonnull
-  default Task<V> onComplete(@Nonnull Consumer<? super V> action) {
+  @NotNull
+  default Task<V> onComplete(@NotNull Consumer<? super V> action) {
     return onComplete((task, value) -> action.accept(value));
   }
 
-  @Nonnull
-  default Task<V> onComplete(@Nonnull BiConsumer<? super Task<V>, ? super V> action) {
+  @NotNull
+  default Task<V> onComplete(@NotNull BiConsumer<? super Task<V>, ? super V> action) {
     return addListener(new TaskListener<V>() {
       @Override
-      public void onComplete(@Nonnull Task<V> task, @Nonnull V value) {
+      public void onComplete(@NotNull Task<V> task, @NotNull V value) {
         action.accept(task, value);
       }
     });
   }
 
-  @Nonnull
-  default Task<V> onFailure(@Nonnull Runnable action) {
+  @NotNull
+  default Task<V> onFailure(@NotNull Runnable action) {
     return onFailure(ex -> action.run());
   }
 
-  @Nonnull
-  default Task<V> onFailure(@Nonnull Consumer<? super Throwable> action) {
+  @NotNull
+  default Task<V> onFailure(@NotNull Consumer<? super Throwable> action) {
     return onFailure((task, ex) -> action.accept(ex));
   }
 
-  @Nonnull
-  default Task<V> onFailure(@Nonnull BiConsumer<? super Task<V>, ? super Throwable> action) {
+  @NotNull
+  default Task<V> onFailure(@NotNull BiConsumer<? super Task<V>, ? super Throwable> action) {
     return addListener(new TaskListener<V>() {
       @Override
-      public void onFailure(@Nonnull Task<V> task, @Nonnull Throwable ex) {
+      public void onFailure(@NotNull Task<V> task, @NotNull Throwable ex) {
         action.accept(task, ex);
       }
     });
   }
 
-  @Nonnull
+  @NotNull
   default Task<V> throwOnFailure() {
     return onFailure(ex -> ex.printStackTrace());
   }
 
-  @Nonnull
-  default Task<V> onCancelled(@Nonnull Runnable action) {
+  @NotNull
+  default Task<V> onCancelled(@NotNull Runnable action) {
     return onCancelled(task -> action.run());
   }
 
-  @Nonnull
-  default Task<V> onCancelled(@Nonnull Consumer<? super Task<V>> action) {
+  @NotNull
+  default Task<V> onCancelled(@NotNull Consumer<? super Task<V>> action) {
     return addListener(new TaskListener<V>() {
       @Override
-      public void onCancelled(@Nonnull Task<V> task) {
+      public void onCancelled(@NotNull Task<V> task) {
         action.accept(task);
       }
     });
   }
 
-  @Nonnull
-  default Task<V> addListeners(@Nonnull TaskListener<V>... listeners) {
+  @NotNull
+  default Task<V> addListeners(@NotNull TaskListener<V>... listeners) {
     for (TaskListener<V> listener : listeners)
       addListener(listener);
 
     return this;
   }
 
-  @Nonnull
-  Task<V> addListener(@Nonnull TaskListener<V> listener);
+  @NotNull
+  Task<V> addListener(@NotNull TaskListener<V> listener);
 
-  @Nonnull
+  @NotNull
   Task<V> clearListeners();
 
   @Override
   V get() throws InterruptedException, ExecutionException;
 
   @Override
-  V get(long timeout, @Nonnull TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException;
+  V get(long timeout, @NotNull TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException;
 
   default V getOrDefault(V def) {
     try {
@@ -189,7 +189,7 @@ public interface Task<V> extends Future<V>, Callable<V> {
     }
   }
 
-  default V getOrDefault(long timeout, @Nonnull TimeUnit unit, V def) {
+  default V getOrDefault(long timeout, @NotNull TimeUnit unit, V def) {
     try {
       return this.get(timeout, unit);
     } catch (InterruptedException ex) {
@@ -199,7 +199,7 @@ public interface Task<V> extends Future<V>, Callable<V> {
     }
   }
 
-  default V getBeforeTimeout(long timeout, @Nonnull TimeUnit unit) {
+  default V getBeforeTimeout(long timeout, @NotNull TimeUnit unit) {
     try {
       return get(timeout, unit);
     } catch (ExecutionException | InterruptedException ex) {
@@ -209,25 +209,25 @@ public interface Task<V> extends Future<V>, Callable<V> {
     }
   }
 
-  @Nonnull
+  @NotNull
   <R> Task<R> map(@Nullable Function<? super V, ? extends R> mapper);
 
-  @Nonnull
+  @NotNull
   default <R> Task<R> mapExceptionally(@Nullable ExceptionallyFunction<? super V, ? extends R> mapper) {
     return map(mapper);
   }
 
-  @Nonnull
+  @NotNull
   default Task<Void> mapVoid() {
     return map(v -> null);
   }
 
-  @Nonnull
-  default <R> Task<R> map(@Nonnull Class<R> target) {
+  @NotNull
+  default <R> Task<R> map(@NotNull Class<R> target) {
     return map(target::cast);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   CompletionStage<V> stage();
 

@@ -8,9 +8,7 @@ import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickI
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.common.config.Document;
-
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class Modifier extends AbstractChallenge implements IModifier {
 
@@ -18,19 +16,19 @@ public abstract class Modifier extends AbstractChallenge implements IModifier {
   private final int defaultValue;
   private int value;
 
-  public Modifier(@Nonnull MenuType menu) {
+  public Modifier(@NotNull MenuType menu) {
     this(menu, 64);
   }
 
-  public Modifier(@Nonnull MenuType menu, int max) {
+  public Modifier(@NotNull MenuType menu, int max) {
     this(menu, 1, max);
   }
 
-  public Modifier(@Nonnull MenuType menu, int min, int max) {
+  public Modifier(@NotNull MenuType menu, int min, int max) {
     this(menu, min, max, min);
   }
 
-  public Modifier(@Nonnull MenuType menu, int min, int max, int defaultValue) {
+  public Modifier(@NotNull MenuType menu, int min, int max, int defaultValue) {
     super(menu);
     if (max < min) throw new IllegalArgumentException("max < min");
     if (min < 0) throw new IllegalArgumentException("min < 0");
@@ -42,7 +40,7 @@ public abstract class Modifier extends AbstractChallenge implements IModifier {
     this.defaultValue = defaultValue;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     return DefaultItem.value(value);
@@ -54,7 +52,6 @@ public abstract class Modifier extends AbstractChallenge implements IModifier {
   }
 
   @Override
-  @Nonnegative
   public final int getValue() {
     return value;
   }
@@ -75,13 +72,11 @@ public abstract class Modifier extends AbstractChallenge implements IModifier {
   }
 
   @Override
-  @Nonnegative
   public final int getMaxValue() {
     return max;
   }
 
   @Override
-  @Nonnegative
   public final int getMinValue() {
     return min;
   }
@@ -92,7 +87,7 @@ public abstract class Modifier extends AbstractChallenge implements IModifier {
   }
 
   @Override
-  public void handleClick(@Nonnull ChallengeMenuClickInfo info) {
+  public void handleClick(@NotNull ChallengeMenuClickInfo info) {
     ChallengeHelper.handleModifierClick(info, this);
   }
 
@@ -105,12 +100,12 @@ public abstract class Modifier extends AbstractChallenge implements IModifier {
   }
 
   @Override
-  public void loadSettings(@Nonnull Document document) {
+  public void loadSettings(@NotNull Document document) {
     setValue(document.getInt("value", value));
   }
 
   @Override
-  public void writeSettings(@Nonnull Document document) {
+  public void writeSettings(@NotNull Document document) {
     document.set("value", value);
   }
 

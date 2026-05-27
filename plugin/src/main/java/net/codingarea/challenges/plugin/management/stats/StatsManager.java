@@ -15,8 +15,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
@@ -38,8 +38,8 @@ public final class StatsManager implements Listener {
     noStatsAfterCheating = enabled && Challenges.getInstance().getConfigDocument().getBoolean("no-stats-after-cheating");
   }
 
-  @Nonnull
-  public static Comparator<PlayerStats> getStatsComparator(@Nonnull Statistic statistic) {
+  @NotNull
+  public static Comparator<PlayerStats> getStatsComparator(@NotNull Statistic statistic) {
     return Comparator.<PlayerStats>comparingDouble(value -> value.getStatisticValue(statistic)).reversed();
   }
 
@@ -52,14 +52,14 @@ public final class StatsManager implements Listener {
   }
 
   @EventHandler(priority = EventPriority.MONITOR)
-  public void onLeave(@Nonnull PlayerQuitEvent event) {
+  public void onLeave(@NotNull PlayerQuitEvent event) {
     PlayerStats cached = cache.remove(event.getPlayer().getUniqueId());
     if (cached == null) return;
     store(event.getPlayer().getUniqueId(), cached);
   }
 
   @EventHandler(priority = EventPriority.MONITOR)
-  public void onJoin(@Nonnull PlayerJoinEvent event) {
+  public void onJoin(@NotNull PlayerJoinEvent event) {
     getStats(event.getPlayer()); // Cache stats
   }
 
@@ -70,7 +70,7 @@ public final class StatsManager implements Listener {
     }
   }
 
-  private void store(@Nonnull UUID uuid, @Nonnull PlayerStats stats) {
+  private void store(@NotNull UUID uuid, @NotNull PlayerStats stats) {
     try {
       Challenges.getInstance().getDatabaseManager().getDatabase()
         .insertOrUpdate("challenges")
@@ -83,13 +83,13 @@ public final class StatsManager implements Listener {
     }
   }
 
-  @Nonnull
-  public PlayerStats getStats(@Nonnull Player player) {
+  @NotNull
+  public PlayerStats getStats(@NotNull Player player) {
     return getStats(player.getUniqueId(), player.getName());
   }
 
-  @Nonnull
-  public PlayerStats getStats(@Nonnull UUID uuid, @Nonnull String name) {
+  @NotNull
+  public PlayerStats getStats(@NotNull UUID uuid, @NotNull String name) {
     PlayerStats cached = cache.get(uuid);
     if (cached != null) return cached;
 
@@ -106,8 +106,8 @@ public final class StatsManager implements Listener {
     }
   }
 
-  @Nonnull
-  private PlayerStats getStatsFromDatabase(@Nonnull UUID uuid, @Nonnull String name) throws DatabaseException {
+  @NotNull
+  private PlayerStats getStatsFromDatabase(@NotNull UUID uuid, @NotNull String name) throws DatabaseException {
     return Challenges.getInstance().getDatabaseManager().getDatabase()
       .query("challenges")
       .select("stats", "name")
@@ -117,7 +117,7 @@ public final class StatsManager implements Listener {
       .orElse(new PlayerStats(uuid, name));
   }
 
-  @Nonnull
+  @NotNull
   private List<PlayerStats> getAllStats() throws DatabaseException {
     if (cachedLeaderboard != null && System.currentTimeMillis() - leaderboardCacheTimestamp < 3 * 60 * 1000) {
       return cachedLeaderboard;
@@ -127,7 +127,7 @@ public final class StatsManager implements Listener {
     return cachedLeaderboard = getAllStats0();
   }
 
-  @Nonnull
+  @NotNull
   private List<PlayerStats> getAllStats0() throws DatabaseException {
     return Challenges.getInstance().getDatabaseManager().getDatabase()
       .query("challenges")
@@ -138,8 +138,8 @@ public final class StatsManager implements Listener {
       .collect(Collectors.toList());
   }
 
-  @Nonnull
-  public LeaderboardInfo getLeaderboardInfo(@Nonnull UUID uuid) {
+  @NotNull
+  public LeaderboardInfo getLeaderboardInfo(@NotNull UUID uuid) {
     try {
       List<PlayerStats> stats = getAllStats();
       LeaderboardInfo info = new LeaderboardInfo();
@@ -155,8 +155,8 @@ public final class StatsManager implements Listener {
     }
   }
 
-  @Nonnull
-  public List<PlayerStats> getLeaderboard(@Nonnull Statistic statistic) {
+  @NotNull
+  public List<PlayerStats> getLeaderboard(@NotNull Statistic statistic) {
     try {
       List<PlayerStats> stats = getAllStats();
       stats.sort(getStatsComparator(statistic));
@@ -167,7 +167,7 @@ public final class StatsManager implements Listener {
     }
   }
 
-  private <T, U> int determineIndex(@Nonnull List<T> list, @Nonnull Function<T, U> extractor, @Nonnull U target, @Nonnull Comparator<T> sort) {
+  private <T, U> int determineIndex(@NotNull List<T> list, @NotNull Function<T, U> extractor, @NotNull U target, @NotNull Comparator<T> sort) {
     list.sort(sort);
     int index = 0;
     for (T t : list) {

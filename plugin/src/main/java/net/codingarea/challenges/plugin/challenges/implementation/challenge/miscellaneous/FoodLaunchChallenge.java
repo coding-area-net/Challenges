@@ -13,9 +13,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @Since("2.0.2")
 public class FoodLaunchChallenge extends SettingModifier {
@@ -42,7 +40,7 @@ public class FoodLaunchChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerItemConsume(@Nonnull PlayerItemConsumeEvent event) {
+  public void onPlayerItemConsume(@NotNull PlayerItemConsumeEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
 

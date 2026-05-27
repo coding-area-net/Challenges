@@ -4,9 +4,8 @@ import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +38,7 @@ public abstract class PointsGoal extends SettingGoal {
   }
 
   @Override
-  public void loadGameState(@Nonnull Document document) {
+  public void loadGameState(@NotNull Document document) {
     super.loadGameState(document);
 
     Document scores = document.getDocument("scores");
@@ -55,7 +54,7 @@ public abstract class PointsGoal extends SettingGoal {
   }
 
   @Override
-  public void writeGameState(@Nonnull Document document) {
+  public void writeGameState(@NotNull Document document) {
     super.writeGameState(document);
 
     Document scores = document.getDocument("scores");
@@ -63,42 +62,40 @@ public abstract class PointsGoal extends SettingGoal {
   }
 
   @Override
-  public void getWinnersOnEnd(@Nonnull List<Player> winners) {
+  public void getWinnersOnEnd(@NotNull List<Player> winners) {
     GoalHelper.getWinnersOnEnd(winners, getPoints(new AtomicInteger(), false));
   }
 
-  @Nonnull
-  @CheckReturnValue
-  protected Map<Player, Integer> getPoints(@Nonnull AtomicInteger mostPoints, boolean zeros) {
+  @NotNull
+  protected Map<Player, Integer> getPoints(@NotNull AtomicInteger mostPoints, boolean zeros) {
     return GoalHelper.createPointsFromValues(mostPoints, points, (uuid, integer) -> integer, zeros);
   }
 
-  protected void collect(@Nonnull Player player) {
+  protected void collect(@NotNull Player player) {
     collect(player, 1);
   }
 
-  protected void collect(@Nonnull Player player, int amount) {
+  protected void collect(@NotNull Player player, int amount) {
     points.compute(player.getUniqueId(), (uuid, points) -> points == null ? amount : points + amount);
     scoreboard.update();
   }
 
-  protected void setPoints(@Nonnull UUID uuid, int amount) {
+  protected void setPoints(@NotNull UUID uuid, int amount) {
     points.put(uuid, amount);
     scoreboard.update();
   }
 
-  protected void addPoints(@Nonnull UUID uuid, int amount) {
+  protected void addPoints(@NotNull UUID uuid, int amount) {
     points.put(uuid, getPoints(uuid) + amount);
     scoreboard.update();
   }
 
-  protected void removePoints(@Nonnull UUID uuid, int amount) {
+  protected void removePoints(@NotNull UUID uuid, int amount) {
     points.put(uuid, getPoints(uuid) - amount);
     scoreboard.update();
   }
 
-  @CheckReturnValue
-  protected int getPoints(@Nonnull UUID uuid) {
+  protected int getPoints(@NotNull UUID uuid) {
     Integer points = this.points.get(uuid);
     return points == null ? 0 : points;
   }

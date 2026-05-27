@@ -20,8 +20,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,21 +37,21 @@ public class NoDupedItemsChallenge extends Setting {
     setCategory(SettingCategory.INVENTORY);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.OBSERVER, Message.forName("item-no-duped-items-challenge"));
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onInventoryClick(@Nonnull PlayerInventoryClickEvent event) {
+  public void onInventoryClick(@NotNull PlayerInventoryClickEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     checkInventories();
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onEntityPickUpItem(@Nonnull PlayerPickupItemEvent event) {
+  public void onEntityPickUpItem(@NotNull PlayerPickupItemEvent event) {
     Bukkit.getScheduler().runTaskLater(plugin, () -> {
       if (!shouldExecuteEffect()) return;
       if (ignorePlayer(event.getPlayer())) return;
@@ -60,7 +60,7 @@ public class NoDupedItemsChallenge extends Setting {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onInteract(@Nonnull PlayerInteractEvent event) {
+  public void onInteract(@NotNull PlayerInteractEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (event.getClickedBlock() == null) return;
@@ -87,7 +87,7 @@ public class NoDupedItemsChallenge extends Setting {
 
   }
 
-  private Triple<Player, Player, Material> checkInventory(@Nonnull Player player, Map<Player, List<Material>> blacklist) {
+  private Triple<Player, Player, Material> checkInventory(@NotNull Player player, Map<Player, List<Material>> blacklist) {
     List<Material> localBlacklist = new ArrayList<>();
     List<Material> playerBlacklist = blacklist.getOrDefault(player, new ArrayList<>());
     blacklist.put(player, playerBlacklist);

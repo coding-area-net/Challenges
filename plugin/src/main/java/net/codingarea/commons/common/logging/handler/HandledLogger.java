@@ -2,9 +2,9 @@ package net.codingarea.commons.common.logging.handler;
 
 import net.codingarea.commons.common.logging.ILogger;
 import net.codingarea.commons.common.logging.LogLevel;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,12 +15,12 @@ public abstract class HandledLogger implements ILogger {
   protected final Collection<LogHandler> handlers = new CopyOnWriteArrayList<>();
   protected LogLevel level;
 
-  public HandledLogger(@Nonnull LogLevel initialLevel) {
+  public HandledLogger(@NotNull LogLevel initialLevel) {
     this.level = initialLevel;
   }
 
   @Override
-  public void log(@Nonnull LogLevel level, @Nullable String message, @Nonnull Object... args) {
+  public void log(@NotNull LogLevel level, @Nullable String message, @NotNull Object... args) {
     if (!level.isShownAtLoggerLevel(this.level)) return;
     Throwable exception = null;
     for (Object arg : args) {
@@ -30,14 +30,14 @@ public abstract class HandledLogger implements ILogger {
     log0(new LogEntry(Instant.now(), Thread.currentThread().getName(), ILogger.formatMessage(message, args), level, exception));
   }
 
-  public void log(@Nonnull LogEntry entry) {
+  public void log(@NotNull LogEntry entry) {
     if (!entry.getLevel().isShownAtLoggerLevel(this.level)) return;
     log0(entry);
   }
 
-  protected abstract void log0(@Nonnull LogEntry entry);
+  protected abstract void log0(@NotNull LogEntry entry);
 
-  protected void logNow(@Nonnull LogEntry entry) {
+  protected void logNow(@NotNull LogEntry entry) {
     for (LogHandler handler : handlers) {
       try {
         handler.handle(entry);
@@ -47,21 +47,21 @@ public abstract class HandledLogger implements ILogger {
     }
   }
 
-  @Nonnull
-  public HandledLogger addHandler(@Nonnull LogHandler... handler) {
+  @NotNull
+  public HandledLogger addHandler(@NotNull LogHandler... handler) {
     handlers.addAll(Arrays.asList(handler));
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public LogLevel getMinLevel() {
     return level;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public ILogger setMinLevel(@Nonnull LogLevel level) {
+  public ILogger setMinLevel(@NotNull LogLevel level) {
     this.level = level;
     return this;
   }

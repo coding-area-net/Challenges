@@ -5,8 +5,8 @@ import net.codingarea.challenges.plugin.management.scheduler.policy.ExtraWorldPo
 import net.codingarea.challenges.plugin.management.scheduler.policy.FreshnessPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.policy.PlayerCountPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -16,21 +16,21 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TimerTask {
 
-  @Nonnull
+  @NotNull
   TimerStatus[] status();
 
   boolean async() default true;
 
-  @Nonnull
+  @NotNull
   ChallengeStatusPolicy challengePolicy() default ChallengeStatusPolicy.ENABLED;
 
-  @Nonnull
+  @NotNull
   PlayerCountPolicy playerPolicy() default PlayerCountPolicy.SOMEONE;
 
-  @Nonnull
+  @NotNull
   ExtraWorldPolicy worldPolicy() default ExtraWorldPolicy.NOT_USED;
 
-  @Nonnull
+  @NotNull
   FreshnessPolicy freshnessPolicy() default FreshnessPolicy.ALWAYS;
 
 }

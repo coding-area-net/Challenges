@@ -11,15 +11,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HelpListener implements Listener {
 
   @EventHandler(priority = EventPriority.MONITOR)
-  public void onCommand(@Nonnull PlayerCommandPreprocessEvent event) {
+  public void onCommand(@NotNull PlayerCommandPreprocessEvent event) {
 
     String message = event.getMessage().toLowerCase();
     if (message.isEmpty()) return;

@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.management.scheduler.policy;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.function.BooleanSupplier;
 
 public enum TimerPolicy implements IPolicy {
@@ -13,12 +13,12 @@ public enum TimerPolicy implements IPolicy {
 
   private final BooleanSupplier check;
 
-  TimerPolicy(@Nonnull BooleanSupplier check) {
+  TimerPolicy(@NotNull BooleanSupplier check) {
     this.check = check;
   }
 
   @Override
-  public boolean check(@Nonnull Object holder) {
+  public boolean check(@NotNull Object holder) {
     return check.getAsBoolean();
   }
 

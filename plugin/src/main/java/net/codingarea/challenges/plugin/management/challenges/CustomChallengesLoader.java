@@ -13,8 +13,8 @@ import net.codingarea.challenges.plugin.management.menu.generator.MenuGenerator;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 
 @Getter
@@ -29,7 +29,7 @@ public class CustomChallengesLoader extends ModuleChallengeLoader {
     maxNameLength = Challenges.getInstance().getConfigDocument().getInt("custom-challenge-settings.max-name-length");
   }
 
-  public CustomChallenge registerCustomChallenge(@Nonnull UUID uuid, Material material, String name, ChallengeTrigger trigger,
+  public CustomChallenge registerCustomChallenge(@NotNull UUID uuid, Material material, String name, ChallengeTrigger trigger,
                                                  Map<String, String[]> subTriggers, ChallengeAction action, Map<String, String[]> subActions, boolean generate) {
     CustomChallenge challenge = customChallenges.getOrDefault(uuid, new CustomChallenge(MenuType.CUSTOM, uuid, material, name, trigger, subTriggers, action, subActions));
     if (!customChallenges.containsKey(uuid)) {
@@ -42,14 +42,14 @@ public class CustomChallengesLoader extends ModuleChallengeLoader {
     return challenge;
   }
 
-  public void unregisterCustomChallenge(@Nonnull UUID uuid) {
+  public void unregisterCustomChallenge(@NotNull UUID uuid) {
     CustomChallenge challenge = customChallenges.remove(uuid);
     if (challenge == null) return;
     Challenges.getInstance().getChallengeLoader().unregister(challenge);
     generateCustomChallenge(challenge, true, true);
   }
 
-  public void loadCustomChallengesFrom(@Nonnull Document document) {
+  public void loadCustomChallengesFrom(@NotNull Document document) {
     customChallenges.clear();
     Challenges.getInstance().getChallengeManager().unregisterIf(iChallenge -> iChallenge.getType() == MenuType.CUSTOM);
     ((ChallengeMenuGenerator) MenuType.CUSTOM.getMenuGenerator()).resetChallengeCache();
@@ -104,7 +104,7 @@ public class CustomChallengesLoader extends ModuleChallengeLoader {
     }
   }
 
-  public List<CustomChallenge> getCustomChallengesByTrigger(@Nonnull IChallengeTrigger trigger) {
+  public List<CustomChallenge> getCustomChallengesByTrigger(@NotNull IChallengeTrigger trigger) {
     List<CustomChallenge> challenges = new LinkedList<>();
 
     for (CustomChallenge challenge : customChallenges.values()) {
@@ -116,7 +116,7 @@ public class CustomChallengesLoader extends ModuleChallengeLoader {
     return challenges;
   }
 
-  public void executeTrigger(@Nonnull ChallengeExecutionData challengeExecutionData) {
+  public void executeTrigger(@NotNull ChallengeExecutionData challengeExecutionData) {
     getCustomChallengesByTrigger(challengeExecutionData.getTrigger())
       .forEach(customChallenge -> customChallenge
         .onTriggerFulfilled(challengeExecutionData));

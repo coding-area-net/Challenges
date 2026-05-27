@@ -23,9 +23,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +47,7 @@ public class TsunamiChallenge extends TimedChallenge {
     setCategory(SettingCategory.WORLD);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.ICE, Message.forName("item-tsunami-challenge"));
@@ -131,7 +131,7 @@ public class TsunamiChallenge extends TimedChallenge {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  private void onPlayerMove(@Nonnull PlayerMoveEvent event) {
+  private void onPlayerMove(@NotNull PlayerMoveEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (event.getTo() == null) return;
@@ -145,7 +145,7 @@ public class TsunamiChallenge extends TimedChallenge {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onTeleport(@Nonnull PlayerTeleportEvent event) {
+  public void onTeleport(@NotNull PlayerTeleportEvent event) {
     if (ignorePlayer(event.getPlayer())) return;
     if (!shouldExecuteEffect()) return;
     if (event.getTo() == null) return;
@@ -161,11 +161,11 @@ public class TsunamiChallenge extends TimedChallenge {
   }
 
   @EventHandler
-  public void onChunkUnload(@Nonnull ChunkUnloadEvent event) {
+  public void onChunkUnload(@NotNull ChunkUnloadEvent event) {
     floodedChunks.remove(event.getChunk());
   }
 
-  private void floodChunk(@Nonnull Chunk chunk, boolean discovered) {
+  private void floodChunk(@NotNull Chunk chunk, boolean discovered) {
     if (floodedChunks.contains(chunk)) return;
     floodedChunks.add(chunk);
     if (chunk.getWorld().getEnvironment() == Environment.THE_END) return;
@@ -175,7 +175,7 @@ public class TsunamiChallenge extends TimedChallenge {
     floodChunk0(chunk, discovered ? null : height - 1, height, overworld, (delay, task) -> Bukkit.getScheduler().runTaskLater(plugin, task, delay));
   }
 
-  private void floodChunk0(@Nonnull Chunk chunk, @Nullable Integer givenStartAt, int height, boolean overworld, @Nonnull BiConsumer<Integer, Runnable> executor) {
+  private void floodChunk0(@NotNull Chunk chunk, @Nullable Integer givenStartAt, int height, boolean overworld, @NotNull BiConsumer<Integer, Runnable> executor) {
     int startAt = givenStartAt != null ? Math.max(BukkitReflectionUtils.getMinHeight(chunk.getWorld()) + 1, givenStartAt) : BukkitReflectionUtils
       .getMinHeight(chunk.getWorld()) + 1;
     Map<Integer, List<Block>> blocksByDelay = new HashMap<>();
@@ -207,7 +207,7 @@ public class TsunamiChallenge extends TimedChallenge {
     }).build();
   }
 
-  private List<Chunk> getChunksAroundChunk(@Nonnull Chunk origin) {
+  private List<Chunk> getChunksAroundChunk(@NotNull Chunk origin) {
     return new ListBuilder<Chunk>().fill(builder -> {
       for (int x = -RANGE; x <= RANGE; x++) {
         for (int z = -RANGE; z <= RANGE; z++) {
@@ -218,14 +218,14 @@ public class TsunamiChallenge extends TimedChallenge {
   }
 
   @Override
-  public void writeGameState(@Nonnull Document document) {
+  public void writeGameState(@NotNull Document document) {
     super.writeGameState(document);
     document.set("waterHeight", waterHeight);
     document.set("lavaHeight", lavaHeight);
   }
 
   @Override
-  public void loadGameState(@Nonnull Document document) {
+  public void loadGameState(@NotNull Document document) {
     super.loadGameState(document);
     waterHeight = document.getInt("waterHeight");
     lavaHeight = document.getInt("lavaHeight");

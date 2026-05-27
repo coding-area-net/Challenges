@@ -2,19 +2,18 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class OneEnabledSetting extends Setting {
 
   private final String typeId;
 
-  public OneEnabledSetting(@Nonnull MenuType menu, @Nonnull String typeId) {
+  public OneEnabledSetting(@NotNull MenuType menu, @NotNull String typeId) {
     super(menu);
     this.typeId = typeId;
   }
 
-  public OneEnabledSetting(@Nonnull MenuType menu, boolean enabledByDefault, @Nonnull String typeId) {
+  public OneEnabledSetting(@NotNull MenuType menu, boolean enabledByDefault, @NotNull String typeId) {
     super(menu, enabledByDefault);
     this.typeId = typeId;
   }

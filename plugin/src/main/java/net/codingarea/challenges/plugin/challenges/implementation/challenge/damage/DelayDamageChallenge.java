@@ -14,9 +14,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,7 +69,7 @@ public class DelayDamageChallenge extends TimedChallenge {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onPlayerDamage(@Nonnull EntityDamageEvent event) {
+  public void onPlayerDamage(@NotNull EntityDamageEvent event) {
     if (!shouldExecuteEffect()) return;
     if (!(event.getEntity() instanceof Player)) return;
     if (ignorePlayer((Player) event.getEntity())) return;

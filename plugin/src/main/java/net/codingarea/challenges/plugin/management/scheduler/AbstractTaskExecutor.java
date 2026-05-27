@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.management.scheduler;
 
 import net.codingarea.commons.bukkit.utils.logging.Logger;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +22,14 @@ public abstract class AbstractTaskExecutor implements Runnable {
     }
   }
 
-  @Nonnull
+  @NotNull
   public abstract AbstractTaskConfig getConfig();
 
-  public void register(@Nonnull ScheduledFunction function) {
+  public void register(@NotNull ScheduledFunction function) {
     functions.add(function);
   }
 
-  public void unregister(@Nonnull Object holder) {
+  public void unregister(@NotNull Object holder) {
     functions.removeIf(function -> function.getHolder() == holder);
   }
 

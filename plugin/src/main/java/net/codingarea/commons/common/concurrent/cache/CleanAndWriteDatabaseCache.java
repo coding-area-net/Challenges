@@ -4,10 +4,9 @@ import net.codingarea.commons.common.annotations.ReplaceWith;
 import net.codingarea.commons.common.collection.pair.Tuple;
 import net.codingarea.commons.common.logging.ILogger;
 import net.codingarea.commons.common.misc.SimpleCollectionUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -31,9 +30,9 @@ public class CleanAndWriteDatabaseCache<K, V> implements DatabaseCache<K, V> {
   protected final long cleanAndWriteInterval;
   protected final ILogger logger;
 
-  public CleanAndWriteDatabaseCache(@Nullable ILogger logger, @Nonnegative long unusedTimeBeforeClean, @Nonnegative long cleanAndWriteInterval, @Nonnull String taskName,
-                                    @Nonnull Predicate<? super V> check, @Nonnull Function<? super K, ? extends V> fallback,
-                                    @Nonnull Function<? super K, ? extends V> query, @Nonnull BiConsumer<? super K, ? super V> writer) {
+  public CleanAndWriteDatabaseCache(@Nullable ILogger logger, long unusedTimeBeforeClean, long cleanAndWriteInterval, @NotNull String taskName,
+                                    @NotNull Predicate<? super V> check, @NotNull Function<? super K, ? extends V> fallback,
+                                    @NotNull Function<? super K, ? extends V> query, @NotNull BiConsumer<? super K, ? super V> writer) {
     this.logger = logger;
     this.unusedTimeBeforeClean = unusedTimeBeforeClean;
     this.cleanAndWriteInterval = cleanAndWriteInterval;
@@ -51,9 +50,9 @@ public class CleanAndWriteDatabaseCache<K, V> implements DatabaseCache<K, V> {
     cleanAndWrite(cache, unusedTimeBeforeClean, logger, check, writer);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public V getData(@Nonnull K key) {
+  public V getData(@NotNull K key) {
     Tuple<Long, V> cached = cache.get(key);
     if (cached != null) {
       cached.setFirst(System.currentTimeMillis());
@@ -72,7 +71,7 @@ public class CleanAndWriteDatabaseCache<K, V> implements DatabaseCache<K, V> {
   }
 
   @Override
-  public boolean contains(@Nonnull K key) {
+  public boolean contains(@NotNull K key) {
     return cache.containsKey(key);
   }
 
@@ -86,8 +85,8 @@ public class CleanAndWriteDatabaseCache<K, V> implements DatabaseCache<K, V> {
     cache.clear();
   }
 
-  public static <K, V> void cleanAndWrite(@Nonnull Map<K, Tuple<Long, V>> cache, @Nonnegative long unusedTimeBeforeClean, @Nullable ILogger logger,
-                                          @Nonnull Predicate<? super V> check, @Nonnull BiConsumer<? super K, ? super V> writer) {
+  public static <K, V> void cleanAndWrite(@NotNull Map<K, Tuple<Long, V>> cache, long unusedTimeBeforeClean, @Nullable ILogger logger,
+                                          @NotNull Predicate<? super V> check, @NotNull BiConsumer<? super K, ? super V> writer) {
     long now = System.currentTimeMillis();
     Collection<K> remove = new ArrayList<>();
     cache.forEach((key, pair) -> {
@@ -110,7 +109,7 @@ public class CleanAndWriteDatabaseCache<K, V> implements DatabaseCache<K, V> {
     remove.forEach(cache::remove);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Map<K, V> values() {
     return Collections.unmodifiableMap(SimpleCollectionUtils.convertMap(cache, k -> k, Tuple::getSecond));

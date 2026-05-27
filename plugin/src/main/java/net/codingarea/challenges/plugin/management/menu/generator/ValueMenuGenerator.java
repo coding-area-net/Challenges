@@ -14,8 +14,8 @@ import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Map;
 
 @Getter
@@ -34,7 +34,7 @@ public abstract class ValueMenuGenerator extends MultiPageMenuGenerator {
     return new GeneratorMenuPosition(this, page) {
 
       @Override
-      public void handleClick(@Nonnull MenuClickInfo info) {
+      public void handleClick(@NotNull MenuClickInfo info) {
 
         if (info.getSlot() == FINISH_SLOT) {
           onSaveItemClick(info.getPlayer());
@@ -87,7 +87,7 @@ public abstract class ValueMenuGenerator extends MultiPageMenuGenerator {
   }
 
   @Override
-  public void generatePage(@Nonnull Inventory inventory, int page) {
+  public void generatePage(@NotNull Inventory inventory, int page) {
 
     int startIndex = getItemsPerPage() * page;
     for (int i = startIndex; i < startIndex + getItemsPerPage() && i < settings.size(); i++) {

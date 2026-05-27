@@ -17,8 +17,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class CollectWoodGoal extends SettingModifierCollectionGoal {
 
@@ -33,13 +32,13 @@ public class CollectWoodGoal extends SettingModifierCollectionGoal {
     setCategory(SettingCategory.FASTEST_TIME);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.GOLDEN_AXE, Message.forName("item-collect-wood-goal"));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     if (!newNether) return DefaultItem.enabled();
@@ -51,7 +50,7 @@ public class CollectWoodGoal extends SettingModifierCollectionGoal {
   }
 
   @Override
-  public void handleClick(@Nonnull ChallengeMenuClickInfo info) {
+  public void handleClick(@NotNull ChallengeMenuClickInfo info) {
     if (!newNether && info.isLowerItemClick() && enabled) {
       setEnabled(false);
       SoundSample.playStatusSound(info.getPlayer(), enabled);
@@ -74,7 +73,7 @@ public class CollectWoodGoal extends SettingModifierCollectionGoal {
     checkCollects();
   }
 
-  @Nonnull
+  @NotNull
   private Object[] getWoodMaterials() {
     return new ListBuilder<Material>().fill(builder -> {
       for (Material material : ExperimentalUtils.getMaterials()) {
@@ -84,22 +83,22 @@ public class CollectWoodGoal extends SettingModifierCollectionGoal {
     }).build().toArray();
   }
 
-  private boolean isLog(@Nonnull Material material) {
+  private boolean isLog(@NotNull Material material) {
     return material.name().contains("LOG") && !material.name().contains("STRIPPED");
   }
 
-  private boolean isNetherLog(@Nonnull Material material) {
+  private boolean isNetherLog(@NotNull Material material) {
     return material == Material.WARPED_STEM || material == Material.CRIMSON_STEM;
   }
 
-  private boolean isSearched(@Nonnull Material material) {
+  private boolean isSearched(@NotNull Material material) {
     return getValue() == OVERWORLD && isLog(material) ||
       getValue() == NETHER && isNetherLog(material) ||
       getValue() == BOTH && (isLog(material) || isNetherLog(material));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPickupItem(@Nonnull PlayerPickupItemEvent event) {
+  public void onPickupItem(@NotNull PlayerPickupItemEvent event) {
     if (!shouldExecuteEffect()) return;
     Material material = event.getItem().getItemStack().getType();
     Player player = event.getPlayer();
@@ -107,7 +106,7 @@ public class CollectWoodGoal extends SettingModifierCollectionGoal {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerInventoryClick(@Nonnull PlayerInventoryClickEvent event) {
+  public void onPlayerInventoryClick(@NotNull PlayerInventoryClickEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.isCancelled()) return;
     if (event.getClickedInventory() == null) return;
@@ -118,7 +117,7 @@ public class CollectWoodGoal extends SettingModifierCollectionGoal {
     handleCollect(player, material);
   }
 
-  private void handleCollect(@Nonnull Player player, @Nonnull Material material) {
+  private void handleCollect(@NotNull Player player, @NotNull Material material) {
     collect(player, material, () -> {
       Message.forName("item-collected").send(player, Prefix.CHALLENGES, material);
       SoundSample.PLING.play(player);

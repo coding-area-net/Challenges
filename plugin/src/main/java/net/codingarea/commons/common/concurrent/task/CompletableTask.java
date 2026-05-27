@@ -1,9 +1,9 @@
 package net.codingarea.commons.common.concurrent.task;
 
 import net.codingarea.commons.common.collection.NamedThreadFactory;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.*;
@@ -22,7 +22,7 @@ public class CompletableTask<V> implements Task<V> {
     this(new CompletableFuture<>());
   }
 
-  private CompletableTask(@Nonnull CompletableFuture<V> future) {
+  private CompletableTask(@NotNull CompletableFuture<V> future) {
     this.future = future;
     this.future.exceptionally(ex -> {
       this.failure = ex;
@@ -30,8 +30,8 @@ public class CompletableTask<V> implements Task<V> {
     });
   }
 
-  @Nonnull
-  public static <V> Task<V> callAsync(@Nonnull Callable<V> callable) {
+  @NotNull
+  public static <V> Task<V> callAsync(@NotNull Callable<V> callable) {
     CompletableTask<V> task = new CompletableTask<>();
     SERVICE.execute(() -> {
       try {
@@ -43,8 +43,8 @@ public class CompletableTask<V> implements Task<V> {
     return task;
   }
 
-  @Nonnull
-  public static <V> Task<V> callSync(@Nonnull Callable<V> callable) {
+  @NotNull
+  public static <V> Task<V> callSync(@NotNull Callable<V> callable) {
     CompletableTask<V> task = new CompletableTask<>();
     try {
       task.complete(callable.call());
@@ -54,9 +54,9 @@ public class CompletableTask<V> implements Task<V> {
     return task;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Task<V> addListener(@Nonnull TaskListener<V> listener) {
+  public Task<V> addListener(@NotNull TaskListener<V> listener) {
     if (future.isDone()) {
       V value = future.getNow(null);
       if (future.isCancelled() || value != null) {
@@ -73,7 +73,7 @@ public class CompletableTask<V> implements Task<V> {
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Task<V> clearListeners() {
     this.listeners.clear();
@@ -141,11 +141,11 @@ public class CompletableTask<V> implements Task<V> {
   }
 
   @Override
-  public V get(long timeout, @Nonnull TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
+  public V get(long timeout, @NotNull TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
     return future.get(timeout, unit);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public <R> Task<R> map(@Nullable Function<? super V, ? extends R> mapper) {
     CompletableTask<R> task = new CompletableTask<>();
@@ -161,7 +161,7 @@ public class CompletableTask<V> implements Task<V> {
     return task;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public CompletionStage<V> stage() {
     return future;

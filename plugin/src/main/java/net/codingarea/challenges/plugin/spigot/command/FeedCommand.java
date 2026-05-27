@@ -7,16 +7,16 @@ import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
 import net.codingarea.challenges.plugin.utils.misc.CommandHelper;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FeedCommand implements SenderCommand, Completer {
 
   @Override
-  public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 
     List<Player> targets = new ArrayList<>();
 
@@ -49,7 +49,7 @@ public class FeedCommand implements SenderCommand, Completer {
 
   @Nullable
   @Override
-  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
     return CommandHelper.getCompletions(sender);
   }
 

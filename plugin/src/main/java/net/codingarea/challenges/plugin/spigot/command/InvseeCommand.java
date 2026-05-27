@@ -21,8 +21,8 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.PlayerInventory;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,7 +42,7 @@ public class InvseeCommand implements PlayerCommand, Listener {
   private final Map<Player, Inventory> inventories = new HashMap<>();
 
   @Override
-  public void onCommand(@Nonnull Player player, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
 
     if (args.length < 1) {
       Message.forName("syntax").send(player, Prefix.CHALLENGES, "invsee <player>");
@@ -61,7 +61,7 @@ public class InvseeCommand implements PlayerCommand, Listener {
     Message.forName("command-invsee-open").send(player, Prefix.CHALLENGES, NameHelper.getName(target));
   }
 
-  public Inventory getInventory(@Nonnull Player player) {
+  public Inventory getInventory(@NotNull Player player) {
     if (inventories.containsKey(player)) {
       return inventories.get(player);
     }
@@ -74,7 +74,7 @@ public class InvseeCommand implements PlayerCommand, Listener {
     return inventory;
   }
 
-  public void updateInventoryContents(@Nonnull Inventory inventory, @Nonnull PlayerInventory playerInventory) {
+  public void updateInventoryContents(@NotNull Inventory inventory, @NotNull PlayerInventory playerInventory) {
     inventory.clear();
 
     for (int slot = startBottom; slot <= endBottom; slot++) {
@@ -93,26 +93,26 @@ public class InvseeCommand implements PlayerCommand, Listener {
 
   }
 
-  public void updateInventory(@Nonnull Player player) {
+  public void updateInventory(@NotNull Player player) {
     if (!inventories.containsKey(player)) return;
     Inventory inventory = inventories.get(player);
     updateInventoryContents(inventory, player.getInventory());
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerInventoryClick(@Nonnull PlayerInventoryClickEvent event) {
+  public void onPlayerInventoryClick(@NotNull PlayerInventoryClickEvent event) {
     if (event.getClickedInventory() == null) return;
     if (event.getClickedInventory().getHolder() != event.getPlayer()) return;
     Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), () -> updateInventory(event.getPlayer()), 1);
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerDropItem(@Nonnull PlayerDropItemEvent event) {
+  public void onPlayerDropItem(@NotNull PlayerDropItemEvent event) {
     Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), () -> updateInventory(event.getPlayer()), 1);
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerQuit(@Nonnull PlayerQuitEvent event) {
+  public void onPlayerQuit(@NotNull PlayerQuitEvent event) {
     Inventory inventory = inventories.remove(event.getPlayer());
     if (inventory == null) return;
     for (HumanEntity viewer : new ArrayList<>(inventory.getViewers())) {
@@ -122,7 +122,7 @@ public class InvseeCommand implements PlayerCommand, Listener {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onClose(@Nonnull InventoryCloseEvent event) {
+  public void onClose(@NotNull InventoryCloseEvent event) {
     if (event.getInventory().getHolder() != MenuPosition.HOLDER) return;
     Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), () -> {
       for (Entry<Player, Inventory> entry : inventories.entrySet()) {

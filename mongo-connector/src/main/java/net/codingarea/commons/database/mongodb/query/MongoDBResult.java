@@ -1,18 +1,17 @@
 package net.codingarea.commons.database.mongodb.query;
 
 import net.codingarea.commons.common.config.document.BsonDocument;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class MongoDBResult extends BsonDocument {
 
-	public MongoDBResult(@Nonnull org.bson.Document bsonDocument) {
-		super(bsonDocument);
-	}
+  public MongoDBResult(@NotNull org.bson.Document bsonDocument) {
+    super(bsonDocument);
+  }
 
-	@Override
-	public boolean isReadonly() {
-		return true;
-	}
+  @Override
+  public boolean isReadonly() {
+    return true;
+  }
 
 }

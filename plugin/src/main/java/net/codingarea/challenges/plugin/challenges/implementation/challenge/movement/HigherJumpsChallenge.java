@@ -10,8 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.util.Vector;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class HigherJumpsChallenge extends Setting {
 
@@ -20,14 +19,14 @@ public class HigherJumpsChallenge extends Setting {
     setCategory(SettingCategory.MOVEMENT);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.RABBIT_FOOT, Message.forName("item-higher-jumps-challenge"));
   }
 
   @EventHandler(priority = EventPriority.NORMAL)
-  public void onJump(@Nonnull PlayerJumpEvent event) {
+  public void onJump(@NotNull PlayerJumpEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
 

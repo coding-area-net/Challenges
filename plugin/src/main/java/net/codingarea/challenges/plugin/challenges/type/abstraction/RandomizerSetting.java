@@ -5,19 +5,18 @@ import net.codingarea.challenges.plugin.management.menu.generator.categorised.Se
 import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.commons.common.collection.SeededRandomWrapper;
 import net.codingarea.commons.common.config.Document;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class RandomizerSetting extends Setting {
 
   protected IRandom random = IRandom.create();
 
-  public RandomizerSetting(@Nonnull MenuType menu) {
+  public RandomizerSetting(@NotNull MenuType menu) {
     super(menu);
     setCategory(SettingCategory.RANDOMIZER);
   }
 
-  public RandomizerSetting(@Nonnull MenuType menu, boolean enabledByDefault) {
+  public RandomizerSetting(@NotNull MenuType menu, boolean enabledByDefault) {
     super(menu, enabledByDefault);
     setCategory(SettingCategory.RANDOMIZER);
   }
@@ -36,7 +35,7 @@ public abstract class RandomizerSetting extends Setting {
   }
 
   @Override
-  public void loadGameState(@Nonnull Document document) {
+  public void loadGameState(@NotNull Document document) {
     super.loadGameState(document);
     if (!document.contains("seed")) {
       random = new SeededRandomWrapper();
@@ -53,7 +52,7 @@ public abstract class RandomizerSetting extends Setting {
   }
 
   @Override
-  public void writeGameState(@Nonnull Document document) {
+  public void writeGameState(@NotNull Document document) {
     super.writeGameState(document);
     document.set("seed", random.getSeed());
   }

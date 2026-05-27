@@ -5,10 +5,10 @@ import net.codingarea.commons.common.config.document.GsonDocument;
 import net.codingarea.commons.common.config.document.PropertiesDocument;
 import net.codingarea.commons.common.config.document.wrapper.FileDocumentWrapper;
 import net.codingarea.commons.common.logging.ILogger;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -38,7 +38,7 @@ public interface FileDocument extends Document {
     }
   }
 
-  @Nonnull
+  @NotNull
   default Task<Void> saveAsync() {
     return Task.asyncRunExceptionally(this::save);
   }
@@ -53,118 +53,118 @@ public interface FileDocument extends Document {
     else save();
   }
 
-  @Nonnull
+  @NotNull
   File getFile();
 
-  @Nonnull
+  @NotNull
   Path getPath();
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NotNull
   @Override
-  FileDocument set(@Nonnull String path, @Nullable Object value);
+  FileDocument set(@NotNull String path, @Nullable Object value);
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NotNull
   @Override
-  FileDocument set(@Nonnull Object value);
+  FileDocument set(@NotNull Object value);
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NotNull
   @Override
   FileDocument clear();
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NotNull
   @Override
-  FileDocument remove(@Nonnull String path);
+  FileDocument remove(@NotNull String path);
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NotNull
   @Override
-  default <O extends Propertyable> FileDocument apply(@Nonnull Consumer<O> action) {
+  default <O extends Propertyable> FileDocument apply(@NotNull Consumer<O> action) {
     return (FileDocument) Document.super.apply(action);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  default FileDocument setIfAbsent(@Nonnull String path, @Nonnull Object defaultValue) {
+  default FileDocument setIfAbsent(@NotNull String path, @NotNull Object defaultValue) {
     return (FileDocument) Document.super.setIfAbsent(path, defaultValue);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  default FileDocument increment(@Nonnull String path, double amount) {
+  default FileDocument increment(@NotNull String path, double amount) {
     return (FileDocument) Document.super.increment(path, amount);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  default FileDocument decrement(@Nonnull String path, double amount) {
+  default FileDocument decrement(@NotNull String path, double amount) {
     return (FileDocument) Document.super.decrement(path, amount);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  default FileDocument multiply(@Nonnull String path, double factor) {
+  default FileDocument multiply(@NotNull String path, double factor) {
     return (FileDocument) Document.super.multiply(path, factor);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  default FileDocument divide(@Nonnull String path, double divisor) {
+  default FileDocument divide(@NotNull String path, double divisor) {
     return (FileDocument) Document.super.divide(path, divisor);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static FileDocument wrap(@Nonnull Document document, @Nonnull File file) {
+  static FileDocument wrap(@NotNull Document document, @NotNull File file) {
     return new FileDocumentWrapper(file, document);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static FileDocument readFile(@Nonnull Class<? extends Document> classOfDocument, @Nonnull File file) {
+  static FileDocument readFile(@NotNull Class<? extends Document> classOfDocument, @NotNull File file) {
     return Document.readFile(classOfDocument, file).asFileDocument(file);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static FileDocument readFile(@Nonnull Class<? extends Document> classOfDocument, @Nonnull Path file) {
+  static FileDocument readFile(@NotNull Class<? extends Document> classOfDocument, @NotNull Path file) {
     return Document.readFile(classOfDocument, file).asFileDocument(file);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static FileDocument readJsonFile(@Nonnull File file) {
+  static FileDocument readJsonFile(@NotNull File file) {
     return readFile(GsonDocument.class, file);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static FileDocument readJsonFile(@Nonnull Path file) {
+  static FileDocument readJsonFile(@NotNull Path file) {
     return readFile(GsonDocument.class, file);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static FileDocument readPropertiesFile(@Nonnull File file) {
+  static FileDocument readPropertiesFile(@NotNull File file) {
     return readFile(PropertiesDocument.class, file);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static FileDocument readPropertiesFile(@Nonnull Path file) {
+  static FileDocument readPropertiesFile(@NotNull Path file) {
     return readFile(PropertiesDocument.class, file);
   }
 

@@ -22,9 +22,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntitySpawnEvent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -55,14 +55,14 @@ public class RandomizedHPChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onSpawn(@Nonnull EntitySpawnEvent event) {
+  public void onSpawn(@NotNull EntitySpawnEvent event) {
     if (!shouldExecuteEffect()) return;
     if (!(event.getEntity() instanceof LivingEntity)) return;
     LivingEntity entity = (LivingEntity) event.getEntity();
     randomizeEntityHealth(entity);
   }
 
-  private void randomizeEntityHealth(@Nonnull LivingEntity entity) {
+  private void randomizeEntityHealth(@NotNull LivingEntity entity) {
     if (entity instanceof Player) return;
     if (!isEnabled()) {
       entity.resetMaxHealth();
@@ -101,7 +101,7 @@ public class RandomizedHPChallenge extends SettingModifier {
     }
   }
 
-  private double getDefaultHealth(@Nonnull EntityType entityType) {
+  private double getDefaultHealth(@NotNull EntityType entityType) {
     World world = ChallengeAPI.getGameWorld(Environment.NORMAL);
     Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), entityType);
     entity.remove();
@@ -111,13 +111,13 @@ public class RandomizedHPChallenge extends SettingModifier {
     return attribute.getBaseValue();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new PotionBuilder(Material.POTION, Message.forName("item-randomized-hp-challenge")).setColor(Color.RED);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     return super.createSettingsItem().amount(isEnabled() ? getValue() * 5 : 1);

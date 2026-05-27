@@ -14,9 +14,9 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -27,25 +27,25 @@ public class MessageImpl implements Message {
   protected final String name;
   protected String[] value;
 
-  public MessageImpl(@Nonnull String name) {
+  public MessageImpl(@NotNull String name) {
     this.name = name;
   }
 
-  @Nonnull
+  @NotNull
   protected static IRandom defaultRandom() {
     return IRandom.threadLocal();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public String asString(@Nonnull Object... args) {
+  public String asString(@NotNull Object... args) {
     if (value == null) return name;
     return String.join("\n", asArray(args));
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public BaseComponent asComponent(@Nonnull Object... args) {
+  public BaseComponent asComponent(@NotNull Object... args) {
     if (value == null) return new TextComponent(name);
     BaseComponent[] components = asComponentArray(null, args);
     BaseComponent first = null;
@@ -57,31 +57,31 @@ public class MessageImpl implements Message {
     return first == null ? new TextComponent() : first;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public String asRandomString(@Nonnull Object... args) {
+  public String asRandomString(@NotNull Object... args) {
     return asRandomString(defaultRandom(), args);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public String asRandomString(@Nonnull IRandom random, @Nonnull Object... args) {
+  public String asRandomString(@NotNull IRandom random, @NotNull Object... args) {
     String[] array = asArray(args);
     if (array.length == 0) return Message.unknown(name);
     return random.choose(array);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public BaseComponent asRandomComponent(@Nonnull IRandom random, @Nonnull Prefix prefix, @Nonnull Object... args) {
+  public BaseComponent asRandomComponent(@NotNull IRandom random, @NotNull Prefix prefix, @NotNull Object... args) {
     BaseComponent[] array = asComponentArray(prefix, args);
     if (array.length == 0) return new TextComponent(Message.unknown(name));
     return random.choose(array);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public String[] asArray(@Nonnull Object... args) {
+  public String[] asArray(@NotNull Object... args) {
     if (value == null) return new String[]{Message.unknown(name)};
     args = BukkitStringUtils.replaceArguments(args, true);
     LanguageLoader loader = Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class);
@@ -90,16 +90,16 @@ public class MessageImpl implements Message {
     return capsFont ? FontUtils.toSmallCaps(StringUtils.format(value, args)) : StringUtils.format(value, args);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public BaseComponent[] asComponentArray(@Nullable Prefix prefix, @Nonnull Object... args) {
+  public BaseComponent[] asComponentArray(@Nullable Prefix prefix, @NotNull Object... args) {
     if (value == null) return new TextComponent[]{new TextComponent(Message.unknown(name))};
     return BukkitStringUtils.format(prefix, value, args);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public ItemDescription asItemDescription(@Nonnull Object... args) {
+  public ItemDescription asItemDescription(@NotNull Object... args) {
     if (value == null) {
       Message.unknown(name);
       return ItemDescription.empty();
@@ -108,42 +108,42 @@ public class MessageImpl implements Message {
   }
 
   @Override
-  public void send(@Nonnull CommandSender target, @Nonnull Prefix prefix, @Nonnull Object... args) {
+  public void send(@NotNull CommandSender target, @NotNull Prefix prefix, @NotNull Object... args) {
     doSendLines(component -> target.spigot().sendMessage(component), prefix, asComponentArray(prefix, args));
   }
 
   @Override
-  public void sendRandom(@Nonnull CommandSender target, @Nonnull Prefix prefix, @Nonnull Object... args) {
+  public void sendRandom(@NotNull CommandSender target, @NotNull Prefix prefix, @NotNull Object... args) {
     sendRandom(defaultRandom(), target, prefix, args);
   }
 
   @Override
-  public void sendRandom(@Nonnull IRandom random, @Nonnull CommandSender target, @Nonnull Prefix prefix, @Nonnull Object... args) {
+  public void sendRandom(@NotNull IRandom random, @NotNull CommandSender target, @NotNull Prefix prefix, @NotNull Object... args) {
     doSendLine(components -> target.spigot().sendMessage(components), prefix, asRandomComponent(random, prefix, args));
   }
 
   @Override
-  public void broadcast(@Nonnull Prefix prefix, @Nonnull Object... args) {
+  public void broadcast(@NotNull Prefix prefix, @NotNull Object... args) {
     doSendLines(components -> Bukkit.spigot().broadcast(components), prefix, asComponentArray(prefix, args));
   }
 
   @Override
-  public void broadcastRandom(@Nonnull Prefix prefix, @Nonnull Object... args) {
+  public void broadcastRandom(@NotNull Prefix prefix, @NotNull Object... args) {
     broadcastRandom(defaultRandom(), prefix, args);
   }
 
   @Override
-  public void broadcastRandom(@Nonnull IRandom random, @Nonnull Prefix prefix, @Nonnull Object... args) {
+  public void broadcastRandom(@NotNull IRandom random, @NotNull Prefix prefix, @NotNull Object... args) {
     doSendLine(component -> Bukkit.spigot().broadcast(component), prefix, asRandomComponent(random, prefix, args));
   }
 
-  private void doSendLines(@Nonnull Consumer<? super BaseComponent> sender, @Nonnull Prefix prefix, @Nonnull BaseComponent[] components) {
+  private void doSendLines(@NotNull Consumer<? super BaseComponent> sender, @NotNull Prefix prefix, @NotNull BaseComponent[] components) {
     for (BaseComponent line : components) {
       doSendLine(sender, prefix, line);
     }
   }
 
-  private void doSendLine(@Nonnull Consumer<? super BaseComponent> sender, @Nonnull Prefix prefix, BaseComponent component) {
+  private void doSendLine(@NotNull Consumer<? super BaseComponent> sender, @NotNull Prefix prefix, BaseComponent component) {
     LanguageLoader loader = Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class);
     boolean capsFont = false;
     if (loader != null) capsFont = loader.isSmallCapsFont();
@@ -177,41 +177,41 @@ public class MessageImpl implements Message {
   }
 
   @Override
-  public void broadcastTitle(@Nonnull Object... args) {
+  public void broadcastTitle(@NotNull Object... args) {
     String[] title = asArray(args);
     Bukkit.getOnlinePlayers().forEach(player -> doSendTitle(player, title));
   }
 
   @Override
-  public void sendTitle(@Nonnull Player player, @Nonnull Object... args) {
+  public void sendTitle(@NotNull Player player, @NotNull Object... args) {
     doSendTitle(player, asArray(args));
   }
 
   @Override
-  public void sendTitleInstant(@Nonnull Player player, @Nonnull Object... args) {
+  public void sendTitleInstant(@NotNull Player player, @NotNull Object... args) {
     doSendTitleInstant(player, asArray(args));
   }
 
-  protected void doSendTitle(@Nonnull Player player, @Nonnull String[] title) {
+  protected void doSendTitle(@NotNull Player player, @NotNull String[] title) {
     sendTitle(title, (line1, line2) -> Challenges.getInstance().getTitleManager().sendTitle(player, line1, line2));
   }
 
-  protected void doSendTitleInstant(@Nonnull Player player, @Nonnull String[] title) {
+  protected void doSendTitleInstant(@NotNull Player player, @NotNull String[] title) {
     sendTitle(title, (line1, line2) -> Challenges.getInstance().getTitleManager().sendTitleInstant(player, line1, line2));
   }
 
-  protected void sendTitle(@Nonnull String[] title, @Nonnull BiConsumer<String, String> send) {
+  protected void sendTitle(@NotNull String[] title, @NotNull BiConsumer<String, String> send) {
     if (title.length == 0) send.accept("", "");
     else if (title.length == 1) send.accept(title[0], "");
     else send.accept(title[0], title[1]);
   }
 
   @Override
-  public void setValue(@Nonnull String[] value) {
+  public void setValue(@NotNull String[] value) {
     this.value = value;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public String getName() {
     return name;

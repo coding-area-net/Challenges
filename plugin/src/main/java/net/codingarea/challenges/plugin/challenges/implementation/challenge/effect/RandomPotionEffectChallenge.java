@@ -15,9 +15,9 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -64,7 +64,7 @@ public class RandomPotionEffectChallenge extends MenuSetting {
   }
 
   @Nullable
-  public static PotionEffectType getNewRandomEffect(@Nonnull LivingEntity entity) {
+  public static PotionEffectType getNewRandomEffect(@NotNull LivingEntity entity) {
     List<PotionEffectType> activeEffects = entity.getActivePotionEffects().stream().map(PotionEffect::getType).collect(Collectors.toList());
 
     ArrayList<PotionEffectType> possibleEffects = new ArrayList<>(Arrays.asList(PotionEffectType.values()));
@@ -74,7 +74,7 @@ public class RandomPotionEffectChallenge extends MenuSetting {
     return possibleEffects.get(IRandom.threadLocal().nextInt(possibleEffects.size()));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.BREWING_STAND, Message.forName("item-random-effect-challenge"));
@@ -95,13 +95,13 @@ public class RandomPotionEffectChallenge extends MenuSetting {
     Bukkit.getOnlinePlayers().forEach(this::applyRandomEffect);
   }
 
-  private void applyRandomEffect(@Nonnull Player entity) {
+  private void applyRandomEffect(@NotNull Player entity) {
     PotionEffectType effect = getNewRandomEffect(entity);
     if (effect == null) return;
     applyEffect(entity, effect);
   }
 
-  private void applyEffect(@Nonnull Player player, @Nonnull PotionEffectType effectType) {
+  private void applyEffect(@NotNull Player player, @NotNull PotionEffectType effectType) {
     PotionEffect potionEffect = new PotionEffect(effectType, (getSetting("length").getAsInt() + 1) * 20, getSetting("amplifier").getAsInt() - 1);
     player.addPotionEffect(potionEffect);
   }

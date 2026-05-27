@@ -23,9 +23,9 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 
 @Since("2.0")
@@ -48,14 +48,14 @@ public class AllBlocksDisappearChallenge extends MenuSetting {
     stackDropLimit = document.contains("all-block-disappear-stack-drop-limit") ? document.getInt("all-block-disappear-stack-drop-limit") : 50;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.TNT, Message.forName("item-all-blocks-disappear-challenge"));
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onBlockBreak(@Nonnull BlockBreakEvent event) {
+  public void onBlockBreak(@NotNull BlockBreakEvent event) {
     if (!shouldExecuteEffect()) return;
     if (!getSetting("break").getAsBoolean()) return;
     if (ignorePlayer(event.getPlayer())) return;
@@ -65,7 +65,7 @@ public class AllBlocksDisappearChallenge extends MenuSetting {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onBlockPlace(@Nonnull BlockPlaceEvent event) {
+  public void onBlockPlace(@NotNull BlockPlaceEvent event) {
     if (!shouldExecuteEffect()) return;
     if (!getSetting("place").getAsBoolean()) return;
     if (ignorePlayer(event.getPlayer())) return;
@@ -74,7 +74,7 @@ public class AllBlocksDisappearChallenge extends MenuSetting {
     breakBlocks(event.getBlockAgainst(), null, event.getPlayer().getInventory());
   }
 
-  private void breakBlocks(@Nonnull Block block, @Nullable ItemStack tool, @Nonnull Inventory inventory) {
+  private void breakBlocks(@NotNull Block block, @Nullable ItemStack tool, @NotNull Inventory inventory) {
     Chunk chunk = block.getChunk();
     List<Block> blocks = getAllBlocksToBreak(chunk, block.getType());
 
@@ -105,7 +105,7 @@ public class AllBlocksDisappearChallenge extends MenuSetting {
     dropList(allDrops, block.getLocation(), inventory);
   }
 
-  private void dropList(@Nonnull Collection<ItemStack> itemStacks, @Nonnull Location location, @Nonnull Inventory inventory) {
+  private void dropList(@NotNull Collection<ItemStack> itemStacks, @NotNull Location location, @NotNull Inventory inventory) {
     if (location.getWorld() == null) return;
     Map<Material, Integer> stackCount = new HashMap<>();
 
@@ -125,7 +125,7 @@ public class AllBlocksDisappearChallenge extends MenuSetting {
     return true;
   }
 
-  protected List<Block> getAllBlocksToBreak(@Nonnull Chunk chunk, @Nonnull Material material) {
+  protected List<Block> getAllBlocksToBreak(@NotNull Chunk chunk, @NotNull Material material) {
     return new ListBuilder<Block>()
       .fill(builder -> {
         for (int x = 0; x < 16; x++) {

@@ -14,8 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class RegenerationSetting extends Modifier {
 
@@ -23,13 +22,13 @@ public class RegenerationSetting extends Modifier {
     super(MenuType.SETTINGS, 1, 3, 2);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new PotionBuilder(Material.POTION, Message.forName("item-regeneration-setting")).color(Color.RED);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     if (getValue() == 1) {

@@ -5,10 +5,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nonnull;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -24,7 +24,7 @@ public class CompatibilityUtils {
   private CompatibilityUtils() {
   }
 
-  public static Inventory getTopInventory(@Nonnull Player player) {
+  public static Inventory getTopInventory(@NotNull Player player) {
     InventoryView view = player.getOpenInventory();
 
     try {
@@ -36,7 +36,7 @@ public class CompatibilityUtils {
     }
   }
 
-  public static Inventory getTopInventory(@Nonnull InventoryClickEvent event) {
+  public static Inventory getTopInventory(@NotNull InventoryClickEvent event) {
     InventoryView view = event.getView();
 
     try {

@@ -4,8 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +29,7 @@ public final class SoundSample {
     WIN = new SoundSample().addSound(Sound.UI_TOAST_CHALLENGE_COMPLETE, 1),
     DRAGON_BREATH = new SoundSample().addSound(Sound.ENTITY_ENDER_DRAGON_GROWL, 0.5F);
 
-  public static void playStatusSound(@Nonnull Player player, boolean enabled) {
+  public static void playStatusSound(@NotNull Player player, boolean enabled) {
     (enabled ? BASS_ON : BASS_OFF).play(player);
   }
 
@@ -38,17 +38,17 @@ public final class SoundSample {
     private final float pitch, volume;
     private final Sound sound;
 
-    public SoundFrame(@Nonnull Sound sound, float volume, float pitch) {
+    public SoundFrame(@NotNull Sound sound, float volume, float pitch) {
       this.volume = volume;
       this.pitch = pitch;
       this.sound = sound;
     }
 
-    public SoundFrame(@Nonnull Sound sound, float volume) {
+    public SoundFrame(@NotNull Sound sound, float volume) {
       this(sound, volume, 1);
     }
 
-    public void play(@Nonnull Player player, @Nonnull Location location) {
+    public void play(@NotNull Player player, @NotNull Location location) {
       player.playSound(location, sound, volume, pitch);
     }
 
@@ -60,7 +60,7 @@ public final class SoundSample {
       return volume;
     }
 
-    @Nonnull
+    @NotNull
     public Sound getSound() {
       return sound;
     }
@@ -69,35 +69,35 @@ public final class SoundSample {
 
   private final List<SoundFrame> frames = new ArrayList<>();
 
-  @Nonnull
-  public SoundSample addSound(@Nonnull Sound sound, float volume, float pitch) {
+  @NotNull
+  public SoundSample addSound(@NotNull Sound sound, float volume, float pitch) {
     frames.add(new SoundFrame(sound, volume, pitch));
     return this;
   }
 
-  @Nonnull
-  public SoundSample addSound(@Nonnull Sound sound, float volume) {
+  @NotNull
+  public SoundSample addSound(@NotNull Sound sound, float volume) {
     frames.add(new SoundFrame(sound, volume));
     return this;
   }
 
-  @Nonnull
-  public SoundSample addSound(@Nonnull SoundSample sound) {
+  @NotNull
+  public SoundSample addSound(@NotNull SoundSample sound) {
     frames.addAll(sound.frames);
     return this;
   }
 
-  public void play(@Nonnull Player player) {
+  public void play(@NotNull Player player) {
     play(player, player.getLocation());
   }
 
-  public void play(@Nonnull Player player, @Nonnull Location location) {
+  public void play(@NotNull Player player, @NotNull Location location) {
     for (SoundFrame frame : frames) {
       frame.play(player, location);
     }
   }
 
-  public void playIfPlayer(@Nonnull Object target) {
+  public void playIfPlayer(@NotNull Object target) {
     if (target instanceof Player)
       play((Player) target);
   }
@@ -106,7 +106,7 @@ public final class SoundSample {
     Bukkit.getOnlinePlayers().forEach(this::play);
   }
 
-  public void broadcast(@Nonnull Location location) {
+  public void broadcast(@NotNull Location location) {
     Bukkit.getOnlinePlayers().forEach(player -> play(player, location));
   }
 

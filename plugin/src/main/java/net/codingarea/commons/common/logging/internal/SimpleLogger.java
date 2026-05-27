@@ -2,10 +2,9 @@ package net.codingarea.commons.common.logging.internal;
 
 import net.codingarea.commons.common.logging.LogLevel;
 import net.codingarea.commons.common.logging.lib.Slf4jILogger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Marker;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class SimpleLogger extends FallbackLogger implements Slf4jILogger {
 
@@ -18,67 +17,67 @@ public class SimpleLogger extends FallbackLogger implements Slf4jILogger {
   }
 
   @Override
-  public void log(@Nonnull LogLevel level, @Nullable Object message, @Nonnull Object... args) {
+  public void log(@NotNull LogLevel level, @Nullable Object message, @NotNull Object... args) {
     super.log(level, message, args);
   }
 
   @Override
-  public void error(@Nullable String message, @Nonnull Object... args) {
+  public void error(@Nullable String message, @NotNull Object... args) {
     super.error(message, args);
   }
 
   @Override
-  public void error(@Nullable Object message, @Nonnull Object... args) {
+  public void error(@Nullable Object message, @NotNull Object... args) {
     super.error(message, args);
   }
 
   @Override
-  public void warn(@Nullable String message, @Nonnull Object... args) {
+  public void warn(@Nullable String message, @NotNull Object... args) {
     super.warn(message, args);
   }
 
   @Override
-  public void warn(@Nullable Object message, @Nonnull Object... args) {
+  public void warn(@Nullable Object message, @NotNull Object... args) {
     super.warn(message, args);
   }
 
   @Override
-  public void info(@Nullable String message, @Nonnull Object... args) {
+  public void info(@Nullable String message, @NotNull Object... args) {
     super.info(message, args);
   }
 
   @Override
-  public void info(@Nullable Object message, @Nonnull Object... args) {
+  public void info(@Nullable Object message, @NotNull Object... args) {
     super.info(message, args);
   }
 
   @Override
-  public void status(@Nullable String message, @Nonnull Object... args) {
+  public void status(@Nullable String message, @NotNull Object... args) {
     super.status(message, args);
   }
 
   @Override
-  public void status(@Nullable Object message, @Nonnull Object... args) {
+  public void status(@Nullable Object message, @NotNull Object... args) {
     super.status(message, args);
   }
 
   @Override
-  public void debug(@Nullable String message, @Nonnull Object... args) {
+  public void debug(@Nullable String message, @NotNull Object... args) {
     super.debug(message, args);
   }
 
   @Override
-  public void debug(@Nullable Object message, @Nonnull Object... args) {
+  public void debug(@Nullable Object message, @NotNull Object... args) {
     super.debug(message, args);
   }
 
   @Override
-  public void trace(@Nullable String message, @Nonnull Object... args) {
+  public void trace(@Nullable String message, @NotNull Object... args) {
     super.trace(message, args);
   }
 
   @Override
-  public void trace(@Nullable Object message, @Nonnull Object... args) {
+  public void trace(@Nullable Object message, @NotNull Object... args) {
     super.trace(message, args);
   }
 

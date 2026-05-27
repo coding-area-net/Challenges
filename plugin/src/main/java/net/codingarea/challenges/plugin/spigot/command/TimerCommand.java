@@ -12,8 +12,8 @@ import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,7 +22,7 @@ import java.util.List;
 public class TimerCommand implements SenderCommand, Completer {
 
   @Override
-  public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) {
 
     if (args.length == 0) {
       if (sender instanceof Player) {
@@ -97,7 +97,7 @@ public class TimerCommand implements SenderCommand, Completer {
   }
 
   @Override
-  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
     if (args.length == 0) return new ArrayList<>();
     String last = args[args.length - 1];
     if (args.length == 1) {

@@ -13,7 +13,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,7 +59,7 @@ public class ForceDamageBattleGoal extends ForceBattleGoal<DamageTarget> {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onDamage(@Nonnull EntityDamageEvent event) {
+  public void onDamage(@NotNull EntityDamageEvent event) {
     if (!shouldExecuteEffect()) return;
     if (!(event.getEntity() instanceof Player)) return;
     Player player = (Player) event.getEntity();

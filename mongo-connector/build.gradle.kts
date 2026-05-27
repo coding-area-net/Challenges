@@ -6,9 +6,10 @@ plugins {
 dependencies {
   implementation(libs.slf4j.api)
   implementation(libs.mongodb.driver)
-  implementation(libs.jsr305)
 
   compileOnly(libs.spigot.api)
+
+  compileOnly(libs.jetbrains.annotations)
   compileOnly(libs.lombok)
 
   implementation(project(":plugin"))

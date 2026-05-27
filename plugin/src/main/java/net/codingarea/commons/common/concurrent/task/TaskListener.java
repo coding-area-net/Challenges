@@ -1,16 +1,16 @@
 package net.codingarea.commons.common.concurrent.task;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public interface TaskListener<T> {
 
-  default void onComplete(@Nonnull Task<T> task, @Nonnull T value) {
+  default void onComplete(@NotNull Task<T> task, @NotNull T value) {
   }
 
-  default void onCancelled(@Nonnull Task<T> task) {
+  default void onCancelled(@NotNull Task<T> task) {
   }
 
-  default void onFailure(@Nonnull Task<T> task, @Nonnull Throwable ex) {
+  default void onFailure(@NotNull Task<T> task, @NotNull Throwable ex) {
   }
 
 }

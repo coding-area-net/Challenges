@@ -10,9 +10,9 @@ import net.codingarea.commons.common.config.document.YamlDocument;
 import net.codingarea.commons.common.misc.FileUtils;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -90,7 +90,7 @@ public final class ConfigManager {
   }
 
   @Nullable
-  private FileDocument load(@Nonnull String filename) {
+  private FileDocument load(@NotNull String filename) {
     try {
       File file = Challenges.getInstance().getDataFile(filename);
       FileUtils.createFilesIfNecessary(file);
@@ -101,7 +101,7 @@ public final class ConfigManager {
     }
   }
 
-  @Nonnull
+  @NotNull
   public List<String> getMissingConfigSettings() {
     return new LinkedList<>(missingConfigSettings);
   }

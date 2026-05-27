@@ -12,8 +12,7 @@ import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class ImmediateRespawnSetting extends Setting {
@@ -24,7 +23,7 @@ public class ImmediateRespawnSetting extends Setting {
     super(MenuType.SETTINGS);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.GOLDEN_APPLE, Message.forName("item-immediate-respawn-setting"));
@@ -58,7 +57,7 @@ public class ImmediateRespawnSetting extends Setting {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onPlayerDeath(@Nonnull PlayerDeathEvent event) {
+  public void onPlayerDeath(@NotNull PlayerDeathEvent event) {
     if (!isEnabled()) return;
     if (!respawnWithEvent) return;
     Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> event.getEntity().spigot().respawn(), 1);

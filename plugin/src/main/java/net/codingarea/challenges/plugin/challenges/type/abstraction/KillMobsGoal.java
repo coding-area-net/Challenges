@@ -13,7 +13,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -56,7 +55,7 @@ public abstract class KillMobsGoal extends SettingGoal {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onDeath(@Nonnull EntityDeathEvent event) {
+  public void onDeath(@NotNull EntityDeathEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.getEntityType() != EntityType.WITHER && event.getEntityType() != EntityType.ENDER_DRAGON && event.getEntityType() != EntityType.ELDER_GUARDIAN) {
       if (event.getEntity().getKiller() == null) return;
@@ -73,14 +72,14 @@ public abstract class KillMobsGoal extends SettingGoal {
   }
 
   @Override
-  public void writeGameState(@Nonnull Document document) {
+  public void writeGameState(@NotNull Document document) {
     super.writeGameState(document);
 
     document.set("entities", entitiesKilled);
   }
 
   @Override
-  public void loadGameState(@Nonnull Document document) {
+  public void loadGameState(@NotNull Document document) {
     super.loadGameState(document);
 
     entitiesKilled = document.getEnumList("entities", EntityType.class);

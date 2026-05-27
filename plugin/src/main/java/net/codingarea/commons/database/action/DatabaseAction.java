@@ -7,8 +7,7 @@ import net.codingarea.commons.database.action.hierarchy.WhereAction;
 import net.codingarea.commons.database.exceptions.DatabaseConnectionClosedException;
 import net.codingarea.commons.database.exceptions.DatabaseException;
 import net.codingarea.commons.database.exceptions.UnsignedDatabaseException;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Some action which will be executed on a database.
@@ -67,7 +66,7 @@ public interface DatabaseAction<R> {
    *
    * @return a new {@link Task} which will be completed when the action was executed
    */
-  @Nonnull
+  @NotNull
   default Task<R> executeAsync() {
     return Task.asyncCall(this::execute);
   }

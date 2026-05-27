@@ -2,9 +2,8 @@ package net.codingarea.challenges.plugin.management.server;
 
 import lombok.Getter;
 import net.codingarea.challenges.plugin.content.Message;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Getter
 public enum ChallengeEndCause {
@@ -15,12 +14,12 @@ public enum ChallengeEndCause {
 
   private final Message noWinnerMessage, winnerMessage;
 
-  ChallengeEndCause(@Nonnull Message noWinnerMessage, @Nullable Message winnerMessage) {
+  ChallengeEndCause(@NotNull Message noWinnerMessage, @Nullable Message winnerMessage) {
     this.noWinnerMessage = noWinnerMessage;
     this.winnerMessage = winnerMessage;
   }
 
-  @Nonnull
+  @NotNull
   public Message getMessage(boolean withWinner) {
     return withWinner && winnerMessage != null ? winnerMessage : noWinnerMessage;
   }

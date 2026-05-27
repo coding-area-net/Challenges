@@ -1,6 +1,7 @@
 package net.codingarea.commons.common.annotations;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.annotation.*;
 
 /**
@@ -11,7 +12,7 @@ import java.lang.annotation.*;
 @Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.METHOD, ElementType.PACKAGE, ElementType.PARAMETER, ElementType.TYPE})
 public @interface DeprecatedSince {
 
-  @Nonnull
+  @NotNull
   String value();
 
 }

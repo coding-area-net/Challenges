@@ -4,16 +4,15 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public final class EntityUtils {
 
   private EntityUtils() {
   }
 
-  public static Vector getSucceedingVelocity(@Nonnull Vector vector) {
+  public static Vector getSucceedingVelocity(@NotNull Vector vector) {
     return new Vector(vector.getX(), getSucceedingVelocity(vector.getY()), vector.getX());
   }
 
@@ -21,7 +20,7 @@ public final class EntityUtils {
     return 0.98 * ((currentYVelocity) - 0.08);
   }
 
-  public static boolean isStandingOnBlock(@Nonnull Entity entity, Material block) {
+  public static boolean isStandingOnBlock(@NotNull Entity entity, Material block) {
     for (int x = -1; x <= 1; x++) {
       for (int z = -1; z <= 1; z++) {
         for (int y = -1; y <= 1; y++) {

@@ -9,9 +9,9 @@ import org.bukkit.World.Environment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,14 +27,14 @@ public abstract class NetherPortalSpawnSetting extends OneEnabledSetting {
   private final Collection<Material> groundMaterial;
   private final String unableToFindMessage;
 
-  public NetherPortalSpawnSetting(@Nonnull MenuType menu, @Nonnull StructureType structureType, @Nonnull String unableToFindMessage, @Nonnull Material... groundMaterial) {
+  public NetherPortalSpawnSetting(@NotNull MenuType menu, @NotNull StructureType structureType, @NotNull String unableToFindMessage, @NotNull Material... groundMaterial) {
     super(menu, id);
     this.structureType = structureType;
     this.unableToFindMessage = unableToFindMessage;
     this.groundMaterial = Arrays.asList(groundMaterial);
   }
 
-  public NetherPortalSpawnSetting(@Nonnull MenuType menu, @Nonnull StructureType structureType, @Nonnull String unableToFindMessage, @Nonnull Collection<Material> groundMaterial) {
+  public NetherPortalSpawnSetting(@NotNull MenuType menu, @NotNull StructureType structureType, @NotNull String unableToFindMessage, @NotNull Collection<Material> groundMaterial) {
     super(menu, id);
     this.structureType = structureType;
     this.unableToFindMessage = unableToFindMessage;
@@ -42,7 +42,7 @@ public abstract class NetherPortalSpawnSetting extends OneEnabledSetting {
   }
 
   @EventHandler
-  public void onNetherPortal(@Nonnull PlayerTeleportEvent event) {
+  public void onNetherPortal(@NotNull PlayerTeleportEvent event) {
     if (!isEnabled()) return;
     if (event.getCause() != TeleportCause.NETHER_PORTAL) return;
     if (event.getTo() == null) return;
@@ -68,7 +68,7 @@ public abstract class NetherPortalSpawnSetting extends OneEnabledSetting {
   }
 
   @Nullable
-  private Location getNetherPortal(@Nonnull Location overworldPortal, @Nonnull World nether) {
+  private Location getNetherPortal(@NotNull Location overworldPortal, @NotNull World nether) {
 
     // Look if the current portal was used before
     for (Entry<Location, Location> entry : netherPortalsByOverworldPortals.entrySet()) {
@@ -93,7 +93,7 @@ public abstract class NetherPortalSpawnSetting extends OneEnabledSetting {
   }
 
   @Nullable
-  private Location getOverworldPortal(@Nonnull Location netherPortal) {
+  private Location getOverworldPortal(@NotNull Location netherPortal) {
     for (Entry<Location, Location> entry : netherPortalsByOverworldPortals.entrySet()) {
       if (netherPortal.distance(entry.getValue()) < 100)
         return entry.getKey();
@@ -103,7 +103,7 @@ public abstract class NetherPortalSpawnSetting extends OneEnabledSetting {
 
 
   @Nullable
-  private Location findNearestStructurePart(@Nonnull Location structure) {
+  private Location findNearestStructurePart(@NotNull Location structure) {
 
     Chunk chunk = structure.getChunk();
     for (int x = 0; x < 16; x++) {
@@ -123,7 +123,7 @@ public abstract class NetherPortalSpawnSetting extends OneEnabledSetting {
 
   }
 
-  private void buildPortal(@Nonnull Location origin) {
+  private void buildPortal(@NotNull Location origin) {
 
     // Floor
     origin.clone().add(-1, -1, 0).getBlock().setType(Material.OBSIDIAN);
@@ -168,7 +168,7 @@ public abstract class NetherPortalSpawnSetting extends OneEnabledSetting {
   }
 
   @Override
-  public void loadGameState(@Nonnull Document document) {
+  public void loadGameState(@NotNull Document document) {
     super.loadGameState(document);
 
     Document portals = document.getDocument("portals");
@@ -183,7 +183,7 @@ public abstract class NetherPortalSpawnSetting extends OneEnabledSetting {
   }
 
   @Override
-  public void writeGameState(@Nonnull Document document) {
+  public void writeGameState(@NotNull Document document) {
     super.writeGameState(document);
 
     int index = 0;

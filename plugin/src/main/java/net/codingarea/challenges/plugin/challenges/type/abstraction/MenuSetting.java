@@ -21,9 +21,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
@@ -35,12 +35,12 @@ public abstract class MenuSetting extends Setting {
   private final List<Inventory> inventories = new ArrayList<>();
   private final Message title;
 
-  public MenuSetting(@Nonnull MenuType menu, @Nonnull Message title) {
+  public MenuSetting(@NotNull MenuType menu, @NotNull Message title) {
     super(menu);
     this.title = title;
   }
 
-  @Nonnull
+  @NotNull
   public static int[] getSlots(int amount) {
     switch (amount) {
       default:
@@ -99,7 +99,7 @@ public abstract class MenuSetting extends Setting {
 
   }
 
-  @Nonnull
+  @NotNull
   private Inventory createNewInventory(int page, int pagesAmount) {
     Inventory inventory = Bukkit.createInventory(MenuPosition.HOLDER, SettingsMenuGenerator.SIZE, InventoryTitleManager.getMenuSettingTitle(getType(), title.asString(), page, pagesAmount > 1));
     InventoryUtils.fillInventory(inventory, ItemBuilder.FILL_ITEM);
@@ -107,18 +107,18 @@ public abstract class MenuSetting extends Setting {
     return inventory;
   }
 
-  protected final void registerSetting(@Nonnull String name, @Nonnull SubSetting setting) {
+  protected final void registerSetting(@NotNull String name, @NotNull SubSetting setting) {
     if (name.equals("enabled")) throw new IllegalArgumentException();
     settings.put(name, setting);
     Challenges.getInstance().registerListener(setting);
   }
 
-  public final SubSetting getSetting(@Nonnull String name) {
+  public final SubSetting getSetting(@NotNull String name) {
     return settings.get(name);
   }
 
   @Override
-  public void handleClick(@Nonnull ChallengeMenuClickInfo info) {
+  public void handleClick(@NotNull ChallengeMenuClickInfo info) {
     if (info.isUpperItemClick()) {
       super.handleClick(info);
     } else if (isEnabled() && !info.isRightClick()) {
@@ -128,7 +128,7 @@ public abstract class MenuSetting extends Setting {
     }
   }
 
-  private void openMenu(@Nonnull ChallengeMenuClickInfo event) {
+  private void openMenu(@NotNull ChallengeMenuClickInfo event) {
     MenuPosition position = MenuPosition.get(event.getPlayer());
     if (position == null) position = new EmptyMenuPosition();
     Inventory inventory = event.getInventory();
@@ -136,7 +136,7 @@ public abstract class MenuSetting extends Setting {
     open(event.getPlayer(), inventory, position, 0);
   }
 
-  private void open(@Nonnull Player player, @Nonnull Inventory inventory, @Nonnull MenuPosition position, int page) {
+  private void open(@NotNull Player player, @NotNull Inventory inventory, @NotNull MenuPosition position, int page) {
     if (inventories.isEmpty()) generateInventories();
     if (inventories.isEmpty()) {
       SoundSample.BASS_OFF.play(player);
@@ -148,14 +148,14 @@ public abstract class MenuSetting extends Setting {
     player.openInventory(menu);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public final ItemBuilder createSettingsItem() {
     return isEnabled() ? DefaultItem.customize() : DefaultItem.disabled();
   }
 
   @Override
-  public void writeSettings(@Nonnull Document document) {
+  public void writeSettings(@NotNull Document document) {
     document.set("enabled", isEnabled());
     for (Entry<String, SubSetting> entry : settings.entrySet()) {
       Document subDocument = document.getDocument(entry.getKey());
@@ -164,7 +164,7 @@ public abstract class MenuSetting extends Setting {
   }
 
   @Override
-  public void loadSettings(@Nonnull Document document) {
+  public void loadSettings(@NotNull Document document) {
     setEnabled(document.getBoolean("enabled"));
     for (Entry<String, SubSetting> entry : settings.entrySet()) {
       if (!document.contains(entry.getKey())) continue;
@@ -201,7 +201,7 @@ public abstract class MenuSetting extends Setting {
       inventory.setItem(slot + 9, buildSettingsItem());
     }
 
-    @Nonnull
+    @NotNull
     private ItemStack buildSettingsItem() {
       ItemBuilder item = getSettingsItem();
       String[] description = getSettingsDescription();
@@ -213,10 +213,10 @@ public abstract class MenuSetting extends Setting {
       return item.build();
     }
 
-    @Nonnull
+    @NotNull
     public abstract ItemBuilder getDisplayItem();
 
-    @Nonnull
+    @NotNull
     public abstract ItemBuilder getSettingsItem();
 
     @Nullable
@@ -232,11 +232,11 @@ public abstract class MenuSetting extends Setting {
 
     public abstract void restoreDefaults();
 
-    public abstract void loadSettings(@Nonnull Document document);
+    public abstract void loadSettings(@NotNull Document document);
 
-    public abstract void writeSettings(@Nonnull Document document);
+    public abstract void writeSettings(@NotNull Document document);
 
-    public abstract void handleClick(@Nonnull ChallengeMenuClickInfo info);
+    public abstract void handleClick(@NotNull ChallengeMenuClickInfo info);
 
   }
 
@@ -247,32 +247,32 @@ public abstract class MenuSetting extends Setting {
     private final boolean enabledByDefault;
     private boolean enabled;
 
-    public BooleanSubSetting(@Nonnull Supplier<ItemBuilder> item) {
+    public BooleanSubSetting(@NotNull Supplier<ItemBuilder> item) {
       this(item, () -> null);
     }
 
-    public BooleanSubSetting(@Nonnull Supplier<ItemBuilder> item, boolean enabledByDefault) {
+    public BooleanSubSetting(@NotNull Supplier<ItemBuilder> item, boolean enabledByDefault) {
       this(item, () -> null, enabledByDefault);
     }
 
-    public BooleanSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Supplier<String[]> description) {
+    public BooleanSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Supplier<String[]> description) {
       this(item, description, false);
     }
 
-    public BooleanSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Supplier<String[]> description, boolean enabledByDefault) {
+    public BooleanSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Supplier<String[]> description, boolean enabledByDefault) {
       this.item = item;
       this.description = description;
       this.enabledByDefault = enabledByDefault;
       this.setEnabled(enabledByDefault);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public ItemBuilder getDisplayItem() {
       return item.get();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public ItemBuilder getSettingsItem() {
       return DefaultItem.status(enabled);
@@ -299,7 +299,7 @@ public abstract class MenuSetting extends Setting {
       this.setEnabled(enabledByDefault);
     }
 
-    @Nonnull
+    @NotNull
     public BooleanSubSetting setEnabled(boolean enabled) {
       if (this.enabled == enabled) return this;
       this.enabled = enabled;
@@ -312,18 +312,18 @@ public abstract class MenuSetting extends Setting {
     }
 
     @Override
-    public final void handleClick(@Nonnull ChallengeMenuClickInfo info) {
+    public final void handleClick(@NotNull ChallengeMenuClickInfo info) {
       this.setEnabled(!enabled);
       SoundSample.playStatusSound(info.getPlayer(), enabled);
     }
 
     @Override
-    public void loadSettings(@Nonnull Document document) {
+    public void loadSettings(@NotNull Document document) {
       this.setEnabled(document.getBoolean("enabled"));
     }
 
     @Override
-    public void writeSettings(@Nonnull Document document) {
+    public void writeSettings(@NotNull Document document) {
       document.set("enabled", enabled);
     }
 
@@ -345,19 +345,19 @@ public abstract class MenuSetting extends Setting {
     @Getter
     private int value;
 
-    public NumberSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description, @Nullable Function<Integer, String> name) {
+    public NumberSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description, @Nullable Function<Integer, String> name) {
       this(item, description, name, 64);
     }
 
-    public NumberSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description, @Nullable Function<Integer, String> name, int max) {
+    public NumberSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description, @Nullable Function<Integer, String> name, int max) {
       this(item, description, name, max, 1);
     }
 
-    public NumberSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description, @Nullable Function<Integer, String> name, int min, int max) {
+    public NumberSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description, @Nullable Function<Integer, String> name, int min, int max) {
       this(item, description, name, min, max, min);
     }
 
-    public NumberSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description, @Nullable Function<Integer, String> name, int min, int max, int defaultValue) {
+    public NumberSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description, @Nullable Function<Integer, String> name, int min, int max, int defaultValue) {
       if (max <= min) throw new IllegalArgumentException("max <= min");
       if (min < 0) throw new IllegalArgumentException("min < 0");
       if (defaultValue > max) throw new IllegalArgumentException("defaultValue > max");
@@ -371,45 +371,45 @@ public abstract class MenuSetting extends Setting {
       this.name = name;
     }
 
-    public NumberSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description) {
+    public NumberSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description) {
       this(item, description, null, 64, 1);
     }
 
-    public NumberSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description, int max) {
+    public NumberSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description, int max) {
       this(item, description, null, max, 1);
     }
 
-    public NumberSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description, int min, int max) {
+    public NumberSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description, int min, int max) {
       this(item, description, null, min, max, min);
     }
 
-    public NumberSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description, int min, int max, int defaultValue) {
+    public NumberSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description, int min, int max, int defaultValue) {
       this(item, description, null, min, max, defaultValue);
     }
 
-    public NumberSubSetting(@Nonnull Supplier<ItemBuilder> item) {
+    public NumberSubSetting(@NotNull Supplier<ItemBuilder> item) {
       this(item, value -> null);
     }
 
-    public NumberSubSetting(@Nonnull Supplier<ItemBuilder> item, int max) {
+    public NumberSubSetting(@NotNull Supplier<ItemBuilder> item, int max) {
       this(item, value -> null, max);
     }
 
-    public NumberSubSetting(@Nonnull Supplier<ItemBuilder> item, int min, int max) {
+    public NumberSubSetting(@NotNull Supplier<ItemBuilder> item, int min, int max) {
       this(item, value -> null, min, max);
     }
 
-    public NumberSubSetting(@Nonnull Supplier<ItemBuilder> item, int min, int max, int defaultValue) {
+    public NumberSubSetting(@NotNull Supplier<ItemBuilder> item, int min, int max, int defaultValue) {
       this(item, value -> null, min, max, defaultValue);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public ItemBuilder getDisplayItem() {
       return item.get();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public ItemBuilder getSettingsItem() {
       if (name != null)
@@ -448,7 +448,7 @@ public abstract class MenuSetting extends Setting {
     }
 
     @Override
-    public void handleClick(@Nonnull ChallengeMenuClickInfo info) {
+    public void handleClick(@NotNull ChallengeMenuClickInfo info) {
       int amount = info.isShiftClick() ? 10 : 1;
       int newValue = value;
       if (info.isRightClick()) {
@@ -467,12 +467,12 @@ public abstract class MenuSetting extends Setting {
     }
 
     @Override
-    public void loadSettings(@Nonnull Document document) {
+    public void loadSettings(@NotNull Document document) {
       this.setValue(document.getInt("value"));
     }
 
     @Override
-    public void writeSettings(@Nonnull Document document) {
+    public void writeSettings(@NotNull Document document) {
       document.set("value", value);
     }
 
@@ -486,47 +486,47 @@ public abstract class MenuSetting extends Setting {
     private final boolean enabledByDefault = false; // Implement in future
     private boolean enabled;
 
-    public NumberAndBooleanSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description, @Nullable Function<Integer, String> name) {
+    public NumberAndBooleanSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description, @Nullable Function<Integer, String> name) {
       super(item, description, name);
     }
 
-    public NumberAndBooleanSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description, @Nullable Function<Integer, String> name, int max) {
+    public NumberAndBooleanSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description, @Nullable Function<Integer, String> name, int max) {
       super(item, description, name, max);
     }
 
-    public NumberAndBooleanSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description, @Nullable Function<Integer, String> name, int min, int max) {
+    public NumberAndBooleanSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description, @Nullable Function<Integer, String> name, int min, int max) {
       super(item, description, name, min, max);
     }
 
-    public NumberAndBooleanSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description, @Nullable Function<Integer, String> name, int min, int max, int defaultValue) {
+    public NumberAndBooleanSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description, @Nullable Function<Integer, String> name, int min, int max, int defaultValue) {
       super(item, description, name, min, max, defaultValue);
     }
 
-    public NumberAndBooleanSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description) {
+    public NumberAndBooleanSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description) {
       super(item, description);
     }
 
-    public NumberAndBooleanSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description, int max) {
+    public NumberAndBooleanSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description, int max) {
       super(item, description, max);
     }
 
-    public NumberAndBooleanSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description, int min, int max) {
+    public NumberAndBooleanSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description, int min, int max) {
       super(item, description, min, max);
     }
 
-    public NumberAndBooleanSubSetting(@Nonnull Supplier<ItemBuilder> item, @Nonnull Function<Integer, String[]> description, int min, int max, int defaultValue) {
+    public NumberAndBooleanSubSetting(@NotNull Supplier<ItemBuilder> item, @NotNull Function<Integer, String[]> description, int min, int max, int defaultValue) {
       super(item, description, min, max, defaultValue);
     }
 
-    public NumberAndBooleanSubSetting(@Nonnull Supplier<ItemBuilder> item) {
+    public NumberAndBooleanSubSetting(@NotNull Supplier<ItemBuilder> item) {
       super(item);
     }
 
-    public NumberAndBooleanSubSetting(@Nonnull Supplier<ItemBuilder> item, int max) {
+    public NumberAndBooleanSubSetting(@NotNull Supplier<ItemBuilder> item, int max) {
       super(item, max);
     }
 
-    public NumberAndBooleanSubSetting(@Nonnull Supplier<ItemBuilder> item, int min, int max) {
+    public NumberAndBooleanSubSetting(@NotNull Supplier<ItemBuilder> item, int min, int max) {
       super(item, min, max);
     }
 
@@ -552,7 +552,7 @@ public abstract class MenuSetting extends Setting {
     }
 
     @Override
-    public void handleClick(@Nonnull ChallengeMenuClickInfo info) {
+    public void handleClick(@NotNull ChallengeMenuClickInfo info) {
       if (info.isUpperItemClick() || !enabled) {
         this.setEnabled(!enabled);
         SoundSample.playStatusSound(info.getPlayer(), enabled);
@@ -562,13 +562,13 @@ public abstract class MenuSetting extends Setting {
     }
 
     @Override
-    public void loadSettings(@Nonnull Document document) {
+    public void loadSettings(@NotNull Document document) {
       super.loadSettings(document);
       this.setEnabled(document.getBoolean("enabled"));
     }
 
     @Override
-    public void writeSettings(@Nonnull Document document) {
+    public void writeSettings(@NotNull Document document) {
       super.writeSettings(document);
       document.set("enabled", enabled);
     }
@@ -587,14 +587,14 @@ public abstract class MenuSetting extends Setting {
     private final Inventory inventoryBefore;
     private final int page;
 
-    public SettingMenuPosition(@Nonnull MenuPosition before, @Nonnull Inventory inventoryBefore, int page) {
+    public SettingMenuPosition(@NotNull MenuPosition before, @NotNull Inventory inventoryBefore, int page) {
       this.before = before;
       this.inventoryBefore = inventoryBefore;
       this.page = page;
     }
 
     @Override
-    public void handleClick(@Nonnull MenuClickInfo info) {
+    public void handleClick(@NotNull MenuClickInfo info) {
 
       if (info.getSlot() == SettingsMenuGenerator.NAVIGATION_SLOTS[0]) {
         if (page == 0) {

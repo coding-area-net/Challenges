@@ -17,9 +17,9 @@ import net.codingarea.commons.database.sql.sqlite.SQLiteDatabase;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
@@ -125,11 +125,11 @@ public final class DatabaseManager {
   }
 
   @Nullable
-  private Tuple<String, JavaPlugin> getDatabaseForName(@Nonnull String type) throws ClassNotFoundException {
+  private Tuple<String, JavaPlugin> getDatabaseForName(@NotNull String type) throws ClassNotFoundException {
     return registry.get(type);
   }
 
-  public void registerDatabase(@Nonnull String name, @Nonnull Class<? extends Database> classOfDatabase, @Nonnull JavaPlugin provider) {
+  public void registerDatabase(@NotNull String name, @NotNull Class<? extends Database> classOfDatabase, @NotNull JavaPlugin provider) {
     registry.put(name, new Tuple<>(classOfDatabase.getName(), provider));
   }
 
@@ -141,7 +141,7 @@ public final class DatabaseManager {
     return database != null;
   }
 
-  private boolean checkDependencies(@Nonnull String... classes) {
+  private boolean checkDependencies(@NotNull String... classes) {
     try {
       for (String name : classes) {
         Class.forName(name);

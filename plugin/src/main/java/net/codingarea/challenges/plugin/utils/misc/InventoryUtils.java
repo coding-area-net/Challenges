@@ -15,9 +15,9 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,49 +37,49 @@ public final class InventoryUtils {
   private InventoryUtils() {
   }
 
-  public static void fillInventory(@Nonnull Inventory inventory, @Nullable ItemStack item) {
+  public static void fillInventory(@NotNull Inventory inventory, @Nullable ItemStack item) {
     for (int i = 0; i < inventory.getSize(); i++) {
       inventory.setItem(i, item);
     }
   }
 
-  public static void fillInventory(@Nonnull Inventory inventory, @Nullable ItemStack item, @Nonnull int... slots) {
+  public static void fillInventory(@NotNull Inventory inventory, @Nullable ItemStack item, @NotNull int... slots) {
     for (int i : slots) {
       inventory.setItem(i, item);
     }
   }
 
-  public static void setNavigationItemsToInventory(@Nonnull List<Inventory> inventories, @Nonnull int[] navigationSlots) {
+  public static void setNavigationItemsToInventory(@NotNull List<Inventory> inventories, @NotNull int[] navigationSlots) {
     setNavigationItemsToInventory(inventories, navigationSlots, true);
   }
 
-  public static void setNavigationItemsToInventory(@Nonnull List<Inventory> inventories, @Nonnull int[] navigationSlots, boolean goBackExit) {
+  public static void setNavigationItemsToInventory(@NotNull List<Inventory> inventories, @NotNull int[] navigationSlots, boolean goBackExit) {
     setNavigationItems(inventories, navigationSlots, goBackExit, InventorySetter.INVENTORY);
   }
 
-  public static void setNavigationItemsToFrame(@Nonnull List<AnimationFrame> frames, @Nonnull int[] navigationSlots) {
+  public static void setNavigationItemsToFrame(@NotNull List<AnimationFrame> frames, @NotNull int[] navigationSlots) {
     setNavigationItemsToFrame(frames, navigationSlots, true);
   }
 
-  public static void setNavigationItemsToFrame(@Nonnull List<AnimationFrame> inventories, @Nonnull int[] navigationSlots, boolean goBackExit) {
+  public static void setNavigationItemsToFrame(@NotNull List<AnimationFrame> inventories, @NotNull int[] navigationSlots, boolean goBackExit) {
     setNavigationItems(inventories, navigationSlots, goBackExit, InventorySetter.FRAME);
   }
 
-  public static void setNavigationItemsToFrame(@Nonnull AnimationFrame frame, @Nonnull int[] navigationSlots, boolean goBackExit, int index, int size) {
+  public static void setNavigationItemsToFrame(@NotNull AnimationFrame frame, @NotNull int[] navigationSlots, boolean goBackExit, int index, int size) {
     setNavigationItems(frame, navigationSlots, goBackExit, InventorySetter.FRAME, index, size);
   }
 
-  public static <I> void setNavigationItems(@Nonnull List<I> inventories, @Nonnull int[] navigationSlots, boolean goBackExit, @Nonnull InventorySetter<I> setter) {
+  public static <I> void setNavigationItems(@NotNull List<I> inventories, @NotNull int[] navigationSlots, boolean goBackExit, @NotNull InventorySetter<I> setter) {
     for (int i = 0; i < inventories.size(); i++) {
       setNavigationItems(inventories.get(i), navigationSlots, goBackExit, setter, i, inventories.size());
     }
   }
 
-  public static <I> void setNavigationItems(@Nonnull I inventory, @Nonnull int[] navigationSlots, boolean goBackExit, @Nonnull InventorySetter<I> setter, int index, int size) {
+  public static <I> void setNavigationItems(@NotNull I inventory, @NotNull int[] navigationSlots, boolean goBackExit, @NotNull InventorySetter<I> setter, int index, int size) {
     setNavigationItems(inventory, navigationSlots, goBackExit, setter, index, size, DefaultItem.navigateBack(), DefaultItem.navigateNext());
   }
 
-  public static <I> void setNavigationItems(@Nonnull I inventory, @Nonnull int[] navigationSlots, boolean goBackExit, @Nonnull InventorySetter<I> setter, int index, int size, ItemBuilder navigateBack, ItemBuilder navigateNext) {
+  public static <I> void setNavigationItems(@NotNull I inventory, @NotNull int[] navigationSlots, boolean goBackExit, @NotNull InventorySetter<I> setter, int index, int size, ItemBuilder navigateBack, ItemBuilder navigateNext) {
     if (navigationSlots.length >= 1) {
       ItemBuilder left = index == 0 && goBackExit ? DefaultItem.navigateBackMainMenu() : navigateBack;
       setter.set(inventory, navigationSlots[0], left);
@@ -88,14 +88,14 @@ public final class InventoryUtils {
       setter.set(inventory, navigationSlots[1], navigateNext);
   }
 
-  public static boolean isEmpty(@Nonnull Inventory inventory) {
+  public static boolean isEmpty(@NotNull Inventory inventory) {
     for (ItemStack content : inventory.getContents()) {
       if (content != null) return false;
     }
     return true;
   }
 
-  public static int getRandomEmptySlot(@Nonnull Inventory inventory) {
+  public static int getRandomEmptySlot(@NotNull Inventory inventory) {
     List<Integer> emptySlots = new ArrayList<>();
 
     for (int slot = 0; slot < inventory.getSize(); slot++) {
@@ -109,7 +109,7 @@ public final class InventoryUtils {
     return emptySlots.get(ThreadLocalRandom.current().nextInt(emptySlots.size()));
   }
 
-  public static int getRandomFullSlot(@Nonnull Inventory inventory) {
+  public static int getRandomFullSlot(@NotNull Inventory inventory) {
     List<Integer> fullSlots = new ArrayList<>();
 
     for (int slot = 0; slot < inventory.getSize(); slot++) {
@@ -124,7 +124,7 @@ public final class InventoryUtils {
     return fullSlots.get(ThreadLocalRandom.current().nextInt(fullSlots.size()));
   }
 
-  public static int getRandomSlot(@Nonnull Inventory inventory) {
+  public static int getRandomSlot(@NotNull Inventory inventory) {
     List<Integer> slots = new ArrayList<>();
 
     for (int slot = 0; slot < inventory.getSize(); slot++) {
@@ -138,17 +138,17 @@ public final class InventoryUtils {
     return slots.get(ThreadLocalRandom.current().nextInt(slots.size()));
   }
 
-  public static void dropItemByPlayer(@Nonnull Location location, @Nonnull ItemStack itemStack) {
+  public static void dropItemByPlayer(@NotNull Location location, @NotNull ItemStack itemStack) {
     if (location.getWorld() == null) return;
     Item droppedItem = location.getWorld().dropItem(location.clone().add(0, 1.4, 0), itemStack);
     droppedItem.setVelocity(location.getDirection().multiply(0.4));
   }
 
-  public static void dropOrGiveItem(@Nonnull Inventory inventory, @Nonnull Location location, @Nonnull Material material) {
+  public static void dropOrGiveItem(@NotNull Inventory inventory, @NotNull Location location, @NotNull Material material) {
     dropOrGiveItem(inventory, location, new ItemStack(material));
   }
 
-  public static void dropOrGiveItem(@Nonnull Inventory inventory, @Nonnull Location location, @Nonnull ItemStack itemStack) {
+  public static void dropOrGiveItem(@NotNull Inventory inventory, @NotNull Location location, @NotNull ItemStack itemStack) {
     location = location.clone();
     if (inventory.firstEmpty() == -1) {
       if (location.getWorld() == null)
@@ -159,17 +159,17 @@ public final class InventoryUtils {
     inventory.addItem(itemStack);
   }
 
-  public static void removeRandomItem(@Nonnull Inventory inventory) {
+  public static void removeRandomItem(@NotNull Inventory inventory) {
     int slot = InventoryUtils.getRandomFullSlot(inventory);
     if (slot == -1) return;
     inventory.setItem(slot, null);
   }
 
-  public static void giveItem(@Nonnull Player player, @Nonnull ItemStack itemStack) {
+  public static void giveItem(@NotNull Player player, @NotNull ItemStack itemStack) {
     giveItem(player.getInventory(), player.getLocation(), itemStack);
   }
 
-  public static void giveItem(@Nonnull Inventory inventory, @Nonnull Location locationToDrop, @Nonnull ItemStack itemStack) {
+  public static void giveItem(@NotNull Inventory inventory, @NotNull Location locationToDrop, @NotNull ItemStack itemStack) {
     if (inventory.firstEmpty() == -1) {
       dropItemByPlayer(locationToDrop, itemStack);
       return;
@@ -218,7 +218,7 @@ public final class InventoryUtils {
     InventorySetter<AnimationFrame> FRAME = AnimationFrame::setItem;
     InventorySetter<Inventory> INVENTORY = (inventory, slot, item) -> inventory.setItem(slot, item.build());
 
-    void set(@Nonnull I inventory, int slot, @Nonnull ItemBuilder item);
+    void set(@NotNull I inventory, int slot, @NotNull ItemBuilder item);
 
   }
 

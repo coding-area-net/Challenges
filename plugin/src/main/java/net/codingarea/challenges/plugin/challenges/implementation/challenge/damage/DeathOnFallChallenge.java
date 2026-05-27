@@ -12,8 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class DeathOnFallChallenge extends Setting {
@@ -23,14 +22,14 @@ public class DeathOnFallChallenge extends Setting {
     setCategory(SettingCategory.DAMAGE);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.FEATHER, Message.forName("item-death-on-fall-challenge"));
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onEntityDamage(@Nonnull EntityDamageEvent event) {
+  public void onEntityDamage(@NotNull EntityDamageEvent event) {
     if (!(event.getEntity() instanceof Player)) return;
     if (!shouldExecuteEffect()) return;
     Player player = (Player) event.getEntity();

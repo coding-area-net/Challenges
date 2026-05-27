@@ -2,8 +2,8 @@ package net.codingarea.commons.common.concurrent.cache;
 
 import net.codingarea.commons.common.annotations.ReplaceWith;
 import net.codingarea.commons.common.collection.NamedThreadFactory;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -19,7 +19,7 @@ public interface ICache<K, V> {
 
   ScheduledExecutorService EXECUTOR = Executors.newScheduledThreadPool(2, new NamedThreadFactory(threadId -> String.format("CacheTask-%s", threadId)));
 
-  boolean contains(@Nonnull K key);
+  boolean contains(@NotNull K key);
 
   int size();
 
@@ -29,10 +29,10 @@ public interface ICache<K, V> {
 
   void clear();
 
-  @Nonnull
+  @NotNull
   Map<K, V> values();
 
-  default void forEach(@Nonnull BiConsumer<? super K, ? super V> action) {
+  default void forEach(@NotNull BiConsumer<? super K, ? super V> action) {
     values().forEach(action);
   }
 

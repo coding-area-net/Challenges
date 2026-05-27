@@ -5,8 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class PlayerSneakTrigger extends ChallengeTrigger {
 
@@ -20,7 +19,7 @@ public class PlayerSneakTrigger extends ChallengeTrigger {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onJump(@Nonnull PlayerToggleSneakEvent event) {
+  public void onJump(@NotNull PlayerToggleSneakEvent event) {
     if (event.isSneaking()) {
       createData().entity(event.getPlayer()).execute();
     }

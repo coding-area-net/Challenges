@@ -13,8 +13,8 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
@@ -25,13 +25,13 @@ public final class ChallengeBossBar {
   private BiConsumer<BossBarInstance, Player> content = (bossbar, player) -> {
   };
 
-  private BossBar createBossbar(@Nonnull BossBarInstance instance) {
+  private BossBar createBossbar(@NotNull BossBarInstance instance) {
     BossBar bossbar = Bukkit.createBossBar(instance.title.toPlainText(), instance.color, instance.style);
     bossbar.setProgress(instance.progress);
     return bossbar;
   }
 
-  private void apply(@Nonnull BossBar bossbar, @Nonnull BossBarInstance instance) {
+  private void apply(@NotNull BossBar bossbar, @NotNull BossBarInstance instance) {
     if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_20_5)) {
       bossbar.setTitle(instance.title.toPlainText());
     } else {
@@ -43,11 +43,11 @@ public final class ChallengeBossBar {
     bossbar.setVisible(instance.visible);
   }
 
-  public void setContent(@Nonnull BiConsumer<BossBarInstance, Player> content) {
+  public void setContent(@NotNull BiConsumer<BossBarInstance, Player> content) {
     this.content = content;
   }
 
-  public void applyHide(@Nonnull Player player) {
+  public void applyHide(@NotNull Player player) {
     BossBar bossbar = bossbars.get(player);
     if (bossbar == null) return;
     bossbar.removePlayer(player);
@@ -57,7 +57,7 @@ public final class ChallengeBossBar {
     Bukkit.getOnlinePlayers().forEach(this::update);
   }
 
-  public void update(@Nonnull Player player) {
+  public void update(@NotNull Player player) {
     if (!isShown()) {
       Logger.warn("Tried to update bossbar which is not shown");
       return;
@@ -109,19 +109,19 @@ public final class ChallengeBossBar {
     private BossBarInstance() {
     }
 
-    @Nonnull
-    public BossBarInstance setTitle(@Nonnull String title) {
+    @NotNull
+    public BossBarInstance setTitle(@NotNull String title) {
       this.title = new TextComponent(title);
       return this;
     }
 
-    @Nonnull
-    public BossBarInstance setTitle(@Nonnull BaseComponent title) {
+    @NotNull
+    public BossBarInstance setTitle(@NotNull BaseComponent title) {
       this.title = title;
       return this;
     }
 
-    @Nonnull
+    @NotNull
     public BossBarInstance setProgress(double progress) {
       if (progress < 0 || progress > 1)
         throw new IllegalArgumentException("Progress must be between 0 and 1; Got " + progress);
@@ -129,19 +129,19 @@ public final class ChallengeBossBar {
       return this;
     }
 
-    @Nonnull
-    public BossBarInstance setColor(@Nonnull BarColor color) {
+    @NotNull
+    public BossBarInstance setColor(@NotNull BarColor color) {
       this.color = color;
       return this;
     }
 
-    @Nonnull
-    public BossBarInstance setStyle(@Nonnull BarStyle style) {
+    @NotNull
+    public BossBarInstance setStyle(@NotNull BarStyle style) {
       this.style = style;
       return this;
     }
 
-    @Nonnull
+    @NotNull
     public BossBarInstance setVisible(boolean visible) {
       this.visible = visible;
       return this;

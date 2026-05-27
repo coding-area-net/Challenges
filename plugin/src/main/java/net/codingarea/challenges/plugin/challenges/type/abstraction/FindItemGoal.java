@@ -11,7 +11,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public abstract class FindItemGoal extends SettingGoal {
 
   }
 
-  private void checkItem(ItemStack itemStack, @Nonnull Player player) {
+  private void checkItem(ItemStack itemStack, @NotNull Player player) {
     if (itemStack == null) return;
     if (itemStack.getType() != searchedItem) return;
     ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, () -> Collections.singletonList(player));

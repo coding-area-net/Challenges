@@ -2,9 +2,7 @@ package net.codingarea.challenges.plugin.challenges.type.helper;
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.commons.common.config.Document;
-
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class ChallengeConfigHelper {
 
@@ -17,8 +15,7 @@ public final class ChallengeConfigHelper {
   private ChallengeConfigHelper() {
   }
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   public static Document getSettingsDocument() {
     return settingsDocument;
   }

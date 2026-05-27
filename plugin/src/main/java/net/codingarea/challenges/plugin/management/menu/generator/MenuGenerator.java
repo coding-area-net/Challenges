@@ -10,9 +10,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
 import java.util.List;
 
 @Getter
@@ -26,7 +25,7 @@ public abstract class MenuGenerator {
 
   public abstract List<Inventory> getInventories();
 
-  public abstract MenuPosition getMenuPosition(@Nonnegative int page);
+  public abstract MenuPosition getMenuPosition(int page);
 
   public boolean hasInventoryOpen(Player player) {
     MenuPosition menuPosition = MenuPosition.get(player);
@@ -50,7 +49,7 @@ public abstract class MenuGenerator {
     }
   }
 
-  public void open(@Nonnull Player player, @Nonnegative int page) {
+  public void open(@NotNull Player player, int page) {
     List<Inventory> inventories = getInventories();
     if (inventories == null || inventories.isEmpty()) generateInventories();
     if (inventories == null || inventories.isEmpty()) return;

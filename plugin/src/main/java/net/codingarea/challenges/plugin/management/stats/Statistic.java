@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.management.stats;
 
 import net.codingarea.commons.common.collection.NumberFormatter;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.function.Function;
 
 public enum Statistic {
@@ -20,11 +20,11 @@ public enum Statistic {
 
   private final Display display;
 
-  Statistic(@Nonnull Display display) {
+  Statistic(@NotNull Display display) {
     this.display = display;
   }
 
-  @Nonnull
+  @NotNull
   public String formatChat(double value) {
     return display.formatChat(value);
   }
@@ -36,11 +36,11 @@ public enum Statistic {
 
     private final Function<Double, String> chatFormat;
 
-    Display(@Nonnull Function<Double, String> chatFormat) {
+    Display(@NotNull Function<Double, String> chatFormat) {
       this.chatFormat = chatFormat;
     }
 
-    @Nonnull
+    @NotNull
     public String formatChat(double value) {
       return chatFormat.apply(value);
     }

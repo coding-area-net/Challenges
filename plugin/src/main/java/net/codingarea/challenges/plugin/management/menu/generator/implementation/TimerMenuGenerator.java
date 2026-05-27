@@ -23,9 +23,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,14 +79,14 @@ public class TimerMenuGenerator extends MenuGenerator {
     inventory.setItem(SECOND_SLOTS[1], getTimeItem(seconds, Message.forName("second"), Message.forName("seconds")));
   }
 
-  private void setTimeNavigation(@Nonnull int[] slots, @Nonnull Message singular, @Nonnull Message plural) {
+  private void setTimeNavigation(@NotNull int[] slots, @NotNull Message singular, @NotNull Message plural) {
     Inventory inventory = inventories.get(1);
     inventory.setItem(slots[0], getNavigationItem(true, singular, plural));
     inventory.setItem(slots[2], getNavigationItem(false, singular, plural));
   }
 
-  @Nonnull
-  private ItemStack getNavigationItem(boolean up, @Nonnull Message singular, @Nonnull Message plural) {
+  @NotNull
+  private ItemStack getNavigationItem(boolean up, @NotNull Message singular, @NotNull Message plural) {
     return new ItemBuilder(up ? Material.DARK_OAK_BUTTON : Material.STONE_BUTTON).name(
       " ",
       "§7§o[Click] §8» §" + (up ? "a+" : "c-") + "1 " + singular,
@@ -96,8 +95,8 @@ public class TimerMenuGenerator extends MenuGenerator {
     ).hideAttributes().build();
   }
 
-  @Nonnull
-  private ItemStack getTimeItem(long value, @Nonnull Message singular, @Nonnull Message plural) {
+  @NotNull
+  private ItemStack getTimeItem(long value, @NotNull Message singular, @NotNull Message plural) {
     return new ItemBuilder(Material.CLOCK).name(
       "§8» §7" + (value == 1 ? singular : plural) + ": §e" + value,
       " ",
@@ -106,7 +105,7 @@ public class TimerMenuGenerator extends MenuGenerator {
     ).hideAttributes().amount((int) Math.max(value, 1)).build();
   }
 
-  @Nonnull
+  @NotNull
   private Inventory createNewInventory(int page) {
     Inventory inventory = Bukkit.createInventory(MenuPosition.HOLDER, SIZE, InventoryTitleManager.getTitle(MenuType.TIMER, page));
     InventoryUtils.fillInventory(inventory, ItemBuilder.FILL_ITEM);
@@ -143,12 +142,12 @@ public class TimerMenuGenerator extends MenuGenerator {
 
     private final int page;
 
-    public TimerMenuPosition(@Nonnegative int page) {
+    public TimerMenuPosition(int page) {
       this.page = page;
     }
 
     @Override
-    public void handleClick(@Nonnull MenuClickInfo info) {
+    public void handleClick(@NotNull MenuClickInfo info) {
 
       if (info.getSlot() == NAVIGATION_SLOTS[0]) {
         SoundSample.CLICK.play(info.getPlayer());
@@ -212,13 +211,13 @@ public class TimerMenuGenerator extends MenuGenerator {
 
     }
 
-    private boolean playNoPermissionsEffect(@Nonnull Player player) {
+    private boolean playNoPermissionsEffect(@NotNull Player player) {
       if (mayManageTimer(player)) return false;
       Challenges.getInstance().getMenuManager().playNoPermissionsEffect(player);
       return true;
     }
 
-    private boolean mayManageTimer(@Nonnull Player player) {
+    private boolean mayManageTimer(@NotNull Player player) {
       return player.hasPermission("challenges.timer");
     }
 

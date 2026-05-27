@@ -22,9 +22,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +39,7 @@ public class ForceMobChallenge extends CompletableForceChallenge {
     setCategory(SettingCategory.FORCE);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.DIAMOND_BOOTS, Message.forName("item-force-mob-challenge"));
@@ -57,7 +56,7 @@ public class ForceMobChallenge extends CompletableForceChallenge {
     ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 - 30, getValue() * 60 + 30);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   protected BiConsumer<BossBarInstance, Player> setupBossbar() {
     return (bossbar, player) -> {
@@ -78,7 +77,7 @@ public class ForceMobChallenge extends CompletableForceChallenge {
   }
 
   @Override
-  protected void broadcastSuccessMessage(@Nonnull Player player) {
+  protected void broadcastSuccessMessage(@NotNull Player player) {
     Message.forName("force-mob-success").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), entity);
   }
 
@@ -103,7 +102,7 @@ public class ForceMobChallenge extends CompletableForceChallenge {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onKill(@Nonnull EntityDeathEvent event) {
+  public void onKill(@NotNull EntityDeathEvent event) {
     LivingEntity entity = event.getEntity();
     if (entity.getType() != this.entity) return;
     Player killer = entity.getKiller();

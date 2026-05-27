@@ -11,8 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerExpChangeEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class NoExpChallenge extends Setting {
 
@@ -29,7 +28,7 @@ public class NoExpChallenge extends Setting {
     ChallengeHelper.kill(event.getPlayer());
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.EXPERIENCE_BOTTLE, Message.forName("item-no-exp-challenge"));

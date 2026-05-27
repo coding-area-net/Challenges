@@ -2,10 +2,9 @@ package net.codingarea.commons.database;
 
 import net.codingarea.commons.common.misc.ReflectionUtils;
 import net.codingarea.commons.common.misc.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Arrays;
 
 public final class SQLColumn {
@@ -113,7 +112,7 @@ public final class SQLColumn {
   private final String type;
   private final String param;
 
-  public SQLColumn(@Nonnull String name, @Nonnull String type, @Nullable String param) {
+  public SQLColumn(@NotNull String name, @NotNull String type, @Nullable String param) {
     if (name.contains(" ")) throw new IllegalArgumentException("Column name cannot contain spaces");
     if (type.contains(" ")) throw new IllegalArgumentException("Column type cannot contain spaces");
 
@@ -122,44 +121,44 @@ public final class SQLColumn {
     this.param = param;
   }
 
-  public SQLColumn(@Nonnull String name, @Nonnull String type, @Nonnegative int size) {
+  public SQLColumn(@NotNull String name, @NotNull String type, int size) {
     this(name, type, String.valueOf(size));
   }
 
-  public SQLColumn(@Nonnull String name, @Nonnull String type, @Nonnegative int size, @Nonnegative int d) {
+  public SQLColumn(@NotNull String name, @NotNull String type, int size, int d) {
     this(name, type, String.valueOf(size), String.valueOf(d));
   }
 
-  public SQLColumn(@Nonnull String name, @Nonnull String type, @Nonnull String... params) {
+  public SQLColumn(@NotNull String name, @NotNull String type, @NotNull String... params) {
     this(name, type, StringUtils.getArrayAsString(params, ", "));
   }
 
-  public SQLColumn(@Nonnull String name, @Nonnull Type type, @Nullable String param) {
+  public SQLColumn(@NotNull String name, @NotNull Type type, @Nullable String param) {
     this(name, type.name(), param);
   }
 
-  public SQLColumn(@Nonnull String name, @Nonnull Type type, @Nonnegative int size) {
+  public SQLColumn(@NotNull String name, @NotNull Type type, int size) {
     this(name, type.name(), size);
   }
 
-  public SQLColumn(@Nonnull String name, @Nonnull Type type, @Nonnegative int size, @Nonnegative int d) {
+  public SQLColumn(@NotNull String name, @NotNull Type type, int size, int d) {
     this(name, type.name(), size, d);
   }
 
-  public SQLColumn(@Nonnull String name, @Nonnull Type type, @Nonnull String... params) {
+  public SQLColumn(@NotNull String name, @NotNull Type type, @NotNull String... params) {
     this(name, type.name(), params);
   }
 
-  public SQLColumn(@Nonnull String name, @Nonnull Type type, @Nonnull Type... types) {
+  public SQLColumn(@NotNull String name, @NotNull Type type, @NotNull Type... types) {
     this(name, type, Arrays.stream(types).map(Type::name).toArray(String[]::new));
   }
 
-  @Nonnull
+  @NotNull
   public String getName() {
     return name;
   }
 
-  @Nonnull
+  @NotNull
   public String getType() {
     return type;
   }

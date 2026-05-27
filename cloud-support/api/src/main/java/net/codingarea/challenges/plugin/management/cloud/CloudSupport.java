@@ -1,19 +1,19 @@
 package net.codingarea.challenges.plugin.management.cloud;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.UUID;
 
 public interface CloudSupport {
 
-  @Nonnull
-  String getColoredName(@Nonnull Player player);
+  @NotNull
+  String getColoredName(@NotNull Player player);
 
-  @Nonnull
-  String getColoredName(@Nonnull UUID uuid);
+  @NotNull
+  String getColoredName(@NotNull UUID uuid);
 
-  boolean hasNameFor(@Nonnull UUID uuid);
+  boolean hasNameFor(@NotNull UUID uuid);
 
   void setIngame();
 

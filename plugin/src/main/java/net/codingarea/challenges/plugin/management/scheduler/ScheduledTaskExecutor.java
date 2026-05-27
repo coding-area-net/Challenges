@@ -4,15 +4,14 @@ import net.codingarea.challenges.plugin.Challenges;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 final class ScheduledTaskExecutor extends AbstractTaskExecutor {
 
   private final ScheduledTaskConfig config;
   private BukkitTask task;
 
-  ScheduledTaskExecutor(@Nonnull ScheduledTaskConfig config) {
+  ScheduledTaskExecutor(@NotNull ScheduledTaskConfig config) {
     this.config = config;
   }
 
@@ -30,7 +29,7 @@ final class ScheduledTaskExecutor extends AbstractTaskExecutor {
       scheduler.runTaskTimer(plugin, this, 0, config.getRate());
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ScheduledTaskConfig getConfig() {
     return config;

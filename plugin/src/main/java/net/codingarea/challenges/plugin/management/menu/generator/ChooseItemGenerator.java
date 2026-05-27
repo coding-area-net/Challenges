@@ -11,9 +11,8 @@ import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
 import java.util.LinkedHashMap;
 
 public abstract class ChooseItemGenerator extends MultiPageMenuGenerator {
@@ -24,17 +23,17 @@ public abstract class ChooseItemGenerator extends MultiPageMenuGenerator {
     this.items = items;
   }
 
-  private static int getNextMiddleSlot(@Nonnegative int currentSlot) {
+  private static int getNextMiddleSlot(int currentSlot) {
     if (currentSlot >= 53) return currentSlot;
     if (isSideSlot(currentSlot)) return getNextMiddleSlot(currentSlot + 1);
     return currentSlot;
   }
 
-  private static boolean isSideSlot(@Nonnegative int slot) {
+  private static boolean isSideSlot(int slot) {
     return slot % 9 == 0 || slot % 9 == 8;
   }
 
-  private static boolean isTopOrBottomSlot(@Nonnegative int slot) {
+  private static boolean isTopOrBottomSlot(int slot) {
     return slot < 9 || slot > 35;
   }
 
@@ -43,7 +42,7 @@ public abstract class ChooseItemGenerator extends MultiPageMenuGenerator {
     return new GeneratorMenuPosition(this, page) {
 
       @Override
-      public void handleClick(@Nonnull MenuClickInfo info) {
+      public void handleClick(@NotNull MenuClickInfo info) {
 
         if (InventoryUtils.handleNavigationClicking(generator, getNavigationSlots(page), page, info, () -> onBackToMenuItemClick(info.getPlayer()))) {
           return;
@@ -91,7 +90,7 @@ public abstract class ChooseItemGenerator extends MultiPageMenuGenerator {
   }
 
   @Override
-  public void generatePage(@Nonnull Inventory inventory, int page) {
+  public void generatePage(@NotNull Inventory inventory, int page) {
 
     int lastSlot = 10;
     int startIndex = getItemsPerPage() * page;

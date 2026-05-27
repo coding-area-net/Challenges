@@ -16,9 +16,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -88,7 +87,7 @@ public class CustomChallenge extends Setting {
     return builder.build();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.BARRIER);
@@ -100,7 +99,7 @@ public class CustomChallenge extends Setting {
   }
 
   @Override
-  public void writeSettings(@Nonnull Document document) {
+  public void writeSettings(@NotNull Document document) {
     super.writeSettings(document);
 
     document.set("material", material == null ? null : material.name());
@@ -167,7 +166,7 @@ public class CustomChallenge extends Setting {
     action.execute(challengeExecutionData, subActions);
   }
 
-  public void applySettings(@Nonnull Material material, @Nonnull String name, @Nonnull ChallengeTrigger trigger,
+  public void applySettings(@NotNull Material material, @NotNull String name, @NotNull ChallengeTrigger trigger,
                             Map<String, String[]> subTriggers, ChallengeAction action, Map<String, String[]> subActions) {
     this.material = material;
     this.name = name;
@@ -181,7 +180,7 @@ public class CustomChallenge extends Setting {
     return uuid;
   }
 
-  @Nonnull
+  @NotNull
   public String getDisplayName() {
     return name;
   }

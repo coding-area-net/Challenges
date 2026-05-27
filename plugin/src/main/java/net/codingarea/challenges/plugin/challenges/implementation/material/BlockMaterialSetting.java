@@ -17,7 +17,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Arrays;
 
 public class BlockMaterialSetting extends Setting {
@@ -27,7 +26,7 @@ public class BlockMaterialSetting extends Setting {
   private final Object[] replacements;
   private final Material[] materials;
 
-  public BlockMaterialSetting(@Nonnull String name, @Nonnull ItemBuilder preset, @Nonnull Object[] replacements, @Nonnull Material... materials) {
+  public BlockMaterialSetting(@NotNull String name, @NotNull ItemBuilder preset, @NotNull Object[] replacements, @NotNull Material... materials) {
     super(MenuType.ITEMS, true);
     this.name = name;
     this.preset = preset;
@@ -35,7 +34,7 @@ public class BlockMaterialSetting extends Setting {
     this.materials = materials;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return preset.clone().applyFormat(Message.forName(name).asItemDescription(replacements));
@@ -46,7 +45,7 @@ public class BlockMaterialSetting extends Setting {
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onPlayerInteract(@Nonnull PlayerInteractEvent event) {
+  public void onPlayerInteract(@NotNull PlayerInteractEvent event) {
     if (isEnabled()) return;
     if (ChallengeAPI.isWorldInUse()) return;
     if (ignorePlayer(event.getPlayer())) return;
@@ -62,7 +61,7 @@ public class BlockMaterialSetting extends Setting {
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onPlayerInventoryClick(@Nonnull PlayerInventoryClickEvent event) {
+  public void onPlayerInventoryClick(@NotNull PlayerInventoryClickEvent event) {
     if (isEnabled()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (ChallengeAPI.isWorldInUse()) return;
@@ -76,7 +75,7 @@ public class BlockMaterialSetting extends Setting {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerPickupItem(@Nonnull PlayerPickupItemEvent event) {
+  public void onPlayerPickupItem(@NotNull PlayerPickupItemEvent event) {
     if (isEnabled()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (ChallengeAPI.isWorldInUse()) return;
@@ -84,7 +83,7 @@ public class BlockMaterialSetting extends Setting {
     event.setCancelled(true);
   }
 
-  public void dropMaterial(@Nonnull Location location, @Nonnull Inventory inventory) {
+  public void dropMaterial(@NotNull Location location, @NotNull Inventory inventory) {
     for (int slot = 0; slot < inventory.getSize(); slot++) {
       ItemStack item = inventory.getItem(slot);
       if (item == null) continue;

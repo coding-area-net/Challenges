@@ -5,9 +5,9 @@ import com.google.gson.JsonArray;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.PropertyHelper;
 import net.codingarea.commons.common.misc.GsonUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.awt.*;
 import java.io.IOException;
 import java.io.Writer;
@@ -26,12 +26,12 @@ public class MapDocument extends AbstractDocument {
 
   private final Map<String, Object> values;
 
-  public MapDocument(@Nonnull Map<String, Object> values) {
+  public MapDocument(@NotNull Map<String, Object> values) {
     Preconditions.checkNotNull(values, "Map cannot be null");
     this.values = values;
   }
 
-  public MapDocument(@Nonnull Map<String, Object> values, @Nonnull Document root, @Nullable Document parent) {
+  public MapDocument(@NotNull Map<String, Object> values, @NotNull Document root, @Nullable Document parent) {
     super(root, parent);
     this.values = values;
   }
@@ -45,9 +45,9 @@ public class MapDocument extends AbstractDocument {
     return false;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Document getDocument0(@Nonnull String path, @Nonnull Document root, @Nullable Document parent) {
+  public Document getDocument0(@NotNull String path, @NotNull Document root, @Nullable Document parent) {
     Object value = this.values.computeIfAbsent(path, key -> new HashMap<>());
     if (value instanceof Map) return new MapDocument((Map<String, Object>) value, root, parent);
     if (value instanceof Document) return (Document) value;
@@ -55,9 +55,9 @@ public class MapDocument extends AbstractDocument {
     throw new IllegalStateException("Expected java.util.Map, found " + values.getClass().getName());
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Document> getDocumentList(@Nonnull String path) {
+  public List<Document> getDocumentList(@NotNull String path) {
     List<Document> documents = new ArrayList<>();
     Object value = values.get(path);
     if (value instanceof List) {
@@ -72,7 +72,7 @@ public class MapDocument extends AbstractDocument {
   }
 
   @Override
-  public void set0(@Nonnull String path, @Nullable Object value) {
+  public void set0(@NotNull String path, @Nullable Object value) {
     values.put(path, value);
   }
 
@@ -82,22 +82,22 @@ public class MapDocument extends AbstractDocument {
   }
 
   @Override
-  public void remove0(@Nonnull String path) {
+  public void remove0(@NotNull String path) {
     values.remove(path);
   }
 
   @Override
-  public void write(@Nonnull Writer writer) throws IOException {
+  public void write(@NotNull Writer writer) throws IOException {
     new GsonDocument(values).write(writer);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public String toJson() {
     return new GsonDocument(values).toJson();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public String toPrettyJson() {
     return new GsonDocument(values).toPrettyJson();
@@ -105,29 +105,29 @@ public class MapDocument extends AbstractDocument {
 
   @Nullable
   @Override
-  public Object getObject(@Nonnull String path) {
+  public Object getObject(@NotNull String path) {
     return values.get(path);
   }
 
   @Override
-  public <T> T getInstance(@Nonnull String path, @Nonnull Class<T> classOfT) {
+  public <T> T getInstance(@NotNull String path, @NotNull Class<T> classOfT) {
     return classOfT.cast(getObject(path));
   }
 
   @Override
-  public <T> T toInstanceOf(@Nonnull Class<T> classOfT) {
+  public <T> T toInstanceOf(@NotNull Class<T> classOfT) {
     return copyJson().toInstanceOf(classOfT);
   }
 
   @Nullable
   @Override
-  public String getString(@Nonnull String path) {
+  public String getString(@NotNull String path) {
     Object value = values.get(path);
     return value == null ? null : value.toString();
   }
 
   @Override
-  public long getLong(@Nonnull String path, long def) {
+  public long getLong(@NotNull String path, long def) {
     try {
       return Long.parseLong(getString(path));
     } catch (Exception ex) {
@@ -136,7 +136,7 @@ public class MapDocument extends AbstractDocument {
   }
 
   @Override
-  public int getInt(@Nonnull String path, int def) {
+  public int getInt(@NotNull String path, int def) {
     try {
       return Integer.parseInt(getString(path));
     } catch (Exception ex) {
@@ -145,7 +145,7 @@ public class MapDocument extends AbstractDocument {
   }
 
   @Override
-  public short getShort(@Nonnull String path, short def) {
+  public short getShort(@NotNull String path, short def) {
     try {
       return Short.parseShort(getString(path));
     } catch (Exception ex) {
@@ -154,7 +154,7 @@ public class MapDocument extends AbstractDocument {
   }
 
   @Override
-  public byte getByte(@Nonnull String path, byte def) {
+  public byte getByte(@NotNull String path, byte def) {
     try {
       return Byte.parseByte(getString(path));
     } catch (Exception ex) {
@@ -163,7 +163,7 @@ public class MapDocument extends AbstractDocument {
   }
 
   @Override
-  public float getFloat(@Nonnull String path, float def) {
+  public float getFloat(@NotNull String path, float def) {
     try {
       return Float.parseFloat(getString(path));
     } catch (Exception ex) {
@@ -172,7 +172,7 @@ public class MapDocument extends AbstractDocument {
   }
 
   @Override
-  public double getDouble(@Nonnull String path, double def) {
+  public double getDouble(@NotNull String path, double def) {
     try {
       return Double.parseDouble(getString(path));
     } catch (Exception ex) {
@@ -181,7 +181,7 @@ public class MapDocument extends AbstractDocument {
   }
 
   @Override
-  public boolean getBoolean(@Nonnull String path, boolean def) {
+  public boolean getBoolean(@NotNull String path, boolean def) {
     try {
       if (!contains(path)) return def;
       switch (getString(path).toLowerCase()) {
@@ -196,9 +196,9 @@ public class MapDocument extends AbstractDocument {
     }
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<String> getStringList(@Nonnull String path) {
+  public List<String> getStringList(@NotNull String path) {
     Object object = getObject(path);
     if (object == null) return Collections.emptyList();
     if (object instanceof Iterable)
@@ -210,7 +210,7 @@ public class MapDocument extends AbstractDocument {
 
   @Nullable
   @Override
-  public UUID getUUID(@Nonnull String path) {
+  public UUID getUUID(@NotNull String path) {
     try {
       Object object = getObject(path);
       if (object instanceof UUID) return (UUID) object;
@@ -222,7 +222,7 @@ public class MapDocument extends AbstractDocument {
 
   @Nullable
   @Override
-  public Date getDate(@Nonnull String path) {
+  public Date getDate(@NotNull String path) {
     Object object = getObject(path);
     if (object instanceof String) return PropertyHelper.parseDate((String) object);
     if (object instanceof Date) return (Date) object;
@@ -231,7 +231,7 @@ public class MapDocument extends AbstractDocument {
 
   @Nullable
   @Override
-  public OffsetDateTime getDateTime(@Nonnull String path) {
+  public OffsetDateTime getDateTime(@NotNull String path) {
     Object object = getObject(path);
     if (object instanceof CharSequence) return OffsetDateTime.parse((CharSequence) object);
     if (object instanceof OffsetDateTime) return (OffsetDateTime) object;
@@ -240,7 +240,7 @@ public class MapDocument extends AbstractDocument {
 
   @Nullable
   @Override
-  public Color getColor(@Nonnull String path) {
+  public Color getColor(@NotNull String path) {
     Object object = getObject(path);
     if (object instanceof Color) return (Color) object;
     if (object instanceof String) return Color.decode((String) object);
@@ -248,24 +248,24 @@ public class MapDocument extends AbstractDocument {
   }
 
   @Override
-  public boolean isList(@Nonnull String path) {
+  public boolean isList(@NotNull String path) {
     Object value = values.get(path);
     return value instanceof Iterable || (value != null && value.getClass().isArray());
   }
 
   @Override
-  public boolean isObject(@Nonnull String path) {
+  public boolean isObject(@NotNull String path) {
     return !isDocument(path) && !isList(path);
   }
 
   @Override
-  public boolean isDocument(@Nonnull String path) {
+  public boolean isDocument(@NotNull String path) {
     Object value = values.get(path);
     return value instanceof Map || value instanceof Document;
   }
 
   @Override
-  public boolean contains(@Nonnull String path) {
+  public boolean contains(@NotNull String path) {
     return values.containsKey(path);
   }
 
@@ -274,20 +274,20 @@ public class MapDocument extends AbstractDocument {
     return values.size();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Map<String, Object> values() {
     return Collections.unmodifiableMap(values);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Collection<String> keys() {
     return values.keySet();
   }
 
   @Override
-  public void forEach(@Nonnull BiConsumer<? super String, ? super Object> action) {
+  public void forEach(@NotNull BiConsumer<? super String, ? super Object> action) {
     values.forEach(action);
   }
 

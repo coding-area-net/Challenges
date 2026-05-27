@@ -15,7 +15,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,7 +53,7 @@ public class ForceMobBattleGoal extends ForceBattleDisplayGoal<MobTarget> {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onKill(@Nonnull EntityDeathEvent event) {
+  public void onKill(@NotNull EntityDeathEvent event) {
     if (!shouldExecuteEffect()) return;
     LivingEntity entity = event.getEntity();
     Player killer = entity.getKiller();

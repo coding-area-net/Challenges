@@ -13,8 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scoreboard.*;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class HealthDisplaySetting extends Setting {
@@ -25,7 +24,7 @@ public class HealthDisplaySetting extends Setting {
     super(MenuType.SETTINGS, true);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.RED_STAINED_GLASS, Message.forName("item-health-display-setting"));
@@ -42,7 +41,7 @@ public class HealthDisplaySetting extends Setting {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onJoin(@Nonnull PlayerJoinEvent event) {
+  public void onJoin(@NotNull PlayerJoinEvent event) {
     if (isEnabled()) {
       show(event.getPlayer());
     } else {
@@ -50,7 +49,7 @@ public class HealthDisplaySetting extends Setting {
     }
   }
 
-  private void show(@Nonnull Player player) {
+  private void show(@NotNull Player player) {
     Scoreboard scoreboard = player.getScoreboard();
     ScoreboardManager manager = Bukkit.getScoreboardManager();
     if (manager == null) return;
@@ -73,7 +72,7 @@ public class HealthDisplaySetting extends Setting {
 
   }
 
-  private void hide(@Nonnull Player player) {
+  private void hide(@NotNull Player player) {
 
     Scoreboard scoreboard = player.getScoreboard();
     Objective objective = scoreboard.getObjective(OBJECTIVE_NAME);

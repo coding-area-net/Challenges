@@ -20,8 +20,8 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntitySpawnEvent;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -91,7 +91,7 @@ public class MobRandomizerChallenge extends RandomizerSetting {
   }
 
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.COMMAND_BLOCK_MINECART, Message.forName("item-mob-randomizer-challenge"));
@@ -125,7 +125,7 @@ public class MobRandomizerChallenge extends RandomizerSetting {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onEntitySpawn(@Nonnull EntitySpawnEvent event) {
+  public void onEntitySpawn(@NotNull EntitySpawnEvent event) {
     if (!shouldExecuteEffect()) return;
     if (!entityRandomizer.containsKey(event.getEntityType())) return;
     if (inSpawn) return;
@@ -141,14 +141,14 @@ public class MobRandomizerChallenge extends RandomizerSetting {
     inSpawn = false;
   }
 
-  private boolean maySpawn(@Nonnull EntityType newType, @Nonnull World world) {
+  private boolean maySpawn(@NotNull EntityType newType, @NotNull World world) {
     EntityCategory category = getEntityCategory(newType);
     int currentMobCount = getCurrentMobCount(category, world);
     int spawnLimit = getEntityCategory(newType).getSpawnLimit(world);
     return currentMobCount < spawnLimit;
   }
 
-  private int getCurrentMobCount(@Nonnull EntityCategory entityState, @Nonnull World world) {
+  private int getCurrentMobCount(@NotNull EntityCategory entityState, @NotNull World world) {
 
     int mobCount = 0;
 
@@ -164,7 +164,7 @@ public class MobRandomizerChallenge extends RandomizerSetting {
     return mobCount;
   }
 
-  private EntityCategory getEntityCategory(@Nonnull EntityType type) {
+  private EntityCategory getEntityCategory(@NotNull EntityType type) {
     Class<? extends Entity> entity = type.getEntityClass();
     if (entity == null) return EntityCategory.OTHER;
 
@@ -193,7 +193,7 @@ public class MobRandomizerChallenge extends RandomizerSetting {
     WATER_AMBIENT,
     OTHER;
 
-    private int getSpawnLimit(@Nonnull World world) {
+    private int getSpawnLimit(@NotNull World world) {
       boolean useSpawnCategories = MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_19); // World#getSpawnLimit was added in 1.19
       switch (this) {
         case AMBIENT:

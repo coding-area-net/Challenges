@@ -17,7 +17,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public class WorldCommand implements PlayerCommand, TabCompleter {
@@ -52,7 +51,7 @@ public class WorldCommand implements PlayerCommand, TabCompleter {
     player.teleport(location);
   }
 
-  public Location getSpawn(@Nonnull World world, @Nonnull Player player) {
+  public Location getSpawn(@NotNull World world, @NotNull Player player) {
     Location location = world.getSpawnLocation();
     Location bedSpawnLocation = player.getBedSpawnLocation();
     if (bedSpawnLocation != null && bedSpawnLocation.getWorld() == world) {
@@ -63,7 +62,7 @@ public class WorldCommand implements PlayerCommand, TabCompleter {
     return location;
   }
 
-  public String getWorldName(@Nonnull Location location) {
+  public String getWorldName(@NotNull Location location) {
     if (location.getWorld() == null) return "?";
     switch (location.getWorld().getEnvironment()) {
       default:

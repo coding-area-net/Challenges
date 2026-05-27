@@ -3,10 +3,10 @@ package net.codingarea.commons.common.misc;
 import net.codingarea.commons.common.collection.ArrayWalker;
 import net.codingarea.commons.common.collection.ClassWalker;
 import net.codingarea.commons.common.collection.WrappedException;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -22,8 +22,8 @@ public final class ReflectionUtils {
   private ReflectionUtils() {
   }
 
-  @Nonnull
-  public static Collection<Method> getPublicMethodsAnnotatedWith(@Nonnull Class<?> clazz, @Nonnull Class<? extends Annotation> classOfAnnotation) {
+  @NotNull
+  public static Collection<Method> getPublicMethodsAnnotatedWith(@NotNull Class<?> clazz, @NotNull Class<? extends Annotation> classOfAnnotation) {
     List<Method> annotatedMethods = new ArrayList<>();
     for (Method method : clazz.getMethods()) {
       if (!method.isAnnotationPresent(classOfAnnotation)) continue;
@@ -32,8 +32,8 @@ public final class ReflectionUtils {
     return annotatedMethods;
   }
 
-  @Nonnull
-  public static Collection<Method> getMethodsAnnotatedWith(@Nonnull Class<?> clazz, @Nonnull Class<? extends Annotation> classOfAnnotation) {
+  @NotNull
+  public static Collection<Method> getMethodsAnnotatedWith(@NotNull Class<?> clazz, @NotNull Class<? extends Annotation> classOfAnnotation) {
     List<Method> annotatedMethods = new ArrayList<>();
     for (Class<?> currentClass : ClassWalker.walk(clazz)) {
       for (Method method : currentClass.getDeclaredMethods()) {
@@ -44,8 +44,8 @@ public final class ReflectionUtils {
     return annotatedMethods;
   }
 
-  @Nonnull
-  public static Method getInheritedPrivateMethod(@Nonnull Class<?> clazz, @Nonnull String name, @Nonnull Class<?>... parameterTypes) throws NoSuchMethodException {
+  @NotNull
+  public static Method getInheritedPrivateMethod(@NotNull Class<?> clazz, @NotNull String name, @NotNull Class<?>... parameterTypes) throws NoSuchMethodException {
     for (Class<?> current : ClassWalker.walk(clazz)) {
       try {
         return current.getDeclaredMethod(name, parameterTypes);
@@ -56,8 +56,8 @@ public final class ReflectionUtils {
     throw new NoSuchMethodException(name);
   }
 
-  @Nonnull
-  public static Field getInheritedPrivateField(@Nonnull Class<?> clazz, @Nonnull String name) throws NoSuchFieldException {
+  @NotNull
+  public static Field getInheritedPrivateField(@NotNull Class<?> clazz, @NotNull String name) throws NoSuchFieldException {
     for (Class<?> current : ClassWalker.walk(clazz)) {
       try {
         return current.getDeclaredField(name);
@@ -72,8 +72,8 @@ public final class ReflectionUtils {
    * @param classOfEnum The class containing the enum constants
    * @return The first enum found by the given names
    */
-  @Nonnull
-  public static <E extends Enum<E>> E getFirstEnumByNames(@Nonnull Class<E> classOfEnum, @Nonnull String... names) {
+  @NotNull
+  public static <E extends Enum<E>> E getFirstEnumByNames(@NotNull Class<E> classOfEnum, @NotNull String... names) {
     for (String name : names) {
       try {
         return Enum.valueOf(classOfEnum, name);
@@ -94,17 +94,16 @@ public final class ReflectionUtils {
    * @see Array#getLength(Object)
    * @see Array#get(Object, int)
    */
-  public static <T> void forEachInArray(@Nonnull Object array, @Nonnull Consumer<T> action) {
+  public static <T> void forEachInArray(@NotNull Object array, @NotNull Consumer<T> action) {
     ReflectionUtils.<T>iterableArray(array).forEach(action);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  public static <T> Iterable<T> iterableArray(@Nonnull Object array) {
+  public static <T> Iterable<T> iterableArray(@NotNull Object array) {
     return ArrayWalker.walk(array);
   }
 
-  @CheckReturnValue
   public static Class<?> getCaller() {
     return StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
       .walk(stream -> stream
@@ -115,7 +114,7 @@ public final class ReflectionUtils {
       );
   }
 
-  @Nonnull
+  @NotNull
   public static String getCallerName() {
     StackTraceElement[] trace = Thread.currentThread().getStackTrace();
     StackTraceElement element = trace[3];
@@ -129,8 +128,8 @@ public final class ReflectionUtils {
    *
    * @see Class#getField(String)
    */
-  @Nonnull
-  public static Field getEnumAsField(@Nonnull Enum<?> enun) {
+  @NotNull
+  public static Field getEnumAsField(@NotNull Enum<?> enun) {
     Class<?> classOfEnum = enun.getClass();
 
     try {
@@ -143,8 +142,8 @@ public final class ReflectionUtils {
   /**
    * @see Field#getAnnotations()
    */
-  @Nonnull
-  public static <E extends Enum<?>> Annotation[] getEnumAnnotations(@Nonnull E enun) {
+  @NotNull
+  public static <E extends Enum<?>> Annotation[] getEnumAnnotations(@NotNull E enun) {
     Field field = getEnumAsField(enun);
     return field.getAnnotations();
   }
@@ -153,13 +152,13 @@ public final class ReflectionUtils {
    * @return Returns {@code null} if no annotation of this class is present
    * @see Field#getAnnotation(Class)
    */
-  public static <E extends Enum<?>, A extends Annotation> A getEnumAnnotation(@Nonnull E enun, Class<A> classOfAnnotation) {
+  public static <E extends Enum<?>, A extends Annotation> A getEnumAnnotation(@NotNull E enun, Class<A> classOfAnnotation) {
     Field field = getEnumAsField(enun);
     return field.getAnnotation(classOfAnnotation);
   }
 
   @Nullable
-  public static <E extends Enum<E>> E getEnumOrNull(@Nullable String name, @Nonnull Class<E> classOfEnum) {
+  public static <E extends Enum<E>> E getEnumOrNull(@Nullable String name, @NotNull Class<E> classOfEnum) {
     try {
       if (name == null) return null;
       return Enum.valueOf(classOfEnum, name);
@@ -181,7 +180,7 @@ public final class ReflectionUtils {
 
   @Nullable
   @SuppressWarnings("unchecked")
-  public static <T> Class<T> getClassOrNull(@Nullable String name, boolean initialize, @Nonnull ClassLoader classLoader) {
+  public static <T> Class<T> getClassOrNull(@Nullable String name, boolean initialize, @NotNull ClassLoader classLoader) {
     try {
       if (name == null) return null;
       return (Class<T>) Class.forName(name, initialize, classLoader);
@@ -192,7 +191,7 @@ public final class ReflectionUtils {
 
   @Nullable
   @SuppressWarnings("unchecked")
-  public static <T> T invokeMethodOrNull(@Nullable Object instance, @Nonnull Method method) {
+  public static <T> T invokeMethodOrNull(@Nullable Object instance, @NotNull Method method) {
     try {
       if (!method.isAccessible()) method.setAccessible(true);
       return (T) method.invoke(instance);
@@ -202,7 +201,7 @@ public final class ReflectionUtils {
   }
 
   @Nullable
-  public static <T> T invokeStaticMethodOrNull(@Nonnull Class<?> clazz, @Nonnull String method) {
+  public static <T> T invokeStaticMethodOrNull(@NotNull Class<?> clazz, @NotNull String method) {
     try {
       return invokeMethodOrNull(null, clazz.getMethod(method));
     } catch (NoSuchMethodException ex) {
@@ -211,7 +210,7 @@ public final class ReflectionUtils {
   }
 
   @Nullable
-  public static <T> T invokeMethodOrNull(@Nonnull Object instance, @Nonnull String method) {
+  public static <T> T invokeMethodOrNull(@NotNull Object instance, @NotNull String method) {
     try {
       return invokeMethodOrNull(instance, instance.getClass().getDeclaredMethod(method));
     } catch (NoSuchMethodException ex) {
@@ -220,12 +219,12 @@ public final class ReflectionUtils {
   }
 
   @Nullable
-  public static <T> T getAnnotationValue(@Nonnull Annotation annotation) {
+  public static <T> T getAnnotationValue(@NotNull Annotation annotation) {
     return invokeMethodOrNull(annotation, "value");
   }
 
   @Nullable
-  public static <E extends Enum<?>> E getEnumByAlternateNames(@Nonnull Class<E> classOfE, @Nonnull String input) {
+  public static <E extends Enum<?>> E getEnumByAlternateNames(@NotNull Class<E> classOfE, @NotNull String input) {
     E[] values = invokeStaticMethodOrNull(classOfE, "values");
     String[] methodNames = {"getName", "getNames", "getAlias", "getAliases", "getKey", "getKeys", "name", "toString", "ordinal", "getId", "id"};
     for (E value : values) {
@@ -238,7 +237,7 @@ public final class ReflectionUtils {
     return null;
   }
 
-  private static boolean check(@Nonnull String input, @Nullable Object value) {
+  private static boolean check(@NotNull String input, @Nullable Object value) {
     if (value == null) return false;
     if (value.getClass().isArray()) {
       for (Object key : iterableArray(value)) {

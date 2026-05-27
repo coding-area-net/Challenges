@@ -23,8 +23,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -64,39 +64,39 @@ public final class PlayerInventoryManager implements Listener {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onCommandsUpdate(@Nonnull PlayerCommandSendEvent event) {
+  public void onCommandsUpdate(@NotNull PlayerCommandSendEvent event) {
     updateInventoryAuto(event.getPlayer());
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onJoin(@Nonnull PlayerJoinEvent event) {
+  public void onJoin(@NotNull PlayerJoinEvent event) {
     updateInventoryJoin(event.getPlayer(), true);
   }
 
   @EventHandler
-  public void onQuit(@Nonnull PlayerQuitEvent event) {
+  public void onQuit(@NotNull PlayerQuitEvent event) {
     removeItems(event.getPlayer());
   }
 
   @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-  public void onGameModeChange(@Nonnull PlayerGameModeChangeEvent event) {
+  public void onGameModeChange(@NotNull PlayerGameModeChangeEvent event) {
     updateInventoryGamemode(event.getPlayer(), event.getNewGameMode());
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onDrop(@Nonnull PlayerDropItemEvent event) {
+  public void onDrop(@NotNull PlayerDropItemEvent event) {
     if (ChallengeAPI.isStarted()) return;
     if (!hasItems(event.getPlayer())) return;
     event.setCancelled(true);
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onRespawn(@Nonnull PlayerRespawnEvent event) {
+  public void onRespawn(@NotNull PlayerRespawnEvent event) {
     updateInventoryAlive(event.getPlayer(), true);
   }
 
   @EventHandler
-  public void onInteract(@Nonnull PlayerInteractEvent event) {
+  public void onInteract(@NotNull PlayerInteractEvent event) {
     switch (event.getAction()) {
       case LEFT_CLICK_AIR:
       case LEFT_CLICK_BLOCK:
@@ -126,23 +126,23 @@ public final class PlayerInventoryManager implements Listener {
     Bukkit.getOnlinePlayers().forEach(this::updateInventoryAuto);
   }
 
-  public void updateInventoryAuto(@Nonnull Player player) {
+  public void updateInventoryAuto(@NotNull Player player) {
     updateInventory(player, player.getGameMode(), false, !player.isDead());
   }
 
-  public void updateInventoryAlive(@Nonnull Player player, boolean alive) {
+  public void updateInventoryAlive(@NotNull Player player, boolean alive) {
     updateInventory(player, player.getGameMode(), false, alive);
   }
 
-  public void updateInventoryGamemode(@Nonnull Player player, @Nonnull GameMode gamemode) {
+  public void updateInventoryGamemode(@NotNull Player player, @NotNull GameMode gamemode) {
     updateInventory(player, gamemode, false, !player.isDead());
   }
 
-  public void updateInventoryJoin(@Nonnull Player player, boolean join) {
+  public void updateInventoryJoin(@NotNull Player player, boolean join) {
     updateInventory(player, player.getGameMode(), join, !player.isDead());
   }
 
-  public void updateInventory(@Nonnull Player player, @Nonnull GameMode gamemode, boolean join, boolean alive) {
+  public void updateInventory(@NotNull Player player, @NotNull GameMode gamemode, boolean join, boolean alive) {
     if (Bukkit.isPrimaryThread()) {
       Challenges.getInstance().runAsync(() -> updateInventory(player, gamemode, join, alive));
       return;
@@ -160,11 +160,11 @@ public final class PlayerInventoryManager implements Listener {
     }
   }
 
-  private void updateInventoryStarted(@Nonnull Player player, @Nonnull GameMode gamemode, boolean join, boolean alive) {
+  private void updateInventoryStarted(@NotNull Player player, @NotNull GameMode gamemode, boolean join, boolean alive) {
     removeItems(player);
   }
 
-  private void updateInventoryPaused(@Nonnull Player player, @Nonnull GameMode gamemode, boolean join, boolean alive) {
+  private void updateInventoryPaused(@NotNull Player player, @NotNull GameMode gamemode, boolean join, boolean alive) {
     if (gamemode == GameMode.CREATIVE || gamemode == GameMode.SPECTATOR) {
       removeItems(player);
       return;
@@ -176,7 +176,7 @@ public final class PlayerInventoryManager implements Listener {
     }
   }
 
-  private boolean hasItems(@Nonnull Player player) {
+  private boolean hasItems(@NotNull Player player) {
     Triple<ItemStack, Consumer<Player>, String>[] pairs = createItemPairs(player);
     for (int i = 0; i < pairs.length; i++) {
       Triple<ItemStack, Consumer<Player>, String> pair = pairs[i];
@@ -191,7 +191,7 @@ public final class PlayerInventoryManager implements Listener {
     return true;
   }
 
-  private boolean canGiveItems(@Nonnull Player player) {
+  private boolean canGiveItems(@NotNull Player player) {
     Triple<ItemStack, Consumer<Player>, String>[] pairs = createItemPairs(player);
     for (int i = 0; i < pairs.length; i++) {
       Triple<ItemStack, Consumer<Player>, String> pair = pairs[i];
@@ -205,7 +205,7 @@ public final class PlayerInventoryManager implements Listener {
     return true;
   }
 
-  private void removeItems(@Nonnull Player player) {
+  private void removeItems(@NotNull Player player) {
     Triple<ItemStack, Consumer<Player>, String>[] pairs = createItemPairs(player);
     for (Triple<ItemStack, Consumer<Player>, String> pair : pairs) {
       if (pair == null) continue;
@@ -225,7 +225,7 @@ public final class PlayerInventoryManager implements Listener {
     }
   }
 
-  private void giveItems(@Nonnull Player player) {
+  private void giveItems(@NotNull Player player) {
     Triple<ItemStack, Consumer<Player>, String>[] pairs = createItemPairs(player);
     for (int i = 0; i < pairs.length; i++) {
       Triple<ItemStack, Consumer<Player>, String> pair = pairs[i];
@@ -235,8 +235,8 @@ public final class PlayerInventoryManager implements Listener {
     }
   }
 
-  @Nonnull
-  private Triple<ItemStack, Consumer<Player>, String>[] createItemPairs(@Nonnull Player player) {
+  @NotNull
+  private Triple<ItemStack, Consumer<Player>, String>[] createItemPairs(@NotNull Player player) {
     Triple<ItemStack, Consumer<Player>, String>[] pairs = new Triple[9];
 
     for (HotbarItem item : hotbarItems) {

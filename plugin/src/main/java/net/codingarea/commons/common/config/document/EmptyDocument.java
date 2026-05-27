@@ -4,9 +4,9 @@ import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.Propertyable;
 import net.codingarea.commons.common.config.exceptions.ConfigReadOnlyException;
 import net.codingarea.commons.common.version.Version;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class EmptyDocument implements Document {
 
   protected final Document root, parent;
 
-  public EmptyDocument(@Nonnull Document root, @Nullable Document parent) {
+  public EmptyDocument(@NotNull Document root, @Nullable Document parent) {
     this.root = root;
     this.parent = parent;
   }
@@ -35,366 +35,366 @@ public class EmptyDocument implements Document {
     this.parent = null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Document getDocument(@Nonnull String path) {
+  public Document getDocument(@NotNull String path) {
     return new EmptyDocument();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <R> R mapDocument(@Nonnull String path, @Nonnull Function<? super Document, ? extends R> mapper) {
+  public <R> R mapDocument(@NotNull String path, @NotNull Function<? super Document, ? extends R> mapper) {
     return mapper.apply(Document.empty());
   }
 
   @Nullable
   @Override
-  public <R> R mapDocumentNullable(@Nonnull String path, @Nonnull Function<? super Document, ? extends R> mapper) {
+  public <R> R mapDocumentNullable(@NotNull String path, @NotNull Function<? super Document, ? extends R> mapper) {
     return null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Document> getDocumentList(@Nonnull String path) {
+  public List<Document> getDocumentList(@NotNull String path) {
     return new ArrayList<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <T> List<T> getSerializableList(@Nonnull String path, @Nonnull Class<T> classOfT) {
+  public <T> List<T> getSerializableList(@NotNull String path, @NotNull Class<T> classOfT) {
     return new ArrayList<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Document set(@Nonnull String path, @Nullable Object value) {
+  public Document set(@NotNull String path, @Nullable Object value) {
     throw new ConfigReadOnlyException("set");
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Document set(@Nonnull Object value) {
+  public Document set(@NotNull Object value) {
     throw new ConfigReadOnlyException("set");
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Document clear() {
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Document remove(@Nonnull String path) {
+  public Document remove(@NotNull String path) {
     return this;
   }
 
   @Override
-  public void write(@Nonnull Writer writer) throws IOException {
+  public void write(@NotNull Writer writer) throws IOException {
     throw new UnsupportedOperationException("EmptyDocument.write(Writer)");
   }
 
   @Override
-  public void saveToFile(@Nonnull File file) throws IOException {
+  public void saveToFile(@NotNull File file) throws IOException {
     throw new UnsupportedOperationException("EmptyDocument.save(File)");
   }
 
   @Nullable
   @Override
-  public Object getObject(@Nonnull String path) {
+  public Object getObject(@NotNull String path) {
     return null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Object getObject(@Nonnull String path, @Nonnull Object def) {
+  public Object getObject(@NotNull String path, @NotNull Object def) {
     return def;
   }
 
   @Override
-  public <T> T getInstance(@Nonnull String path, @Nonnull Class<T> classOfT) {
+  public <T> T getInstance(@NotNull String path, @NotNull Class<T> classOfT) {
     return null;
   }
 
   @Override
-  public <T> T toInstanceOf(@Nonnull Class<T> classOfT) {
+  public <T> T toInstanceOf(@NotNull Class<T> classOfT) {
     throw new UnsupportedOperationException();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <T, O extends Propertyable> Optional<T> getOptional(@Nonnull String key, @Nonnull BiFunction<O, ? super String, ? extends T> extractor) {
+  public <T, O extends Propertyable> Optional<T> getOptional(@NotNull String key, @NotNull BiFunction<O, ? super String, ? extends T> extractor) {
     return Optional.empty();
   }
 
   @Nullable
   @Override
-  public String getString(@Nonnull String path) {
+  public String getString(@NotNull String path) {
     return null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public String getString(@Nonnull String path, @Nonnull String def) {
+  public String getString(@NotNull String path, @NotNull String def) {
     return def;
   }
 
   @Override
-  public char getChar(@Nonnull String path) {
+  public char getChar(@NotNull String path) {
     return 0;
   }
 
   @Override
-  public char getChar(@Nonnull String path, char def) {
+  public char getChar(@NotNull String path, char def) {
     return def;
   }
 
   @Override
-  public long getLong(@Nonnull String path) {
+  public long getLong(@NotNull String path) {
     return 0;
   }
 
   @Override
-  public long getLong(@Nonnull String path, long def) {
+  public long getLong(@NotNull String path, long def) {
     return def;
   }
 
   @Override
-  public int getInt(@Nonnull String path) {
+  public int getInt(@NotNull String path) {
     return 0;
   }
 
   @Override
-  public int getInt(@Nonnull String path, int def) {
+  public int getInt(@NotNull String path, int def) {
     return def;
   }
 
   @Override
-  public short getShort(@Nonnull String path) {
+  public short getShort(@NotNull String path) {
     return 0;
   }
 
   @Override
-  public short getShort(@Nonnull String path, short def) {
+  public short getShort(@NotNull String path, short def) {
     return def;
   }
 
   @Override
-  public byte getByte(@Nonnull String path) {
+  public byte getByte(@NotNull String path) {
     return 0;
   }
 
   @Override
-  public byte getByte(@Nonnull String path, byte def) {
+  public byte getByte(@NotNull String path, byte def) {
     return def;
   }
 
   @Override
-  public float getFloat(@Nonnull String path) {
+  public float getFloat(@NotNull String path) {
     return 0;
   }
 
   @Override
-  public float getFloat(@Nonnull String path, float def) {
+  public float getFloat(@NotNull String path, float def) {
     return def;
   }
 
   @Override
-  public double getDouble(@Nonnull String path) {
+  public double getDouble(@NotNull String path) {
     return 0;
   }
 
   @Override
-  public double getDouble(@Nonnull String path, double def) {
+  public double getDouble(@NotNull String path, double def) {
     return def;
   }
 
   @Override
-  public boolean getBoolean(@Nonnull String path) {
+  public boolean getBoolean(@NotNull String path) {
     return false;
   }
 
   @Override
-  public boolean getBoolean(@Nonnull String path, boolean def) {
+  public boolean getBoolean(@NotNull String path, boolean def) {
     return def;
   }
 
   @Nullable
   @Override
-  public byte[] getBinary(@Nonnull String path) {
+  public byte[] getBinary(@NotNull String path) {
     return null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<String> getStringList(@Nonnull String path) {
+  public List<String> getStringList(@NotNull String path) {
     return new ArrayList<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public String[] getStringArray(@Nonnull String path) {
+  public String[] getStringArray(@NotNull String path) {
     return new String[0];
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <E extends Enum<E>> List<E> getEnumList(@Nonnull String path, @Nonnull Class<E> classOfEnum) {
+  public <E extends Enum<E>> List<E> getEnumList(@NotNull String path, @NotNull Class<E> classOfEnum) {
     return new ArrayList<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <T> List<T> mapList(@Nonnull String path, @Nonnull Function<String, ? extends T> mapper) {
+  public <T> List<T> mapList(@NotNull String path, @NotNull Function<String, ? extends T> mapper) {
     return new ArrayList<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<UUID> getUUIDList(@Nonnull String path) {
+  public List<UUID> getUUIDList(@NotNull String path) {
     return new ArrayList<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Character> getCharacterList(@Nonnull String path) {
+  public List<Character> getCharacterList(@NotNull String path) {
     return new ArrayList<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Byte> getByteList(@Nonnull String path) {
+  public List<Byte> getByteList(@NotNull String path) {
     return new ArrayList<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Short> getShortList(@Nonnull String path) {
+  public List<Short> getShortList(@NotNull String path) {
     return new ArrayList<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Integer> getIntegerList(@Nonnull String path) {
+  public List<Integer> getIntegerList(@NotNull String path) {
     return new ArrayList<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Long> getLongList(@Nonnull String path) {
+  public List<Long> getLongList(@NotNull String path) {
     return new ArrayList<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Float> getFloatList(@Nonnull String path) {
+  public List<Float> getFloatList(@NotNull String path) {
     return new ArrayList<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Double> getDoubleList(@Nonnull String path) {
+  public List<Double> getDoubleList(@NotNull String path) {
     return new ArrayList<>();
   }
 
   @Nullable
   @Override
-  public UUID getUUID(@Nonnull String path) {
+  public UUID getUUID(@NotNull String path) {
     return null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public UUID getUUID(@Nonnull String path, @Nonnull UUID def) {
+  public UUID getUUID(@NotNull String path, @NotNull UUID def) {
     return def;
   }
 
   @Nullable
   @Override
-  public Date getDate(@Nonnull String path) {
+  public Date getDate(@NotNull String path) {
     return null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Date getDate(@Nonnull String path, @Nonnull Date def) {
+  public Date getDate(@NotNull String path, @NotNull Date def) {
     return def;
   }
 
   @Nullable
   @Override
-  public OffsetDateTime getDateTime(@Nonnull String path) {
+  public OffsetDateTime getDateTime(@NotNull String path) {
     return null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public OffsetDateTime getDateTime(@Nonnull String path, @Nonnull OffsetDateTime def) {
+  public OffsetDateTime getDateTime(@NotNull String path, @NotNull OffsetDateTime def) {
     return def;
   }
 
   @Nullable
   @Override
-  public Color getColor(@Nonnull String path) {
+  public Color getColor(@NotNull String path) {
     return null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Color getColor(@Nonnull String path, @Nonnull Color def) {
+  public Color getColor(@NotNull String path, @NotNull Color def) {
     return def;
   }
 
   @Nullable
   @Override
-  public <E extends Enum<E>> E getEnum(@Nonnull String path, @Nonnull Class<E> classOfEnum) {
+  public <E extends Enum<E>> E getEnum(@NotNull String path, @NotNull Class<E> classOfEnum) {
     return null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <E extends Enum<E>> E getEnum(@Nonnull String path, @Nonnull E def) {
+  public <E extends Enum<E>> E getEnum(@NotNull String path, @NotNull E def) {
     return def;
   }
 
   @Nullable
   @Override
-  public <T> T getSerializable(@Nonnull String path, @Nonnull Class<T> classOfT) {
+  public <T> T getSerializable(@NotNull String path, @NotNull Class<T> classOfT) {
     return null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <T> T getSerializable(@Nonnull String path, @Nonnull T def) {
+  public <T> T getSerializable(@NotNull String path, @NotNull T def) {
     return def;
   }
 
   @Nullable
   @Override
-  public Class<?> getClass(@Nonnull String path) {
+  public Class<?> getClass(@NotNull String path) {
     return null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Class<?> getClass(@Nonnull String path, @Nonnull Class<?> def) {
+  public Class<?> getClass(@NotNull String path, @NotNull Class<?> def) {
     return def;
   }
 
   @Nullable
   @Override
-  public Version getVersion(@Nonnull String path) {
+  public Version getVersion(@NotNull String path) {
     return null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Version getVersion(@Nonnull String path, @Nonnull Version def) {
+  public Version getVersion(@NotNull String path, @NotNull Version def) {
     return def;
   }
 
   @Override
-  public boolean contains(@Nonnull String path) {
+  public boolean contains(@NotNull String path) {
     return false;
   }
 
@@ -404,22 +404,22 @@ public class EmptyDocument implements Document {
   }
 
   @Override
-  public boolean hasChildren(@Nonnull String path) {
+  public boolean hasChildren(@NotNull String path) {
     return false;
   }
 
   @Override
-  public boolean isList(@Nonnull String path) {
+  public boolean isList(@NotNull String path) {
     return false;
   }
 
   @Override
-  public boolean isObject(@Nonnull String path) {
+  public boolean isObject(@NotNull String path) {
     return false;
   }
 
   @Override
-  public boolean isDocument(@Nonnull String path) {
+  public boolean isDocument(@NotNull String path) {
     return false;
   }
 
@@ -428,65 +428,65 @@ public class EmptyDocument implements Document {
     return 0;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Map<String, Object> values() {
     return Collections.emptyMap();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Map<String, String> valuesAsStrings() {
     return new HashMap<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Map<String, Document> children() {
     return new HashMap<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <K, V> Map<K, V> mapValues(@Nonnull Function<? super String, ? extends K> keyMapper, @Nonnull Function<? super String, ? extends V> valueMapper) {
+  public <K, V> Map<K, V> mapValues(@NotNull Function<? super String, ? extends K> keyMapper, @NotNull Function<? super String, ? extends V> valueMapper) {
     return new HashMap<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <K, V> Map<K, V> mapDocuments(@Nonnull Function<? super String, ? extends K> keyMapper, @Nonnull Function<? super Document, ? extends V> valueMapper) {
+  public <K, V> Map<K, V> mapDocuments(@NotNull Function<? super String, ? extends K> keyMapper, @NotNull Function<? super Document, ? extends V> valueMapper) {
     return new HashMap<>();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Collection<String> keys() {
     return Collections.emptyList();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Set<Entry<String, Object>> entrySet() {
     return Collections.emptySet();
   }
 
   @Override
-  public void forEach(@Nonnull BiConsumer<? super String, ? super Object> action) {
+  public void forEach(@NotNull BiConsumer<? super String, ? super Object> action) {
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public String toJson() {
     return "{}";
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public String toPrettyJson() {
     return "{}";
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public String toString() {
     return "{}";
@@ -497,7 +497,7 @@ public class EmptyDocument implements Document {
     return true;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Document readonly() {
     return this;
@@ -509,7 +509,7 @@ public class EmptyDocument implements Document {
     return parent;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Document getRoot() {
     return root;

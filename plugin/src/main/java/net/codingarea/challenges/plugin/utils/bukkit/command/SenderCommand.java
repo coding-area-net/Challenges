@@ -5,13 +5,12 @@ import net.codingarea.commons.bukkit.utils.logging.Logger;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public interface SenderCommand extends CommandExecutor {
 
   @Override
-  default boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
+  default boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
     try {
       onCommand(sender, args);
     } catch (Exception ex) {
@@ -21,6 +20,6 @@ public interface SenderCommand extends CommandExecutor {
     return true;
   }
 
-  void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) throws Exception;
+  void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception;
 
 }

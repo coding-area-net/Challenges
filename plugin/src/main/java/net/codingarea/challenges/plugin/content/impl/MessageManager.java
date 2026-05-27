@@ -1,9 +1,8 @@
 package net.codingarea.challenges.plugin.content.impl;
 
 import net.codingarea.challenges.plugin.content.Message;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -14,14 +13,12 @@ public final class MessageManager {
   private MessageManager() {
   }
 
-  @Nonnull
-  @CheckReturnValue
-  public static Message getOrCreateMessage(@Nonnull String name) {
+  @NotNull
+  public static Message getOrCreateMessage(@NotNull String name) {
     return cache.computeIfAbsent(name, key -> new MessageImpl(key));
   }
 
-  @CheckReturnValue
-  public static boolean hasMessageInCache(@Nonnull String name) {
+  public static boolean hasMessageInCache(@NotNull String name) {
     return cache.containsKey(name);
   }
 

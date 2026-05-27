@@ -12,8 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryAction;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class DamagePerItemChallenge extends Setting {
 
@@ -23,14 +22,14 @@ public class DamagePerItemChallenge extends Setting {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onPickup(@Nonnull PlayerPickupItemEvent event) {
+  public void onPickup(@NotNull PlayerPickupItemEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     applyDamage(event.getPlayer(), event.getItem().getItemStack().getAmount());
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onClick(@Nonnull PlayerInventoryClickEvent event) {
+  public void onClick(@NotNull PlayerInventoryClickEvent event) {
     if (event.isCancelled()) return; // ignoreCancelled not working on own event
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
@@ -39,12 +38,12 @@ public class DamagePerItemChallenge extends Setting {
     applyDamage(event.getPlayer(), event.getCurrentItem().getAmount());
   }
 
-  private void applyDamage(@Nonnull Player player, int amount) {
+  private void applyDamage(@NotNull Player player, int amount) {
     player.setNoDamageTicks(0);
     player.damage(amount);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.SHEARS, Message.forName("item-damage-item-challenge"));

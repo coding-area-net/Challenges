@@ -17,9 +17,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class WaterMLGChallenge extends WorldDependentChallenge {
 
@@ -28,7 +27,7 @@ public class WaterMLGChallenge extends WorldDependentChallenge {
     setCategory(SettingCategory.EXTRA_WORLD);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.WATER_BUCKET, Message.forName("item-water-mlg-challenge"));
@@ -68,7 +67,7 @@ public class WaterMLGChallenge extends WorldDependentChallenge {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerBucketEmpty(@Nonnull PlayerBucketEmptyEvent event) {
+  public void onPlayerBucketEmpty(@NotNull PlayerBucketEmptyEvent event) {
     if (!isInExtraWorld()) return;
 
     Bukkit.getScheduler().runTaskLater(plugin, () -> {
@@ -81,7 +80,7 @@ public class WaterMLGChallenge extends WorldDependentChallenge {
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onEntityDamage(@Nonnull EntityDamageEvent event) {
+  public void onEntityDamage(@NotNull EntityDamageEvent event) {
     if (!(event.getEntity() instanceof Player)) return;
     if (!isInExtraWorld()) return;
 

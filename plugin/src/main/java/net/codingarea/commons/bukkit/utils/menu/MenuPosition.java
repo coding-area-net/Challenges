@@ -3,9 +3,9 @@ package net.codingarea.commons.bukkit.utils.menu;
 import net.codingarea.commons.bukkit.utils.menu.positions.EmptyMenuPosition;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryHolder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -23,23 +23,23 @@ public interface MenuPosition {
 
   InventoryHolder HOLDER = new MenuPositionHolder();
 
-  static void set(@Nonnull Player player, @Nullable MenuPosition position) {
+  static void set(@NotNull Player player, @Nullable MenuPosition position) {
     Holder.positions.put(player, position);
   }
 
-  static void remove(@Nonnull Player player) {
+  static void remove(@NotNull Player player) {
     Holder.positions.remove(player);
   }
 
   @Nullable
-  static MenuPosition get(@Nonnull Player player) {
+  static MenuPosition get(@NotNull Player player) {
     return Holder.positions.get(player);
   }
 
-  static void setEmpty(@Nonnull Player player) {
+  static void setEmpty(@NotNull Player player) {
     set(player, new EmptyMenuPosition());
   }
 
-  void handleClick(@Nonnull MenuClickInfo info);
+  void handleClick(@NotNull MenuClickInfo info);
 
 }

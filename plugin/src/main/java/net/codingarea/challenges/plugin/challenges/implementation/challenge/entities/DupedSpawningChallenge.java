@@ -10,8 +10,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntitySpawnEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class DupedSpawningChallenge extends Setting {
 
@@ -22,14 +21,14 @@ public class DupedSpawningChallenge extends Setting {
     setCategory(SettingCategory.ENTITIES);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.ELDER_GUARDIAN_SPAWN_EGG, Message.forName("item-duped-spawning-challenge"));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onSpawn(@Nonnull EntitySpawnEvent event) {
+  public void onSpawn(@NotNull EntitySpawnEvent event) {
     if (!shouldExecuteEffect()) return;
     if (!(event.getEntity() instanceof LivingEntity)
       || event.getEntity() instanceof Player

@@ -9,16 +9,16 @@ import net.codingarea.commons.bukkit.utils.wrapper.AttributeWrapper;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HealCommand implements SenderCommand, Completer {
 
   @Override
-  public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) {
 
     List<Player> targets = new ArrayList<>();
 
@@ -59,7 +59,7 @@ public class HealCommand implements SenderCommand, Completer {
 
   @Nullable
   @Override
-  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
     return CommandHelper.getCompletions(sender);
   }
 

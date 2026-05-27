@@ -1,29 +1,29 @@
 package net.codingarea.commons.database.action.hierarchy;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface WhereAction {
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  WhereAction where(@Nonnull String field, @Nullable Object value);
+  WhereAction where(@NotNull String field, @Nullable Object value);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  WhereAction where(@Nonnull String field, @Nullable Number value);
+  WhereAction where(@NotNull String field, @Nullable Number value);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  WhereAction where(@Nonnull String field, @Nullable String value, boolean ignoreCase);
+  WhereAction where(@NotNull String field, @Nullable String value, boolean ignoreCase);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  WhereAction where(@Nonnull String field, @Nullable String value);
+  WhereAction where(@NotNull String field, @Nullable String value);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  WhereAction whereNot(@Nonnull String field, @Nullable Object value);
+  WhereAction whereNot(@NotNull String field, @Nullable Object value);
 
 }

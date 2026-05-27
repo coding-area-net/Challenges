@@ -18,8 +18,8 @@ import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
@@ -30,7 +30,7 @@ public class StatsCommand implements PlayerCommand {
   private final Map<Player, Long> submitTimeByPlayer = new ConcurrentHashMap<>();
 
   @Override
-  public void onCommand(@Nonnull Player player, @Nonnull String[] args) {
+  public void onCommand(@NotNull Player player, @NotNull String[] args) {
     if (!Challenges.getInstance().getStatsManager().isEnabled()) {
       Message.forName("feature-disabled").send(player, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.play(player);
@@ -61,13 +61,13 @@ public class StatsCommand implements PlayerCommand {
     }
   }
 
-  private void handleCommand(@Nonnull Player player) {
+  private void handleCommand(@NotNull Player player) {
     Challenges.getInstance().runAsync(() -> {
       open(player, player.getUniqueId(), player.getName());
     });
   }
 
-  private void handleCommand(@Nonnull Player player, @Nonnull String name) {
+  private void handleCommand(@NotNull Player player, @NotNull String name) {
     Challenges.getInstance().runAsync(() -> {
       Player target = Bukkit.getPlayer(name);
       if (target != null) {
@@ -84,7 +84,7 @@ public class StatsCommand implements PlayerCommand {
     });
   }
 
-  private void open(@Nonnull Player player, @Nonnull UUID uuid, @Nonnull String name) {
+  private void open(@NotNull Player player, @NotNull UUID uuid, @NotNull String name) {
 
     PlayerStats stats = Challenges.getInstance().getStatsManager().getStats(uuid, name);
     name = stats.getPlayerName();
@@ -105,7 +105,7 @@ public class StatsCommand implements PlayerCommand {
     submitTimeByPlayer.remove(player);
   }
 
-  private void createInventory(@Nonnull PlayerStats stats, @Nonnull LeaderboardInfo info, @Nonnull AnimatedInventory inventory, @Nonnull int... slots) {
+  private void createInventory(@NotNull PlayerStats stats, @NotNull LeaderboardInfo info, @NotNull AnimatedInventory inventory, @NotNull int... slots) {
     for (int i = 0; i < Statistic.values().length; i++) {
       Statistic statistic = Statistic.values()[i];
       double value = stats.getStatisticValue(statistic);

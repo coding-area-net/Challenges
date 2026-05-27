@@ -19,9 +19,9 @@ import net.codingarea.commons.bukkit.utils.menu.positions.SlottedMenuPosition;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public class LeaderboardCommand implements PlayerCommand {
@@ -36,7 +36,7 @@ public class LeaderboardCommand implements PlayerCommand {
   }
 
   @Override
-  public void onCommand(@Nonnull Player player, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
     if (!Challenges.getInstance().getStatsManager().isEnabled()) {
       Message.forName("feature-disabled").send(player, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.play(player);
@@ -50,9 +50,9 @@ public class LeaderboardCommand implements PlayerCommand {
     createInventory(player).open(player, Challenges.getInstance());
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  public AnimatedInventory createInventory(@Nonnull Player player) {
+  public AnimatedInventory createInventory(@NotNull Player player) {
     AnimatedInventory inventory = new AnimatedInventory(InventoryTitleManager.getLeaderboardTitle(), 4 * 9, MenuPosition.HOLDER);
     StatsHelper.setAccent(inventory, 2);
     SlottedMenuPosition position = new SlottedMenuPosition();
@@ -67,13 +67,13 @@ public class LeaderboardCommand implements PlayerCommand {
     return inventory;
   }
 
-  private void openMenu(@Nonnull Player player, @Nonnull Statistic statistic, int page, boolean openInstant) {
+  private void openMenu(@NotNull Player player, @NotNull Statistic statistic, int page, boolean openInstant) {
     loadingInventory.open(player, Challenges.getInstance());
     MenuPosition.setEmpty(player);
     Challenges.getInstance().runAsync(() -> openMenu0(player, statistic, page, openInstant));
   }
 
-  private void openMenu0(@Nonnull Player player, @Nonnull Statistic statistic, int page, boolean openInstant) {
+  private void openMenu0(@NotNull Player player, @NotNull Statistic statistic, int page, boolean openInstant) {
 
     int[] slots = {
       10, 11, 12, 13, 14, 15, 16,

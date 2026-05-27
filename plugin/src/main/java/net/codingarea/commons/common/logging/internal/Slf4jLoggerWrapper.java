@@ -3,17 +3,16 @@ package net.codingarea.commons.common.logging.internal;
 import net.codingarea.commons.common.logging.ILogger;
 import net.codingarea.commons.common.logging.LogLevel;
 import net.codingarea.commons.common.logging.lib.Slf4jILogger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class Slf4jLoggerWrapper implements Slf4jILogger {
 
   protected final Logger logger;
 
-  public Slf4jLoggerWrapper(@Nonnull Logger logger) {
+  public Slf4jLoggerWrapper(@NotNull Logger logger) {
     this.logger = logger;
   }
 
@@ -283,7 +282,7 @@ public class Slf4jLoggerWrapper implements Slf4jILogger {
   }
 
   @Override
-  public void log(@Nonnull LogLevel level, @Nullable String message, @Nonnull Object... args) {
+  public void log(@NotNull LogLevel level, @Nullable String message, @NotNull Object... args) {
     switch (level) {
       case TRACE:
         trace(message, args);
@@ -344,7 +343,7 @@ public class Slf4jLoggerWrapper implements Slf4jILogger {
     logger.error(marker, msg, t);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public LogLevel getMinLevel() {
     if (logger.isTraceEnabled()) {
@@ -360,9 +359,9 @@ public class Slf4jLoggerWrapper implements Slf4jILogger {
     }
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public ILogger setMinLevel(@Nonnull LogLevel level) {
+  public ILogger setMinLevel(@NotNull LogLevel level) {
     return this;
   }
 

@@ -15,36 +15,36 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public class BlockDropListener implements Listener {
 
   @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-  public void onBlockBreak(@Nonnull BlockBreakEvent event) {
+  public void onBlockBreak(@NotNull BlockBreakEvent event) {
     if (event.getPlayer().getGameMode() == GameMode.CREATIVE) return;
     if (!event.isDropItems()) return;
     dropCustomDrops(event.getBlock(), () -> event.setDropItems(false));
   }
 
   @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-  public void onBlockExplosion(@Nonnull BlockExplodeEvent event) {
+  public void onBlockExplosion(@NotNull BlockExplodeEvent event) {
     handleExplosion(event.blockList(), () -> event.setYield(0));
   }
 
   @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-  public void onEntityExplosion(@Nonnull EntityExplodeEvent event) {
+  public void onEntityExplosion(@NotNull EntityExplodeEvent event) {
     handleExplosion(event.blockList(), () -> event.setYield(0));
   }
 
-  protected void handleExplosion(@Nonnull Iterable<Block> blocklist, @Nonnull Runnable dropsExist) {
+  protected void handleExplosion(@NotNull Iterable<Block> blocklist, @NotNull Runnable dropsExist) {
     for (Block block : blocklist) {
       dropCustomDrops(block, dropsExist);
     }
   }
 
-  protected void dropCustomDrops(@Nonnull Block block, @Nonnull Runnable dropsExist) {
+  protected void dropCustomDrops(@NotNull Block block, @NotNull Runnable dropsExist) {
 
     Material material = block.getType();
     if (BukkitReflectionUtils.isAir(material)) return;

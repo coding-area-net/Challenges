@@ -8,9 +8,9 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.lang.reflect.Method;
 import java.util.regex.Pattern;
 
@@ -26,7 +26,7 @@ public final class BukkitReflectionUtils {
   private BukkitReflectionUtils() {
   }
 
-  public static double getAbsorptionAmount(@Nonnull Player player) {
+  public static double getAbsorptionAmount(@NotNull Player player) {
     Class<?> classOfPlayer = player.getClass();
 
     try {
@@ -51,7 +51,7 @@ public final class BukkitReflectionUtils {
     return 0;
   }
 
-  public static boolean isAir(@Nonnull Material material) {
+  public static boolean isAir(@NotNull Material material) {
     try {
       return material.isAir();
     } catch (Throwable ignored) {
@@ -68,7 +68,7 @@ public final class BukkitReflectionUtils {
     }
   }
 
-  public static int getMinHeight(@Nonnull World world) {
+  public static int getMinHeight(@NotNull World world) {
     try {
       return world.getMinHeight();
     } catch (Throwable ignored) {
@@ -82,7 +82,7 @@ public final class BukkitReflectionUtils {
    * @deprecated not implemented in all forks of bukkit
    */
   @Deprecated
-  public static boolean isInWater(@Nonnull Entity entity) {
+  public static boolean isInWater(@NotNull Entity entity) {
     try {
       return entity.isInWater();
     } catch (Throwable ignored) {
@@ -104,7 +104,7 @@ public final class BukkitReflectionUtils {
    * @see #fromString(String, Plugin)
    */
   @Nullable
-  public static NamespacedKey fromString(@Nonnull String key) {
+  public static NamespacedKey fromString(@NotNull String key) {
     return fromString(key, null);
   }
 
@@ -135,7 +135,7 @@ public final class BukkitReflectionUtils {
    * @see #fromString(String)
    */
   @Nullable
-  public static NamespacedKey fromString(@Nonnull String string, @Nullable Plugin defaultNamespace) {
+  public static NamespacedKey fromString(@NotNull String string, @Nullable Plugin defaultNamespace) {
     Preconditions.checkArgument(string != null && !string.isEmpty(), "Input string must not be empty or null");
 
     String[] components = string.split(":", 3);

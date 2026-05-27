@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.content;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,31 +24,28 @@ public class Prefix {
   private final String defaultValue;
   private String value;
 
-  private Prefix(@Nonnull String name, @Nonnull String defaultValue) {
+  private Prefix(@NotNull String name, @NotNull String defaultValue) {
     this.defaultValue = getDefaultValueFor(defaultValue);
     this.name = name;
   }
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   public static Collection<Prefix> values() {
     return Collections.unmodifiableCollection(values.values());
   }
 
-  @Nonnull
-  @CheckReturnValue
-  public static Prefix forName(@Nonnull String name, @Nonnull String defaultValue) {
+  @NotNull
+  public static Prefix forName(@NotNull String name, @NotNull String defaultValue) {
     return values.computeIfAbsent(name, key -> new Prefix(name, defaultValue));
   }
 
-  @Nonnull
-  @CheckReturnValue
-  public static Prefix forName(@Nonnull String name) {
+  @NotNull
+  public static Prefix forName(@NotNull String name) {
     return forName(name, name);
   }
 
-  @Nonnull
-  public static String getDefaultValueFor(@Nonnull String value) {
+  @NotNull
+  public static String getDefaultValueFor(@NotNull String value) {
     return "§8§l┃ " + value + " §8┃ ";
   }
 
@@ -56,13 +53,13 @@ public class Prefix {
     this.value = value == null ? null : value.endsWith(" ") ? value : value + " ";
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public String toString() {
     return (value == null ? defaultValue : value) + "§7";
   }
 
-  @Nonnull
+  @NotNull
   public String getName() {
     return name;
   }

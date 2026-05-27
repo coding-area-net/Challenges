@@ -2,8 +2,8 @@ package net.codingarea.commons.database.abstraction;
 
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.database.action.ExecutedQuery;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.io.PrintStream;
 import java.util.*;
 import java.util.function.IntFunction;
@@ -14,40 +14,40 @@ public class DefaultExecutedQuery implements ExecutedQuery {
 
   protected final List<Document> results;
 
-  public DefaultExecutedQuery(@Nonnull List<Document> results) {
+  public DefaultExecutedQuery(@NotNull List<Document> results) {
     this.results = results;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Optional<Document> first() {
     if (results.isEmpty()) return Optional.empty();
     return Optional.ofNullable(results.get(0));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Optional<Document> get(int index) {
     if (index >= results.size()) return Optional.empty();
     return Optional.ofNullable(results.get(index));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Stream<Document> all() {
     return results.stream();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <C extends Collection<? super Document>> C toCollection(@Nonnull C collection) {
+  public <C extends Collection<? super Document>> C toCollection(@NotNull C collection) {
     collection.addAll(results);
     return collection;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Document[] toArray(@Nonnull IntFunction<Document[]> arraySupplier) {
+  public Document[] toArray(@NotNull IntFunction<Document[]> arraySupplier) {
     Document[] array = arraySupplier.apply(size());
     for (int i = 0; i < size(); i++) {
       array[i] = results.get(i);
@@ -56,7 +56,7 @@ public class DefaultExecutedQuery implements ExecutedQuery {
   }
 
   @Override
-  public int index(@Nonnull Predicate<? super Document> filter) {
+  public int index(@NotNull Predicate<? super Document> filter) {
     int index = 0;
     for (Document result : results) {
       if (filter.test(result))
@@ -82,7 +82,7 @@ public class DefaultExecutedQuery implements ExecutedQuery {
   }
 
   @Override
-  public void print(@Nonnull PrintStream out) {
+  public void print(@NotNull PrintStream out) {
     if (results.isEmpty()) {
       out.println("<Empty ExecutedQuery Result>");
       return;

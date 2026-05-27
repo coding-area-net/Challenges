@@ -12,8 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class OneTeamLifeSetting extends Setting {
 
@@ -23,14 +22,14 @@ public class OneTeamLifeSetting extends Setting {
     super(MenuType.SETTINGS, true);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.FIRE_CHARGE, Message.forName("item-one-life-setting"));
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onDeath(@Nonnull PlayerDeathEvent event) {
+  public void onDeath(@NotNull PlayerDeathEvent event) {
     if (!shouldExecuteEffect()) return;
     if (isKilling) return;
 

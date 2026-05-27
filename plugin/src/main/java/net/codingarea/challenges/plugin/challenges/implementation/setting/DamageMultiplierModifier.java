@@ -11,8 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class DamageMultiplierModifier extends Modifier {
 
@@ -20,20 +19,20 @@ public class DamageMultiplierModifier extends Modifier {
     super(MenuType.SETTINGS, 10);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.STONE_SWORD, Message.forName("item-damage-setting"));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     return DefaultItem.value(getValue()).appendName("x");
   }
 
   @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-  public void onDamage(@Nonnull EntityDamageEvent event) {
+  public void onDamage(@NotNull EntityDamageEvent event) {
     if (!(event.getEntity() instanceof Player)) return;
     event.setDamage(event.getDamage() * getValue());
   }

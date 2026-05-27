@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.management.scheduler;
 
 import lombok.EqualsAndHashCode;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -13,7 +13,7 @@ public final class ScheduledFunction {
   private final Object holder;
   private final PoliciesContainer policies;
 
-  ScheduledFunction(@Nonnull Object holder, @Nonnull Method method, @Nonnull PoliciesContainer policies) {
+  ScheduledFunction(@NotNull Object holder, @NotNull Method method, @NotNull PoliciesContainer policies) {
     this.method = method;
     this.holder = holder;
     this.policies = policies;
@@ -33,7 +33,7 @@ public final class ScheduledFunction {
     return policies.allPoliciesAreTrue(holder);
   }
 
-  @Nonnull
+  @NotNull
   public Object getHolder() {
     return holder;
   }

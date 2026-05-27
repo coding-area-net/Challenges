@@ -1,6 +1,7 @@
 package net.codingarea.commons.common.collection;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.IntFunction;
@@ -14,17 +15,17 @@ public class NamedThreadFactory implements ThreadFactory {
   protected final ThreadGroup group;
   protected final AtomicInteger threadNumber = new AtomicInteger(1);
 
-  public NamedThreadFactory(@Nonnull IntFunction<String> nameFunction) {
+  public NamedThreadFactory(@NotNull IntFunction<String> nameFunction) {
     this.group = Thread.currentThread().getThreadGroup();
     this.nameFunction = nameFunction;
   }
 
-  public NamedThreadFactory(@Nonnull String prefix) {
+  public NamedThreadFactory(@NotNull String prefix) {
     this(id -> prefix + "-" + id);
   }
 
   @Override
-  public Thread newThread(@Nonnull Runnable task) {
+  public Thread newThread(@NotNull Runnable task) {
     Thread thread = new Thread(group, task, nameFunction.apply(threadNumber.getAndIncrement()));
     if (thread.isDaemon())
       thread.setDaemon(false);

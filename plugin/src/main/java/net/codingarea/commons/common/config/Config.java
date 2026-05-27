@@ -1,10 +1,10 @@
 package net.codingarea.commons.common.config;
 
 import net.codingarea.commons.common.config.exceptions.ConfigReadOnlyException;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 /**
@@ -22,13 +22,13 @@ public interface Config extends Propertyable {
    * @return {@code this} for chaining
    * @throws ConfigReadOnlyException If this is {@link #isReadonly() readonly}
    */
-  @Nonnull
-  Config set(@Nonnull String path, @Nullable Object value);
+  @NotNull
+  Config set(@NotNull String path, @Nullable Object value);
 
   /**
    * @throws ConfigReadOnlyException If this is {@link #isReadonly() readonly}
    */
-  @Nonnull
+  @NotNull
   Config clear();
 
   /**
@@ -38,52 +38,52 @@ public interface Config extends Propertyable {
    * @return {@code this} for chaining
    * @throws ConfigReadOnlyException If this is {@link #isReadonly() readonly}
    */
-  @Nonnull
-  Config remove(@Nonnull String path);
+  @NotNull
+  Config remove(@NotNull String path);
 
   boolean isReadonly();
 
   /**
    * @return A new config which is readonly, or {@code this} if already {@link #isReadonly() readonly}
    */
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   Config readonly();
 
-  @Nonnull
+  @NotNull
   @Override
-  default <O extends Propertyable> Config apply(@Nonnull Consumer<O> action) {
+  default <O extends Propertyable> Config apply(@NotNull Consumer<O> action) {
     return (Config) Propertyable.super.apply(action);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  default <O extends Propertyable> Config applyIf(boolean expression, @Nonnull Consumer<O> action) {
+  default <O extends Propertyable> Config applyIf(boolean expression, @NotNull Consumer<O> action) {
     return (Config) Propertyable.super.applyIf(expression, action);
   }
 
-  @Nonnull
-  default Config increment(@Nonnull String path, double amount) {
+  @NotNull
+  default Config increment(@NotNull String path, double amount) {
     return set(path, getDouble(path) + amount);
   }
 
-  @Nonnull
-  default Config decrement(@Nonnull String path, double amount) {
+  @NotNull
+  default Config decrement(@NotNull String path, double amount) {
     return set(path, getDouble(path) - amount);
   }
 
-  @Nonnull
-  default Config multiply(@Nonnull String path, double factor) {
+  @NotNull
+  default Config multiply(@NotNull String path, double factor) {
     return set(path, getDouble(path) * factor);
   }
 
-  @Nonnull
-  default Config divide(@Nonnull String path, double divisor) {
+  @NotNull
+  default Config divide(@NotNull String path, double divisor) {
     return set(path, getDouble(path) / divisor);
   }
 
-  @Nonnull
-  default Config setIfAbsent(@Nonnull String path, @Nonnull Object defaultValue) {
+  @NotNull
+  default Config setIfAbsent(@NotNull String path, @NotNull Object defaultValue) {
     if (!contains(path))
       set(path, defaultValue);
     return this;

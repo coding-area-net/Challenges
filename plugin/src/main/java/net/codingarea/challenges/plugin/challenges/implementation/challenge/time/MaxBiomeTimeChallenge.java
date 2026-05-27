@@ -14,9 +14,8 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Since("2.0")
 public class MaxBiomeTimeChallenge extends SettingModifier {
@@ -48,7 +47,7 @@ public class MaxBiomeTimeChallenge extends SettingModifier {
     bossbar.update();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.SPRUCE_SAPLING, Message.forName("item-max-biome-time-challenge"));
@@ -66,7 +65,7 @@ public class MaxBiomeTimeChallenge extends SettingModifier {
   }
 
   @EventHandler
-  public void onPlayerMove(@Nonnull PlayerMoveEvent event) {
+  public void onPlayerMove(@NotNull PlayerMoveEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (event.getTo() == null) return;
@@ -79,7 +78,7 @@ public class MaxBiomeTimeChallenge extends SettingModifier {
     broadcast(this::updateBiomeTime);
   }
 
-  private void updateBiomeTime(@Nonnull Player player) {
+  private void updateBiomeTime(@NotNull Player player) {
     if (ignorePlayer(player)) {
       bossbar.update(player);
       return;
@@ -96,11 +95,11 @@ public class MaxBiomeTimeChallenge extends SettingModifier {
     bossbar.update(player);
   }
 
-  private int getCurrentTime(@Nonnull Player player) {
+  private int getCurrentTime(@NotNull Player player) {
     return getPlayerData(player).getInt(getBiome(player).name(), 0);
   }
 
-  private Biome getBiome(@Nonnull Player player) {
+  private Biome getBiome(@NotNull Player player) {
     return player.getLocation().getBlock().getBiome();
   }
 

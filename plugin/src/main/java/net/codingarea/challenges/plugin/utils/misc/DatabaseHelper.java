@@ -8,9 +8,9 @@ import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.bukkit.utils.misc.GameProfileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 
 public final class DatabaseHelper {
@@ -21,14 +21,14 @@ public final class DatabaseHelper {
   }
 
   @Nullable
-  public static String getPlayerTextures(@Nonnull Player player) {
+  public static String getPlayerTextures(@NotNull Player player) {
     GameProfile profile = GameProfileUtils.getGameProfile(player);
     PropertyMap properties = profile.getProperties();
     List<Property> textures = new ArrayList<>(properties.get("textures"));
     return textures.isEmpty() ? null : textures.get(0).getValue();
   }
 
-  public static void savePlayerData(@Nonnull Player player) {
+  public static void savePlayerData(@NotNull Player player) {
     try {
 
       String textures = getPlayerTextures(player);
@@ -47,7 +47,7 @@ public final class DatabaseHelper {
   }
 
   @Nullable
-  public static String getTextures(@Nonnull UUID uuid) {
+  public static String getTextures(@NotNull UUID uuid) {
     String cached = cachedTextures.get(uuid);
     if (cached != null) return cached;
 
@@ -78,7 +78,7 @@ public final class DatabaseHelper {
     }
   }
 
-  public static void clearCache(@Nonnull UUID uuid) {
+  public static void clearCache(@NotNull UUID uuid) {
     cachedTextures.remove(uuid);
   }
 

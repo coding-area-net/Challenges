@@ -7,9 +7,8 @@ import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -20,12 +19,12 @@ public abstract class CollectionGoal extends SettingGoal {
   private final Map<UUID, List<String>> collections = new HashMap<>();
   protected Object[] target;
 
-  public CollectionGoal(@Nonnull Object[] target) {
+  public CollectionGoal(@NotNull Object[] target) {
     super();
     this.target = target;
   }
 
-  public CollectionGoal(boolean enabledByDefault, @Nonnull Object[] target) {
+  public CollectionGoal(boolean enabledByDefault, @NotNull Object[] target) {
     super(enabledByDefault);
     this.target = target;
   }
@@ -42,7 +41,7 @@ public abstract class CollectionGoal extends SettingGoal {
   }
 
   @Override
-  public void getWinnersOnEnd(@Nonnull List<Player> winners) {
+  public void getWinnersOnEnd(@NotNull List<Player> winners) {
     AtomicInteger mostPoints = new AtomicInteger();
     Map<Player, Integer> points = getPoints(mostPoints, false);
     if (mostPoints.get() == 0) return; // Nobody won, nobody has anything
@@ -53,13 +52,12 @@ public abstract class CollectionGoal extends SettingGoal {
     }
   }
 
-  @Nonnull
-  @CheckReturnValue
-  protected Map<Player, Integer> getPoints(@Nonnull AtomicInteger mostPoints, boolean zeros) {
+  @NotNull
+  protected Map<Player, Integer> getPoints(@NotNull AtomicInteger mostPoints, boolean zeros) {
     return GoalHelper.createPointsFromValues(mostPoints, collections, (uuid, strings) -> getCollectionFiltered(uuid).size(), zeros);
   }
 
-  protected void collect(@Nonnull Player player, @Nonnull Object item, @Nonnull Runnable success) {
+  protected void collect(@NotNull Player player, @NotNull Object item, @NotNull Runnable success) {
     if (ignorePlayer(player)) return;
     List<String> collection = getCollectionRaw(player.getUniqueId());
     if (collection.contains(item.toString())) return;
@@ -69,12 +67,12 @@ public abstract class CollectionGoal extends SettingGoal {
     checkCollects();
   }
 
-  protected List<String> getCollectionFiltered(@Nonnull UUID uuid) {
+  protected List<String> getCollectionFiltered(@NotNull UUID uuid) {
     List<String> targetStringList = Arrays.stream(target).map(Object::toString).collect(Collectors.toList());
     return collections.computeIfAbsent(uuid, key -> new ArrayList<>()).stream().filter(targetStringList::contains).collect(Collectors.toList());
   }
 
-  protected List<String> getCollectionRaw(@Nonnull UUID uuid) {
+  protected List<String> getCollectionRaw(@NotNull UUID uuid) {
     return collections.computeIfAbsent(uuid, key -> new ArrayList<>());
   }
 
@@ -85,13 +83,13 @@ public abstract class CollectionGoal extends SettingGoal {
     }
   }
 
-  protected void checkCollects(@Nonnull List<String> collection) {
+  protected void checkCollects(@NotNull List<String> collection) {
     if (collection.size() >= target.length)
       ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED);
   }
 
   @Override
-  public void loadGameState(@Nonnull Document document) {
+  public void loadGameState(@NotNull Document document) {
     super.loadGameState(document);
 
     collections.clear();
@@ -112,7 +110,7 @@ public abstract class CollectionGoal extends SettingGoal {
   }
 
   @Override
-  public void writeGameState(@Nonnull Document document) {
+  public void writeGameState(@NotNull Document document) {
     super.writeGameState(document);
 
     Document scores = document.getDocument("scores");
@@ -121,7 +119,7 @@ public abstract class CollectionGoal extends SettingGoal {
     });
   }
 
-  protected void setTarget(@Nonnull Object... target) {
+  protected void setTarget(@NotNull Object... target) {
     this.target = target;
   }
 

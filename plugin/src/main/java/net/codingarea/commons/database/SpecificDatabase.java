@@ -1,9 +1,8 @@
 package net.codingarea.commons.database;
 
 import net.codingarea.commons.database.action.*;
-
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Represents a table/collection of a database
@@ -15,52 +14,52 @@ public interface SpecificDatabase {
 
   boolean isConnected();
 
-  @Nonnull
+  @NotNull
   String getName();
 
   /**
    * @see Database#countEntries(String)
    */
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   DatabaseCountEntries countEntries();
 
   /**
    * @see Database#query(String)
    */
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   DatabaseQuery query();
 
   /**
    * @see Database#update(String)
    */
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   DatabaseUpdate update();
 
   /**
    * @see Database#insert(String)
    */
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   DatabaseInsertion insert();
 
   /**
    * @see Database#insertOrUpdate(String)
    */
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   DatabaseInsertionOrUpdate insertOrUpdate();
 
   /**
    * @see Database#delete(String)
    */
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   DatabaseDeletion delete();
 
-  @Nonnull
+  @NotNull
   Database getParent();
 
 }

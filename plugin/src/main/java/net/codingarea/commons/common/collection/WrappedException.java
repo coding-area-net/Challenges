@@ -1,7 +1,7 @@
 package net.codingarea.commons.common.collection;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This class is used to rethrow signed exception as unsigned exceptions.
@@ -10,11 +10,11 @@ public class WrappedException extends RuntimeException {
 
   public static class SilentWrappedException extends WrappedException {
 
-    public SilentWrappedException(@Nullable String message, @Nonnull Throwable cause) {
+    public SilentWrappedException(@Nullable String message, @NotNull Throwable cause) {
       super(message, cause);
     }
 
-    public SilentWrappedException(@Nonnull Throwable cause) {
+    public SilentWrappedException(@NotNull Throwable cause) {
       super(cause);
     }
 
@@ -25,22 +25,22 @@ public class WrappedException extends RuntimeException {
 
   }
 
-  public WrappedException(@Nullable String message, @Nonnull Throwable cause) {
+  public WrappedException(@Nullable String message, @NotNull Throwable cause) {
     super(message, cause);
   }
 
-  public WrappedException(@Nonnull Throwable cause) {
+  public WrappedException(@NotNull Throwable cause) {
     super(cause);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Throwable getCause() {
     return super.getCause();
   }
 
-  @Nonnull
-  public static RuntimeException rethrow(@Nonnull Throwable ex) {
+  @NotNull
+  public static RuntimeException rethrow(@NotNull Throwable ex) {
     if (ex instanceof Error)
       throw (Error) ex;
     if (ex instanceof RuntimeException)
@@ -48,13 +48,13 @@ public class WrappedException extends RuntimeException {
     throw silent(ex);
   }
 
-  @Nonnull
-  public static WrappedException silent(@Nonnull Throwable cause) {
+  @NotNull
+  public static WrappedException silent(@NotNull Throwable cause) {
     return new SilentWrappedException(cause);
   }
 
-  @Nonnull
-  public static WrappedException silent(@Nullable String message, @Nonnull Throwable cause) {
+  @NotNull
+  public static WrappedException silent(@Nullable String message, @NotNull Throwable cause) {
     return new SilentWrappedException(message, cause);
   }
 

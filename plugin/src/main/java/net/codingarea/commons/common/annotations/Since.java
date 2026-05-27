@@ -1,6 +1,7 @@
 package net.codingarea.commons.common.annotations;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.annotation.*;
 
 @Documented
@@ -8,7 +9,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Since {
 
-  @Nonnull
+  @NotNull
   String value();
 
 }

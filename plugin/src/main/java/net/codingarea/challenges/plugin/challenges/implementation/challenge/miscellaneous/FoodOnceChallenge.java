@@ -13,8 +13,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public class FoodOnceChallenge extends SettingModifier {
@@ -23,13 +23,13 @@ public class FoodOnceChallenge extends SettingModifier {
     super(MenuType.CHALLENGES, 2);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.COOKED_BEEF, Message.forName("item-food-once-challenge"));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     switch (getValue()) {
@@ -48,7 +48,7 @@ public class FoodOnceChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerItemConsume(@Nonnull PlayerItemConsumeEvent event) {
+  public void onPlayerItemConsume(@NotNull PlayerItemConsumeEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
 
@@ -76,13 +76,13 @@ public class FoodOnceChallenge extends SettingModifier {
     }
   }
 
-  private void addPlayerFood(@Nonnull Player player, @Nonnull Material material) {
+  private void addPlayerFood(@NotNull Player player, @NotNull Material material) {
     List<Material> foods = getPlayerData(player).getEnumList("foods", Material.class);
     foods.add(material);
     getPlayerData(player).set("foods", foods);
   }
 
-  private boolean hasEaten(@Nonnull Player player, @Nonnull Material material) {
+  private boolean hasEaten(@NotNull Player player, @NotNull Material material) {
     if (teamFoodsActivated()) {
       return hasBeenEatenByTeam(material);
     }
@@ -90,13 +90,13 @@ public class FoodOnceChallenge extends SettingModifier {
     return getPlayerData(player).getEnumList("foods", Material.class).contains(material);
   }
 
-  private void addTeamFood(@Nonnull Material material) {
+  private void addTeamFood(@NotNull Material material) {
     List<Material> foods = getGameStateData().getEnumList("foods", Material.class);
     foods.add(material);
     getGameStateData().set("foods", foods);
   }
 
-  private boolean hasBeenEatenByTeam(@Nonnull Material material) {
+  private boolean hasBeenEatenByTeam(@NotNull Material material) {
     return getGameStateData().getEnumList("foods", Material.class).contains(material);
   }
 

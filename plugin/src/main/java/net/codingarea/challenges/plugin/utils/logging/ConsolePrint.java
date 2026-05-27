@@ -2,9 +2,8 @@ package net.codingarea.challenges.plugin.utils.logging;
 
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import org.bukkit.Bukkit;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public final class ConsolePrint {
 
@@ -72,7 +71,7 @@ public final class ConsolePrint {
     log("");
   }
 
-  private static void log(@Nonnull String message) {
+  private static void log(@NotNull String message) {
     Logger.error(message);
   }
 

@@ -1,7 +1,7 @@
 package net.codingarea.challenges.mongoconnector;
 
-import net.codingarea.commons.database.mongodb.MongoDBDatabase;
 import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.commons.database.mongodb.MongoDBDatabase;
 import org.bukkit.plugin.java.JavaPlugin;
 
 

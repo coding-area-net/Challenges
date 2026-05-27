@@ -11,9 +11,9 @@ import net.codingarea.challenges.plugin.utils.misc.ListBuilder;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class ChunkDeconstructionChallenge extends TimedChallenge {
@@ -23,7 +23,7 @@ public class ChunkDeconstructionChallenge extends TimedChallenge {
     setCategory(SettingCategory.WORLD);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.DIAMOND_PICKAXE, Message.forName("item-chunk-deconstruction-challenge"));
@@ -57,7 +57,7 @@ public class ChunkDeconstructionChallenge extends TimedChallenge {
     restartTimer();
   }
 
-  private void deconstructChunk(@Nonnull Chunk chunk) {
+  private void deconstructChunk(@NotNull Chunk chunk) {
 
     for (int x = 0; x < 16; x++) {
       int finalX = x;
@@ -70,7 +70,7 @@ public class ChunkDeconstructionChallenge extends TimedChallenge {
 
   }
 
-  private void deconstructAtLocation(@Nonnull Block block) {
+  private void deconstructAtLocation(@NotNull Block block) {
     Block lowestBreakableBlock = getLowestBreakableBlock(block);
     if (lowestBreakableBlock == null) return;
 
@@ -78,7 +78,7 @@ public class ChunkDeconstructionChallenge extends TimedChallenge {
   }
 
   @Nullable
-  private Block getLowestBreakableBlock(@Nonnull Block block) {
+  private Block getLowestBreakableBlock(@NotNull Block block) {
     Location location = block.getLocation();
     location.setY(block.getWorld().getMaxHeight());
 
@@ -90,7 +90,7 @@ public class ChunkDeconstructionChallenge extends TimedChallenge {
     return currentBlock.getType() == Material.BEDROCK || currentBlock.isLiquid() ? null : location.getBlock();
   }
 
-  private boolean isBreakable(@Nonnull Block block) {
+  private boolean isBreakable(@NotNull Block block) {
     return block.getType() != Material.BEDROCK && !BukkitReflectionUtils.isAir(block.getType()) && !block.isLiquid();
   }
 

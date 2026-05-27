@@ -10,9 +10,9 @@ import net.codingarea.commons.database.sql.abstraction.AbstractSQLDatabase;
 import net.codingarea.commons.database.sql.abstraction.where.ObjectWhere;
 import net.codingarea.commons.database.sql.abstraction.where.SQLWhere;
 import net.codingarea.commons.database.sql.abstraction.where.StringIgnoreCaseWhere;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -29,70 +29,70 @@ public class SQLQuery implements DatabaseQuery {
   protected String orderBy;
   protected Order order;
 
-  public SQLQuery(@Nonnull AbstractSQLDatabase database, @Nonnull String table) {
+  public SQLQuery(@NotNull AbstractSQLDatabase database, @NotNull String table) {
     this.database = database;
     this.table = table;
     this.where = new HashMap<>();
   }
 
-  public SQLQuery(@Nonnull AbstractSQLDatabase database, @Nonnull String table, @Nonnull Map<String, SQLWhere> where) {
+  public SQLQuery(@NotNull AbstractSQLDatabase database, @NotNull String table, @NotNull Map<String, SQLWhere> where) {
     this.database = database;
     this.table = table;
     this.where = where;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseQuery where(@Nonnull String column, @Nullable Object object) {
+  public DatabaseQuery where(@NotNull String column, @Nullable Object object) {
     where.put(column, new ObjectWhere(column, object, "="));
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseQuery where(@Nonnull String column, @Nullable Number value) {
+  public DatabaseQuery where(@NotNull String column, @Nullable Number value) {
     return where(column, (Object) value);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseQuery where(@Nonnull String column, @Nullable String value) {
+  public DatabaseQuery where(@NotNull String column, @Nullable String value) {
     return where(column, (Object) value);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseQuery where(@Nonnull String column, @Nullable String value, boolean ignoreCase) {
+  public DatabaseQuery where(@NotNull String column, @Nullable String value, boolean ignoreCase) {
     if (!ignoreCase) return where(column, value);
     if (value == null) throw new NullPointerException("Cannot use where ignore case with null value");
     where.put(column, new StringIgnoreCaseWhere(column, value));
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseQuery whereNot(@Nonnull String column, @Nullable Object object) {
+  public DatabaseQuery whereNot(@NotNull String column, @Nullable Object object) {
     where.put(column, new ObjectWhere(column, object, "!="));
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseQuery orderBy(@Nonnull String column, @Nonnull Order order) {
+  public DatabaseQuery orderBy(@NotNull String column, @NotNull Order order) {
     this.orderBy = column;
     this.order = order;
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseQuery select(@Nonnull String... selection) {
+  public DatabaseQuery select(@NotNull String... selection) {
     if (selection.length == 0) throw new IllegalArgumentException("Cannot select noting");
     this.selection = selection;
     return this;
   }
 
-  @Nonnull
+  @NotNull
   protected PreparedStatement prepare() throws SQLException, DatabaseException {
     StringBuilder command = new StringBuilder();
     List<Object> args = new LinkedList<>();
@@ -128,7 +128,7 @@ public class SQLQuery implements DatabaseQuery {
     return database.prepare(command.toString(), args.toArray());
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ExecutedQuery execute() throws DatabaseException {
     try {
@@ -140,8 +140,8 @@ public class SQLQuery implements DatabaseQuery {
     }
   }
 
-  @Nonnull
-  private ExecutedQuery createExecutedQuery(@Nonnull ResultSet result) throws SQLException {
+  @NotNull
+  private ExecutedQuery createExecutedQuery(@NotNull ResultSet result) throws SQLException {
     List<Document> results = new ArrayList<>();
     ResultSetMetaData data = result.getMetaData();
     while (result.next()) {

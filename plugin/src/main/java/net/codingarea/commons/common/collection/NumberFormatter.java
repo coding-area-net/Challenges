@@ -1,50 +1,43 @@
 package net.codingarea.commons.common.collection;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.function.Consumer;
 
 public interface NumberFormatter {
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   String format(double value);
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   default String format(float value) {
     return format(Float.valueOf(value));
   }
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   default String format(long value) {
     return format(Long.valueOf(value));
   }
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   default String format(int value) {
     return format(Integer.valueOf(value));
   }
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   default String format(short value) {
     return format(Short.valueOf(value));
   }
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
   default String format(byte value) {
     return format(Byte.valueOf(value));
   }
 
-  @Nonnull
-  @CheckReturnValue
-  default String format(@Nonnull Number number) {
+  @NotNull
+  default String format(@NotNull Number number) {
     return format(number.doubleValue());
   }
 
@@ -328,29 +321,25 @@ public interface NumberFormatter {
     },
     GERMAN_ORDINAL = fromPattern("0", ".", false);
 
-  @Nonnull
-  @CheckReturnValue
-  public static NumberFormatter fromPattern(@Nonnull String pattern, String ending, boolean positive) {
+  @NotNull
+  public static NumberFormatter fromPattern(@NotNull String pattern, String ending, boolean positive) {
     return fromPattern(pattern, ending, positive, null);
   }
 
-  @Nonnull
-  @CheckReturnValue
-  public static NumberFormatter fromPattern(@Nonnull String pattern, String ending, boolean positive, Consumer<? super DecimalFormat> init) {
+  @NotNull
+  public static NumberFormatter fromPattern(@NotNull String pattern, String ending, boolean positive, Consumer<? super DecimalFormat> init) {
     DecimalFormat format = new DecimalFormat(pattern);
     if (init != null) init.accept(format);
     return value -> Double.isNaN(value) ? "NaN" : format.format(positive ? (value > 0 ? value : 0) : value) + (ending != null ? ending : "");
   }
 
-  @Nonnull
-  @CheckReturnValue
-  public static DecimalFormatSymbols updateSymbols(@Nonnull DecimalFormatSymbols symbols, @Nonnull Consumer<? super DecimalFormatSymbols> action) {
+  @NotNull
+  public static DecimalFormatSymbols updateSymbols(@NotNull DecimalFormatSymbols symbols, @NotNull Consumer<? super DecimalFormatSymbols> action) {
     action.accept(symbols);
     return symbols;
   }
 
-  @CheckReturnValue
-  public static void updateSymbols(@Nonnull DecimalFormat format, @Nonnull Consumer<? super DecimalFormatSymbols> action) {
+  public static void updateSymbols(@NotNull DecimalFormat format, @NotNull Consumer<? super DecimalFormatSymbols> action) {
     format.setDecimalFormatSymbols(updateSymbols(format.getDecimalFormatSymbols(), action));
   }
 

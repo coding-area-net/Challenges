@@ -12,7 +12,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class DamageRuleSetting extends Setting {
   private final String name;
   private final ItemBuilder preset;
 
-  public DamageRuleSetting(@Nonnull ItemBuilder preset, @Nonnull String name, @Nonnull DamageCause... causes) {
+  public DamageRuleSetting(@NotNull ItemBuilder preset, @NotNull String name, @NotNull DamageCause... causes) {
     super(MenuType.DAMAGE, true);
     this.causes = Arrays.asList(causes);
     this.name = name;
@@ -36,14 +35,14 @@ public class DamageRuleSetting extends Setting {
     return super.getUniqueName() + name;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return preset.clone().applyFormat(Message.forName("item-damage-rule-" + name).asItemDescription());
   }
 
   @EventHandler(priority = EventPriority.NORMAL)
-  public void onDamage(@Nonnull EntityDamageEvent event) {
+  public void onDamage(@NotNull EntityDamageEvent event) {
     if (ChallengeAPI.isWorldInUse()) return;
     if (isEnabled()) return;
     if (!(event.getEntity() instanceof Player)) return;

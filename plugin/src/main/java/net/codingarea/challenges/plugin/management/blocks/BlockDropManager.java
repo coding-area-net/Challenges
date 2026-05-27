@@ -7,9 +7,9 @@ import net.codingarea.commons.bukkit.utils.logging.Logger;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.BooleanSupplier;
@@ -21,8 +21,8 @@ public final class BlockDropManager {
   private final Map<Material, RegisteredChance> chance = new HashMap<>();
   private SubSetting directInventorySetting;
 
-  @Nonnull
-  public Collection<ItemStack> getDrops(@Nonnull Block block) {
+  @NotNull
+  public Collection<ItemStack> getDrops(@NotNull Block block) {
     if (!getDropChance(block.getType()).getAsBoolean()) return new ArrayList<>();
     List<Material> customDrops = getCustomDrops(block.getType());
     if (!customDrops.isEmpty())
@@ -30,8 +30,8 @@ public final class BlockDropManager {
     return block.getDrops();
   }
 
-  @Nonnull
-  public Collection<ItemStack> getDrops(@Nonnull Block block, @Nullable ItemStack tool) {
+  @NotNull
+  public Collection<ItemStack> getDrops(@NotNull Block block, @Nullable ItemStack tool) {
     if (!getDropChance(block.getType()).getAsBoolean()) return new ArrayList<>();
     List<Material> customDrops = getCustomDrops(block.getType());
     if (!customDrops.isEmpty())
@@ -39,25 +39,25 @@ public final class BlockDropManager {
     return block.getDrops(tool);
   }
 
-  @Nonnull
-  public List<Material> getCustomDrops(@Nonnull Material block) {
+  @NotNull
+  public List<Material> getCustomDrops(@NotNull Material block) {
     RegisteredDrops option = drops.get(block);
     if (option == null) return new ArrayList<>();
     return option.getFirst().orElse(new ArrayList<>());
   }
 
-  public void setCustomDrops(@Nonnull Material block, @Nonnull Material item, byte priority) {
+  public void setCustomDrops(@NotNull Material block, @NotNull Material item, byte priority) {
     setCustomDrops(block, Collections.singletonList(item), priority);
   }
 
-  public void setCustomDrops(@Nonnull Material block, @Nonnull List<Material> items, byte priority) {
+  public void setCustomDrops(@NotNull Material block, @NotNull List<Material> items, byte priority) {
     Logger.debug("Setting block drop for {} to {} at priority {}", block, items, priority);
 
     RegisteredDrops option = this.drops.computeIfAbsent(block, key -> new RegisteredDrops());
     option.setOption(priority, items);
   }
 
-  public void resetCustomDrop(@Nonnull Material block, byte priority) {
+  public void resetCustomDrop(@NotNull Material block, byte priority) {
     Logger.debug("Resetting block drop for {} at priority {}", block, priority);
 
     RegisteredDrops option = drops.get(block);
@@ -81,14 +81,14 @@ public final class BlockDropManager {
     remove.forEach(drops::remove);
   }
 
-  @Nonnull
-  public BooleanSupplier getDropChance(@Nonnull Material block) {
+  @NotNull
+  public BooleanSupplier getDropChance(@NotNull Material block) {
     RegisteredChance option = chance.get(block);
     if (option == null) return () -> true;
     return option.getFirst().orElse(() -> true);
   }
 
-  public void setDropChance(@Nonnull Material block, byte priority, @Nonnull BooleanSupplier chance) {
+  public void setDropChance(@NotNull Material block, byte priority, @NotNull BooleanSupplier chance) {
     Logger.debug("Setting block drop chance for {} at priority {}", block, priority);
 
     RegisteredChance option = this.chance.computeIfAbsent(block, key -> new RegisteredChance());
@@ -109,7 +109,7 @@ public final class BlockDropManager {
     remove.forEach(drops::remove);
   }
 
-  @Nonnull
+  @NotNull
   public Map<Material, RegisteredDrops> getRegisteredDrops() {
     return Collections.unmodifiableMap(drops);
   }
@@ -135,7 +135,7 @@ public final class BlockDropManager {
 
     private final SortedMap<Byte, T> optionByPriority = new TreeMap<>(Collections.reverseOrder());
 
-    public void setOption(byte priority, @Nonnull T option) {
+    public void setOption(byte priority, @NotNull T option) {
       optionByPriority.put(priority, option);
     }
 
@@ -143,7 +143,7 @@ public final class BlockDropManager {
       optionByPriority.remove(priority);
     }
 
-    @Nonnull
+    @NotNull
     public Optional<T> getFirst() {
       return optionByPriority.values().stream().findFirst();
     }

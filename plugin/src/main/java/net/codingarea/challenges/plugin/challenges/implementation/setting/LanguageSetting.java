@@ -9,8 +9,8 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class LanguageSetting extends Modifier {
@@ -25,13 +25,13 @@ public class LanguageSetting extends Modifier {
     super(MenuType.SETTINGS, 1, 2, ENGLISH);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.KNOWLEDGE_BOOK, Message.forName("item-language-setting"));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     String texture = getValue() == GERMAN ? GERMAN_SKULL : ENGLISH_SKULL;

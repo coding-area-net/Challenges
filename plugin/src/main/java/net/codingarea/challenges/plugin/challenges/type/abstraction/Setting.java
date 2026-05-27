@@ -8,8 +8,7 @@ import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 
 public abstract class Setting extends AbstractChallenge {
@@ -17,18 +16,18 @@ public abstract class Setting extends AbstractChallenge {
   private final boolean enabledByDefault;
   protected boolean enabled;
 
-  public Setting(@Nonnull MenuType menu) {
+  public Setting(@NotNull MenuType menu) {
     this(menu, false);
   }
 
-  public Setting(@Nonnull MenuType menu, boolean enabledByDefault) {
+  public Setting(@NotNull MenuType menu, boolean enabledByDefault) {
     super(menu);
     this.enabledByDefault = enabledByDefault;
     setEnabled(enabledByDefault);
   }
 
   @Override
-  public void handleClick(@Nonnull ChallengeMenuClickInfo info) {
+  public void handleClick(@NotNull ChallengeMenuClickInfo info) {
     setEnabled(!enabled);
     SoundSample.playStatusSound(info.getPlayer(), enabled);
     playStatusUpdateTitle();
@@ -43,7 +42,7 @@ public abstract class Setting extends AbstractChallenge {
     ChallengeHelper.playToggleChallengeTitle(this);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     return DefaultItem.status(enabled);
@@ -83,12 +82,12 @@ public abstract class Setting extends AbstractChallenge {
   }
 
   @Override
-  public void loadSettings(@Nonnull Document document) {
+  public void loadSettings(@NotNull Document document) {
     setEnabled(document.getBoolean("enabled", enabled));
   }
 
   @Override
-  public void writeSettings(@Nonnull Document document) {
+  public void writeSettings(@NotNull Document document) {
     document.set("enabled", enabled);
   }
 

@@ -4,8 +4,7 @@ import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.inventory.InventoryClickEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 public class PlayerInventoryClickEvent extends InventoryClickEventWrapper {
@@ -14,17 +13,17 @@ public class PlayerInventoryClickEvent extends InventoryClickEventWrapper {
 
   private final Player player;
 
-  public PlayerInventoryClickEvent(@Nonnull InventoryClickEvent event) {
+  public PlayerInventoryClickEvent(@NotNull InventoryClickEvent event) {
     super(event);
     player = ((Player) event.getWhoClicked());
   }
 
-  @Nonnull
+  @NotNull
   public static HandlerList getHandlerList() {
     return handlers;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public HandlerList getHandlers() {
     return getHandlerList();

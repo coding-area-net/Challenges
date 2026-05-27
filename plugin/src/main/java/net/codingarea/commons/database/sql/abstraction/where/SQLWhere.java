@@ -1,13 +1,13 @@
 package net.codingarea.commons.database.sql.abstraction.where;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public interface SQLWhere {
 
-  @Nonnull
+  @NotNull
   Object[] getArgs();
 
-  @Nonnull
+  @NotNull
   String getAsSQLString();
 
 }

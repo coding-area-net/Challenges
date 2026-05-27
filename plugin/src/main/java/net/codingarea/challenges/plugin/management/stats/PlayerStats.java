@@ -2,8 +2,8 @@ package net.codingarea.challenges.plugin.management.stats;
 
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.config.Document;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -15,7 +15,7 @@ public class PlayerStats {
   private final UUID uuid;
   private final String name;
 
-  public PlayerStats(@Nonnull UUID uuid, @Nonnull String name, @Nonnull Document document) {
+  public PlayerStats(@NotNull UUID uuid, @NotNull String name, @NotNull Document document) {
     this.uuid = uuid;
     this.name = name;
     for (Statistic statistic : Statistic.values()) {
@@ -23,18 +23,18 @@ public class PlayerStats {
     }
   }
 
-  public PlayerStats(@Nonnull UUID uuid, @Nonnull String name) {
+  public PlayerStats(@NotNull UUID uuid, @NotNull String name) {
     this.uuid = uuid;
     this.name = name;
   }
 
-  public void incrementStatistic(@Nonnull Statistic statistic, double amount) {
+  public void incrementStatistic(@NotNull Statistic statistic, double amount) {
     Logger.debug("Incrementing statistic {} by {} for {}", statistic, amount, name);
     double value = values.getOrDefault(statistic, 0d);
     values.put(statistic, value + amount);
   }
 
-  @Nonnull
+  @NotNull
   public Document asDocument() {
     Document document = Document.create();
     for (Entry<Statistic, Double> entry : values.entrySet()) {
@@ -43,16 +43,16 @@ public class PlayerStats {
     return document;
   }
 
-  public double getStatisticValue(@Nonnull Statistic statistic) {
+  public double getStatisticValue(@NotNull Statistic statistic) {
     return values.getOrDefault(statistic, 0d);
   }
 
-  @Nonnull
+  @NotNull
   public UUID getPlayerUUID() {
     return uuid;
   }
 
-  @Nonnull
+  @NotNull
   public String getPlayerName() {
     return name;
   }

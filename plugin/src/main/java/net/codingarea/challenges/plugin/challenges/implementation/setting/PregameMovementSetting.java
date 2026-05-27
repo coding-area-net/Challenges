@@ -11,8 +11,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class PregameMovementSetting extends Setting {
 
@@ -21,7 +20,7 @@ public class PregameMovementSetting extends Setting {
   }
 
   @EventHandler
-  public void onMove(@Nonnull PlayerMoveEvent event) {
+  public void onMove(@NotNull PlayerMoveEvent event) {
     if (ChallengeAPI.isStarted() || isEnabled()) return;
     if (event.getPlayer().getGameMode() == GameMode.SPECTATOR || event.getPlayer().getGameMode() == GameMode.CREATIVE)
       return;
@@ -43,12 +42,12 @@ public class PregameMovementSetting extends Setting {
     Message.forName("title-pregame-movement-setting").sendTitleInstant(event.getPlayer());
   }
 
-  private void findNearestBlock(@Nonnull Location location) {
+  private void findNearestBlock(@NotNull Location location) {
     for (; location.getBlockY() > 0 && location.getBlock().isPassable(); location.subtract(0, 1, 0))
       ;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.PISTON, Message.forName("pregame-movement-setting"));

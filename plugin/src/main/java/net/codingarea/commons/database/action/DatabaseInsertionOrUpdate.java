@@ -3,10 +3,9 @@ package net.codingarea.commons.database.action;
 import net.codingarea.commons.database.Database;
 import net.codingarea.commons.database.SpecificDatabase;
 import net.codingarea.commons.database.exceptions.DatabaseException;
-
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @see Database#insertOrUpdate(String)
@@ -14,29 +13,29 @@ import javax.annotation.Nullable;
  */
 public interface DatabaseInsertionOrUpdate extends DatabaseUpdate, DatabaseInsertion {
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseInsertionOrUpdate where(@Nonnull String field, @Nullable Object value);
+  DatabaseInsertionOrUpdate where(@NotNull String field, @Nullable Object value);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseInsertionOrUpdate where(@Nonnull String field, @Nullable Number value);
+  DatabaseInsertionOrUpdate where(@NotNull String field, @Nullable Number value);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseInsertionOrUpdate where(@Nonnull String field, @Nullable String value, boolean ignoreCase);
+  DatabaseInsertionOrUpdate where(@NotNull String field, @Nullable String value, boolean ignoreCase);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseInsertionOrUpdate where(@Nonnull String field, @Nullable String value);
+  DatabaseInsertionOrUpdate where(@NotNull String field, @Nullable String value);
 
-  @Nonnull
+  @NotNull
   @Override
-  DatabaseInsertionOrUpdate whereNot(@Nonnull String field, @Nullable Object value);
+  DatabaseInsertionOrUpdate whereNot(@NotNull String field, @Nullable Object value);
 
-  @Nonnull
+  @NotNull
   @Override
-  DatabaseInsertionOrUpdate set(@Nonnull String field, @Nullable Object value);
+  DatabaseInsertionOrUpdate set(@NotNull String field, @Nullable Object value);
 
   @Nullable
   @Override

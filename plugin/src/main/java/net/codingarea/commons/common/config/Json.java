@@ -1,7 +1,8 @@
 package net.codingarea.commons.common.config;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.function.Supplier;
 
 /**
@@ -9,29 +10,29 @@ import java.util.function.Supplier;
  */
 public interface Json {
 
-  @Nonnull
+  @NotNull
   String toJson();
 
-  @Nonnull
+  @NotNull
   String toPrettyJson();
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   static Json empty() {
     return constant("{}", "{}");
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static Json supply(@Nonnull Supplier<String> normal, @Nonnull Supplier<String> pretty) {
+  static Json supply(@NotNull Supplier<String> normal, @NotNull Supplier<String> pretty) {
     return new Json() {
-      @Nonnull
+      @NotNull
       @Override
       public String toJson() {
         return normal.get();
       }
 
-      @Nonnull
+      @NotNull
       @Override
       public String toPrettyJson() {
         return pretty.get();
@@ -39,9 +40,9 @@ public interface Json {
     };
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  static Json constant(@Nonnull String json, @Nonnull String prettyJson) {
+  static Json constant(@NotNull String json, @NotNull String prettyJson) {
     return supply(() -> json, () -> prettyJson);
   }
 

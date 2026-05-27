@@ -12,8 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 @Since("2.0")
@@ -26,14 +26,14 @@ public class FirstOneToDieGoal extends SettingGoal {
     setCategory(SettingCategory.FASTEST_TIME);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.STONE_SWORD, Message.forName("item-first-one-to-die-goal"));
   }
 
   @Override
-  public void getWinnersOnEnd(@Nonnull List<Player> winners) {
+  public void getWinnersOnEnd(@NotNull List<Player> winners) {
     if (winner != null)
       winners.add(winner);
   }
@@ -44,7 +44,7 @@ public class FirstOneToDieGoal extends SettingGoal {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onDeath(@Nonnull PlayerDeathEvent event) {
+  public void onDeath(@NotNull PlayerDeathEvent event) {
     if (!shouldExecuteEffect()) return;
     winner = event.getEntity();
     ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED);

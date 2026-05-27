@@ -5,8 +5,7 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerStatisticIncrementEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
 
@@ -14,12 +13,12 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
 
   private final PlayerStatisticIncrementEvent event;
 
-  public PlayerJumpEvent(@Nonnull Player who, PlayerStatisticIncrementEvent statisticIncrementEvent) {
+  public PlayerJumpEvent(@NotNull Player who, PlayerStatisticIncrementEvent statisticIncrementEvent) {
     super(who);
     this.event = statisticIncrementEvent;
   }
 
-  @Nonnull
+  @NotNull
   public static HandlerList getHandlerList() {
     return handlers;
   }
@@ -34,7 +33,7 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
     event.setCancelled(true);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public HandlerList getHandlers() {
     return handlers;

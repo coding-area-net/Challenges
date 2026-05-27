@@ -13,9 +13,9 @@ import net.codingarea.commons.common.config.document.GsonDocument;
 import net.codingarea.commons.common.config.document.wrapper.FileDocumentWrapper;
 import net.codingarea.commons.database.exceptions.DatabaseException;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -29,25 +29,25 @@ public final class ChallengeManager {
 
   private IGoal currentGoal;
 
-  @Nonnull
+  @NotNull
   public List<IChallenge> getChallenges() {
     return Collections.unmodifiableList(challenges);
   }
 
-  public void registerGameStateSaver(@Nonnull GamestateSaveable savable) {
+  public void registerGameStateSaver(@NotNull GamestateSaveable savable) {
     additionalSaver.add(savable);
   }
 
-  public void register(@Nonnull IChallenge challenge) {
+  public void register(@NotNull IChallenge challenge) {
     if (!challenge.getType().isUsable()) throw new IllegalArgumentException("Invalid MenuType");
     challenges.add(challenge);
   }
 
-  public void unregister(@Nonnull IChallenge challenge) {
+  public void unregister(@NotNull IChallenge challenge) {
     challenges.remove(challenge);
   }
 
-  public void unregisterIf(@Nonnull Predicate<IChallenge> predicate) {
+  public void unregisterIf(@NotNull Predicate<IChallenge> predicate) {
     challenges.removeIf(predicate);
   }
 
@@ -78,7 +78,7 @@ public final class ChallengeManager {
     }
   }
 
-  public void saveSettings(@Nonnull Player player) throws DatabaseException {
+  public void saveSettings(@NotNull Player player) throws DatabaseException {
     Document document = new GsonDocument();
     saveSettingsInto(document);
     Challenges.getInstance().getDatabaseManager().getDatabase()
@@ -88,7 +88,7 @@ public final class ChallengeManager {
       .execute();
   }
 
-  public void saveCustomChallenges(@Nonnull Player player) throws DatabaseException {
+  public void saveCustomChallenges(@NotNull Player player) throws DatabaseException {
     Document document = new GsonDocument();
     saveCustomChallengesInto(document);
     Challenges.getInstance().getDatabaseManager().getDatabase()
@@ -104,7 +104,7 @@ public final class ChallengeManager {
     loadCustomChallenges(Challenges.getInstance().getConfigManager().getCustomChallengesConfig().readonly());
   }
 
-  public synchronized void loadSettings(@Nonnull Document config) {
+  public synchronized void loadSettings(@NotNull Document config) {
 
     for (IChallenge challenge : challenges) {
       if (challenge instanceof CustomChallenge) continue;
@@ -120,7 +120,7 @@ public final class ChallengeManager {
     }
   }
 
-  public synchronized void loadGamestate(@Nonnull Document config) {
+  public synchronized void loadGamestate(@NotNull Document config) {
     LinkedList<GamestateSaveable> list = new LinkedList<>(challenges);
     list.addAll(additionalSaver);
     for (GamestateSaveable challenge : list) {
@@ -146,7 +146,7 @@ public final class ChallengeManager {
     }
   }
 
-  public synchronized void loadCustomChallenges(@Nonnull Document config) {
+  public synchronized void loadCustomChallenges(@NotNull Document config) {
     Challenges.getInstance().getCustomChallengesLoader().loadCustomChallengesFrom(config);
   }
 
@@ -172,7 +172,7 @@ public final class ChallengeManager {
     }
   }
 
-  public void saveGameStateInto(@Nonnull Document config) {
+  public void saveGameStateInto(@NotNull Document config) {
     LinkedList<GamestateSaveable> list = new LinkedList<>(challenges);
     list.addAll(additionalSaver);
     for (GamestateSaveable challenge : list) {
@@ -191,7 +191,7 @@ public final class ChallengeManager {
     config.save(async);
   }
 
-  public void saveSettingsInto(@Nonnull Document config) {
+  public void saveSettingsInto(@NotNull Document config) {
     for (IChallenge challenge : challenges) {
       if (challenge instanceof CustomChallenge) continue;
       try {
@@ -209,7 +209,7 @@ public final class ChallengeManager {
     config.save(async);
   }
 
-  public void saveCustomChallengesInto(@Nonnull Document config) {
+  public void saveCustomChallengesInto(@NotNull Document config) {
     Collection<CustomChallenge> customChallenges = Challenges.getInstance().getCustomChallengesLoader()
       .getCustomChallenges().values();
 

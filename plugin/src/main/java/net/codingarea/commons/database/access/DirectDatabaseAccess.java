@@ -3,9 +3,9 @@ package net.codingarea.commons.database.access;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.database.Database;
 import net.codingarea.commons.database.exceptions.DatabaseException;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
@@ -15,7 +15,7 @@ public class DirectDatabaseAccess<V> implements DatabaseAccess<V> {
   protected final DatabaseAccessConfig config;
   protected final BiFunction<? super Document, ? super String, ? extends V> mapper;
 
-  public DirectDatabaseAccess(@Nonnull Database database, @Nonnull DatabaseAccessConfig config, @Nonnull BiFunction<? super Document, ? super String, ? extends V> mapper) {
+  public DirectDatabaseAccess(@NotNull Database database, @NotNull DatabaseAccessConfig config, @NotNull BiFunction<? super Document, ? super String, ? extends V> mapper) {
     this.database = database;
     this.config = config;
     this.mapper = mapper;
@@ -23,24 +23,24 @@ public class DirectDatabaseAccess<V> implements DatabaseAccess<V> {
 
   @Nullable
   @Override
-  public V getValue(@Nonnull String key) throws DatabaseException {
+  public V getValue(@NotNull String key) throws DatabaseException {
     return getValue0(key).orElse(null);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public V getValue(@Nonnull String key, @Nonnull V def) throws DatabaseException {
+  public V getValue(@NotNull String key, @NotNull V def) throws DatabaseException {
     return getValue0(key).orElse(def);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Optional<V> getValueOptional(@Nonnull String key) throws DatabaseException {
+  public Optional<V> getValueOptional(@NotNull String key) throws DatabaseException {
     return getValue0(key);
   }
 
-  @Nonnull
-  protected Optional<V> getValue0(@Nonnull String key) throws DatabaseException {
+  @NotNull
+  protected Optional<V> getValue0(@NotNull String key) throws DatabaseException {
     return database.query(config.getTable())
       .where(config.getKeyField(), key)
       .execute().first()
@@ -48,20 +48,20 @@ public class DirectDatabaseAccess<V> implements DatabaseAccess<V> {
   }
 
   @Override
-  public void setValue(@Nonnull String key, @Nullable V value) throws DatabaseException {
+  public void setValue(@NotNull String key, @Nullable V value) throws DatabaseException {
     database.insertOrUpdate(config.getTable())
       .set(config.getValueField(), value)
       .where(config.getKeyField(), key)
       .execute();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Database getDatabase() {
     return database;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DatabaseAccessConfig getConfig() {
     return config;

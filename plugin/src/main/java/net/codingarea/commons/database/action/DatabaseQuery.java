@@ -6,10 +6,9 @@ import net.codingarea.commons.database.SpecificDatabase;
 import net.codingarea.commons.database.action.hierarchy.OrderedAction;
 import net.codingarea.commons.database.action.hierarchy.WhereAction;
 import net.codingarea.commons.database.exceptions.DatabaseException;
-
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @see Database#query(String)
@@ -17,37 +16,36 @@ import javax.annotation.Nullable;
  */
 public interface DatabaseQuery extends DatabaseAction<ExecutedQuery>, WhereAction, OrderedAction {
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseQuery where(@Nonnull String field, @Nullable Object object);
+  DatabaseQuery where(@NotNull String field, @Nullable Object object);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseQuery where(@Nonnull String field, @Nullable Number value);
+  DatabaseQuery where(@NotNull String field, @Nullable Number value);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseQuery where(@Nonnull String field, @Nullable String value, boolean ignoreCase);
+  DatabaseQuery where(@NotNull String field, @Nullable String value, boolean ignoreCase);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseQuery where(@Nonnull String field, @Nullable String value);
+  DatabaseQuery where(@NotNull String field, @Nullable String value);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseQuery whereNot(@Nonnull String field, @Nullable Object value);
+  DatabaseQuery whereNot(@NotNull String field, @Nullable Object value);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseQuery select(@Nonnull String... selection);
+  DatabaseQuery select(@NotNull String... selection);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseQuery orderBy(@Nonnull String field, @Nonnull Order order);
+  DatabaseQuery orderBy(@NotNull String field, @NotNull Order order);
 
-  @Nonnull
+  @NotNull
   @Override
-  @CheckReturnValue
   ExecutedQuery execute() throws DatabaseException;
 
 }

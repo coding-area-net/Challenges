@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +85,7 @@ public class GamemodeCommand implements SenderCommand, Completer {
 
   @Nullable
   @Override
-  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
     if (args.length == 2) return CommandHelper.getCompletions(sender);
     if (args.length > 1) return null;
     return Utils.filterRecommendations(args[0], "0", "1", "2", "3", "survival", "creative", "spectator", "adventure", "s", "c", "sp", "a");

@@ -10,9 +10,8 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class AdvancementDamageChallenge extends SettingModifier {
 
@@ -26,7 +25,7 @@ public class AdvancementDamageChallenge extends SettingModifier {
     ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.BOOK, Message.forName("item-advancement-damage-challenge"));
@@ -39,7 +38,7 @@ public class AdvancementDamageChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerAdvancementDone(@Nonnull PlayerAdvancementDoneEvent event) {
+  public void onPlayerAdvancementDone(@NotNull PlayerAdvancementDoneEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (event.getAdvancement().getKey().toString().contains(":recipes/")) return;

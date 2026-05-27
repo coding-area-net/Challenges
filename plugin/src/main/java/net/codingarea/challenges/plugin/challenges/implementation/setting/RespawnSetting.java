@@ -18,8 +18,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -31,14 +31,14 @@ public class RespawnSetting extends Setting {
     super(MenuType.SETTINGS);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.RED_BED, Message.forName("item-respawn-setting"));
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onPlayerDeath(@Nonnull PlayerDeathEvent event) {
+  public void onPlayerDeath(@NotNull PlayerDeathEvent event) {
     Player player = event.getEntity();
     if (isEnabled()) {
       SoundSample.DEATH.play(player);
@@ -62,7 +62,7 @@ public class RespawnSetting extends Setting {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onRespawn(@Nonnull PlayerRespawnEvent event) {
+  public void onRespawn(@NotNull PlayerRespawnEvent event) {
     if (isEnabled()) return;
 
     Player player = event.getPlayer();

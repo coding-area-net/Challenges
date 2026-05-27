@@ -4,8 +4,7 @@ import net.codingarea.commons.database.DatabaseConfig;
 import net.codingarea.commons.database.action.DatabaseListTables;
 import net.codingarea.commons.database.sql.abstraction.AbstractSQLDatabase;
 import net.codingarea.commons.database.sql.mysql.list.MySQLListTables;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class MySQLDatabase extends AbstractSQLDatabase {
 
@@ -17,17 +16,17 @@ public class MySQLDatabase extends AbstractSQLDatabase {
     }
   }
 
-  public MySQLDatabase(@Nonnull DatabaseConfig config) {
+  public MySQLDatabase(@NotNull DatabaseConfig config) {
     super(config);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   protected String createUrl() {
     return "jdbc:mysql://" + config.getHost() + (config.isPortSet() ? ":" + config.getPort() : "") + "/" + config.getDatabase();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DatabaseListTables listTables() {
     return new MySQLListTables(this);

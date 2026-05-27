@@ -30,9 +30,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -56,7 +56,7 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
     setCategory(SettingCategory.EXTRA_WORLD);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.ACACIA_STAIRS, Message.forName("item-jump-and-run-challenge"));
@@ -96,7 +96,7 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onQuit(@Nonnull PlayerQuitEvent event) {
+  public void onQuit(@NotNull PlayerQuitEvent event) {
     if (currentPlayer == null) return;
     if (!currentPlayer.equals(event.getPlayer().getUniqueId())) return;
     exitJumpAndRun();
@@ -137,7 +137,7 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
 
   }
 
-  @Nonnull
+  @NotNull
   protected Material getRandomBlockType() {
     if (currentJump == jumps - 1) return Material.EMERALD_BLOCK;
 
@@ -153,7 +153,7 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
     return globalRandom.choose(materials);
   }
 
-  @Nonnull
+  @NotNull
   protected Player getNextPlayer() {
     List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
     players.removeIf(AbstractChallenge::ignorePlayer);
@@ -191,14 +191,14 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
   }
 
   @Override
-  public void writeGameState(@Nonnull Document document) {
+  public void writeGameState(@NotNull Document document) {
     super.writeGameState(document);
     document.set("jumps", jumps);
     document.set("jumpsDone", jumpsDone);
   }
 
   @Override
-  public void loadGameState(@Nonnull Document document) {
+  public void loadGameState(@NotNull Document document) {
     super.loadGameState(document);
     jumps = document.getInt("jumps", jumps);
     jumpsDone = document.getInt("jumpsDone", jumpsDone);
@@ -212,7 +212,7 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onMove(@Nonnull PlayerMoveEvent event) {
+  public void onMove(@NotNull PlayerMoveEvent event) {
     if (!event.getPlayer().getUniqueId().equals(currentPlayer)) return;
     if (!isInExtraWorld()) return;
     if (targetBlock == null) return;

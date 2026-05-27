@@ -10,8 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityResurrectEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class TotemSaveDeathSetting extends Setting {
@@ -20,14 +19,14 @@ public class TotemSaveDeathSetting extends Setting {
     super(MenuType.SETTINGS);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.TOTEM_OF_UNDYING, Message.forName("item-totem-save-setting"));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onEntityResurrect(@Nonnull EntityResurrectEvent event) {
+  public void onEntityResurrect(@NotNull EntityResurrectEvent event) {
     if (ChallengeHelper.isInInstantKill() && !isEnabled()) {
       event.setCancelled(true);
     }

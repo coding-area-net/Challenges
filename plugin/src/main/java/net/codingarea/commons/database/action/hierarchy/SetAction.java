@@ -1,11 +1,11 @@
 package net.codingarea.commons.database.action.hierarchy;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface SetAction {
 
-  @Nonnull
-  SetAction set(@Nonnull String field, @Nullable Object value);
+  @NotNull
+  SetAction set(@NotNull String field, @Nullable Object value);
 
 }

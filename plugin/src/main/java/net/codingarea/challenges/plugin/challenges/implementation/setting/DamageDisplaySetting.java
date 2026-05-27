@@ -20,8 +20,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.projectiles.ProjectileSource;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class DamageDisplaySetting extends Setting {
 
@@ -29,7 +28,7 @@ public class DamageDisplaySetting extends Setting {
     super(MenuType.SETTINGS, true);
   }
 
-  public static String getCause(@Nonnull EntityDamageEvent event) {
+  public static String getCause(@NotNull EntityDamageEvent event) {
 
     if (event.getCause() == DamageCause.CUSTOM) return Message.forName("undefined").asString();
     String cause = StringUtils.getEnumName(event.getCause());
@@ -67,7 +66,7 @@ public class DamageDisplaySetting extends Setting {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onDamage(@Nonnull EntityDamageEvent event) {
+  public void onDamage(@NotNull EntityDamageEvent event) {
     if (ChallengeAPI.isPaused() || event.getCause() == DamageCause.CUSTOM || !isEnabled())
       return;
     if (!(event.getEntity() instanceof Player)) return;
@@ -78,7 +77,7 @@ public class DamageDisplaySetting extends Setting {
     Message.forName("player-damage-display").broadcast(Prefix.DAMAGE, NameHelper.getName((Player) event.getEntity()), damageDisplay, getCause(event));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.COMMAND_BLOCK, Message.forName("item-damage-display-setting"));

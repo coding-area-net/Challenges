@@ -6,9 +6,9 @@ import net.codingarea.commons.common.collection.WrappedException;
 import net.codingarea.commons.common.logging.ILogger;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.UUID;
@@ -20,8 +20,8 @@ public final class GameProfileUtils {
   private GameProfileUtils() {
   }
 
-  @Nonnull
-  public static GameProfile getGameProfile(@Nonnull Player player) {
+  @NotNull
+  public static GameProfile getGameProfile(@NotNull Player player) {
     try {
 
       Class<?> classOfPlayer = player.getClass();
@@ -35,11 +35,11 @@ public final class GameProfileUtils {
     }
   }
 
-  public static void applyTextures(@Nonnull SkullMeta meta, @Nullable UUID uuid, @Nullable String name, @Nullable String texture) {
+  public static void applyTextures(@NotNull SkullMeta meta, @Nullable UUID uuid, @Nullable String name, @Nullable String texture) {
     applyTextures(meta, uuid, name, texture, null);
   }
 
-  public static void applyTextures(@Nonnull SkullMeta meta, @Nullable UUID uuid, @Nullable String name, @Nullable String texture, @Nullable String signature) {
+  public static void applyTextures(@NotNull SkullMeta meta, @Nullable UUID uuid, @Nullable String name, @Nullable String texture, @Nullable String signature) {
     if (texture == null || texture.isEmpty()) return;
 
     GameProfile profile = new GameProfile(uuid == null ? UUID.randomUUID() : uuid, name);
@@ -75,8 +75,8 @@ public final class GameProfileUtils {
 
   }
 
-  @Nonnull
-  public static GameProfile getTextures(@Nonnull SkullMeta meta) {
+  @NotNull
+  public static GameProfile getTextures(@NotNull SkullMeta meta) {
 
     Class<?> classOfMeta = meta.getClass();
     try {

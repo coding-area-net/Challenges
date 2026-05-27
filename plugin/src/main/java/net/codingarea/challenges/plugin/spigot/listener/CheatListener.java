@@ -14,8 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class CheatListener implements Listener {
 
@@ -26,7 +25,7 @@ public class CheatListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onGameModeChange(@Nonnull PlayerGameModeChangeEvent event) {
+  public void onGameModeChange(@NotNull PlayerGameModeChangeEvent event) {
     if (event.getNewGameMode() == GameMode.CREATIVE)
       handleCheatsDetected(event.getPlayer());
   }
@@ -40,7 +39,7 @@ public class CheatListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onCommand(@Nonnull PlayerCommandPreprocessEvent event) {
+  public void onCommand(@NotNull PlayerCommandPreprocessEvent event) {
     String[] commands = {
       "give",
       "replaceitem",
@@ -70,7 +69,7 @@ public class CheatListener implements Listener {
     }
   }
 
-  private boolean hasPermission(@Nonnull Player player, @Nonnull String command) {
+  private boolean hasPermission(@NotNull Player player, @NotNull String command) {
     String[] prefixes = {
       "challenges.",
       "minecraft.command.",
@@ -86,7 +85,7 @@ public class CheatListener implements Listener {
     return false;
   }
 
-  private void handleCheatsDetected(@Nonnull Player player) {
+  private void handleCheatsDetected(@NotNull Player player) {
     if (Challenges.getInstance().getServerManager().hasCheated()) return;
     if (!Challenges.getInstance().getStatsManager().isNoStatsAfterCheating()) return;
     Challenges.getInstance().getServerManager().setHasCheated();

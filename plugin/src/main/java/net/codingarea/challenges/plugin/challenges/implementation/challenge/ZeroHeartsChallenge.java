@@ -22,8 +22,7 @@ import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent.Action;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class ZeroHeartsChallenge extends SettingModifier {
@@ -55,7 +54,7 @@ public class ZeroHeartsChallenge extends SettingModifier {
     AbstractChallenge.getFirstInstance(MaxHealthSetting.class).onValueChange();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.ENCHANTED_GOLDEN_APPLE, Message.forName("item-zero-hearts-challenge"));
@@ -99,7 +98,7 @@ public class ZeroHeartsChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onEntityPotionEffect(@Nonnull EntityPotionEffectEvent event) {
+  public void onEntityPotionEffect(@NotNull EntityPotionEffectEvent event) {
     if (event.getAction() != Action.REMOVED) return;
     if (!(event.getEntity() instanceof Player)) return;
     if (!shouldExecuteEffect()) return;

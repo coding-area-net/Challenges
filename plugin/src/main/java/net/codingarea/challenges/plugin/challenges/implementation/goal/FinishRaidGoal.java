@@ -15,8 +15,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.raid.RaidFinishEvent;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 @Since("2.0")
@@ -29,18 +29,18 @@ public class FinishRaidGoal extends SettingGoal {
   }
 
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.CROSSBOW, Message.forName("item-finish-raid-goal"));
   }
 
   @Override
-  public void getWinnersOnEnd(@Nonnull List<Player> winners) {
+  public void getWinnersOnEnd(@NotNull List<Player> winners) {
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onRaidFinish(@Nonnull RaidFinishEvent event) {
+  public void onRaidFinish(@NotNull RaidFinishEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.getRaid().getStatus() != RaidStatus.VICTORY) return;
     ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, event::getWinners);

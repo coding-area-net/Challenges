@@ -15,9 +15,8 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Since("2.0")
 public class JumpDamageChallenge extends SettingModifier {
@@ -27,7 +26,7 @@ public class JumpDamageChallenge extends SettingModifier {
     setCategory(SettingCategory.DAMAGE);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-jump-damage-challenge")).setColor(Color.ORANGE);
@@ -45,7 +44,7 @@ public class JumpDamageChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onSneak(@Nonnull PlayerJumpEvent event) {
+  public void onSneak(@NotNull PlayerJumpEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     Message.forName("jump-damage-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));

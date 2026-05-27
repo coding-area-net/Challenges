@@ -10,7 +10,7 @@ gson = "2.13.2"
 
 # annotations, compile time processing
 lombok = "1.18.38"
-jsr305 = "3.0.2" # TODO replace with jetbrains annotations
+jetbrains-annotations = "26.1.0"
 
 # database
 mongodb = "3.12.14"
@@ -32,7 +32,7 @@ gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 
 # annotations, compile time processing
 lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
-jsr305 = { group = "com.google.code.findbugs", name = "jsr305", version.ref = "jsr305" }
+jetbrains-annotations = { group = "org.jetbrains", name = "annotations", version.ref = "jetbrains-annotations" }
 
 # database
 mongodb-driver = { group = "org.mongodb", name = "mongodb-driver", version.ref = "mongodb" }

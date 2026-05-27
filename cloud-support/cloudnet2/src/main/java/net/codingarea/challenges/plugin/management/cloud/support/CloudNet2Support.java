@@ -7,21 +7,21 @@ import de.dytanic.cloudnet.lib.player.permission.PermissionGroup;
 import de.dytanic.cloudnet.lib.server.ServerState;
 import net.codingarea.challenges.plugin.management.cloud.CloudSupport;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.UUID;
 
 public final class CloudNet2Support implements CloudSupport {
 
-  @Nonnull
+  @NotNull
   @Override
-  public String getColoredName(@Nonnull Player player) {
+  public String getColoredName(@NotNull Player player) {
     return getColoredName(player.getUniqueId());
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public String getColoredName(@Nonnull UUID uuid) {
+  public String getColoredName(@NotNull UUID uuid) {
     OfflinePlayer offlinePlayer = CloudAPI.getInstance().getOfflinePlayer(uuid);
     PermissionGroup permissionGroup = offlinePlayer.getPermissionEntity().getHighestPermissionGroup(CloudAPI.getInstance().getPermissionPool());
     String color = permissionGroup.getColor();
@@ -29,7 +29,7 @@ public final class CloudNet2Support implements CloudSupport {
   }
 
   @Override
-  public boolean hasNameFor(@Nonnull UUID uuid) {
+  public boolean hasNameFor(@NotNull UUID uuid) {
     return CloudAPI.getInstance().getOfflinePlayer(uuid) != null;
   }
 

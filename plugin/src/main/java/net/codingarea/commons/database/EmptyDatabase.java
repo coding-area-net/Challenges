@@ -5,9 +5,9 @@ import net.codingarea.commons.database.abstraction.DefaultExecutedQuery;
 import net.codingarea.commons.database.abstraction.DefaultSpecificDatabase;
 import net.codingarea.commons.database.action.*;
 import net.codingarea.commons.database.exceptions.DatabaseException;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class EmptyDatabase implements Database {
     return silent;
   }
 
-  protected void exception(@Nonnull String message) {
+  protected void exception(@NotNull String message) {
     throw new UnsupportedOperationException(message);
   }
 
@@ -55,16 +55,16 @@ public class EmptyDatabase implements Database {
   }
 
   @Override
-  public void createTable(@Nonnull String name, @Nonnull SQLColumn... columns) throws DatabaseException {
+  public void createTable(@NotNull String name, @NotNull SQLColumn... columns) throws DatabaseException {
     if (!silent)
       exception("Cannot create tables from a NOP Database");
   }
 
   @Override
-  public void createTableSafely(@Nonnull String name, @Nonnull SQLColumn... columns) {
+  public void createTableSafely(@NotNull String name, @NotNull SQLColumn... columns) {
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DatabaseListTables listTables() {
     if (!silent)
@@ -73,67 +73,67 @@ public class EmptyDatabase implements Database {
     return new EmptyListTables();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseCountEntries countEntries(@Nonnull String table) {
+  public DatabaseCountEntries countEntries(@NotNull String table) {
     if (!silent)
       exception("Cannot count entries of a NOP Database");
 
     return new EmptyCountEntries();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseQuery query(@Nonnull String table) {
+  public DatabaseQuery query(@NotNull String table) {
     if (!silent)
       exception("Cannot query in a NOP Database");
 
     return new EmptyDatabaseQuery();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseUpdate update(@Nonnull String table) {
+  public DatabaseUpdate update(@NotNull String table) {
     if (!silent)
       exception("Cannot update in a NOP Database");
 
     return new EmptyVoidAction();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseInsertion insert(@Nonnull String table) {
+  public DatabaseInsertion insert(@NotNull String table) {
     if (!silent)
       exception("Cannot insert into a NOP Database");
 
     return new EmptyVoidAction();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseInsertionOrUpdate insertOrUpdate(@Nonnull String table) {
+  public DatabaseInsertionOrUpdate insertOrUpdate(@NotNull String table) {
     if (!silent)
       exception("Cannot inset or update into a NOP Database");
 
     return new EmptyVoidAction();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseDeletion delete(@Nonnull String table) {
+  public DatabaseDeletion delete(@NotNull String table) {
     if (!silent)
       exception("Cannot delete from a NOP Database");
 
     return new EmptyVoidAction();
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public SpecificDatabase getSpecificDatabase(@Nonnull String name) {
+  public SpecificDatabase getSpecificDatabase(@NotNull String name) {
     return new DefaultSpecificDatabase(this, name);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DatabaseConfig getConfig() {
     throw new UnsupportedOperationException();
@@ -146,55 +146,55 @@ public class EmptyDatabase implements Database {
 
   public static class EmptyDatabaseQuery implements DatabaseQuery {
 
-    @Nonnull
+    @NotNull
     @Override
-    public DatabaseQuery where(@Nonnull String field, @Nullable Object object) {
+    public DatabaseQuery where(@NotNull String field, @Nullable Object object) {
       return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public DatabaseQuery where(@Nonnull String field, @Nullable Number value) {
+    public DatabaseQuery where(@NotNull String field, @Nullable Number value) {
       return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public DatabaseQuery where(@Nonnull String field, @Nullable String value, boolean ignoreCase) {
+    public DatabaseQuery where(@NotNull String field, @Nullable String value, boolean ignoreCase) {
       return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public DatabaseQuery where(@Nonnull String field, @Nullable String value) {
+    public DatabaseQuery where(@NotNull String field, @Nullable String value) {
       return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public DatabaseQuery whereNot(@Nonnull String field, @Nullable Object value) {
+    public DatabaseQuery whereNot(@NotNull String field, @Nullable Object value) {
       return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public DatabaseQuery select(@Nonnull String... selection) {
+    public DatabaseQuery select(@NotNull String... selection) {
       return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public DatabaseQuery orderBy(@Nonnull String field, @Nonnull Order order) {
+    public DatabaseQuery orderBy(@NotNull String field, @NotNull Order order) {
       return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public ExecutedQuery execute() throws DatabaseException {
       return new DefaultExecutedQuery(Collections.emptyList());
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Task<ExecutedQuery> executeAsync() {
       return Task.syncCall(this::execute);
@@ -204,39 +204,39 @@ public class EmptyDatabase implements Database {
 
   public static class EmptyVoidAction implements DatabaseDeletion, DatabaseInsertion, DatabaseUpdate, DatabaseInsertionOrUpdate {
 
-    @Nonnull
+    @NotNull
     @Override
-    public EmptyVoidAction where(@Nonnull String field, @Nullable Object value) {
+    public EmptyVoidAction where(@NotNull String field, @Nullable Object value) {
       return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public EmptyVoidAction where(@Nonnull String field, @Nullable Number value) {
+    public EmptyVoidAction where(@NotNull String field, @Nullable Number value) {
       return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public EmptyVoidAction where(@Nonnull String field, @Nullable String value, boolean ignoreCase) {
+    public EmptyVoidAction where(@NotNull String field, @Nullable String value, boolean ignoreCase) {
       return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public EmptyVoidAction where(@Nonnull String field, @Nullable String value) {
+    public EmptyVoidAction where(@NotNull String field, @Nullable String value) {
       return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public EmptyVoidAction whereNot(@Nonnull String field, @Nullable Object value) {
+    public EmptyVoidAction whereNot(@NotNull String field, @Nullable Object value) {
       return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public EmptyVoidAction set(@Nonnull String field, @Nullable Object value) {
+    public EmptyVoidAction set(@NotNull String field, @Nullable Object value) {
       return this;
     }
 
@@ -245,7 +245,7 @@ public class EmptyDatabase implements Database {
       return null;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Task<Void> executeAsync() {
       return Task.completedVoid();
@@ -255,13 +255,13 @@ public class EmptyDatabase implements Database {
 
   public static class EmptyCountEntries implements DatabaseCountEntries {
 
-    @Nonnull
+    @NotNull
     @Override
     public Long execute() throws DatabaseException {
       return 0L;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Task<Long> executeAsync() {
       return Task.completed(0L);
@@ -271,13 +271,13 @@ public class EmptyDatabase implements Database {
 
   public static class EmptyListTables implements DatabaseListTables {
 
-    @Nonnull
+    @NotNull
     @Override
     public List<String> execute() throws DatabaseException {
       return Collections.emptyList();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Task<List<String>> executeAsync() {
       return Task.completed(Collections.emptyList());

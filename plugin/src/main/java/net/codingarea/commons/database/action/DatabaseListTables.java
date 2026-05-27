@@ -2,8 +2,8 @@ package net.codingarea.commons.database.action;
 
 import net.codingarea.commons.database.Database;
 import net.codingarea.commons.database.exceptions.DatabaseException;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 /**
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface DatabaseListTables extends DatabaseAction<List<String>> {
 
-  @Nonnull
+  @NotNull
   @Override
   List<String> execute() throws DatabaseException;
 

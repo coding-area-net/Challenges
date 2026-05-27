@@ -1,17 +1,16 @@
 package net.codingarea.commons.common.concurrent.cache;
 
 import net.codingarea.commons.common.annotations.ReplaceWith;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Deprecated
 @ReplaceWith("com.google.common.cache.Cache")
 public interface WriteableCache<K, V> extends ICache<K, V> {
 
   @Nullable
-  V getData(@Nonnull K key);
+  V getData(@NotNull K key);
 
-  void setData(@Nonnull K key, @Nullable V value);
+  void setData(@NotNull K key, @Nullable V value);
 
 }

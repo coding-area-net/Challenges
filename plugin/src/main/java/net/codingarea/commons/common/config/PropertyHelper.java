@@ -1,6 +1,7 @@
 package net.codingarea.commons.common.config;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
+
 import java.awt.*;
 import java.lang.reflect.Type;
 import java.text.DateFormat;

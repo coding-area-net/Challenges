@@ -4,10 +4,9 @@ import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.document.readonly.ReadOnlyDocumentWrapper;
 import net.codingarea.commons.common.config.exceptions.ConfigReadOnlyException;
 import net.codingarea.commons.common.misc.BukkitReflectionSerializationUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +18,7 @@ public abstract class AbstractDocument extends AbstractConfig implements Documen
 
   protected final Document root, parent;
 
-  public AbstractDocument(@Nonnull Document root, @Nullable Document parent) {
+  public AbstractDocument(@NotNull Document root, @Nullable Document parent) {
     this.root = root;
     this.parent = parent;
   }
@@ -29,59 +28,59 @@ public abstract class AbstractDocument extends AbstractConfig implements Documen
     this.parent = null;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <T> T getSerializable(@Nonnull String path, @Nonnull T def) {
+  public <T> T getSerializable(@NotNull String path, @NotNull T def) {
     T value = getSerializable(path, (Class<T>) def.getClass());
     return value == null ? def : value;
   }
 
   @Nullable
   @Override
-  public <T> T getSerializable(@Nonnull String path, @Nonnull Class<T> classOfT) {
+  public <T> T getSerializable(@NotNull String path, @NotNull Class<T> classOfT) {
     if (!contains(path)) return null;
     return BukkitReflectionSerializationUtils.deserializeObject(getDocument(path).values(), classOfT);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <T> List<T> getSerializableList(@Nonnull String path, @Nonnull Class<T> classOfT) {
+  public <T> List<T> getSerializableList(@NotNull String path, @NotNull Class<T> classOfT) {
     return getDocumentList(path).stream()
       .map(Document::values)
       .map(map -> BukkitReflectionSerializationUtils.deserializeObject(map, classOfT))
       .collect(Collectors.toList());
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <K, V> Map<K, V> mapDocuments(@Nonnull Function<? super String, ? extends K> keyMapper, @Nonnull Function<? super Document, ? extends V> valueMapper) {
+  public <K, V> Map<K, V> mapDocuments(@NotNull Function<? super String, ? extends K> keyMapper, @NotNull Function<? super Document, ? extends V> valueMapper) {
     return map(children(), keyMapper, valueMapper);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <R> R mapDocument(@Nonnull String path, @Nonnull Function<? super Document, ? extends R> mapper) {
+  public <R> R mapDocument(@NotNull String path, @NotNull Function<? super Document, ? extends R> mapper) {
     Document document = getDocument(path);
     return mapper.apply(document);
   }
 
   @Nullable
   @Override
-  public <R> R mapDocumentNullable(@Nonnull String path, @Nonnull Function<? super Document, ? extends R> mapper) {
+  public <R> R mapDocumentNullable(@NotNull String path, @NotNull Function<? super Document, ? extends R> mapper) {
     if (!contains(path)) return null;
     return mapDocument(path, mapper);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Document getDocument(@Nonnull String path) {
+  public Document getDocument(@NotNull String path) {
     Document document = getDocument0(path, root, this);
     return isReadonly() && !document.isReadonly() ? new ReadOnlyDocumentWrapper(document) : document;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Document set(@Nonnull String path, @Nullable Object value) {
+  public Document set(@NotNull String path, @Nullable Object value) {
     if (isReadonly()) throw new ConfigReadOnlyException("set");
 
     if (value instanceof byte[])
@@ -91,24 +90,24 @@ public abstract class AbstractDocument extends AbstractConfig implements Documen
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Document set(@Nonnull Object object) {
+  public Document set(@NotNull Object object) {
     if (isReadonly()) throw new ConfigReadOnlyException("set");
 
     Document.of(object).forEach(this::set);
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Document remove(@Nonnull String path) {
+  public Document remove(@NotNull String path) {
     if (isReadonly()) throw new ConfigReadOnlyException("remove");
     remove0(path);
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Document clear() {
     if (isReadonly()) throw new ConfigReadOnlyException("clear");
@@ -116,22 +115,22 @@ public abstract class AbstractDocument extends AbstractConfig implements Documen
     return this;
   }
 
-  @Nonnull
-  @CheckReturnValue
+  @NotNull
+  @Override
   public Document readonly() {
     return isReadonly() ? this : new ReadOnlyDocumentWrapper(this);
   }
 
-  @Nonnull
-  protected abstract Document getDocument0(@Nonnull String path, @Nonnull Document root, @Nullable Document parent);
+  @NotNull
+  protected abstract Document getDocument0(@NotNull String path, @NotNull Document root, @Nullable Document parent);
 
-  protected abstract void set0(@Nonnull String path, @Nullable Object value);
+  protected abstract void set0(@NotNull String path, @Nullable Object value);
 
-  protected abstract void remove0(@Nonnull String path);
+  protected abstract void remove0(@NotNull String path);
 
   protected abstract void clear0();
 
-  @Nonnull
+  @NotNull
   @Override
   public Map<String, Document> children() {
     Map<String, Document> map = new HashMap<>();
@@ -143,11 +142,11 @@ public abstract class AbstractDocument extends AbstractConfig implements Documen
   }
 
   @Override
-  public boolean hasChildren(@Nonnull String path) {
+  public boolean hasChildren(@NotNull String path) {
     return !getDocument(path).isEmpty();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Document getRoot() {
     return root;

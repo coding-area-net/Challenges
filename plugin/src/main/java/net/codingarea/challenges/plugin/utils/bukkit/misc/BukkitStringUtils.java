@@ -11,9 +11,9 @@ import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 import org.bukkit.loot.LootTable;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -23,8 +23,8 @@ import java.util.function.Supplier;
 
 public class BukkitStringUtils {
 
-  @Nonnull
-  public static BaseComponent[] format(@Nullable Prefix prefix, @Nonnull String[] array, @Nonnull Object... args) {
+  @NotNull
+  public static BaseComponent[] format(@Nullable Prefix prefix, @NotNull String[] array, @NotNull Object... args) {
     List<BaseComponent> results = new ArrayList<>();
     for (String value : array) {
       String s = value;
@@ -44,8 +44,8 @@ public class BukkitStringUtils {
     return results.toArray(new BaseComponent[0]);
   }
 
-  @Nonnull
-  public static List<BaseComponent> format(@Nonnull String sequence, @Nonnull Object... args) {
+  @NotNull
+  public static List<BaseComponent> format(@NotNull String sequence, @NotNull Object... args) {
 
     args = replaceArguments(args, false);
 
@@ -182,18 +182,18 @@ public class BukkitStringUtils {
     return args;
   }
 
-  public static TranslatableComponent getItemName(@Nonnull Material material) {
+  public static TranslatableComponent getItemName(@NotNull Material material) {
     NamespacedKey key = material.getKey();
     return new TranslatableComponent((material.isBlock() ? "block" : "item") + "." + key.getNamespace() + "." + key.getKey());
   }
 
-  public static @Nullable BaseComponent getMusicDiscName(@Nonnull Material material) {
+  public static @Nullable BaseComponent getMusicDiscName(@NotNull Material material) {
     if (!material.name().startsWith("MUSIC_DISC")) return null;
     String key = "item.minecraft." + material.name().toLowerCase() + ".desc";
     return new TranslatableComponent(key);
   }
 
-  public static BaseComponent getItemComponent(@Nonnull Material material) {
+  public static BaseComponent getItemComponent(@NotNull Material material) {
     BaseComponent component = getItemName(material);
     BaseComponent musicDiscName = getMusicDiscName(material);
     if (musicDiscName != null) {
@@ -205,7 +205,7 @@ public class BukkitStringUtils {
   }
 
 
-  public static TranslatableComponent getEntityName(@Nonnull EntityType type) {
+  public static TranslatableComponent getEntityName(@NotNull EntityType type) {
 
     String key;
     String namespace = "minecraft";
@@ -221,12 +221,12 @@ public class BukkitStringUtils {
     return new TranslatableComponent("entity." + namespace + "." + key);
   }
 
-  public static TranslatableComponent getEntityName(@Nonnull LootTable type) {
+  public static TranslatableComponent getEntityName(@NotNull LootTable type) {
     NamespacedKey key = type.getKey();
     return new TranslatableComponent("entity." + key.getNamespace() + "." + key.getKey().replace("entities/", ""));
   }
 
-  public static TranslatableComponent getPotionEffectName(@Nonnull PotionEffectType type) {
+  public static TranslatableComponent getPotionEffectName(@NotNull PotionEffectType type) {
 
     String key;
     String namespace = "minecraft";
@@ -243,7 +243,7 @@ public class BukkitStringUtils {
     return new TranslatableComponent("effect." + namespace + "." + key);
   }
 
-  public static TranslatableComponent getBiomeName(@Nonnull Biome biome) {
+  public static TranslatableComponent getBiomeName(@NotNull Biome biome) {
     String key;
     String namespace = "minecraft";
 
@@ -258,21 +258,21 @@ public class BukkitStringUtils {
     return new TranslatableComponent("biome." + namespace + "." + key);
   }
 
-  public static TranslatableComponent getGameModeName(@Nonnull GameMode gameMode) {
+  public static TranslatableComponent getGameModeName(@NotNull GameMode gameMode) {
     return new TranslatableComponent("selectWorld.gameMode." + gameMode.name().toLowerCase());
   }
 
-  public static BaseComponent getAdvancementTitle(@Nonnull Advancement advancement) {
+  public static BaseComponent getAdvancementTitle(@NotNull Advancement advancement) {
     String replace = advancement.getKey().getKey().replace("/", ".");
     return new TranslatableComponent("advancements." + correctAdvancementKeys(replace) + ".title");
   }
 
-  public static BaseComponent getAdvancementDescription(@Nonnull Advancement advancement) {
+  public static BaseComponent getAdvancementDescription(@NotNull Advancement advancement) {
     String replace = advancement.getKey().getKey().replace("/", ".");
     return new TranslatableComponent("advancements." + correctAdvancementKeys(replace) + ".description");
   }
 
-  public static BaseComponent getAdvancementComponent(@Nonnull Advancement advancement) {
+  public static BaseComponent getAdvancementComponent(@NotNull Advancement advancement) {
     BaseComponent title = getAdvancementTitle(advancement);
     BaseComponent description = getAdvancementDescription(advancement);
     description.setColor(net.md_5.bungee.api.ChatColor.GREEN);
@@ -284,7 +284,7 @@ public class BukkitStringUtils {
     return s.replace("bred_all_animals", "breed_all_animals").replace("obtain_netherite_hoe", "netherite_hoe"); // mc sucks
   }
 
-  public static TranslatableComponent getDifficultyName(@Nonnull Difficulty difficulty) {
+  public static TranslatableComponent getDifficultyName(@NotNull Difficulty difficulty) {
     return new TranslatableComponent("options.difficulty." + difficulty.name().toLowerCase());
   }
 

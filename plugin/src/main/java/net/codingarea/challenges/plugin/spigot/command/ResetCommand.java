@@ -11,8 +11,8 @@ import net.codingarea.challenges.plugin.utils.misc.Utils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class ResetCommand implements SenderCommand, Completer {
   }
 
   @Override
-  public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) {
 
     if (confirmReset && (args.length < 1 || !args[0].equalsIgnoreCase("confirm")) || (args.length > 0 && !args[0].equalsIgnoreCase("confirm"))) {
       if (args.length > 0 && args[0].equalsIgnoreCase("settings")) {
@@ -79,7 +79,7 @@ public class ResetCommand implements SenderCommand, Completer {
   }
 
   @Override
-  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
     if (confirmReset && args.length == 1) return Utils.filterRecommendations(
       args[0], "confirm", "settings", "customs");
     if (seedResetCommand && ((confirmReset && args.length == 2) || args.length == 1)) {

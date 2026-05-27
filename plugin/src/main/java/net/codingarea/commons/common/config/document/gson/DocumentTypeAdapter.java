@@ -7,14 +7,14 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.document.GsonDocument;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 
 public class DocumentTypeAdapter implements GsonTypeAdapter<Document> {
 
   @Override
-  public void write(@Nonnull Gson gson, @Nonnull JsonWriter writer, @Nonnull Document document) throws IOException {
+  public void write(@NotNull Gson gson, @NotNull JsonWriter writer, @NotNull Document document) throws IOException {
     if (document instanceof GsonDocument) {
       GsonDocument gsonDocument = (GsonDocument) document;
       TypeAdapters.JSON_ELEMENT.write(writer, gsonDocument.getJsonObject());
@@ -34,7 +34,7 @@ public class DocumentTypeAdapter implements GsonTypeAdapter<Document> {
   }
 
   @Override
-  public Document read(@Nonnull Gson gson, @Nonnull JsonReader reader) throws IOException {
+  public Document read(@NotNull Gson gson, @NotNull JsonReader reader) throws IOException {
     JsonElement jsonElement = TypeAdapters.JSON_ELEMENT.read(reader);
     if (jsonElement != null && jsonElement.isJsonObject()) {
       return new GsonDocument(jsonElement.getAsJsonObject());

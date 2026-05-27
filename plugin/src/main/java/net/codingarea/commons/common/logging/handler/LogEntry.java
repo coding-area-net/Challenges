@@ -1,9 +1,9 @@
 package net.codingarea.commons.common.logging.handler;
 
 import net.codingarea.commons.common.logging.LogLevel;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.time.Instant;
 
 public class LogEntry {
@@ -14,7 +14,7 @@ public class LogEntry {
   private LogLevel level;
   private Throwable exception;
 
-  public LogEntry(@Nonnull Instant timestamp, @Nonnull String threadName, @Nonnull String message, @Nonnull LogLevel level, @Nullable Throwable exception) {
+  public LogEntry(@NotNull Instant timestamp, @NotNull String threadName, @NotNull String message, @NotNull LogLevel level, @Nullable Throwable exception) {
     this.timestamp = timestamp;
     this.threadName = threadName;
     this.message = message;
@@ -22,22 +22,22 @@ public class LogEntry {
     this.exception = exception;
   }
 
-  @Nonnull
+  @NotNull
   public Instant getTimestamp() {
     return timestamp;
   }
 
-  @Nonnull
+  @NotNull
   public String getThreadName() {
     return threadName;
   }
 
-  @Nonnull
+  @NotNull
   public String getMessage() {
     return message;
   }
 
-  @Nonnull
+  @NotNull
   public LogLevel getLevel() {
     return level;
   }

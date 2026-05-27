@@ -10,8 +10,7 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class EnderChestCommandSetting extends Setting implements PlayerCommand {
@@ -20,14 +19,14 @@ public class EnderChestCommandSetting extends Setting implements PlayerCommand {
     super(MenuType.SETTINGS);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.ENDER_CHEST, Message.forName("item-enderchest-command-setting"));
   }
 
   @Override
-  public void onCommand(@Nonnull Player player, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
     if (!isEnabled() || ChallengeAPI.isWorldInUse()) {
       Message.forName("feature-disabled").send(player, Prefix.CHALLENGES);
       return;

@@ -19,9 +19,8 @@ import org.bukkit.World.Environment;
 import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.function.BiConsumer;
 
 @ExcludeFromRandomChallenges
@@ -34,7 +33,7 @@ public class ForceHeightChallenge extends EndingForceChallenge {
     setCategory(SettingCategory.FORCE);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.IRON_BOOTS, Message.forName("item-force-height-challenge"));
@@ -51,7 +50,7 @@ public class ForceHeightChallenge extends EndingForceChallenge {
     ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 - 30, getValue() * 60 + 30);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   protected BiConsumer<BossBarInstance, Player> setupBossbar() {
     return (bossbar, player) -> {
@@ -67,12 +66,12 @@ public class ForceHeightChallenge extends EndingForceChallenge {
   }
 
   @Override
-  protected boolean isFailing(@Nonnull Player player) {
+  protected boolean isFailing(@NotNull Player player) {
     return player.getLocation().getBlockY() != height;
   }
 
   @Override
-  protected void broadcastFailedMessage(@Nonnull Player player) {
+  protected void broadcastFailedMessage(@NotNull Player player) {
     Message.forName("force-height-fail").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), player.getLocation().getBlockY());
   }
 

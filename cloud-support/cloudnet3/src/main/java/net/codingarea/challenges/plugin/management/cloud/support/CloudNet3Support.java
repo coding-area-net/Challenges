@@ -8,21 +8,21 @@ import de.dytanic.cloudnet.ext.bridge.BridgeHelper;
 import de.dytanic.cloudnet.ext.bridge.bukkit.BukkitCloudNetHelper;
 import net.codingarea.challenges.plugin.management.cloud.CloudSupport;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.UUID;
 
 public final class CloudNet3Support implements CloudSupport {
 
-  @Nonnull
+  @NotNull
   @Override
-  public String getColoredName(@Nonnull Player player) {
+  public String getColoredName(@NotNull Player player) {
     return getColoredName(player.getUniqueId());
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public String getColoredName(@Nonnull UUID uuid) {
+  public String getColoredName(@NotNull UUID uuid) {
     IPermissionManagement management = CloudNetDriver.getInstance().getPermissionManagement();
     IPermissionUser user = management.getUser(uuid);
     if (user == null) return "Unknown CloudPlayer";
@@ -32,7 +32,7 @@ public final class CloudNet3Support implements CloudSupport {
   }
 
   @Override
-  public boolean hasNameFor(@Nonnull UUID uuid) {
+  public boolean hasNameFor(@NotNull UUID uuid) {
     return CloudNetDriver.getInstance().getPermissionManagement().getUser(uuid) != null;
   }
 

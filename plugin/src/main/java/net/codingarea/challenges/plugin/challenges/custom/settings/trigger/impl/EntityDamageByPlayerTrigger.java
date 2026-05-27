@@ -6,8 +6,7 @@ import net.codingarea.challenges.plugin.spigot.events.EntityDamageByPlayerEvent;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class EntityDamageByPlayerTrigger extends ChallengeTrigger {
 
@@ -21,7 +20,7 @@ public class EntityDamageByPlayerTrigger extends ChallengeTrigger {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onDeath(@Nonnull EntityDamageByPlayerEvent event) {
+  public void onDeath(@NotNull EntityDamageByPlayerEvent event) {
 
     createData()
       .entity(event.getDamager())

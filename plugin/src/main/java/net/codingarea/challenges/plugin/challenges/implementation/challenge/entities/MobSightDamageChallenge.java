@@ -15,9 +15,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Since("2.0")
 public class MobSightDamageChallenge extends SettingModifier {
@@ -27,7 +26,7 @@ public class MobSightDamageChallenge extends SettingModifier {
     setCategory(SettingCategory.ENTITIES);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.SPIDER_EYE, Message.forName("item-no-mob-sight-challenge"));

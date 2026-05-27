@@ -1,6 +1,7 @@
 package net.codingarea.commons.database.sql.abstraction.where;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 
 public class StringIgnoreCaseWhere implements SQLWhere {
@@ -8,18 +9,18 @@ public class StringIgnoreCaseWhere implements SQLWhere {
   protected final String column;
   protected final String value;
 
-  public StringIgnoreCaseWhere(@Nonnull String column, @Nonnull String value) {
+  public StringIgnoreCaseWhere(@NotNull String column, @NotNull String value) {
     this.column = column;
     this.value = value;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Object[] getArgs() {
     return new Object[]{value};
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public String getAsSQLString() {
     return String.format("LOWER(%s) = LOWER(?)", column);

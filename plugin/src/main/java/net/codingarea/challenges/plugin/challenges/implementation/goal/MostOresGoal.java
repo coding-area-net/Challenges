@@ -14,8 +14,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-
 @Since("2.1.1")
 public class MostOresGoal extends PointsGoal {
 
@@ -58,7 +56,7 @@ public class MostOresGoal extends PointsGoal {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onUpdate(@Nonnull BlockBreakEvent event) {
+  public void onUpdate(@NotNull BlockBreakEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     int points = getPointsForOre(event.getBlock().getType());
@@ -70,7 +68,7 @@ public class MostOresGoal extends PointsGoal {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onUpdate(@Nonnull BlockPlaceEvent event) {
+  public void onUpdate(@NotNull BlockPlaceEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     int points = getPointsForOre(event.getBlock().getType());

@@ -2,14 +2,13 @@ package net.codingarea.challenges.plugin.management.scheduler;
 
 import net.codingarea.challenges.plugin.Challenges;
 import org.bukkit.Bukkit;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 final class TimerTaskExecutor extends AbstractTaskExecutor {
 
   private final TimerTaskConfig config;
 
-  TimerTaskExecutor(@Nonnull TimerTaskConfig config) {
+  TimerTaskExecutor(@NotNull TimerTaskConfig config) {
     this.config = config;
   }
 
@@ -21,7 +20,7 @@ final class TimerTaskExecutor extends AbstractTaskExecutor {
     else this.run();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public TimerTaskConfig getConfig() {
     return config;

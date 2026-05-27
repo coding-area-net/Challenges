@@ -1,6 +1,7 @@
 package net.codingarea.commons.common.logging;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -10,7 +11,7 @@ public class LogOutputStream extends ByteArrayOutputStream {
   private final ILogger logger;
   private final LogLevel level;
 
-  public LogOutputStream(@Nonnull ILogger logger, @Nonnull LogLevel level) {
+  public LogOutputStream(@NotNull ILogger logger, @NotNull LogLevel level) {
     this.logger = logger;
     this.level = level;
   }

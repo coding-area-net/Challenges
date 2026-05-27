@@ -3,9 +3,9 @@ package net.codingarea.commons.database.action;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.logging.ILogger;
 import net.codingarea.commons.common.logging.LogLevel;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
 import java.io.PrintStream;
 import java.util.*;
 import java.util.function.IntFunction;
@@ -17,55 +17,55 @@ import java.util.stream.Stream;
  */
 public interface ExecutedQuery extends Iterable<Document> {
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   Optional<Document> first();
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   default Document firstOrEmpty() {
     return first().orElse(Document.empty());
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   Optional<Document> get(int index);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   default Document getOrEmpty(int index) {
     return get(index).orElse(Document.empty());
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   Stream<Document> all();
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   default List<Document> toList() {
     return toCollection((IntFunction<List<Document>>) ArrayList::new);
   }
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
   default Set<Document> toSet() {
     return toCollection((IntFunction<Set<Document>>) HashSet::new);
   }
 
-  @Nonnull
-  <C extends Collection<? super Document>> C toCollection(@Nonnull C collection);
+  @NotNull
+  <C extends Collection<? super Document>> C toCollection(@NotNull C collection);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  default <C extends Collection<? super Document>> C toCollection(@Nonnull IntFunction<C> collectionSupplier) {
+  default <C extends Collection<? super Document>> C toCollection(@NotNull IntFunction<C> collectionSupplier) {
     return toCollection(collectionSupplier.apply(size()));
   }
 
-  @Nonnull
-  Document[] toArray(@Nonnull IntFunction<Document[]> arraySupplier);
+  @NotNull
+  Document[] toArray(@NotNull IntFunction<Document[]> arraySupplier);
 
-  int index(@Nonnull Predicate<? super Document> filter);
+  int index(@NotNull Predicate<? super Document> filter);
 
   boolean isEmpty();
 
@@ -73,9 +73,9 @@ public interface ExecutedQuery extends Iterable<Document> {
 
   int size();
 
-  void print(@Nonnull PrintStream out);
+  void print(@NotNull PrintStream out);
 
-  default void print(@Nonnull ILogger logger) {
+  default void print(@NotNull ILogger logger) {
     print(logger.asPrintStream(LogLevel.INFO));
   }
 

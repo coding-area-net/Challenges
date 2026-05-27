@@ -6,8 +6,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Collection;
 
 @Data
@@ -26,7 +26,7 @@ public final class PlayerData {
   private final boolean allowedFlight;
   private final boolean flying;
 
-  public PlayerData(@Nonnull Player player) {
+  public PlayerData(@NotNull Player player) {
     this(
       player.getGameMode(),
       player.getLocation(),
@@ -43,11 +43,11 @@ public final class PlayerData {
   }
 
   public PlayerData(
-    @Nonnull GameMode gamemode,
-    @Nonnull Location location,
-    @Nonnull ItemStack[] inventory,
-    @Nonnull ItemStack[] armor,
-    @Nonnull Collection<PotionEffect> effects,
+    @NotNull GameMode gamemode,
+    @NotNull Location location,
+    @NotNull ItemStack[] inventory,
+    @NotNull ItemStack[] armor,
+    @NotNull Collection<PotionEffect> effects,
     double health,
     int food,
     float saturation,
@@ -68,7 +68,7 @@ public final class PlayerData {
     this.flying = allowedFlight && flying;
   }
 
-  public void apply(@Nonnull Player player) {
+  public void apply(@NotNull Player player) {
     for (PotionEffect effect : player.getActivePotionEffects()) {
       player.removePotionEffect(effect.getType());
     }

@@ -12,9 +12,8 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class FloorIsLavaChallenge extends SettingModifier {
 
@@ -24,7 +23,7 @@ public class FloorIsLavaChallenge extends SettingModifier {
   }
 
   @EventHandler
-  public void onMove(@Nonnull PlayerMoveEvent event) {
+  public void onMove(@NotNull PlayerMoveEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.getPlayer().getGameMode() == GameMode.CREATIVE || event.getPlayer().getGameMode() == GameMode.SPECTATOR)
       return;
@@ -36,18 +35,18 @@ public class FloorIsLavaChallenge extends SettingModifier {
     }, getValue() * 20L);
   }
 
-  private void createMagmaFloor(@Nonnull Location to) {
+  private void createMagmaFloor(@NotNull Location to) {
     BlockUtils.setBlockNatural(BlockUtils.getBlockBelow(to, 0.6), Material.MAGMA_BLOCK, true);
     Bukkit.getScheduler().runTaskLater(plugin, () -> {
       createLavaFloor(to);
     }, getValue() * 20L);
   }
 
-  private void createLavaFloor(@Nonnull Location to) {
+  private void createLavaFloor(@NotNull Location to) {
     BlockUtils.setBlockNatural(BlockUtils.getBlockBelow(to), Material.LAVA, true);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.MAGMA_BLOCK, Message.forName("item-floor-lava-challenge"));

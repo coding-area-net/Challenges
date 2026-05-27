@@ -17,8 +17,7 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerStatisticIncrementEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class CustomEventListener implements Listener {
 
@@ -26,7 +25,7 @@ public class CustomEventListener implements Listener {
    * Detecting jumps and calls a {@link PlayerJumpEvent}
    */
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onPlayerStatisticIncrement(@Nonnull PlayerStatisticIncrementEvent event) {
+  public void onPlayerStatisticIncrement(@NotNull PlayerStatisticIncrementEvent event) {
     if (BukkitReflectionUtils.isInWater(event.getPlayer())) return;
     if (event.getStatistic() == Statistic.JUMP) {
       Bukkit.getPluginManager().callEvent(new PlayerJumpEvent(event.getPlayer(), event));
@@ -34,7 +33,7 @@ public class CustomEventListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.HIGHEST)
-  public void onInventoryClick(@Nonnull InventoryClickEvent event) {
+  public void onInventoryClick(@NotNull InventoryClickEvent event) {
     if (!(event.getWhoClicked() instanceof Player)) return;
     PlayerInventoryClickEvent eventCall = new PlayerInventoryClickEvent(event);
     eventCall.setCancelled(event.isCancelled());
@@ -43,7 +42,7 @@ public class CustomEventListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.HIGHEST)
-  public void onEntityPickupItem(@Nonnull EntityPickupItemEvent event) {
+  public void onEntityPickupItem(@NotNull EntityPickupItemEvent event) {
     if (!(event.getEntity() instanceof Player)) return;
     PlayerPickupItemEvent eventCall = new PlayerPickupItemEvent(((Player) event.getEntity()), event.getItem(), event.getRemaining());
     eventCall.setCancelled(event.isCancelled());

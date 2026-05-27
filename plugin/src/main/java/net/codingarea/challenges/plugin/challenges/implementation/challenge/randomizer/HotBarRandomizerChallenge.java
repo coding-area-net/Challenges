@@ -26,9 +26,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @Since("2.1.2")
 public class HotBarRandomizerChallenge extends TimedChallenge {
@@ -110,7 +108,7 @@ public class HotBarRandomizerChallenge extends TimedChallenge {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onInventoryClick(@Nonnull PlayerInventoryClickEvent event) {
+  public void onInventoryClick(@NotNull PlayerInventoryClickEvent event) {
     Player player = event.getPlayer();
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(player)) return;
@@ -129,7 +127,7 @@ public class HotBarRandomizerChallenge extends TimedChallenge {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerDropItem(@Nonnull PlayerDropItemEvent event) {
+  public void onPlayerDropItem(@NotNull PlayerDropItemEvent event) {
     if (!shouldExecuteEffect()) return;
     event.setCancelled(true);
   }

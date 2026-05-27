@@ -7,8 +7,7 @@ import net.codingarea.challenges.plugin.management.menu.generator.categorised.Se
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class HydraNormalChallenge extends HydraChallenge {
 
@@ -17,14 +16,14 @@ public class HydraNormalChallenge extends HydraChallenge {
     setCategory(SettingCategory.ENTITIES);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.WITCH_SPAWN_EGG, Message.forName("item-hydra-challenge"));
   }
 
   @Override
-  public int getNewMobsCount(@Nonnull EntityType entityType) {
+  public int getNewMobsCount(@NotNull EntityType entityType) {
     return 2;
   }
 }

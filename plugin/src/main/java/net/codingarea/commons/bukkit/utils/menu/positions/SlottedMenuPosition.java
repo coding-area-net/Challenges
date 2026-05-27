@@ -4,8 +4,8 @@ import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -16,7 +16,7 @@ public class SlottedMenuPosition implements MenuPosition {
   protected boolean emptySound = true;
 
   @Override
-  public void handleClick(@Nonnull MenuClickInfo info) {
+  public void handleClick(@NotNull MenuClickInfo info) {
     Consumer<? super MenuClickInfo> action = actions.get(info.getSlot());
     if (action == null) {
       if (emptySound) SoundSample.CLICK.play(info.getPlayer());
@@ -26,19 +26,19 @@ public class SlottedMenuPosition implements MenuPosition {
     action.accept(info);
   }
 
-  @Nonnull
-  public SlottedMenuPosition setAction(int slot, @Nonnull Consumer<? super MenuClickInfo> action) {
+  @NotNull
+  public SlottedMenuPosition setAction(int slot, @NotNull Consumer<? super MenuClickInfo> action) {
     actions.put(slot, action);
     return this;
   }
 
-  @Nonnull
-  public SlottedMenuPosition setPlayerAction(int slot, @Nonnull Consumer<? super Player> action) {
+  @NotNull
+  public SlottedMenuPosition setPlayerAction(int slot, @NotNull Consumer<? super Player> action) {
     return setAction(slot, info -> action.accept(info.getPlayer()));
   }
 
-  @Nonnull
-  public SlottedMenuPosition setAction(int slot, @Nonnull Runnable action) {
+  @NotNull
+  public SlottedMenuPosition setAction(int slot, @NotNull Runnable action) {
     return setAction(slot, info -> action.run());
   }
 

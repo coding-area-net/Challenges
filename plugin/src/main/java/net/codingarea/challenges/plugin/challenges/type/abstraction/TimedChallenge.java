@@ -8,9 +8,6 @@ import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-
 public abstract class TimedChallenge extends SettingModifier {
 
   private final boolean runAsync;
@@ -20,38 +17,38 @@ public abstract class TimedChallenge extends SettingModifier {
   private boolean timerStatus = false;
   private boolean startedBefore = false;
 
-  public TimedChallenge(@Nonnull MenuType menu) {
+  public TimedChallenge(@NotNull MenuType menu) {
     this(menu, true);
   }
 
-  public TimedChallenge(@Nonnull MenuType menu, int max) {
+  public TimedChallenge(@NotNull MenuType menu, int max) {
     this(menu, max, true);
   }
 
-  public TimedChallenge(@Nonnull MenuType menu, int min, int max) {
+  public TimedChallenge(@NotNull MenuType menu, int min, int max) {
     this(menu, min, max, true);
   }
 
-  public TimedChallenge(@Nonnull MenuType menu, int min, int max, int defaultValue) {
+  public TimedChallenge(@NotNull MenuType menu, int min, int max, int defaultValue) {
     this(menu, min, max, defaultValue, true);
   }
 
-  public TimedChallenge(@Nonnull MenuType menu, boolean runAsync) {
+  public TimedChallenge(@NotNull MenuType menu, boolean runAsync) {
     super(menu);
     this.runAsync = runAsync;
   }
 
-  public TimedChallenge(@Nonnull MenuType menu, int max, boolean runAsync) {
+  public TimedChallenge(@NotNull MenuType menu, int max, boolean runAsync) {
     super(menu, max);
     this.runAsync = runAsync;
   }
 
-  public TimedChallenge(@Nonnull MenuType menu, int min, int max, boolean runAsync) {
+  public TimedChallenge(@NotNull MenuType menu, int min, int max, boolean runAsync) {
     super(menu, min, max);
     this.runAsync = runAsync;
   }
 
-  public TimedChallenge(@Nonnull MenuType menu, int min, int max, int defaultValue, boolean runAsync) {
+  public TimedChallenge(@NotNull MenuType menu, int min, int max, int defaultValue, boolean runAsync) {
     super(menu, min, max, defaultValue);
     this.runAsync = runAsync;
   }
@@ -97,7 +94,7 @@ public abstract class TimedChallenge extends SettingModifier {
     }
   }
 
-  public final void shortCountDownTo(@Nonnegative int seconds) {
+  public final void shortCountDownTo(int seconds) {
     if (!timerStatus) throw new IllegalArgumentException("Countdown is not started");
     if (seconds > originalSecondsUntilActivation)
       throw new IllegalArgumentException("Cannot short countdown to a higher length than originally set");

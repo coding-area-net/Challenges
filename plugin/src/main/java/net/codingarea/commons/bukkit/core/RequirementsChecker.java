@@ -4,24 +4,23 @@ import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.version.Version;
 import org.bukkit.Bukkit;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class RequirementsChecker {
 
   private final BukkitModule module;
 
-  public RequirementsChecker(@Nonnull BukkitModule module) {
+  public RequirementsChecker(@NotNull BukkitModule module) {
     this.module = module;
   }
 
-  public void checkExceptionally(@Nonnull Document requirements) throws IllegalStateException {
+  public void checkExceptionally(@NotNull Document requirements) throws IllegalStateException {
     if (requirements.getBoolean("spigot")) requireSpigot();
     if (requirements.getBoolean("paper")) requirePaper();
     if (requirements.contains("version")) requireVersion(requirements.getVersion("version"));
   }
 
-  public boolean checkBoolean(@Nonnull Document requirements) {
+  public boolean checkBoolean(@NotNull Document requirements) {
     try {
       checkExceptionally(requirements);
       return true;
@@ -69,7 +68,7 @@ public final class RequirementsChecker {
     }
   }
 
-  private void requireVersion(@Nonnull Version required) {
+  private void requireVersion(@NotNull Version required) {
     if (MinecraftVersion.currentExact().isOlderThan(required)) {
       log("");
       log("============================== {} ==============================", module.getName());
@@ -87,7 +86,7 @@ public final class RequirementsChecker {
     }
   }
 
-  private void log(@Nonnull String line, @Nonnull Object... args) {
+  private void log(@NotNull String line, @NotNull Object... args) {
     module.getILogger().error(line, args);
   }
 

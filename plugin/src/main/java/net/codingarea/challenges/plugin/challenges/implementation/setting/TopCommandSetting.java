@@ -13,8 +13,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class TopCommandSetting extends Setting implements PlayerCommand {
 
@@ -23,7 +22,7 @@ public class TopCommandSetting extends Setting implements PlayerCommand {
   }
 
   @Override
-  public void onCommand(@Nonnull Player player, @Nonnull String[] args) {
+  public void onCommand(@NotNull Player player, @NotNull String[] args) {
     if (!isEnabled()) {
       Message.forName("feature-disabled").send(player, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.play(player);
@@ -66,7 +65,7 @@ public class TopCommandSetting extends Setting implements PlayerCommand {
 
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.MAGENTA_GLAZED_TERRACOTTA, Message.forName("top-command-setting"));

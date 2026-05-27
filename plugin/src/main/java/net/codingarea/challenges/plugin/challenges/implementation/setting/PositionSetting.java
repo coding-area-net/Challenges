@@ -25,7 +25,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -41,7 +40,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
     Challenges.getInstance().registerCommand(new SetPosCommand(), "setposition");
   }
 
-  public static Environment getWorldEnvironment(@Nonnull String name) {
+  public static Environment getWorldEnvironment(@NotNull String name) {
     switch (name.toLowerCase()) {
       default:
         return null;
@@ -54,14 +53,14 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
     }
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.BLUE_BANNER, Message.forName("item-position-setting"));
   }
 
   @Override
-  public void onCommand(@Nonnull Player player, @Nonnull String[] args) {
+  public void onCommand(@NotNull Player player, @NotNull String[] args) {
     if (!isEnabled()) {
       Message.forName("positions-disabled").send(player, Prefix.POSITION);
       SoundSample.BASS_OFF.play(player);
@@ -110,12 +109,12 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
 
   @Nullable
   @Override
-  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String alias, @Nonnull String[] args) {
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
     if (args.length > 1) return new ArrayList<>();
     return Utils.filterRecommendations(args[0], positions.keySet().toArray(new String[0]));
   }
 
-  public String getWorldName(@Nonnull Location location) {
+  public String getWorldName(@NotNull Location location) {
     if (location.getWorld() == null) return "?";
     switch (location.getWorld().getEnvironment()) {
       default:
@@ -127,15 +126,15 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
     }
   }
 
-  public boolean containsPosition(@Nonnull String name) {
+  public boolean containsPosition(@NotNull String name) {
     return positions.containsKey(name);
   }
 
-  private void broadcastParticleLine(@Nonnull Location location) {
+  private void broadcastParticleLine(@NotNull Location location) {
     broadcast(player -> playParticleLine(player, location));
   }
 
-  private void playParticleLine(@Nonnull Player player, @Nonnull Location position) {
+  private void playParticleLine(@NotNull Player player, @NotNull Location position) {
     if (!particleLines) return;
     if (player.getWorld() != position.getWorld()) return;
 
@@ -152,7 +151,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
   }
 
   @Override
-  public void loadGameState(@Nonnull Document document) {
+  public void loadGameState(@NotNull Document document) {
     positions.clear();
     for (String name : document.keys()) {
       positions.put(name, document.getSerializable(name, Location.class));
@@ -160,7 +159,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
   }
 
   @Override
-  public void writeGameState(@Nonnull Document document) {
+  public void writeGameState(@NotNull Document document) {
     for (String key : document.keys()) {
       document.remove(key);
     }

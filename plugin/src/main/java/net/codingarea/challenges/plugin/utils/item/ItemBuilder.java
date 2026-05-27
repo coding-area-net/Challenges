@@ -1,7 +1,6 @@
 package net.codingarea.challenges.plugin.utils.item;
 
 import com.google.gson.JsonParser;
-import lombok.NonNull;
 import net.codingarea.challenges.plugin.content.ItemDescription;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.commons.bukkit.utils.item.BannerPattern;
@@ -15,10 +14,9 @@ import org.bukkit.inventory.meta.*;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.profile.PlayerProfile;
 import org.bukkit.profile.PlayerTextures;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -33,11 +31,11 @@ public class ItemBuilder extends net.codingarea.commons.bukkit.utils.item.ItemBu
 
   protected ItemDescription builtByItemDescription;
 
-  public ItemBuilder(@Nonnull ItemStack item) {
+  public ItemBuilder(@NotNull ItemStack item) {
     super(item);
   }
 
-  public ItemBuilder(@Nonnull ItemStack item, @Nullable ItemMeta meta) {
+  public ItemBuilder(@NotNull ItemStack item, @Nullable ItemMeta meta) {
     super(item, meta);
   }
 
@@ -45,162 +43,162 @@ public class ItemBuilder extends net.codingarea.commons.bukkit.utils.item.ItemBu
     this(Material.BARRIER, ItemDescription.empty());
   }
 
-  public ItemBuilder(@Nonnull Material material) {
+  public ItemBuilder(@NotNull Material material) {
     super(material);
   }
 
-  public ItemBuilder(@Nonnull Material material, @Nonnull Message message) {
+  public ItemBuilder(@NotNull Material material, @NotNull Message message) {
     this(material, message.asItemDescription());
   }
 
-  public ItemBuilder(@Nonnull Material material, @Nonnull Message message, Object... args) {
+  public ItemBuilder(@NotNull Material material, @NotNull Message message, Object... args) {
     this(material, message.asItemDescription(args));
   }
 
-  public ItemBuilder(@Nonnull Material material, @Nonnull ItemDescription description) {
+  public ItemBuilder(@NotNull Material material, @NotNull ItemDescription description) {
     this(material);
     applyFormat(description);
   }
 
-  public ItemBuilder(@Nonnull Material material, @Nonnull String name) {
+  public ItemBuilder(@NotNull Material material, @NotNull String name) {
     super(material, name);
   }
 
-  public ItemBuilder(@Nonnull Material material, @Nonnull String name, @Nonnull String... lore) {
+  public ItemBuilder(@NotNull Material material, @NotNull String name, @NotNull String... lore) {
     super(material, name, lore);
   }
 
-  public ItemBuilder(@Nonnull Material material, @Nonnull String name, int amount) {
+  public ItemBuilder(@NotNull Material material, @NotNull String name, int amount) {
     super(material, name, amount);
   }
 
-  @Nonnull
-  public ItemBuilder setLore(@Nonnull Message message) {
+  @NotNull
+  public ItemBuilder setLore(@NotNull Message message) {
     return setLore(message.asArray());
   }
 
-  @Nonnull
-  public ItemBuilder setLore(@Nonnull List<String> lore) {
+  @NotNull
+  public ItemBuilder setLore(@NotNull List<String> lore) {
     return (ItemBuilder) super.setLore(lore);
   }
 
-  @Nonnull
-  public ItemBuilder setLore(@Nonnull String... lore) {
+  @NotNull
+  public ItemBuilder setLore(@NotNull String... lore) {
     return (ItemBuilder) super.setLore(lore);
   }
 
-  @Nonnull
-  public ItemBuilder appendLore(@Nonnull String... lore) {
+  @NotNull
+  public ItemBuilder appendLore(@NotNull String... lore) {
     return (ItemBuilder) super.appendLore(lore);
   }
 
-  @Nonnull
-  public ItemBuilder appendLore(@Nonnull Collection<String> lore) {
+  @NotNull
+  public ItemBuilder appendLore(@NotNull Collection<String> lore) {
     return (ItemBuilder) super.appendLore(lore);
   }
 
-  @Nonnull
+  @NotNull
   public ItemBuilder setName(@Nullable String name) {
     return (ItemBuilder) super.setName(name);
   }
 
-  @Nonnull
+  @NotNull
   public ItemBuilder setName(@Nullable Object name) {
     return (ItemBuilder) super.setName(name);
   }
 
-  @Nonnull
-  public ItemBuilder setName(@Nonnull String... content) {
+  @NotNull
+  public ItemBuilder setName(@NotNull String... content) {
     return (ItemBuilder) super.setName(content);
   }
 
-  @Nonnull
+  @NotNull
   public ItemBuilder appendName(@Nullable Object sequence) {
     return (ItemBuilder) super.appendName(sequence);
   }
 
-  @Nonnull
+  @NotNull
   public ItemBuilder name(@Nullable Object name) {
     return (ItemBuilder) super.name(name);
   }
 
-  @Nonnull
-  public ItemBuilder name(@Nonnull String... content) {
+  @NotNull
+  public ItemBuilder name(@NotNull String... content) {
     return (ItemBuilder) super.name(content);
   }
 
-  @Nonnull
-  public ItemBuilder addEnchantment(@Nonnull Enchantment enchantment, int level) {
+  @NotNull
+  public ItemBuilder addEnchantment(@NotNull Enchantment enchantment, int level) {
     return (ItemBuilder) super.addEnchantment(enchantment, level);
   }
 
-  @Nonnull
-  public ItemBuilder enchant(@Nonnull Enchantment enchantment, int level) {
+  @NotNull
+  public ItemBuilder enchant(@NotNull Enchantment enchantment, int level) {
     return (ItemBuilder) super.enchant(enchantment, level);
   }
 
-  @Nonnull
-  public ItemBuilder addFlag(@Nonnull ItemFlag... flags) {
+  @NotNull
+  public ItemBuilder addFlag(@NotNull ItemFlag... flags) {
     return (ItemBuilder) super.addFlag(flags);
   }
 
-  @Nonnull
-  public ItemBuilder removeFlag(@Nonnull ItemFlag... flags) {
+  @NotNull
+  public ItemBuilder removeFlag(@NotNull ItemFlag... flags) {
     return (ItemBuilder) super.removeFlag(flags);
   }
 
-  @Nonnull
+  @NotNull
   public ItemBuilder hideAttributes() {
     return (ItemBuilder) super.hideAttributes();
   }
 
-  @Nonnull
+  @NotNull
   public ItemBuilder showAttributes() {
     return (ItemBuilder) super.showAttributes();
   }
 
-  @Nonnull
+  @NotNull
   public ItemBuilder setUnbreakable(boolean unbreakable) {
     return (ItemBuilder) super.setUnbreakable(unbreakable);
   }
 
-  @Nonnull
+  @NotNull
   public ItemBuilder unbreakable() {
     return (ItemBuilder) super.unbreakable();
   }
 
-  @Nonnull
+  @NotNull
   public ItemBuilder breakable() {
     return (ItemBuilder) super.breakable();
   }
 
-  @Nonnull
+  @NotNull
   public ItemBuilder setAmount(int amount) {
     return (ItemBuilder) super.setAmount(amount);
   }
 
-  @Nonnull
+  @NotNull
   public ItemBuilder amount(int amount) {
     return (ItemBuilder) super.amount(amount);
   }
 
-  @Nonnull
+  @NotNull
   public ItemBuilder setDamage(int damage) {
     return (ItemBuilder) super.setDamage(damage);
   }
 
-  @Nonnull
+  @NotNull
   public ItemBuilder damage(int damage) {
     return (ItemBuilder) super.damage(damage);
   }
 
-  @Nonnull
-  public ItemBuilder setType(@Nonnull Material material) {
+  @NotNull
+  public ItemBuilder setType(@NotNull Material material) {
     return (ItemBuilder) super.setType(material);
   }
 
-  @Nonnull
-  public ItemBuilder applyFormat(@Nonnull ItemDescription description) {
+  @NotNull
+  public ItemBuilder applyFormat(@NotNull ItemDescription description) {
     builtByItemDescription = description;
     setName(description.getName());
     setLore(description.getLore());
@@ -221,46 +219,46 @@ public class ItemBuilder extends net.codingarea.commons.bukkit.utils.item.ItemBu
 
   public static class BannerBuilder extends ItemBuilder {
 
-    public BannerBuilder(@Nonnull Material material) {
+    public BannerBuilder(@NotNull Material material) {
       super(material);
     }
 
-    public BannerBuilder(@Nonnull Material material, @Nonnull Message message) {
+    public BannerBuilder(@NotNull Material material, @NotNull Message message) {
       super(material, message);
     }
 
-    public BannerBuilder(@Nonnull Material material, @Nonnull ItemDescription description) {
+    public BannerBuilder(@NotNull Material material, @NotNull ItemDescription description) {
       super(material, description);
     }
 
-    public BannerBuilder(@Nonnull Material material, @Nonnull String name) {
+    public BannerBuilder(@NotNull Material material, @NotNull String name) {
       super(material, name);
     }
 
-    public BannerBuilder(@Nonnull Material material, @Nonnull String name, @Nonnull String... lore) {
+    public BannerBuilder(@NotNull Material material, @NotNull String name, @NotNull String... lore) {
       super(material, name, lore);
     }
 
-    public BannerBuilder(@Nonnull Material material, @Nonnull String name, int amount) {
+    public BannerBuilder(@NotNull Material material, @NotNull String name, int amount) {
       super(material, name, amount);
     }
 
-    public BannerBuilder(@Nonnull ItemStack item) {
+    public BannerBuilder(@NotNull ItemStack item) {
       super(item);
     }
 
-    @Nonnull
-    public ItemBuilder.BannerBuilder addPattern(@Nonnull BannerPattern pattern, @Nonnull DyeColor color) {
+    @NotNull
+    public ItemBuilder.BannerBuilder addPattern(@NotNull BannerPattern pattern, @NotNull DyeColor color) {
       return addPattern(pattern.getPatternType(), color);
     }
 
-    @Nonnull
-    public ItemBuilder.BannerBuilder addPattern(@Nonnull PatternType pattern, @Nonnull DyeColor color) {
+    @NotNull
+    public ItemBuilder.BannerBuilder addPattern(@NotNull PatternType pattern, @NotNull DyeColor color) {
       getMeta().addPattern(new Pattern(color, pattern));
       return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public BannerMeta getMeta() {
       return getCastedMeta();
@@ -282,20 +280,20 @@ public class ItemBuilder extends net.codingarea.commons.bukkit.utils.item.ItemBu
       super(Material.PLAYER_HEAD, name, lore);
     }
 
-    @NonNull
-    public ItemBuilder.SkullBuilder setOwner(@NonNull OfflinePlayer owner) {
+    @NotNull
+    public ItemBuilder.SkullBuilder setOwner(@NotNull OfflinePlayer owner) {
       getMeta().setOwningPlayer(owner);
       return this;
     }
 
-    @NonNull
-    public ItemBuilder.SkullBuilder setOwner(@NonNull UUID uuid, @NonNull String name) {
+    @NotNull
+    public ItemBuilder.SkullBuilder setOwner(@NotNull UUID uuid, @NotNull String name) {
       PlayerProfile profile = Bukkit.createPlayerProfile(uuid, name);
       getMeta().setOwnerProfile(profile);
       return this;
     }
 
-    public ItemBuilder.SkullBuilder setTexture(@NonNull String textureUrl) {
+    public ItemBuilder.SkullBuilder setTexture(@NotNull String textureUrl) {
       UUID uuid = UUID.nameUUIDFromBytes(textureUrl.getBytes());
 
       PlayerProfile profile = Bukkit.createPlayerProfile(uuid);
@@ -312,7 +310,7 @@ public class ItemBuilder extends net.codingarea.commons.bukkit.utils.item.ItemBu
       return this;
     }
 
-    public ItemBuilder.SkullBuilder setBase64Texture(@NonNull String base64Texture) {
+    public ItemBuilder.SkullBuilder setBase64Texture(@NotNull String base64Texture) {
       String textureUrlJson = new String(Base64.getDecoder().decode(base64Texture),
         StandardCharsets.UTF_8);
 
@@ -325,7 +323,7 @@ public class ItemBuilder extends net.codingarea.commons.bukkit.utils.item.ItemBu
       return setTexture(textureUrl);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public SkullMeta getMeta() {
       return getCastedMeta();
@@ -335,54 +333,53 @@ public class ItemBuilder extends net.codingarea.commons.bukkit.utils.item.ItemBu
 
   public static class PotionBuilder extends ItemBuilder {
 
-    public PotionBuilder(@Nonnull Material material) {
+    public PotionBuilder(@NotNull Material material) {
       super(material);
     }
 
-    public PotionBuilder(@Nonnull Material material, @Nonnull Message message) {
+    public PotionBuilder(@NotNull Material material, @NotNull Message message) {
       super(material, message);
     }
 
-    public PotionBuilder(@Nonnull Material material, @Nonnull String name) {
+    public PotionBuilder(@NotNull Material material, @NotNull String name) {
       super(material, name);
     }
 
-    public PotionBuilder(@Nonnull Material material, @Nonnull String name, @Nonnull String... lore) {
+    public PotionBuilder(@NotNull Material material, @NotNull String name, @NotNull String... lore) {
       super(material, name, lore);
     }
 
-    public PotionBuilder(@Nonnull Material material, @Nonnull String name, int amount) {
+    public PotionBuilder(@NotNull Material material, @NotNull String name, int amount) {
       super(material, name, amount);
     }
 
-    public PotionBuilder(@Nonnull ItemStack item) {
+    public PotionBuilder(@NotNull ItemStack item) {
       super(item);
     }
 
-    @Nonnull
-    @CheckReturnValue
+    @NotNull
     public static ItemBuilder createWaterBottle() {
       return new ItemBuilder.PotionBuilder(Material.POTION).setColor(Color.BLUE).hideAttributes();
     }
 
-    @Nonnull
-    public ItemBuilder.PotionBuilder addEffect(@Nonnull PotionEffect effect) {
+    @NotNull
+    public ItemBuilder.PotionBuilder addEffect(@NotNull PotionEffect effect) {
       getMeta().addCustomEffect(effect, true);
       return this;
     }
 
-    @Nonnull
-    public ItemBuilder.PotionBuilder setColor(@Nonnull Color color) {
+    @NotNull
+    public ItemBuilder.PotionBuilder setColor(@NotNull Color color) {
       getMeta().setColor(color);
       return this;
     }
 
-    @Nonnull
-    public ItemBuilder.PotionBuilder color(@Nonnull Color color) {
+    @NotNull
+    public ItemBuilder.PotionBuilder color(@NotNull Color color) {
       return setColor(color);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public PotionMeta getMeta() {
       return getCastedMeta();
@@ -392,42 +389,42 @@ public class ItemBuilder extends net.codingarea.commons.bukkit.utils.item.ItemBu
 
   public static class LeatherArmorBuilder extends ItemBuilder {
 
-    public LeatherArmorBuilder(@Nonnull Material material) {
+    public LeatherArmorBuilder(@NotNull Material material) {
       super(material);
     }
 
-    public LeatherArmorBuilder(@Nonnull Material material, @Nonnull Message message) {
+    public LeatherArmorBuilder(@NotNull Material material, @NotNull Message message) {
       super(material, message);
     }
 
-    public LeatherArmorBuilder(@Nonnull Material material, @Nonnull String name) {
+    public LeatherArmorBuilder(@NotNull Material material, @NotNull String name) {
       super(material, name);
     }
 
-    public LeatherArmorBuilder(@Nonnull Material material, @Nonnull String name, @Nonnull String... lore) {
+    public LeatherArmorBuilder(@NotNull Material material, @NotNull String name, @NotNull String... lore) {
       super(material, name, lore);
     }
 
-    public LeatherArmorBuilder(@Nonnull Material material, @Nonnull String name, int amount) {
+    public LeatherArmorBuilder(@NotNull Material material, @NotNull String name, int amount) {
       super(material, name, amount);
     }
 
-    public LeatherArmorBuilder(@Nonnull ItemStack item) {
+    public LeatherArmorBuilder(@NotNull ItemStack item) {
       super(item);
     }
 
-    @Nonnull
-    public ItemBuilder.LeatherArmorBuilder setColor(@Nonnull Color color) {
+    @NotNull
+    public ItemBuilder.LeatherArmorBuilder setColor(@NotNull Color color) {
       getMeta().setColor(color);
       return this;
     }
 
-    @Nonnull
-    public ItemBuilder.LeatherArmorBuilder color(@Nonnull Color color) {
+    @NotNull
+    public ItemBuilder.LeatherArmorBuilder color(@NotNull Color color) {
       return setColor(color);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public LeatherArmorMeta getMeta() {
       return getCastedMeta();

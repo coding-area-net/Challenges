@@ -3,10 +3,10 @@ package net.codingarea.commons.common.logging.internal.factory;
 import net.codingarea.commons.common.logging.ILogger;
 import net.codingarea.commons.common.logging.ILoggerFactory;
 import net.codingarea.commons.common.logging.LogLevel;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
@@ -17,11 +17,11 @@ public class DefaultLoggerFactory implements ILoggerFactory {
   protected final Function<? super String, ? extends ILogger> creator;
   protected LogLevel level = LogLevel.DEBUG;
 
-  public DefaultLoggerFactory(@Nonnull Function<? super String, ? extends ILogger> creator) {
+  public DefaultLoggerFactory(@NotNull Function<? super String, ? extends ILogger> creator) {
     this.creator = creator;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   @CheckReturnValue
   public synchronized ILogger forName(@Nullable String name) {
@@ -29,7 +29,7 @@ public class DefaultLoggerFactory implements ILoggerFactory {
   }
 
   @Override
-  public void setDefaultLevel(@Nonnull LogLevel level) {
+  public void setDefaultLevel(@NotNull LogLevel level) {
     this.level = level;
   }
 

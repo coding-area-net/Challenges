@@ -30,8 +30,8 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 
 @ToString
@@ -147,7 +147,7 @@ public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGen
   }
 
   @Override
-  public void open(@Nonnull Player player, int page) {
+  public void open(@NotNull Player player, int page) {
     if (inventory == null) generateInventories();
     super.open(player, page);
   }
@@ -215,7 +215,7 @@ public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGen
     }
 
     @Override
-    public void handleClick(@Nonnull MenuClickInfo info) {
+    public void handleClick(@NotNull MenuClickInfo info) {
       if (InventoryUtils.handleNavigationClicking(generator, new int[]{36 + 9}, page, info, () -> Challenges.getInstance().getMenuManager().openMenu(info.getPlayer(), MenuType.CUSTOM, 0))) {
         return;
       }

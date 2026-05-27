@@ -15,9 +15,9 @@ import org.bukkit.*;
 import org.bukkit.World.Environment;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -183,7 +183,7 @@ public final class WorldManager {
   }
 
   @SuppressWarnings("unchecked")
-  private void disableGameRuleInFlatWorld(@Nonnull String name) {
+  private void disableGameRuleInFlatWorld(@NotNull String name) {
     GameRule<Boolean> gamerule = (GameRule<Boolean>) GameRule.getByName(name);
     if (gamerule == null) return;
     flatWorld.setGameRule(gamerule, false);
@@ -219,13 +219,13 @@ public final class WorldManager {
 
   }
 
-  private void deleteWorld(@Nonnull String name) {
+  private void deleteWorld(@NotNull String name) {
     File folder = new File(Bukkit.getWorldContainer(), name);
     FileUtils.deleteWorldFolder(folder);
     Logger.info("Deleted world {}", name);
   }
 
-  private void copyPreGeneratedWorld(@Nonnull String name) {
+  private void copyPreGeneratedWorld(@NotNull String name) {
     File source = new File(Bukkit.getWorldContainer(), customSeedWorldPrefix + name);
     if (!source.exists() || !source.isDirectory()) {
       Logger.warn("Custom seed world '{}' does not exist!", name);
@@ -241,7 +241,7 @@ public final class WorldManager {
     }
   }
 
-  private void deletePreGeneratedWorld(@Nonnull String name) {
+  private void deletePreGeneratedWorld(@NotNull String name) {
     File source = new File(Bukkit.getWorldContainer(), customSeedWorldPrefix + name);
     if (!source.exists() || !source.isDirectory()) return;
 
@@ -249,7 +249,7 @@ public final class WorldManager {
     Logger.debug("Deleted pre generated custom seed world {}", name);
   }
 
-  public void copy(@Nonnull File source, @Nonnull File target) throws IOException {
+  public void copy(@NotNull File source, @NotNull File target) throws IOException {
     if (source.isDirectory()) {
       copyDirectory(source, target);
     } else {
@@ -257,7 +257,7 @@ public final class WorldManager {
     }
   }
 
-  private void copyDirectory(@Nonnull File source, @Nonnull File target) throws IOException {
+  private void copyDirectory(@NotNull File source, @NotNull File target) throws IOException {
     if (!target.exists()) {
       if (!target.mkdir()) {
         return;
@@ -272,7 +272,7 @@ public final class WorldManager {
     }
   }
 
-  private void copyFile(@Nonnull File source, @Nonnull File target) throws IOException {
+  private void copyFile(@NotNull File source, @NotNull File target) throws IOException {
     try (InputStream in = Files.newInputStream(source.toPath()); OutputStream out = Files.newOutputStream(target.toPath())) {
       byte[] buf = new byte[1024];
       int length;
@@ -308,7 +308,7 @@ public final class WorldManager {
     Bukkit.getOnlinePlayers().forEach(this::cachePlayerData);
   }
 
-  public void cachePlayerData(@Nonnull Player player) {
+  public void cachePlayerData(@NotNull Player player) {
     playerData.put(player.getUniqueId(), new PlayerData(player));
   }
 
@@ -316,22 +316,22 @@ public final class WorldManager {
     Bukkit.getOnlinePlayers().forEach(this::restorePlayerData);
   }
 
-  public void restorePlayerData(@Nonnull Player player) {
+  public void restorePlayerData(@NotNull Player player) {
     PlayerData data = playerData.remove(player.getUniqueId());
     if (data == null) return;
     data.apply(player);
   }
 
-  public boolean hasPlayerData(@Nonnull Player player) {
+  public boolean hasPlayerData(@NotNull Player player) {
     return playerData.containsKey(player.getUniqueId());
   }
 
-  @Nonnull
+  @NotNull
   public World getExtraWorld() {
     return flatWorld;
   }
 
-  @Nonnull
+  @NotNull
   public WorldSettings getSettings() {
     return settings;
   }

@@ -6,9 +6,8 @@ import net.codingarea.commons.common.config.Document;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -27,15 +26,15 @@ public class GeneratorWorldPortalManager implements GamestateSaveable {
   }
 
   @Nullable
-  public Location getAndRemoveLastWorld(@Nonnull Player player) {
+  public Location getAndRemoveLastWorld(@NotNull Player player) {
     return lastWorldLocations.remove(player.getUniqueId());
   }
 
-  public void setLastLocation(@Nonnull Player player, @Nonnull Location location) {
+  public void setLastLocation(@NotNull Player player, @NotNull Location location) {
     lastWorldLocations.put(player.getUniqueId(), location);
   }
 
-  public boolean isCustomWorld(@Nonnull String name) {
+  public boolean isCustomWorld(@NotNull String name) {
     return Challenges.getInstance().getGameWorldStorage().getCustomGeneratedGameWorlds().contains(name);
   }
 

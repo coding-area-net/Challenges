@@ -11,8 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class DeathPositionSetting extends Setting {
@@ -24,7 +23,7 @@ public class DeathPositionSetting extends Setting {
   }
 
   @EventHandler(priority = EventPriority.LOWEST)
-  public void onDeath(@Nonnull PlayerDeathEvent event) {
+  public void onDeath(@NotNull PlayerDeathEvent event) {
     if (!shouldExecuteEffect()) return;
 
     int index = 1;
@@ -36,7 +35,7 @@ public class DeathPositionSetting extends Setting {
 
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.MUSIC_DISC_11, Message.forName("item-death-position-setting"));

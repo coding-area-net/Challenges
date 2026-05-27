@@ -4,9 +4,9 @@ import net.codingarea.commons.common.config.Config;
 import net.codingarea.commons.common.logging.ILogger;
 import net.codingarea.commons.common.misc.ReflectionUtils;
 import net.codingarea.commons.common.version.Version;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.awt.*;
 import java.time.OffsetDateTime;
 import java.util.*;
@@ -19,32 +19,32 @@ public abstract class AbstractConfig implements Config {
 
   protected static final ILogger logger = ILogger.forThisClass();
 
-  @Nonnull
-  protected <T> T getDef(@Nonnull T def, @Nonnull Supplier<? extends T> getter) {
+  @NotNull
+  protected <T> T getDef(@NotNull T def, @NotNull Supplier<? extends T> getter) {
     T value = getter.get();
     return value == null ? def : value;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Object getObject(@Nonnull String path, @Nonnull Object def) {
+  public Object getObject(@NotNull String path, @NotNull Object def) {
     Object value = getObject(path);
     return value == null ? def : value;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public String getString(@Nonnull String path, @Nonnull String def) {
+  public String getString(@NotNull String path, @NotNull String def) {
     return getDef(def, () -> getString(path));
   }
 
   @Override
-  public char getChar(@Nonnull String path) {
+  public char getChar(@NotNull String path) {
     return getChar(path, (char) 0);
   }
 
   @Override
-  public char getChar(@Nonnull String path, char def) {
+  public char getChar(@NotNull String path, char def) {
     try {
       return getString(path).charAt(0);
     } catch (NullPointerException | IndexOutOfBoundsException ex) {
@@ -53,80 +53,80 @@ public abstract class AbstractConfig implements Config {
   }
 
   @Override
-  public double getDouble(@Nonnull String path) {
+  public double getDouble(@NotNull String path) {
     return getDouble(path, 0);
   }
 
   @Override
-  public float getFloat(@Nonnull String path) {
+  public float getFloat(@NotNull String path) {
     return getFloat(path, 0);
   }
 
   @Override
-  public long getLong(@Nonnull String path) {
+  public long getLong(@NotNull String path) {
     return getLong(path, 0);
   }
 
   @Override
-  public int getInt(@Nonnull String path) {
+  public int getInt(@NotNull String path) {
     return getInt(path, 0);
   }
 
   @Override
-  public short getShort(@Nonnull String path) {
+  public short getShort(@NotNull String path) {
     return getShort(path, (short) 0);
   }
 
   @Override
-  public byte getByte(@Nonnull String path) {
+  public byte getByte(@NotNull String path) {
     return getByte(path, (byte) 0);
   }
 
   @Override
-  public boolean getBoolean(@Nonnull String path) {
+  public boolean getBoolean(@NotNull String path) {
     return getBoolean(path, false);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public UUID getUUID(@Nonnull String path, @Nonnull UUID def) {
+  public UUID getUUID(@NotNull String path, @NotNull UUID def) {
     return getDef(def, () -> getUUID(path));
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public OffsetDateTime getDateTime(@Nonnull String path, @Nonnull OffsetDateTime def) {
+  public OffsetDateTime getDateTime(@NotNull String path, @NotNull OffsetDateTime def) {
     return getDef(def, () -> getDateTime(path));
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Date getDate(@Nonnull String path, @Nonnull Date def) {
+  public Date getDate(@NotNull String path, @NotNull Date def) {
     return getDef(def, () -> getDate(path));
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Color getColor(@Nonnull String path, @Nonnull Color def) {
+  public Color getColor(@NotNull String path, @NotNull Color def) {
     return getDef(def, () -> getColor(path));
   }
 
   @Nullable
   @Override
-  public <E extends Enum<E>> E getEnum(@Nonnull String path, @Nonnull Class<E> classOfEnum) {
+  public <E extends Enum<E>> E getEnum(@NotNull String path, @NotNull Class<E> classOfEnum) {
     return ReflectionUtils.getEnumOrNull(getString(path), classOfEnum);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <E extends Enum<E>> E getEnum(@Nonnull String path, @Nonnull E def) {
+  public <E extends Enum<E>> E getEnum(@NotNull String path, @NotNull E def) {
     E value = getEnum(path, def.getDeclaringClass());
     return value == null ? def : value;
   }
 
   @Nullable
   @Override
-  public Class<?> getClass(@Nonnull String path) {
+  public Class<?> getClass(@NotNull String path) {
     try {
       return Class.forName(getString(path));
     } catch (Exception ex) {
@@ -134,95 +134,95 @@ public abstract class AbstractConfig implements Config {
     }
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Class<?> getClass(@Nonnull String path, @Nonnull Class<?> def) {
+  public Class<?> getClass(@NotNull String path, @NotNull Class<?> def) {
     return getDef(def, () -> getClass(path));
   }
 
   @Nullable
   @Override
-  public Version getVersion(@Nonnull String path) {
+  public Version getVersion(@NotNull String path) {
     return Version.parse(getString(path), null);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Version getVersion(@Nonnull String path, @Nonnull Version def) {
+  public Version getVersion(@NotNull String path, @NotNull Version def) {
     return getDef(def, () -> getVersion(path));
   }
 
   @Nullable
   @Override
-  public byte[] getBinary(@Nonnull String path) {
+  public byte[] getBinary(@NotNull String path) {
     String string = getString(path);
     if (string == null) return null;
     return Base64.getDecoder().decode(string);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public String[] getStringArray(@Nonnull String path) {
+  public String[] getStringArray(@NotNull String path) {
     return getStringList(path).toArray(new String[0]);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <E extends Enum<E>> List<E> getEnumList(@Nonnull String path, @Nonnull Class<E> classOfEnum) {
+  public <E extends Enum<E>> List<E> getEnumList(@NotNull String path, @NotNull Class<E> classOfEnum) {
     return mapList(path, name -> ReflectionUtils.getEnumOrNull(name, classOfEnum));
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Character> getCharacterList(@Nonnull String path) {
+  public List<Character> getCharacterList(@NotNull String path) {
     return mapList(path, string -> string == null || string.length() == 0 ? (char) 0 : string.charAt(0));
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<UUID> getUUIDList(@Nonnull String path) {
+  public List<UUID> getUUIDList(@NotNull String path) {
     return mapList(path, UUID::fromString);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Byte> getByteList(@Nonnull String path) {
+  public List<Byte> getByteList(@NotNull String path) {
     return mapList(path, Byte::parseByte);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Short> getShortList(@Nonnull String path) {
+  public List<Short> getShortList(@NotNull String path) {
     return mapList(path, Short::parseShort);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Integer> getIntegerList(@Nonnull String path) {
+  public List<Integer> getIntegerList(@NotNull String path) {
     return mapList(path, Integer::parseInt);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Long> getLongList(@Nonnull String path) {
+  public List<Long> getLongList(@NotNull String path) {
     return mapList(path, Long::parseLong);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Float> getFloatList(@Nonnull String path) {
+  public List<Float> getFloatList(@NotNull String path) {
     return mapList(path, Float::parseFloat);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public List<Double> getDoubleList(@Nonnull String path) {
+  public List<Double> getDoubleList(@NotNull String path) {
     return mapList(path, Double::parseDouble);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <T> List<T> mapList(@Nonnull String path, @Nonnull Function<String, ? extends T> mapper) {
+  public <T> List<T> mapList(@NotNull String path, @NotNull Function<String, ? extends T> mapper) {
     List<String> list = getStringList(path);
     List<T> result = new ArrayList<>(list.size());
     for (String string : list) {
@@ -240,7 +240,7 @@ public abstract class AbstractConfig implements Config {
     return size() == 0;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Map<String, String> valuesAsStrings() {
     Map<String, String> map = new HashMap<>();
@@ -248,22 +248,22 @@ public abstract class AbstractConfig implements Config {
     return map;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public <K, V> Map<K, V> mapValues(@Nonnull Function<? super String, ? extends K> keyMapper, @Nonnull Function<? super String, ? extends V> valueMapper) {
+  public <K, V> Map<K, V> mapValues(@NotNull Function<? super String, ? extends K> keyMapper, @NotNull Function<? super String, ? extends V> valueMapper) {
     return map(valuesAsStrings(), keyMapper, valueMapper);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Set<Entry<String, Object>> entrySet() {
     return values().entrySet();
   }
 
-  @Nonnull
-  public <FromK, FromV, ToK, ToV> Map<ToK, ToV> map(@Nonnull Map<? extends FromK, ? extends FromV> values,
-                                                    @Nonnull Function<? super FromK, ? extends ToK> keyMapper,
-                                                    @Nonnull Function<? super FromV, ? extends ToV> valueMapper) {
+  @NotNull
+  public <FromK, FromV, ToK, ToV> Map<ToK, ToV> map(@NotNull Map<? extends FromK, ? extends FromV> values,
+                                                    @NotNull Function<? super FromK, ? extends ToK> keyMapper,
+                                                    @NotNull Function<? super FromV, ? extends ToV> valueMapper) {
     Map<ToK, ToV> result = new HashMap<>();
     values.forEach((key, value) -> {
       try {

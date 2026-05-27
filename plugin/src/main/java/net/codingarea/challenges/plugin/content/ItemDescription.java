@@ -4,8 +4,8 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.utils.misc.ColorConversions;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.ChatColor;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,14 +19,14 @@ public final class ItemDescription {
   private final String name;
   private final String originalName;
 
-  public ItemDescription(@Nonnull String[] themeColors, @Nonnull String name, @Nonnull String[] formattedLore) {
+  public ItemDescription(@NotNull String[] themeColors, @NotNull String name, @NotNull String[] formattedLore) {
     this.colors = themeColors;
     this.name = Message.forName("item-prefix") + name;
     this.originalName = name;
     this.lore = formattedLore;
   }
 
-  public ItemDescription(@Nonnull String[] description) {
+  public ItemDescription(@NotNull String[] description) {
     if (description.length == 0)
       throw new IllegalArgumentException("Invalid item description: Cannot be empty");
 
@@ -43,27 +43,27 @@ public final class ItemDescription {
     return new ItemDescription(new String[]{"§e"}, Message.NULL, new String[0]);
   }
 
-  @Nonnull
+  @NotNull
   public String getName() {
     return name;
   }
 
-  @Nonnull
+  @NotNull
   public String getOriginalName() {
     return originalName;
   }
 
-  @Nonnull
+  @NotNull
   public String[] getTheme() {
     return colors;
   }
 
-  @Nonnull
+  @NotNull
   public String[] getLore() {
     return lore;
   }
 
-  private void fillLore(@Nonnull String[] origin, @Nonnull List<String> output) {
+  private void fillLore(@NotNull String[] origin, @NotNull List<String> output) {
 
     String colorBefore = "§7";
     boolean inColor = false;
@@ -107,7 +107,7 @@ public final class ItemDescription {
 
   }
 
-  private String[] determineColors(@Nonnull String input) {
+  private String[] determineColors(@NotNull String input) {
     List<String> colors = new LinkedList<>();
     int colorIndex = 0;
 

@@ -1,15 +1,13 @@
 package net.codingarea.challenges.plugin.management.scheduler.timer;
 
 import net.codingarea.commons.common.config.Document;
-
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class TimerFormat {
 
   private final String seconds, minutes, hours, day, days;
 
-  public TimerFormat(@Nonnull Document document) {
+  public TimerFormat(@NotNull Document document) {
     seconds = document.getString("seconds", "");
     minutes = document.getString("minutes", "");
     hours = document.getString("hours", "");
@@ -25,9 +23,8 @@ public final class TimerFormat {
     days = "{d}:{hh}:{mm}:{ss}";
   }
 
-  @Nonnull
-  public String format(@Nonnegative long time) {
-
+  @NotNull
+  public String format(long time) {
     long seconds = time;
     long minutes = seconds / 60;
     long hours = minutes / 60;
@@ -64,7 +61,7 @@ public final class TimerFormat {
     return format;
   }
 
-  private String digit2(@Nonnegative long number) {
+  private String digit2(long number) {
     return number > 9 ? String.valueOf(number) : "0" + number;
   }
 

@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public abstract class KillEntityGoal extends SettingGoal {
@@ -23,11 +23,11 @@ public abstract class KillEntityGoal extends SettingGoal {
   protected boolean killerNeeded = false;
   protected Player winner;
 
-  public KillEntityGoal(@Nonnull EntityType entity) {
+  public KillEntityGoal(@NotNull EntityType entity) {
     this(entity, false);
   }
 
-  public KillEntityGoal(@Nonnull EntityType entity, boolean enabledByDefault) {
+  public KillEntityGoal(@NotNull EntityType entity, boolean enabledByDefault) {
     this(entity, null, enabledByDefault);
   }
 
@@ -42,12 +42,12 @@ public abstract class KillEntityGoal extends SettingGoal {
   }
 
   @Override
-  public void getWinnersOnEnd(@Nonnull List<Player> winners) {
+  public void getWinnersOnEnd(@NotNull List<Player> winners) {
     if (oneWinner && winner != null) winners.add(winner);
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onKill(@Nonnull EntityDeathEvent event) {
+  public void onKill(@NotNull EntityDeathEvent event) {
     if (!isEnabled() || !ChallengeAPI.isStarted()) return;
     LivingEntity entity = event.getEntity();
     if (entity.getType() != this.entity) return;

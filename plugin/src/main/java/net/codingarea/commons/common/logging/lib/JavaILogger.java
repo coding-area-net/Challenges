@@ -2,8 +2,8 @@ package net.codingarea.commons.common.logging.lib;
 
 import net.codingarea.commons.common.logging.ILogger;
 import net.codingarea.commons.common.logging.LogLevel;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.logging.Logger;
 
 public abstract class JavaILogger extends Logger implements ILogger {
@@ -12,8 +12,8 @@ public abstract class JavaILogger extends Logger implements ILogger {
     super(name, resourceBundleName);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public abstract JavaILogger setMinLevel(@Nonnull LogLevel level);
+  public abstract JavaILogger setMinLevel(@NotNull LogLevel level);
 
 }

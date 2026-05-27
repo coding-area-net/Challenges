@@ -2,9 +2,9 @@ package net.codingarea.commons.common.misc;
 
 import net.codingarea.commons.common.collection.WrappedException;
 import net.codingarea.commons.common.logging.ILogger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.function.Function;
@@ -17,13 +17,13 @@ public final class StringUtils {
   private StringUtils() {
   }
 
-  @Nonnull
-  public static String getEnumName(@Nonnull Enum<?> enun) {
+  @NotNull
+  public static String getEnumName(@NotNull Enum<?> enun) {
     return getEnumName(enun.name());
   }
 
-  @Nonnull
-  public static String getEnumName(@Nonnull String name) {
+  @NotNull
+  public static String getEnumName(@NotNull String name) {
     StringBuilder builder = new StringBuilder();
     boolean nextUpperCase = true;
     for (char letter : name.toCharArray()) {
@@ -39,8 +39,8 @@ public final class StringUtils {
     return builder.toString();
   }
 
-  @Nonnull
-  public static String format(@Nonnull String sequence, @Nonnull Object... args) {
+  @NotNull
+  public static String format(@NotNull String sequence, @NotNull Object... args) {
     char start = '{', end = '}';
     boolean inArgument = false;
     StringBuilder argument = new StringBuilder();
@@ -79,16 +79,16 @@ public final class StringUtils {
     return builder.toString();
   }
 
-  @Nonnull
-  public static String getAfterLastIndex(@Nonnull String input, @Nonnull String separator) {
+  @NotNull
+  public static String getAfterLastIndex(@NotNull String input, @NotNull String separator) {
     return Optional.of(input)
       .filter(name -> name.contains(separator))
       .map(name -> name.substring(name.lastIndexOf(separator) + separator.length()))
       .orElse("");
   }
 
-  @Nonnull
-  public static String[] format(@Nonnull String[] array, @Nonnull Object... args) {
+  @NotNull
+  public static String[] format(@NotNull String[] array, @NotNull Object... args) {
     String[] result = new String[array.length];
     for (int i = 0; i < array.length; i++) {
       result[i] = format(array[i], args);
@@ -96,8 +96,8 @@ public final class StringUtils {
     return result;
   }
 
-  @Nonnull
-  public static String getArrayAsString(@Nonnull String[] array, @Nonnull String separator) {
+  @NotNull
+  public static String getArrayAsString(@NotNull String[] array, @NotNull String separator) {
     StringBuilder builder = new StringBuilder();
     for (String string : array) {
       if (builder.length() != 0) builder.append(separator);
@@ -106,13 +106,13 @@ public final class StringUtils {
     return builder.toString();
   }
 
-  @Nonnull
-  public static String[] getStringAsArray(@Nonnull String string) {
+  @NotNull
+  public static String[] getStringAsArray(@NotNull String string) {
     return string.split("\n");
   }
 
-  @Nonnull
-  public static <T> String getIterableAsString(@Nonnull Iterable<T> iterable, @Nonnull String separator, @Nonnull Function<T, String> mapper) {
+  @NotNull
+  public static <T> String getIterableAsString(@NotNull Iterable<T> iterable, @NotNull String separator, @NotNull Function<T, String> mapper) {
     StringBuilder builder = new StringBuilder();
     for (T t : iterable) {
       if (builder.length() > 0) builder.append(separator);
@@ -122,7 +122,7 @@ public final class StringUtils {
     return builder.toString();
   }
 
-  @Nonnull
+  @NotNull
   public static String repeat(@Nullable Object sequence, int amount) {
     StringBuilder builder = new StringBuilder();
     for (int i = 0; i < amount; i++) builder.append(sequence);
@@ -146,7 +146,7 @@ public final class StringUtils {
     }
   }
 
-  public static long parseSeconds(@Nonnull String input) {
+  public static long parseSeconds(@NotNull String input) {
     if (input.toLowerCase().startsWith("perm")) return -1;
     long current = 0;
     long seconds = 0;
@@ -165,7 +165,7 @@ public final class StringUtils {
     return seconds;
   }
 
-  public static boolean isNumber(@Nonnull String sequence) {
+  public static boolean isNumber(@NotNull String sequence) {
     try {
       Double.parseDouble(sequence);
       return true;
@@ -174,7 +174,7 @@ public final class StringUtils {
     }
   }
 
-  private static int indexOf(@Nonnull String string, @Nonnull String pattern, int occurrenceIndex) {
+  private static int indexOf(@NotNull String string, @NotNull String pattern, int occurrenceIndex) {
     int lastIndex = 0;
     for (int currentLayer = 0; currentLayer <= occurrenceIndex; currentLayer++) {
       int index = string.indexOf(pattern, (lastIndex > 0) ? lastIndex + 1 : 0);

@@ -22,8 +22,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class SlotLimitSetting extends Modifier {
@@ -32,7 +31,7 @@ public class SlotLimitSetting extends Modifier {
     super(MenuType.SETTINGS, 1, 36, 36);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.BARRIER, Message.forName("item-slot-limit-setting"));
@@ -53,7 +52,7 @@ public class SlotLimitSetting extends Modifier {
     Bukkit.getOnlinePlayers().forEach(this::updateSlots);
   }
 
-  private void updateSlots(@Nonnull Player player) {
+  private void updateSlots(@NotNull Player player) {
     for (int i = 0; i < 36; i++) {
       if (ignorePlayer(player)) {
         unBlockSlot(player, i);
@@ -81,7 +80,7 @@ public class SlotLimitSetting extends Modifier {
     return slot > value;
   }
 
-  private void blockSlot(@Nonnull Player player, int slot) {
+  private void blockSlot(@NotNull Player player, int slot) {
     if (ignorePlayer(player)) return;
 
     ItemStack item = player.getInventory().getItem(slot);
@@ -97,7 +96,7 @@ public class SlotLimitSetting extends Modifier {
     player.getInventory().setItem(slot, ItemBuilder.BLOCKED_ITEM);
   }
 
-  private void unBlockSlot(@Nonnull Player player, int slot) {
+  private void unBlockSlot(@NotNull Player player, int slot) {
     ItemStack item = player.getInventory().getItem(slot);
     if (item != null && item.isSimilar(ItemBuilder.BLOCKED_ITEM)) {
       player.getInventory().setItem(slot, null);
@@ -105,7 +104,7 @@ public class SlotLimitSetting extends Modifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerInventoryClick(@Nonnull PlayerInventoryClickEvent event) {
+  public void onPlayerInventoryClick(@NotNull PlayerInventoryClickEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.getClickedInventory() == null) return;
     if (event.getClickedInventory().getType() != InventoryType.PLAYER) return;
@@ -115,7 +114,7 @@ public class SlotLimitSetting extends Modifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerDropItem(@Nonnull PlayerDropItemEvent event) {
+  public void onPlayerDropItem(@NotNull PlayerDropItemEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (!event.getItemDrop().getItemStack().isSimilar(ItemBuilder.BLOCKED_ITEM)) return;
@@ -123,7 +122,7 @@ public class SlotLimitSetting extends Modifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onClick(@Nonnull BlockPlaceEvent event) {
+  public void onClick(@NotNull BlockPlaceEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (!event.getItemInHand().isSimilar(ItemBuilder.BLOCKED_ITEM)) return;
@@ -131,7 +130,7 @@ public class SlotLimitSetting extends Modifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onSwapItem(@Nonnull PlayerSwapHandItemsEvent event) {
+  public void onSwapItem(@NotNull PlayerSwapHandItemsEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
 
@@ -143,7 +142,7 @@ public class SlotLimitSetting extends Modifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onPlayerDeath(@Nonnull PlayerDeathEvent event) {
+  public void onPlayerDeath(@NotNull PlayerDeathEvent event) {
     event.getDrops().removeIf(itemStack -> itemStack.isSimilar(ItemBuilder.BLOCKED_ITEM));
   }
 

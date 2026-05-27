@@ -13,8 +13,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 
 public class EntityDamageTrigger extends ChallengeTrigger {
@@ -50,7 +50,7 @@ public class EntityDamageTrigger extends ChallengeTrigger {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onDeath(@Nonnull EntityDamageEvent event) {
+  public void onDeath(@NotNull EntityDamageEvent event) {
     createData()
       .entity(event.getEntity())
       .event(event)

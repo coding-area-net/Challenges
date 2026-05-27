@@ -5,57 +5,57 @@ import net.codingarea.commons.database.exceptions.DatabaseException;
 import net.codingarea.commons.database.sql.abstraction.AbstractSQLDatabase;
 import net.codingarea.commons.database.sql.abstraction.update.SQLUpdate;
 import net.codingarea.commons.database.sql.abstraction.where.SQLWhere;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public class SQLInsertionOrUpdate extends SQLUpdate implements DatabaseInsertionOrUpdate {
 
-  public SQLInsertionOrUpdate(@Nonnull AbstractSQLDatabase database, @Nonnull String table) {
+  public SQLInsertionOrUpdate(@NotNull AbstractSQLDatabase database, @NotNull String table) {
     super(database, table);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseInsertionOrUpdate where(@Nonnull String column, @Nullable Object value) {
+  public DatabaseInsertionOrUpdate where(@NotNull String column, @Nullable Object value) {
     super.where(column, value);
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseInsertionOrUpdate where(@Nonnull String column, @Nullable Number value) {
+  public DatabaseInsertionOrUpdate where(@NotNull String column, @Nullable Number value) {
     super.where(column, value);
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseInsertionOrUpdate where(@Nonnull String column, @Nullable String value, boolean ignoreCase) {
+  public DatabaseInsertionOrUpdate where(@NotNull String column, @Nullable String value, boolean ignoreCase) {
     super.where(column, value);
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseInsertionOrUpdate where(@Nonnull String column, @Nullable String value) {
+  public DatabaseInsertionOrUpdate where(@NotNull String column, @Nullable String value) {
     super.where(column, value);
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseInsertionOrUpdate whereNot(@Nonnull String column, @Nullable Object value) {
+  public DatabaseInsertionOrUpdate whereNot(@NotNull String column, @Nullable Object value) {
     super.whereNot(column, value);
     return this;
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public DatabaseInsertionOrUpdate set(@Nonnull String column, @Nullable Object value) {
+  public DatabaseInsertionOrUpdate set(@NotNull String column, @Nullable Object value) {
     super.set(column, value);
     return this;
   }

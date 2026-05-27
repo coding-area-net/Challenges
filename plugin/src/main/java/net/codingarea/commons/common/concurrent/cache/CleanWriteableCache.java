@@ -4,10 +4,9 @@ import net.codingarea.commons.common.annotations.ReplaceWith;
 import net.codingarea.commons.common.collection.pair.Tuple;
 import net.codingarea.commons.common.logging.ILogger;
 import net.codingarea.commons.common.misc.SimpleCollectionUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,7 +23,7 @@ public class CleanWriteableCache<K, V> implements WriteableCache<K, V> {
   protected final long cleanInterval;
   protected final long unusedTimeBeforeClean;
 
-  public CleanWriteableCache(@Nullable ILogger logger, @Nonnegative long unusedTimeBeforeClean, @Nonnegative long cleanInterval, @Nonnull String taskName) {
+  public CleanWriteableCache(@Nullable ILogger logger, long unusedTimeBeforeClean, long cleanInterval, @NotNull String taskName) {
     this.logger = logger;
     this.cleanInterval = cleanInterval;
     this.unusedTimeBeforeClean = unusedTimeBeforeClean;
@@ -48,7 +47,7 @@ public class CleanWriteableCache<K, V> implements WriteableCache<K, V> {
 
   @Nullable
   @Override
-  public V getData(@Nonnull K key) {
+  public V getData(@NotNull K key) {
     Tuple<Long, V> pair = cache.get(key);
     if (pair == null) return null;
     pair.setFirst(System.currentTimeMillis());
@@ -56,12 +55,12 @@ public class CleanWriteableCache<K, V> implements WriteableCache<K, V> {
   }
 
   @Override
-  public void setData(@Nonnull K key, @Nullable V value) {
+  public void setData(@NotNull K key, @Nullable V value) {
     cache.put(key, new Tuple<>(System.currentTimeMillis(), value));
   }
 
   @Override
-  public boolean contains(@Nonnull K key) {
+  public boolean contains(@NotNull K key) {
     return cache.containsKey(key);
   }
 
@@ -75,7 +74,7 @@ public class CleanWriteableCache<K, V> implements WriteableCache<K, V> {
     cache.clear();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Map<K, V> values() {
     return Collections.unmodifiableMap(SimpleCollectionUtils.convertMap(cache, k -> k, Tuple::getSecond));

@@ -14,9 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @Since("2.0")
 public class PickupItemLaunchChallenge extends SettingModifier {
@@ -44,7 +42,7 @@ public class PickupItemLaunchChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerPickUpItem(@Nonnull PlayerPickupItemEvent event) {
+  public void onPlayerPickUpItem(@NotNull PlayerPickupItemEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
 

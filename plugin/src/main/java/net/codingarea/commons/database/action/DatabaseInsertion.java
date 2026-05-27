@@ -4,10 +4,9 @@ import net.codingarea.commons.database.Database;
 import net.codingarea.commons.database.SpecificDatabase;
 import net.codingarea.commons.database.action.hierarchy.SetAction;
 import net.codingarea.commons.database.exceptions.DatabaseException;
-
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @see Database#insert(String)
@@ -15,9 +14,9 @@ import javax.annotation.Nullable;
  */
 public interface DatabaseInsertion extends DatabaseAction<Void>, SetAction {
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseInsertion set(@Nonnull String field, @Nullable Object value);
+  DatabaseInsertion set(@NotNull String field, @Nullable Object value);
 
   @Nullable
   @Override

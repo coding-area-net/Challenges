@@ -10,13 +10,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ExtraWorldRestrictionListener implements Listener {
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onBlockPlace(@Nonnull BlockPlaceEvent event) {
+  public void onBlockPlace(@NotNull BlockPlaceEvent event) {
     if (!isInExtraWorld(event.getBlock().getLocation())) return;
     if (Challenges.getInstance().getWorldManager().getSettings().isPlaceBlocks()) return;
 
@@ -25,7 +24,7 @@ public class ExtraWorldRestrictionListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onBlockBreak(@Nonnull BlockBreakEvent event) {
+  public void onBlockBreak(@NotNull BlockBreakEvent event) {
     if (!isInExtraWorld(event.getBlock().getLocation())) return;
     if (Challenges.getInstance().getWorldManager().getSettings().isDestroyBlocks()) return;
 
@@ -33,7 +32,7 @@ public class ExtraWorldRestrictionListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onDrop(@Nonnull PlayerDropItemEvent event) {
+  public void onDrop(@NotNull PlayerDropItemEvent event) {
     if (!isInExtraWorld(event.getPlayer().getWorld())) return;
     if (Challenges.getInstance().getWorldManager().getSettings().isDropItems()) return;
 
@@ -41,19 +40,19 @@ public class ExtraWorldRestrictionListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.LOW)
-  public void onPickUp(@Nonnull PlayerPickupItemEvent event) {
+  public void onPickUp(@NotNull PlayerPickupItemEvent event) {
     if (!isInExtraWorld(event.getPlayer().getWorld())) return;
     if (Challenges.getInstance().getWorldManager().getSettings().isPickupItems()) return;
 
     event.setCancelled(true);
   }
 
-  private boolean isInExtraWorld(@Nonnull Location location) {
+  private boolean isInExtraWorld(@NotNull Location location) {
     if (location.getWorld() == null) return false;
     return isInExtraWorld(location.getWorld());
   }
 
-  private boolean isInExtraWorld(@Nonnull World world) {
+  private boolean isInExtraWorld(@NotNull World world) {
     return Challenges.getInstance().getWorldManager().getExtraWorld().equals(world);
   }
 

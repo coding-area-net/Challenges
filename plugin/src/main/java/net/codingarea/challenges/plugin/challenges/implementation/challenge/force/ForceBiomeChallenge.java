@@ -24,9 +24,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.BiConsumer;
@@ -42,7 +41,7 @@ public class ForceBiomeChallenge extends CompletableForceChallenge {
     setCategory(SettingCategory.FORCE);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.CHAINMAIL_BOOTS, Message.forName("item-force-biome-challenge"));
@@ -59,7 +58,7 @@ public class ForceBiomeChallenge extends CompletableForceChallenge {
     ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 * 3 - 60, getValue() * 60 * 3 + 60);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   protected BiConsumer<BossBarInstance, Player> setupBossbar() {
     return (bossbar, player) -> {
@@ -80,7 +79,7 @@ public class ForceBiomeChallenge extends CompletableForceChallenge {
   }
 
   @Override
-  protected void broadcastSuccessMessage(@Nonnull Player player) {
+  protected void broadcastSuccessMessage(@NotNull Player player) {
     Message.forName("force-biome-success").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), BukkitStringUtils.getBiomeName(biome));
   }
 
@@ -101,7 +100,7 @@ public class ForceBiomeChallenge extends CompletableForceChallenge {
     return globalRandom.around(getRarity(biome) * 60 * 6, 60);
   }
 
-  private int getRarity(@Nonnull Biome biome) {
+  private int getRarity(@NotNull Biome biome) {
     Object[][] mapping = {
       {"BADLANDS", 5},
       {"JUNGLE", 4},
@@ -125,7 +124,7 @@ public class ForceBiomeChallenge extends CompletableForceChallenge {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onMove(@Nonnull PlayerMoveEvent event) {
+  public void onMove(@NotNull PlayerMoveEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.getTo() == null) return;
     if (event.getTo().getBlock().getBiome() != biome) return;

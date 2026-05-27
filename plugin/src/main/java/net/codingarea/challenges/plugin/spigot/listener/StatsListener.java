@@ -28,8 +28,8 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +47,7 @@ public class StatsListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onDamage(@Nonnull EntityDamageEvent event) {
+  public void onDamage(@NotNull EntityDamageEvent event) {
     if (countNoStats()) return;
     if (!(event.getEntity() instanceof Player)) return;
     if (event.getCause() == DamageCause.VOID) return;
@@ -58,7 +58,7 @@ public class StatsListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onDamage(@Nonnull EntityDamageByEntityEvent event) {
+  public void onDamage(@NotNull EntityDamageByEntityEvent event) {
     if (countNoStats()) return;
 
     if (event.getDamager() instanceof Player) {
@@ -82,27 +82,27 @@ public class StatsListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onBlockPlace(@Nonnull BlockPlaceEvent event) {
+  public void onBlockPlace(@NotNull BlockPlaceEvent event) {
     if (countNoStats()) return;
     if (AbstractChallenge.ignorePlayer(event.getPlayer())) return;
     incrementStatistic(event.getPlayer(), Statistic.BLOCKS_PLACED, 1);
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onBlockBreak(@Nonnull BlockBreakEvent event) {
+  public void onBlockBreak(@NotNull BlockBreakEvent event) {
     if (AbstractChallenge.ignorePlayer(event.getPlayer())) return;
     if (countNoStats()) return;
     incrementStatistic(event.getPlayer(), Statistic.BLOCKS_MINED, 1);
   }
 
   @EventHandler(priority = EventPriority.MONITOR)
-  public void onDeath(@Nonnull PlayerDeathEvent event) {
+  public void onDeath(@NotNull PlayerDeathEvent event) {
     if (countNoStats()) return;
     incrementStatistic(event.getEntity(), Statistic.DEATHS, 1);
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onKill(@Nonnull EntityDeathEvent event) {
+  public void onKill(@NotNull EntityDeathEvent event) {
     if (countNoStats()) return;
     LivingEntity entity = event.getEntity();
     Player player = entity.getKiller();
@@ -117,7 +117,7 @@ public class StatsListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onMove(@Nonnull PlayerMoveEvent event) {
+  public void onMove(@NotNull PlayerMoveEvent event) {
     if (countNoStats()) return;
     if (AbstractChallenge.ignorePlayer(event.getPlayer())) return;
     if (ChallengeAPI.isPaused()) return;
@@ -127,14 +127,14 @@ public class StatsListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onJump(@Nonnull PlayerJumpEvent event) {
+  public void onJump(@NotNull PlayerJumpEvent event) {
     if (countNoStats()) return;
     if (AbstractChallenge.ignorePlayer(event.getPlayer())) return;
     if (ChallengeAPI.isPaused()) return;
     incrementStatistic(event.getPlayer(), Statistic.JUMPS, 1);
   }
 
-  private void incrementStatistic(@Nonnull Player player, @Nonnull Statistic statistic, double amount) {
+  private void incrementStatistic(@NotNull Player player, @NotNull Statistic statistic, double amount) {
     PlayerStats stats = Challenges.getInstance().getStatsManager().getStats(player);
     stats.incrementStatistic(statistic, amount);
   }

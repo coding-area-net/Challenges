@@ -1,8 +1,7 @@
 package net.codingarea.commons.common.concurrent.cache;
 
 import net.codingarea.commons.common.annotations.ReplaceWith;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @see com.google.common.cache.LoadingCache
@@ -12,7 +11,7 @@ import javax.annotation.Nonnull;
 @ReplaceWith("com.google.common.cache.LoadingCache")
 public interface DatabaseCache<K, V> extends ICache<K, V> {
 
-  @Nonnull
-  V getData(@Nonnull K key);
+  @NotNull
+  V getData(@NotNull K key);
 
 }

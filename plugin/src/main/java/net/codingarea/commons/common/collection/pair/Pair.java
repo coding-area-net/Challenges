@@ -1,7 +1,6 @@
 package net.codingarea.commons.common.collection.pair;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @see Tuple
@@ -13,10 +12,9 @@ public interface Pair {
   /**
    * @return The amount of values
    */
-  @Nonnegative
   int amount();
 
-  @Nonnull
+  @NotNull
   Object[] values();
 
   /**

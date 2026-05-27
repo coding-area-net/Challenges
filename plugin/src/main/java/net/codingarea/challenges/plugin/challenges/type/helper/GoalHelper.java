@@ -11,8 +11,8 @@ import net.codingarea.commons.common.collection.NumberFormatter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -28,7 +28,7 @@ public final class GoalHelper {
   private GoalHelper() {
   }
 
-  public static void handleSetEnabled(@Nonnull IGoal goal, boolean enabled) {
+  public static void handleSetEnabled(@NotNull IGoal goal, boolean enabled) {
     if (Challenges.getInstance().getChallengeManager().getCurrentGoal() != goal && enabled) {
       Challenges.getInstance().getChallengeManager().setCurrentGoal(goal);
     } else if (Challenges.getInstance().getChallengeManager().getCurrentGoal() == goal && !enabled) {
@@ -36,8 +36,8 @@ public final class GoalHelper {
     }
   }
 
-  @Nonnull
-  public static SortedMap<Integer, List<Player>> createLeaderboardFromPoints(@Nonnull Map<Player, Integer> points) {
+  @NotNull
+  public static SortedMap<Integer, List<Player>> createLeaderboardFromPoints(@NotNull Map<Player, Integer> points) {
     SortedMap<Integer, List<Player>> leaderboard = new TreeMap<>(Collections.reverseOrder());
     for (Entry<Player, Integer> entry : points.entrySet()) {
       List<Player> players = leaderboard.computeIfAbsent(entry.getValue(), key -> new ArrayList<>());
@@ -46,8 +46,8 @@ public final class GoalHelper {
     return leaderboard;
   }
 
-  @Nonnull
-  public static <V> Map<Player, Integer> createPointsFromValues(@Nonnull AtomicInteger mostPoints, @Nonnull Map<UUID, V> map, @Nonnull ToIntBiFunction<UUID, V> mapper, boolean zeros) {
+  @NotNull
+  public static <V> Map<Player, Integer> createPointsFromValues(@NotNull AtomicInteger mostPoints, @NotNull Map<UUID, V> map, @NotNull ToIntBiFunction<UUID, V> mapper, boolean zeros) {
     Map<Player, Integer> result = new HashMap<>();
     if (zeros) ChallengeAPI.getIngamePlayers().forEach(player -> result.put(player, 0));
     for (Entry<UUID, V> entry : map.entrySet()) {
@@ -69,7 +69,7 @@ public final class GoalHelper {
     return result;
   }
 
-  public static <E> int determinePosition(@Nonnull SortedMap<?, List<E>> map, @Nonnull E target) {
+  public static <E> int determinePosition(@NotNull SortedMap<?, List<E>> map, @NotNull E target) {
     int position = 1;
     for (Entry<?, List<E>> entry : map.entrySet()) {
       if (entry.getValue().contains(target)) break;
@@ -78,13 +78,13 @@ public final class GoalHelper {
     return position;
   }
 
-  @Nonnull
-  public static BiConsumer<ScoreboardInstance, Player> createScoreboard(@Nonnull Supplier<Map<Player, Integer>> points) {
+  @NotNull
+  public static BiConsumer<ScoreboardInstance, Player> createScoreboard(@NotNull Supplier<Map<Player, Integer>> points) {
     return createScoreboard(points, player -> new LinkedList<>());
   }
 
-  @Nonnull
-  public static BiConsumer<ScoreboardInstance, Player> createScoreboard(@Nonnull Supplier<Map<Player, Integer>> points, Function<Player, List<String>> additionalLines) {
+  @NotNull
+  public static BiConsumer<ScoreboardInstance, Player> createScoreboard(@NotNull Supplier<Map<Player, Integer>> points, Function<Player, List<String>> additionalLines) {
     return (scoreboard, player) -> {
       SortedMap<Integer, List<Player>> leaderboard = GoalHelper.createLeaderboardFromPoints(points.get());
       int playerPlace = GoalHelper.determinePosition(leaderboard, player);
@@ -120,7 +120,7 @@ public final class GoalHelper {
     };
   }
 
-  public static void getWinnersOnEnd(@Nonnull List<Player> winners, @Nonnull Map<Player, Integer> points) {
+  public static void getWinnersOnEnd(@NotNull List<Player> winners, @NotNull Map<Player, Integer> points) {
     AtomicInteger mostPoints = new AtomicInteger();
     List<Player> currentWinners = new LinkedList<>();
 

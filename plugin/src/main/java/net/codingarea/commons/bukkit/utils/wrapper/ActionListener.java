@@ -3,8 +3,8 @@ package net.codingarea.commons.bukkit.utils.wrapper;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -15,7 +15,7 @@ public final class ActionListener<E extends Event> implements Listener {
   private final EventPriority priority;
   private final boolean ignoreCancelled;
 
-  public ActionListener(@Nonnull Class<E> classOfEvent, @Nonnull Consumer<? super E> listener, @Nonnull EventPriority priority, boolean ignoreCancelled) {
+  public ActionListener(@NotNull Class<E> classOfEvent, @NotNull Consumer<? super E> listener, @NotNull EventPriority priority, boolean ignoreCancelled) {
     this.classOfEvent = classOfEvent;
     this.listener = listener;
     this.priority = priority;
@@ -35,17 +35,17 @@ public final class ActionListener<E extends Event> implements Listener {
     return Objects.hash(listener);
   }
 
-  @Nonnull
+  @NotNull
   public Consumer<? super E> getListener() {
     return listener;
   }
 
-  @Nonnull
+  @NotNull
   public EventPriority getPriority() {
     return priority;
   }
 
-  @Nonnull
+  @NotNull
   public Class<E> getClassOfEvent() {
     return classOfEvent;
   }

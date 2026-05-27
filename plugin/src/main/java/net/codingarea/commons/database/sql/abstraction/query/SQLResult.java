@@ -4,20 +4,20 @@ import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.document.EmptyDocument;
 import net.codingarea.commons.common.config.document.GsonDocument;
 import net.codingarea.commons.common.config.document.MapDocument;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Map;
 
 public final class SQLResult extends MapDocument {
 
-  public SQLResult(@Nonnull Map<String, Object> values) {
+  public SQLResult(@NotNull Map<String, Object> values) {
     super(values);
   }
 
-  @Nonnull
+  @NotNull
   @Override
-  public Document getDocument0(@Nonnull String path, @Nonnull Document root, @Nullable Document parent) {
+  public Document getDocument0(@NotNull String path, @NotNull Document root, @Nullable Document parent) {
     try {
       return new GsonDocument(getString(path), this, this).readonly();
     } catch (Exception ex) {

@@ -1,6 +1,7 @@
 package net.codingarea.commons.common.collection;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 /**
@@ -11,24 +12,24 @@ public class ClassWalker implements Iterable<Class<?>> {
   protected final Class<?> clazz;
   protected final Class<?> end;
 
-  protected ClassWalker(@Nonnull Class<?> clazz) {
+  protected ClassWalker(@NotNull Class<?> clazz) {
     this(clazz, Object.class);
   }
 
-  protected ClassWalker(@Nonnull Class<?> clazz, @Nonnull Class<?> end) {
+  protected ClassWalker(@NotNull Class<?> clazz, @NotNull Class<?> end) {
     this.clazz = clazz;
     this.end = end;
   }
 
-  public static ClassWalker range(@Nonnull Class<?> start, @Nonnull Class<?> end) {
+  public static ClassWalker range(@NotNull Class<?> start, @NotNull Class<?> end) {
     return new ClassWalker(start, end);
   }
 
-  public static ClassWalker walk(@Nonnull Class<?> start) {
+  public static ClassWalker walk(@NotNull Class<?> start) {
     return new ClassWalker(start);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Iterator<Class<?>> iterator() {
     return new Iterator<Class<?>>() {

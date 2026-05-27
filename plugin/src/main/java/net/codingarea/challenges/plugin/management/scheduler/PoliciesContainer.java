@@ -3,8 +3,8 @@ package net.codingarea.challenges.plugin.management.scheduler;
 import net.codingarea.challenges.plugin.management.scheduler.policy.IPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +13,7 @@ public class PoliciesContainer {
 
   private final List<IPolicy> policies = new ArrayList<>();
 
-  public PoliciesContainer(@Nonnull ScheduledTask annotation) {
+  public PoliciesContainer(@NotNull ScheduledTask annotation) {
     addPolicies(
       annotation.challengePolicy(),
       annotation.timerPolicy(),
@@ -23,7 +23,7 @@ public class PoliciesContainer {
     );
   }
 
-  public PoliciesContainer(@Nonnull TimerTask annotation) {
+  public PoliciesContainer(@NotNull TimerTask annotation) {
     addPolicies(
       annotation.challengePolicy(),
       annotation.playerPolicy(),
@@ -32,11 +32,11 @@ public class PoliciesContainer {
     );
   }
 
-  private void addPolicies(@Nonnull IPolicy... policies) {
+  private void addPolicies(@NotNull IPolicy... policies) {
     this.policies.addAll(Arrays.asList(policies));
   }
 
-  public boolean allPoliciesAreTrue(@Nonnull Object holder) {
+  public boolean allPoliciesAreTrue(@NotNull Object holder) {
     for (IPolicy policy : policies) {
       if (!policy.isApplicable(holder)) continue;
       if (!policy.check(holder))

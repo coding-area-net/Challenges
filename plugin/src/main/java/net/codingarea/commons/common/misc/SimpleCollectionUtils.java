@@ -1,10 +1,9 @@
 package net.codingarea.commons.common.misc;
 
 import net.codingarea.commons.common.logging.ILogger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
@@ -30,10 +29,9 @@ public final class SimpleCollectionUtils {
    *
    * @deprecated Unsafe because of strings containing , or =
    */
-  @Nonnull
+  @NotNull
   @Deprecated
-  @CheckReturnValue
-  public static <K, V> String convertMapToString(@Nonnull Map<K, V> map, @Nonnull Function<K, String> key, @Nonnull Function<V, String> value) {
+  public static <K, V> String convertMapToString(@NotNull Map<K, V> map, @NotNull Function<K, String> key, @NotNull Function<V, String> value) {
     StringBuilder builder = new StringBuilder();
     for (Entry<K, V> entry : map.entrySet()) {
       if (builder.length() != 0) builder.append(REGEX_1);
@@ -50,10 +48,9 @@ public final class SimpleCollectionUtils {
    *
    * @deprecated Unsafe because of strings containing , or =
    */
-  @Nonnull
+  @NotNull
   @Deprecated
-  @CheckReturnValue
-  public static <K, V> Map<K, V> convertStringToMap(@Nullable String string, @Nonnull Function<String, K> key, @Nonnull Function<String, V> value) {
+  public static <K, V> Map<K, V> convertStringToMap(@Nullable String string, @NotNull Function<String, K> key, @NotNull Function<String, V> value) {
 
     Map<K, V> map = new HashMap<>();
     if (string == null) return map;
@@ -81,11 +78,10 @@ public final class SimpleCollectionUtils {
 
   }
 
-  @Nonnull
-  @CheckReturnValue
-  public static <FromK, FromV, ToK, ToV> Map<ToK, ToV> convertMap(@Nonnull Map<FromK, FromV> map,
-                                                                  @Nonnull Function<? super FromK, ? extends ToK> keyMapper,
-                                                                  @Nonnull Function<? super FromV, ? extends ToV> valueMapper) {
+  @NotNull
+  public static <FromK, FromV, ToK, ToV> Map<ToK, ToV> convertMap(@NotNull Map<FromK, FromV> map,
+                                                                  @NotNull Function<? super FromK, ? extends ToK> keyMapper,
+                                                                  @NotNull Function<? super FromV, ? extends ToV> valueMapper) {
     Map<ToK, ToV> result = new HashMap<>();
     map.forEach((key, value) -> {
       try {
@@ -98,10 +94,9 @@ public final class SimpleCollectionUtils {
     return result;
   }
 
-  @Nonnull
-  @CheckReturnValue
-  public static <From, To> List<To> convert(@Nonnull Collection<From> collection,
-                                            @Nonnull Function<? super From, ? extends To> mapper) {
+  @NotNull
+  public static <From, To> List<To> convert(@NotNull Collection<From> collection,
+                                            @NotNull Function<? super From, ? extends To> mapper) {
     List<To> result = new ArrayList<>(collection.size());
     collection.forEach(value -> {
       try {
@@ -114,7 +109,7 @@ public final class SimpleCollectionUtils {
     return result;
   }
 
-  public static <K, V> V getMostFrequentValue(@Nonnull Map<K, V> map) {
+  public static <K, V> V getMostFrequentValue(@NotNull Map<K, V> map) {
     Collection<V> values = map.values();
     List<V> list = new ArrayList<>(values);
     Set<V> set = new HashSet<>(values);
@@ -133,7 +128,7 @@ public final class SimpleCollectionUtils {
   }
 
   @SafeVarargs
-  public static <T> Set<T> setOf(@Nonnull Collection<T>... collections) {
+  public static <T> Set<T> setOf(@NotNull Collection<T>... collections) {
     Set<T> set = new HashSet<>();
     for (Collection<T> collection : collections) {
       set.addAll(collection);

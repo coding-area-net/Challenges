@@ -2,8 +2,7 @@ package net.codingarea.commons.database.exceptions;
 
 import net.codingarea.commons.common.collection.WrappedException;
 import net.codingarea.commons.database.action.DatabaseAction;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @see DatabaseException
@@ -11,11 +10,11 @@ import javax.annotation.Nonnull;
  */
 public class UnsignedDatabaseException extends WrappedException {
 
-  public UnsignedDatabaseException(@Nonnull DatabaseException cause) {
+  public UnsignedDatabaseException(@NotNull DatabaseException cause) {
     super(cause);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DatabaseException getCause() {
     return (DatabaseException) super.getCause();

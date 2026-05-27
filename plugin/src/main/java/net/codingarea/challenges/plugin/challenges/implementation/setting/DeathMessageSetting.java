@@ -17,8 +17,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class DeathMessageSetting extends Modifier {
 
@@ -31,13 +30,13 @@ public class DeathMessageSetting extends Modifier {
     super(MenuType.SETTINGS, 1, 3, 2);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.BOW, Message.forName("item-death-message-setting"));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     switch (getValue()) {
@@ -65,7 +64,7 @@ public class DeathMessageSetting extends Modifier {
   }
 
   @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-  public void onDeath(@Nonnull PlayerDeathEvent event) {
+  public void onDeath(@NotNull PlayerDeathEvent event) {
     event.setDeathMessage(null);
     if (hide) return;
 

@@ -5,10 +5,9 @@ import net.codingarea.commons.database.SpecificDatabase;
 import net.codingarea.commons.database.action.hierarchy.SetAction;
 import net.codingarea.commons.database.action.hierarchy.WhereAction;
 import net.codingarea.commons.database.exceptions.DatabaseException;
-
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @see Database#update(String)
@@ -16,29 +15,29 @@ import javax.annotation.Nullable;
  */
 public interface DatabaseUpdate extends DatabaseAction<Void>, WhereAction, SetAction {
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseUpdate where(@Nonnull String field, @Nullable Object value);
+  DatabaseUpdate where(@NotNull String field, @Nullable Object value);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseUpdate where(@Nonnull String field, @Nullable Number value);
+  DatabaseUpdate where(@NotNull String field, @Nullable Number value);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseUpdate where(@Nonnull String field, @Nullable String value, boolean ignoreCase);
+  DatabaseUpdate where(@NotNull String field, @Nullable String value, boolean ignoreCase);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseUpdate where(@Nonnull String field, @Nullable String value);
+  DatabaseUpdate where(@NotNull String field, @Nullable String value);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseUpdate whereNot(@Nonnull String field, @Nullable Object value);
+  DatabaseUpdate whereNot(@NotNull String field, @Nullable Object value);
 
-  @Nonnull
+  @NotNull
   @CheckReturnValue
-  DatabaseUpdate set(@Nonnull String field, @Nullable Object value);
+  DatabaseUpdate set(@NotNull String field, @Nullable Object value);
 
   @Nullable
   @Override

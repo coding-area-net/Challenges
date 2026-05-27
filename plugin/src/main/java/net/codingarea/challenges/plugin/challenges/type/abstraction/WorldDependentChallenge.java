@@ -14,9 +14,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.BiConsumer;
 
@@ -26,35 +26,35 @@ public abstract class WorldDependentChallenge extends TimedChallenge {
   private BiConsumer<Player, Integer> lastTeleport;
   private int teleportIndex;
 
-  public WorldDependentChallenge(@Nonnull MenuType menu) {
+  public WorldDependentChallenge(@NotNull MenuType menu) {
     super(menu);
   }
 
-  public WorldDependentChallenge(@Nonnull MenuType menu, int max) {
+  public WorldDependentChallenge(@NotNull MenuType menu, int max) {
     super(menu, max);
   }
 
-  public WorldDependentChallenge(@Nonnull MenuType menu, int min, int max) {
+  public WorldDependentChallenge(@NotNull MenuType menu, int min, int max) {
     super(menu, min, max);
   }
 
-  public WorldDependentChallenge(@Nonnull MenuType menu, int min, int max, int defaultValue) {
+  public WorldDependentChallenge(@NotNull MenuType menu, int min, int max, int defaultValue) {
     super(menu, min, max, defaultValue);
   }
 
-  public WorldDependentChallenge(@Nonnull MenuType menu, boolean runAsync) {
+  public WorldDependentChallenge(@NotNull MenuType menu, boolean runAsync) {
     super(menu, runAsync);
   }
 
-  public WorldDependentChallenge(@Nonnull MenuType menu, int max, boolean runAsync) {
+  public WorldDependentChallenge(@NotNull MenuType menu, int max, boolean runAsync) {
     super(menu, max, runAsync);
   }
 
-  public WorldDependentChallenge(@Nonnull MenuType menu, int min, int max, boolean runAsync) {
+  public WorldDependentChallenge(@NotNull MenuType menu, int min, int max, boolean runAsync) {
     super(menu, min, max, runAsync);
   }
 
-  public WorldDependentChallenge(@Nonnull MenuType menu, int min, int max, int defaultValue, boolean runAsync) {
+  public WorldDependentChallenge(@NotNull MenuType menu, int min, int max, int defaultValue, boolean runAsync) {
     super(menu, min, max, defaultValue, runAsync);
   }
 
@@ -77,7 +77,7 @@ public abstract class WorldDependentChallenge extends TimedChallenge {
     return inExtraWorld || !Challenges.getInstance().getWorldManager().isWorldInUse();
   }
 
-  protected void teleportToWorld(boolean allowJoinCatchUp, @Nonnull BiConsumer<Player, Integer> action) {
+  protected void teleportToWorld(boolean allowJoinCatchUp, @NotNull BiConsumer<Player, Integer> action) {
     if (Challenges.getInstance().getWorldManager().isWorldInUse()) return;
     Challenges.getInstance().getWorldManager().setWorldInUse(inExtraWorld = true);
     lastTeleport = allowJoinCatchUp ? action : null;
@@ -97,11 +97,11 @@ public abstract class WorldDependentChallenge extends TimedChallenge {
     teleportIndex = 0;
   }
 
-  protected void teleportBack(@Nonnull Player player) {
+  protected void teleportBack(@NotNull Player player) {
     Challenges.getInstance().getWorldManager().restorePlayerData(player);
   }
 
-  private void teleport(@Nonnull Player player, @Nullable BiConsumer<Player, Integer> teleport) {
+  private void teleport(@NotNull Player player, @Nullable BiConsumer<Player, Integer> teleport) {
     player.getInventory().clear();
     player.setFoodLevel(20);
     player.setSaturation(20);
@@ -118,7 +118,7 @@ public abstract class WorldDependentChallenge extends TimedChallenge {
     }
   }
 
-  protected void teleportSpectator(@Nonnull Player player) {
+  protected void teleportSpectator(@NotNull Player player) {
     player.setGameMode(GameMode.SPECTATOR);
     List<Player> ingamePlayers = ChallengeHelper.getIngamePlayers();
     if (ingamePlayers.isEmpty()) return;
@@ -128,7 +128,7 @@ public abstract class WorldDependentChallenge extends TimedChallenge {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onJoin(@Nonnull PlayerJoinEvent event) {
+  public void onJoin(@NotNull PlayerJoinEvent event) {
     if (isInExtraWorld()) {
       if (lastTeleport == null) return;
       if (Challenges.getInstance().getWorldManager().hasPlayerData(event.getPlayer())) return;
@@ -138,12 +138,12 @@ public abstract class WorldDependentChallenge extends TimedChallenge {
     }
   }
 
-  @Nonnull
+  @NotNull
   protected final World getExtraWorld() {
     return Challenges.getInstance().getWorldManager().getExtraWorld();
   }
 
-  @Nonnull
+  @NotNull
   protected final WorldSettings getExtraWorldSettings() {
     return Challenges.getInstance().getWorldManager().getSettings();
   }

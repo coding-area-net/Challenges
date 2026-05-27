@@ -8,8 +8,8 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import net.codingarea.commons.common.misc.BukkitReflectionSerializationUtils;
 import net.codingarea.commons.common.misc.GsonUtils;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
@@ -19,7 +19,7 @@ public class BukkitReflectionSerializableTypeAdapter implements GsonTypeAdapter<
   public static final String ALTERNATE_KEY = "classOfType", KEY = "==";
 
   @Override
-  public void write(@Nonnull Gson gson, @Nonnull JsonWriter writer, @Nonnull Object object) throws IOException {
+  public void write(@NotNull Gson gson, @NotNull JsonWriter writer, @NotNull Object object) throws IOException {
 
     Map<String, Object> map = BukkitReflectionSerializationUtils.serializeObject(object);
     if (map == null) return;
@@ -32,7 +32,7 @@ public class BukkitReflectionSerializableTypeAdapter implements GsonTypeAdapter<
   }
 
   @Override
-  public Object read(@Nonnull Gson gson, @Nonnull JsonReader reader) throws IOException {
+  public Object read(@NotNull Gson gson, @NotNull JsonReader reader) throws IOException {
 
     JsonElement element = TypeAdapters.JSON_ELEMENT.read(reader);
     if (element == null || !element.isJsonObject()) return null;
@@ -51,7 +51,7 @@ public class BukkitReflectionSerializableTypeAdapter implements GsonTypeAdapter<
 
   }
 
-  private JsonElement findClassContainer(@Nonnull JsonObject json) {
+  private JsonElement findClassContainer(@NotNull JsonObject json) {
     if (json.has(ALTERNATE_KEY))
       return json.get(ALTERNATE_KEY);
     return json.get(KEY);

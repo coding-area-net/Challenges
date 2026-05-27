@@ -5,9 +5,9 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,18 +37,18 @@ public final class BlockUtils {
       && loc1.getBlockZ() == loc2.getBlockZ();
   }
 
-  public static boolean isSameLocation(@Nonnull Location loc1, @Nonnull Location loc2) {
+  public static boolean isSameLocation(@NotNull Location loc1, @NotNull Location loc2) {
     if (loc1.getWorld() != loc2.getWorld()) return false;
     return loc1.distance(loc2) < 0.1;
   }
 
-  public static boolean isSameLocationIgnoreHeight(@Nonnull Location loc1, @Nonnull Location loc2) {
+  public static boolean isSameLocationIgnoreHeight(@NotNull Location loc1, @NotNull Location loc2) {
     if (loc1.getWorld() != loc2.getWorld()) return false;
     return loc1.getX() == loc2.getX()
       && loc1.getZ() == loc2.getZ();
   }
 
-  public static boolean isSameChunk(@Nonnull Chunk chunk1, @Nonnull Chunk chunk2) {
+  public static boolean isSameChunk(@NotNull Chunk chunk1, @NotNull Chunk chunk2) {
     if (chunk1.getWorld() != chunk2.getWorld()) return false;
     return chunk1.getX() == chunk2.getX() && chunk1.getZ() == chunk2.getZ();
   }
@@ -63,8 +63,8 @@ public final class BlockUtils {
    * @param block middle block
    * @return the block above, under, in the front, behind, to the left and to the right of the middle block
    */
-  @Nonnull
-  public static List<Block> getBlocksAroundBlock(@Nonnull Block block) {
+  @NotNull
+  public static List<Block> getBlocksAroundBlock(@NotNull Block block) {
     List<Block> list = new ArrayList<>();
     for (BlockFace face : faces) {
       list.add(block.getRelative(face));
@@ -109,11 +109,11 @@ public final class BlockUtils {
     }
   }
 
-  public static void createBlockPath(@Nullable Location from, @Nullable Location to, @Nonnull Material type) {
+  public static void createBlockPath(@Nullable Location from, @Nullable Location to, @NotNull Material type) {
     createBlockPath(from, to, type, true);
   }
 
-  public static void createBlockPath(@Nullable Location from, @Nullable Location to, @Nonnull Material type, boolean playSound) {
+  public static void createBlockPath(@Nullable Location from, @Nullable Location to, @NotNull Material type, boolean playSound) {
     if (from == null || to == null) return;
     if (isSameBlockLocationIgnoreHeight(from, to)) return;
 
@@ -126,7 +126,7 @@ public final class BlockUtils {
    * @param block the block of block to replace
    * @param type  the type to set as the block type
    */
-  public static void setBlockNatural(@Nullable Block block, @Nonnull Material type, boolean blockUpdate) {
+  public static void setBlockNatural(@Nullable Block block, @NotNull Material type, boolean blockUpdate) {
     setBlockNatural(block, type, blockUpdate, true);
   }
 
@@ -137,7 +137,7 @@ public final class BlockUtils {
    * @param type      the type to set as the block type
    * @param playSound if a breaking sound for the block on top should be played
    */
-  public static void setBlockNatural(@Nullable Block block, @Nonnull Material type, boolean blockUpdate, boolean playSound) {
+  public static void setBlockNatural(@Nullable Block block, @NotNull Material type, boolean blockUpdate, boolean playSound) {
     if (block == null || !block.getType().isSolid()) return;
 
     Block upperBlock = block.getLocation().add(0, 1, 0).getBlock();
@@ -156,7 +156,7 @@ public final class BlockUtils {
    * @return the block below the location
    */
   @Nullable
-  public static Block getBlockBelow(@Nonnull Location location) {
+  public static Block getBlockBelow(@NotNull Location location) {
     return getBlockBelow(location, 0.1);
   }
 
@@ -165,7 +165,7 @@ public final class BlockUtils {
    * @return the block below the location
    */
   @Nullable
-  public static Block getBlockBelow(@Nonnull Location location, boolean ignoreNonSolid) {
+  public static Block getBlockBelow(@NotNull Location location, boolean ignoreNonSolid) {
     return getBlockBelow(location, 0.1, ignoreNonSolid);
   }
 
@@ -174,7 +174,7 @@ public final class BlockUtils {
    * @return the block below the location
    */
   @Nullable
-  public static Block getBlockBelow(@Nonnull Location location, double offset) {
+  public static Block getBlockBelow(@NotNull Location location, double offset) {
     return getBlockBelow(location, offset, true);
   }
 
@@ -183,7 +183,7 @@ public final class BlockUtils {
    * @return the block below the location
    */
   @Nullable
-  public static Block getBlockBelow(@Nonnull Location location, double offset, boolean ignoreNonSolid) {
+  public static Block getBlockBelow(@NotNull Location location, double offset, boolean ignoreNonSolid) {
 
     Block block;
     if (offset == -1) {

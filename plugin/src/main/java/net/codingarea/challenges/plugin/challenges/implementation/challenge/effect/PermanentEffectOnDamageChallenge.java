@@ -29,9 +29,9 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 
 @Since("2.0")
@@ -45,7 +45,7 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
     setCategory(SettingCategory.EFFECT);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.MAGMA_CREAM, Message.forName("item-permanent-effect-on-damage-challenge"));
@@ -78,7 +78,7 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onConsume(@Nonnull PlayerItemConsumeEvent event) {
+  public void onConsume(@NotNull PlayerItemConsumeEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (event.getItem().getType() != Material.MILK_BUCKET) return;
@@ -86,21 +86,21 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onPlayerJoin(@Nonnull PlayerJoinEvent event) {
+  public void onPlayerJoin(@NotNull PlayerJoinEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     updateEffects();
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onPlayerItemConsume(@Nonnull PlayerItemConsumeEvent event) {
+  public void onPlayerItemConsume(@NotNull PlayerItemConsumeEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     updateEffects();
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerGameModeChange(@Nonnull PlayerGameModeChangeEvent event) {
+  public void onPlayerGameModeChange(@NotNull PlayerGameModeChangeEvent event) {
     if (!shouldExecuteEffect()) return;
     Bukkit.getScheduler().runTask(plugin, () -> {
       clearEffects();
@@ -109,7 +109,7 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerDamage(@Nonnull EntityDamageEvent event) {
+  public void onPlayerDamage(@NotNull EntityDamageEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.getFinalDamage() <= 0 && event.getDamage(DamageModifier.ABSORPTION) >= 0) return;
     if (!(event.getEntity() instanceof Player)) return;
@@ -122,13 +122,13 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
     updateEffects();
   }
 
-  public void addRandomEffect(@Nonnull Player eventPlayer) {
+  public void addRandomEffect(@NotNull Player eventPlayer) {
     PotionEffectType randomEffect = getNewRandomEffect();
     if (randomEffect == null) return;
     applyNewEffect(eventPlayer, randomEffect);
   }
 
-  private void applyNewEffect(@Nonnull Player player, @Nonnull PotionEffectType potionEffectType) {
+  private void applyNewEffect(@NotNull Player player, @NotNull PotionEffectType potionEffectType) {
     String path = player.getUniqueId().toString();
     Document effects = getGameStateData().getDocument(path);
 
@@ -171,7 +171,7 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
     });
   }
 
-  private void addEffect(@Nonnull Player player, @Nonnull PotionEffectType effectType, int amplifier) {
+  private void addEffect(@NotNull Player player, @NotNull PotionEffectType effectType, int amplifier) {
 
     if (player.hasPotionEffect(effectType)) {
       PotionEffect effect = player.getPotionEffect(effectType);
@@ -192,7 +192,7 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
     });
   }
 
-  private void forEachEffect(@Nonnull TriConsumer<Player, PotionEffectType, Integer> action) {
+  private void forEachEffect(@NotNull TriConsumer<Player, PotionEffectType, Integer> action) {
     List<Tuple<PotionEffectType, Integer>> effects = new ArrayList<>();
 
     for (String uuid : getGameStateData().keys()) {
@@ -224,7 +224,7 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
     });
   }
 
-  private void addEffectToList(@Nonnull List<Tuple<PotionEffectType, Integer>> effectsList, @Nonnull PotionEffectType effectType, int amplifier) {
+  private void addEffectToList(@NotNull List<Tuple<PotionEffectType, Integer>> effectsList, @NotNull PotionEffectType effectType, int amplifier) {
     Tuple<PotionEffectType, Integer> effectTuple = effectsList.stream().filter(tuple -> tuple.getFirst() == effectType).findFirst()
       .orElse(new Tuple<>(effectType, 0));
     effectTuple.setSecond(effectTuple.getSecond() + amplifier);
@@ -243,7 +243,7 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
     updateEffects();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     if (!isEnabled()) return DefaultItem.disabled();
@@ -262,7 +262,7 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
   }
 
   @Override
-  public void loadGameState(@Nonnull Document document) {
+  public void loadGameState(@NotNull Document document) {
     super.loadGameState(document);
     broadcast(player -> {
       for (PotionEffect potionEffect : player.getActivePotionEffects()) {

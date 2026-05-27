@@ -8,8 +8,7 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class PvPSetting extends Setting {
 
@@ -17,14 +16,14 @@ public class PvPSetting extends Setting {
     super(MenuType.SETTINGS, true);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.STONE_SWORD, Message.forName("item-pvp-setting"));
   }
 
   @EventHandler
-  public void onDamage(@Nonnull EntityDamageByPlayerEvent event) {
+  public void onDamage(@NotNull EntityDamageByPlayerEvent event) {
     if (isEnabled()) return;
     if (!(event.getEntity() instanceof Player)) return;
     event.setCancelled(true);

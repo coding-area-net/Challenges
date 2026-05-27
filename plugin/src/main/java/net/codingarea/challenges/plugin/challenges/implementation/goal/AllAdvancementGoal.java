@@ -20,7 +20,6 @@ import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -100,7 +99,7 @@ public class AllAdvancementGoal extends PointsGoal {
     broadcastFiltered(this::updateAdvancements);
   }
 
-  protected void updateAdvancements(@Nonnull Player player) {
+  protected void updateAdvancements(@NotNull Player player) {
     int done = 0;
     for (Advancement advancement : allAdvancements) {
       AdvancementProgress progress = player.getAdvancementProgress(advancement);
@@ -118,7 +117,7 @@ public class AllAdvancementGoal extends PointsGoal {
     }
   }
 
-  protected boolean hasWon(@Nonnull Player player) {
+  protected boolean hasWon(@NotNull Player player) {
     return getPoints(player.getUniqueId()) >= advancementCount;
   }
 

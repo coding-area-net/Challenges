@@ -20,8 +20,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class InvisibleMobsChallenge extends Setting {
@@ -36,14 +35,14 @@ public class InvisibleMobsChallenge extends Setting {
     addEffectForEveryEntity();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new PotionBuilder(Material.POTION, Message.forName("item-invisible-mobs-challenge")).setColor(Color.WHITE);
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onSpawn(@Nonnull EntitySpawnEvent event) {
+  public void onSpawn(@NotNull EntitySpawnEvent event) {
     if (!shouldExecuteEffect()) return;
     if (!(event.getEntity() instanceof LivingEntity)) return;
     addEffect(((LivingEntity) event.getEntity()));
@@ -64,7 +63,7 @@ public class InvisibleMobsChallenge extends Setting {
     }
   }
 
-  private void addEffect(@Nonnull LivingEntity entity) {
+  private void addEffect(@NotNull LivingEntity entity) {
     entity.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 40, 1, true, false, false));
   }
 

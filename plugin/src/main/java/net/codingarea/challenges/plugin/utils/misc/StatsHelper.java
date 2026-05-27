@@ -5,15 +5,14 @@ import net.codingarea.challenges.plugin.management.stats.Statistic;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.AnimatedInventory;
 import org.bukkit.Material;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class StatsHelper {
 
   private StatsHelper() {
   }
 
-  @Nonnull
+  @NotNull
   public static int[] getSlots(int row) {
     int[] slots = {1, 2, 3, 4, 5, 6, 7, 11, 12, 13, 14, 15};
     for (int i = 0; i < slots.length; i++) {
@@ -22,7 +21,7 @@ public final class StatsHelper {
     return slots;
   }
 
-  public static void setAccent(@Nonnull AnimatedInventory inventory, int row) {
+  public static void setAccent(@NotNull AnimatedInventory inventory, int row) {
     inventory.createAndAdd().fill(ItemBuilder.FILL_ITEM);
     int offset = row * 9;
     inventory.cloneLastAndAdd().setAccent(offset, offset + 8);
@@ -32,13 +31,13 @@ public final class StatsHelper {
     inventory.cloneLastAndAdd().setAccent(offset + 12, offset + 14);
   }
 
-  @Nonnull
-  public static Message getNameMessage(@Nonnull Statistic statistic) {
+  @NotNull
+  public static Message getNameMessage(@NotNull Statistic statistic) {
     return Message.forName("stat-" + statistic.name().toLowerCase().replace('_', '-'));
   }
 
-  @Nonnull
-  public static Material getMaterial(@Nonnull Statistic statistic) {
+  @NotNull
+  public static Material getMaterial(@NotNull Statistic statistic) {
     switch (statistic) {
       default:
         return Material.PAPER;

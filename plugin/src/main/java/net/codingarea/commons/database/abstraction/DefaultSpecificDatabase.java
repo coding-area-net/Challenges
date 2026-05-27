@@ -3,8 +3,8 @@ package net.codingarea.commons.database.abstraction;
 import net.codingarea.commons.database.Database;
 import net.codingarea.commons.database.SpecificDatabase;
 import net.codingarea.commons.database.action.*;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class DefaultSpecificDatabase implements SpecificDatabase {
@@ -12,7 +12,7 @@ public class DefaultSpecificDatabase implements SpecificDatabase {
   protected final Database parent;
   protected final String name;
 
-  public DefaultSpecificDatabase(@Nonnull Database parent, @Nonnull String name) {
+  public DefaultSpecificDatabase(@NotNull Database parent, @NotNull String name) {
     this.parent = parent;
     this.name = name;
   }
@@ -22,49 +22,49 @@ public class DefaultSpecificDatabase implements SpecificDatabase {
     return parent.isConnected();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public String getName() {
     return name;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DatabaseCountEntries countEntries() {
     return parent.countEntries(name);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DatabaseQuery query() {
     return parent.query(name);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DatabaseUpdate update() {
     return parent.update(name);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DatabaseInsertion insert() {
     return parent.insert(name);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DatabaseInsertionOrUpdate insertOrUpdate() {
     return parent.insertOrUpdate(name);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public DatabaseDeletion delete() {
     return parent.delete(name);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Database getParent() {
     return parent;

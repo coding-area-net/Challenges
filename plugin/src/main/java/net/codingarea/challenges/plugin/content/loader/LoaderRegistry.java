@@ -3,8 +3,8 @@ package net.codingarea.challenges.plugin.content.loader;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.utils.logging.ConsolePrint;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -14,11 +14,11 @@ public final class LoaderRegistry {
   private final Map<Class<? extends ContentLoader>, Subscribers> subscribers = new HashMap<>();
   private final Collection<ContentLoader> loaders;
 
-  public LoaderRegistry(@Nonnull ContentLoader... loaders) {
+  public LoaderRegistry(@NotNull ContentLoader... loaders) {
     this.loaders = Arrays.asList(loaders);
   }
 
-  private static void execute(@Nonnull Class<? extends ContentLoader> classOfLoader, @Nonnull Runnable action) {
+  private static void execute(@NotNull Class<? extends ContentLoader> classOfLoader, @NotNull Runnable action) {
     try {
       action.run();
     } catch (Exception ex) {
@@ -35,14 +35,14 @@ public final class LoaderRegistry {
     loaders.forEach(this::executeLoader);
   }
 
-  private void executeLoader(@Nonnull ContentLoader loader) {
+  private void executeLoader(@NotNull ContentLoader loader) {
     loading.incrementAndGet();
     loader.load();
     loading.decrementAndGet();
     handleCompleteLoading(loader.getClass());
   }
 
-  private void handleCompleteLoading(@Nonnull Class<? extends ContentLoader> classOfLoader) {
+  private void handleCompleteLoading(@NotNull Class<? extends ContentLoader> classOfLoader) {
     Logger.debug("{} finished loading. {} loader(s) left", classOfLoader.getSimpleName(), loading);
 
     if (loading.get() == 0)
@@ -70,7 +70,7 @@ public final class LoaderRegistry {
     return loading.get() > 0;
   }
 
-  public void subscribe(@Nonnull Class<? extends ContentLoader> classOfLoader, @Nonnull Runnable action) {
+  public void subscribe(@NotNull Class<? extends ContentLoader> classOfLoader, @NotNull Runnable action) {
     Subscribers subscribers = this.subscribers.computeIfAbsent(classOfLoader, key -> new Subscribers(classOfLoader));
     subscribers.actions.add(action);
 
@@ -79,7 +79,7 @@ public final class LoaderRegistry {
   }
 
   @SuppressWarnings("unchecked")
-  public <T extends ContentLoader> T getFirstLoaderByClass(@Nonnull Class<T> clazz) {
+  public <T extends ContentLoader> T getFirstLoaderByClass(@NotNull Class<T> clazz) {
     for (ContentLoader loader : loaders) {
       if (loader.getClass().equals(clazz)) {
         return (T) loader;

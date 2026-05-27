@@ -26,8 +26,7 @@ import net.codingarea.challenges.plugin.spigot.listener.*;
 import net.codingarea.challenges.plugin.utils.bukkit.command.ForwardingCommand;
 import net.codingarea.commons.bukkit.core.BukkitModule;
 import net.codingarea.commons.common.version.Version;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 public final class Challenges extends BukkitModule {
@@ -56,7 +55,7 @@ public final class Challenges extends BukkitModule {
   private GeneratorWorldPortalManager generatorWorldPortalManager;
   private TeamProvider teamProvider;
 
-  @Nonnull
+  @NotNull
   public static Challenges getInstance() {
     return instance;
   }
@@ -86,7 +85,6 @@ public final class Challenges extends BukkitModule {
   }
 
   private void createManagers() {
-
     configManager = new ConfigManager();
     configManager.loadConfigs();
 

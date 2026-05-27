@@ -1,9 +1,9 @@
 package net.codingarea.commons.common.misc;
 
 import net.codingarea.commons.common.logging.ILogger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -15,7 +15,7 @@ public final class BukkitReflectionSerializationUtils {
 
   protected static final ILogger logger = ILogger.forThisClass();
 
-  public static boolean isSerializable(@Nonnull Class<?> clazz) {
+  public static boolean isSerializable(@NotNull Class<?> clazz) {
     try {
       clazz.getMethod("serialize");
       return true;
@@ -25,7 +25,7 @@ public final class BukkitReflectionSerializationUtils {
   }
 
   @Nullable
-  public static Map<String, Object> serializeObject(@Nonnull Object object) {
+  public static Map<String, Object> serializeObject(@NotNull Object object) {
     Class<?> classOfObject = object.getClass();
     try {
 
@@ -47,7 +47,7 @@ public final class BukkitReflectionSerializationUtils {
 
   @Nullable
   @SuppressWarnings("unchecked")
-  public static <T> T deserializeObject(@Nonnull Map<String, Object> map, @Nullable Class<T> classOfT) {
+  public static <T> T deserializeObject(@NotNull Map<String, Object> map, @Nullable Class<T> classOfT) {
     try {
 
       Class<?> configurationSerializationClass = Class.forName("org.bukkit.configuration.serialization.ConfigurationSerialization");
@@ -79,8 +79,8 @@ public final class BukkitReflectionSerializationUtils {
     }
   }
 
-  @Nonnull
-  public static String getSerializationName(@Nonnull Class<?> clazz) {
+  @NotNull
+  public static String getSerializationName(@NotNull Class<?> clazz) {
     for (Annotation annotation : clazz.getAnnotations()) {
       Class<? extends Annotation> annotationType = annotation.annotationType();
       Object value = ReflectionUtils.getAnnotationValue(annotation);

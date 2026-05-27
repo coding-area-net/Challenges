@@ -1,8 +1,7 @@
 package net.codingarea.commons.database;
 
 import net.codingarea.commons.common.config.Propertyable;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class DatabaseConfig {
 
@@ -46,7 +45,7 @@ public final class DatabaseConfig {
     this.file = file;
   }
 
-  public DatabaseConfig(@Nonnull Propertyable config) {
+  public DatabaseConfig(@NotNull Propertyable config) {
     this(
       config.getString("host"),
       config.getString("database"),

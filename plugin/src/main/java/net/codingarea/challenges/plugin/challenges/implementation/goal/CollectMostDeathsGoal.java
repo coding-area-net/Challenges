@@ -12,8 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class CollectMostDeathsGoal extends CollectionGoal {
 
@@ -22,14 +21,14 @@ public class CollectMostDeathsGoal extends CollectionGoal {
     setCategory(SettingCategory.SCORE_POINTS);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.LAVA_BUCKET, Message.forName("item-most-deaths-goal"));
   }
 
   @EventHandler
-  public void onDeath(@Nonnull PlayerDeathEvent event) {
+  public void onDeath(@NotNull PlayerDeathEvent event) {
     if (!shouldExecuteEffect()) return;
 
     EntityDamageEvent lastCause = event.getEntity().getLastDamageCause();

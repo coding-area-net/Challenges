@@ -17,8 +17,8 @@ import org.bukkit.Location;
 import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -61,7 +61,7 @@ public final class ServerManager {
     return hasCheated;
   }
 
-  public void endChallenge(@Nonnull ChallengeEndCause endCause, Supplier<List<Player>> winnerGetter) {
+  public void endChallenge(@NotNull ChallengeEndCause endCause, Supplier<List<Player>> winnerGetter) {
     if (ChallengeAPI.isPaused()) {
       Logger.warn("Tried to end challenge while timer was paused");
       return;
@@ -111,12 +111,12 @@ public final class ServerManager {
     }
   }
 
-  private void dropItems(@Nonnull Player player) {
+  private void dropItems(@NotNull Player player) {
     dropItems(player.getLocation(), player.getInventory().getContents());
     player.getInventory().clear();
   }
 
-  private void dropItems(@Nonnull Location location, @Nonnull ItemStack[] items) {
+  private void dropItems(@NotNull Location location, @NotNull ItemStack[] items) {
     for (ItemStack item : items) {
       if (item == null) continue;
       if (BukkitReflectionUtils.isAir(item.getType())) continue;

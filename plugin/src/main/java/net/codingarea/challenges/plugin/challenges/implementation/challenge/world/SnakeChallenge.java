@@ -18,8 +18,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +33,7 @@ public class SnakeChallenge extends Setting {
     setCategory(SettingCategory.WORLD);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.BLUE_TERRACOTTA, Message.forName("item-snake-challenge"));
@@ -45,7 +45,7 @@ public class SnakeChallenge extends Setting {
   }
 
   @Override
-  public void writeGameState(@Nonnull Document document) {
+  public void writeGameState(@NotNull Document document) {
     super.writeGameState(document);
 
     List<Location> locations = blocks.stream().map(Block::getLocation).collect(Collectors.toList());
@@ -53,14 +53,14 @@ public class SnakeChallenge extends Setting {
   }
 
   @Override
-  public void loadGameState(@Nonnull Document document) {
+  public void loadGameState(@NotNull Document document) {
     super.loadGameState(document);
 
     blocks.addAll(document.getSerializableList("blocks", Location.class).stream().map(Location::getBlock).collect(Collectors.toList()));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onMove(@Nonnull PlayerMoveEvent event) {
+  public void onMove(@NotNull PlayerMoveEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.getTo() == null) return;
     if (event.getFrom().getBlock().equals(event.getTo().getBlock())) return;

@@ -1,6 +1,7 @@
 package net.codingarea.commons.common.collection;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.PrintWriter;
 
 /**
@@ -15,7 +16,7 @@ public class StringBuilderPrintWriter extends PrintWriter {
     writer = (StringBuilderWriter) out;
   }
 
-  @Nonnull
+  @NotNull
   public StringBuilder getBuilder() {
     return writer.getBuilder();
   }

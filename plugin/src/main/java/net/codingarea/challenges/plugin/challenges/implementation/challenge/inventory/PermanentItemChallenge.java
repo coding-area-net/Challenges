@@ -15,8 +15,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.Inventory;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class PermanentItemChallenge extends Setting {
@@ -26,14 +25,14 @@ public class PermanentItemChallenge extends Setting {
     setCategory(SettingCategory.INVENTORY);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.VINE, Message.forName("item-permanent-item-challenge"));
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onInventoryClick(@Nonnull PlayerInventoryClickEvent event) {
+  public void onInventoryClick(@NotNull PlayerInventoryClickEvent event) {
     Player player = event.getPlayer();
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(player)) return;
@@ -52,7 +51,7 @@ public class PermanentItemChallenge extends Setting {
   }
 
   @EventHandler
-  public void onPlayerDropItem(@Nonnull PlayerDropItemEvent event) {
+  public void onPlayerDropItem(@NotNull PlayerDropItemEvent event) {
     if (!shouldExecuteEffect()) return;
     event.setCancelled(true);
   }

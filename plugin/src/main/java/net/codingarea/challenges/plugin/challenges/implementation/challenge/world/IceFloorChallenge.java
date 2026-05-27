@@ -19,8 +19,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class IceFloorChallenge extends Setting {
     setCategory(SettingCategory.WORLD);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.PACKED_ICE, Message.forName("item-ice-floor-challenge"));
@@ -55,7 +55,7 @@ public class IceFloorChallenge extends Setting {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerMove(@Nonnull PlayerMoveEvent event) {
+  public void onPlayerMove(@NotNull PlayerMoveEvent event) {
     Player player = event.getPlayer();
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(player)) return;
@@ -63,12 +63,12 @@ public class IceFloorChallenge extends Setting {
     createIceFloorForPlayer(player);
   }
 
-  private void createIceFloorForPlayer(@Nonnull Player player) {
+  private void createIceFloorForPlayer(@NotNull Player player) {
     Block middleBlock = player.getLocation().clone().subtract(0, 1, 0).getBlock();
     createIceFloor(middleBlock);
   }
 
-  private void createIceFloor(@Nonnull Block middleBlock) {
+  private void createIceFloor(@NotNull Block middleBlock) {
 
     for (int x = -1; x <= 1; x++) {
       for (int z = -1; z <= 1; z++) {
@@ -85,7 +85,7 @@ public class IceFloorChallenge extends Setting {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onSneak(@Nonnull PlayerToggleSneakEvent event) {
+  public void onSneak(@NotNull PlayerToggleSneakEvent event) {
     if (!shouldExecuteEffect()) return;
     if (!event.isSneaking()) return;
     if (ignorePlayer(event.getPlayer())) return;
@@ -99,7 +99,7 @@ public class IceFloorChallenge extends Setting {
     bossbar.update(event.getPlayer());
   }
 
-  private boolean ignoreIce(@Nonnull Player player) {
+  private boolean ignoreIce(@NotNull Player player) {
     return ignoredPlayers.contains(player);
   }
 

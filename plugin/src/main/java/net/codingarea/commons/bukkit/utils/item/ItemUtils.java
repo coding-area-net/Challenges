@@ -6,13 +6,12 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemUtils {
 
-  @Nonnull
-  public static Material convertFoodToCookedFood(@Nonnull Material material) {
+  @NotNull
+  public static Material convertFoodToCookedFood(@NotNull Material material) {
     try {
       return Material.valueOf("COOKED_" + material.name());
     } catch (Exception ex) {
@@ -20,7 +19,7 @@ public class ItemUtils {
     }
   }
 
-  public static boolean isObtainableInSurvival(@Nonnull Material material) {
+  public static boolean isObtainableInSurvival(@NotNull Material material) {
     String name = material.name();
     if (BukkitReflectionUtils.isAir(material)) return false;
     if (name.endsWith("_SPAWN_EGG")) return false;
@@ -71,7 +70,7 @@ public class ItemUtils {
     return true;
   }
 
-  public static boolean blockIsAvailableInSurvival(@Nonnull Material material) {
+  public static boolean blockIsAvailableInSurvival(@NotNull Material material) {
     if (!material.isBlock()) return false;
     String name = material.name();
     if (BukkitReflectionUtils.isAir(material)) return false;
@@ -101,11 +100,11 @@ public class ItemUtils {
     return true;
   }
 
-  public static void damageItem(@Nonnull ItemStack item) {
+  public static void damageItem(@NotNull ItemStack item) {
     damageItem(item, 1);
   }
 
-  public static void damageItem(@Nonnull ItemStack item, int amount) {
+  public static void damageItem(@NotNull ItemStack item, int amount) {
     ItemMeta meta = item.getItemMeta();
     if (meta == null) return;
     if (!(meta instanceof Damageable)) return;

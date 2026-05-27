@@ -5,9 +5,9 @@ import net.codingarea.challenges.plugin.management.challenges.ChallengeManager;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 
 public interface IGoal extends IChallenge {
@@ -27,7 +27,7 @@ public interface IGoal extends IChallenge {
    *
    * @return the sound to play
    */
-  @Nonnull
+  @NotNull
   SoundSample getStartSound();
 
   /**
@@ -45,6 +45,6 @@ public interface IGoal extends IChallenge {
    *
    * @param winners the list to which the winners should be added
    */
-  void getWinnersOnEnd(@Nonnull List<Player> winners);
+  void getWinnersOnEnd(@NotNull List<Player> winners);
 
 }

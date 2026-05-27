@@ -9,16 +9,16 @@ import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 
 public abstract class InventoryClickEventWrapper extends Event {
 
   private final InventoryClickEvent event;
 
-  public InventoryClickEventWrapper(@Nonnull InventoryClickEvent event) {
+  public InventoryClickEventWrapper(@NotNull InventoryClickEvent event) {
     this.event = event;
   }
 
@@ -27,22 +27,22 @@ public abstract class InventoryClickEventWrapper extends Event {
     return event.getClickedInventory();
   }
 
-  @Nonnull
+  @NotNull
   public Inventory getInventory() {
     return event.getInventory();
   }
 
-  @Nonnull
+  @NotNull
   public InventoryView getView() {
     return event.getView();
   }
 
-  @Nonnull
+  @NotNull
   public ClickType getClick() {
     return event.getClick();
   }
 
-  @Nonnull
+  @NotNull
   public HumanEntity getWhoClicked() {
     return event.getWhoClicked();
   }
@@ -55,7 +55,7 @@ public abstract class InventoryClickEventWrapper extends Event {
     return event.getRawSlot();
   }
 
-  @Nonnull
+  @NotNull
   public InventoryAction getAction() {
     return event.getAction();
   }
@@ -69,17 +69,17 @@ public abstract class InventoryClickEventWrapper extends Event {
     return event.getHotbarButton();
   }
 
-  @Nonnull
+  @NotNull
   public SlotType getSlotType() {
     return event.getSlotType();
   }
 
-  @Nonnull
+  @NotNull
   public Result getResult() {
     return event.getResult();
   }
 
-  public void setResult(@Nonnull Result result) {
+  public void setResult(@NotNull Result result) {
     event.setResult(result);
   }
 
@@ -92,12 +92,12 @@ public abstract class InventoryClickEventWrapper extends Event {
     event.setCurrentItem(item);
   }
 
-  @Nonnull
+  @NotNull
   public List<HumanEntity> getViewers() {
     return event.getViewers();
   }
 
-  @Nonnull
+  @NotNull
   public InventoryClickEvent getEvent() {
     return event;
   }

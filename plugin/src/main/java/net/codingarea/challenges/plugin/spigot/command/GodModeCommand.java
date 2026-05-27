@@ -12,9 +12,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -24,7 +24,7 @@ public class GodModeCommand implements SenderCommand, Completer, Listener {
   private final List<UUID> godModePlayers = new ArrayList<>();
 
   @Override
-  public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 
     List<Player> targets = new ArrayList<>();
 
@@ -63,7 +63,7 @@ public class GodModeCommand implements SenderCommand, Completer, Listener {
 
   @Nullable
   @Override
-  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
     return CommandHelper.getCompletions(sender);
   }
 

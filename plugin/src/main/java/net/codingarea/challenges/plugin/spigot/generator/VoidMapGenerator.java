@@ -7,8 +7,8 @@ import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Directional;
 import org.bukkit.generator.ChunkGenerator;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class VoidMapGenerator extends ChunkGenerator {
@@ -16,8 +16,8 @@ public class VoidMapGenerator extends ChunkGenerator {
   private static final boolean generateEndPortal = MinecraftVersion.current().getMinor() == 18;
 
   @Override
-  @Nonnull
-  public ChunkData generateChunkData(@Nonnull World world, @Nonnull Random random, int x, int z, @Nonnull BiomeGrid biome) {
+  @NotNull
+  public ChunkData generateChunkData(@NotNull World world, @NotNull Random random, int x, int z, @NotNull BiomeGrid biome) {
 
     ChunkData chunkData = createChunkData(world);
     if (x == 0 && z == 0) {
@@ -45,7 +45,7 @@ public class VoidMapGenerator extends ChunkGenerator {
     return chunkData;
   }
 
-  public void generateEndPortal(@Nonnull ChunkData data) {
+  public void generateEndPortal(@NotNull ChunkData data) {
 
     int x = 6;
     int y = 29;

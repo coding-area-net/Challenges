@@ -14,8 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class OneDurabilityChallenge extends Setting {
 
@@ -23,14 +22,14 @@ public class OneDurabilityChallenge extends Setting {
     super(MenuType.CHALLENGES);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.WOODEN_HOE, Message.forName("item-one-durability-challenge"));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onInventoryClick(@Nonnull InventoryClickEvent event) {
+  public void onInventoryClick(@NotNull InventoryClickEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.getWhoClicked() instanceof Player && ignorePlayer((Player) event.getWhoClicked()))
       return;
@@ -55,7 +54,7 @@ public class OneDurabilityChallenge extends Setting {
     setDurability(event.getItem().getItemStack());
   }
 
-  private void setDurability(@Nonnull ItemStack item) {
+  private void setDurability(@NotNull ItemStack item) {
     ItemMeta meta = item.getItemMeta();
     if (meta instanceof Damageable) {
       meta.setUnbreakable(false);

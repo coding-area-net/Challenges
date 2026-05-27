@@ -29,8 +29,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
@@ -167,12 +167,12 @@ public abstract class BukkitModule extends JavaPlugin {
     return firstInstance == this;
   }
 
-  @Nonnull
+  @NotNull
   public JavaILogger getILogger() {
     return logger != null ? logger : (logger = new BukkitLoggerWrapper(super.getLogger()));
   }
 
-  @Nonnull
+  @NotNull
   public Document getConfigDocument() {
     checkLoaded();
     return config != null ? config : (config = new YamlDocument(super.getConfig()));
@@ -187,23 +187,23 @@ public abstract class BukkitModule extends JavaPlugin {
   /**
    * @return the plugin configuration (plugin.yml) as document
    */
-  @Nonnull
+  @NotNull
   public Document getPluginDocument() {
     return pluginConfig != null ? pluginConfig :
       (pluginConfig = new YamlDocument(YamlConfiguration.loadConfiguration(new InputStreamReader(getResource("plugin.yml"), Charsets.UTF_8))));
   }
 
-  @Nonnull
-  public FileDocument getConfig(@Nonnull String filename) {
+  @NotNull
+  public FileDocument getConfig(@NotNull String filename) {
     return configManager.getDocument(filename);
   }
 
-  @Nonnull
+  @NotNull
   public Version getVersion() {
     return version != null ? version : (version = Version.parse(getDescription().getVersion()));
   }
 
-  @Nonnull
+  @NotNull
   @Deprecated
   @DeprecatedSince("1.3.0")
   @ReplaceWith("MinecraftVersion.current()")
@@ -211,7 +211,7 @@ public abstract class BukkitModule extends JavaPlugin {
     return MinecraftVersion.current();
   }
 
-  @Nonnull
+  @NotNull
   @Deprecated
   @DeprecatedSince("1.3.0")
   @ReplaceWith("MinecraftVersion.currentExact()")
@@ -219,7 +219,7 @@ public abstract class BukkitModule extends JavaPlugin {
     return MinecraftVersion.currentExact();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   @Deprecated
   @ReplaceWith("getConfigDocument()")
@@ -237,12 +237,12 @@ public abstract class BukkitModule extends JavaPlugin {
     this.requirementsMet = false;
   }
 
-  public final <T extends CommandExecutor & Listener> void registerListenerCommand(@Nonnull T listenerAndExecutor, @Nonnull String... names) {
+  public final <T extends CommandExecutor & Listener> void registerListenerCommand(@NotNull T listenerAndExecutor, @NotNull String... names) {
     registerCommand(listenerAndExecutor, names);
     registerListener(listenerAndExecutor);
   }
 
-  public final void registerCommand(@Nonnull CommandExecutor executor, @Nonnull String... names) {
+  public final void registerCommand(@NotNull CommandExecutor executor, @NotNull String... names) {
     for (String name : names) {
       if (isEnabled()) {
         registerCommand0(executor, name);
@@ -252,7 +252,7 @@ public abstract class BukkitModule extends JavaPlugin {
     }
   }
 
-  private void registerCommand0(@Nonnull CommandExecutor executor, @Nonnull String name) {
+  private void registerCommand0(@NotNull CommandExecutor executor, @NotNull String name) {
     PluginCommand command = getCommand(name);
     if (command == null) {
       getILogger().warn("Tried to register invalid command '{}'", name);
@@ -261,7 +261,7 @@ public abstract class BukkitModule extends JavaPlugin {
     }
   }
 
-  public final void registerListener(@Nonnull Listener... listeners) {
+  public final void registerListener(@NotNull Listener... listeners) {
     if (isEnabled()) {
       for (Listener listener : listeners) {
         registerListener0(listener);
@@ -271,7 +271,7 @@ public abstract class BukkitModule extends JavaPlugin {
     }
   }
 
-  private void registerListener0(@Nonnull Listener listener) {
+  private void registerListener0(@NotNull Listener listener) {
     if (listener instanceof ActionListener) {
       ActionListener<?> actionListener = (ActionListener<?>) listener;
       getServer().getPluginManager().registerEvent(
@@ -283,15 +283,15 @@ public abstract class BukkitModule extends JavaPlugin {
     }
   }
 
-  public final <E extends Event> void on(@Nonnull Class<E> classOfEvent, @Nonnull Consumer<? super E> action) {
+  public final <E extends Event> void on(@NotNull Class<E> classOfEvent, @NotNull Consumer<? super E> action) {
     on(classOfEvent, EventPriority.NORMAL, action);
   }
 
-  public final <E extends Event> void on(@Nonnull Class<E> classOfEvent, @Nonnull EventPriority priority, @Nonnull Consumer<? super E> action) {
+  public final <E extends Event> void on(@NotNull Class<E> classOfEvent, @NotNull EventPriority priority, @NotNull Consumer<? super E> action) {
     on(classOfEvent, priority, false, action);
   }
 
-  public final <E extends Event> void on(@Nonnull Class<E> classOfEvent, @Nonnull EventPriority priority, boolean ignoreCancelled, @Nonnull Consumer<? super E> action) {
+  public final <E extends Event> void on(@NotNull Class<E> classOfEvent, @NotNull EventPriority priority, boolean ignoreCancelled, @NotNull Consumer<? super E> action) {
     registerListener(new ActionListener<>(classOfEvent, action, priority, ignoreCancelled));
   }
 
@@ -299,22 +299,22 @@ public abstract class BukkitModule extends JavaPlugin {
     getServer().getPluginManager().disablePlugin(this);
   }
 
-  @Nonnull
-  public final File getDataFile(@Nonnull String filename) {
+  @NotNull
+  public final File getDataFile(@NotNull String filename) {
     return new File(getDataFolder(), filename);
   }
 
-  @Nonnull
-  public final File getDataFile(@Nonnull String subfolder, @Nonnull String filename) {
+  @NotNull
+  public final File getDataFile(@NotNull String subfolder, @NotNull String filename) {
     return new File(getDataFile(subfolder), filename);
   }
 
-  @Nonnull
+  @NotNull
   public ExecutorService getExecutor() {
     return executorService != null ? executorService : (executorService = Executors.newCachedThreadPool(new NamedThreadFactory(threadId -> String.format("%s-Task-%s", this.getName(), threadId))));
   }
 
-  public void runAsync(@Nonnull Runnable task) {
+  public void runAsync(@NotNull Runnable task) {
     getExecutor().submit(task);
   }
 
@@ -353,7 +353,7 @@ public abstract class BukkitModule extends JavaPlugin {
     }
   }
 
-  @Nonnull
+  @NotNull
   public static BukkitModule getFirstInstance() {
     if (firstInstance == null) {
       JavaPlugin provider = JavaPlugin.getProvidingPlugin(BukkitModule.class);
@@ -365,14 +365,14 @@ public abstract class BukkitModule extends JavaPlugin {
     return firstInstance;
   }
 
-  private static synchronized void setFirstInstance(@Nonnull BukkitModule module) {
+  private static synchronized void setFirstInstance(@NotNull BukkitModule module) {
     setFirstInstance = false;
     firstInstance = module;
     module.registerAsFirstInstance();
   }
 
-  @Nonnull
-  public static BukkitModule getProvidingModule(@Nonnull Class<?> clazz) {
+  @NotNull
+  public static BukkitModule getProvidingModule(@NotNull Class<?> clazz) {
     JavaPlugin provider = JavaPlugin.getProvidingPlugin(clazz);
     if (!(provider instanceof BukkitModule))
       throw new IllegalStateException(clazz.getName() + " is not provided by a BukkitModule");

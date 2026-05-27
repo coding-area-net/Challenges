@@ -17,8 +17,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockSpreadEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @CanInstaKillOnEnable
 public class OnlyDirtChallenge extends Setting {
@@ -28,20 +27,20 @@ public class OnlyDirtChallenge extends Setting {
     setCategory(SettingCategory.MOVEMENT);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemStack getSettingsItem() {
     return super.getSettingsItem();
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.DIRT, Message.forName("item-only-dirt-challenge"));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onPlayerMove(@Nonnull PlayerMoveEvent event) {
+  public void onPlayerMove(@NotNull PlayerMoveEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (event.getTo() == null) return;
@@ -56,7 +55,7 @@ public class OnlyDirtChallenge extends Setting {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onBlockSpread(@Nonnull BlockSpreadEvent event) {
+  public void onBlockSpread(@NotNull BlockSpreadEvent event) {
     if (!shouldExecuteEffect()) return;
 
     if (event.getNewState().getType() == Material.GRASS_BLOCK) {

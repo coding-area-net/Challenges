@@ -15,8 +15,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class OldPvPSetting extends Setting {
@@ -27,7 +26,7 @@ public class OldPvPSetting extends Setting {
     super(MenuType.SETTINGS);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.IRON_SWORD, Message.forName("item-old-pvp-setting"));
@@ -44,30 +43,30 @@ public class OldPvPSetting extends Setting {
   }
 
   @EventHandler
-  public void onChangeWorldEvent(@Nonnull PlayerChangedWorldEvent event) {
+  public void onChangeWorldEvent(@NotNull PlayerChangedWorldEvent event) {
     if (!isEnabled()) return;
     setAttackSpeed(event.getPlayer(), DISABLED);
   }
 
   @EventHandler
-  public void onJoin(@Nonnull PlayerJoinEvent event) {
+  public void onJoin(@NotNull PlayerJoinEvent event) {
     if (!isEnabled()) return;
     setAttackSpeed(event.getPlayer(), DISABLED);
   }
 
   @EventHandler
-  public void onQuit(@Nonnull PlayerQuitEvent event) {
+  public void onQuit(@NotNull PlayerQuitEvent event) {
     setAttackSpeed(event.getPlayer(), NORMAL);
   }
 
   @EventHandler
-  public void onSweepDamage(@Nonnull EntityDamageEvent event) {
+  public void onSweepDamage(@NotNull EntityDamageEvent event) {
     if (!isEnabled()) return;
     if (event.getCause() != DamageCause.ENTITY_SWEEP_ATTACK) return;
     event.setCancelled(true);
   }
 
-  protected void setAttackSpeed(@Nonnull Player player, double value) {
+  protected void setAttackSpeed(@NotNull Player player, double value) {
     AttributeInstance attribute = player.getAttribute(AttributeWrapper.ATTACK_SPEED);
     if (attribute == null) return;
     attribute.setBaseValue(value);

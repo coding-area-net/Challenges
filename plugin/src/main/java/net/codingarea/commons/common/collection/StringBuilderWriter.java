@@ -1,7 +1,8 @@
 package net.codingarea.commons.common.collection;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.Writer;
 
 /**
@@ -44,7 +45,7 @@ public class StringBuilderWriter extends Writer {
   public void flush() {
   }
 
-  public void write(@Nonnull String value) {
+  public void write(@NotNull String value) {
     builder.append(value);
   }
 
@@ -54,7 +55,7 @@ public class StringBuilderWriter extends Writer {
     }
   }
 
-  @Nonnull
+  @NotNull
   public StringBuilder getBuilder() {
     return this.builder;
   }
@@ -65,4 +66,3 @@ public class StringBuilderWriter extends Writer {
   }
 
 }
-

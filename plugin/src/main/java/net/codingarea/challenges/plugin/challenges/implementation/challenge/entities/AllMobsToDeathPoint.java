@@ -11,8 +11,8 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Collection;
 
 @Since("2.0")
@@ -24,7 +24,7 @@ public class AllMobsToDeathPoint extends Setting {
   }
 
   @EventHandler
-  public void onEntityDeath(@Nonnull EntityDeathByPlayerEvent event) {
+  public void onEntityDeath(@NotNull EntityDeathByPlayerEvent event) {
     if (!shouldExecuteEffect()) return;
     if (event.getEntity() instanceof EnderDragon || event.getEntity() instanceof Player) return;
     if (!(event.getEntity() instanceof LivingEntity)) return;
@@ -33,7 +33,7 @@ public class AllMobsToDeathPoint extends Setting {
     teleportAllMobsOfType(event.getEntityType(), event.getEntity().getLocation());
   }
 
-  private void teleportAllMobsOfType(@Nonnull EntityType entityType, @Nonnull Location location) {
+  private void teleportAllMobsOfType(@NotNull EntityType entityType, @NotNull Location location) {
     if (location.getWorld() == null) return;
     Collection<Entity> entities = location.getWorld().getEntitiesByClasses(entityType.getEntityClass());
     for (Entity entity : entities) {
@@ -44,7 +44,7 @@ public class AllMobsToDeathPoint extends Setting {
 
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.SPAWNER, Message.forName("item-all-mobs-to-death-position-challenge"));

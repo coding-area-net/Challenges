@@ -9,8 +9,7 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ReversedDamageChallenge extends Setting {
 
@@ -19,14 +18,14 @@ public class ReversedDamageChallenge extends Setting {
     setCategory(SettingCategory.DAMAGE);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.GOLDEN_SWORD, Message.forName("item-reversed-damage-challenge"));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onDamageByPlayer(@Nonnull EntityDamageByPlayerEvent event) {
+  public void onDamageByPlayer(@NotNull EntityDamageByPlayerEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getDamager())) return;
 

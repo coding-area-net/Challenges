@@ -3,8 +3,8 @@ package net.codingarea.commons.database.sql.abstraction.count;
 import net.codingarea.commons.database.action.DatabaseCountEntries;
 import net.codingarea.commons.database.exceptions.DatabaseException;
 import net.codingarea.commons.database.sql.abstraction.AbstractSQLDatabase;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Objects;
@@ -14,12 +14,12 @@ public class SQLCountEntries implements DatabaseCountEntries {
   protected final AbstractSQLDatabase database;
   protected final String table;
 
-  public SQLCountEntries(@Nonnull AbstractSQLDatabase database, @Nonnull String table) {
+  public SQLCountEntries(@NotNull AbstractSQLDatabase database, @NotNull String table) {
     this.database = database;
     this.table = table;
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public Long execute() throws DatabaseException {
     try {

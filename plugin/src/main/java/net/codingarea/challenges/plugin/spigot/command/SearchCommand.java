@@ -12,9 +12,9 @@ import net.codingarea.commons.bukkit.utils.item.ItemUtils;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class SearchCommand implements SenderCommand, Completer {
 
   @Override
-  public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 
     if (args.length == 0) {
       Message.forName("syntax").send(sender, Prefix.CHALLENGES, "search <item>");
@@ -62,7 +62,7 @@ public class SearchCommand implements SenderCommand, Completer {
 
   @Nullable
   @Override
-  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
     return args.length != 1 ? null :
       Arrays.stream(ExperimentalUtils.getMaterials())
         .filter(ItemUtils::isObtainableInSurvival)

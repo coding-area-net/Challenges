@@ -23,9 +23,9 @@ import org.bukkit.World.Environment;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,13 +41,13 @@ public class DifficultySetting extends Modifier implements SenderCommand, TabCom
     setDifficulty(getDifficultyByValue(getValue()));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.GLISTERING_MELON_SLICE, Message.forName("item-difficulty-setting"));
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createSettingsItem() {
     switch (getValue()) {
@@ -78,20 +78,20 @@ public class DifficultySetting extends Modifier implements SenderCommand, TabCom
     }
   }
 
-  @Nonnull
+  @NotNull
   private Difficulty getCurrentDifficulty() {
     return Bukkit.getWorlds().isEmpty() ? Difficulty.NORMAL : ChallengeAPI.getGameWorld(Environment.NORMAL)
       .getDifficulty();
   }
 
-  @Nonnull
+  @NotNull
   private Difficulty getDifficultyByValue(int value) {
     Difficulty difficulty = Difficulty.values()[value];
     return difficulty == null ? Difficulty.NORMAL : difficulty;
   }
 
   @Override
-  public void loadSettings(@Nonnull Document document) {
+  public void loadSettings(@NotNull Document document) {
     if (!document.contains("value"))
       setValue(getCurrentDifficulty().ordinal());
 
@@ -99,7 +99,7 @@ public class DifficultySetting extends Modifier implements SenderCommand, TabCom
   }
 
   @Override
-  public void onCommand(@Nonnull CommandSender sender, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 
     if (args.length == 0) {
       Message.forName("command-difficulty-current").send(sender, Prefix.CHALLENGES, getDifficultyComponent());
@@ -138,12 +138,12 @@ public class DifficultySetting extends Modifier implements SenderCommand, TabCom
 
   @Nullable
   @Override
-  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String alias, @Nonnull String[] args) {
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
     if (args.length > 1) return new ArrayList<>();
     return Arrays.asList("peaceful", "easy", "normal", "hard");
   }
 
-  private int getDifficultyValue(@Nonnull String input) {
+  private int getDifficultyValue(@NotNull String input) {
 
     switch (input.toLowerCase()) {
       case "peaceful":

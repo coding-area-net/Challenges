@@ -10,9 +10,8 @@ import org.bukkit.World.Environment;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -75,7 +74,7 @@ public class GameWorldStorage implements GamestateSaveable {
     }
   }
 
-  @Nonnull
+  @NotNull
   public World getOrCreateVoidWorld() {
     if (voidWorld != null) {
       return voidWorld;

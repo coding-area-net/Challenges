@@ -8,14 +8,14 @@ import net.codingarea.commons.common.collection.pair.Pair;
 import net.codingarea.commons.common.collection.pair.Quadro;
 import net.codingarea.commons.common.collection.pair.Triple;
 import net.codingarea.commons.common.collection.pair.Tuple;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 
 public class PairTypeAdapter implements GsonTypeAdapter<Pair> {
 
   @Override
-  public void write(@Nonnull Gson gson, @Nonnull JsonWriter writer, @Nonnull Pair object) throws IOException {
+  public void write(@NotNull Gson gson, @NotNull JsonWriter writer, @NotNull Pair object) throws IOException {
     Object[] values = object.values();
     JsonArray array = new JsonArray(values.length); // TODO fix(deps) version ambiguity
     for (Object value : values) {
@@ -24,7 +24,7 @@ public class PairTypeAdapter implements GsonTypeAdapter<Pair> {
   }
 
   @Override
-  public Pair read(@Nonnull Gson gson, @Nonnull JsonReader reader) throws IOException {
+  public Pair read(@NotNull Gson gson, @NotNull JsonReader reader) throws IOException {
     JsonArray array = gson.fromJson(reader, JsonArray.class);
     int size = array.size();
     switch (size) {

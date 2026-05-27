@@ -2,12 +2,11 @@ package net.codingarea.commons.bukkit.utils.menu;
 
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 class MenuPositionHolder implements InventoryHolder {
 
-  @Nonnull
+  @NotNull
   @Override
   public Inventory getInventory() {
     return null;

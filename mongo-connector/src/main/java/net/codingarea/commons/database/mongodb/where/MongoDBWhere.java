@@ -2,16 +2,15 @@ package net.codingarea.commons.database.mongodb.where;
 
 import com.mongodb.client.model.Collation;
 import org.bson.conversions.Bson;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface MongoDBWhere {
 
-	@Nonnull
-	Bson toBson();
+  @NotNull
+  Bson toBson();
 
-	@Nullable
-	Collation getCollation();
+  @Nullable
+  Collation getCollation();
 
 }

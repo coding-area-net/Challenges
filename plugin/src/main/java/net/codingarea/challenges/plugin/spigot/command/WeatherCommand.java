@@ -8,16 +8,16 @@ import net.codingarea.challenges.plugin.utils.misc.Utils;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherCommand implements PlayerCommand, Completer {
 
   @Override
-  public void onCommand(@Nonnull Player player, @Nonnull String[] args) throws Exception {
+  public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
 
     if (args.length == 0) {
       Message.forName("syntax").send(player, Prefix.CHALLENGES, "weather <sun/clear/rain/thunder>");
@@ -52,7 +52,7 @@ public class WeatherCommand implements PlayerCommand, Completer {
 
   @Nullable
   @Override
-  public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull String[] args) {
+  public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
     if (args.length > 1) return new ArrayList<>();
     return Utils.filterRecommendations(args[0], "sun", "clear", "rain", "thunder");
   }

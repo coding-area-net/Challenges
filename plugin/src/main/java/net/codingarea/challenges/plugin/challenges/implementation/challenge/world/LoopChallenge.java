@@ -39,8 +39,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -54,7 +54,7 @@ public class LoopChallenge extends Setting {
     setCategory(SettingCategory.WORLD);
   }
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.LEAD, Message.forName("item-loop-challenge"));
@@ -87,12 +87,12 @@ public class LoopChallenge extends Setting {
     loops.clear();
   }
 
-  private void createLoop(@Nonnull Loop loop) {
+  private void createLoop(@NotNull Loop loop) {
     loops.put(loop, System.currentTimeMillis());
   }
 
   @EventHandler(priority = EventPriority.MONITOR)
-  public void onSneak(@Nonnull PlayerToggleSneakEvent event) {
+  public void onSneak(@NotNull PlayerToggleSneakEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (!event.isSneaking()) return;
@@ -101,7 +101,7 @@ public class LoopChallenge extends Setting {
 
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onProjectileLaunch(@Nonnull ProjectileLaunchEvent event) {
+  public void onProjectileLaunch(@NotNull ProjectileLaunchEvent event) {
     if (!shouldExecuteEffect()) return;
     ProjectileSource shooter = event.getEntity().getShooter();
     if (shooter == null) return;
@@ -110,7 +110,7 @@ public class LoopChallenge extends Setting {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onDamage(@Nonnull EntityDamageEvent event) {
+  public void onDamage(@NotNull EntityDamageEvent event) {
     if (!shouldExecuteEffect()) return;
     if (!(event.getEntity() instanceof LivingEntity)) return;
     double damage = event.getFinalDamage() + event.getDamage(DamageModifier.ABSORPTION);
@@ -119,14 +119,14 @@ public class LoopChallenge extends Setting {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onBlockPlace(@Nonnull BlockPlaceEvent event) {
+  public void onBlockPlace(@NotNull BlockPlaceEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     createLoop(new BlockPlaceLoop(event.getBlock().getType(), event.getPlayer(), event.getBlockAgainst().getFace(event.getBlock()), event.getBlock()));
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onBlockBreak(@Nonnull BlockBreakEvent event) {
+  public void onBlockBreak(@NotNull BlockBreakEvent event) {
     if (!shouldExecuteEffect()) return;
     Player player = event.getPlayer();
     if (ignorePlayer(player)) return;
@@ -141,7 +141,7 @@ public class LoopChallenge extends Setting {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onBlockPlace(@Nonnull PlayerDropItemEvent event) {
+  public void onBlockPlace(@NotNull PlayerDropItemEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     createLoop(new DropLoop(event.getItemDrop().getItemStack(), event.getPlayer()));
@@ -312,7 +312,7 @@ public class LoopChallenge extends Setting {
       return true;
     }
 
-    private boolean isTool(@Nonnull ItemStack itemStack) {
+    private boolean isTool(@NotNull ItemStack itemStack) {
       if (itemStack.getItemMeta() != null) {
         try {
           Attribute attribute = AttributeWrapper.MAX_HEALTH;
@@ -326,7 +326,7 @@ public class LoopChallenge extends Setting {
       return true;
     }
 
-    private boolean cantBeBroken(@Nonnull Block block, @Nonnull ItemStack tool) {
+    private boolean cantBeBroken(@NotNull Block block, @NotNull ItemStack tool) {
       return block.getDrops(tool).isEmpty();
     }
 

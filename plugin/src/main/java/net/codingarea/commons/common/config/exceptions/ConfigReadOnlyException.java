@@ -1,10 +1,10 @@
 package net.codingarea.commons.common.config.exceptions;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public final class ConfigReadOnlyException extends IllegalStateException {
 
-  public ConfigReadOnlyException(@Nonnull String action) {
+  public ConfigReadOnlyException(@NotNull String action) {
     super("Config." + action);
   }
 

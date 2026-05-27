@@ -11,9 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
@@ -24,11 +24,11 @@ public final class ChallengeScoreboard {
   private BiConsumer<ScoreboardInstance, Player> content = (scoreboard, player) -> {
   };
 
-  public void setContent(@Nonnull BiConsumer<ScoreboardInstance, Player> content) {
+  public void setContent(@NotNull BiConsumer<ScoreboardInstance, Player> content) {
     this.content = content;
   }
 
-  public void applyHide(@Nonnull Player player) {
+  public void applyHide(@NotNull Player player) {
     unregister(objectives.remove(player));
   }
 
@@ -38,7 +38,7 @@ public final class ChallengeScoreboard {
     }
   }
 
-  public void update(@Nonnull Player player) {
+  public void update(@NotNull Player player) {
     if (!isShown()) {
       Logger.warn("Tried to update scoreboard which is not shown");
       return;
@@ -121,15 +121,15 @@ public final class ChallengeScoreboard {
     private ScoreboardInstance() {
     }
 
-    @Nonnull
-    public ScoreboardInstance addLine(@Nonnull String text) {
+    @NotNull
+    public ScoreboardInstance addLine(@NotNull String text) {
       if (linesIndex >= lines.length)
         throw new IllegalStateException("All lines are already used! (" + lines.length + ")");
       lines[linesIndex++] = text;
       return this;
     }
 
-    @Nonnull
+    @NotNull
     public Collection<String> getLines() {
       List<String> list = new ArrayList<>();
       for (String line : lines) {
@@ -139,8 +139,8 @@ public final class ChallengeScoreboard {
       return list;
     }
 
-    @Nonnull
-    public ScoreboardInstance setTitle(@Nonnull String title) {
+    @NotNull
+    public ScoreboardInstance setTitle(@NotNull String title) {
       this.title = title;
       return this;
     }

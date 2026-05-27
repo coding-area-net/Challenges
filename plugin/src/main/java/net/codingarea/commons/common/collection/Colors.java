@@ -1,7 +1,7 @@
 package net.codingarea.commons.common.collection;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.*;
 
 import static java.awt.Color.decode;
@@ -23,9 +23,8 @@ public final class Colors {
 
   LIGHT_BLACK = decode("#1c1c1c");
 
-  @Nonnull
-  @CheckReturnValue
-  public static String asHex(@Nonnull Color color) {
+  @NotNull
+  public static String asHex(@NotNull Color color) {
     String red = Integer.toHexString(color.getRed());
     String green = Integer.toHexString(color.getGreen());
     String blue = Integer.toHexString(color.getBlue());

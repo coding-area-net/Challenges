@@ -5,10 +5,9 @@ import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.misc.ReflectionUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.CheckReturnValue;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -19,8 +18,8 @@ public final class Utils {
   private Utils() {
   }
 
-  @Nonnull
-  public static List<String> filterRecommendations(@Nonnull String argument, @Nonnull String... recommendations) {
+  @NotNull
+  public static List<String> filterRecommendations(@NotNull String argument, @NotNull String... recommendations) {
     argument = argument.toLowerCase();
     List<String> list = new ArrayList<>();
     for (String current : recommendations) {
@@ -30,8 +29,8 @@ public final class Utils {
     return list;
   }
 
-  @Nonnull
-  public static UUID fetchUUID(@Nonnull String name) throws IOException {
+  @NotNull
+  public static UUID fetchUUID(@NotNull String name) throws IOException {
     String url = "https://api.mojang.com/users/profiles/minecraft/" + name;
     String content = IOUtils.toString(new URL(url));
     Document document = Document.parseJson(content);
@@ -46,18 +45,16 @@ public final class Utils {
   }
 
   @Nullable
-  @CheckReturnValue
   public static Material getMaterial(@Nullable String name) {
     return ReflectionUtils.getEnumOrNull(name, Material.class);
   }
 
   @Nullable
-  @CheckReturnValue
   public static EntityType getEntityType(@Nullable String name) {
     return ReflectionUtils.getEnumOrNull(name, EntityType.class);
   }
 
-  public static <T extends Enum<?>> void removeEnums(@Nonnull Collection<T> collection, @Nonnull String... names) {
+  public static <T extends Enum<?>> void removeEnums(@NotNull Collection<T> collection, @NotNull String... names) {
     List<String> nameList = Arrays.asList(names);
     collection.removeIf(element -> nameList.contains(element.name()));
   }

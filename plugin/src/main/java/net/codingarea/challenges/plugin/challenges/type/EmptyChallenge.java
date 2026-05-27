@@ -11,13 +11,11 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-
 public class EmptyChallenge implements IChallenge {
 
   private final MenuType menuType;
 
-  public EmptyChallenge(@Nonnull MenuType menuType) {
+  public EmptyChallenge(@NotNull MenuType menuType) {
     this.menuType = menuType;
   }
 

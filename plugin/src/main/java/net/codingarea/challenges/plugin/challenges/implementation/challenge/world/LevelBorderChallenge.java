@@ -28,7 +28,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -173,7 +172,7 @@ public class LevelBorderChallenge extends Setting {
     }
   }
 
-  private void updateBorderSize(@Nonnull World world, boolean animate) {
+  private void updateBorderSize(@NotNull World world, boolean animate) {
     Location location = worldCenters.get(world);
     if (location == null) return;
     int newSize = bestPlayerLevel + 1;
@@ -199,13 +198,13 @@ public class LevelBorderChallenge extends Setting {
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-  public void onLevelChange(@Nonnull PlayerLevelChangeEvent event) {
+  public void onLevelChange(@NotNull PlayerLevelChangeEvent event) {
     if (!shouldExecuteEffect()) return;
     checkBorderSize(true);
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onPlayerJoin(@Nonnull PlayerJoinEvent event) {
+  public void onPlayerJoin(@NotNull PlayerJoinEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     Bukkit.getScheduler().runTaskLater(plugin, () -> checkBorderSize(false), 1);
@@ -213,7 +212,7 @@ public class LevelBorderChallenge extends Setting {
   }
 
   @EventHandler(priority = EventPriority.HIGH)
-  public void onPlayerLeave(@Nonnull PlayerQuitEvent event) {
+  public void onPlayerLeave(@NotNull PlayerQuitEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     Bukkit.getScheduler().runTaskLater(plugin, () -> checkBorderSize(false), 1);
@@ -225,7 +224,7 @@ public class LevelBorderChallenge extends Setting {
    * because of the random spawning mechanic at the world spawn.
    */
   @EventHandler(priority = EventPriority.HIGH)
-  public void onRespawn(@Nonnull PlayerRespawnEvent event) {
+  public void onRespawn(@NotNull PlayerRespawnEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     Bukkit.getScheduler().runTaskLater(plugin, () -> {
@@ -238,7 +237,7 @@ public class LevelBorderChallenge extends Setting {
    * Execute level change event when dying instead of respawning like spigot does it
    */
   @EventHandler(priority = EventPriority.HIGH)
-  public void onDeath(@Nonnull PlayerDeathEvent event) {
+  public void onDeath(@NotNull PlayerDeathEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getEntity())) return;
     PlayerLevelChangeEvent lvlEvent = new PlayerLevelChangeEvent(
@@ -259,7 +258,7 @@ public class LevelBorderChallenge extends Setting {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onTeleport(@Nonnull PlayerTeleportEvent event) {
+  public void onTeleport(@NotNull PlayerTeleportEvent event) {
     if (event.getTo() == null) return;
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
@@ -334,7 +333,7 @@ public class LevelBorderChallenge extends Setting {
     }
   }
 
-  private void sendBorder(@Nonnull Player player) {
+  private void sendBorder(@NotNull Player player) {
     if (useAPI) {
       WorldBorder border = playerWorldBorders.get(player.getWorld());
       player.setWorldBorder(border);

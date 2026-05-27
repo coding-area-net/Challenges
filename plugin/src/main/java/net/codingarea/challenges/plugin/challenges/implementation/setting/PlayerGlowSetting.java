@@ -13,8 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class PlayerGlowSetting extends Setting {
 
@@ -23,7 +22,7 @@ public class PlayerGlowSetting extends Setting {
   }
 
 
-  @Nonnull
+  @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
     return new ItemBuilder(Material.GLASS_BOTTLE, Message.forName("item-glow-setting"));
@@ -50,7 +49,7 @@ public class PlayerGlowSetting extends Setting {
   }
 
   @EventHandler
-  public void onPlayerJoin(@Nonnull PlayerJoinEvent event) {
+  public void onPlayerJoin(@NotNull PlayerJoinEvent event) {
     updateEffects();
   }
 

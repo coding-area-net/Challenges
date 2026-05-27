@@ -28,7 +28,6 @@ import org.bukkit.event.world.LootGenerateEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -144,7 +143,7 @@ public class FiveHundredBlocksChallenge extends SettingModifier {
   /**
    * @return if 500 blocks were reached
    */
-  private boolean updateOrReset(@Nonnull Player player) {
+  private boolean updateOrReset(@NotNull Player player) {
     UUID uuid = player.getUniqueId();
 
     int blocksWalked = this.blocksWalked.getOrDefault(uuid, 0);

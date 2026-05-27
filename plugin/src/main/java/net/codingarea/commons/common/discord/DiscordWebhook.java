@@ -1,9 +1,9 @@
 package net.codingarea.commons.common.discord;
 
 import net.codingarea.commons.common.config.Document;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.net.ssl.HttpsURLConnection;
 import java.awt.*;
 import java.io.IOException;
@@ -32,22 +32,22 @@ public class DiscordWebhook {
    *
    * @param url The webhook URL obtained in Discord
    */
-  public DiscordWebhook(@Nonnull String url) {
+  public DiscordWebhook(@NotNull String url) {
     this.url = url;
   }
 
-  public DiscordWebhook(@Nonnull String url, @Nonnull String username) {
+  public DiscordWebhook(@NotNull String url, @NotNull String username) {
     this.url = url;
     this.username = username;
   }
 
-  public DiscordWebhook(@Nonnull String url, @Nonnull String username, @Nonnull String avatarUrl) {
+  public DiscordWebhook(@NotNull String url, @NotNull String username, @NotNull String avatarUrl) {
     this.url = url;
     this.username = username;
     this.avatarUrl = avatarUrl;
   }
 
-  public DiscordWebhook(@Nonnull String url, @Nonnull String username, @Nonnull String avatarUrl, @Nonnull String content, @Nonnull List<EmbedObject> embeds, boolean tts) {
+  public DiscordWebhook(@NotNull String url, @NotNull String username, @NotNull String avatarUrl, @NotNull String content, @NotNull List<EmbedObject> embeds, boolean tts) {
     this.url = url;
     this.username = username;
     this.avatarUrl = avatarUrl;
@@ -56,37 +56,37 @@ public class DiscordWebhook {
     this.tts = tts;
   }
 
-  @Nonnull
-  public DiscordWebhook setUrl(@Nonnull String url) {
+  @NotNull
+  public DiscordWebhook setUrl(@NotNull String url) {
     this.url = url;
     return this;
   }
 
-  @Nonnull
+  @NotNull
   public DiscordWebhook setContent(@Nullable String content) {
     this.content = content;
     return this;
   }
 
-  @Nonnull
+  @NotNull
   public DiscordWebhook setUsername(@Nullable String username) {
     this.username = username;
     return this;
   }
 
-  @Nonnull
+  @NotNull
   public DiscordWebhook setAvatarUrl(@Nullable String avatarUrl) {
     this.avatarUrl = avatarUrl;
     return this;
   }
 
-  @Nonnull
+  @NotNull
   public DiscordWebhook setTts(boolean tts) {
     this.tts = tts;
     return this;
   }
 
-  @Nonnull
+  @NotNull
   public DiscordWebhook addEmbed(EmbedObject embed) {
     this.embeds.add(embed);
     return this;
@@ -197,8 +197,8 @@ public class DiscordWebhook {
     connection.disconnect();
   }
 
-  @Nonnull
-  public DiscordWebhook replaceEverywhere(@Nonnull String trigger, @Nonnull String replacement) {
+  @NotNull
+  public DiscordWebhook replaceEverywhere(@NotNull String trigger, @NotNull String replacement) {
     if (content != null) content = content.replace(trigger, replacement);
     if (username != null) username = username.replace(trigger, replacement);
     for (EmbedObject embed : embeds) {
@@ -232,7 +232,7 @@ public class DiscordWebhook {
 
     public EmbedObject(@Nullable String title, @Nullable String description, @Nullable String url, @Nullable Color color,
                        @Nullable Footer footer, @Nullable Thumbnail thumbnail, @Nullable Image image, @Nullable Author author,
-                       @Nonnull List<Field> fields) {
+                       @NotNull List<Field> fields) {
       this.title = title;
       this.description = description;
       this.url = url;
@@ -280,55 +280,55 @@ public class DiscordWebhook {
       return fields;
     }
 
-    @Nonnull
+    @NotNull
     public EmbedObject setTitle(String title) {
       this.title = title;
       return this;
     }
 
-    @Nonnull
+    @NotNull
     public EmbedObject setDescription(String description) {
       this.description = description;
       return this;
     }
 
-    @Nonnull
+    @NotNull
     public EmbedObject setUrl(String url) {
       this.url = url;
       return this;
     }
 
-    @Nonnull
+    @NotNull
     public EmbedObject setColor(Color color) {
       this.color = color;
       return this;
     }
 
-    @Nonnull
+    @NotNull
     public EmbedObject setFooter(String text, String icon) {
       this.footer = new Footer(text, icon);
       return this;
     }
 
-    @Nonnull
+    @NotNull
     public EmbedObject setThumbnail(String url) {
       this.thumbnail = new Thumbnail(url);
       return this;
     }
 
-    @Nonnull
+    @NotNull
     public EmbedObject setImage(String url) {
       this.image = new Image(url);
       return this;
     }
 
-    @Nonnull
+    @NotNull
     public EmbedObject setAuthor(String name, String url, String icon) {
       this.author = new Author(name, url, icon);
       return this;
     }
 
-    @Nonnull
+    @NotNull
     public EmbedObject addField(String name, String value, boolean inline) {
       this.fields.add(new Field(name, value, inline));
       return this;
@@ -487,8 +487,8 @@ public class DiscordWebhook {
     return new DiscordWebhook(url, username, avatarUrl, content, clone(embeds, EmbedObject::clone), tts);
   }
 
-  @Nonnull
-  protected static <T> List<T> clone(@Nonnull Collection<T> collection, @Nonnull Function<T, T> cloner) {
+  @NotNull
+  protected static <T> List<T> clone(@NotNull Collection<T> collection, @NotNull Function<T, T> cloner) {
     List<T> list = new ArrayList<>(collection.size());
     for (T current : collection) {
       list.add(cloner.apply(current));

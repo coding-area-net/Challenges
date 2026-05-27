@@ -1,17 +1,16 @@
 package net.codingarea.commons.common.logging.handler;
 
 import net.codingarea.commons.common.logging.LogLevel;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class HandledSyncLogger extends HandledLogger {
 
-  public HandledSyncLogger(@Nonnull LogLevel initialLevel) {
+  public HandledSyncLogger(@NotNull LogLevel initialLevel) {
     super(initialLevel);
   }
 
   @Override
-  protected void log0(@Nonnull LogEntry entry) {
+  protected void log0(@NotNull LogEntry entry) {
     logNow(entry);
   }
 }
