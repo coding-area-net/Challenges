@@ -9,8 +9,6 @@ allprojects {
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
     maven("https://libraries.minecraft.net/")
     maven("https://jitpack.io")
-    // legacy cloudnet 3 repository, officially "https://repo.cloudnetservice.eu/repository/releases/"
-    maven("https://repo.cloudnetservice.eu/releases/")
   }
 }
 
