@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TimerMenuGenerator extends MenuGenerator {
+public class TimerMenuGenerator extends MenuGenerator { // TODO discussion: reason for not using MultiPageMenuGenerator
 
   public static final int SIZE = 5 * 9;
   public static final int[] NAVIGATION_SLOTS = {36, 44};
@@ -79,7 +79,7 @@ public class TimerMenuGenerator extends MenuGenerator {
     inventory.setItem(SECOND_SLOTS[1], getTimeItem(seconds, Message.forName("second"), Message.forName("seconds")));
   }
 
-  private void setTimeNavigation(@NotNull int[] slots, @NotNull Message singular, @NotNull Message plural) {
+  private void setTimeNavigation(int[] slots, @NotNull Message singular, @NotNull Message plural) {
     Inventory inventory = inventories.get(1);
     inventory.setItem(slots[0], getNavigationItem(true, singular, plural));
     inventory.setItem(slots[2], getNavigationItem(false, singular, plural));
@@ -122,6 +122,7 @@ public class TimerMenuGenerator extends MenuGenerator {
 
   @Override
   public void generateInventories() {
+    inventories.clear();
     createNewInventory(0);
     createNewInventory(1);
     setNavigation();

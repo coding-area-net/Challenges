@@ -41,7 +41,7 @@ public final class LanguageLoader extends ContentLoader {
     try {
       FileUtils.createFilesIfNecessary(getLanguagePropertiesFile());
 
-      FileDocument document = FileDocument.readPropertiesFile(getLanguagePropertiesFile());
+      return FileDocument.readPropertiesFile(getLanguagePropertiesFile());
     } catch (Exception e) {
       Logger.error("Could not read language properties", e);
     }
