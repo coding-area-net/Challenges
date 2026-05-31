@@ -1,11 +1,16 @@
 package net.codingarea.commons.bukkit.utils.item;
 
+import net.codingarea.commons.bukkit.core.BukkitModule;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
@@ -163,7 +168,28 @@ public class ItemBuilder {
 
   @NotNull
   public ItemBuilder hideAttributes() {
+    applyDummyAttributeModifier();
     return addFlag(ItemFlag.values());
+  }
+
+  @SuppressWarnings({"UnstableApiUsage"})
+  protected void applyDummyAttributeModifier() {
+    try {
+      // hacky fix to make paper hide damage attributes (only works with custom modifiers), "Vanilla behavior since 1.20.5"
+      // see https://github.com/PaperMC/Paper/issues/11224
+      Attribute dummyAttribute = Attribute.LUCK;
+      Collection<AttributeModifier> modifiers = getMeta().getAttributeModifiers(dummyAttribute);
+
+      if (modifiers == null || modifiers.isEmpty()) {
+        meta.addAttributeModifier(dummyAttribute, new AttributeModifier(
+          new NamespacedKey(BukkitModule.getFirstInstance(), "dummy"),
+          0,
+          AttributeModifier.Operation.ADD_NUMBER,
+          EquipmentSlotGroup.ANY
+        ));
+      }
+    } catch (Throwable ignored) { // defend against experimental api changes
+    }
   }
 
   @NotNull
