@@ -38,6 +38,11 @@ tasks {
     dependencies {
       // TODO adopted from maven shade configuration, check necessity
       include(dependency("net.kyori:adventure-api"))
+
+      // TODO abstract to register dynamically
+      include(project(":cloud-support:api"))
+      include(project(":cloud-support:cloudnet2"))
+      include(project(":cloud-support:cloudnet3"))
     }
   }
 
