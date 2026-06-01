@@ -50,3 +50,8 @@ tasks {
     dependsOn(shadowJar)
   }
 }
+
+val localBuild = file("local.gradle.kts")
+if (localBuild.exists()) {
+    apply(from = localBuild)
+}

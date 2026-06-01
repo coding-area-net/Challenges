@@ -3,6 +3,7 @@
 .idea/
 *.iml
 **/dependency-reduced-pom.xml
+**/local.gradle.kts
 
 # Test Sources
 **/src/test
