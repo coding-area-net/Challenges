@@ -1,34 +1,36 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
-import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
+import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.collection.IRandom;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Parameter;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 
 public final class ParticleUtils {
 
-  private static final IRandom iRandom = IRandom.create();
+  private static final IRandom particleRandom = IRandom.create();
+  private static final double cylinderParticleVerticalStep = 0.25;
 
   private ParticleUtils() {
   }
 
-  private static void spawnParticleCircle(@NotNull Location location, int points, double radius, @NotNull BiConsumer<World, Location> player) {
-    World world = location.getWorld();
+  private static void spawnParticleCircle(@NotNull Location center, int points, double radius, @NotNull BiConsumer<World, Location> playParticle) {
+    World world = center.getWorld();
     if (world == null) return;
 
     for (int i = 0; i < points; i++) {
       double angle = 2 * Math.PI * i / points;
-      Location point = location.clone().add(radius * Math.sin(angle), 0.0d, radius * Math.cos(angle));
-      player.accept(world, point);
+      Location point = center.clone().add(radius * Math.sin(angle), 0.0d, radius * Math.cos(angle));
+      playParticle.accept(world, point);
     }
   }
 
@@ -40,53 +42,52 @@ public final class ParticleUtils {
     spawnParticleCircle(location, points, radius, (world, point) -> world.spawnParticle(particle, point, 1));
   }
 
-  private static void spawnUpGoingParticleCircle(@NotNull JavaPlugin plugin, @NotNull Location location, int points, double radius, double height, @NotNull BiConsumer<World, Location> player) {
-    for (double y = 0, i = 0; y < height; y += .25, i++) {
+  private static void spawnParticleCylinder(@NotNull JavaPlugin plugin, @NotNull Location location,
+                                            int points, double radius, double height,
+                                            @NotNull BiConsumer<World, Location> playerParticle) {
+    for (double y = 0, i = 0; y < height; y += cylinderParticleVerticalStep, i++) {
       final double Y = y;
       Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
-        spawnParticleCircle(location.clone().add(0, Y, 0), points, radius, player);
+        spawnParticleCircle(location.clone().add(0, Y, 0), points, radius, playerParticle);
       }, (long) i);
     }
   }
 
-  public static void spawnUpGoingParticleCircle(@NotNull JavaPlugin plugin, @NotNull Location location, @NotNull Effect effect, int points, double radius, double height) {
-    spawnUpGoingParticleCircle(plugin, location, points, radius, height, (world, point) -> world.playEffect(point, effect, 1));
+  public static void spawnEffectCylinder(@NotNull JavaPlugin plugin, @NotNull Location location,
+                                           @NotNull Effect effect, int points, double radius, double height) {
+    spawnParticleCylinder(plugin, location, points, radius, height, (world, point) -> world.playEffect(point, effect, 1));
   }
 
-  public static void spawnUpGoingParticleCircle(@NotNull JavaPlugin plugin, @NotNull Location location, @NotNull Particle particle, int points, double radius, double height) {
-    if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_20_5)) {
-      for (double y = 0, i = 0; y < height; y += .25, i++) {
-        final double Y = y;
+  public static void spawnParticleCylinder(@NotNull JavaPlugin plugin, @NotNull Location location,
+                                           @NotNull Particle particle,
+                                           int points, double radius, double height) {
+    spawnParticleCylinder(plugin, location, particle, null, points, radius, height);
+  }
 
-        Color color = Color.fromRGB(
-          iRandom.range(0, 255),
-          iRandom.range(0, 255),
-          iRandom.range(0, 255)
-        );
+  public static void spawnParticleCylinder(@NotNull JavaPlugin plugin, @NotNull Location location,
+                                           @NotNull Particle particle, @Nullable Color overrideColor,
+                                           int points, double radius, double height) {
+    for (double y = 0, i = 0; y < height; y += .25, i++) {
+      final double Y = y;
 
-        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
-          if (particle == Particle.ENTITY_EFFECT) {
-            spawnParticleCircle(location.clone().add(0, Y, 0), points, radius, (world, loc) -> world.spawnParticle(particle, loc, 1, color));
-          } else {
-            spawnParticleCircle(location.clone().add(0, Y, 0), points, radius, (world, loc) -> world.spawnParticle(particle, loc, 1));
-          }
-        }, (long) i);
-      }
-    } else {
-      spawnUpGoingParticleCircle(plugin, location, points, radius, height, (world, point) -> world.spawnParticle(particle, point, 1));
+      Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> spawnParticleCircle(
+        location.clone().add(0, Y, 0), points, radius,
+        (world, loc) -> doSpawnParticleWithData(loc, particle, 1, overrideColor)
+      ), (long) i);
     }
   }
 
   public static void spawnParticleCircleAroundEntity(@NotNull JavaPlugin plugin, @NotNull Entity entity) {
-    spawnParticleCircleAroundBoundingBox(plugin, entity.getLocation(), MinecraftNameWrapper.INSTANT_EFFECT, entity.getBoundingBox(), 0.25);
+    // pre-1.20.5 INSTANT_EFFECT did not require particle data and was white by default
+    spawnParticleCylinderAroundRadius(
+      plugin, entity.getLocation(), MinecraftNameWrapper.INSTANT_EFFECT, Color.WHITE,
+      entity.getBoundingBox().getWidthX(), cylinderParticleVerticalStep);
   }
 
-  public static void spawnParticleCircleAroundBoundingBox(@NotNull JavaPlugin plugin, @NotNull Location location, @NotNull Particle particle, @NotNull BoundingBox box, double height) {
-    spawnParticleCircleAroundRadius(plugin, location, particle, box.getWidthX(), height);
-  }
-
-  public static void spawnParticleCircleAroundRadius(@NotNull JavaPlugin plugin, @NotNull Location location, @NotNull Particle particle, double radius, double height) {
-    spawnUpGoingParticleCircle(plugin, location, particle, (int) (radius * 15), radius, height);
+  public static void spawnParticleCylinderAroundRadius(@NotNull JavaPlugin plugin, @NotNull Location location,
+                                                       @NotNull Particle particle, @Nullable Color overrideColor,
+                                                       double radius, double height) {
+    spawnParticleCylinder(plugin, location, particle, overrideColor, (int) (radius * 15), radius, height);
   }
 
   public static void drawLine(@NotNull Player player, @NotNull Location point1, @NotNull Location point2, @NotNull Particle particle, @Nullable Particle.DustOptions dustOptions, int count, double space, int max) {
@@ -106,6 +107,77 @@ public final class ParticleUtils {
       if (current >= max) break;
     }
 
+  }
+
+  /**
+   * ONLY SUPPORTS SELECTED PARTICLE TYPES NATIVELY.
+   * Adds version specific compatability as api implementation has changed by adding requirements for particle data
+   * types like colors etc., by adding them on the fly.
+   * As particle type names have also changed, use wrapped types for compatability.
+   *
+   * @param location      location to spawn particle at (uses referenced world instance)
+   * @param particle      particle type to spawn, note changed names and reference via name wrappers for compatability
+   * @param count         particle count passed in bukkit call
+   * @param overrideColor some particles require a color, fallback to random color if null is passed
+   *                      and required by particle data type
+   * @see MinecraftNameWrapper
+   */
+  public static void doSpawnParticleWithData(@NotNull Location location, @NotNull Particle particle, int count, @Nullable Color overrideColor) {
+    World world = location.getWorld();
+    if (world == null) return;
+
+    // Particle#getDataType was added in 1.9 so it should be safe to use
+    if (particle.getDataType() == Void.class) { // no data required
+      world.spawnParticle(particle, location, count);
+      return;
+    }
+    // ENTITY_EFFECT required no data type prior to 1.20.5 (now Color)
+    // INSTANT_EFFECT/SPELL_INSTANT required no data type prior to 1.20.5 (now Particle.Spell)
+
+    Object data = null;
+    if (particle.getDataType() == Color.class) { // org.bukkit.Color not java.awt
+      data = (overrideColor != null) ? overrideColor : newRandomColor();
+    }
+    // no native impl for Particle.Spell for compatibility reasons as it has been added for 1.20.5+ and marked as experimental
+    // (maybe impl in future by catching accessor errors)
+
+    if (data != null) {
+      world.spawnParticle(particle, location, count, data);
+      return;
+    }
+
+    try {
+      // fallback, slow reflection
+      Constructor<?> constructor = particle.getDataType().getConstructors()[0];
+      Parameter[] parameters = constructor.getParameters();
+      Object[] dataParameters = new Object[parameters.length];
+      for (int i = 0; i < parameters.length; i++) {
+        Class<?> type = parameters[i].getType();
+        if (type == int.class) {
+          dataParameters[i] = 1; // fallback (commonly "size")
+        } else if (type == float.class) {
+          dataParameters[i] = 1.0; // fallback (commonly "power")
+        } else if (type == Color.class) {
+          dataParameters[i] = (overrideColor != null) ? overrideColor : newRandomColor();
+        } else {
+          // special parameter type not implemented for fallback here, can't provide data
+          return;
+        }
+      }
+
+      data = constructor.newInstance(dataParameters);
+      world.spawnParticle(particle, location, count, data);
+    } catch (Throwable ex) { // compatability issues, also catch Error instances
+      Logger.warn("Unable to create particle {} with data type {}", particle, particle.getDataType(), ex);
+    }
+  }
+
+  public static Color newRandomColor() {
+    return Color.fromRGB(
+      particleRandom.range(0, 255),
+      particleRandom.range(0, 255),
+      particleRandom.range(0, 255)
+    );
   }
 
 }

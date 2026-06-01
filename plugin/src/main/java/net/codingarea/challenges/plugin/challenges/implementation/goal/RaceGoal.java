@@ -112,13 +112,13 @@ public class RaceGoal extends SettingModifierGoal {
       Location relativeGoal = goal.clone();
       relativeGoal.setY(player.getLocation().getY());
       relativeGoal.add(0.5, 0, 0.5);
-      ParticleUtils.drawLine(player, player.getLocation(), relativeGoal, MinecraftNameWrapper.REDSTONE_DUST, new DustOptions(
-        Color.LIME, 1), 1, 0.5, 50);
+      ParticleUtils.drawLine(player, player.getLocation(), relativeGoal, MinecraftNameWrapper.REDSTONE_DUST,
+        new DustOptions(Color.LIME, 1), 1, 0.5, 50);
 
       if (player.getWorld() != goal.getWorld()) return;
       if (player.getLocation().distance(relativeGoal) > 20) return;
-      ParticleUtils.spawnParticleCircleAroundRadius(Challenges.getInstance(), relativeGoal,
-        MinecraftNameWrapper.INSTANT_EFFECT, 0.75, 0.5);
+      ParticleUtils.spawnParticleCylinderAroundRadius(Challenges.getInstance(), relativeGoal,
+        MinecraftNameWrapper.INSTANT_EFFECT, Color.WHITE, 0.75, 0.5);
     });
   }
 
@@ -132,7 +132,8 @@ public class RaceGoal extends SettingModifierGoal {
     if (BlockUtils.isSameBlockLocationIgnoreHeight(event.getTo(), goal)) {
       Message.forName("race-goal-reached").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
       ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, () -> Collections.singletonList(event.getPlayer()));
-      ParticleUtils.spawnParticleCircleAroundRadius(Challenges.getInstance(), event.getTo(), MinecraftNameWrapper.ENTITY_EFFECT, 0.75, 2);
+      ParticleUtils.spawnParticleCylinderAroundRadius(Challenges.getInstance(), event.getTo(),
+        MinecraftNameWrapper.ENTITY_EFFECT, null, 0.75, 2);
     }
   }
 

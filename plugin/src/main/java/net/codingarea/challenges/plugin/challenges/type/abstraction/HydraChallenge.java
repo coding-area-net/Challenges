@@ -36,7 +36,7 @@ public abstract class HydraChallenge extends Setting {
     for (int i = 0; i < mobsCount; i++) {
       event.getEntity().getWorld().spawnEntity(event.getEntity().getLocation(), event.getEntityType());
     }
-    ParticleUtils.spawnUpGoingParticleCircle(Challenges.getInstance(), event.getEntity().getLocation(),
+    ParticleUtils.spawnParticleCylinder(Challenges.getInstance(), event.getEntity().getLocation(),
       MinecraftNameWrapper.ENTITY_EFFECT, 2, 17, 1);
   }
 

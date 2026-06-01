@@ -46,7 +46,7 @@ public class PlayerConnectionListener implements Listener {
     Player player = event.getPlayer();
 
     player.getLocation().getChunk().load(true);
-    ParticleUtils.spawnUpGoingParticleCircle(Challenges.getInstance(), player.getLocation(),
+    ParticleUtils.spawnParticleCylinder(Challenges.getInstance(), player.getLocation(),
       MinecraftNameWrapper.ENTITY_EFFECT, 17, 1, 2);
     Challenges.getInstance().getScoreboardManager().handleJoin(player);
 

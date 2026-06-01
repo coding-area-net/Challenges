@@ -50,7 +50,7 @@ public class RespawnSetting extends Setting {
         checkAllPlayersDead();
     }
 
-    ParticleUtils.spawnUpGoingParticleCircle(Challenges.getInstance(), player.getLocation(),
+    ParticleUtils.spawnParticleCylinder(Challenges.getInstance(), player.getLocation(),
       MinecraftNameWrapper.WITCH_EFFECT, 17, 1, 2);
   }
 
