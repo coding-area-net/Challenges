@@ -154,8 +154,7 @@ public final class WorldManager {
       disableGameRuleInFlatWorld("doDaylightCycle");
       disableGameRuleInFlatWorld("disableRaids");
       disableGameRuleInFlatWorld("mobGriefing");
-
-    } catch (Exception ex) {
+    } catch (Throwable ex) {
       Logger.error("Could not load extra world!", ex);
       Logger.error("Probably the server version or server system was changed and the old world is not compatible with it");
       Logger.error("Please delete all worlds and try again!");

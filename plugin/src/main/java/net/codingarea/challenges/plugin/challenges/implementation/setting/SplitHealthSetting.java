@@ -94,12 +94,21 @@ public class SplitHealthSetting extends Setting {
       }
 
       if (health <= 0 && damageEvent != null) {
-        currentPlayer.setLastDamageCause(damageEvent);
+        tryApplyLastDamageCause(currentPlayer, damageEvent);
       }
 
       currentPlayer.setHealth(health);
     }
 
+  }
+
+  @SuppressWarnings({"deprecation", "removal"})
+  private void tryApplyLastDamageCause(Player player, EntityDamageEvent damageEvent) {
+    // marked for removal in api version 1.20.4 with no apparent replacement?
+    try {
+      player.setLastDamageCause(damageEvent);
+    } catch (Throwable ignored) {
+    }
   }
 
 }

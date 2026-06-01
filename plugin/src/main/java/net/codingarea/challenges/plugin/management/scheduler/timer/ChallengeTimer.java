@@ -14,6 +14,7 @@ import net.codingarea.challenges.plugin.management.scheduler.policy.PlayerCountP
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
+import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.FileDocument;
@@ -62,7 +63,8 @@ public final class ChallengeTimer {
 
   private void updateTimeRule() {
     for (World world : ChallengeAPI.getGameWorlds()) {
-      world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, !paused);
+      // overhaul post-1.21: DO_DAYLIGHT_CYCLE -> ADVANCE_TIME
+      world.setGameRule(MinecraftNameWrapper.DAYLIGHT_CYCLE, !paused);
     }
   }
 

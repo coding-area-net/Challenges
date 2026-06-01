@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.utils.misc;
 
 import net.codingarea.challenges.plugin.utils.bukkit.nms.ReflectionUtil;
 import net.codingarea.commons.common.misc.ReflectionUtils;
+import org.bukkit.GameRule;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.enchantments.Enchantment;
@@ -34,6 +35,9 @@ public class MinecraftNameWrapper {
 
   public static final Enchantment UNBREAKING = getEnchantByNames("DURABILITY", "UNBREAKING");
 
+  public static final GameRule<Boolean> DAYLIGHT_CYCLE = getGameRuleByNames("DO_DAYLIGHT_CYCLE", "ADVANCE_TIME");
+  public static final GameRule<Boolean> IMMEDIATE_RESPAWN = getGameRuleByNames("DO_IMMEDIATE_RESPAWN", "IMMEDIATE_RESPAWN");
+
   private MinecraftNameWrapper() {
   }
 
@@ -60,6 +64,11 @@ public class MinecraftNameWrapper {
   @NotNull
   private static Enchantment getEnchantByNames(@NotNull String... names) {
     return getFirstAttributeByNames(Enchantment.class, names);
+  }
+
+  @NotNull
+  private static <T> GameRule<T> getGameRuleByNames(@NotNull String... names) {
+    return getFirstAttributeByNames(GameRule.class, names);
   }
 
   @SuppressWarnings("unchecked")

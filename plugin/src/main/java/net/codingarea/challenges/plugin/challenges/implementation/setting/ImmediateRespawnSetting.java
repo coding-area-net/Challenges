@@ -4,9 +4,9 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Bukkit;
-import org.bukkit.GameRule;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
@@ -36,7 +36,7 @@ public class ImmediateRespawnSetting extends Setting {
     }
     try {
       for (World world : Bukkit.getWorlds()) {
-        world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
+        world.setGameRule(MinecraftNameWrapper.IMMEDIATE_RESPAWN, true);
       }
     } catch (NoSuchFieldError ignored) {
       respawnWithEvent = true;
@@ -50,7 +50,7 @@ public class ImmediateRespawnSetting extends Setting {
     }
     try {
       for (World world : Bukkit.getWorlds()) {
-        world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, false);
+        world.setGameRule(MinecraftNameWrapper.IMMEDIATE_RESPAWN, false);
       }
     } catch (NoSuchFieldError ignored) {
     }

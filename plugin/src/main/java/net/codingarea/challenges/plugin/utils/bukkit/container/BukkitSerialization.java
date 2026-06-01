@@ -5,11 +5,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
-import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Base64;
 
 public class BukkitSerialization {
 
@@ -52,7 +52,9 @@ public class BukkitSerialization {
 
       // Serialize that array
       dataOutput.close();
-      return Base64Coder.encodeLines(outputStream.toByteArray());
+
+      // org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder.encodeLines removed in 26.1
+      return Base64.getEncoder().encodeToString(outputStream.toByteArray());
     } catch (Exception e) {
       throw new IllegalStateException("Unable to save item stacks.", e);
     }
@@ -83,7 +85,8 @@ public class BukkitSerialization {
 
       // Serialize that array
       dataOutput.close();
-      return Base64Coder.encodeLines(outputStream.toByteArray());
+      // org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder.encodeLines removed in 26.1
+      return Base64.getEncoder().encodeToString(outputStream.toByteArray());
     } catch (Exception e) {
       throw new IllegalStateException("Unable to save item stacks.", e);
     }
@@ -104,7 +107,8 @@ public class BukkitSerialization {
    */
   public static Inventory fromBase64(Inventory inventory, String data) throws IOException {
     try {
-      ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
+      // org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder.decodeLines(data) removed in 26.1
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64.getDecoder().decode(data));
       BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
 
       // Read the serialized inventory
@@ -131,7 +135,8 @@ public class BukkitSerialization {
    */
   public static ItemStack[] itemStackArrayFromBase64(String data) throws IOException {
     try {
-      ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
+      // org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder.decodeLines(data) removed in 26.1
+      ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64.getDecoder().decode(data));
       BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
       ItemStack[] items = new ItemStack[dataInput.readInt()];
 
