@@ -6,8 +6,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -19,7 +17,6 @@ import java.lang.reflect.Method;
 public class CompatibilityUtils {
 
   protected static final ILogger logger = ILogger.forThisClass();
-  private static final Logger log = LoggerFactory.getLogger(CompatibilityUtils.class);
 
   private CompatibilityUtils() {
   }

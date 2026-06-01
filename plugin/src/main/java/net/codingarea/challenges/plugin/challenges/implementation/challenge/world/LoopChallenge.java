@@ -12,9 +12,9 @@ import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
+import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
-import net.codingarea.commons.bukkit.utils.wrapper.AttributeWrapper;
 import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -315,7 +315,7 @@ public class LoopChallenge extends Setting {
     private boolean isTool(@NotNull ItemStack itemStack) {
       if (itemStack.getItemMeta() != null) {
         try {
-          Attribute attribute = AttributeWrapper.MAX_HEALTH;
+          Attribute attribute = MinecraftNameWrapper.MAX_HEALTH;
           Collection<AttributeModifier> attributeModifiers = itemStack.getItemMeta().getAttributeModifiers(attribute);
           return attributeModifiers == null || !attributeModifiers.isEmpty();
 

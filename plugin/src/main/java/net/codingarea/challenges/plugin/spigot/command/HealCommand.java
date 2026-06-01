@@ -5,7 +5,7 @@ import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
 import net.codingarea.challenges.plugin.utils.misc.CommandHelper;
-import net.codingarea.commons.bukkit.utils.wrapper.AttributeWrapper;
+import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -37,7 +37,7 @@ public class HealCommand implements SenderCommand, Completer {
     boolean otherPlayers = false;
     for (Player player : targets) {
       Message.forName("command-heal-healed").send(player, Prefix.CHALLENGES);
-      AttributeInstance attribute = player.getAttribute(AttributeWrapper.MAX_HEALTH);
+      AttributeInstance attribute = player.getAttribute(MinecraftNameWrapper.MAX_HEALTH);
       if (attribute == null) {
         player.setHealth(20);
       } else {

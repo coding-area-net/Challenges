@@ -1,10 +1,12 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
 import net.codingarea.challenges.plugin.utils.bukkit.nms.ReflectionUtil;
+import net.codingarea.commons.common.collection.pair.Tuple;
 import net.codingarea.commons.common.misc.ReflectionUtils;
 import org.bukkit.GameRule;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.potion.PotionEffectType;
@@ -15,10 +17,10 @@ import java.util.Arrays;
 
 public class MinecraftNameWrapper {
 
-  public static final Material GREEN_DYE = getItemByNames("CACTUS_GREEN", "GREEN_DYE");
-  public static final Material RED_DYE = getItemByNames("ROSE_RED", "RED_DYE");
-  public static final Material YELLOW_DYE = getItemByNames("DANDELION_YELLOW", "YELLOW_DYE");
-  public static final Material SIGN = getItemByNames("SIGN", "OAK_SIGN");
+  public static final Material GREEN_DYE = getMaterialByNames("CACTUS_GREEN", "GREEN_DYE");
+  public static final Material RED_DYE = getMaterialByNames("ROSE_RED", "RED_DYE");
+  public static final Material YELLOW_DYE = getMaterialByNames("DANDELION_YELLOW", "YELLOW_DYE");
+  public static final Material SIGN = getMaterialByNames("SIGN", "OAK_SIGN");
 
   public static final EntityType FIREWORK = getEntityByNames("FIREWORK", "FIREWORK_ROCKET");
   public static final EntityType SNOW_GOLEM = getEntityByNames("SNOWMAN", "SNOW_GOLEM");
@@ -35,14 +37,31 @@ public class MinecraftNameWrapper {
 
   public static final Enchantment UNBREAKING = getEnchantByNames("DURABILITY", "UNBREAKING");
 
+  public static final Attribute MAX_HEALTH = getAttributeByNames("GENERIC_MAX_HEALTH", "MAX_HEALTH");
+  public static final Attribute ATTACK_SPEED = getAttributeByNames("GENERIC_ATTACK_SPEED", "ATTACK_SPEED");
+
+  // replacement for wrapping via GameRule.getByName (marked for removal as of 1.21.11),
+  // access via namespace key would be a viable alternative
   public static final GameRule<Boolean> DAYLIGHT_CYCLE = getGameRuleByNames("DO_DAYLIGHT_CYCLE", "ADVANCE_TIME");
+  public static final GameRule<Boolean> WEATHER_CYCLE = getGameRuleByNames("DO_WEATHER_CYCLE", "ADVANCE_WEATHER");
   public static final GameRule<Boolean> IMMEDIATE_RESPAWN = getGameRuleByNames("DO_IMMEDIATE_RESPAWN", "IMMEDIATE_RESPAWN");
+  public static final GameRule<Boolean> MOB_SPAWNING = getGameRuleByNames("DO_MOB_SPAWNING", "SPAWN_MOBS");
+  public static final GameRule<Boolean> WANDERING_TRADERS = getGameRuleByNames("DO_TRADER_SPAWNING", "SPAWN_WANDERING_TRADERS");
+
+  // the game rule for toggling raids has been inverted from "disableRaids" to "raids" in the 1.21->26.1 update
+  public static final GameRule<Boolean> DISABLE_RAIDS = getFirstConstantByNamesOrNull(GameRule.class, "DISABLE_RAIDS");
+  public static final GameRule<Boolean> ENABLE_RAIDS = getFirstConstantByNamesOrNull(GameRule.class, "RAIDS");
+
+  @NotNull
+  public static Tuple<GameRule<Boolean>, Boolean> getDisableRaidsGameRulePair() {
+    return DISABLE_RAIDS != null ? Tuple.of(DISABLE_RAIDS, true) : Tuple.of(ENABLE_RAIDS, false);
+  }
 
   private MinecraftNameWrapper() {
   }
 
   @NotNull
-  private static Material getItemByNames(@NotNull String... names) {
+  private static Material getMaterialByNames(@NotNull String... names) {
     return ReflectionUtils.getFirstEnumByNames(Material.class, names);
   }
 
@@ -58,22 +77,27 @@ public class MinecraftNameWrapper {
 
   @NotNull
   private static PotionEffectType getPotionByNames(@NotNull String... names) {
-    return getFirstAttributeByNames(PotionEffectType.class, names);
+    return getFirstConstantByNames(PotionEffectType.class, names);
   }
 
   @NotNull
   private static Enchantment getEnchantByNames(@NotNull String... names) {
-    return getFirstAttributeByNames(Enchantment.class, names);
+    return getFirstConstantByNames(Enchantment.class, names);
+  }
+
+  @NotNull
+  private static Attribute getAttributeByNames(@NotNull String... names) {
+    return getFirstConstantByNames(Attribute.class, names);
   }
 
   @NotNull
   private static <T> GameRule<T> getGameRuleByNames(@NotNull String... names) {
-    return getFirstAttributeByNames(GameRule.class, names);
+    return getFirstConstantByNames(GameRule.class, names);
   }
 
-  @SuppressWarnings("unchecked")
   @NotNull
-  public static <T> T getFirstAttributeByNames(@NotNull Class<?> clazz, @NotNull String... names) {
+  @SuppressWarnings("unchecked")
+  public static <T> T getFirstConstantByNames(@NotNull Class<?> clazz, @NotNull String... names) {
     for (String name : names) {
       try {
         Field field = ReflectionUtil.getField(clazz, name);
@@ -82,6 +106,14 @@ public class MinecraftNameWrapper {
       }
     }
     throw new IllegalArgumentException("No attribute found in: " + clazz.getName() + " for " + Arrays.toString(names));
+  }
+
+  public static <T> T getFirstConstantByNamesOrNull(@NotNull Class<?> clazz, @NotNull String... names) {
+    try {
+     return getFirstConstantByNames(clazz, names);
+    } catch (IllegalArgumentException ex) {
+      return null;
+    }
   }
 
 }

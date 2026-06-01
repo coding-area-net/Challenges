@@ -6,8 +6,12 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.utils.bukkit.container.PlayerData;
+import net.codingarea.challenges.plugin.utils.bukkit.nms.ReflectionUtil;
+import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
+import net.codingarea.commons.common.collection.IRandom;
+import net.codingarea.commons.common.collection.pair.Tuple;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.FileDocument;
 import net.codingarea.commons.common.misc.FileUtils;
@@ -19,17 +23,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.*;
 
 public final class WorldManager {
 
-  private static final String customSeedWorldPrefix = "pregenerated_";
   private final boolean restartOnReset;
   @Getter
   private final boolean enableFreshReset;
@@ -58,7 +57,7 @@ public final class WorldManager {
     levelName = sessionConfig.getString("level-name", "world");
     worlds = new String[]{
       levelName,
-      levelName + "_nether",
+      levelName + "_nether", // TODO
       levelName + "_the_end"
     };
   }
@@ -91,53 +90,27 @@ public final class WorldManager {
     String kickMessage = Message.forName("server-reset").asString(requester);
     Bukkit.getOnlinePlayers().forEach(player -> player.kickPlayer(kickMessage));
 
-    if (seed != null) {
-      generateCustomSeedWorlds(seed);
-    }
-
     Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), this::stopServerNow, 3);
-
-  }
-
-  private void generateCustomSeedWorlds(long seed) {
-
-    Logger.debug("Generating custom seed worlds with seed " + seed);
-    for (String name : worlds) {
-
-      World world = Bukkit.getWorld(name);
-      if (world == null) {
-        Logger.error("Could not find world {}", name);
-        continue;
-      }
-
-      String newWorldName = customSeedWorldPrefix + name;
-      File folder = new File(Bukkit.getWorldContainer(), newWorldName);
-      if (folder.exists()) FileUtils.deleteWorldFolder(folder);
-
-      WorldCreator creator = new WorldCreator(newWorldName).seed(seed).environment(world.getEnvironment());
-      creator.createWorld();
-
-      Logger.debug("Created custom seed world {}", newWorldName);
-
-    }
-
   }
 
   private void resetConfigs() {
-
     FileDocument sessionConfig = Challenges.getInstance().getConfigManager().getSessionConfig();
     sessionConfig.clear();
     sessionConfig.set("reset", true);
-    sessionConfig.set("seed-reset", useCustomSeed);
+    sessionConfig.set("provided-custom-seed", useCustomSeed);
+    if (useCustomSeed) {
+      sessionConfig.set("custom-seed", customSeed);
+    }
+
     if (!Bukkit.getWorlds().isEmpty()) {
       sessionConfig.set("level-name", ChallengeAPI.getGameWorld(Environment.NORMAL).getName());
+      sessionConfig.set("old-seed", ChallengeAPI.getGameWorld(Environment.NORMAL).getSeed());
     }
     sessionConfig.save();
 
     FileDocument gamestateConfig = Challenges.getInstance().getConfigManager().getGamestateConfig();
     gamestateConfig.clear();
     gamestateConfig.save();
-
   }
 
   private void loadExtraWorld() {
@@ -148,12 +121,9 @@ public final class WorldManager {
       flatWorld = new WorldCreator("challenges-extra").type(WorldType.FLAT).generateStructures(false).createWorld();
       if (flatWorld == null) return;
       flatWorld.setSpawnFlags(false, false);
-      disableGameRuleInFlatWorld("doMobSpawning");
-      disableGameRuleInFlatWorld("doTraderSpawning");
-      disableGameRuleInFlatWorld("doWeatherCycle");
-      disableGameRuleInFlatWorld("doDaylightCycle");
-      disableGameRuleInFlatWorld("disableRaids");
-      disableGameRuleInFlatWorld("mobGriefing");
+      applyGameRuleInFlatWorld(MinecraftNameWrapper.getDisableRaidsGameRulePair());
+      disableGameRulesInFlatWorld(MinecraftNameWrapper.MOB_SPAWNING, MinecraftNameWrapper.WANDERING_TRADERS,
+        MinecraftNameWrapper.WEATHER_CYCLE, MinecraftNameWrapper.DAYLIGHT_CYCLE, GameRule.MOB_GRIEFING);
     } catch (Throwable ex) {
       Logger.error("Could not load extra world!", ex);
       Logger.error("Probably the server version or server system was changed and the old world is not compatible with it");
@@ -181,11 +151,15 @@ public final class WorldManager {
     }
   }
 
-  @SuppressWarnings("unchecked")
-  private void disableGameRuleInFlatWorld(@NotNull String name) {
-    GameRule<Boolean> gamerule = (GameRule<Boolean>) GameRule.getByName(name);
-    if (gamerule == null) return;
-    flatWorld.setGameRule(gamerule, false);
+  private void applyGameRuleInFlatWorld(Tuple<GameRule<Boolean>, Boolean> gameRulePair) {
+    flatWorld.setGameRule(gameRulePair.getFirst(), gameRulePair.getSecond());
+  }
+
+  @SafeVarargs
+  private void disableGameRulesInFlatWorld(@NotNull GameRule<Boolean>... gameRules) {
+    for (GameRule<Boolean> gameRule : gameRules) {
+      flatWorld.setGameRule(gameRule, false);
+    }
   }
 
   private void executeWorldResetIfNecessary() {
@@ -194,18 +168,23 @@ public final class WorldManager {
   }
 
   public void executeWorldReset() {
-    FileDocument sessionConfig = Challenges.getInstance().getConfigManager().getSessionConfig();
-    boolean seedReset = sessionConfig.getBoolean("seed-reset");
-
     Logger.info("Deleting worlds..");
 
     for (String world : worlds) {
       deleteWorld(world);
-      if (seedReset) {
-        copyPreGeneratedWorld(world);
-      } else {
-        deletePreGeneratedWorld(world);
-      }
+    }
+
+    FileDocument sessionConfig = Challenges.getInstance().getConfigManager().getSessionConfig();
+    boolean providedCustomSeed = sessionConfig.getBoolean("provided-custom-seed");
+    long customSeed = sessionConfig.getLong("custom-seed");
+
+    if (sessionConfig.contains("old-seed")) {
+      long oldSeed = sessionConfig.getLong("old-seed");
+      long newSeed = providedCustomSeed ? customSeed : this.useCustomSeed ? this.customSeed : IRandom.secure().nextLong();
+      injectSeedViaReflection(String.valueOf(oldSeed), String.valueOf(newSeed));
+    } else {
+      // this should never happen, probably old or corrupt session.json
+      Logger.warn("Could not find old level-seed session config for replacement!");
     }
 
     for (String world : Challenges.getInstance().getGameWorldStorage().getCustomGeneratedGameWorlds()) {
@@ -213,71 +192,93 @@ public final class WorldManager {
     }
 
     sessionConfig.set("reset", false);
-    sessionConfig.set("seed-reset", false);
+    sessionConfig.set("provided-custom-seed", false);
     sessionConfig.save();
+  }
 
+  private void injectSeedViaReflection(String oldSeed, String newSeed) {
+    // before the world structure overhaul it was enough to just delete world data to trigger a regeneration
+    // with a new random seed. but after the overhaul the seed seemed to be already be read when onLoad injection
+    // takes place, therefore requiring the seed to be replaced in memory when sticking to world deletion on startup
+    // for easy plug-and-play. this also removes the need to pre-generate custom seed levels as the seed gets replaced.
+    try {
+      Object craftServer = Bukkit.getServer();
+      Object dedicatedServer = ReflectionUtil.invokeMethod(craftServer, "getServer");
+      if (dedicatedServer != null) {
+        injectSeedInto(dedicatedServer, oldSeed, newSeed, 6, new HashSet<>());
+      }
+    } catch (Exception ex) {
+      Logger.warn("Failed to inject seed via reflection", ex);
+    }
+  }
+
+  private void injectSeedInto(Object obj, String oldSeed, String newSeed, int depth, Set<Integer> visited) {
+    if (obj == null || depth == 0) return;
+    if (!visited.add(System.identityHashCode(obj))) return;
+    // defend preemptively against obfuscation and impl changes: replace fields containing old seed with new one
+    // alternative: replacing correct field directly via reflection would be riskier and less future-proof
+    Class<?> clazz = obj.getClass();
+    while (clazz != null && clazz != Object.class) {
+      for (Field field : clazz.getDeclaredFields()) {
+        if (Modifier.isStatic(field.getModifiers())) continue;
+        try {
+          field.setAccessible(true);
+          Object value = field.get(obj);
+          if (value == null) continue;
+
+          if (value instanceof String) {
+            if (oldSeed.equals(value)) {
+              field.set(obj, newSeed);
+              Logger.debug("Injected string seed in " + clazz.getSimpleName() + "." + field.getName());
+            }
+          } else if (field.getType() == long.class) {
+            try {
+              long oldL = Long.parseLong(oldSeed);
+              long newL = Long.parseLong(newSeed);
+              if ((long) value == oldL) {
+                field.setLong(obj, newL);
+                Logger.debug("Injected long seed in " + clazz.getSimpleName() + "." + field.getName());
+              }
+            } catch (NumberFormatException ignored) {
+            }
+          } else if (value instanceof OptionalLong) {
+            try {
+              long oldL = Long.parseLong(oldSeed);
+              long newL = Long.parseLong(newSeed);
+              OptionalLong opt = (OptionalLong) value;
+              if (opt.isPresent() && opt.getAsLong() == oldL) {
+                field.set(obj, OptionalLong.of(newL));
+                Logger.debug("Injected OptionalLong seed in " + clazz.getSimpleName() + "." + field.getName());
+              }
+            } catch (NumberFormatException ignored) {
+            }
+          } else if (value instanceof Properties) {
+            Properties p = (Properties) value;
+            if (oldSeed.equals(p.getProperty("level-seed"))) {
+              p.setProperty("level-seed", newSeed);
+              Logger.debug("Injected seed in java.util.Properties");
+            }
+          } else {
+            String name = value.getClass().getName();
+            if (name.startsWith("net.minecraft") || name.startsWith("org.bukkit") || name.startsWith("com.destroystokyo")) {
+              injectSeedInto(value, oldSeed, newSeed, depth - 1, visited);
+            } else if (value instanceof Iterable) {
+              for (Object item : (Iterable<?>) value) {
+                injectSeedInto(item, oldSeed, newSeed, depth - 1, visited);
+              }
+            }
+          }
+        } catch (Exception ignored) {
+        }
+      }
+      clazz = clazz.getSuperclass();
+    }
   }
 
   private void deleteWorld(@NotNull String name) {
     File folder = new File(Bukkit.getWorldContainer(), name);
     FileUtils.deleteWorldFolder(folder);
-    Logger.info("Deleted world {}", name);
-  }
-
-  private void copyPreGeneratedWorld(@NotNull String name) {
-    File source = new File(Bukkit.getWorldContainer(), customSeedWorldPrefix + name);
-    if (!source.exists() || !source.isDirectory()) {
-      Logger.warn("Custom seed world '{}' does not exist!", name);
-      return;
-    }
-
-    File target = new File(Bukkit.getWorldContainer(), name);
-    try {
-      copy(source, target);
-      Logger.debug("Copied pre generated custom seed world {}", name);
-    } catch (IOException ex) {
-      Logger.error("Unable to copy pre generated custom seed world {}", name, ex);
-    }
-  }
-
-  private void deletePreGeneratedWorld(@NotNull String name) {
-    File source = new File(Bukkit.getWorldContainer(), customSeedWorldPrefix + name);
-    if (!source.exists() || !source.isDirectory()) return;
-
-    FileUtils.deleteWorldFolder(source);
-    Logger.debug("Deleted pre generated custom seed world {}", name);
-  }
-
-  public void copy(@NotNull File source, @NotNull File target) throws IOException {
-    if (source.isDirectory()) {
-      copyDirectory(source, target);
-    } else {
-      copyFile(source, target);
-    }
-  }
-
-  private void copyDirectory(@NotNull File source, @NotNull File target) throws IOException {
-    if (!target.exists()) {
-      if (!target.mkdir()) {
-        return;
-      }
-    }
-
-    String[] list = source.list();
-    if (list == null) return;
-    for (String child : list) {
-      if ("session.lock".equals(child)) continue;
-      copy(new File(source, child), new File(target, child));
-    }
-  }
-
-  private void copyFile(@NotNull File source, @NotNull File target) throws IOException {
-    try (InputStream in = Files.newInputStream(source.toPath()); OutputStream out = Files.newOutputStream(target.toPath())) {
-      byte[] buf = new byte[1024];
-      int length;
-      while ((length = in.read(buf)) > 0)
-        out.write(buf, 0, length);
-    }
+    Logger.info("Deleted world {} (at: {}, world container: {})", name, folder, Bukkit.getWorldContainer());
   }
 
   private void stopServerNow() {

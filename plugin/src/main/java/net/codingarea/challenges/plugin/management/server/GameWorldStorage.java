@@ -81,8 +81,7 @@ public class GameWorldStorage implements GamestateSaveable {
     }
 
     VoidMapGenerator generator = new VoidMapGenerator();
-    voidWorld = new WorldCreator("void").type(WorldType.FLAT).generator(
-      generator).createWorld();
+    voidWorld = new WorldCreator("void").type(WorldType.FLAT).generator(generator).createWorld();
     worlds.add(voidWorld);
 
     return voidWorld;

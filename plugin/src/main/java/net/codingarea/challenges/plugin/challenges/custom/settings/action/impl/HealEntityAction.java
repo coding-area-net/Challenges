@@ -5,7 +5,6 @@ import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
-import net.codingarea.commons.bukkit.utils.wrapper.AttributeWrapper;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Entity;
@@ -31,7 +30,7 @@ public class HealEntityAction extends EntityTargetAction {
     int amount = Integer.parseInt(subActions.get("amount")[0]);
     if (entity instanceof LivingEntity) {
       LivingEntity livingEntity = (LivingEntity) entity;
-      AttributeInstance attribute = livingEntity.getAttribute(AttributeWrapper.MAX_HEALTH);
+      AttributeInstance attribute = livingEntity.getAttribute(MinecraftNameWrapper.MAX_HEALTH);
 
       if (attribute == null) return;
       double newHealth = Math.min(livingEntity.getHealth() + amount,

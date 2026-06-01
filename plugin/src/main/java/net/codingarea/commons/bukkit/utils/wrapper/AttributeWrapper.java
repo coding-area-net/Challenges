@@ -5,7 +5,8 @@ import org.bukkit.attribute.Attribute;
 
 public class AttributeWrapper {
 
-  public static final Attribute MAX_HEALTH = wrap("MAX_HEALTH", "GENERIC_MAX_HEALTH"),
+  public static final Attribute
+    MAX_HEALTH = wrap("MAX_HEALTH", "GENERIC_MAX_HEALTH"),
     ATTACK_SPEED = wrap("ATTACK_SPEED", "GENERIC_ATTACK_SPEED");
 
   public static Attribute wrap(String name, String legacyName) {

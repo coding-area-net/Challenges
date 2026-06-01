@@ -8,7 +8,7 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.commons.bukkit.utils.wrapper.AttributeWrapper;
+import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -48,7 +48,7 @@ public class GetFullHealthGoal extends SettingModifierGoal {
   public void getWinnersOnEnd(@NotNull List<Player> winners) {
     for (Player player : Bukkit.getOnlinePlayers()) {
       if (ignorePlayer(player)) continue;
-      AttributeInstance attribute = player.getAttribute(AttributeWrapper.MAX_HEALTH);
+      AttributeInstance attribute = player.getAttribute(MinecraftNameWrapper.MAX_HEALTH);
       if (attribute != null) {
         if (player.getHealth() >= attribute.getBaseValue()) {
           winners.add(player);
@@ -80,7 +80,7 @@ public class GetFullHealthGoal extends SettingModifierGoal {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer((Player) event.getEntity())) return;
     Bukkit.getScheduler().runTask(plugin, () -> {
-      AttributeInstance attribute = ((Player) event.getEntity()).getAttribute(AttributeWrapper.MAX_HEALTH);
+      AttributeInstance attribute = ((Player) event.getEntity()).getAttribute(MinecraftNameWrapper.MAX_HEALTH);
       if (attribute != null && ((Player) event.getEntity()).getHealth() >= attribute.getBaseValue()) {
         ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED);
       }

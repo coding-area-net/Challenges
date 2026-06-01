@@ -6,8 +6,8 @@ import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
-import net.codingarea.commons.bukkit.utils.wrapper.AttributeWrapper;
 import net.codingarea.commons.bukkit.utils.wrapper.MaterialWrapper;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.document.GsonDocument;
@@ -72,7 +72,7 @@ public class MaxHealthSetting extends Modifier {
   }
 
   private void updateHealth(Player player) {
-    AttributeInstance attribute = player.getAttribute(AttributeWrapper.MAX_HEALTH);
+    AttributeInstance attribute = player.getAttribute(MinecraftNameWrapper.MAX_HEALTH);
     if (attribute == null)
       return; // This should never happen because its a generic attribute, but just in case
     int newMaxHealth = getMaxHealth(player);

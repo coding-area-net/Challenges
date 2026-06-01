@@ -8,7 +8,7 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder.PotionBuilder;
-import net.codingarea.commons.bukkit.utils.wrapper.AttributeWrapper;
+import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -71,7 +71,7 @@ public class RandomizedHPChallenge extends SettingModifier {
     }
     int health = random.nextInt(getValue() * 100) + 1;
     entity.setHealth(health);
-    AttributeInstance attribute = entity.getAttribute(AttributeWrapper.MAX_HEALTH);
+    AttributeInstance attribute = entity.getAttribute(MinecraftNameWrapper.MAX_HEALTH);
     if (attribute == null) return;
     attribute.setBaseValue(health);
   }
@@ -93,7 +93,7 @@ public class RandomizedHPChallenge extends SettingModifier {
         double health = entityDefaultHealth.getOrDefault(type, getDefaultHealth(type));
         entityDefaultHealth.put(type, health);
 
-        AttributeInstance attribute = entity.getAttribute(AttributeWrapper.MAX_HEALTH);
+        AttributeInstance attribute = entity.getAttribute(MinecraftNameWrapper.MAX_HEALTH);
         if (attribute == null) return;
         attribute.setBaseValue(health);
         entity.setHealth(health);
@@ -106,7 +106,7 @@ public class RandomizedHPChallenge extends SettingModifier {
     Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), entityType);
     entity.remove();
     if (!(entity instanceof LivingEntity)) return 0;
-    AttributeInstance attribute = ((LivingEntity) entity).getAttribute(AttributeWrapper.MAX_HEALTH);
+    AttributeInstance attribute = ((LivingEntity) entity).getAttribute(MinecraftNameWrapper.MAX_HEALTH);
     if (attribute == null) return 10;
     return attribute.getBaseValue();
   }

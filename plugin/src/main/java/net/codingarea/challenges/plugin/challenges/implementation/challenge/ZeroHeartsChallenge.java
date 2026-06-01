@@ -8,8 +8,8 @@ import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
-import net.codingarea.commons.bukkit.utils.wrapper.AttributeWrapper;
 import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -42,7 +42,7 @@ public class ZeroHeartsChallenge extends SettingModifier {
     });
     bossbar.show();
     Bukkit.getOnlinePlayers().forEach(player -> {
-      AttributeInstance attribute = player.getAttribute(AttributeWrapper.MAX_HEALTH);
+      AttributeInstance attribute = player.getAttribute(MinecraftNameWrapper.MAX_HEALTH);
       if (attribute == null) return;
       attribute.setBaseValue(0);
     });
@@ -68,7 +68,7 @@ public class ZeroHeartsChallenge extends SettingModifier {
   @ScheduledTask(ticks = 20, async = false)
   public void onSecond() {
     broadcast(player -> {
-      AttributeInstance attribute = player.getAttribute(AttributeWrapper.MAX_HEALTH);
+      AttributeInstance attribute = player.getAttribute(MinecraftNameWrapper.MAX_HEALTH);
       if (attribute == null) return;
       attribute.setBaseValue(0);
     });
