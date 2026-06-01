@@ -20,10 +20,7 @@ import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.ParticleUtils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -208,7 +205,7 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
   public void spawnParticles() {
     if (targetBlock == null) return;
     ParticleUtils.spawnParticleCircle(targetBlock.getLocation().add(0.5, 1.05, 0.5),
-      MinecraftNameWrapper.INSTANT_EFFECT, 13, 0.35);
+      MinecraftNameWrapper.INSTANT_EFFECT, Color.WHITE, 13, 0.35);
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

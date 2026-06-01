@@ -34,21 +34,21 @@ public final class ParticleUtils {
     }
   }
 
-  public static void spawnParticleCircle(@NotNull Location location, @NotNull Effect particle, int points, double radius) {
+  public static void spawnEffectCircle(@NotNull Location location, @NotNull Effect particle, int points, double radius) {
     spawnParticleCircle(location, points, radius, (world, point) -> world.playEffect(point, particle, 1));
   }
 
-  public static void spawnParticleCircle(@NotNull Location location, @NotNull Particle particle, int points, double radius) {
-    spawnParticleCircle(location, points, radius, (world, point) -> world.spawnParticle(particle, point, 1));
+  public static void spawnParticleCircle(@NotNull Location location, @NotNull Particle particle, @Nullable Color overrideColor, int points, double radius) {
+    spawnParticleCircle(location, points, radius, (world, loc) -> doSpawnParticleWithData(loc, particle, 1, overrideColor));
   }
 
   private static void spawnParticleCylinder(@NotNull JavaPlugin plugin, @NotNull Location location,
                                             int points, double radius, double height,
-                                            @NotNull BiConsumer<World, Location> playerParticle) {
+                                            @NotNull BiConsumer<World, Location> playParticle) {
     for (double y = 0, i = 0; y < height; y += cylinderParticleVerticalStep, i++) {
       final double Y = y;
       Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
-        spawnParticleCircle(location.clone().add(0, Y, 0), points, radius, playerParticle);
+        spawnParticleCircle(location.clone().add(0, Y, 0), points, radius, playParticle);
       }, (long) i);
     }
   }
@@ -156,7 +156,9 @@ public final class ParticleUtils {
         if (type == int.class) {
           dataParameters[i] = 1; // fallback (commonly "size")
         } else if (type == float.class) {
-          dataParameters[i] = 1.0; // fallback (commonly "power")
+          dataParameters[i] = 1.0f; // fallback (commonly "power")
+        } else if (type == double.class) {
+          dataParameters[i] = 1.0d;
         } else if (type == Color.class) {
           dataParameters[i] = (overrideColor != null) ? overrideColor : newRandomColor();
         } else {
