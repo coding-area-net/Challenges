@@ -39,7 +39,7 @@ public abstract class ForceTarget<T> {
   }
 
   public void updateDisplayStand(@NotNull ArmorStand armorStand) {
-    if (target instanceof Material) {
+    if (target instanceof Material && ((Material) target).isItem()) {
       Objects.requireNonNull(armorStand.getEquipment()).setHelmet(new ItemStack((Material) target));
     } else {
       Objects.requireNonNull(armorStand.getEquipment()).setHelmet(null);

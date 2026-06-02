@@ -8,6 +8,7 @@ import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
@@ -38,7 +39,10 @@ public final class ChallengeScoreboard {
     }
   }
 
-  public void update(@NotNull Player player) {
+  public synchronized void update(@NotNull Player player) {
+    // synchronized method lock: prevent race condition resulting in client error/crash: by sending the objective
+    // with the same name at the same time twice as the name is constant (1d2b97b)
+    // java.lang.IllegalArgumentException: An objective with the name 'xxx' already exists! (client-side)
     if (!isShown()) {
       Logger.warn("Tried to update scoreboard which is not shown");
       return;
@@ -67,12 +71,12 @@ public final class ChallengeScoreboard {
 
       String name = String.valueOf(player.getUniqueId().hashCode());
       // Unregister any old objective existing
-      Objective objective1 = scoreboard.getObjective(name);
-      if (objective1 != null) {
-        unregister(objective1);
+      Objective oldObjective = scoreboard.getObjective(name);
+      if (oldObjective != null) {
+        unregister(oldObjective);
       }
 
-      Objective objective = scoreboard.registerNewObjective(name, "dummy", String.valueOf(instance.getTitle()));
+      Objective objective = registerDummyObjective(scoreboard, name, String.valueOf(instance.getTitle()));
       int score = lines.size();
       for (String line : lines) {
         if (line.isEmpty()) line = StringUtils.repeat(' ', score + 1);
@@ -107,6 +111,17 @@ public final class ChallengeScoreboard {
       objective.unregister();
     } catch (Exception ex) {
       Logger.error("Unable to unregister objective " + objective.getName());
+    }
+  }
+
+  @NotNull
+  @SuppressWarnings("deprecation")
+  private Objective registerDummyObjective(@NotNull Scoreboard scoreboard, @NotNull String name, @NotNull String displayName) {
+    try {
+      return scoreboard.registerNewObjective(name, Criteria.DUMMY, displayName);
+    } catch (Error ignored) {
+      // replacement not yet available in this version, use deprecated method
+      return scoreboard.registerNewObjective(name, "dummy", displayName);
     }
   }
 

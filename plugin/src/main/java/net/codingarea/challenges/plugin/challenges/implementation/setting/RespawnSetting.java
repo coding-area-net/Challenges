@@ -46,8 +46,7 @@ public class RespawnSetting extends Setting {
       locationsBeforeRespawn.put(player, player.getLocation());
       player.setGameMode(GameMode.SPECTATOR);
 
-      if (ChallengeAPI.isStarted())
-        checkAllPlayersDead();
+      checkAllPlayersDead();
     }
 
     ParticleUtils.spawnParticleCylinder(Challenges.getInstance(), player.getLocation(),
@@ -55,6 +54,8 @@ public class RespawnSetting extends Setting {
   }
 
   public void checkAllPlayersDead() {
+    if (ChallengeAPI.isPaused()) return;
+
     int playersAlive = ChallengeAPI.getIngamePlayers().size();
     if (playersAlive == 0) {
       ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_FAILED);
