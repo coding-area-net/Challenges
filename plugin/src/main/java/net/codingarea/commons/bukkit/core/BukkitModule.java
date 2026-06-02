@@ -3,6 +3,7 @@ package net.codingarea.commons.bukkit.core;
 import com.google.common.base.Charsets;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import net.codingarea.commons.bukkit.utils.menu.MenuPositionListener;
+import net.codingarea.commons.bukkit.utils.misc.CompatibilityUtils;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.commons.bukkit.utils.wrapper.ActionListener;
 import net.codingarea.commons.bukkit.utils.wrapper.SimpleEventExecutor;
@@ -128,10 +129,9 @@ public abstract class BukkitModule extends JavaPlugin {
       executorService.shutdown();
 
     for (Player player : Bukkit.getOnlinePlayers()) {
-      InventoryView view = player.getOpenInventory();
-      Inventory inventory = view.getTopInventory();
-      if (inventory.getHolder() == MenuPosition.HOLDER)
-        view.close();
+      Inventory inventory = CompatibilityUtils.getTopInventory(player);
+      if (inventory != null && inventory.getHolder() == MenuPosition.HOLDER)
+        CompatibilityUtils.closeInventoryView(player);
     }
 
     if (error != null)

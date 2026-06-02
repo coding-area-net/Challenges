@@ -8,7 +8,6 @@ import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
-import net.codingarea.commons.bukkit.utils.wrapper.MaterialWrapper;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.document.GsonDocument;
 import org.bukkit.attribute.AttributeInstance;
@@ -34,7 +33,7 @@ public class MaxHealthSetting extends Modifier {
   @NotNull
   @Override
   public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(MaterialWrapper.RED_DYE, Message.forName("item-max-health-setting"));
+    return new ItemBuilder(MinecraftNameWrapper.RED_DYE, Message.forName("item-max-health-setting"));
   }
 
   @NotNull

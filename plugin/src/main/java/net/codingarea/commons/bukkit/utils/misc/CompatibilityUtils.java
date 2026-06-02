@@ -44,4 +44,21 @@ public class CompatibilityUtils {
       return null;
     }
   }
+
+  public static void closeInventoryView(@NotNull Player player) {
+    InventoryView view = player.getOpenInventory();
+
+    try {
+      view.close();
+      return;
+    } catch (Throwable ignored) {
+    }
+
+    try {
+      Method closeInventory = InventoryView.class.getMethod("close");
+      closeInventory.invoke(view);
+    } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
+      logger.error("Failed to close inventory", ex);
+    }
+  }
 }

@@ -11,6 +11,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -108,6 +109,7 @@ public class MinecraftNameWrapper {
     throw new IllegalArgumentException("No attribute found in: " + clazz.getName() + " for " + Arrays.toString(names));
   }
 
+  @Nullable
   public static <T> T getFirstConstantByNamesOrNull(@NotNull Class<?> clazz, @NotNull String... names) {
     try {
      return getFirstConstantByNames(clazz, names);
