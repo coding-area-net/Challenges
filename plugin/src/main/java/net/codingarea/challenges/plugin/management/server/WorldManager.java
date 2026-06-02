@@ -32,13 +32,13 @@ public final class WorldManager {
   private final boolean restartOnReset;
   @Getter
   private final boolean enableFreshReset;
-  private final long customSeed;
+  private final long configCustomSeed;
+  private final boolean configUseCustomSeed;
   private final String levelName;
   private final String[] worlds;
   private final Map<UUID, PlayerData> playerData = new HashMap<>();
   @Getter
   private boolean shutdownBecauseOfReset = false;
-  private boolean useCustomSeed;
   private WorldSettings settings = new WorldSettings();
   private World flatWorld;
   @Getter
@@ -50,8 +50,8 @@ public final class WorldManager {
     enableFreshReset = pluginConfig.getBoolean("enable-fresh-reset");
 
     Document seedConfig = pluginConfig.getDocument("custom-seed");
-    useCustomSeed = seedConfig.getBoolean("config");
-    customSeed = seedConfig.getLong("seed");
+    configUseCustomSeed = seedConfig.getBoolean("config");
+    configCustomSeed = seedConfig.getLong("seed");
 
     Document sessionConfig = Challenges.getInstance().getConfigManager().getSessionConfig();
     levelName = sessionConfig.getString("level-name", "world");
@@ -71,12 +71,11 @@ public final class WorldManager {
   }
 
   public void prepareWorldReset(@Nullable CommandSender requestedBy) {
-    prepareWorldReset(requestedBy, customSeed);
+    prepareWorldReset(requestedBy, configCustomSeed);
   }
 
   public void prepareWorldReset(@Nullable CommandSender requestedBy, @Nullable Long seed) {
-    if (seed == null && useCustomSeed) seed = customSeed;
-    if (seed != null) useCustomSeed = true;
+    if (seed == null && configUseCustomSeed) seed = configCustomSeed;
 
     shutdownBecauseOfReset = true;
     ChallengeAPI.pauseTimer(false);
@@ -84,7 +83,7 @@ public final class WorldManager {
     // Stop all tasks to prevent them from overwriting configs
     Challenges.getInstance().getScheduler().stop();
 
-    resetConfigs();
+    resetConfigs(seed);
 
     String requester = requestedBy instanceof Player ? NameHelper.getName((Player) requestedBy) : "§4§lConsole";
     String kickMessage = Message.forName("server-reset").asString(requester);
@@ -93,18 +92,19 @@ public final class WorldManager {
     Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), this::stopServerNow, 3);
   }
 
-  private void resetConfigs() {
+  private void resetConfigs(@Nullable Long seed) {
     FileDocument sessionConfig = Challenges.getInstance().getConfigManager().getSessionConfig();
     sessionConfig.clear();
     sessionConfig.set("reset", true);
-    sessionConfig.set("provided-custom-seed", useCustomSeed);
-    if (useCustomSeed) {
-      sessionConfig.set("custom-seed", customSeed);
+    sessionConfig.set("provided-custom-seed", seed != null);
+    if (seed != null) {
+      sessionConfig.set("custom-seed", seed);
     }
 
-    if (!Bukkit.getWorlds().isEmpty()) {
-      sessionConfig.set("level-name", ChallengeAPI.getGameWorld(Environment.NORMAL).getName());
-      sessionConfig.set("old-seed", ChallengeAPI.getGameWorld(Environment.NORMAL).getSeed());
+    World world = ChallengeAPI.getGameWorld(Environment.NORMAL);
+    if (world != null) {
+      sessionConfig.set("level-name", world.getName());
+      sessionConfig.set("old-seed", world.getSeed());
     }
     sessionConfig.save();
 
@@ -174,17 +174,17 @@ public final class WorldManager {
       deleteWorld(world);
     }
 
-    FileDocument sessionConfig = Challenges.getInstance().getConfigManager().getSessionConfig();
-    boolean providedCustomSeed = sessionConfig.getBoolean("provided-custom-seed");
-    long customSeed = sessionConfig.getLong("custom-seed");
+    long newSeed = getCustomSeedOrRandom();
+    String newSeedString = String.valueOf(newSeed);
+    replaceServerPropertiesSeed(newSeedString);
 
+    FileDocument sessionConfig = Challenges.getInstance().getConfigManager().getSessionConfig();
     if (sessionConfig.contains("old-seed")) {
       long oldSeed = sessionConfig.getLong("old-seed");
-      long newSeed = providedCustomSeed ? customSeed : this.useCustomSeed ? this.customSeed : IRandom.secure().nextLong();
-      injectSeedViaReflection(String.valueOf(oldSeed), String.valueOf(newSeed));
+      injectSeedViaReflection(String.valueOf(oldSeed), newSeedString);
     } else {
       // this should never happen, probably old or corrupt session.json
-      Logger.warn("Could not find old level-seed session config for replacement!");
+      Logger.warn("Could not find old level-seed in session config for reflection injection!");
     }
 
     for (String world : Challenges.getInstance().getGameWorldStorage().getCustomGeneratedGameWorlds()) {
@@ -194,6 +194,31 @@ public final class WorldManager {
     sessionConfig.set("reset", false);
     sessionConfig.set("provided-custom-seed", false);
     sessionConfig.save();
+  }
+
+  private long getCustomSeedOrRandom() {
+    FileDocument sessionConfig = Challenges.getInstance().getConfigManager().getSessionConfig();
+    boolean providedCustomSeed = sessionConfig.getBoolean("provided-custom-seed");
+    long customSeed = sessionConfig.getLong("custom-seed");
+
+    if (providedCustomSeed) return customSeed;
+    if (configUseCustomSeed) return configCustomSeed;
+    return IRandom.secure().nextLong();
+  }
+
+  private void replaceServerPropertiesSeed(String newSeed) {
+    // before the world structure overhaul we pre generated a custom seed world and copied it. injecting the level-seed
+    // into the server.properties works more seamlessly. versions after the update seem to have already read the seed
+    // before we replace it, requiring an injection via reflection and rendering this function ineffective
+    File serverPropertiesFile = new File("server.properties");
+    if (!serverPropertiesFile.exists()) {
+      Logger.warn("Unable to find server.properties at {} for seed '{}' injection", serverPropertiesFile.getAbsolutePath(), newSeed);
+      return;
+    }
+
+    FileDocument properties = FileDocument.readPropertiesFile(serverPropertiesFile);
+    properties.set("level-seed", newSeed);
+    properties.save();
   }
 
   private void injectSeedViaReflection(String oldSeed, String newSeed) {
