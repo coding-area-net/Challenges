@@ -299,6 +299,37 @@
     "Are you sick??",
     "What's going on now?!"
   ],
+
+  "quiz-how-to": "Write your answer with §e/guess <answer>",
+
+  "quiz-right-answer": "§e{0} §7is the §aright §7answer!",
+  "quiz-right-answer-other": "§e{0} §7answered the question §acorrectly§7!",
+
+  "quiz-wrong-answer": "§e{0} §7is a §cwrong §7answer!",
+  "quiz-wrong-answer-other": "§e{0} §7answered the question §cincorrectly§7!",
+  "quiz-time-up": "The time is §cup§7!",
+  "quiz-cancel": "The question was §ccancelled§7!",
+
+  "quiz-right-answer-was": "The right answer was: §e{0}",
+  "quiz-right-answer-was-multiple": "the right answers were: §e{0}",
+
+  "quiz-question-often-have": "How often have you{1} §e{0}?",
+  "quiz-question-often-be": "How often did you{1} §e{0}?",
+  "quiz-question-far-be": "How far did you {0}?",
+  "quiz-question-most": "What do you have the most of these {1} {0}?",
+  "quiz-question-damage-have": "How much damage have you {0}",
+  "quiz-question-damage-taken-have": "How much damage have you taken from {0}",
+
+  "quiz-verb-traveled": "walk",
+  "quiz-verb-jumped": "jump",
+  "quiz-verb-sneaked": "sneak",
+  "quiz-verb-killed": "killed",
+  "quiz-verb-damaged": "hurt",
+  "quiz-verb-broken": "broken",
+  "quiz-verb-placed": "placed",
+  "quiz-verb-dropped": "dropped",
+  "quiz-verb-suffered": "suffered",
+
   "bossbar-timer-paused": "§8» §7The timer is §cpaused",
   "bossbar-mob-transformation": "§8» §7Last mob §8§l┃ §a{0}",
   "bossbar-biome-time-left": "§8» §7Time left in §e{0} §8§l┃ §a{1}s",

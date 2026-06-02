@@ -10,6 +10,7 @@ import net.codingarea.challenges.plugin.challenges.implementation.challenge.forc
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.inventory.*;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.miscellaneous.*;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.movement.*;
+import net.codingarea.challenges.plugin.challenges.implementation.challenge.quiz.QuizChallenge;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.randomizer.*;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.time.MaxBiomeTimeChallenge;
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.time.MaxHeightTimeChallenge;
@@ -191,6 +192,7 @@ public final class ChallengeLoader extends ModuleChallengeLoader {
     register(EnderGamesChallenge.class);
     register(InvertHealthChallenge.class);
     register(NoSharedAdvancementsChallenge.class);
+    registerWithCommand(QuizChallenge.class, "guess");
 
 
     // Goal

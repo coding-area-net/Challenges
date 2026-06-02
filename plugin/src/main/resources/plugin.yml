@@ -215,6 +215,9 @@ commands:
     usage: "/result"
     description: "Shows the result of the current force battle (if enabled)"
     permission: "challenges.result"
+  guess:
+    usage: "/guess <answer>"
+    description: "Used to guess at quiz challenge"
   skiptimer:
     usage: "/skiptimer"
     description: "Skips all activated timers"

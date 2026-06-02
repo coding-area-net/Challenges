@@ -299,6 +299,37 @@
     "Bist du etwa krank?",
     "Was geht denn jetzt ab"
   ],
+
+  "quiz-how-to": "Schreibe deine Antwort mit §e/guess <antwort>",
+
+  "quiz-right-answer": "§e{0} §7ist die §arichtige §7Antwort!",
+  "quiz-right-answer-other": "§e{0} §7hat die Frage §arichtig §7beantwortet",
+
+  "quiz-wrong-answer": "§e{0} §7ist eine §cfalsche §7Antwort!",
+  "quiz-wrong-answer-other": "§e{0} §7hat die Frage §cfalsch beantwortet",
+  "quiz-time-up": "Die Zeit ist §cabgelaufen§7!",
+  "quiz-cancel": "Die Frage wurde §cabgebrochen§7!",
+
+  "quiz-right-answer-was": "Die richtige Antwort lautete: §e{0}",
+  "quiz-right-answer-was-multiple": "Die richtigen Antworten lauteten: §e{0}",
+
+  "quiz-question-often-have": "Wie oft hast du §e{0}§7{1}?",
+  "quiz-question-often-be": "Wie oft bist du §e{0}§7{1}?",
+  "quiz-question-far-be": "Wie weit bist du {0}?",
+  "quiz-question-most": "Was hast du von diesen {1} am meisten {0}?",
+  "quiz-question-damage-have": "Wie viel Schaden hast du {0}{1}?",
+  "quiz-question-damage-taken-have": "Wie viel Schaden hast du durch {0}{1}?",
+
+  "quiz-verb-traveled": "gelaufen",
+  "quiz-verb-jumped": "gesprungen",
+  "quiz-verb-sneaked": "geschlichen",
+  "quiz-verb-killed": "getötet",
+  "quiz-verb-damaged": "zugefügt",
+  "quiz-verb-broken": "abgebaut",
+  "quiz-verb-placed": "platziert",
+  "quiz-verb-dropped": "gedropped",
+  "quiz-verb-suffered": "erlitten",
+
   "bossbar-timer-paused": "§8» §7Der Timer ist §cpausiert",
   "bossbar-mob-transformation": "§8» §7Letzter Mob §8§l┃ §a{0}",
   "bossbar-biome-time-left": "§8» §7Zeit übrig in §e{0} §8§l┃ §a{1}s",
