@@ -2,10 +2,10 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingGoal;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;

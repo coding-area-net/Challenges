@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.MenuSetting;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.blocks.BlockDropManager.DropPriority;
@@ -13,7 +14,6 @@ import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.item.ItemUtils;
-import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

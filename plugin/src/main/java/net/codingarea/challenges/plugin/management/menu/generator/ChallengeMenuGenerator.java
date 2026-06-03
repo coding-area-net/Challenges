@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.management.menu.generator;
 import com.google.common.collect.ImmutableList;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
+import net.codingarea.challenges.plugin.challenges.type.annotation.ChallengeAnnotations;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuManager;
 import net.codingarea.challenges.plugin.management.menu.position.GeneratorMenuPosition;
@@ -166,7 +167,7 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
 
   protected boolean isNew(@NotNull IChallenge challenge) {
     Version version = Challenges.getInstance().getVersion();
-    Version since = Version.getAnnotatedSince(challenge);
+    Version since = ChallengeAnnotations.getSince(challenge);
     return since.isNewerOrEqualThan(version);
   }
 

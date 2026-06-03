@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.movement;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -8,7 +9,6 @@ import net.codingarea.challenges.plugin.management.menu.generator.categorised.Se
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
-import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;

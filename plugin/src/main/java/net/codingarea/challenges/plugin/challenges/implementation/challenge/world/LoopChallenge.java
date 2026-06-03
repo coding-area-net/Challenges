@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
@@ -15,7 +16,6 @@ import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
-import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;

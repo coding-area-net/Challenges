@@ -1,13 +1,13 @@
 package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.NetherPortalSpawnSetting;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.challenges.annotations.RequireVersion;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
-import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Material;
 import org.bukkit.StructureType;
 import org.jetbrains.annotations.NotNull;

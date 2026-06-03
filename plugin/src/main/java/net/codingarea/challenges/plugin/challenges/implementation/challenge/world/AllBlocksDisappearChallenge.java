@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.wor
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.MenuSetting;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeConfigHelper;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
@@ -10,7 +11,6 @@ import net.codingarea.challenges.plugin.management.menu.generator.categorised.Se
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ListBuilder;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
-import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Chunk;
 import org.bukkit.Location;

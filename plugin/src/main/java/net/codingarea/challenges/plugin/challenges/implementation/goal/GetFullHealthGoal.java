@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifierGoal;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -9,7 +10,6 @@ import net.codingarea.challenges.plugin.management.menu.generator.categorised.Se
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
-import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeInstance;

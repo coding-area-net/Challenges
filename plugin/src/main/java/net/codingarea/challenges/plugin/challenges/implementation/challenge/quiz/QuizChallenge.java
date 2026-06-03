@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.qui
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.quiz.QuizChallenge.IQuestion.Question;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
@@ -17,7 +18,6 @@ import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.TriFunction;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
-import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.misc.StringUtils;

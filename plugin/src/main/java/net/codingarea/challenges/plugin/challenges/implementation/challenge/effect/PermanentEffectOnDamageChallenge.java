@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.effect;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
@@ -13,7 +14,6 @@ import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.TriConsumer;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
-import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.commons.common.collection.pair.Tuple;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;

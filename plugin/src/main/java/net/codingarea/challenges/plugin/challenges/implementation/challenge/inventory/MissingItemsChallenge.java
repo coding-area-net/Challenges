@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.inv
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
@@ -16,7 +17,6 @@ import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.item.ItemUtils;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
-import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.commons.common.collection.pair.Tuple;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;

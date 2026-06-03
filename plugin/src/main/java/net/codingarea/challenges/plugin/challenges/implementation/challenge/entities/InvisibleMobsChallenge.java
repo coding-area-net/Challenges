@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ent
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
@@ -9,7 +10,6 @@ import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder.PotionBuilder;
-import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.World;

@@ -1,13 +1,13 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.effect;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.MenuSetting;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
-import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.commons.common.collection.IRandom;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

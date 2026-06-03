@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.eff
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
@@ -11,7 +12,6 @@ import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
 import net.codingarea.challenges.plugin.spigot.events.PlayerIgnoreStatusChangeEvent;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
-import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.commons.common.collection.SeededRandomWrapper;
 import org.bukkit.Location;

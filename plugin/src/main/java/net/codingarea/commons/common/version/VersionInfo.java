@@ -11,10 +11,6 @@ public class VersionInfo implements Version {
 
   private final int major, minor, revision;
 
-  public VersionInfo() {
-    this(1, 0, 0);
-  }
-
   public VersionInfo(int major, int minor, int revision) {
     this.major = major;
     this.minor = minor;
@@ -75,5 +71,4 @@ public class VersionInfo implements Version {
       return def;
     }
   }
-
 }

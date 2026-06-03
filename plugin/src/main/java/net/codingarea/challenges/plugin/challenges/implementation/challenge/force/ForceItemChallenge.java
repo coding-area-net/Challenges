@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.for
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.CompletableForceChallenge;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.Prefix;
@@ -16,7 +17,6 @@ import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.item.ItemUtils;
-import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

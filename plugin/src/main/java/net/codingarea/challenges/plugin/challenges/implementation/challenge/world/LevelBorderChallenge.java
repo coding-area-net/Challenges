@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.wor
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.challenges.annotations.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -15,7 +16,6 @@ import net.codingarea.challenges.plugin.utils.bukkit.nms.NMSProvider;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.type.PacketBorder;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
-import net.codingarea.commons.common.annotations.Since;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.document.GsonDocument;
 import org.bukkit.*;

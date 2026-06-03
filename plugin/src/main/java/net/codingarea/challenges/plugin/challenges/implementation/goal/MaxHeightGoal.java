@@ -2,10 +2,10 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.FirstPlayerAtHeightGoal;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.commons.common.annotations.Since;
 import org.bukkit.Material;
 import org.bukkit.World.Environment;
 import org.jetbrains.annotations.NotNull;

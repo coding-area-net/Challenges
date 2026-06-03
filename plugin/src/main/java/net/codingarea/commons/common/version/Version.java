@@ -1,12 +1,13 @@
 package net.codingarea.commons.common.version;
 
-import net.codingarea.commons.common.annotations.Since;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
 public interface Version {
+
+  Version FALLBACK = new VersionInfo(1, 0, 0);
 
   int getMajor();
 
@@ -70,12 +71,6 @@ public interface Version {
   }
 
   @NotNull
-  static Version getAnnotatedSince(@NotNull Object object) {
-    if (!object.getClass().isAnnotationPresent(Since.class)) return new VersionInfo(1, 0, 0);
-    return parse(object.getClass().getAnnotation(Since.class).value());
-  }
-
-  @NotNull
   static <V extends Version> V findNearest(@NotNull Version target, @NotNull V[] sortedVersionsArray) {
     List<V> versions = new ArrayList<>(Arrays.asList(sortedVersionsArray));
     Collections.reverse(versions);
@@ -88,7 +83,7 @@ public interface Version {
 
   @NotNull
   static Comparator<Version> comparator() {
-    return new VersionComparator();
+    return VersionComparator.INSTANCE;
   }
 
 }

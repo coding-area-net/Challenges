@@ -1,11 +1,11 @@
-package net.codingarea.commons.common.annotations;
+package net.codingarea.challenges.plugin.challenges.type.annotation;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.annotation.*;
 
 @Documented
-@Target({ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.PACKAGE})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Since {
 
