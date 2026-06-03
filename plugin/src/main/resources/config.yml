@@ -29,6 +29,12 @@ config-version: "2.4"
 # - de (German / Deutsch)
 language: "de"
 
+# Whether the plugin should pull newer/missing translations from https://github.com/anweisen/Challenges
+# on every load. Defaults to off so the plugin doesn't make outbound HTTP calls without consent.
+language-online-update: false
+# If you want to use a custom translations file, you can specify the path to the folder where the file is located.
+language-overwrite-path: null
+
 # Makes text from the plugin appear in the 'small caps' font
 # Example: ᴛʜɪs ɪs sᴍᴀʟʟ ᴄᴀᴘs
 small-caps: false

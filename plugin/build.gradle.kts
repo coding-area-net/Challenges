@@ -26,6 +26,14 @@ dependencies {
 }
 
 tasks {
+
+  processResources {
+    from("../language") {
+      into("language")
+      include("**/*.json")
+    }
+  }
+
   jar {
     archiveClassifier = "plain"
   }
@@ -53,5 +61,5 @@ tasks {
 
 val localBuild = file("local.gradle.kts")
 if (localBuild.exists()) {
-    apply(from = localBuild)
+  apply(from = localBuild)
 }
