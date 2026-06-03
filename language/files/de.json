@@ -32,6 +32,7 @@
     "Die Challenge wurde §cnoch nicht §7gestartet"
   ],
   "new-challenge": "§a§lNeu!",
+  "updated-challenge": "§e§lUpdate!",
   "feature-disabled": "Diese Funktion ist derzeit §cdeaktiviert",
   "challenge-disabled": "Diese Challenge ist derzeit §cdeaktiviert",
   "stopped-message": "§8• §7Timer §c§lpaused §8•",

@@ -31,7 +31,7 @@ public final class MenuManager {
   public MenuManager() {
     ChallengeAPI.subscribeLoader(LanguageLoader.class, this::generateMenus);
     ChallengeAPI.subscribeLoader(LanguageLoader.class, this::generateMainMenu);
-    displayNewInFront = Challenges.getInstance().getConfigDocument().getBoolean("display-new-in-front");
+    displayNewInFront = Challenges.getInstance().getConfigDocument().getBoolean("challenge-updates.new.in-front");
     permissionToManageGUI = Challenges.getInstance().getConfigDocument().getBoolean("manage-settings-permission");
     generateMainMenu();
   }

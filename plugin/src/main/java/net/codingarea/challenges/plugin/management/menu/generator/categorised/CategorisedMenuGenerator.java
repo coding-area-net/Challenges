@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.management.menu.generator.categorised;
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
+import net.codingarea.challenges.plugin.challenges.type.annotation.ChallengeAnnotations;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -67,8 +68,11 @@ public class CategorisedMenuGenerator extends SettingsMenuGenerator {
       if (i >= 7) slot += 2;
 
       for (IChallenge challenge : generator.getChallenges()) {
-        if (newSuffix && isNew(challenge)) {
+        if (newSuffix && ChallengeAnnotations.isNew(challenge)) {
           builder.appendName(" " + Message.forName("new-challenge"));
+          break;
+        } else if (updatedSuffix && ChallengeAnnotations.isUpdated(challenge)) {
+          builder.appendName(" " + Message.forName("updated-challenge"));
           break;
         }
       }

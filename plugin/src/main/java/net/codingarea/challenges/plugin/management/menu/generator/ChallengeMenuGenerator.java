@@ -13,7 +13,7 @@ import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
-import net.codingarea.commons.common.version.Version;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -28,12 +28,15 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
 
   protected final List<IChallenge> challenges = new LinkedList<>();
   protected final boolean newSuffix;
+  protected final boolean updatedSuffix;
 
   private final int startPage;
   protected Consumer<Player> onLeaveClick;
 
   public ChallengeMenuGenerator(int startPage, Consumer<Player> onLeaveClick) {
-    newSuffix = Challenges.getInstance().getConfigDocument().getBoolean("new-suffix");
+    Document config = Challenges.getInstance().getConfigDocument();
+    this.newSuffix = config.getBoolean("challenge-updates.new.suffix");
+    this.updatedSuffix = config.getBoolean("challenge-updates.updated.suffix");
     this.startPage = startPage;
     this.onLeaveClick = onLeaveClick;
   }
@@ -96,9 +99,12 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
     Inventory inventory = getInventories().get(page + startPage);
     setSettingsItems(inventory, challenge, slot);
 
-    if (newSuffix && isNew(challenge)) {
+    if (newSuffix && ChallengeAnnotations.isNew(challenge)) {
       inventory.setItem(slot + 1, new ItemBuilder(Material.LIME_STAINED_GLASS_PANE, "§0").build());
       inventory.setItem(slot + 28, new ItemBuilder(Material.LIME_STAINED_GLASS_PANE, "§0").build());
+    } else if (updatedSuffix && ChallengeAnnotations.isUpdated(challenge)) {
+      inventory.setItem(slot + 1, new ItemBuilder(Material.YELLOW_STAINED_GLASS_PANE, "§0").build());
+      inventory.setItem(slot + 28, new ItemBuilder(Material.YELLOW_STAINED_GLASS_PANE, "§0").build());
     }
   }
 
@@ -126,7 +132,7 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
   }
 
   public void addChallengeToCache(@NotNull IChallenge challenge) {
-    if (isNew(challenge) && Challenges.getInstance().getMenuManager().isDisplayNewInFront()) {
+    if (ChallengeAnnotations.isNew(challenge) && Challenges.getInstance().getMenuManager().isDisplayNewInFront()) {
       challenges.add(countNewChallenges(), challenge);
     } else {
       challenges.add(challenge);
@@ -144,8 +150,10 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
   protected ItemBuilder getDisplayItemBuilder(@NotNull IChallenge challenge) {
     try {
       ItemBuilder item = new ItemBuilder(challenge.getDisplayItem()).hideAttributes();
-      if (newSuffix && isNew(challenge)) {
+      if (newSuffix && ChallengeAnnotations.isNew(challenge)) {
         return item.appendName(" " + Message.forName("new-challenge"));
+      } else if (updatedSuffix && ChallengeAnnotations.isUpdated(challenge)) {
+        return item.appendName(" " + Message.forName("updated-challenge"));
       } else {
         return item;
       }
@@ -165,14 +173,8 @@ public abstract class ChallengeMenuGenerator extends MultiPageMenuGenerator {
     }
   }
 
-  protected boolean isNew(@NotNull IChallenge challenge) {
-    Version version = Challenges.getInstance().getVersion();
-    Version since = ChallengeAnnotations.getSince(challenge);
-    return since.isNewerOrEqualThan(version);
-  }
-
   protected int countNewChallenges() {
-    return (int) challenges.stream().filter(this::isNew).count();
+    return (int) challenges.stream().filter(ChallengeAnnotations::isNew).count();
   }
 
   public abstract int[] getSlots();

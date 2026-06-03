@@ -90,11 +90,14 @@ permission-info: true
 # Players with the permission 'challenges.gui' will get a message if the timer is paused when they join
 timer-is-paused-info: true
 
-# New challenges will be displayed first in the setting menu.
-display-new-in-front: false
-
-# New challenges will have a suffix in their title
-new-suffix: true
+# Whether to display new/updated challenges at the front of the setting menu
+# and whether to add a suffix to their name indicating their update.
+challenge-updates:
+  new:
+    in-front: false
+    suffix: true
+  updated:
+    suffix: true
 
 # If activated players need the permission "challenges.manage" to manage settings in the gui
 # To manage the timer in the gui, players will always need the permission "challenges.timer"

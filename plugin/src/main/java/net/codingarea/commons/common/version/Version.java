@@ -58,7 +58,7 @@ public interface Version {
 
   @NotNull
   static Version parse(@Nullable String input) {
-    return parse(input, new VersionInfo(1, 0, 0));
+    return parse(input, FALLBACK);
   }
 
   static Version parse(@Nullable String input, Version def) {
