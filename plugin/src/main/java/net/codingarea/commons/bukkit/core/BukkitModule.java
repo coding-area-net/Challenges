@@ -1,19 +1,18 @@
 package net.codingarea.commons.bukkit.core;
 
-import com.google.common.base.Charsets;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import net.codingarea.commons.bukkit.utils.menu.MenuPositionListener;
 import net.codingarea.commons.bukkit.utils.misc.CompatibilityUtils;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.commons.bukkit.utils.wrapper.ActionListener;
 import net.codingarea.commons.bukkit.utils.wrapper.SimpleEventExecutor;
-import net.codingarea.commons.common.annotations.DeprecatedSince;
 import net.codingarea.commons.common.annotations.ReplaceWith;
 import net.codingarea.commons.common.collection.NamedThreadFactory;
 import net.codingarea.commons.common.collection.WrappedException;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.FileDocument;
 import net.codingarea.commons.common.config.document.YamlDocument;
+import net.codingarea.commons.common.config.document.YamlHelper;
 import net.codingarea.commons.common.logging.ILogger;
 import net.codingarea.commons.common.logging.internal.BukkitLoggerWrapper;
 import net.codingarea.commons.common.logging.lib.JavaILogger;
@@ -28,16 +27,21 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 
@@ -76,10 +80,12 @@ public abstract class BukkitModule extends JavaPlugin {
     ILogger.setConstantFactory(this.getILogger());
     trySaveDefaultConfig();
     if (wasShutdown) isReloaded = true;
-    if (firstInstall = !getDataFolder().exists()) {
+    firstInstall = !getDataFolder().exists();
+    if (firstInstall) {
       getILogger().info("Detected first install!");
     }
-    if (devMode = getConfigDocument().getBoolean("dev-mode") || getConfigDocument().getBoolean("dev-mode.enabled")) {
+    devMode = getConfigDocument().getBoolean("dev-mode") || getConfigDocument().getBoolean("dev-mode.enabled");
+    if (devMode) {
       getILogger().setLevel(Level.ALL);
       getILogger().debug("Devmode is enabled: Showing debug messages. This can be disabled in the plugin.yml ('dev-mode')");
     } else {
@@ -178,6 +184,11 @@ public abstract class BukkitModule extends JavaPlugin {
     return config != null ? config : (config = new YamlDocument(super.getConfig()));
   }
 
+  @NotNull
+  public File getConfigFile() {
+    return getDataFile("config.yml");
+  }
+
   @Override
   public void reloadConfig() {
     config = null;
@@ -189,8 +200,10 @@ public abstract class BukkitModule extends JavaPlugin {
    */
   @NotNull
   public Document getPluginDocument() {
-    return pluginConfig != null ? pluginConfig :
-      (pluginConfig = new YamlDocument(YamlConfiguration.loadConfiguration(new InputStreamReader(getResource("plugin.yml"), Charsets.UTF_8))));
+    if (pluginConfig != null) return pluginConfig;
+    InputStream resource = getResource("plugin.yml");
+    if (resource == null) throw new IllegalStateException("Could not load plugin.yml as resource");
+    return pluginConfig = new YamlDocument(YamlConfiguration.loadConfiguration(new InputStreamReader(resource, StandardCharsets.UTF_8)));
   }
 
   @NotNull
@@ -201,22 +214,6 @@ public abstract class BukkitModule extends JavaPlugin {
   @NotNull
   public Version getVersion() {
     return version != null ? version : (version = Version.parse(getDescription().getVersion()));
-  }
-
-  @NotNull
-  @Deprecated
-  @DeprecatedSince("1.3.0")
-  @ReplaceWith("MinecraftVersion.current()")
-  public MinecraftVersion getServerVersion() {
-    return MinecraftVersion.current();
-  }
-
-  @NotNull
-  @Deprecated
-  @DeprecatedSince("1.3.0")
-  @ReplaceWith("MinecraftVersion.currentExact()")
-  public Version getServerVersionExact() {
-    return MinecraftVersion.currentExact();
   }
 
   @NotNull
@@ -311,7 +308,9 @@ public abstract class BukkitModule extends JavaPlugin {
 
   @NotNull
   public ExecutorService getExecutor() {
-    return executorService != null ? executorService : (executorService = Executors.newCachedThreadPool(new NamedThreadFactory(threadId -> String.format("%s-Task-%s", this.getName(), threadId))));
+    if (executorService != null) return executorService;
+    ThreadFactory factory = new NamedThreadFactory(threadId -> String.format("%s-Task-%s", this.getName(), threadId));
+    return executorService = Executors.newCachedThreadPool(factory);
   }
 
   public void runAsync(@NotNull Runnable task) {
@@ -333,7 +332,7 @@ public abstract class BukkitModule extends JavaPlugin {
     registerListener(
       new MenuPositionListener()
     );
-    getILogger().info("Detected server version {} -> {}", getServerVersionExact(), getServerVersion());
+    getILogger().info("Detected server version {} -> {}", MinecraftVersion.currentExact(), MinecraftVersion.current());
   }
 
   private void trySaveDefaultConfig() {
@@ -341,6 +340,42 @@ public abstract class BukkitModule extends JavaPlugin {
       saveDefaultConfig();
     } catch (IllegalArgumentException ex) {
       // No default config exists
+    }
+  }
+
+
+  /**
+   * Replaces the value of an <b>already existing</b> key inside the {@code config.yml} while leaving every
+   * comment (and the rest of the file's formatting) untouched.
+   * Bukkit's {@link #saveConfig()} re-serializes the whole document and therefore strips all comments.
+   *
+   * @param key   the dot-separated path of an existing config value
+   * @param value the new value, or {@code null} to write a literal {@code null}
+   * @return whether the value could be set
+   */
+  public boolean setValueInConfig(@NotNull String key, @Nullable Object value) {
+    File file = getConfigFile();
+    if (!file.exists()) {
+      getILogger().warn("Cannot replace '{}' in config.yml: file does not exist", key);
+      return false;
+    }
+
+    try {
+      String content = Files.readString(file.toPath());
+      String updated = YamlHelper.replaceValue(content, key, value);
+      if (updated == null) {
+        getILogger().warn("Cannot replace '{}' in config.yml: key not found or has a multi-line value", key);
+        return false;
+      }
+
+      Files.writeString(file.toPath(), updated);
+
+      // keep the loaded configuration in sync with the file we just edited
+      if (isLoaded()) getConfigDocument().set(key, value);
+      return true;
+    } catch (IOException ex) {
+      getILogger().error("Could not replace '{}' in config.yml: {}", key, ex.getMessage());
+      return false;
     }
   }
 
