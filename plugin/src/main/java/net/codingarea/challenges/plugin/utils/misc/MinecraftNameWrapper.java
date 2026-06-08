@@ -112,7 +112,7 @@ public class MinecraftNameWrapper {
   @Nullable
   public static <T> T getFirstConstantByNamesOrNull(@NotNull Class<?> clazz, @NotNull String... names) {
     try {
-     return getFirstConstantByNames(clazz, names);
+      return getFirstConstantByNames(clazz, names);
     } catch (IllegalArgumentException ex) {
       return null;
     }

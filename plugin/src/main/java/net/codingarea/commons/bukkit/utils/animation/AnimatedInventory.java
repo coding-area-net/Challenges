@@ -12,13 +12,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 
 public class AnimatedInventory {
 
   private final List<AnimationFrame> frames = new ArrayList<>();
-  private final InventoryHolder holder;
+  private final Function<Integer, Inventory> sizeToNewInventory;
   private final int size;
-  private final String title;
   private SoundSample frameSound = SoundSample.CLICK, endSound = SoundSample.OPEN;
   private int frameDelay = 1;
 
@@ -27,9 +27,13 @@ public class AnimatedInventory {
   }
 
   public AnimatedInventory(@NotNull String title, int size, @Nullable InventoryHolder holder) {
-    this.title = title;
     this.size = size;
-    this.holder = holder;
+    this.sizeToNewInventory = forSize -> Bukkit.createInventory(holder, forSize, title);
+  }
+
+  public AnimatedInventory(int size, @NotNull Function<Integer, Inventory> sizeToNewInventory) {
+    this.sizeToNewInventory = sizeToNewInventory;
+    this.size = size;
   }
 
   public void open(@NotNull Player player) {
@@ -163,7 +167,7 @@ public class AnimatedInventory {
 
   @NotNull
   private Inventory createInventory() {
-    return Bukkit.createInventory(holder, size, title);
+    return sizeToNewInventory.apply(size);
   }
 
 }

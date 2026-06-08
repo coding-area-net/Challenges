@@ -15,7 +15,6 @@ import net.codingarea.commons.common.misc.ReflectionUtils;
 import org.jetbrains.annotations.CheckReturnValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.LoggerFactory;
 
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -55,7 +54,7 @@ public interface ILogger {
         } catch (ClassNotFoundException eService) { // there was no service provider interface (SLF4J 1.8.x+)
           try {
             // prints warning of missing implementation
-            LoggerFactory.getLogger(ILogger.class);
+            org.slf4j.LoggerFactory.getLogger(ILogger.class);
           } catch (NoClassDefFoundError eApi) {
             slf4jApi = false;
           }

@@ -51,8 +51,8 @@ public abstract class BukkitModule extends JavaPlugin {
   private static boolean setFirstInstance = true;
   private static boolean wasShutdown;
 
-  private final Map<String, CommandExecutor> commands = new HashMap<>();
-  private final List<Listener> listeners = new ArrayList<>();
+  private final Map<String, CommandExecutor> commandsQueue = new HashMap<>();
+  private final List<Listener> listenersQueue = new ArrayList<>();
   private final SimpleConfigManager configManager = new SimpleConfigManager(this);
 
   private JavaILogger logger;
@@ -105,8 +105,11 @@ public abstract class BukkitModule extends JavaPlugin {
   public final void onEnable() {
     if (!requirementsMet) return;
 
-    commands.forEach((name, executor) -> registerCommand0(executor, name));
-    listeners.forEach(this::registerListener);
+    commandsQueue.forEach((name, executor) -> registerCommand0(executor, name));
+    commandsQueue.clear();
+
+    listenersQueue.forEach(this::registerListener);
+    listenersQueue.clear();
 
 
     try {
@@ -128,8 +131,6 @@ public abstract class BukkitModule extends JavaPlugin {
     setFirstInstance = true;
     wasShutdown = true;
     isLoaded = false;
-    commands.clear();
-    listeners.clear();
 
     if (executorService != null)
       executorService.shutdown();
@@ -244,7 +245,7 @@ public abstract class BukkitModule extends JavaPlugin {
       if (isEnabled()) {
         registerCommand0(executor, name);
       } else {
-        commands.put(name, executor);
+        commandsQueue.put(name, executor);
       }
     }
   }
@@ -264,7 +265,7 @@ public abstract class BukkitModule extends JavaPlugin {
         registerListener0(listener);
       }
     } else {
-      this.listeners.addAll(Arrays.asList(listeners));
+      this.listenersQueue.addAll(Arrays.asList(listeners));
     }
   }
 

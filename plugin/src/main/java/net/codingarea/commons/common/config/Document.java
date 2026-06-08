@@ -263,7 +263,7 @@ public interface Document extends Config, Json {
 
   @NotNull
   @CheckReturnValue
-  static List<String> parseStringArray(@NotNull String jsonInput) {
+  static List<String> parseJsonStringArray(@NotNull String jsonInput) {
     return GsonDocument.convertArrayToStrings(GsonDocument.GSON.fromJson(jsonInput, JsonArray.class));
   }
 

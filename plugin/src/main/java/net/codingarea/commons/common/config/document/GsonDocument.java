@@ -54,11 +54,11 @@ public class GsonDocument extends AbstractDocument {
         case STRING:
           return new LazilyParsedNumber(in.nextString());
         case BOOLEAN:
-        default:
-          throw new JsonSyntaxException("Expecting number, got: " + jsonToken);
         case NULL:
           in.nextNull();
           return null;
+        default:
+          throw new JsonSyntaxException("Expecting number, got: " + jsonToken);
       }
     }
   };
@@ -99,7 +99,7 @@ public class GsonDocument extends AbstractDocument {
   public static List<String> convertArrayToStrings(@NotNull JsonArray array) {
     List<String> list = new ArrayList<>(array.size());
     for (JsonElement element : array) {
-      if (!element.isJsonObject()) continue;
+      if (!element.isJsonPrimitive()) continue;
       list.add(element.getAsString());
     }
     return list;
@@ -359,6 +359,12 @@ public class GsonDocument extends AbstractDocument {
   @NotNull
   @Override
   public Collection<String> keys() {
+    try {
+      // JsonObject#keySet was added in a later version
+      return jsonObject.keySet();
+    } catch (Throwable ignored) {
+    }
+
     Collection<String> keys = new ArrayList<>(size());
     for (Entry<String, JsonElement> entry : jsonObject.entrySet()) {
       keys.add(entry.getKey());

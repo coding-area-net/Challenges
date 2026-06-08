@@ -115,12 +115,17 @@ public final class ReflectionUtils {
   }
 
   @NotNull
-  public static String getCallerName() {
+  public static String getCallerName(int skip) {
     StackTraceElement[] trace = Thread.currentThread().getStackTrace();
-    StackTraceElement element = trace[3];
+    StackTraceElement element = trace[3 + skip];
 
     String className = StringUtils.getAfterLastIndex(element.getClassName(), ".");
     return className + "." + element.getMethodName();
+  }
+
+  @NotNull
+  public static String getCallerName() {
+    return getCallerName(1);
   }
 
   /**

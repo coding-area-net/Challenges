@@ -19,6 +19,9 @@ mongodb = "3.12.14"
 cloudnet3 = "3.4.5-RELEASE"
 cloudnet2 = "2.1.17"
 
+# plugins
+shadow = "8.3.11"
+
 
 [libraries]
 
@@ -41,3 +44,8 @@ mongodb-driver = { group = "org.mongodb", name = "mongodb-driver", version.ref =
 cloudnet3-driver = { group = "de.dytanic.cloudnet", name = "cloudnet-driver", version.ref = "cloudnet3" }
 cloudnet3-bridge = { group = "de.dytanic.cloudnet", name = "cloudnet-bridge", version.ref = "cloudnet3" }
 cloudnet2-bridge = { group = "de.dytanic.cloudnet", name = "cloudnet-api-bridge", version.ref = "cloudnet2" }
+
+
+[plugins]
+
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }

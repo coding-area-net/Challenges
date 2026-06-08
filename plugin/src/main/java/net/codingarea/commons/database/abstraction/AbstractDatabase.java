@@ -19,6 +19,7 @@ public abstract class AbstractDatabase implements Database {
 
   @Override
   public boolean disconnectSafely() {
+    if (!isConnected()) return true;
     try {
       disconnect();
       LOGGER.info("Successfully closed connection to database of type " + this.getClass().getSimpleName());

@@ -54,7 +54,7 @@ public final class ParticleUtils {
   }
 
   public static void spawnEffectCylinder(@NotNull JavaPlugin plugin, @NotNull Location location,
-                                           @NotNull Effect effect, int points, double radius, double height) {
+                                         @NotNull Effect effect, int points, double radius, double height) {
     spawnParticleCylinder(plugin, location, points, radius, height, (world, point) -> world.playEffect(point, effect, 1));
   }
 

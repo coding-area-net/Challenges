@@ -3,6 +3,7 @@ package net.codingarea.commons.bukkit.core;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.FileDocument;
 import net.codingarea.commons.common.config.document.GsonDocument;
+import net.codingarea.commons.common.config.document.PropertiesDocument;
 import net.codingarea.commons.common.config.document.YamlDocument;
 import net.codingarea.commons.common.misc.FileUtils;
 import org.jetbrains.annotations.NotNull;
@@ -39,6 +40,8 @@ public class SimpleConfigManager {
       case "yml":
       case "yaml":
         return YamlDocument.class;
+      case "properties":
+        return PropertiesDocument.class;
       default:
         throw new IllegalArgumentException("Unknown document file extension '" + extension + "'");
     }

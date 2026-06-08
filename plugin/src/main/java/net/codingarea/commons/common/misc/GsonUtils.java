@@ -59,7 +59,6 @@ public final class GsonUtils {
     }
   }
 
-
   @NotNull
   public static List<String> convertJsonArrayToStringList(@NotNull JsonArray array) {
     List<String> list = new ArrayList<>(array.size());

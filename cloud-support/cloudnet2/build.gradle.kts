@@ -1,11 +1,12 @@
 plugins {
-  `java-library`
+  id("java-library")
 }
 
 dependencies {
   compileOnly(libs.spigot.api)
   compileOnly(libs.cloudnet2.bridge)
-  compileOnly(project(":cloud-support:api"))
+
+  api(project(":cloud-support:api"))
 }
 
 repositories {

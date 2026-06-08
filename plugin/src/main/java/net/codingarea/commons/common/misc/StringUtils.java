@@ -75,7 +75,7 @@ public final class StringUtils {
       }
       builder.append(c);
     }
-    if (argument.length() > 0) builder.append(start).append(argument);
+    if (!argument.isEmpty()) builder.append(start).append(argument);
     return builder.toString();
   }
 
