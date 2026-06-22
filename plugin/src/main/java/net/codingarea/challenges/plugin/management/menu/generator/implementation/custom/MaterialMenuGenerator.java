@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.management.menu.generator.implementation.custom;
 
 import net.codingarea.challenges.plugin.challenges.custom.settings.SettingType;
-import net.codingarea.challenges.plugin.management.menu.generator.ChooseItemGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.ChooseItemGenerator;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;

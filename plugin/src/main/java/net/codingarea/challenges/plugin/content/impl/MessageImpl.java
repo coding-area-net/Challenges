@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.content.impl;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.ItemDescription;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
 import net.codingarea.challenges.plugin.utils.misc.FontUtils;
@@ -84,10 +84,7 @@ public class MessageImpl implements Message {
   public String[] asArray(@NotNull Object... args) {
     if (value == null) return new String[]{Message.unknown(name)};
     args = BukkitStringUtils.replaceArguments(args, true);
-    LanguageLoader loader = Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class);
-    boolean capsFont = false;
-    if (loader != null) capsFont = loader.isSmallCapsFont();
-    return capsFont ? FontUtils.toSmallCaps(StringUtils.format(value, args)) : StringUtils.format(value, args);
+    return StringUtils.format(value, args);
   }
 
   @NotNull
@@ -144,9 +141,8 @@ public class MessageImpl implements Message {
   }
 
   private void doSendLine(@NotNull Consumer<? super BaseComponent> sender, @NotNull Prefix prefix, BaseComponent component) {
-    LanguageLoader loader = Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class);
-    boolean capsFont = false;
-    if (loader != null) capsFont = loader.isSmallCapsFont();
+    LanguageLoader loader = Challenges.getInstance().getLoaderRegistry().findLoaderByClassOrThrow(LanguageLoader.class);
+    boolean capsFont = loader.isSmallCapsFont();
 
     BaseComponent component1 = component;
     if (capsFont) {

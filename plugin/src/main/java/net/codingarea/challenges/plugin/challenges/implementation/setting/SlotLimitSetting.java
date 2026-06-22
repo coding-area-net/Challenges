@@ -3,13 +3,12 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
 import net.codingarea.challenges.plugin.spigot.events.PlayerIgnoreStatusChangeEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -28,13 +27,7 @@ import org.jetbrains.annotations.NotNull;
 public class SlotLimitSetting extends Modifier {
 
   public SlotLimitSetting() {
-    super(MenuType.SETTINGS, 1, 36, 36);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.BARRIER, Message.forName("item-slot-limit-setting"));
+    super(MenuType.SETTINGS, null, 1, 36, 36, new ItemStack(Material.BARRIER), "slot-limit");
   }
 
   @Override
@@ -84,7 +77,7 @@ public class SlotLimitSetting extends Modifier {
     if (ignorePlayer(player)) return;
 
     ItemStack item = player.getInventory().getItem(slot);
-    if (item != null && !item.isSimilar(ItemBuilder.BLOCKED_ITEM)) {
+    if (item != null && !item.isSimilar(LegacyItemBuilder.BLOCKED_ITEM)) {
       if (!Bukkit.isPrimaryThread()) {
         Bukkit.getScheduler().runTask(plugin, () -> {
           player.getWorld().dropItemNaturally(player.getLocation(), item);
@@ -93,12 +86,12 @@ public class SlotLimitSetting extends Modifier {
         player.getWorld().dropItemNaturally(player.getLocation(), item);
       }
     }
-    player.getInventory().setItem(slot, ItemBuilder.BLOCKED_ITEM);
+    player.getInventory().setItem(slot, LegacyItemBuilder.BLOCKED_ITEM);
   }
 
   private void unBlockSlot(@NotNull Player player, int slot) {
     ItemStack item = player.getInventory().getItem(slot);
-    if (item != null && item.isSimilar(ItemBuilder.BLOCKED_ITEM)) {
+    if (item != null && item.isSimilar(LegacyItemBuilder.BLOCKED_ITEM)) {
       player.getInventory().setItem(slot, null);
     }
   }
@@ -117,7 +110,7 @@ public class SlotLimitSetting extends Modifier {
   public void onPlayerDropItem(@NotNull PlayerDropItemEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
-    if (!event.getItemDrop().getItemStack().isSimilar(ItemBuilder.BLOCKED_ITEM)) return;
+    if (!event.getItemDrop().getItemStack().isSimilar(LegacyItemBuilder.BLOCKED_ITEM)) return;
     event.setCancelled(true);
   }
 
@@ -125,7 +118,7 @@ public class SlotLimitSetting extends Modifier {
   public void onClick(@NotNull BlockPlaceEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
-    if (!event.getItemInHand().isSimilar(ItemBuilder.BLOCKED_ITEM)) return;
+    if (!event.getItemInHand().isSimilar(LegacyItemBuilder.BLOCKED_ITEM)) return;
     event.setCancelled(true);
   }
 
@@ -134,16 +127,16 @@ public class SlotLimitSetting extends Modifier {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
 
-    if (event.getMainHandItem() != null && event.getMainHandItem().isSimilar(ItemBuilder.BLOCKED_ITEM)) {
+    if (event.getMainHandItem() != null && event.getMainHandItem().isSimilar(LegacyItemBuilder.BLOCKED_ITEM)) {
       event.setCancelled(true);
-    } else if (event.getOffHandItem() != null && event.getOffHandItem().isSimilar(ItemBuilder.BLOCKED_ITEM)) {
+    } else if (event.getOffHandItem() != null && event.getOffHandItem().isSimilar(LegacyItemBuilder.BLOCKED_ITEM)) {
       event.setCancelled(true);
     }
   }
 
   @EventHandler(priority = EventPriority.HIGH)
   public void onPlayerDeath(@NotNull PlayerDeathEvent event) {
-    event.getDrops().removeIf(itemStack -> itemStack.isSimilar(ItemBuilder.BLOCKED_ITEM));
+    event.getDrops().removeIf(itemStack -> itemStack.isSimilar(LegacyItemBuilder.BLOCKED_ITEM));
   }
 
   @EventHandler(priority = EventPriority.HIGH)

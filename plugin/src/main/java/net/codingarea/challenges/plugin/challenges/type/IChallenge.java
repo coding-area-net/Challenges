@@ -1,14 +1,17 @@
 package net.codingarea.challenges.plugin.challenges.type;
 
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.challenges.ChallengeManager;
 import net.codingarea.challenges.plugin.management.challenges.entities.GamestateSaveable;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
+import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.common.config.Document;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Locale;
 
 public interface IChallenge extends GamestateSaveable {
 
@@ -63,10 +66,16 @@ public interface IChallenge extends GamestateSaveable {
   SettingCategory getCategory();
 
   @NotNull
-  ItemStack getDisplayItem();
+  ItemBuilder getDisplayItem(@NotNull Locale locale);
 
   @NotNull
-  ItemStack getSettingsItem();
+  ItemBuilder getSettingsItem(@NotNull Locale locale);
+
+  @NotNull
+  LocalizableMessage getChallengeName();
+
+  @NotNull
+  LocalizableMessage getChallengeDescription();
 
   void handleClick(@NotNull ChallengeMenuClickInfo info);
 

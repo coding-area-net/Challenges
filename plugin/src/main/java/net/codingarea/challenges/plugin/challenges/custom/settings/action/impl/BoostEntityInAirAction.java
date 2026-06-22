@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.action.impl;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.EntityTargetAction;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.EntityUtils;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import org.bukkit.Material;
@@ -17,7 +17,7 @@ public class BoostEntityInAirAction extends EntityTargetAction {
   public BoostEntityInAirAction(String name) {
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true).createValueChild().fill(builder -> {
       builder.addModifierSetting("strength",
-        new ItemBuilder(Material.FEATHER, Message.forName("item-custom-action-boost_in_air-strength")),
+        new LegacyItemBuilder(Material.FEATHER, Message.forName("item-custom-action-boost_in_air-strength")),
         1, 1, 10,
         value -> Message.forName("amplifier").asString(),
         integer -> ""

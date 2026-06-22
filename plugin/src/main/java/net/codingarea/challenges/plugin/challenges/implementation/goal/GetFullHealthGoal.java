@@ -4,11 +4,11 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifierGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -17,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,8 +27,7 @@ import java.util.List;
 public class GetFullHealthGoal extends SettingModifierGoal {
 
   public GetFullHealthGoal() {
-    super(MenuType.GOAL, 1, 20, 20);
-    setCategory(SettingCategory.FASTEST_TIME);
+    super(MenuType.GOAL, SettingCategory.FASTEST_TIME, 1, 20, 20, new ItemStack(Material.AZURE_BLUET), "get-full-health-goal");
   }
 
   @Override
@@ -57,16 +57,10 @@ public class GetFullHealthGoal extends SettingModifierGoal {
     }
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.AZURE_BLUET, Message.forName("item-get-full-health-goal"));
-  }
-
   @Nullable
   @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-heart-start-description").asArray(getValue() / 2f);
+  public LocalizableMessage getSettingsDescription() {
+    return MessageKey.of("item-heart-start-description").withArgs(getValue() / 2f);
   }
 
   @Override

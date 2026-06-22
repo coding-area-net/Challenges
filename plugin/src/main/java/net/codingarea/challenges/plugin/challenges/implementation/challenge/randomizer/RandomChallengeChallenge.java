@@ -9,13 +9,12 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallen
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,21 +25,14 @@ public class RandomChallengeChallenge extends TimedChallenge {
   private AbstractChallenge lastUsed;
 
   public RandomChallengeChallenge() {
-    super(MenuType.CHALLENGES, 3, 60, 6, false);
-    setCategory(SettingCategory.RANDOMIZER);
+    super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 3, 60, 6, false, new ItemStack(Material.REDSTONE), "random-challenge");
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.REDSTONE, Message.forName("item-random-challenge-challenge"));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-time-seconds-description").asArray(getValue() * 10);
-  }
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-time-seconds-description").asArray(getValue() * 10);
+//  }
 
   @Override
   public void playValueChangeTitle() {

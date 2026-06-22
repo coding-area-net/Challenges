@@ -11,13 +11,18 @@ allprojects {
   }
 }
 
+var javaVersion = libs.versions.java.get()
+
 subprojects {
   apply(plugin = "java-library")
 
+  group = "${project.group}${project.path.replace(":", ".")}" // hacky fix..
+
   extensions.configure<JavaPluginExtension>("java") {
-    sourceCompatibility = JavaVersion.VERSION_16
-    targetCompatibility = JavaVersion.VERSION_16
     withSourcesJar()
+    toolchain {
+      languageVersion.set(JavaLanguageVersion.of(javaVersion))
+    }
   }
 
   tasks.withType<JavaCompile>().configureEach {

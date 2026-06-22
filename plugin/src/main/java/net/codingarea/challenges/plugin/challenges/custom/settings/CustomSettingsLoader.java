@@ -6,7 +6,7 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.action.Challe
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.impl.*;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.impl.*;
-import net.codingarea.challenges.plugin.management.challenges.annotations.RequireVersion;
+import net.codingarea.challenges.plugin.challenges.type.annotation.RequireVersion;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Bukkit;

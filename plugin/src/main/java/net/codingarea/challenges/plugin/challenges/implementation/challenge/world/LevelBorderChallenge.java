@@ -3,18 +3,17 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.wor
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
+import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.management.challenges.annotations.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.NMSProvider;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.type.PacketBorder;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.document.GsonDocument;
@@ -26,6 +25,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -46,8 +46,7 @@ public class LevelBorderChallenge extends Setting {
   private int bestPlayerLevel = 0;
 
   public LevelBorderChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.WORLD);
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.ENCHANTING_TABLE), "level-border-challenge");
   }
 
   @Override
@@ -72,12 +71,6 @@ public class LevelBorderChallenge extends Setting {
   protected void onDisable() {
     borderReset();
     bossbar.hide();
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.ENCHANTING_TABLE, Message.forName("item-level-border-challenges"));
   }
 
   public void checkBorderSize(boolean animate) {

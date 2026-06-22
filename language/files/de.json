@@ -1,4 +1,272 @@
 {
+  "generic": {
+    "disabled": "<red>Deaktiviert</red>",
+    "enabled": "<green>Aktiviert</green>",
+    "customized": "<gold>Anpassen</gold>"
+  },
+  "menu": {
+    "generic": {
+      "click-prefix": "<gray><i>[Klick]</i> <dark_gray>{@symbol.arrow}</dark_gray></gray> ",
+      "shift-click-prefix": "<gray><i>[Shift-Klick]</i> <dark_gray>{@symbol.arrow}</dark_gray></gray> ",
+      "right-click-prefix": "<gray><i>[Rechts-Klick]</i> <dark_gray>{@symbol.arrow}</dark_gray></gray> ",
+      "left-click-prefix": "<gray><i>[Links-Klick]</i> <dark_gray>{@symbol.arrow}</dark_gray></gray> "
+    },
+    "timer": {
+      "name": "Timer",
+      "name-state": "Status",
+      "name-time": "Zeit",
+      "item-name-format": "{@item-format('<gray>{0}:</gray> <yellow><b>{1}</b></yellow> <dark_gray>(<yellow>{2}</yellow>)</dark_gray>')}",
+      "item-add-format": [
+        "{@item-name-format('{4}', '{0}', '{1}')}",
+        " ",
+        "{@generic.click-prefix}<green>+1</green> {3}</gray>",
+        "{@generic.shift-click-prefix}<dark_gray>{@symbol.arrow}</dark_gray> <green>+{2}</green> {4}</gray>"
+      ],
+      "item-subtract-format": [
+        "{@item-name-format('{4}', '{0}', '{1}')}",
+        " ",
+        "{@generic.click-prefix}<red>-1</red> {3}</gray>",
+        "{@generic.shift-click-prefix} <red>-{2}</red> {4}</gray>"
+      ],
+      "item-state-format": [
+        "{@item-name-format('{2}', '{0}', '{1}')}",
+        " ",
+        "{@generic.click-prefix}<red>Zeit zurücksetzen</red>"
+      ],
+      "item-seconds": "{@item-state-format('{0}', '{1}', 'Sekunden')}",
+      "item-seconds-add": "{@item-add-format('{0}', '{1}', '{2}', 'Sekunde', 'Sekunden')}",
+      "item-seconds-subtract": "{@item-subtract-format('{0}', '{1}', '{2}', 'Sekunde', 'Sekunden')}",
+      "item-minutes": "{@item-state-format('{0}', '{1}', 'Minuten')}",
+      "item-minutes-add": "{@item-add-format('{0}', '{1}', '{2}', 'Minute', 'Minuten')}",
+      "item-minutes-subtract": "{@item-subtract-format('{0}', '{1}', '{2}', 'Minute', 'Minuten')}",
+      "item-hours": "{@item-state-format('{0}', '{1}', 'Stunden')}",
+      "item-hours-add": "{@item-add-format('{0}', '{1}', '{2}', 'Stunde', 'Stunden')}",
+      "item-hours-subtract": "{@item-subtract-format('{0}', '{1}', '{2}', 'Stunde', 'Stunden')}",
+      "item-days": "{@item-state-format('{0}', '{1}', 'Tage')}",
+      "item-days-add": "{@item-add-format('{0}', '{1}', '{2}', 'Tag', 'Tage')}",
+      "item-days-subtract": "{@item-subtract-format('{0}', '{1}', '{2}', 'Tag', 'Tage')}"
+    },
+    "damage": {
+      "name": "Schaden"
+    },
+    "goal": {
+      "name": "Ziele"
+    },
+    "items-blocks": {
+      "name": "Items & Blöcke"
+    },
+    "challenges": {
+      "name": "Challenges"
+    },
+    "settings": {
+      "name": "Einstellungen"
+    },
+    "custom": {
+      "name": "Individuelle Challenges"
+    }
+  },
+  "category": {
+    "misc_challenge": {
+      "menu": "Sonstige",
+      "desc": [
+        "Challenges, die *keiner Kategorie*",
+        "zugeordnet werden können"
+      ],
+      "info": [
+        "{@info-format('Aktiviert', '<green>{0}</green><dark_gray>/</dark_gray>{1}')}"
+      ]
+    },
+    "randomizer": {
+      "menu": "Randomizer",
+      "desc": [
+        "Erlebe ein komplett",
+        "*durcheinandergebrachtes* Spiel"
+      ]
+    },
+    "limited_time": {
+      "menu": "Limitierte Zeit",
+      "desc": [
+        "Du wirst bei verschiedenen",
+        "Faktoren *zeitlich eingeschränkt*"
+      ]
+    },
+    "force": {
+      "menu": "Zwischenziele",
+      "name": "*{@menu} (Force)*",
+      "desc": [
+        "Du musst *bestimmte Zwischenziele*",
+        "erfüllen, sonst stirbst du"
+      ]
+    },
+    "world": {
+      "menu": "Welteinfluss",
+      "desc": [
+        "Die Welt wird nicht mehr",
+        "*wiedererkennbar* sein"
+      ]
+    },
+    "damage": {
+      "menu": "Schaden",
+      "desc": [
+        "Du wirst auf *verschiedenste*",
+        "Arten *Schaden* nehmen"
+      ]
+    },
+    "effect": {
+      "menu": "Effekte",
+      "desc": [
+        "Erlebe verrückte *Effekte*"
+      ]
+    },
+    "inventory": {
+      "menu": "Inventar",
+      "desc": [
+        "Dein *Inventar* wird *verdreht*"
+      ]
+    },
+    "movement": {
+      "menu": "Bewegung",
+      "desc": [
+        "Du wirst in deinen *Bewegungen*",
+        "*eingeschränkt*"
+      ]
+    },
+    "entities": {
+      "menu": "Entities",
+      "desc": [
+        "Entities werden *verändert*"
+      ]
+    },
+    "extra_world": {
+      "menu": "Extra Welt",
+      "desc": [
+        "Challenges, die in einer",
+        "*anderen Welt* spielen"
+      ]
+    },
+    "misc_goal": {
+      "menu": "Sonstige Ziele",
+      "desc": [
+        "Ziele, die *keiner Kategorie*",
+        "zugeordnet werden können"
+      ],
+      "info": "{@info-format('Aktuell', '{2}')}"
+    },
+    "kill_entity": {
+      "menu": "Entity töten",
+      "desc": [
+        "Töte *bestimmte Entities*,",
+        "um zu gewinnen"
+      ]
+    },
+    "score_points": {
+      "menu": "Punkte sammeln",
+      "desc": [
+        "Erziele die *meisten Punkte* in",
+        "einem *bestimmten Bereich*",
+        " ",
+        "Der Spieler mit den *meisten Punkten*",
+        "gewinnt, wenn der *Timer abläuft*"
+      ]
+    },
+    "fastest_time": {
+      "menu": "Schnellste Zeit",
+      "desc": [
+        "Der *schnellste Spieler*, der das Ziel",
+        "erreicht *gewinnt* die Challenge"
+      ]
+    },
+    "force_battle": {
+      "menu": "Force Battles",
+      "desc": [
+        "Erfülle die *vorgegebenen Zwischenziele*,",
+        "um Punkte zu erhalten.",
+        " ",
+        "Der Spieler mit den *meisten Punkten*",
+        "*gewinnt* die Challenge wenn der Timer *abläuft*"
+      ]
+    }
+  },
+  "challenge": {
+    "random-challenge": {
+      "name": "*Random Challenge*",
+      "desc": [
+        "In einem *gesetzten Intervall*",
+        "wird eine *zufällige Challenge* aktiviert"
+      ]
+    },
+    "randomized-hp": {
+      "name": "*Zufällige HP*",
+      "desc": [
+        "Die *Leben* aller *Mobs*",
+        "sind *zufällig*"
+      ]
+    },
+    "goal-ender-dragon": {
+      "name": "*Enderdrache*",
+      "desc": [
+        "Töte den *Enderdrachen* um zu gewinnen"
+      ]
+    },
+    "goal-wither": {
+      "name": "*Wither*",
+      "desc": [
+        "Töte einen *Wither* um zu gewinnen"
+      ]
+    },
+    "goal-elder-guardian": {
+      "name": "*Elder Guardian*",
+      "desc": [
+        "Töte einen *Großen Wächter* um zu gewinnen"
+      ]
+    },
+    "goal-warden": {
+      "name": "*Warden*",
+      "desc": [
+        "Töte einen *Warden* um zu gewinnen"
+      ]
+    },
+    "goal-all-bosses": {
+      "name": "*Alle Bosse*",
+      "desc": [
+        "Es müssen *alle Bosse* einmal",
+        "*getötet* werden, um zu *gewinnen*",
+        " ",
+        "<dark_gray>(</dark_gray>{@goal-ender-dragon.name}, {@goal-wither.name}, {@goal-elder-guardian.name}<dark_gray>)</dark_gray>"
+      ]
+    },
+    "goal-all-bosses-new": {
+      "name": "*Alle Bosse (+ Warden)*",
+      "desc": [
+        "Es müssen *alle Bosse* einmal",
+        "*getötet* werden, um zu *gewinnen*",
+        " ",
+        "<dark_gray>(</dark_gray>{@goal-ender-dragon.name}, {@goal-wither.name}, {@goal-elder-guardian.name}, {@goal-warden.name}<dark_gray>)</dark_gray>"
+      ]
+    }
+  },
+  "title": {
+    "timer-started": [
+      " ",
+      "<dark_gray>{@symbol.arrow}</dark_gray> <gray>Timer</gray> <green>fortgesetzt</green>"
+    ],
+    "timer-paused": [
+      " ",
+      "<dark_gray>{@symbol.arrow}</dark_gray> <gray>Timer</gray> <green>pausiert</green>"
+    ],
+    "challenge-enabled": [
+      "<yellow>{0}</yellow>",
+      "<dark_green><b>{@symbol.check}</b></dark_green> <dark_gray>{@symbol.vertical}</dark_grays> <green>Aktiviert</green>"
+    ],
+    "challenge-disabled": [
+      "<yellow>{0}</yellow>",
+      "<dark_red>{@symbol.x}</dark_red> <dark_gray>┃</dark_gray> <red>Deaktiviert</red>"
+    ],
+    "challenge-value-changed": [
+      "<yellow>{0}</yellow>",
+      "<dark_gray>{@symbol.arrow}</dark_gray> <yellow>{1}</yellow>"
+    ]
+  },
   "syntax": "Bitte nutze §e/{0}",
   "reload": "Challenges Plugin wird neu geladen...",
   "reload-failed": "Ein §cFehler §7ist während dem Reload aufgetreten",
@@ -31,11 +299,11 @@
     "Der Server kann §cnicht resettet §7werden",
     "Die Challenge wurde §cnoch nicht §7gestartet"
   ],
-  "new-challenge": "§a§lNeu!",
-  "updated-challenge": "§e§lUpdate!",
+  "new-challenge-suffix": "{@challenge.suffix-format('<b><gradient:#0BC418:#5CFC60>Neu!</gradient></b>')}",
+  "updated-challenge-suffix": "{@challenge.suffix-format('<b><gradient:#FFEE00:#C7FC4A>Update!</gradient></b>')}",
   "feature-disabled": "Diese Funktion ist derzeit §cdeaktiviert",
   "challenge-disabled": "Diese Challenge ist derzeit §cdeaktiviert",
-  "stopped-message": "§8• §7Timer §c§lpaused §8•",
+  "stopped-message": "§8• §7Timer §c§lpausiert §8•",
   "count-up-message": "§8• §7Time: §a§l{0} §8•",
   "count-down-message": "§8• §7Time: §c§l{0} §8•",
   "timer-not-started": "Der Timer wurde noch §cnicht gestartet",
@@ -76,8 +344,8 @@
   "not-op": [
     "§7Um dieses Plugin zu nutzen, musst du die Berechtigung haben. Gib dir die Berechtigung in der Serverkonsole mit: /op [name]"
   ],
-  "join-message": "§e{0} §7hat den Server §abetreten",
-  "quit-message": "§e{0} §7hat den Server §cverlassen",
+  "join-message": "<gray><yellow>{0}</yellow> hat den Server <green>betreten</green></gray>",
+  "quit-message": "<gray><yellow>{0}</yellow> hat den Server <red>verlassen</red></gray>",
   "timer-paused-message": [
     "Der Timer ist noch §cpausiert",
     "Nutze §e/timer resume §7um ihn zu starten"
@@ -231,7 +499,7 @@
   "loops-cleared": "§e{0} §7Loops abgebrochen",
   "stopped-moving": "§e{0} §7hat sich zu lange nicht bewegt",
   "all-advancements-goal": "§7Advancements §8» §e{0}",
-  "Chalheight-reached": "§e{0} §7hat Höhe §e{1} §7erreicht!",
+  "height-reached": "§e{0} §7hat Höhe §e{1} §7erreicht!",
   "race-goal-reached": "§e{0} §7hat das Ziel erreicht!",
   "points-change": "§e{0} §7Punkte",
   "force-item-battle-found": "Du hast §e{0} §7gefunden!",
@@ -300,27 +568,21 @@
     "Bist du etwa krank?",
     "Was geht denn jetzt ab"
   ],
-
   "quiz-how-to": "Schreibe deine Antwort mit §e/guess <antwort>",
-
   "quiz-right-answer": "§e{0} §7ist die §arichtige §7Antwort!",
   "quiz-right-answer-other": "§e{0} §7hat die Frage §arichtig §7beantwortet",
-
   "quiz-wrong-answer": "§e{0} §7ist eine §cfalsche §7Antwort!",
   "quiz-wrong-answer-other": "§e{0} §7hat die Frage §cfalsch beantwortet",
   "quiz-time-up": "Die Zeit ist §cabgelaufen§7!",
   "quiz-cancel": "Die Frage wurde §cabgebrochen§7!",
-
   "quiz-right-answer-was": "Die richtige Antwort lautete: §e{0}",
   "quiz-right-answer-was-multiple": "Die richtigen Antworten lauteten: §e{0}",
-
   "quiz-question-often-have": "Wie oft hast du §e{0}§7{1}?",
   "quiz-question-often-be": "Wie oft bist du §e{0}§7{1}?",
   "quiz-question-far-be": "Wie weit bist du {0}?",
   "quiz-question-most": "Was hast du von diesen {1} am meisten {0}?",
   "quiz-question-damage-have": "Wie viel Schaden hast du {0}{1}?",
   "quiz-question-damage-taken-have": "Wie viel Schaden hast du durch {0}{1}?",
-
   "quiz-verb-traveled": "gelaufen",
   "quiz-verb-jumped": "gesprungen",
   "quiz-verb-sneaked": "geschlichen",
@@ -330,7 +592,6 @@
   "quiz-verb-placed": "platziert",
   "quiz-verb-dropped": "gedropped",
   "quiz-verb-suffered": "erlitten",
-
   "bossbar-timer-paused": "§8» §7Der Timer ist §cpausiert",
   "bossbar-mob-transformation": "§8» §7Letzter Mob §8§l┃ §a{0}",
   "bossbar-biome-time-left": "§8» §7Zeit übrig in §e{0} §8§l┃ §a{1}s",
@@ -373,15 +634,25 @@
   "scoreboard-title": "§7» §f§lChallenge",
   "scoreboard-leaderboard": "§e#{0} §8┃ §7{1} §8» §e{2}",
   "your-place": "§7Dein Platz §8» §e{0}",
-  "server-reset": [
-    "§8————————————————————",
+  "server-reset-restart": [
+    "§8§m                               §r",
     " ",
     "§8» §cServerreset",
     " ",
     "§7Reset durch §4§l{0}",
     "§7Der Server startet nun §cneu",
     " ",
-    "§8————————————————————"
+    "§8§m                               §r"
+  ],
+  "server-reset-stop": [
+    "§8§m                               §r",
+    " ",
+    "§8» §cServerreset",
+    " ",
+    "§7Reset durch §4§l{0}",
+    "§7Der Server wird nun §cgestoppt",
+    " ",
+    "§8§m                               §r"
   ],
   "challenge-end-timer-hit-zero": [
     " ",
@@ -413,7 +684,7 @@
   ],
   "challenge-end-goal-failed": [
     " ",
-    "§cDie Challenge ist vorbei! §6#FeelsBadMan ✞",
+    "§cDie Challenge ist vorbei! §6#FeelsBadMan {@symbol.cross}",
     "§7Zeit verschwendet: §a§l{0}",
     "§7Seed: §e§l{2}",
     " "
@@ -447,7 +718,7 @@
   "item-menu-timer": "§8• §5Timer §8┃ §e/timer §8•",
   "item-menu-leaderboard": "§8• §6Leaderboard §8┃ §e/leaderboard §8•",
   "item-menu-stats": "§8• §2Statistiken §8┃ §e/stats §8•",
-  "menu-title": "Menu",
+  "menu-main-title": "{@menu.title-format('Menu')}",
   "menu-timer": "§6Timer",
   "menu-goal": "§5Ziel",
   "menu-damage": "§7Schaden",
@@ -458,83 +729,6 @@
   "lore-category-activated-count": "§7Aktiviert §8» §a{0}§8/§7{1}",
   "lore-category-activated": "§7Aktiviert §8» §aJa",
   "lore-category-deactivated": "§7Aktiviert §8» §cNein",
-  "category-misc_challenge": [
-    "§9Miscellaneous",
-    "Challenges, die *keiner Kategorie*",
-    "zugeordnet werden können"
-  ],
-  "category-randomizer": [
-    "§6Randomizer",
-    "Erlebe ein komplett",
-    "*durcheinandergebrachtes* Spiel"
-  ],
-  "category-limited_time": [
-    "§aLimitierte Zeit",
-    "Du wirst bei verschiedenen",
-    "Faktoren *zeitlich eingeschränkt*"
-  ],
-  "category-force": [
-    "§3Zwischenziele (Force)",
-    "Du musst *bestimmte Zwischenziele*",
-    "erfüllen, sonst stirbst du"
-  ],
-  "category-world": [
-    "§4Weltveränderung",
-    "Die Welt wird nicht mehr",
-    "*wiedererkennbar* sein"
-  ],
-  "category-damage": [
-    "§cSchaden",
-    "Neue *Schadens Regeln*"
-  ],
-  "category-effect": [
-    "§5Effekte",
-    "Erlebe verrückte *Effekte*"
-  ],
-  "category-inventory": [
-    "§6Inventory",
-    "Dein Inventar wird *verdreht*"
-  ],
-  "category-movement": [
-    "§aBewegung",
-    "Du wirst in deinen Bewegungen *eingeschränkt*"
-  ],
-  "category-entities": [
-    "§bEntities",
-    "Entities werden *verändert*"
-  ],
-  "category-extra_world": [
-    "§aExtra Welt",
-    "Challenges, die in einer",
-    "*anderen Welt* spielen"
-  ],
-  "category-misc_goal": [
-    "§9Miscellaneous",
-    "Ziele, die *keiner Kategorie*",
-    "zugeordnet werden können"
-  ],
-  "category-kill_entity": [
-    "§cEntity töten",
-    "Töte *bestimmte Entities*,",
-    "um zu gewinnen"
-  ],
-  "category-score_points": [
-    "§eMeiste Punkte",
-    "Erziele die *meisten Punkte* in",
-    "einem *bestimmten Bereich*."
-  ],
-  "category-fastest_time": [
-    "§6Schnellste Zeit",
-    "Sei der *schnellste Spieler*, der",
-    "das Ziel erfüllt"
-  ],
-  "category-force_battle": [
-    "§bForce Battles",
-    "Erfülle die *vorgegebenen Zwischenziele*,",
-    "um Punkte zu erhalten.",
-    " ",
-    "Der Spieler mit den *meisten Punkten* gewinnt."
-  ],
   "item-time-seconds-description": "§8» §7Zeit: §e{0} §7Sekunden",
   "item-time-seconds-range-description": "§8» §7Zeit: §e{0}-{1} §7Sekunden",
   "item-time-minutes-description": "§8» §7Zeit: §e{0} §7Minuten",
@@ -851,11 +1045,6 @@
     "Alle *paar Minuten* musst du ein random *Jump and Run* machen,",
     "welches jedes Mal *schwieriger* wird"
   ],
-  "item-randomized-hp-challenge": [
-    "§4Randomized HP",
-    "Die *Leben* aller *Mobs*",
-    "sind *random*"
-  ],
   "item-snake-challenge": [
     "§9Snake",
     "*Jeder Spieler* zieht eine",
@@ -1053,11 +1242,6 @@
     "§6Permanente Effekte",
     "Du bekommst immer, wenn du *Schaden*",
     "erleidest, einen *zufälligen Effekt*"
-  ],
-  "item-random-challenge-challenge": [
-    "§cRandom Challenge",
-    "In einem *gesetzten Intervall*",
-    "wird eine *Random Challenge* aktiviert"
   ],
   "item-anvil-rain-challenge": [
     "§cAmboss Regen",
@@ -1290,22 +1474,6 @@
     "Der *schaden* von allen *Spielern* ist",
     "zusammenaddiert und wird nach einer bestimmten *Zeit* hinzugefügt."
   ],
-  "item-dragon-goal": [
-    "§5Enderdrache",
-    "Töte den *Enderdrachen* um zu gewinnen"
-  ],
-  "item-wither-goal": [
-    "§dWither",
-    "Töte einen *Wither* um zu gewinnen"
-  ],
-  "item-elder-guardian-goal": [
-    "§bElder Guardian",
-    "Töte einen *Elder Guardian* um zu gewinnen"
-  ],
-  "item-warden-goal": [
-    "§5Warden",
-    "Töte einen *Warden* um zu gewinnen"
-  ],
   "item-iron-golem-goal": [
     "§bEisengolem",
     "Töte einen *Eisengolem* um zu gewinnen"
@@ -1348,16 +1516,6 @@
   "item-collect-wood-goal-overworld": "§aOverworld",
   "item-collect-wood-goal-nether": "§cNether",
   "item-collect-wood-goal-both": "§9Beide",
-  "item-all-bosses-goal": [
-    "§bAlle Bosse",
-    "Es müssen *alle Bosse* einmal",
-    "*getötet* werden, um zu *gewinnen*"
-  ],
-  "item-all-bosses-new-goal": [
-    "§5Alle Bosse (+ Warden)",
-    "Es müssen *alle Bosse* einmal",
-    "*getötet* werden, um zu *gewinnen*"
-  ],
   "item-all-mobs-goal": [
     "§bAlle Mobs",
     "Es müssen *alle Mobs* einmal",

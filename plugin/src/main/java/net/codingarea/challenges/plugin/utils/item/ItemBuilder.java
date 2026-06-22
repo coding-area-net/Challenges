@@ -1,435 +1,345 @@
 package net.codingarea.challenges.plugin.utils.item;
 
-import com.google.gson.JsonParser;
-import net.codingarea.challenges.plugin.content.ItemDescription;
-import net.codingarea.challenges.plugin.content.Message;
+import com.google.common.base.Preconditions;
+import lombok.Getter;
+import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.commons.bukkit.utils.item.BannerPattern;
+import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
+import net.codingarea.commons.common.config.Document;
 import org.bukkit.*;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.*;
+import org.bukkit.inventory.meta.BannerMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.profile.PlayerProfile;
 import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
-public class ItemBuilder extends net.codingarea.commons.bukkit.utils.item.ItemBuilder {
+public class ItemBuilder extends StandardItemBuilder {
 
-  public static final ItemStack BLOCKED_ITEM = new ItemBuilder(Material.BARRIER, "§cBlocked").build();
+  @Getter
+  private final Locale locale;
 
-  protected ItemDescription builtByItemDescription;
-
-  public ItemBuilder(@NotNull ItemStack item) {
-    super(item);
-  }
-
-  public ItemBuilder(@NotNull ItemStack item, @Nullable ItemMeta meta) {
-    super(item, meta);
-  }
-
-  public ItemBuilder() {
-    this(Material.BARRIER, ItemDescription.empty());
-  }
-
-  public ItemBuilder(@NotNull Material material) {
+  public ItemBuilder(@NotNull Locale locale, @NotNull Material material, @NotNull MessageKey nameAndLoreKey, @NotNull Object... args) {
+    Preconditions.checkNotNull(locale, "Cannot create ItemBuilder from null Locale");
     super(material);
+    this.locale = locale;
+    resetToNameAndLore(nameAndLoreKey, args);
   }
 
-  public ItemBuilder(@NotNull Material material, @NotNull Message message) {
-    this(material, message.asItemDescription());
+  public ItemBuilder(@NotNull Locale locale, @NotNull ItemStack item, @NotNull MessageKey nameAndLoreKey, @NotNull Object... args) {
+    Preconditions.checkNotNull(locale, "Cannot create ItemBuilder from null Locale");
+    super(item);
+    this.locale = locale;
+    resetToNameAndLore(nameAndLoreKey, args);
   }
 
-  public ItemBuilder(@NotNull Material material, @NotNull Message message, Object... args) {
-    this(material, message.asItemDescription(args));
+  public ItemBuilder(@NotNull Locale locale, @NotNull StandardItemBuilder item, @NotNull MessageKey nameAndLoreKey, @NotNull Object... args) {
+    this(locale, item.build(), nameAndLoreKey, args);
   }
 
-  public ItemBuilder(@NotNull Material material, @NotNull ItemDescription description) {
-    this(material);
-    applyFormat(description);
+  public ItemBuilder(@NotNull Player playerLocale, @NotNull Material material, @NotNull MessageKey nameAndLoreKey, @NotNull Object... args) {
+    this(Challenges.getInstance().getTranslationManager().getLanguageProvider().getPlayerLanguage(playerLocale), material, nameAndLoreKey, args);
   }
 
-  public ItemBuilder(@NotNull Material material, @NotNull String name) {
-    super(material, name);
+  public ItemBuilder(@NotNull Locale locale, @NotNull ItemStack item) {
+    Preconditions.checkNotNull(locale, "Cannot create ItemBuilder from null Locale");
+    super(item);
+    this.locale = locale;
   }
 
-  public ItemBuilder(@NotNull Material material, @NotNull String name, @NotNull String... lore) {
-    super(material, name, lore);
-  }
-
-  public ItemBuilder(@NotNull Material material, @NotNull String name, int amount) {
-    super(material, name, amount);
-  }
-
-  @NotNull
-  public ItemBuilder setLore(@NotNull Message message) {
-    return setLore(message.asArray());
-  }
-
-  @NotNull
-  public ItemBuilder setLore(@NotNull List<String> lore) {
-    return (ItemBuilder) super.setLore(lore);
+  protected void resetToNameAndLore(@NotNull MessageKey nameAndLoreKey, @NotNull Object... args) {
+    nameAndLoreKey.applyAsItemNameAndLore(locale, getItemMeta(), args);
+    hideAttributes();
   }
 
   @NotNull
-  public ItemBuilder setLore(@NotNull String... lore) {
-    return (ItemBuilder) super.setLore(lore);
+  public ItemBuilder appendNameWithSpace(@NotNull MessageKey key, @NotNull Object... args) {
+    key.appendToItemName(locale, getItemMeta(), true, args);
+    return this;
   }
 
   @NotNull
-  public ItemBuilder appendLore(@NotNull String... lore) {
-    return (ItemBuilder) super.appendLore(lore);
+  public ItemBuilder appendName(@NotNull MessageKey key, @NotNull Object... args) {
+    key.appendToItemName(locale, getItemMeta(), false, args);
+    return this;
   }
 
   @NotNull
-  public ItemBuilder appendLore(@NotNull Collection<String> lore) {
-    return (ItemBuilder) super.appendLore(lore);
+  public ItemBuilder appendLore(@NotNull MessageKey key, @NotNull Object... args) {
+    key.appendToItemLore(locale, getItemMeta(), args);
+    return this;
   }
 
   @NotNull
-  public ItemBuilder setName(@Nullable String name) {
-    return (ItemBuilder) super.setName(name);
+  public ItemBuilder appendLore(@NotNull LocalizableMessage localizable) {
+    return this.appendLore(localizable.getLocalizableKey(), localizable.getLocalizableArgs());
   }
 
   @NotNull
-  public ItemBuilder setName(@Nullable Object name) {
-    return (ItemBuilder) super.setName(name);
+  public ItemBuilder appendLoreWithEmptyLine(@NotNull MessageKey key, @NotNull Object... args) {
+    super.appendLore(" ");
+    return this.appendLore(key, args);
   }
 
   @NotNull
-  public ItemBuilder setName(@NotNull String... content) {
-    return (ItemBuilder) super.setName(content);
+  public ItemBuilder appendLoreWithEmptyLine(@NotNull LocalizableMessage localizable) {
+    return this.appendLoreWithEmptyLine(localizable.getLocalizableKey(), localizable.getLocalizableArgs());
   }
 
-  @NotNull
-  public ItemBuilder appendName(@Nullable Object sequence) {
-    return (ItemBuilder) super.appendName(sequence);
-  }
+
+  // Overrides
 
   @NotNull
-  public ItemBuilder name(@Nullable Object name) {
-    return (ItemBuilder) super.name(name);
-  }
-
-  @NotNull
-  public ItemBuilder name(@NotNull String... content) {
-    return (ItemBuilder) super.name(content);
-  }
-
-  @NotNull
+  @Override
   public ItemBuilder addEnchantment(@NotNull Enchantment enchantment, int level) {
     return (ItemBuilder) super.addEnchantment(enchantment, level);
   }
 
   @NotNull
-  public ItemBuilder enchant(@NotNull Enchantment enchantment, int level) {
-    return (ItemBuilder) super.enchant(enchantment, level);
-  }
-
-  @NotNull
-  public ItemBuilder addFlag(@NotNull ItemFlag... flags) {
+  @Override
+  public ItemBuilder addFlag(@NonNull @NotNull ItemFlag... flags) {
     return (ItemBuilder) super.addFlag(flags);
   }
 
   @NotNull
-  public ItemBuilder removeFlag(@NotNull ItemFlag... flags) {
+  @Override
+  public ItemBuilder removeFlag(@NonNull @NotNull ItemFlag... flags) {
     return (ItemBuilder) super.removeFlag(flags);
   }
 
   @NotNull
+  @Override
   public ItemBuilder hideAttributes() {
     return (ItemBuilder) super.hideAttributes();
   }
 
   @NotNull
+  @Override
   public ItemBuilder showAttributes() {
     return (ItemBuilder) super.showAttributes();
   }
 
   @NotNull
+  @Override
   public ItemBuilder setUnbreakable(boolean unbreakable) {
     return (ItemBuilder) super.setUnbreakable(unbreakable);
   }
 
   @NotNull
-  public ItemBuilder unbreakable() {
-    return (ItemBuilder) super.unbreakable();
-  }
-
-  @NotNull
-  public ItemBuilder breakable() {
-    return (ItemBuilder) super.breakable();
-  }
-
-  @NotNull
+  @Override
   public ItemBuilder setAmount(int amount) {
     return (ItemBuilder) super.setAmount(amount);
   }
 
   @NotNull
-  public ItemBuilder amount(int amount) {
-    return (ItemBuilder) super.amount(amount);
-  }
-
-  @NotNull
+  @Override
   public ItemBuilder setDamage(int damage) {
     return (ItemBuilder) super.setDamage(damage);
   }
 
   @NotNull
-  public ItemBuilder damage(int damage) {
-    return (ItemBuilder) super.damage(damage);
-  }
-
-  @NotNull
-  public ItemBuilder setType(@NotNull Material material) {
-    return (ItemBuilder) super.setType(material);
-  }
-
-  @NotNull
-  public ItemBuilder applyFormat(@NotNull ItemDescription description) {
-    builtByItemDescription = description;
-    setName(description.getName());
-    setLore(description.getLore());
-    return this;
-  }
-
-  @Nullable
-  public ItemDescription getBuiltByItemDescription() {
-    return builtByItemDescription;
-  }
-
   @Override
-  public ItemBuilder clone() {
-    ItemBuilder builder = new ItemBuilder(item.clone(), getMeta().clone());
-    builder.builtByItemDescription = builtByItemDescription;
-    return builder;
+  public ItemBuilder setMaterial(@NotNull Material material) {
+    return (ItemBuilder) super.setMaterial(material);
+  }
+
+
+  // Unstable
+
+  @NotNull
+  @Override
+  @Deprecated
+  public StandardItemBuilder setLore(@NotNull List<String> lore) {
+    return super.setLore(lore);
+  }
+
+  @NotNull
+  @Override
+  @Deprecated
+  public StandardItemBuilder setLore(@NonNull @NotNull String... lore) {
+    return super.setLore(lore);
+  }
+
+  @NotNull
+  @Override
+  @Deprecated
+  public StandardItemBuilder appendLore(@NonNull @NotNull String... lore) {
+    return super.appendLore(lore);
+  }
+
+  @NotNull
+  @Override
+  @Deprecated
+  public StandardItemBuilder appendLore(@NotNull Collection<String> lore) {
+    return super.appendLore(lore);
+  }
+
+  @NotNull
+  @Override
+  @Deprecated
+  public StandardItemBuilder setName(@Nullable String name) {
+    return super.setName(name);
+  }
+
+  @NotNull
+  @Override
+  @Deprecated
+  public StandardItemBuilder setName(@Nullable Object name) {
+    return super.setName(name);
+  }
+
+  @NotNull
+  @Override
+  @Deprecated
+  public StandardItemBuilder setName(@NonNull @NotNull String... content) {
+    return super.setName(content);
+  }
+
+  @NotNull
+  @Override
+  @Deprecated
+  public StandardItemBuilder appendName(@Nullable String sequence) {
+    return super.appendName(sequence);
   }
 
   public static class BannerBuilder extends ItemBuilder {
 
-    public BannerBuilder(@NotNull Material material) {
-      super(material);
-    }
-
-    public BannerBuilder(@NotNull Material material, @NotNull Message message) {
-      super(material, message);
-    }
-
-    public BannerBuilder(@NotNull Material material, @NotNull ItemDescription description) {
-      super(material, description);
-    }
-
-    public BannerBuilder(@NotNull Material material, @NotNull String name) {
-      super(material, name);
-    }
-
-    public BannerBuilder(@NotNull Material material, @NotNull String name, @NotNull String... lore) {
-      super(material, name, lore);
-    }
-
-    public BannerBuilder(@NotNull Material material, @NotNull String name, int amount) {
-      super(material, name, amount);
-    }
-
-    public BannerBuilder(@NotNull ItemStack item) {
-      super(item);
+    public BannerBuilder(@NotNull Locale locale, @NotNull Material material, @NotNull MessageKey nameAndLoreKey, @NonNull Object... args) {
+      super(locale, material, nameAndLoreKey, args);
     }
 
     @NotNull
-    public ItemBuilder.BannerBuilder addPattern(@NotNull BannerPattern pattern, @NotNull DyeColor color) {
+    public BannerBuilder addPattern(@NotNull BannerPattern pattern, @NotNull DyeColor color) {
       return addPattern(pattern.getPatternType(), color);
     }
 
     @NotNull
-    public ItemBuilder.BannerBuilder addPattern(@NotNull PatternType pattern, @NotNull DyeColor color) {
-      getMeta().addPattern(new Pattern(color, pattern));
+    public BannerBuilder addPattern(@NotNull PatternType pattern, @NotNull DyeColor color) {
+      getItemMeta().addPattern(new Pattern(color, pattern));
       return this;
     }
 
     @NotNull
     @Override
-    public BannerMeta getMeta() {
-      return getCastedMeta();
+    public BannerMeta getItemMeta() {
+      return getItemMetaAs();
     }
 
   }
 
   public static class SkullBuilder extends ItemBuilder {
 
-    public SkullBuilder() {
-      super(Material.PLAYER_HEAD);
-    }
-
-    public SkullBuilder(Message message) {
-      super(Material.PLAYER_HEAD, message);
-    }
-
-    public SkullBuilder(String name, String... lore) {
-      super(Material.PLAYER_HEAD, name, lore);
+    public SkullBuilder(@NotNull Locale locale, @NotNull MessageKey nameAndLoreKey, @NonNull Object... args) {
+      super(locale, Material.PLAYER_HEAD, nameAndLoreKey, args);
     }
 
     @NotNull
-    public ItemBuilder.SkullBuilder setOwner(@NotNull OfflinePlayer owner) {
-      getMeta().setOwningPlayer(owner);
+    public SkullBuilder setOwner(@NotNull OfflinePlayer owner) {
+      getItemMeta().setOwningPlayer(owner);
       return this;
     }
 
     @NotNull
-    public ItemBuilder.SkullBuilder setOwner(@NotNull UUID uuid, @NotNull String name) {
-      PlayerProfile profile = Bukkit.createPlayerProfile(uuid, name);
-      getMeta().setOwnerProfile(profile);
+    public SkullBuilder setOwner(@NotNull UUID uuid, @NotNull String name) {
+      PlayerProfile profile = Bukkit.createPlayerProfile(uuid, name); // TODO compatibility 1.17
+      getItemMeta().setOwnerProfile(profile);
       return this;
     }
 
-    public ItemBuilder.SkullBuilder setTexture(@NotNull String textureUrl) {
+    @NotNull
+    public SkullBuilder setTexture(@NotNull String textureUrl) {
       UUID uuid = UUID.nameUUIDFromBytes(textureUrl.getBytes());
 
-      PlayerProfile profile = Bukkit.createPlayerProfile(uuid);
+      PlayerProfile profile = Bukkit.createPlayerProfile(uuid); // TODO does not exist 1.17.1
       PlayerTextures texture = profile.getTextures();
 
       try {
-        texture.setSkin(new URL(textureUrl));
+        texture.setSkin(new URL(textureUrl)); // URI.create(textureUrl).toURL()
       } catch (MalformedURLException e) {
         throw new IllegalArgumentException("Invalid texture url", e);
       }
 
       profile.setTextures(texture);
-      getMeta().setOwnerProfile(profile);
+      getItemMeta().setOwnerProfile(profile);
       return this;
     }
 
-    public ItemBuilder.SkullBuilder setBase64Texture(@NotNull String base64Texture) {
-      String textureUrlJson = new String(Base64.getDecoder().decode(base64Texture),
-        StandardCharsets.UTF_8);
-
-      String textureUrl = JsonParser.parseString(textureUrlJson) // TODO fix(deps) version ambiguity
-        .getAsJsonObject()
-        .get("textures").getAsJsonObject()
-        .get("SKIN").getAsJsonObject()
-        .get("url").getAsString();
-
+    public SkullBuilder setBase64Texture(@NotNull String base64Texture) {
+      String textureUrlJson = new String(Base64.getDecoder().decode(base64Texture), StandardCharsets.UTF_8);
+      String textureUrl = Document.parseJson(textureUrlJson)
+        .getString("textures.SKIN.url");
+      if (textureUrl == null) return this; // TODO
       return setTexture(textureUrl);
     }
 
     @NotNull
     @Override
-    public SkullMeta getMeta() {
-      return getCastedMeta();
+    public SkullMeta getItemMeta() {
+      return getItemMetaAs();
     }
 
   }
 
   public static class PotionBuilder extends ItemBuilder {
 
-    public PotionBuilder(@NotNull Material material) {
-      super(material);
-    }
-
-    public PotionBuilder(@NotNull Material material, @NotNull Message message) {
-      super(material, message);
-    }
-
-    public PotionBuilder(@NotNull Material material, @NotNull String name) {
-      super(material, name);
-    }
-
-    public PotionBuilder(@NotNull Material material, @NotNull String name, @NotNull String... lore) {
-      super(material, name, lore);
-    }
-
-    public PotionBuilder(@NotNull Material material, @NotNull String name, int amount) {
-      super(material, name, amount);
-    }
-
-    public PotionBuilder(@NotNull ItemStack item) {
-      super(item);
+    public PotionBuilder(@NotNull Locale locale, @NotNull Material material, @NotNull MessageKey titleAndLoreKey, @NonNull Object... args) {
+      super(locale, material, titleAndLoreKey, args);
     }
 
     @NotNull
-    public static ItemBuilder createWaterBottle() {
-      return new ItemBuilder.PotionBuilder(Material.POTION).setColor(Color.BLUE).hideAttributes();
-    }
-
-    @NotNull
-    public ItemBuilder.PotionBuilder addEffect(@NotNull PotionEffect effect) {
-      getMeta().addCustomEffect(effect, true);
+    public PotionBuilder addEffect(@NotNull PotionEffect effect) {
+      getItemMeta().addCustomEffect(effect, true);
       return this;
     }
 
     @NotNull
-    public ItemBuilder.PotionBuilder setColor(@NotNull Color color) {
-      getMeta().setColor(color);
+    public PotionBuilder setColor(@NotNull Color color) {
+      getItemMeta().setColor(color);
       return this;
-    }
-
-    @NotNull
-    public ItemBuilder.PotionBuilder color(@NotNull Color color) {
-      return setColor(color);
     }
 
     @NotNull
     @Override
-    public PotionMeta getMeta() {
-      return getCastedMeta();
+    public PotionMeta getItemMeta() {
+      return getItemMetaAs();
     }
 
   }
 
   public static class LeatherArmorBuilder extends ItemBuilder {
 
-    public LeatherArmorBuilder(@NotNull Material material) {
-      super(material);
-    }
-
-    public LeatherArmorBuilder(@NotNull Material material, @NotNull Message message) {
-      super(material, message);
-    }
-
-    public LeatherArmorBuilder(@NotNull Material material, @NotNull String name) {
-      super(material, name);
-    }
-
-    public LeatherArmorBuilder(@NotNull Material material, @NotNull String name, @NotNull String... lore) {
-      super(material, name, lore);
-    }
-
-    public LeatherArmorBuilder(@NotNull Material material, @NotNull String name, int amount) {
-      super(material, name, amount);
-    }
-
-    public LeatherArmorBuilder(@NotNull ItemStack item) {
-      super(item);
+    public LeatherArmorBuilder(@NotNull Locale locale, @NotNull Material material, @NotNull MessageKey titleAndLoreKey, @NotNull Object... args) {
+      super(locale, material, titleAndLoreKey, args);
     }
 
     @NotNull
-    public ItemBuilder.LeatherArmorBuilder setColor(@NotNull Color color) {
-      getMeta().setColor(color);
+    public LeatherArmorBuilder setColor(@NotNull Color color) {
+      getItemMeta().setColor(color);
       return this;
     }
 
     @NotNull
-    public ItemBuilder.LeatherArmorBuilder color(@NotNull Color color) {
-      return setColor(color);
-    }
-
-    @NotNull
     @Override
-    public LeatherArmorMeta getMeta() {
-      return getCastedMeta();
+    public LeatherArmorMeta getItemMeta() {
+      return getItemMetaAs();
     }
 
   }
-
 }

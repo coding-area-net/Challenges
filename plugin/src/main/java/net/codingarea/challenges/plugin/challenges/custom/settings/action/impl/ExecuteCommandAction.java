@@ -3,8 +3,8 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.action.impl;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.PlayerTargetAction;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -21,17 +21,17 @@ public class ExecuteCommandAction extends PlayerTargetAction {
 
   public ExecuteCommandAction(String name) {
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true, true, true).createTextInputChild("command", player -> {
-      Message.forName("custom-command-info").send(player, Prefix.CUSTOM, "/" + String.join(" /", commandsThatCanBeExecuted));
+      MessageKey.of("custom-command-info").send(player, Prefix.CUSTOM, "/" + String.join(" /", commandsThatCanBeExecuted));
     }, event -> {
       String cmd = event.getMessage().split(" ")[0].toLowerCase();
 
       if (!commandsThatCanBeExecuted.contains(cmd)) {
-        Message.forName("custom-command-not-allowed").send(event.getPlayer(), Prefix.CUSTOM, cmd);
+        MessageKey.of("custom-command-not-allowed").send(event.getPlayer(), Prefix.CUSTOM, cmd);
         return false;
       }
 
       if (event.getMessage().length() > maxCommandLength) {
-        Message.forName("custom-chars-max_length").send(event.getPlayer(), Prefix.CUSTOM, maxCommandLength);
+        MessageKey.of("custom-chars-max_length").send(event.getPlayer(), Prefix.CUSTOM, maxCommandLength);
         return false;
       }
       return true;

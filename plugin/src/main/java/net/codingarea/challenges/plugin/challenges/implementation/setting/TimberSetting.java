@@ -4,9 +4,11 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChal
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.commons.bukkit.utils.item.ItemUtils;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
@@ -27,23 +29,22 @@ public class TimberSetting extends SettingModifier {
 
   public static final int LOGS_LEAVES = 2;
 
-
   public TimberSetting() {
-    super(MenuType.SETTINGS, 2);
+    super(MenuType.SETTINGS, null, 2, new ItemStack(Material.DIAMOND_AXE), "item-timber-setting");
   }
 
   @NotNull
   @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.DIAMOND_AXE, Message.forName("item-timber-setting"));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createSettingsItem() {
+  public ItemStack getSettingsItemPreset() {
     if (getValue() == LOGS_LEAVES)
-      return DefaultItem.create(Material.OAK_LEAVES, Message.forName("item-timber-setting-logs-and-leaves"));
-    return DefaultItem.create(Material.OAK_LOG, Message.forName("item-timber-setting-logs"));
+      return new ItemStack(Material.OAK_LEAVES);
+    return new ItemStack(Material.OAK_LOG);
+  }
+
+  @NotNull
+  @Override
+  public LocalizableMessage getSettingsName() {
+    return getValue() == LOGS_LEAVES ? MessageKey.of("item-timber-setting-logs-and-leaves") : MessageKey.of("item-timber-setting-logs");
   }
 
   @Override
@@ -105,7 +106,7 @@ public class TimberSetting extends SettingModifier {
           if (BukkitReflectionUtils.isAir(blockAround.getType())) continue;
           if (allBlocks.contains(blockAround)) continue;
 
-          if (currentBlock.getType() == blockAround.getType() || (leaves && isLeaveMaterial(currentBlock.getType(), blockAround.getType()))) {
+          if (currentBlock.getType() == blockAround.getType() || (leaves && isLeafMaterial(currentBlock.getType(), blockAround.getType()))) {
             allBlocks.add(blockAround);
             currentBlocks.add(blockAround);
           }
@@ -129,17 +130,17 @@ public class TimberSetting extends SettingModifier {
     return material.name().endsWith("LEAVES") || material.name().endsWith("WART_BLOCK");
   }
 
-  public boolean isLeaveMaterial(@NotNull Material logMaterial, @NotNull Material leaveMaterial) {
+  public boolean isLeafMaterial(@NotNull Material logMaterial, @NotNull Material leafMaterial) {
     // Exceptions like nether wood
     if (logMaterial.name().equals("CRIMSON_STEM"))
-      return leaveMaterial.name().equals("NETHER_WART_BLOCK") || leaveMaterial.name().equals("SHROOMLIGHT");
+      return leafMaterial.name().equals("NETHER_WART_BLOCK") || leafMaterial.name().equals("SHROOMLIGHT");
     if (logMaterial.name().equals("WARPED_STEM"))
-      return leaveMaterial.name().equals("WARPED_WART_BLOCK") || leaveMaterial.name().equals("SHROOMLIGHT");
+      return leafMaterial.name().equals("WARPED_WART_BLOCK") || leafMaterial.name().equals("SHROOMLIGHT");
 
     int firstUnderscore = logMaterial.name().indexOf("_");
     if (firstUnderscore == -1) return false;
     String logPrefix = logMaterial.name().substring(0, firstUnderscore);
-    return leaveMaterial.name().startsWith(logPrefix) && leaveMaterial.name().endsWith("LEAVES");
+    return leafMaterial.name().startsWith(logPrefix) && leafMaterial.name().endsWith("LEAVES");
   }
 
 }

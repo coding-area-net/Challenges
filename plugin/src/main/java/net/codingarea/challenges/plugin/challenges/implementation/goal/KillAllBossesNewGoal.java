@@ -1,15 +1,14 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.KillMobsGoal;
+import net.codingarea.challenges.plugin.challenges.type.annotation.RequireVersion;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.management.challenges.annotations.RequireVersion;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 
@@ -18,19 +17,13 @@ import java.util.Arrays;
 public class KillAllBossesNewGoal extends KillMobsGoal {
 
   public KillAllBossesNewGoal() {
-    super(Arrays.asList(EntityType.ENDER_DRAGON, EntityType.WITHER, EntityType.ELDER_GUARDIAN, EntityType.WARDEN));
-    setCategory(SettingCategory.KILL_ENTITY);
+    super(SettingCategory.KILL_ENTITY, Arrays.asList(EntityType.ENDER_DRAGON, EntityType.WITHER, EntityType.ELDER_GUARDIAN, EntityType.WARDEN),
+      new ItemStack(Material.NETHERITE_SWORD), "goal-all-bosses-new");
   }
 
   @Override
   public Message getBossbarMessage() {
     return Message.forName("bossbar-kill-all-bosses");
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.NETHERITE_SWORD, Message.forName("item-all-bosses-new-goal"));
   }
 
 }

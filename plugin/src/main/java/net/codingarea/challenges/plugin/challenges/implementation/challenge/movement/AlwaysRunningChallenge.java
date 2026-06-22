@@ -2,29 +2,20 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.mov
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
-import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class AlwaysRunningChallenge extends Setting {
 
   public AlwaysRunningChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.MOVEMENT);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.CARROT_ON_A_STICK, Message.forName("item-always-running-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, new ItemStack(Material.CARROT_ON_A_STICK), "always-running-challenge");
   }
 
   @ScheduledTask(ticks = 1)

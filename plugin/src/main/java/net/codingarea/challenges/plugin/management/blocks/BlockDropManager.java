@@ -2,7 +2,7 @@ package net.codingarea.challenges.plugin.management.blocks;
 
 import net.codingarea.challenges.plugin.challenges.implementation.setting.CutCleanSetting;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
-import net.codingarea.challenges.plugin.challenges.type.abstraction.MenuSetting.SubSetting;
+import net.codingarea.challenges.plugin.challenges.type.abstraction.menu.MenuSetting.SubSetting;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

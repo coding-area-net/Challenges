@@ -3,8 +3,8 @@ package net.codingarea.challenges.plugin.spigot.command;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.implementation.setting.PositionSetting;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
 import org.bukkit.Location;
@@ -25,7 +25,7 @@ public class WorldCommand implements PlayerCommand, TabCompleter {
   public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
 
     if (args.length < 1) {
-      Message.forName("syntax").send(player, Prefix.CHALLENGES, "world <world>");
+      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "world <world>");
       return;
     }
 
@@ -35,19 +35,19 @@ public class WorldCommand implements PlayerCommand, TabCompleter {
 
     boolean targetIsVoidMap = worldName.equalsIgnoreCase("void");
     if (environment == null && !targetIsVoidMap) {
-      Message.forName("syntax").send(player, Prefix.CHALLENGES, "world <world>");
+      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "world <world>");
       return;
     }
 
     World world = targetIsVoidMap ? Challenges.getInstance().getGameWorldStorage().getOrCreateVoidWorld() : ChallengeAPI.getGameWorld(environment);
     if (world == null) {
-      Message.forName("syntax").send(player, Prefix.CHALLENGES, "world <world>");
+      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "world <world>");
       return;
     }
 
     Location location = getSpawn(world, player);
 
-    Message.forName("command-world-teleport").send(player, Prefix.CHALLENGES, targetIsVoidMap ? "Void" : getWorldName(location));
+    MessageKey.of("command-world-teleport").send(player, Prefix.CHALLENGES, targetIsVoidMap ? "Void" : getWorldName(location));
     player.teleport(location);
   }
 

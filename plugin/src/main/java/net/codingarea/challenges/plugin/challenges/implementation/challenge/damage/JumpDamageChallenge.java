@@ -4,39 +4,31 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModif
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.PlayerJumpEvent;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder.LeatherArmorBuilder;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
+import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @Since("2.0")
 public class JumpDamageChallenge extends SettingModifier {
 
   public JumpDamageChallenge() {
-    super(MenuType.CHALLENGES, 1, 60);
-    setCategory(SettingCategory.DAMAGE);
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 60, new StandardItemBuilder.LeatherArmorBuilder(Material.LEATHER_BOOTS).setColor(Color.ORANGE).build(),
+      "jump-damage-challenge");
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new LeatherArmorBuilder(Material.LEATHER_BOOTS, Message.forName("item-jump-damage-challenge")).setColor(Color.ORANGE);
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
-  }
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
+//  }
 
   @Override
   public void playValueChangeTitle() {

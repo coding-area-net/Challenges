@@ -2,9 +2,8 @@ package net.codingarea.challenges.plugin.challenges.implementation.damage;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -20,25 +19,17 @@ public class DamageRuleSetting extends Setting {
   private final List<DamageCause> causes;
 
   private final String name;
-  private final ItemBuilder preset;
 
-  public DamageRuleSetting(@NotNull ItemBuilder preset, @NotNull String name, @NotNull DamageCause... causes) {
-    super(MenuType.DAMAGE, true);
+  public DamageRuleSetting(@NotNull LegacyItemBuilder preset, @NotNull String name, @NotNull DamageCause... causes) {
+    super(MenuType.DAMAGE, null, true, preset.build(), "TITLE!");
     this.causes = Arrays.asList(causes);
     this.name = name;
-    this.preset = preset;
   }
 
   @NotNull
   @Override
   public String getUniqueName() {
     return super.getUniqueName() + name;
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return preset.clone().applyFormat(Message.forName("item-damage-rule-" + name).asItemDescription());
   }
 
   @EventHandler(priority = EventPriority.NORMAL)

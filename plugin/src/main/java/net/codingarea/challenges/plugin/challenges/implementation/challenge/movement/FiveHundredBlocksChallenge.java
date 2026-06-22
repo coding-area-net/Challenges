@@ -6,8 +6,7 @@ import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
@@ -25,8 +24,8 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.world.LootGenerateEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -39,8 +38,7 @@ public class FiveHundredBlocksChallenge extends SettingModifier {
   private final Map<UUID, Integer> blocksWalked = new HashMap<>();
 
   public FiveHundredBlocksChallenge() {
-    super(MenuType.CHALLENGES, 1, 5, 5);
-    setCategory(SettingCategory.MOVEMENT);
+    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, 1, 5, 5, new ItemStack(MinecraftNameWrapper.SIGN), "five-hundred-blocks-challenge");
 
     // Loot Generate Event was added in 1.15
     try {
@@ -76,22 +74,16 @@ public class FiveHundredBlocksChallenge extends SettingModifier {
     bossbar.hide();
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(MinecraftNameWrapper.SIGN, Message.forName("item-five-hundred-blocks-challenges"));
-  }
-
   @Override
   public void playValueChangeTitle() {
     ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("subtitle-blocks").asString(getBlocksToWalk()));
   }
 
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-blocks-description").asArray(getBlocksToWalk());
-  }
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-blocks-description").asArray(getBlocksToWalk());
+//  }
 
   private int getBlocksToWalk() {
     return getValue() * 100;

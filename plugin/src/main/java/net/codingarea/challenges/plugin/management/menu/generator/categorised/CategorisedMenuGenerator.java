@@ -6,8 +6,9 @@ import net.codingarea.challenges.plugin.challenges.type.annotation.ChallengeAnno
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.menu.generator.implementation.SettingsMenuGenerator;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
@@ -58,7 +59,7 @@ public class CategorisedMenuGenerator extends SettingsMenuGenerator {
       SettingCategory category = entry.getKey();
       CategorisedSettingsMenuGenerator generator = entry.getValue();
 
-      ItemBuilder builder = category.getDisplayItem();
+      LegacyItemBuilder builder = category.getDisplayItem();
       String attachment = getLoreAttachment(generator);
       if (!attachment.isEmpty()) {
         builder.appendLore("", attachment);
@@ -119,13 +120,13 @@ public class CategorisedMenuGenerator extends SettingsMenuGenerator {
   }
 
   @Override
-  public MenuPosition getMenuPosition(int page) {
+  public MenuPosition createMenuPosition(int page) {
     return info -> {
       if (InventoryUtils.handleNavigationClicking(this,
         getNavigationSlots(page),
         page,
         info,
-        () -> Challenges.getInstance().getMenuManager().openGUIInstantly(info.getPlayer()))) {
+        () -> Challenges.getInstance().getMenuManager().openMainMenuInstantly(info.getPlayer()))) {
         return;
       }
 
@@ -177,9 +178,7 @@ public class CategorisedMenuGenerator extends SettingsMenuGenerator {
 
     @Override
     protected String getTitle(int page) {
-      String[] strings = category.getMessageSupplier().get().asArray();
-      String display = strings.length == 0 ? "" : ChatColor.stripColor(strings[0]);
-      return InventoryTitleManager.getTitle(getMenuType(), display, String.valueOf(page + 1));
+      throw new UnsupportedOperationException("This method should not be called in CategorisedSettingsMenuGenerator");
     }
 
     @Override

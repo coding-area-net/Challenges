@@ -9,14 +9,15 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.action.Challe
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.ChallengeMenuGenerator;
-import net.codingarea.challenges.plugin.management.menu.generator.MenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.ChallengeMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.MenuGenerator;
 import net.codingarea.challenges.plugin.spigot.listener.ChatInputListener;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils.InventorySetter;
@@ -93,7 +94,7 @@ public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGen
   @Override
   public void generateInventories() {
     inventory = Bukkit.createInventory(MenuPosition.HOLDER, 6 * 9, InventoryTitleManager.getTitle(MenuType.CUSTOM, "Info"));
-    InventoryUtils.fillInventory(inventory, ItemBuilder.FILL_ITEM);
+    InventoryUtils.fillInventory(inventory, LegacyItemBuilder.FILL_ITEM);
 
     updateItems();
 
@@ -105,11 +106,11 @@ public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGen
     String none = Message.forName("none").asString();
 
     // Save / Delete Item
-    inventory.setItem(DELETE_SLOT, new ItemBuilder(Material.BARRIER, Message.forName("item-custom-info-delete")).build());
-    inventory.setItem(SAVE_SLOT, new ItemBuilder(Material.LIME_DYE, Message.forName("item-custom-info-save")).build());
+    inventory.setItem(DELETE_SLOT, new LegacyItemBuilder(Material.BARRIER, Message.forName("item-custom-info-delete")).build());
+    inventory.setItem(SAVE_SLOT, new LegacyItemBuilder(Material.LIME_DYE, Message.forName("item-custom-info-save")).build());
 
     // Trigger Item
-    ItemBuilder triggerItem = new ItemBuilder(Material.WITHER_SKELETON_SKULL,
+    LegacyItemBuilder triggerItem = new LegacyItemBuilder(Material.WITHER_SKELETON_SKULL,
       Message.forName("item-custom-info-trigger"))
       .appendLore(
         currently + (trigger != null ? Message.forName(trigger.getMessage()) : none));
@@ -119,7 +120,7 @@ public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGen
     inventory.setItem(CONDITION_SLOT, triggerItem.build());
 
     // Action Item
-    ItemBuilder actionItem = new ItemBuilder(Material.NETHER_STAR,
+    LegacyItemBuilder actionItem = new LegacyItemBuilder(Material.NETHER_STAR,
       Message.forName("item-custom-info-action"))
       .appendLore(currently + (action != null ? Message.forName(action.getMessage()) : none));
     if (action != null) {
@@ -128,11 +129,11 @@ public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGen
     inventory.setItem(ACTION_SLOT, actionItem.build());
 
     // Display Item
-    inventory.setItem(MATERIAL_SLOT, new ItemBuilder(material == null ? Material.BARRIER : material, Message.forName("item-custom-info-material"))
+    inventory.setItem(MATERIAL_SLOT, new LegacyItemBuilder(material == null ? Material.BARRIER : material, Message.forName("item-custom-info-material"))
       .appendLore(currently + (material != null ? BukkitStringUtils.getItemName(material).toPlainText() : none)).build());
 
     // Name Item
-    inventory.setItem(NAME_SLOT, new ItemBuilder(Material.NAME_TAG, Message.forName("item-custom-info-name"))
+    inventory.setItem(NAME_SLOT, new LegacyItemBuilder(Material.NAME_TAG, Message.forName("item-custom-info-name"))
       .appendLore(currently + "§7" + name).build());
   }
 
@@ -142,7 +143,7 @@ public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGen
   }
 
   @Override
-  public MenuPosition getMenuPosition(int page) {
+  public MenuPosition createMenuPosition(int page) {
     return new InfoMenuPosition(page, this);
   }
 
@@ -230,7 +231,7 @@ public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGen
       switch (info.getSlot()) {
         case DELETE_SLOT:
           if (!Challenges.getInstance().getCustomChallengesLoader().getCustomChallenges().containsKey(uuid)) {
-            Message.forName("custom-not-deleted").send(player, Prefix.CUSTOM);
+            MessageKey.of("custom-not-deleted").send(player, Prefix.CUSTOM);
             SoundSample.BASS_OFF.play(player);
             break;
           }
@@ -243,16 +244,16 @@ public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGen
           String defaults = new InfoMenuGenerator().toString();
           String current = InfoMenuGenerator.this.toString();
           if (defaults.equals(current)) {
-            Message.forName("custom-no-changes").send(player, Prefix.CUSTOM);
+            MessageKey.of("custom-no-changes").send(player, Prefix.CUSTOM);
             SoundSample.BASS_OFF.play(player);
             return;
           }
 
           save();
           openChallengeMenu(player);
-          Message.forName("custom-saved").send(player, Prefix.CUSTOM);
+          MessageKey.of("custom-saved").send(player, Prefix.CUSTOM);
           if (savePlayerChallenges) {
-            Message.forName("custom-saved-db").send(player, Prefix.CUSTOM);
+            MessageKey.of("custom-saved-db").send(player, Prefix.CUSTOM);
           }
           SoundSample.LEVEL_UP.play(player);
           break;
@@ -274,14 +275,14 @@ public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGen
           break;
         case NAME_SLOT:
 
-          Message.forName("custom-name-info").send(player, Prefix.CUSTOM);
+          MessageKey.of("custom-name-info").send(player, Prefix.CUSTOM);
           player.closeInventory();
 
           ChatInputListener.setInputAction(player, event -> {
             int maxNameLength = Challenges.getInstance().getCustomChallengesLoader()
               .getMaxNameLength();
             if (event.getMessage().length() > maxNameLength) {
-              Message.forName("custom-chars-max_length").send(event.getPlayer(), Prefix.CUSTOM, maxNameLength);
+              MessageKey.of("custom-chars-max_length").send(event.getPlayer(), Prefix.CUSTOM, maxNameLength);
               return;
             }
 

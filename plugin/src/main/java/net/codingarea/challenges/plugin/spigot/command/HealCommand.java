@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
 import net.codingarea.challenges.plugin.utils.misc.CommandHelper;
@@ -30,13 +30,13 @@ public class HealCommand implements SenderCommand, Completer {
     }
 
     if (targets.isEmpty()) {
-      Message.forName("command-no-target").send(sender, Prefix.CHALLENGES);
+      MessageKey.of("command-no-target").send(sender, Prefix.CHALLENGES);
       return;
     }
 
     boolean otherPlayers = false;
     for (Player player : targets) {
-      Message.forName("command-heal-healed").send(player, Prefix.CHALLENGES);
+      MessageKey.of("command-heal-healed").send(player, Prefix.CHALLENGES);
       AttributeInstance attribute = player.getAttribute(MinecraftNameWrapper.MAX_HEALTH);
       if (attribute == null) {
         player.setHealth(20);
@@ -54,7 +54,7 @@ public class HealCommand implements SenderCommand, Completer {
     }
 
     if (otherPlayers)
-      Message.forName("command-heal-healed-others").send(sender, Prefix.CHALLENGES, targets.size());
+      MessageKey.of("command-heal-healed-others").send(sender, Prefix.CHALLENGES, targets.size());
   }
 
   @Nullable

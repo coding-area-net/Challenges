@@ -2,16 +2,15 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.for
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.CompletableForceChallenge;
+import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
-import net.codingarea.challenges.plugin.management.challenges.annotations.ExcludeFromRandomChallenges;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBossBar.BossBarInstance;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
@@ -23,8 +22,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -37,21 +36,14 @@ public class ForceBiomeChallenge extends CompletableForceChallenge {
   private Biome biome;
 
   public ForceBiomeChallenge() {
-    super(MenuType.CHALLENGES, 2, 20, 5);
-    setCategory(SettingCategory.FORCE);
+    super(MenuType.CHALLENGES, SettingCategory.FORCE, 2, 20, 5, new ItemStack(Material.CHAINMAIL_BOOTS), "force-biome-challenge");
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.CHAINMAIL_BOOTS, Message.forName("item-force-biome-challenge"));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return ChallengeHelper.getTimeRangeSettingsDescription(this, 60 * 3, 60);
-  }
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return ChallengeHelper.getTimeRangeSettingsDescription(this, 60 * 3, 60);
+//  }
 
   @Override
   public void playValueChangeTitle() {

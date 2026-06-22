@@ -7,11 +7,10 @@ import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 public class LanguageSetting extends Modifier {
 
@@ -22,31 +21,31 @@ public class LanguageSetting extends Modifier {
     ENGLISH_SKULL = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODgzMWM3M2Y1NDY4ZTg4OGMzMDE5ZTI4NDdlNDQyZGZhYTg4ODk4ZDUwY2NmMDFmZDJmOTE0YWY1NDRkNTM2OCJ9fX0";
 
   public LanguageSetting() {
-    super(MenuType.SETTINGS, 1, 2, ENGLISH);
+    super(MenuType.SETTINGS, null, 1, 2, ENGLISH, new ItemStack(Material.KNOWLEDGE_BOOK), "language-setting");
   }
 
   @NotNull
   @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.KNOWLEDGE_BOOK, Message.forName("item-language-setting"));
+  public ItemStack getSettingsItemPreset() {
+    return super.getSettingsItemPreset();
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createSettingsItem() {
-    String texture = getValue() == GERMAN ? GERMAN_SKULL : ENGLISH_SKULL;
-    return new ItemBuilder.SkullBuilder(DefaultItem.getItemPrefix() + Message.forName(getSettingName())).setBase64Texture(texture).hideAttributes();
-  }
+//  @NotNull
+//  @Override
+//  public LegacyItemBuilder createSettingsItem() {
+//    String texture = getValue() == GERMAN ? GERMAN_SKULL : ENGLISH_SKULL;
+//    return new LegacyItemBuilder.SkullBuilder(DefaultItem.getItemPrefix() + Message.forName(getSettingName())).setBase64Texture(texture).hideAttributes();
+//  }
 
   @Override
   public void playValueChangeTitle() {
     switch (getValue()) {
       case GERMAN:
-        Objects.requireNonNull(Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class)).changeLanguage("de");
+        Challenges.getInstance().getLoaderRegistry().findLoaderByClassOrThrow(LanguageLoader.class).changeLanguage("de");
         ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName(getSettingName()));
         break;
       case ENGLISH:
-        Objects.requireNonNull(Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class)).changeLanguage("en");
+        Challenges.getInstance().getLoaderRegistry().findLoaderByClassOrThrow(LanguageLoader.class).changeLanguage("en");
         ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName(getSettingName()));
         break;
       default:

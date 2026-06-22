@@ -1,11 +1,9 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.effect;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -13,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
@@ -23,14 +22,7 @@ import java.util.stream.Collectors;
 public class InfectionChallenge extends Setting {
 
   public InfectionChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.EFFECT);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.SLIME_BALL, Message.forName("item-infection-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.EFFECT, new ItemStack(Material.SLIME_BALL), "infection-challenge");
   }
 
   @Override

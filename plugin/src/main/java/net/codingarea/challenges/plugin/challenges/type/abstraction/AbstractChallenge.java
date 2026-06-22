@@ -1,17 +1,18 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import lombok.Getter;
-import lombok.Setter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBossBar;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeScoreboard;
+import net.codingarea.challenges.plugin.utils.item.DefaultItems;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.commons.common.annotations.DeprecatedSince;
 import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
@@ -19,10 +20,12 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.CheckReturnValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -43,17 +46,24 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
   }
 
   protected final MenuType menu;
+  protected final SettingCategory category;
   @Getter
   protected final ChallengeBossBar bossbar = new ChallengeBossBar();
   @Getter
   protected final ChallengeScoreboard scoreboard = new ChallengeScoreboard();
-  @Setter
-  protected SettingCategory category;
-  private String name;
-  private ItemStack cachedDisplayItem;
+  @Getter
+  protected ItemStack displayItemPreset;
 
-  public AbstractChallenge(@NotNull MenuType menu) {
+  @Getter
+  private final String nameMessageKey;
+  private String uniqueName;
+
+  public AbstractChallenge(@NotNull MenuType menu, @Nullable SettingCategory category,
+                           @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
     this.menu = menu;
+    this.category = category;
+    this.displayItemPreset = displayItemPreset;
+    this.nameMessageKey = nameMessageKey;
     firstInstanceByClass.put(this.getClass(), this);
   }
 
@@ -62,10 +72,12 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
     return classOfChallenge.cast(firstInstanceByClass.get(classOfChallenge));
   }
 
+  // TODO extract
   public static void broadcast(@NotNull Consumer<? super Player> action) {
     Bukkit.getOnlinePlayers().forEach(action);
   }
 
+  // TODO extract
   public static void broadcastFiltered(@NotNull Consumer<? super Player> action) {
     for (Player player : Bukkit.getOnlinePlayers()) {
       if (ignorePlayer(player)) continue;
@@ -73,6 +85,7 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
     }
   }
 
+  // TODO extract
   public static void broadcastIgnored(@NotNull Consumer<? super Player> action) {
     for (Player player : Bukkit.getOnlinePlayers()) {
       if (!ignorePlayer(player)) continue;
@@ -80,10 +93,14 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
     }
   }
 
+  // TODO extract
+  @CheckReturnValue
   public static boolean ignorePlayer(@NotNull Player player) {
     return ignoreGameMode(player.getGameMode());
   }
 
+  // TODO extract
+  @CheckReturnValue
   public static boolean ignoreGameMode(@NotNull GameMode gameMode) {
     return (isIgnoreSpectatorPlayers() && gameMode == GameMode.SPECTATOR) || (isIgnoreCreativePlayers() && gameMode == GameMode.CREATIVE);
   }
@@ -105,46 +122,94 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
 
   @NotNull
   @Override
-  public ItemStack getDisplayItem() {
-    if (cachedDisplayItem != null) return cachedDisplayItem.clone();
-    cachedDisplayItem = createDisplayItem().build();
-    return cachedDisplayItem.clone();
+  public ItemBuilder getDisplayItem(@NotNull Locale locale) {
+    return new ItemBuilder(locale, displayItemPreset, MessageKey.of("challenge.display-format"),
+      getChallengeName(), getChallengeDescription());
+  }
+
+  /**
+   * @implSpec If overridden, use {@link MessageKey#withArgs(Object...)} for placeholders
+   */
+  @NotNull
+  @Override
+  public LocalizableMessage getChallengeName() {
+    return getChallengeMessageKey("name");
+  }
+
+  /**
+   * @implSpec If overridden, use {@link MessageKey#withArgs(Object...)} for placeholders
+   */
+  @NotNull
+  @Override
+  public LocalizableMessage getChallengeDescription() {
+    return getChallengeMessageKey("desc");
+  }
+
+  @NotNull
+  protected MessageKey getChallengeMessageKey(@NotNull String messageNameSuffix) {
+    return MessageKey.of("challenge." + nameMessageKey + "." + messageNameSuffix);
   }
 
   @NotNull
   @Override
-  public ItemStack getSettingsItem() {
-    ItemBuilder item = createSettingsItem();
-    String[] description = getSettingsDescription();
+  public ItemBuilder getSettingsItem(@NotNull Locale locale) {
+    ItemStack preset = isEnabled() ? getSettingsItemPreset() : getDisabledSettingsItemPreset();
+    // apply formatting dynamically, to prevent duplicate format references
+    ItemBuilder item = new ItemBuilder(locale, preset, MessageKey.of("challenge.settings-format"),
+      isEnabled() ? getSettingsName() : MessageKey.of("disabled")); // no need to override disabled name/item
+
+    LocalizableMessage description = getSettingsDescription();
     if (description != null && isEnabled()) {
-      item.appendLore(" ");
-      item.appendLore(description);
+      item.appendLore(MessageKey.of("challenge.settings-format-lore"), description);
     }
 
-    return item.build();
+    return item;
   }
 
+  @NotNull
+  protected ItemStack getDisabledSettingsItemPreset() {
+    return DefaultItems.createDisabledPreset();
+  }
+
+  /**
+   * @implNote Only used if {@link #isEnabled()}.
+   *           Name/Lore will be overwritten by formatting.
+   *           Set name in {@link #getSettingsName()} and lore in {@link #getSettingsDescription()}
+   */
+  @NotNull
+  public ItemStack getSettingsItemPreset() {
+    return DefaultItems.createEnabledPreset();
+  }
+
+  /**
+   * @implNote Only used if {@link #isEnabled()}, format will be applied dynamically
+   */
+  @NotNull
+  public LocalizableMessage getSettingsName() {
+    return MessageKey.of("enabled");
+  }
+
+  /**
+   * @implNote Only used if {@link #isEnabled()}, format will be applied dynamically
+   */
   @Nullable
-  protected String[] getSettingsDescription() {
+  public LocalizableMessage getSettingsDescription() {
     return null;
   }
 
-  @NotNull
-  public abstract ItemBuilder createDisplayItem();
-
-  @NotNull
-  public abstract ItemBuilder createSettingsItem();
-
+  /**
+   * @implSpec override {@link #getUniqueName()} instead
+   */
   @NotNull
   @Override
-  public String getUniqueGamestateName() {
+  public final String getUniqueGamestateName() {
     return getUniqueName();
   }
 
   @NotNull
   @Override
   public String getUniqueName() {
-    return name != null ? name : (name = getClass().getSimpleName().toLowerCase()
+    return uniqueName != null ? uniqueName : (uniqueName = getClass().getSimpleName().toLowerCase()
       .replace("setting", "")
       .replace("challenge", "")
       .replace("modifier", "")
@@ -174,25 +239,6 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
 
   protected boolean shouldExecuteEffect() {
     return isEnabled() && ChallengeAPI.isStarted() && !ChallengeAPI.isWorldInUse();
-  }
-
-  /**
-   * @deprecated Use {@link ChallengeHelper#kill(Player)}
-   */
-  @Deprecated
-  @DeprecatedSince("2.1.0")
-  public void kill(@NotNull Player player) {
-    ChallengeHelper.kill(player);
-  }
-
-  /**
-   * @deprecated Use {@link ChallengeHelper#kill(Player, int)}
-   */
-  @Deprecated
-  @DeprecatedSince("2.1.0")
-  public void kill(@NotNull Player player, int delay) {
-    ChallengeHelper.kill(player, delay);
-
   }
 
   @NotNull

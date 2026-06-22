@@ -4,7 +4,7 @@ import lombok.Getter;
 import net.codingarea.challenges.plugin.challenges.custom.settings.IChallengeSetting;
 import net.codingarea.challenges.plugin.challenges.custom.settings.SettingType;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
-import net.codingarea.challenges.plugin.management.menu.generator.ChooseItemGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.ChooseItemGenerator;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.utils.bukkit.misc;
 
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.commons.common.collection.WrappedException;
 import net.codingarea.commons.common.logging.ILogger;
@@ -204,6 +204,16 @@ public class BukkitStringUtils {
     return component;
   }
 
+//	public static BaseComponent getServerSideItemComponent(@NotNull Material material) {
+//		BaseComponent component = getItemComponent(material);
+//		BaseComponent smithingTemplateName = getSmithingTemplateName(material);
+//		if (smithingTemplateName != null) {
+//			component.addExtra(" (");
+//			component.addExtra(smithingTemplateName);
+//			component.addExtra(")");
+//		}
+//		return component;
+//	}
 
   public static TranslatableComponent getEntityName(@NotNull EntityType type) {
 

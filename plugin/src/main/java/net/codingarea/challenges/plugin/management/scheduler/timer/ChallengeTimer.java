@@ -5,11 +5,10 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IGoal;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
-import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.implementation.TimerMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.TimerMenuGenerator;
 import net.codingarea.challenges.plugin.management.scheduler.policy.PlayerCountPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
@@ -18,8 +17,6 @@ import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.FileDocument;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +25,6 @@ public final class ChallengeTimer {
 
   @Getter
   private final TimerFormat format;
-  private final Message stoppedMessage, upMessage, downMessage;
   private final boolean specificStartSounds, defaultStartSound;
   @Getter
   private long time = 0;
@@ -45,13 +41,7 @@ public final class ChallengeTimer {
     specificStartSounds = pluginConfig.getBoolean("enable-specific-start-sounds");
     defaultStartSound = pluginConfig.getBoolean("enable-default-start-sounds");
 
-    // Load format + messages
-    Document timerConfig = pluginConfig.getDocument("timer");
-    stoppedMessage = Message.forName("stopped-message");
-    upMessage = Message.forName("count-up-message");
-    downMessage = Message.forName("count-down-message");
-
-    Document formatConfig = timerConfig.getDocument("format");
+    Document formatConfig = pluginConfig.getDocument("timer.format");
     format = new TimerFormat(formatConfig);
 
     Challenges.getInstance().getScheduler().register(this);
@@ -107,9 +97,9 @@ public final class ChallengeTimer {
     updateActionbar();
     updateTimeRule();
 
-    Message.forName("timer-was-started").broadcast(Prefix.TIMER);
+    MessageKey.of("timer-was-started").broadcast(Prefix.TIMER);
     Challenges.getInstance().getScheduler().fireTimerStatusChange();
-    Challenges.getInstance().getTitleManager().sendTimerStatusTitle(Message.forName("title-timer-started"));
+    Challenges.getInstance().getTitleManager().sendTimerStatusTitle(MessageKey.of("title-timer-started"));
     Challenges.getInstance().getServerManager().setNotFresh();
 
     for (Player player : Bukkit.getOnlinePlayers()) {
@@ -135,9 +125,17 @@ public final class ChallengeTimer {
 
     Challenges.getInstance().getScheduler().fireTimerStatusChange();
     if (playInGameEffects) {
-      Challenges.getInstance().getTitleManager().sendTimerStatusTitle(Message.forName("title-timer-paused"));
-      Message.forName("timer-was-paused").broadcast(Prefix.TIMER);
+      Challenges.getInstance().getTitleManager().sendTimerStatusTitle(MessageKey.of("title-timer-paused"));
+      MessageKey.of("timer-was-paused").broadcast(Prefix.TIMER);
       SoundSample.BASS_OFF.broadcast();
+    }
+  }
+
+  public void toggle() {
+    if (isStarted()) {
+      pause(true);
+    } else {
+      resume();
     }
   }
 
@@ -152,24 +150,15 @@ public final class ChallengeTimer {
     if (sentEmpty && hidden) return;
     if (hidden) sentEmpty = true;
     if (!hidden) {
-      for (Player player : Bukkit.getOnlinePlayers()) {
-        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(getActionbar()));
-      }
+      this.getCurrentActionbarMessage().broadcastActionBar(getFormattedTime());
     }
-
   }
 
   @NotNull
-  private String getActionbar() {
-    Message message = !paused || (!countingUp && time > 0) ? (countingUp ? upMessage : downMessage) : stoppedMessage;
-    String time = getFormattedTime();
-    return message.asString(time);
-  }
-
-  private boolean isSmallCaps() {
-    LanguageLoader languageLoader = Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class);
-    if (languageLoader == null) return false;
-    return languageLoader.isSmallCapsFont();
+  private MessageKey getCurrentActionbarMessage() {
+    if (paused) return MessageKey.of("stopped-message");
+    if (countingUp) return MessageKey.of("count-up-message");
+    return MessageKey.of("count-down-message");
   }
 
   public synchronized void loadSession() {
@@ -225,8 +214,8 @@ public final class ChallengeTimer {
     this.countingUp = countingUp;
     updateActionbar();
     TimerMenuGenerator menuGenerator = (TimerMenuGenerator) MenuType.TIMER.getMenuGenerator();
-    menuGenerator.updateFirstPage();
-    Message.forName("timer-mode-set-" + (countingUp ? "up" : "down")).broadcast(Prefix.TIMER);
+    menuGenerator.updatePage(TimerMenuGenerator.PAGE_STATE);
+    MessageKey.of("timer-mode-set-" + (countingUp ? "up" : "down")).broadcast(Prefix.TIMER);
     SoundSample.BASS_ON.broadcast();
   }
 

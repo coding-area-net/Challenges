@@ -3,14 +3,12 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.eff
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
 import net.codingarea.challenges.plugin.spigot.events.PlayerIgnoreStatusChangeEvent;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.commons.common.collection.SeededRandomWrapper;
@@ -24,9 +22,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,14 +39,7 @@ public class BlockEffectChallenge extends Setting {
   private Map<UUID, PotionEffect> currentPotionEffects = new HashMap<>();
 
   public BlockEffectChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.EFFECT);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.CARVED_PUMPKIN, Message.forName("item-block-effect-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.EFFECT, new ItemStack(Material.CARVED_PUMPKIN), "block-effect-challenge");
   }
 
   @Override

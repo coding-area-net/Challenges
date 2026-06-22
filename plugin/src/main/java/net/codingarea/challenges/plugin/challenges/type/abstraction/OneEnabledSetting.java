@@ -2,22 +2,26 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class OneEnabledSetting extends Setting {
 
   private final String typeId;
 
-  public OneEnabledSetting(@NotNull MenuType menu, @NotNull String typeId) {
-    super(menu);
+  public OneEnabledSetting(@NotNull MenuType menu, @Nullable SettingCategory category, @NotNull String typeId,
+                           @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(menu, category, displayItemPreset, nameMessageKey);
     this.typeId = typeId;
   }
 
-  public OneEnabledSetting(@NotNull MenuType menu, boolean enabledByDefault, @NotNull String typeId) {
-    super(menu, enabledByDefault);
+  public OneEnabledSetting(@NotNull MenuType menu, @Nullable SettingCategory category, boolean enabledByDefault, @NotNull String typeId,
+                           @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(menu, category, enabledByDefault, displayItemPreset, nameMessageKey);
     this.typeId = typeId;
   }
-
 
   @Override
   public void setEnabled(boolean enabled) {

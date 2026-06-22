@@ -2,28 +2,20 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.KillEntityGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class KillIronGolemGoal extends KillEntityGoal {
 
   public KillIronGolemGoal() {
-    super(EntityType.IRON_GOLEM);
-    setCategory(SettingCategory.KILL_ENTITY);
+    super(SettingCategory.KILL_ENTITY, EntityType.IRON_GOLEM, new ItemStack(Material.IRON_INGOT), "iron-golem-goal");
     this.killerNeeded = true;
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.IRON_INGOT, Message.forName("item-iron-golem-goal"));
   }
 
   @NotNull

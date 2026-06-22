@@ -7,12 +7,10 @@ import net.codingarea.challenges.plugin.challenges.type.IChallenge;
 import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
-import net.codingarea.challenges.plugin.content.ItemDescription;
+import net.codingarea.challenges.plugin.challenges.type.annotation.CanInstaKillOnEnable;
+import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.management.challenges.annotations.CanInstaKillOnEnable;
-import net.codingarea.challenges.plugin.management.challenges.annotations.ExcludeFromRandomChallenges;
-import net.codingarea.challenges.plugin.management.menu.generator.ChallengeMenuGenerator;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.ChallengesMenuGenerator;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
@@ -42,11 +40,7 @@ public final class ChallengeHelper {
   }
 
   public static void kill(@NotNull Player player) {
-
-    if (!Bukkit.isPrimaryThread()) {
-      Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> kill(player));
-      return;
-    }
+    if (runSyncIfConcurrent(() -> kill(player))) return;
 
     inInstantKill = true;
     player.damage(Integer.MAX_VALUE);
@@ -57,8 +51,16 @@ public final class ChallengeHelper {
     Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), () -> kill(player), delay);
   }
 
+  public static boolean runSyncIfConcurrent(Runnable task) {
+    if (Bukkit.isPrimaryThread()) {
+      return false;
+    }
+    Bukkit.getScheduler().runTask(Challenges.getInstance(), task);
+    return true;
+  }
+
   public static void updateItems(@NotNull IChallenge challenge) {
-    challenge.getType().executeWithGenerator(ChallengeMenuGenerator.class, gen -> gen.updateItem(challenge));
+    challenge.getType().executeWithGenerator(ChallengesMenuGenerator.class, gen -> gen.updateElementDisplay(challenge));
   }
 
   public static boolean canInstaKillOnEnable(@NotNull IChallenge challenge) {
@@ -87,11 +89,9 @@ public final class ChallengeHelper {
   }
 
   @NotNull
+  @Deprecated
   public static String getColoredChallengeName(@NotNull AbstractChallenge challenge) {
-    ItemBuilder item = challenge.createDisplayItem();
-    ItemDescription description = item.getBuiltByItemDescription();
-    if (description == null) return Message.NULL;
-    return description.getOriginalName();
+    return challenge.getChallengeName().getLocalizableKey().getKey();
   }
 
   public static void breakBlock(@NotNull Block block, @Nullable ItemStack tool) {

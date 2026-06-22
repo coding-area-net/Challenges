@@ -2,11 +2,9 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder.PotionBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
+import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -23,13 +21,7 @@ import org.jetbrains.annotations.Nullable;
 public class SplitHealthSetting extends Setting {
 
   public SplitHealthSetting() {
-    super(MenuType.SETTINGS);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new PotionBuilder(Material.TIPPED_ARROW, Message.forName("item-split-health-setting")).color(Color.RED);
+    super(MenuType.SETTINGS, null, new StandardItemBuilder.PotionBuilder(Material.TIPPED_ARROW).setColor(Color.RED).build(), "item-split-health-setting");
   }
 
   @Override
@@ -102,7 +94,7 @@ public class SplitHealthSetting extends Setting {
 
   }
 
-  @SuppressWarnings({"deprecation", "removal"})
+  @SuppressWarnings({"removal"})
   private void tryApplyLastDamageCause(Player player, EntityDamageEvent damageEvent) {
     // marked for removal in api version 1.20.4 with no apparent replacement?
     try {

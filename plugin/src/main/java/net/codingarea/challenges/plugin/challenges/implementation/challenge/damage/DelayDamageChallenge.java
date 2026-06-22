@@ -3,16 +3,16 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.dam
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,9 +26,14 @@ public class DelayDamageChallenge extends TimedChallenge {
   private final Map<Player, Double> damageMap = new HashMap<>();
 
   public DelayDamageChallenge() {
-    super(MenuType.CHALLENGES, 1, 64, 4, false);
-    setCategory(SettingCategory.DAMAGE);
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 64, 4, false, new ItemStack(Material.REDSTONE), "item-delay-damage");
   }
+
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-time-seconds-description").asArray(getValue() * 30);
+//  }
 
   @Override
   protected int getSecondsUntilNextActivation() {
@@ -57,26 +62,14 @@ public class DelayDamageChallenge extends TimedChallenge {
     restartTimer();
   }
 
-  @Override
-  public @NotNull ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.REDSTONE, Message.forName("item-delay-damage-description"));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-time-seconds-description").asArray(getValue() * 30);
-  }
-
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
   public void onPlayerDamage(@NotNull EntityDamageEvent event) {
     if (!shouldExecuteEffect()) return;
-    if (!(event.getEntity() instanceof Player)) return;
-    if (ignorePlayer((Player) event.getEntity())) return;
+    if (!(event.getEntity() instanceof Player player)) return;
+    if (ignorePlayer(player)) return;
     if (canGetDamage) return;
 
     double damage = event.getFinalDamage();
-    Player player = (Player) event.getEntity();
 
     damageMap.put(player, damageMap.getOrDefault(player, 0.0) + damage);
     event.setCancelled(true);

@@ -2,16 +2,14 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ran
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.RandomizerSetting;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.blocks.BlockDropManager;
 import net.codingarea.challenges.plugin.management.blocks.BlockDropManager.DropPriority;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.commons.bukkit.utils.item.ItemUtils;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import org.bukkit.Material;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,13 +18,7 @@ import java.util.List;
 public class BlockRandomizerChallenge extends RandomizerSetting {
 
   public BlockRandomizerChallenge() {
-    super(MenuType.CHALLENGES);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.MINECART, Message.forName("item-block-randomizer-challenge"));
+    super(MenuType.CHALLENGES, new ItemStack(Material.MINECART), "block-randomizer-challenge");
   }
 
   @Override

@@ -4,19 +4,20 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class PregameMovementSetting extends Setting {
 
   public PregameMovementSetting() {
-    super(MenuType.SETTINGS, true);
+    super(MenuType.SETTINGS, null, true, new ItemStack(Material.PISTON), "pregame-movement");
   }
 
   @EventHandler
@@ -45,12 +46,6 @@ public class PregameMovementSetting extends Setting {
   private void findNearestBlock(@NotNull Location location) {
     for (; location.getBlockY() > 0 && location.getBlock().isPassable(); location.subtract(0, 1, 0))
       ;
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.PISTON, Message.forName("pregame-movement-setting"));
   }
 
 }

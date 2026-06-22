@@ -2,8 +2,8 @@ package net.codingarea.challenges.plugin.spigot.command;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
@@ -35,12 +35,12 @@ public class TimerCommand implements SenderCommand, Completer {
 
     switch (args[0].toLowerCase()) {
       default:
-        Message.forName("syntax").send(sender, Prefix.TIMER, "timer <resume/pause/reset/set/mode>");
+        MessageKey.of("syntax").send(sender, Prefix.TIMER, "timer <resume/pause/reset/set/mode>");
         return;
       case "resume":
       case "start":
         if (ChallengeAPI.isStarted()) {
-          Message.forName("timer-already-started").send(sender, Prefix.TIMER);
+          MessageKey.of("timer-already-started").send(sender, Prefix.TIMER);
           SoundSample.BASS_OFF.playIfPlayer(sender);
           break;
         }
@@ -49,7 +49,7 @@ public class TimerCommand implements SenderCommand, Completer {
       case "stop":
       case "pause":
         if (ChallengeAPI.isPaused()) {
-          Message.forName("timer-already-paused").send(sender, Prefix.TIMER);
+          MessageKey.of("timer-already-paused").send(sender, Prefix.TIMER);
           SoundSample.BASS_OFF.playIfPlayer(sender);
           break;
         }
@@ -64,7 +64,7 @@ public class TimerCommand implements SenderCommand, Completer {
           seconds = Integer.MAX_VALUE;
         }
         Challenges.getInstance().getChallengeTimer().setSeconds(seconds);
-        Message.forName("timer-was-set").send(sender, Prefix.TIMER, Challenges.getInstance().getChallengeTimer().getFormattedTime());
+        MessageKey.of("timer-was-set").send(sender, Prefix.TIMER, Challenges.getInstance().getChallengeTimer().getFormattedTime());
         break;
       case "show":
         Challenges.getInstance().getChallengeTimer().setHidden(false);
@@ -74,7 +74,7 @@ public class TimerCommand implements SenderCommand, Completer {
         break;
       case "mode":
         if (args.length != 2) {
-          Message.forName("syntax").send(sender, Prefix.TIMER, "timer mode <up/down>");
+          MessageKey.of("syntax").send(sender, Prefix.TIMER, "timer mode <up/down>");
           break;
         }
         switch (args[1].toLowerCase()) {
@@ -88,7 +88,7 @@ public class TimerCommand implements SenderCommand, Completer {
             Challenges.getInstance().getChallengeTimer().setCountingUp(false);
             break;
           default:
-            Message.forName("syntax").send(sender, Prefix.TIMER, "timer mode <up/down>");
+            MessageKey.of("syntax").send(sender, Prefix.TIMER, "timer mode <up/down>");
             break;
         }
 

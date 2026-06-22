@@ -4,8 +4,8 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.Chall
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.commons.bukkit.utils.item.ItemBuilder.PotionBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
+import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder.PotionBuilder;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -26,7 +26,7 @@ public class EntityDamageTrigger extends ChallengeTrigger {
         Arrays.asList(PotionEffectType.values()));
       Collections.shuffle(types, new Random(1));
 
-      builder.addSetting(SubSettingsHelper.ANY, new ItemBuilder(Material.NETHER_STAR, Message.forName("item-custom-trigger-damage-any")));
+      builder.addSetting(SubSettingsHelper.ANY, new LegacyItemBuilder(Material.NETHER_STAR, Message.forName("item-custom-trigger-damage-any")));
 
       DamageCause[] values = DamageCause.values();
       for (int i = 0; i < values.length; i++) {

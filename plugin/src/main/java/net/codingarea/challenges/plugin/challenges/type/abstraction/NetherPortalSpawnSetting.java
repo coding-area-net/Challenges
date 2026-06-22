@@ -1,14 +1,16 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.*;
 import org.bukkit.World.Environment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,19 +27,20 @@ public abstract class NetherPortalSpawnSetting extends OneEnabledSetting {
   private final Map<Location, Location> netherPortalsByOverworldPortals = new HashMap<>();
   private final StructureType structureType;
   private final Collection<Material> groundMaterial;
-  private final String unableToFindMessage;
+  private final String unableToFindMessageKey;
 
-  public NetherPortalSpawnSetting(@NotNull MenuType menu, @NotNull StructureType structureType, @NotNull String unableToFindMessage, @NotNull Material... groundMaterial) {
-    super(menu, id);
-    this.structureType = structureType;
-    this.unableToFindMessage = unableToFindMessage;
-    this.groundMaterial = Arrays.asList(groundMaterial);
+  public NetherPortalSpawnSetting(@NotNull MenuType menu, @Nullable SettingCategory category, @NotNull StructureType structureType,
+                                  @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey,
+                                  @NotNull String unableToFindMessageKey, @NotNull Material... groundMaterial) {
+    this(menu, category, structureType, displayItemPreset, nameMessageKey, unableToFindMessageKey, Arrays.asList(groundMaterial));
   }
 
-  public NetherPortalSpawnSetting(@NotNull MenuType menu, @NotNull StructureType structureType, @NotNull String unableToFindMessage, @NotNull Collection<Material> groundMaterial) {
-    super(menu, id);
+  public NetherPortalSpawnSetting(@NotNull MenuType menu, @Nullable SettingCategory category, @NotNull StructureType structureType,
+                                  @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey,
+                                  @NotNull String unableToFindMessageKey, @NotNull Collection<Material> groundMaterial) {
+    super(menu, category, id, displayItemPreset, nameMessageKey);
     this.structureType = structureType;
-    this.unableToFindMessage = unableToFindMessage;
+    this.unableToFindMessageKey = unableToFindMessageKey;
     this.groundMaterial = groundMaterial;
   }
 
@@ -53,7 +56,7 @@ public abstract class NetherPortalSpawnSetting extends OneEnabledSetting {
       World world = event.getTo().getWorld();
       Location location = getNetherPortal(event.getFrom(), world);
       if (location == null) {
-        Message.forName(unableToFindMessage).send(event.getPlayer(), Prefix.CHALLENGES);
+        MessageKey.of(unableToFindMessageKey).send(event.getPlayer(), Prefix.CHALLENGES);
         return;
       }
 

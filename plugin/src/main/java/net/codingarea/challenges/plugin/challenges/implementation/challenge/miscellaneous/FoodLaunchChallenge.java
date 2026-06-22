@@ -5,12 +5,13 @@ import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.EntityUtils;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,20 +20,14 @@ import org.jetbrains.annotations.Nullable;
 public class FoodLaunchChallenge extends SettingModifier {
 
   public FoodLaunchChallenge() {
-    super(MenuType.CHALLENGES, 1, 10, 2);
+    super(MenuType.CHALLENGES, null, 1, 10, 2, new ItemStack(Material.CAKE), "food-launch-challenge");
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.CAKE, Message.forName("item-consume-launch-challenge"));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-launcher-description").asArray(getValue());
-  }
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-launcher-description").asArray(getValue());
+//  }
 
   @Override
   public void playValueChangeTitle() {

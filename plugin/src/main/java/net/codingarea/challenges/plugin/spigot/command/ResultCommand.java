@@ -4,8 +4,8 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IGoal;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleGoal;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.entity.Player;
@@ -15,7 +15,7 @@ public class ResultCommand implements PlayerCommand {
   @Override
   public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
     if (ChallengeAPI.isPaused()) {
-      Message.forName("timer-not-started").send(player, Prefix.CHALLENGES);
+      MessageKey.of("timer-not-started").send(player, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.play(player);
       return;
     }
@@ -28,6 +28,6 @@ public class ResultCommand implements PlayerCommand {
       return;
     }
 
-    Message.forName("command-result-no-battle-active").send(player, Prefix.CHALLENGES);
+    MessageKey.of("command-result-no-battle-active").send(player, Prefix.CHALLENGES);
   }
 }

@@ -4,13 +4,13 @@ import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebatt
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleGoal;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -19,13 +19,8 @@ import java.util.stream.Collectors;
 public class ForceDamageBattleGoal extends ForceBattleGoal<DamageTarget> {
 
   public ForceDamageBattleGoal() {
-    super(Message.forName("menu-force-damage-battle-goal-settings"));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.TOTEM_OF_UNDYING, Message.forName("item-force-damage-battle-goal"));
+//    super(Message.forName("menu-force-damage-battle-goal-settings"));
+    super(new ItemStack(Material.TOTEM_OF_UNDYING), "force-damange-battle-goal");
   }
 
   @Override

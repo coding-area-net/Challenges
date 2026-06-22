@@ -3,13 +3,11 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ran
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.RandomizerSetting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ListBuilder;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
 import org.bukkit.Material;
@@ -35,14 +33,7 @@ public class EntityLootRandomizerChallenge extends RandomizerSetting implements 
   protected Map<EntityType, LootTable> randomization;
 
   public EntityLootRandomizerChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.RANDOMIZER);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.FURNACE_MINECART, Message.forName("item-entity-loot-randomizer-challenge"));
+    super(MenuType.CHALLENGES, new ItemStack(Material.FURNACE_MINECART), "entity-loot-randomizer-challenge");
   }
 
   @Override
@@ -128,12 +119,12 @@ public class EntityLootRandomizerChallenge extends RandomizerSetting implements 
   public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 
     if (!isEnabled()) {
-      Message.forName("command-searchloot-disabled").send(sender, Prefix.CHALLENGES);
+      MessageKey.of("command-searchloot-disabled").send(sender, Prefix.CHALLENGES);
       return;
     }
 
     if (args.length == 0) {
-      Message.forName("syntax").send(sender, Prefix.CHALLENGES, "searchloot <entity>");
+      MessageKey.of("syntax").send(sender, Prefix.CHALLENGES, "searchloot <entity>");
       return;
     }
 
@@ -141,11 +132,11 @@ public class EntityLootRandomizerChallenge extends RandomizerSetting implements 
     EntityType entityType = Utils.getEntityType(input);
 
     if (entityType == null) {
-      Message.forName("no-such-entity").send(sender, Prefix.CHALLENGES);
+      MessageKey.of("no-such-entity").send(sender, Prefix.CHALLENGES);
       return;
     }
     if (!entityType.isAlive()) {
-      Message.forName("not-alive").send(sender, Prefix.CHALLENGES, entityType);
+      MessageKey.of("not-alive").send(sender, Prefix.CHALLENGES, entityType);
       return;
     }
 
@@ -153,7 +144,7 @@ public class EntityLootRandomizerChallenge extends RandomizerSetting implements 
     try {
       givenLootTable = LootTables.valueOf(entityType.name()).getLootTable();
     } catch (IllegalArgumentException exception) {
-      Message.forName("no-loot").send(sender, Prefix.CHALLENGES, entityType);
+      MessageKey.of("no-loot").send(sender, Prefix.CHALLENGES, entityType);
       return;
     }
 
@@ -161,9 +152,9 @@ public class EntityLootRandomizerChallenge extends RandomizerSetting implements 
     LootTable droppedLootTable = getLootTableForEntity(entityType);
 
     if (optionalEntity.isPresent()) {
-      Message.forName("command-searchloot-result").send(sender, Prefix.CHALLENGES, entityType, droppedLootTable, optionalEntity.get());
+      MessageKey.of("command-searchloot-result").send(sender, Prefix.CHALLENGES, entityType, droppedLootTable, optionalEntity.get());
     } else {
-      Message.forName("command-searchloot-nothing").send(sender, Prefix.CHALLENGES, entityType);
+      MessageKey.of("command-searchloot-nothing").send(sender, Prefix.CHALLENGES, entityType);
     }
 
   }

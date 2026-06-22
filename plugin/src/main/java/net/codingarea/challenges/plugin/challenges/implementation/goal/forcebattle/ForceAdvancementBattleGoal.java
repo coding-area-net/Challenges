@@ -4,7 +4,6 @@ import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebatt
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
@@ -16,7 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,19 +25,14 @@ import java.util.Objects;
 public class ForceAdvancementBattleGoal extends ForceBattleGoal<AdvancementTarget> {
 
   public ForceAdvancementBattleGoal() {
-    super(Message.forName("menu-force-advancement-battle-goal-settings"));
+//    super(Message.forName("menu-force-advancement-battle-goal-settings"));
+    super(new ItemStack(Material.EXPERIENCE_BOTTLE), "force-advancement-battle-goal");
   }
 
   private void resetAdvancementProgress(Player player, Advancement advancement) {
     if (advancement == null) return;
     AdvancementProgress progress = player.getAdvancementProgress(advancement);
     progress.getAwardedCriteria().forEach(progress::revokeCriteria);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.EXPERIENCE_BOTTLE, Message.forName("item-force-advancement-battle-goal"));
   }
 
   @Override

@@ -2,28 +2,20 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.KillEntityGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class KillSnowGolemGoal extends KillEntityGoal {
 
   public KillSnowGolemGoal() {
-    super(MinecraftNameWrapper.SNOW_GOLEM);
-    setCategory(SettingCategory.KILL_ENTITY);
+    super(SettingCategory.KILL_ENTITY, MinecraftNameWrapper.SNOW_GOLEM, new ItemStack(Material.SNOWBALL), "snow-golem-goal");
     this.killerNeeded = true;
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.SNOWBALL, Message.forName("item-snow-golem-goal"));
   }
 
   @NotNull

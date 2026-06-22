@@ -2,13 +2,14 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifierCollectionGoal;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.ListBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
@@ -17,6 +18,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class CollectWoodGoal extends SettingModifierCollectionGoal {
@@ -28,26 +30,19 @@ public class CollectWoodGoal extends SettingModifierCollectionGoal {
     BOTH = 3;
 
   public CollectWoodGoal() {
-    super(1, newNether ? 3 : 1);
-    setCategory(SettingCategory.FASTEST_TIME);
+    super(SettingCategory.FASTEST_TIME, 1, newNether ? 3 : 1, new ItemStack(Material.GOLDEN_AXE), "collect-wood-goal");
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.GOLDEN_AXE, Message.forName("item-collect-wood-goal"));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createSettingsItem() {
-    if (!newNether) return DefaultItem.enabled();
-    if (getValue() == OVERWORLD)
-      return DefaultItem.create(Material.OAK_LOG, Message.forName("item-collect-wood-goal-overworld"));
-    if (getValue() == NETHER)
-      return DefaultItem.create(Material.WARPED_STEM, Message.forName("item-collect-wood-goal-nether"));
-    return DefaultItem.create(Material.CRYING_OBSIDIAN, Message.forName("item-collect-wood-goal-both"));
-  }
+//  @NotNull
+//  @Override
+//  public LegacyItemBuilder createSettingsItem() {
+//    if (!newNether) return DefaultItem.enabled();
+//    if (getValue() == OVERWORLD)
+//      return DefaultItem.create(Material.OAK_LOG, Message.forName("item-collect-wood-goal-overworld"));
+//    if (getValue() == NETHER)
+//      return DefaultItem.create(Material.WARPED_STEM, Message.forName("item-collect-wood-goal-nether"));
+//    return DefaultItem.create(Material.CRYING_OBSIDIAN, Message.forName("item-collect-wood-goal-both"));
+//  }
 
   @Override
   public void handleClick(@NotNull ChallengeMenuClickInfo info) {
@@ -119,7 +114,7 @@ public class CollectWoodGoal extends SettingModifierCollectionGoal {
 
   private void handleCollect(@NotNull Player player, @NotNull Material material) {
     collect(player, material, () -> {
-      Message.forName("item-collected").send(player, Prefix.CHALLENGES, material);
+      MessageKey.of("item-collected").send(player, Prefix.CHALLENGES, material);
       SoundSample.PLING.play(player);
     });
   }

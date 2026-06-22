@@ -1,12 +1,12 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.movement;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
+import net.codingarea.challenges.plugin.challenges.type.annotation.CanInstaKillOnEnable;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
-import net.codingarea.challenges.plugin.management.challenges.annotations.CanInstaKillOnEnable;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
@@ -23,20 +23,7 @@ import org.jetbrains.annotations.NotNull;
 public class OnlyDirtChallenge extends Setting {
 
   public OnlyDirtChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.MOVEMENT);
-  }
-
-  @NotNull
-  @Override
-  public ItemStack getSettingsItem() {
-    return super.getSettingsItem();
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.DIRT, Message.forName("item-only-dirt-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, new ItemStack(Material.DIRT), "only-dirt-challenge");
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
@@ -49,7 +36,7 @@ public class OnlyDirtChallenge extends Setting {
     if (blockBelow == null) return;
     if (blockBelow.getType() != Material.DIRT && !BukkitReflectionUtils.isAir(blockBelow.getType())) {
       Message.forName("only-dirt-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
-      kill(event.getPlayer());
+      ChallengeHelper.kill(event.getPlayer());
     }
 
   }

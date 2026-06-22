@@ -2,11 +2,9 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ent
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -14,6 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.jetbrains.annotations.NotNull;
@@ -26,14 +25,7 @@ public class StoneSightChallenge extends Setting {
   private final Random random = new Random();
 
   public StoneSightChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.ENTITIES);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.COBBLESTONE, Message.forName("item-stone-sight-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.COBBLESTONE), "stone-sight");
   }
 
   @ScheduledTask(ticks = 1, async = false)

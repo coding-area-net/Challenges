@@ -33,14 +33,14 @@ public final class ChallengeAnnotations {
   }
 
   public static boolean isNew(@NotNull IChallenge challenge) {
-    return isVersionNewer(getSince(challenge));
+    return isVersionNew(getSince(challenge));
   }
 
   public static boolean isUpdated(@NotNull IChallenge challenge) {
-    return isVersionNewer(getUpdated(challenge));
+    return isVersionNew(getUpdated(challenge));
   }
 
-  private static boolean isVersionNewer(@NotNull Version challengeVersion) {
+  private static boolean isVersionNew(@NotNull Version challengeVersion) {
     Version pluginVersion = Challenges.getInstance().getVersion();
     return challengeVersion.isNewerOrEqualThan(pluginVersion);
   }

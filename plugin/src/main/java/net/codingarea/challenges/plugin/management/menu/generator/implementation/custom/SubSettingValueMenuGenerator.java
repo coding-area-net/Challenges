@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.management.menu.generator.implementation.custom;
 
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSetting;
-import net.codingarea.challenges.plugin.management.menu.generator.ValueMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.ValueMenuGenerator;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;

@@ -5,13 +5,12 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleG
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +18,8 @@ import java.util.stream.Collectors;
 public class ForceHeightBattleGoal extends ForceBattleGoal<HeightTarget> {
 
   public ForceHeightBattleGoal() {
-    super(Message.forName("menu-force-height-battle-goal-settings"));
+//    super(Message.forName("menu-force-height-battle-goal-settings"));
+    super(new ItemStack(Material.RABBIT_FOOT), "force-height-battle-goal");
   }
 
   @Override
@@ -46,12 +46,6 @@ public class ForceHeightBattleGoal extends ForceBattleGoal<HeightTarget> {
   @Override
   protected Message getLeaderboardTitleMessage() {
     return Message.forName("force-height-battle-leaderboard");
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.RABBIT_FOOT, Message.forName("item-force-height-battle-goal"));
   }
 
   @Override

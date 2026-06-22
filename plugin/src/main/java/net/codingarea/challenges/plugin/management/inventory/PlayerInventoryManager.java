@@ -4,11 +4,12 @@ import lombok.Getter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder.SkullBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder.SkullBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.collection.pair.Triple;
@@ -246,7 +247,7 @@ public final class PlayerInventoryManager implements Listener {
         stack = new SkullBuilder(Message.forName(item.getMessage()).asString())
           .setOwner(player.getUniqueId(), player.getName()).build();
       } else {
-        stack = new ItemBuilder(item.getMaterial(), Message.forName(item.getMessage()).asString()).build();
+        stack = new ItemBuilder(player, item.getMaterial(), MessageKey.of(item.getMessage())).build();
       }
 
       pairs[item.getSlot()] = new Triple<>(

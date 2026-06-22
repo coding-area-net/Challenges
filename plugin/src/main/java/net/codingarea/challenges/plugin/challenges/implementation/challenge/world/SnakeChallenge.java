@@ -1,11 +1,11 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.common.config.Document;
@@ -18,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -29,14 +30,7 @@ public class SnakeChallenge extends Setting {
   private final ArrayList<Block> blocks = new ArrayList<>();
 
   public SnakeChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.WORLD);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.BLUE_TERRACOTTA, Message.forName("item-snake-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.BLUE_TERRACOTTA), "snake-challenge");
   }
 
   @Override
@@ -77,7 +71,7 @@ public class SnakeChallenge extends Setting {
 
     if (blocks.contains(to)) {
       Message.forName("snake-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
-      kill(event.getPlayer());
+      ChallengeHelper.kill(event.getPlayer());
       return;
     }
 

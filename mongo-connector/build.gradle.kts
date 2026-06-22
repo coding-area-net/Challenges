@@ -1,6 +1,6 @@
 plugins {
-  `java-library`
-  id("com.gradleup.shadow")
+  id("java-library")
+  alias(libs.plugins.shadow)
 }
 
 dependencies {

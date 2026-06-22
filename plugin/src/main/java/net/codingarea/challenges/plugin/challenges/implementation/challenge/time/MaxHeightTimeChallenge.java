@@ -5,24 +5,22 @@ import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @Since("2.0")
 public class MaxHeightTimeChallenge extends SettingModifier {
 
   public MaxHeightTimeChallenge() {
-    super(MenuType.CHALLENGES, 3, 20);
-    setCategory(SettingCategory.LIMITED_TIME);
+    super(MenuType.CHALLENGES, SettingCategory.LIMITED_TIME, 3, 20, new ItemStack(Material.PARROT_SPAWN_EGG), "max-height-time-challenge");
   }
 
   @Override
@@ -47,17 +45,11 @@ public class MaxHeightTimeChallenge extends SettingModifier {
     bossbar.update();
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.PARROT_SPAWN_EGG, Message.forName("item-max-height-time-challenge"));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-time-seconds-description").asArray(getValue() * 60);
-  }
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-time-seconds-description").asArray(getValue() * 60);
+//  }
 
   @Override
   public void playValueChangeTitle() {
@@ -86,7 +78,7 @@ public class MaxHeightTimeChallenge extends SettingModifier {
 
     int time = getCurrentTime(player) + 1;
     if (time > getValue() * 60) {
-      kill(player);
+      ChallengeHelper.kill(player);
     }
     if (time < getValue() * 60) {
       getPlayerData(player).set(String.valueOf(player.getLocation().getBlockY()), time);

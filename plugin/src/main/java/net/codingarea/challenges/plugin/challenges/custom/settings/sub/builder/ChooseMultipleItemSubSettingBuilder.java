@@ -4,11 +4,11 @@ import com.google.common.collect.Lists;
 import lombok.Getter;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.management.menu.generator.MenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.MenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.IParentCustomGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.SubSettingChooseMultipleMenuGenerator;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -77,7 +77,7 @@ public class ChooseMultipleItemSubSettingBuilder extends GeneratorSubSettingsBui
     return this;
   }
 
-  public ChooseMultipleItemSubSettingBuilder addSetting(String key, ItemBuilder value) {
+  public ChooseMultipleItemSubSettingBuilder addSetting(String key, LegacyItemBuilder value) {
     settings.put(key, value.hideAttributes().build());
     return this;
   }

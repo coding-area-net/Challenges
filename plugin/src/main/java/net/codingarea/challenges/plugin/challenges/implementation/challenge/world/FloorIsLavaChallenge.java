@@ -1,10 +1,8 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -12,14 +10,13 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class FloorIsLavaChallenge extends SettingModifier {
 
   public FloorIsLavaChallenge() {
-    super(MenuType.CHALLENGES, 1, 60, 30);
-    setCategory(SettingCategory.WORLD);
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 60, 30, new ItemStack(Material.MAGMA_BLOCK), "floor-is-lava-challenge");
   }
 
   @EventHandler
@@ -46,16 +43,10 @@ public class FloorIsLavaChallenge extends SettingModifier {
     BlockUtils.setBlockNatural(BlockUtils.getBlockBelow(to), Material.LAVA, true);
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.MAGMA_BLOCK, Message.forName("item-floor-lava-challenge"));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-time-seconds-description").asArray(getValue());
-  }
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-time-seconds-description").asArray(getValue());
+//  }
 
 }

@@ -2,11 +2,10 @@ package net.codingarea.challenges.plugin.challenges.implementation.material;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,23 +21,21 @@ import java.util.Arrays;
 public class BlockMaterialSetting extends Setting {
 
   private final String name;
-  private final ItemBuilder preset;
   private final Object[] replacements;
   private final Material[] materials;
 
-  public BlockMaterialSetting(@NotNull String name, @NotNull ItemBuilder preset, @NotNull Object[] replacements, @NotNull Material... materials) {
-    super(MenuType.ITEMS, true);
+  public BlockMaterialSetting(@NotNull String name, @NotNull LegacyItemBuilder preset, @NotNull Object[] replacements, @NotNull Material... materials) {
+    super(MenuType.ITEMS, null, true, preset.build(), "lol");
     this.name = name;
-    this.preset = preset;
     this.replacements = replacements;
     this.materials = materials;
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return preset.clone().applyFormat(Message.forName(name).asItemDescription(replacements));
-  }
+//  @NotNull
+//  @Override
+//  public LegacyItemBuilder createDisplayItem() {
+//    return preset.clone().applyFormat(Message.forName(name).asItemDescription(replacements));
+//  }
 
   private boolean blockMaterial(Material material) {
     return Arrays.asList(materials).contains(material);

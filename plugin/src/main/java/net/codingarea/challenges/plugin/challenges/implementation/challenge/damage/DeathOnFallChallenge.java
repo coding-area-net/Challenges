@@ -2,30 +2,22 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.dam
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class DeathOnFallChallenge extends Setting {
 
   public DeathOnFallChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.DAMAGE);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.FEATHER, Message.forName("item-death-on-fall-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, new ItemStack(Material.FEATHER), "item-death-on-fall-challenge");
   }
 
   @EventHandler(priority = EventPriority.HIGH)

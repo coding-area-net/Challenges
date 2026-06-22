@@ -13,7 +13,7 @@ public final class SoundSample {
 
   public static final SoundSample
     CLICK = new SoundSample().addSound(Sound.BLOCK_WOODEN_BUTTON_CLICK_ON, 0.5f),
-    BASS_OFF = new SoundSample().addSound(Sound.BLOCK_NOTE_BLOCK_BASS, 0.5F),
+    BASS_OFF = new SoundSample().addSound(Sound.BLOCK_NOTE_BLOCK_BASS, 0.6F),
     BASS_ON = new SoundSample().addSound(Sound.BLOCK_NOTE_BLOCK_PLING, 0.5F),
     PLING = new SoundSample().addSound(Sound.BLOCK_NOTE_BLOCK_BELL, 1),
     KLING = new SoundSample().addSound(Sound.ENTITY_PLAYER_LEVELUP, 0.6F, 2),
@@ -25,7 +25,7 @@ public final class SoundSample {
     OPEN = new SoundSample().addSound(KLING).addSound(PLOP),
     EAT = new SoundSample().addSound(Sound.ENTITY_PLAYER_BURP, 1),
     BLAST = new SoundSample().addSound(Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST, 1),
-    BREAK = new SoundSample().addSound(Sound.ENTITY_WITHER_BREAK_BLOCK, 0.7f),
+    BREAK = new SoundSample().addSound(Sound.ENTITY_WITHER_BREAK_BLOCK, 0.6f),
     WIN = new SoundSample().addSound(Sound.UI_TOAST_CHALLENGE_COMPLETE, 1),
     DRAGON_BREATH = new SoundSample().addSound(Sound.ENTITY_ENDER_DRAGON_GROWL, 0.5F);
 
@@ -98,8 +98,8 @@ public final class SoundSample {
   }
 
   public void playIfPlayer(@NotNull Object target) {
-    if (target instanceof Player)
-      play((Player) target);
+    if (target instanceof Player player)
+      play(player);
   }
 
   public void broadcast() {

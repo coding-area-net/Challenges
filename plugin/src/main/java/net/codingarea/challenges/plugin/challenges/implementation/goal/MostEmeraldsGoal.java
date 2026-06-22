@@ -2,10 +2,8 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.PointsGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -21,14 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public class MostEmeraldsGoal extends PointsGoal {
 
   public MostEmeraldsGoal() {
-    super();
-    setCategory(SettingCategory.SCORE_POINTS);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.EMERALD, Message.forName("item-most-emeralds-goal"));
+    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.EMERALD), "most-emeralds-goal");
   }
 
   @Override

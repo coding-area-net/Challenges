@@ -5,9 +5,8 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.PointsGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.advancement.Advancement;
@@ -18,6 +17,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -32,7 +32,7 @@ public class AllAdvancementGoal extends PointsGoal {
   private final int advancementCount;
 
   public AllAdvancementGoal() {
-    setCategory(SettingCategory.FASTEST_TIME);
+    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.BOOK), "all-advancements-goal");
     allAdvancements = new LinkedList<>();
     Bukkit.getServer().advancementIterator().forEachRemaining(advancement -> {
       if (!advancement.getKey().toString().contains(":recipes/")) {
@@ -64,12 +64,6 @@ public class AllAdvancementGoal extends PointsGoal {
         winners.add(player);
       }
     });
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.BOOK, Message.forName("item-all-advancements-goal"));
   }
 
   @EventHandler(priority = EventPriority.HIGH)

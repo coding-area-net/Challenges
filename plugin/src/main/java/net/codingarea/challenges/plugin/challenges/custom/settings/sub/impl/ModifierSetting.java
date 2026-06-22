@@ -5,7 +5,7 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSett
 import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 
 import java.util.function.Function;
@@ -13,15 +13,15 @@ import java.util.function.Function;
 public class ModifierSetting extends ValueSetting implements IModifier {
 
   private final int min, max;
-  private final Function<Integer, ItemBuilder> settingsItemGetter;
+  private final Function<Integer, LegacyItemBuilder> settingsItemGetter;
 
   private int tempValue;
 
-  public ModifierSetting(String key, int min, int max, ItemBuilder displayItem) {
+  public ModifierSetting(String key, int min, int max, LegacyItemBuilder displayItem) {
     this(key, min, max, displayItem, integer -> "", integer -> "");
   }
 
-  public ModifierSetting(String key, int min, int max, ItemBuilder itemBuilder, Function<Integer, String> prefixGetter, Function<Integer, String> suffixGetter) {
+  public ModifierSetting(String key, int min, int max, LegacyItemBuilder itemBuilder, Function<Integer, String> prefixGetter, Function<Integer, String> suffixGetter) {
     this(key, min, max, itemBuilder, value ->
     {
       String prefix = prefixGetter.apply(value);
@@ -31,7 +31,7 @@ public class ModifierSetting extends ValueSetting implements IModifier {
     });
   }
 
-  public ModifierSetting(String key, int min, int max, ItemBuilder itemBuilder, Function<Integer, ItemBuilder> settingsItemGetter) {
+  public ModifierSetting(String key, int min, int max, LegacyItemBuilder itemBuilder, Function<Integer, LegacyItemBuilder> settingsItemGetter) {
     super(key, itemBuilder);
     this.min = min;
     this.max = max;
@@ -76,7 +76,7 @@ public class ModifierSetting extends ValueSetting implements IModifier {
   }
 
   @Override
-  public ItemBuilder getSettingsItem(String value) {
+  public LegacyItemBuilder getSettingsItem(String value) {
     int intValue = getIntValue(value);
     return settingsItemGetter.apply(intValue);
   }

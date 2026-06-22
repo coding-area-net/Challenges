@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.content;
 
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.impl.MessageManager;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.collection.IRandom;
@@ -13,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Deprecated
 public interface Message {
 
   String NULL = "§r§fN/A";
@@ -29,6 +31,7 @@ public interface Message {
 
   @NotNull
   @CheckReturnValue
+  @Deprecated
   static Message forName(@NotNull String name) {
     return MessageManager.getOrCreateMessage(name);
   }

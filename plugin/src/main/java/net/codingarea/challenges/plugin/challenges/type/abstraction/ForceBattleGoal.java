@@ -2,15 +2,16 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets.ForceTarget;
+import net.codingarea.challenges.plugin.challenges.type.abstraction.menu.MenuGoal;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
@@ -45,33 +46,33 @@ public abstract class ForceBattleGoal<T extends ForceTarget<?>> extends MenuGoal
   protected T[] targetsPossibleToFind;
   private ItemStack jokerItem;
 
-  public ForceBattleGoal(@NotNull Message title) {
-    super(MenuType.GOAL, title);
-    setCategory(SettingCategory.FORCE_BATTLE);
+  public ForceBattleGoal(@NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(MenuType.GOAL, SettingCategory.FORCE_BATTLE, displayItemPreset, nameMessageKey);
 
-    registerSetting("jokers", new NumberSubSetting(
-      () -> new ItemBuilder(Material.BARRIER, Message.forName("item-force-battle-goal-jokers")),
-      value -> null,
-      value -> "§e" + value,
-      1,
-      32,
-      5
-    ));
-    registerSetting("showScoreboard", new BooleanSubSetting(
-      () -> new ItemBuilder(Material.BOOK, Message.forName("item-force-battle-show-scoreboard")),
-      true
-    ));
-    if (shouldRegisterDupedTargetsSetting()) {
-      registerSetting("dupedTargets", new BooleanSubSetting(
-        () -> new ItemBuilder(Material.PAPER, Message.forName("item-force-battle-duped-targets")),
-        true
-      ));
-    }
+    // TODO !
+//    registerSetting("jokers", new NumberSubSetting(
+//      () -> new LegacyItemBuilder(Material.BARRIER, Message.forName("item-force-battle-goal-jokers")),
+//      value -> null,
+//      value -> "§e" + value,
+//      1,
+//      32,
+//      5
+//    ));
+//    registerSetting("showScoreboard", new BooleanSubSetting(
+//      () -> new LegacyItemBuilder(Material.BOOK, Message.forName("item-force-battle-show-scoreboard")),
+//      true
+//    ));
+//    if (shouldRegisterDupedTargetsSetting()) {
+//      registerSetting("dupedTargets", new BooleanSubSetting(
+//        () -> new LegacyItemBuilder(Material.PAPER, Message.forName("item-force-battle-duped-targets")),
+//        true
+//      ));
+//    }
   }
 
   @Override
   protected void onEnable() {
-    jokerItem = new ItemBuilder(Material.BARRIER, "§cJoker").build();
+    jokerItem = new LegacyItemBuilder(Material.BARRIER, "§cJoker").build();
 
     targetsPossibleToFind = getTargetsPossibleToFind();
 

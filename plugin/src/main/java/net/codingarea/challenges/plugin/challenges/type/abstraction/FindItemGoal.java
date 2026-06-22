@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
@@ -10,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +20,9 @@ public abstract class FindItemGoal extends SettingGoal {
 
   private final Material searchedItem;
 
-  public FindItemGoal(Material searchedItem) {
+  public FindItemGoal(@Nullable SettingCategory category, @NotNull Material searchedItem,
+                      @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(category, displayItemPreset, nameMessageKey);
     this.searchedItem = searchedItem;
   }
 

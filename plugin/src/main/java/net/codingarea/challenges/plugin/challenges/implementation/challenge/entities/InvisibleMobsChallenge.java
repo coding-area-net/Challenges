@@ -3,13 +3,11 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ent
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder.PotionBuilder;
+import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -26,19 +24,13 @@ import org.jetbrains.annotations.NotNull;
 public class InvisibleMobsChallenge extends Setting {
 
   public InvisibleMobsChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.ENTITIES);
+    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new StandardItemBuilder.PotionBuilder(Material.POTION).setColor(Color.WHITE).build(),
+      "invsible-mobs-challenge");
   }
 
   @Override
   protected void onEnable() {
     addEffectForEveryEntity();
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new PotionBuilder(Material.POTION, Message.forName("item-invisible-mobs-challenge")).setColor(Color.WHITE);
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

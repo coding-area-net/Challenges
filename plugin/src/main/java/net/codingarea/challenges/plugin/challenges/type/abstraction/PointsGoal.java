@@ -1,10 +1,13 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,12 +19,13 @@ public abstract class PointsGoal extends SettingGoal {
 
   private final Map<UUID, Integer> points = new HashMap<>();
 
-  public PointsGoal() {
-    super();
+  public PointsGoal(@Nullable SettingCategory category, @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(category, displayItemPreset, nameMessageKey);
   }
 
-  public PointsGoal(boolean enabledByDefault) {
-    super(enabledByDefault);
+  public PointsGoal(@Nullable SettingCategory category, boolean enabledByDefault,
+                    @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(category, enabledByDefault, displayItemPreset, nameMessageKey);
   }
 
   @Override

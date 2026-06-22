@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.utils.bukkit.command;
 
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

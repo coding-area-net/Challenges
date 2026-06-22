@@ -3,7 +3,8 @@ package net.codingarea.challenges.plugin.spigot.listener;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.loader.UpdateLoader;
 import net.codingarea.challenges.plugin.utils.misc.DatabaseHelper;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
@@ -40,9 +41,25 @@ public class PlayerConnectionListener implements Listener {
     restoreDefaultsOnLastQuit = config.getBoolean("restore-defaults-on-last-leave");
   }
 
+//  @EventHandler(priority = EventPriority.LOWEST)
+//  public void onLogin(@NotNull PlayerLoginEvent event) {
+//    // DISCUSSION: really necessary? not implemented by default - extract?
+//    TranslationManager i18n = Challenges.getInstance().getTranslationManager();
+//    if (!i18n.isLanguageProviderInitialized()) return;
+//
+//    LanguageProvider provider = i18n.getLanguageProvider();
+//    if (provider.isDefaultBehaviour() || !provider.isUserSpecific()) return;
+//
+//    Locale playerLanguage = provider.getPlayerLanguage(event.getPlayer());
+//    if (i18n.isLanguageCached(playerLanguage)) return;
+//
+//    LanguageLoader loader = Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class).orElse(null);
+//    if (loader == null) return;
+//    Challenges.getInstance().runAsync(() -> loader.populateLanguageFromFile(playerLanguage));
+//  }
+
   @EventHandler(priority = EventPriority.HIGH)
   public void onJoin(@NotNull PlayerJoinEvent event) {
-
     Player player = event.getPlayer();
 
     player.getLocation().getChunk().load(true);
@@ -51,7 +68,7 @@ public class PlayerConnectionListener implements Listener {
     Challenges.getInstance().getScoreboardManager().handleJoin(player);
 
     if (Challenges.getInstance().isFirstInstall() && !player.hasPermission("challenges.gui")) {
-      Message.forName("not-op").send(player, Prefix.CHALLENGES);
+      MessageKey.of("not-op").send(player, Prefix.CHALLENGES);
     }
 
     if (player.hasPermission("challenges.gui")) {
@@ -64,13 +81,13 @@ public class PlayerConnectionListener implements Listener {
 
       if (timerPausedInfo && !startTimerOnJoin && ChallengeAPI.isPaused()) {
         player.sendMessage("");
-        Message.forName("timer-paused-message").send(player, Prefix.CHALLENGES);
+        MessageKey.of("timer-paused-message").send(player, Prefix.CHALLENGES);
       }
     }
 
     if (Challenges.getInstance().getStatsManager().isNoStatsAfterCheating() && Challenges.getInstance().getServerManager().hasCheated()) {
       player.sendMessage("");
-      Message.forName("cheats-already-detected").send(player, Prefix.CHALLENGES);
+      MessageKey.of("cheats-already-detected").send(player, Prefix.CHALLENGES);
     }
 
 
@@ -82,28 +99,29 @@ public class PlayerConnectionListener implements Listener {
     if (player.hasPermission("challenges.gui")) {
       if (!UpdateLoader.isNewestConfigVersion()) {
         player.sendMessage("");
-        Message.forName("deprecated-config-version").send(player, Prefix.CHALLENGES, UpdateLoader.getDefaultConfigVersion().format(), UpdateLoader.getCurrentConfigVersion().format());
+        MessageKey.of("deprecated-config-version").send(player, Prefix.CHALLENGES, UpdateLoader.getDefaultConfigVersion().format(), UpdateLoader.getCurrentConfigVersion().format());
       }
 
       List<String> missingConfigSettings = Challenges.getInstance().getConfigManager().getMissingConfigSettings();
       if (!missingConfigSettings.isEmpty()) {
         player.sendMessage("");
         String separator = Message.forName("missing-config-settings-separator").asString();
-        Message.forName("missing-config-settings").send(player, Prefix.CHALLENGES, String.join(separator, missingConfigSettings));
+        MessageKey.of("missing-config-settings").send(player, Prefix.CHALLENGES, String.join(separator, missingConfigSettings));
       } else if (!UpdateLoader.isNewestConfigVersion()) {
         player.sendMessage("");
-        Message.forName("no-missing-config-settings").send(player, Prefix.CHALLENGES, UpdateLoader.getDefaultConfigVersion().format());
+        MessageKey.of("no-missing-config-settings").send(player, Prefix.CHALLENGES, UpdateLoader.getDefaultConfigVersion().format());
       }
       if (!UpdateLoader.isNewestPluginVersion()) {
         player.sendMessage("");
-        Message.forName("deprecated-plugin-version").send(player, Prefix.CHALLENGES, "spigotmc.org/resources/" + UpdateLoader.RESOURCE_ID);
+        MessageKey.of("deprecated-plugin-version").send(player, Prefix.CHALLENGES, "spigotmc.org/resources/" + UpdateLoader.RESOURCE_ID);
       }
     }
 
 
     if (messages) {
+      event.setJoinMessage(null);
       player.sendMessage("");
-      event.setJoinMessage(Prefix.CHALLENGES + Message.forName("join-message").asString(NameHelper.getName(event.getPlayer())));
+      MessageKey.of("join-message").broadcast(Prefix.CHALLENGES, event.getPlayer()); // TODO name color
     }
 
     if (Challenges.getInstance().getDatabaseManager().isConnected()) {
@@ -124,7 +142,7 @@ public class PlayerConnectionListener implements Listener {
         event.setQuitMessage(null);
       } else if (messages) {
         event.setQuitMessage(null);
-        Message.forName("quit-message").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+        MessageKey.of("quit-message").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
       }
     } catch (Exception exception) {
       Challenges.getInstance().getILogger().error("Error while handling disconnect", exception);

@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.management.menu;
 import net.codingarea.challenges.plugin.content.Message;
 import org.jetbrains.annotations.NotNull;
 
+@Deprecated
 public final class InventoryTitleManager {
 
   private InventoryTitleManager() {
@@ -20,12 +21,12 @@ public final class InventoryTitleManager {
 
   @NotNull
   public static String getTitle(@NotNull MenuType menu, int page) {
-    return getTitle(menu.getName(), String.valueOf(page + 1));
+    return "getTitle(...)";
   }
 
   @NotNull
   public static String getTitle(@NotNull MenuType menu, String... sub) {
-    return getTitle(menu.getName(), sub);
+    return "getTitle(...)";
   }
 
   @NotNull
@@ -44,7 +45,7 @@ public final class InventoryTitleManager {
 
   @NotNull
   public static String getMenuSettingTitle(@NotNull MenuType menu, @NotNull String name, int page, boolean showPages) {
-    return getTitle(menu.getName() + getTitleSplitter() + name + (showPages ? " §8• " + Message.forName("inventory-color") + (page + 1) : ""));
+    return getTitle("getMenuSettingTitle(...)" + getTitleSplitter() + name + (showPages ? " §8• " + Message.forName("inventory-color") + (page + 1) : ""));
   }
 
   @NotNull

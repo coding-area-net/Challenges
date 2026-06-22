@@ -3,10 +3,8 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ent
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.impl.RandomMobAction;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -19,7 +17,6 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -28,14 +25,7 @@ import java.util.Objects;
 public class BlockMobsChallenge extends Setting {
 
   public BlockMobsChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.ENTITIES);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.BRICKS, Message.forName("item-block-mob-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.BRICKS), "block-mobs-challenge");
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

@@ -3,14 +3,17 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 import lombok.Getter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,6 +22,10 @@ import java.util.List;
 public abstract class FirstPlayerAtHeightGoal extends SettingGoal {
 
   private int heightToGetTo;
+
+  public FirstPlayerAtHeightGoal(@Nullable SettingCategory category, @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(category, displayItemPreset, nameMessageKey);
+  }
 
   @Override
   protected void onEnable() {

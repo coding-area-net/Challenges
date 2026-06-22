@@ -4,6 +4,7 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.WorldManager.WorldSettings;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.GameMode;
@@ -12,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
@@ -26,36 +28,24 @@ public abstract class WorldDependentChallenge extends TimedChallenge {
   private BiConsumer<Player, Integer> lastTeleport;
   private int teleportIndex;
 
-  public WorldDependentChallenge(@NotNull MenuType menu) {
-    super(menu);
+  public WorldDependentChallenge(@NotNull MenuType menu,
+                                 @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    super(menu, SettingCategory.EXTRA_WORLD, false, displayItemPreset, messageNameKey);
   }
 
-  public WorldDependentChallenge(@NotNull MenuType menu, int max) {
-    super(menu, max);
+  public WorldDependentChallenge(@NotNull MenuType menu, int max,
+                                 @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    super(menu, SettingCategory.EXTRA_WORLD, max, false, displayItemPreset, messageNameKey);
   }
 
-  public WorldDependentChallenge(@NotNull MenuType menu, int min, int max) {
-    super(menu, min, max);
+  public WorldDependentChallenge(@NotNull MenuType menu, int min, int max,
+                                 @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    super(menu, SettingCategory.EXTRA_WORLD, min, max, false, displayItemPreset, messageNameKey);
   }
 
-  public WorldDependentChallenge(@NotNull MenuType menu, int min, int max, int defaultValue) {
-    super(menu, min, max, defaultValue);
-  }
-
-  public WorldDependentChallenge(@NotNull MenuType menu, boolean runAsync) {
-    super(menu, runAsync);
-  }
-
-  public WorldDependentChallenge(@NotNull MenuType menu, int max, boolean runAsync) {
-    super(menu, max, runAsync);
-  }
-
-  public WorldDependentChallenge(@NotNull MenuType menu, int min, int max, boolean runAsync) {
-    super(menu, min, max, runAsync);
-  }
-
-  public WorldDependentChallenge(@NotNull MenuType menu, int min, int max, int defaultValue, boolean runAsync) {
-    super(menu, min, max, defaultValue, runAsync);
+  public WorldDependentChallenge(@NotNull MenuType menu, int min, int max, int defaultValue,
+                                 @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    super(menu, SettingCategory.EXTRA_WORLD, min, max, defaultValue, false, displayItemPreset, messageNameKey);
   }
 
   /**

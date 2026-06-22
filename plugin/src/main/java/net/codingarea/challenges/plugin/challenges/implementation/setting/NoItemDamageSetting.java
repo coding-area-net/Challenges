@@ -3,16 +3,17 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemDamageEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class NoItemDamageSetting extends Setting {
 
   public NoItemDamageSetting() {
-    super(MenuType.SETTINGS);
+    super(MenuType.SETTINGS, null, new ItemStack(Material.ANVIL), "no-item-damage");
   }
 
   @EventHandler
@@ -22,12 +23,6 @@ public class NoItemDamageSetting extends Setting {
 
     event.setCancelled(true);
     event.getPlayer().updateInventory();
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.ANVIL, Message.forName("item-no-item-damage-setting"));
   }
 
 }

@@ -17,8 +17,7 @@ public abstract class PlayerTargetAction extends EntityTargetAction {
     super(name);
   }
 
-  public PlayerTargetAction(String name,
-                            Supplier<SubSettingsBuilder> builderSupplier) {
+  public PlayerTargetAction(String name, Supplier<SubSettingsBuilder> builderSupplier) {
     super(name, builderSupplier);
   }
 

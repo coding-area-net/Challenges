@@ -4,13 +4,12 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModif
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.TriConsumer;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
@@ -27,6 +26,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
@@ -41,15 +41,17 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
   private final Random random = new Random();
 
   public PermanentEffectOnDamageChallenge() {
-    super(MenuType.CHALLENGES, 1, 2);
-    setCategory(SettingCategory.EFFECT);
+    super(MenuType.CHALLENGES, SettingCategory.EFFECT, 1, 2, new ItemStack(Material.MAGMA_CREAM), "permanent-effect-on-damage-challenge");
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.MAGMA_CREAM, Message.forName("item-permanent-effect-on-damage-challenge"));
-  }
+  //  @NotNull
+//  @Override
+//  public LegacyItemBuilder createSettingsItem() {
+//    if (!isEnabled()) return DefaultItem.disabled();
+//    if (getValue() == GLOBAL_EFFECT)
+//      return DefaultItem.create(Material.ENDER_CHEST, Message.forName("everyone").asString()).appendLore("", Message.forName("item-permanent-effect-target-everyone-description").asString());
+//    return DefaultItem.create(Material.CHEST, Message.forName("player").asString()).appendLore("", Message.forName("item-permanent-effect-target-player-description").asString());
+//  }
 
   @Override
   protected void onEnable() {
@@ -141,9 +143,9 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
     }
 
     if (effectsToEveryone()) {
-      Message.forName("new-effect").broadcast(Prefix.CHALLENGES, potionEffectType, amplifier);
+      MessageKey.of("new-effect").broadcast(Prefix.CHALLENGES, potionEffectType, amplifier);
     } else {
-      Message.forName("new-effect").send(player, Prefix.CHALLENGES, potionEffectType, amplifier);
+      MessageKey.of("new-effect").send(player, Prefix.CHALLENGES, potionEffectType, amplifier);
     }
 
     getGameStateData().set(path, effects);
@@ -241,15 +243,6 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
     if (!shouldExecuteEffect()) return;
     clearEffects();
     updateEffects();
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createSettingsItem() {
-    if (!isEnabled()) return DefaultItem.disabled();
-    if (getValue() == GLOBAL_EFFECT)
-      return DefaultItem.create(Material.ENDER_CHEST, Message.forName("everyone").asString()).appendLore("", Message.forName("item-permanent-effect-target-everyone-description").asString());
-    return DefaultItem.create(Material.CHEST, Message.forName("player").asString()).appendLore("", Message.forName("item-permanent-effect-target-player-description").asString());
   }
 
   @Override

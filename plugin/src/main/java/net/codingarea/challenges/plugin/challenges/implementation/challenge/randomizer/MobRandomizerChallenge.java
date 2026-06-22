@@ -4,11 +4,9 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.RandomizerSetting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.ListBuilder;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
@@ -20,6 +18,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class MobRandomizerChallenge extends RandomizerSetting {
   private boolean initialSpawn = false;
 
   public MobRandomizerChallenge() {
-    super(MenuType.CHALLENGES);
+    super(MenuType.CHALLENGES, new ItemStack(Material.COMMAND_BLOCK_MINECART), "mob-randomizer");
   }
 
   @Override
@@ -88,13 +87,6 @@ public class MobRandomizerChallenge extends RandomizerSetting {
     }
 
     inSpawn = false;
-  }
-
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.COMMAND_BLOCK_MINECART, Message.forName("item-mob-randomizer-challenge"));
   }
 
   @Override

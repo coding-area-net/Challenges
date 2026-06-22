@@ -3,30 +3,37 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class EndingForceChallenge extends AbstractForceChallenge {
 
-  public EndingForceChallenge(@NotNull MenuType menu) {
-    super(menu);
+  public EndingForceChallenge(@NotNull MenuType menu, @Nullable SettingCategory category,
+                              @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(menu, category, displayItemPreset, nameMessageKey);
   }
 
-  public EndingForceChallenge(@NotNull MenuType menu, int max) {
-    super(menu, max);
+  public EndingForceChallenge(@NotNull MenuType menu, @Nullable SettingCategory category, int max,
+                              @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(menu, category, max, displayItemPreset, nameMessageKey);
   }
 
-  public EndingForceChallenge(@NotNull MenuType menu, int min, int max) {
-    super(menu, min, max);
+  public EndingForceChallenge(@NotNull MenuType menu, @Nullable SettingCategory category, int min, int max,
+                              @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(menu, category, min, max, displayItemPreset, nameMessageKey);
   }
 
-  public EndingForceChallenge(@NotNull MenuType menu, int min, int max, int defaultValue) {
-    super(menu, min, max, defaultValue);
+  public EndingForceChallenge(@NotNull MenuType menu, @Nullable SettingCategory category, int min, int max, int defaultValue,
+                              @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(menu, category, min, max, defaultValue, displayItemPreset, nameMessageKey);
   }
 
   @Override

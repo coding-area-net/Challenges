@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
 import net.codingarea.challenges.plugin.utils.misc.CommandHelper;
@@ -28,7 +28,7 @@ public class FlyCommand implements SenderCommand, Completer {
     }
 
     if (targets.isEmpty()) {
-      Message.forName("command-no-target").send(sender, Prefix.CHALLENGES);
+      MessageKey.of("command-no-target").send(sender, Prefix.CHALLENGES);
       return;
     }
 
@@ -36,9 +36,9 @@ public class FlyCommand implements SenderCommand, Completer {
     for (Player target : targets) {
 
       if (target.getAllowFlight()) {
-        Message.forName("command-fly-disabled").send(target, Prefix.CHALLENGES);
+        MessageKey.of("command-fly-disabled").send(target, Prefix.CHALLENGES);
       } else {
-        Message.forName("command-fly-enabled").send(target, Prefix.CHALLENGES);
+        MessageKey.of("command-fly-enabled").send(target, Prefix.CHALLENGES);
       }
       target.setAllowFlight(!target.getAllowFlight());
 
@@ -48,7 +48,7 @@ public class FlyCommand implements SenderCommand, Completer {
     }
 
     if (otherPlayers)
-      Message.forName("command-fly-toggled-others").send(sender, Prefix.CHALLENGES, targets.size());
+      MessageKey.of("command-fly-toggled-others").send(sender, Prefix.CHALLENGES, targets.size());
 
   }
 

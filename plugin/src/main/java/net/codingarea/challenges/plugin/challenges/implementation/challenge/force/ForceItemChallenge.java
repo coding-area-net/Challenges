@@ -5,14 +5,14 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.CompletableF
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
-import net.codingarea.challenges.plugin.management.challenges.annotations.ExcludeFromRandomChallenges;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBossBar.BossBarInstance;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
@@ -41,21 +41,14 @@ public class ForceItemChallenge extends CompletableForceChallenge {
   private Material item;
 
   public ForceItemChallenge() {
-    super(MenuType.CHALLENGES, 2, 15);
-    setCategory(SettingCategory.FORCE);
+    super(MenuType.CHALLENGES, SettingCategory.FORCE, 2, 15, new ItemStack(Material.LEATHER_BOOTS), "force-item");
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.LEATHER_BOOTS, Message.forName("item-force-item-challenge"));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return ChallengeHelper.getTimeRangeSettingsDescription(this, 60, 30);
-  }
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return ChallengeHelper.getTimeRangeSettingsDescription(this, 60, 30);
+//  }
 
   @Override
   public void playValueChangeTitle() {

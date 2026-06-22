@@ -4,10 +4,10 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallen
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
@@ -18,6 +18,7 @@ import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
@@ -29,8 +30,7 @@ public class RandomEventChallenge extends TimedChallenge {
   private final Event[] events;
 
   public RandomEventChallenge() {
-    super(MenuType.CHALLENGES, 1, 10, 3, false);
-    setCategory(SettingCategory.RANDOMIZER);
+    super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 1, 10, 3, false, new ItemStack(Material.CLOCK), "random-event");
     events = new Event[]{
       new SpeedEvent(),
       new SpawnEntitiesEvent(),
@@ -42,17 +42,11 @@ public class RandomEventChallenge extends TimedChallenge {
     };
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.CLOCK, Message.forName("item-random-event-challenge").asItemDescription(events.length));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-time-seconds-range-description").asArray(getValue() * 60 - 30, getValue() * 60 + 30);
-  }
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-time-seconds-range-description").asArray(getValue() * 60 - 30, getValue() * 60 + 30);
+//  }
 
   @Override
   public void playValueChangeTitle() {

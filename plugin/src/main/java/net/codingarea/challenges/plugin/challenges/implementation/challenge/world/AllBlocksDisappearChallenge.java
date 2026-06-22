@@ -1,14 +1,12 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.challenges.type.abstraction.MenuSetting;
+import net.codingarea.challenges.plugin.challenges.type.abstraction.menu.MenuSetting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeConfigHelper;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.ListBuilder;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.commons.common.config.Document;
@@ -34,24 +32,18 @@ public class AllBlocksDisappearChallenge extends MenuSetting {
   private final int stackDropLimit;
 
   public AllBlocksDisappearChallenge() {
-    super(MenuType.CHALLENGES, Message.forName("menu-all-blocks-disappear-challenge-settings"));
-    setCategory(SettingCategory.WORLD);
-    registerSetting("break", new BooleanSubSetting(
-      () -> new ItemBuilder(Material.DIAMOND_PICKAXE, Message.forName("item-all-blocks-disappear-break-challenge")),
-      true
-    ));
-    registerSetting("place", new BooleanSubSetting(
-      () -> new ItemBuilder(Material.DIAMOND_BLOCK, Message.forName("item-all-blocks-disappear-place-challenge"))
-    ));
+//    super(Message.forName("menu-all-blocks-disappear-challenge-settings"));
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.TNT), "all-blocks-disappear");
+//    registerSetting("break", new BooleanSubSetting(
+//      () -> new LegacyItemBuilder(Material.DIAMOND_PICKAXE, Message.forName("item-all-blocks-disappear-break-challenge")),
+//      true
+//    ));
+//    registerSetting("place", new BooleanSubSetting(
+//      () -> new LegacyItemBuilder(Material.DIAMOND_BLOCK, Message.forName("item-all-blocks-disappear-place-challenge"))
+//    ));
 
     Document document = ChallengeConfigHelper.getSettingsDocument();
     stackDropLimit = document.contains("all-block-disappear-stack-drop-limit") ? document.getInt("all-block-disappear-stack-drop-limit") : 50;
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.TNT, Message.forName("item-all-blocks-disappear-challenge"));
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

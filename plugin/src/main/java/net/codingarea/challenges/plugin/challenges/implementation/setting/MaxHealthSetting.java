@@ -3,9 +3,11 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.commons.common.config.Document;
@@ -14,6 +16,7 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class MaxHealthSetting extends Modifier {
@@ -27,19 +30,13 @@ public class MaxHealthSetting extends Modifier {
   private Document valueOffset = new GsonDocument();
 
   public MaxHealthSetting() {
-    super(MenuType.SETTINGS, 1, 200 * 2, 20);
+    super(MenuType.SETTINGS, null, 1, 200 * 2, 20, new ItemStack(MinecraftNameWrapper.RED_DYE), "max-health");
   }
 
   @NotNull
   @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(MinecraftNameWrapper.RED_DYE, Message.forName("item-max-health-setting"));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createSettingsItem() {
-    return DefaultItem.value(getValue(), "§e").appendName(" §7HP §8(§e" + (getValue() / 2f) + " §c❤§8)");
+  public LocalizableMessage getSettingsName() {
+    return MessageKey.of("").withArgs(getValue(), getValue() / 2); // TODO
   }
 
   @Override

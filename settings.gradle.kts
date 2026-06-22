@@ -3,6 +3,7 @@ rootProject.name = "Challenges"
 include("plugin", "mongo-connector")
 
 includeSubmodules("cloud-support")
+includeSubmodules("platform")
 
 fun includeSubmodules(parentDirName: String) {
   val parentDir = File(settingsDir, parentDirName)

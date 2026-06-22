@@ -2,15 +2,16 @@ package net.codingarea.challenges.plugin.spigot.command;
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.cloud.CloudSupportManager;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.stats.LeaderboardInfo;
 import net.codingarea.challenges.plugin.management.stats.PlayerStats;
 import net.codingarea.challenges.plugin.management.stats.Statistic;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder.SkullBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder.SkullBuilder;
 import net.codingarea.challenges.plugin.utils.misc.StatsHelper;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
 import net.codingarea.commons.bukkit.utils.animation.AnimatedInventory;
@@ -32,11 +33,11 @@ public class StatsCommand implements PlayerCommand {
   @Override
   public void onCommand(@NotNull Player player, @NotNull String[] args) {
     if (!Challenges.getInstance().getStatsManager().isEnabled()) {
-      Message.forName("feature-disabled").send(player, Prefix.CHALLENGES);
+      MessageKey.of("feature-disabled").send(player, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.play(player);
       return;
     } else if (!Challenges.getInstance().getStatsManager().hasDatabaseConnection()) {
-      Message.forName("no-database-connection").send(player, Prefix.CHALLENGES);
+      MessageKey.of("no-database-connection").send(player, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.play(player);
       return;
     }
@@ -49,15 +50,15 @@ public class StatsCommand implements PlayerCommand {
 
     switch (args.length) {
       case 0:
-        Message.forName("fetching-data").send(player, Prefix.CHALLENGES);
+        MessageKey.of("fetching-data").send(player, Prefix.CHALLENGES);
         handleCommand(player);
         break;
       case 1:
-        Message.forName("fetching-data").send(player, Prefix.CHALLENGES);
+        MessageKey.of("fetching-data").send(player, Prefix.CHALLENGES);
         handleCommand(player, args[0]);
         break;
       default:
-        Message.forName("syntax").send(player, Prefix.CHALLENGES, "stats [player]");
+        MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "stats [player]");
     }
   }
 
@@ -111,7 +112,7 @@ public class StatsCommand implements PlayerCommand {
       double value = stats.getStatisticValue(statistic);
       String format = statistic.formatChat(value);
 
-      ItemBuilder item = new ItemBuilder(StatsHelper.getMaterial(statistic), StatsHelper.getNameMessage(statistic).asString()).setLore(Message.forName("stats-display").asArray(format, info.getPlace(statistic))).hideAttributes();
+      LegacyItemBuilder item = new LegacyItemBuilder(StatsHelper.getMaterial(statistic), StatsHelper.getNameMessage(statistic).asString()).setLore(Message.forName("stats-display").asArray(format, info.getPlace(statistic))).hideAttributes();
       inventory.cloneLastAndAdd().setItem(slots[i], item);
     }
   }

@@ -3,10 +3,11 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.DefaultItems;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import org.bukkit.Bukkit;
@@ -17,36 +18,29 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class DeathMessageSetting extends Modifier {
 
-  public static final int ENABLED = 2,
+  public static final int
+    ENABLED = 2,
     VANILLA = 3;
 
   private boolean hide;
 
   public DeathMessageSetting() {
-    super(MenuType.SETTINGS, 1, 3, 2);
+    super(MenuType.SETTINGS, null, 1, 3, ENABLED, new ItemStack(Material.BOW), "death-message");
   }
 
   @NotNull
   @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.BOW, Message.forName("item-death-message-setting"));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createSettingsItem() {
-    switch (getValue()) {
-      default:
-        return DefaultItem.disabled();
-      case ENABLED:
-        return DefaultItem.enabled();
-      case VANILLA:
-        return DefaultItem.create(MinecraftNameWrapper.SIGN, Message.forName("item-death-message-setting-vanilla"));
-    }
+  public ItemStack getSettingsItemPreset() {
+    return switch (getValue()) {
+      case VANILLA -> new ItemStack(MinecraftNameWrapper.SIGN);
+      case ENABLED -> DefaultItems.createEnabledPreset();
+      default -> DefaultItems.createDisabledPreset();
+    };
   }
 
   @Override

@@ -4,19 +4,18 @@ import lombok.Getter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
-import net.codingarea.challenges.plugin.management.menu.generator.ChallengeMenuGenerator;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.commons.bukkit.utils.animation.AnimatedInventory;
-import net.codingarea.commons.bukkit.utils.animation.AnimationFrame;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.MainMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.ChallengesMenuGenerator;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Locale;
 
 public final class MenuManager {
 
@@ -25,83 +24,50 @@ public final class MenuManager {
   @Getter
   private final boolean displayNewInFront;
   private final boolean permissionToManageGUI;
-  private AnimatedInventory gui;
   private boolean generated = false;
+  private final MainMenuGenerator mainMenu;
 
   public MenuManager() {
-    ChallengeAPI.subscribeLoader(LanguageLoader.class, this::generateMenus);
-    ChallengeAPI.subscribeLoader(LanguageLoader.class, this::generateMainMenu);
+    mainMenu = new MainMenuGenerator();
     displayNewInFront = Challenges.getInstance().getConfigDocument().getBoolean("challenge-updates.new.in-front");
     permissionToManageGUI = Challenges.getInstance().getConfigDocument().getBoolean("manage-settings-permission");
-    generateMainMenu();
-  }
 
-  public void generateMainMenu() {
-
-    gui = new AnimatedInventory(InventoryTitleManager.getMainMenuTitle(), 5 * 9, MenuPosition.HOLDER);
-    gui.addFrame(new AnimationFrame(5 * 9).fill(ItemBuilder.FILL_ITEM));
-    gui.cloneLastAndAdd().setAccent(39, 41);
-    gui.cloneLastAndAdd().setAccent(38, 42);
-    gui.cloneLastAndAdd().setAccent(37, 43);
-    gui.cloneLastAndAdd().setAccent(28, 34);
-    gui.cloneLastAndAdd().setAccent(27, 35);
-    gui.cloneLastAndAdd().setAccent(18, 26);
-    gui.cloneLastAndAdd().setAccent(9, 17);
-    gui.cloneLastAndAdd().setAccent(10, 16);
-    gui.cloneLastAndAdd().setAccent(1, 7);
-    gui.cloneLastAndAdd().setAccent(2, 6);
-
-    MenuType[] values = MenuType.values();
-    for (int i = 0; i < values.length; i += 2) {
-
-      AnimationFrame frame = gui.getLastFrame().clone();
-
-      MenuType first = values[i];
-      frame.setItem(GUI_SLOTS[i], new ItemBuilder(first.getDisplayItem()).name(
-        DefaultItem.getItemPrefix() + first.getDisplayName()).hideAttributes());
-
-      if (values.length > i + 1) {
-        MenuType second = values[i + 1];
-        frame.setItem(GUI_SLOTS[i + 1], new ItemBuilder(second.getDisplayItem()).name(
-          DefaultItem.getItemPrefix() + second.getDisplayName()).hideAttributes());
-      }
-
-      gui.addFrame(frame);
-    }
-
+    ChallengeAPI.subscribeLoader(LanguageLoader.class, this::generateMenus);
+    ChallengeAPI.subscribeLoader(LanguageLoader.class, mainMenu::updatePages);
   }
 
   public void generateMenus() {
-
     for (MenuType value : MenuType.values()) {
-      value.executeWithGenerator(ChallengeMenuGenerator.class, ChallengeMenuGenerator::resetChallengeCache);
+      value.executeWithGenerator(ChallengesMenuGenerator.class, ChallengesMenuGenerator::resetCache);
     }
 
     for (IChallenge challenge : Challenges.getInstance().getChallengeManager().getChallenges()) {
       MenuType type = challenge.getType();
-      type.executeWithGenerator(ChallengeMenuGenerator.class, gen -> gen.addChallengeToCache(challenge));
+      type.executeWithGenerator(ChallengesMenuGenerator.class, gen -> gen.addToCache(challenge));
     }
 
+    Locale language = Challenges.getInstance().getLoaderRegistry().findLoaderByClassOrThrow(LanguageLoader.class).getConfigLanguage();
+    mainMenu.updateOrGeneratePages(language);
     for (MenuType value : MenuType.values()) {
-      value.getMenuGenerator().generateInventories();
+      value.getMenuGenerator().updateOrGeneratePages(language);
     }
 
     generated = true;
   }
 
-  public void openGUI(@NotNull Player player) {
+  public void openMainMenu(@NotNull Player player) {
     SoundSample.PLOP.play(player);
     MenuPosition.set(player, new MainMenuPosition());
-    gui.open(player, Challenges.getInstance());
+    mainMenu.openMenu(player);
   }
 
-  public void openGUIInstantly(@NotNull Player player) {
+  public void openMainMenuInstantly(@NotNull Player player) {
     MenuPosition.set(player, new MainMenuPosition());
-    gui.openNotAnimated(player, true, Challenges.getInstance());
+    mainMenu.openMenuInstantly(player, true);
   }
 
   /**
-   * @return If the specified menu page could be opened.
+   * @return If the specified menu page be opened.
    * The menu may not be opened, when there are no challenges registered to that menu or the languages are not loaded
    */
   public boolean openMenu(@NotNull Player player, @NotNull MenuType type, int page) {
@@ -112,14 +78,14 @@ public final class MenuManager {
       return false;
     }
 
-    type.getMenuGenerator().open(player, page);
+    type.getMenuGenerator().openMenu(player, page);
 
     return true;
   }
 
   public void playNoPermissionsEffect(@NotNull Player player) {
     SoundSample.BASS_OFF.play(player);
-    Message.forName("no-permission").send(player, Prefix.CHALLENGES);
+    MessageKey.of("no-permission").send(player, Prefix.CHALLENGES);
   }
 
   public boolean permissionToManageGUI() {

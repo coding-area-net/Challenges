@@ -2,9 +2,9 @@ package net.codingarea.challenges.plugin;
 
 import lombok.Getter;
 import net.codingarea.challenges.plugin.challenges.custom.settings.CustomSettingsLoader;
+import net.codingarea.challenges.plugin.content.i18n.TranslationManager;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.content.loader.LoaderRegistry;
-import net.codingarea.challenges.plugin.content.loader.PrefixLoader;
 import net.codingarea.challenges.plugin.content.loader.UpdateLoader;
 import net.codingarea.challenges.plugin.management.blocks.BlockDropManager;
 import net.codingarea.challenges.plugin.management.bstats.MetricsLoader;
@@ -54,6 +54,8 @@ public final class Challenges extends BukkitModule {
   private GameWorldStorage gameWorldStorage;
   private GeneratorWorldPortalManager generatorWorldPortalManager;
   private TeamProvider teamProvider;
+  private TranslationManager translationManager;
+  private PlatformManager platformManager;
 
   @NotNull
   public static Challenges getInstance() {
@@ -90,10 +92,10 @@ public final class Challenges extends BukkitModule {
 
     loaderRegistry = new LoaderRegistry(
       new LanguageLoader(),
-      new PrefixLoader(),
       new UpdateLoader()
     );
 
+    platformManager = new PlatformManager();
     databaseManager = new DatabaseManager();
     worldManager = new WorldManager();
     serverManager = new ServerManager();
@@ -114,20 +116,23 @@ public final class Challenges extends BukkitModule {
     metricsLoader = new MetricsLoader();
     gameWorldStorage = new GameWorldStorage();
     generatorWorldPortalManager = new GeneratorWorldPortalManager();
+    translationManager = new TranslationManager();
   }
 
   private void loadManagers() {
+    platformManager.createPlatforms();
     loaderRegistry.load();
     worldManager.load();
+    challengeTimer.loadSession();
   }
 
   private void enableManagers() {
+    platformManager.enablePlatforms();
     gameWorldStorage.enable();
     challengeLoader.enable();
     customSettingsLoader.enable();
     databaseManager.enable();
     worldManager.enable();
-    challengeTimer.loadSession();
     challengeTimer.enable();
     challengeManager.enable();
     statsManager.register();
@@ -216,6 +221,8 @@ public final class Challenges extends BukkitModule {
       }
       challengeManager.clearChallengeCache();
     }
+
+    if (platformManager != null) platformManager.disablePlatforms();
   }
 
 }

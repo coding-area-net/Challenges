@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.GameMode;
@@ -12,19 +12,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
 
 public class SoupSetting extends Setting {
 
   public SoupSetting() {
-    super(MenuType.SETTINGS);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.MUSHROOM_STEW, Message.forName("item-soup-setting"));
+    super(MenuType.SETTINGS, null, new ItemStack(Material.MUSHROOM_STEW), "setting-soup");
   }
 
   @EventHandler
@@ -40,7 +35,7 @@ public class SoupSetting extends Setting {
     if (player.getHealth() == player.getMaxHealth()) return;
 
     player.addPotionEffect(new PotionEffect(MinecraftNameWrapper.INSTANT_HEALTH, 1, 1));
-    player.getInventory().setItemInMainHand(new ItemBuilder(Material.BOWL).build());
+    player.getInventory().setItemInMainHand(new ItemStack(Material.BOWL));
     player.updateInventory();
     SoundSample.EAT.play(player);
 

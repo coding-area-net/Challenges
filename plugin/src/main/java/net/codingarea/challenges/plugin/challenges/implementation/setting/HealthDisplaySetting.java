@@ -3,15 +3,14 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,13 +20,7 @@ public class HealthDisplaySetting extends Setting {
   public static final String OBJECTIVE_NAME = "health_display";
 
   public HealthDisplaySetting() {
-    super(MenuType.SETTINGS, true);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.RED_STAINED_GLASS, Message.forName("item-health-display-setting"));
+    super(MenuType.SETTINGS, null, true, new ItemStack(Material.RED_STAINED_GLASS), "health-display");
   }
 
   @Override

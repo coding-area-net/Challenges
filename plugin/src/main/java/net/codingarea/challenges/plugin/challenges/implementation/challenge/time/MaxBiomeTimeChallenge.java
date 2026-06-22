@@ -5,24 +5,22 @@ import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @Since("2.0")
 public class MaxBiomeTimeChallenge extends SettingModifier {
 
   public MaxBiomeTimeChallenge() {
-    super(MenuType.CHALLENGES, 3, 20);
-    setCategory(SettingCategory.LIMITED_TIME);
+    super(MenuType.CHALLENGES, SettingCategory.LIMITED_TIME, 3, 20, new ItemStack(Material.SPRUCE_SAPLING), "max-biome-time");
   }
 
   @Override
@@ -47,17 +45,11 @@ public class MaxBiomeTimeChallenge extends SettingModifier {
     bossbar.update();
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.SPRUCE_SAPLING, Message.forName("item-max-biome-time-challenge"));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-time-seconds-description").asArray(getValue() * 60);
-  }
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-time-seconds-description").asArray(getValue() * 60);
+//  }
 
   @Override
   public void playValueChangeTitle() {
@@ -87,7 +79,7 @@ public class MaxBiomeTimeChallenge extends SettingModifier {
     Biome biome = player.getLocation().getBlock().getBiome();
     int time = getCurrentTime(player) + 1;
     if (time > getValue() * 60) {
-      kill(player);
+      ChallengeHelper.kill(player);
     }
     if (time < getValue() * 60) {
       getPlayerData(player).set(biome.name(), time);

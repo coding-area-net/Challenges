@@ -6,10 +6,10 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder.C
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.StructureUtils;
-import net.codingarea.commons.bukkit.utils.item.ItemBuilder.PotionBuilder;
+import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder.PotionBuilder;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.Material;
@@ -32,20 +32,20 @@ public class SubSettingsHelper {
     return SubSettingsBuilder.createChooseMultipleItem(ENTITY_TYPE).fill(builder -> {
 
       if (any) {
-        builder.addSetting(ANY, new ItemBuilder(
+        builder.addSetting(ANY, new LegacyItemBuilder(
           Material.NETHER_STAR, Message.forName("item-custom-setting-entity_type-any")).build());
       }
       if (player) {
-        builder.addSetting("PLAYER", new ItemBuilder(Material.PLAYER_HEAD, Message.forName("item-custom-setting-entity_type-player")).build());
+        builder.addSetting("PLAYER", new LegacyItemBuilder(Material.PLAYER_HEAD, Message.forName("item-custom-setting-entity_type-player")).build());
       }
       for (EntityType type : EntityType.values()) {
         if (!type.isSpawnable() || !type.isAlive()) continue;
         try {
           Material spawnEgg = Material.valueOf(type.name() + "_SPAWN_EGG");
-          builder.addSetting(type.name(), new ItemBuilder(spawnEgg,
+          builder.addSetting(type.name(), new LegacyItemBuilder(spawnEgg,
             DefaultItem.getItemPrefix() + BukkitStringUtils.getEntityName(type).toPlainText()).build());
         } catch (Exception ex) {
-          builder.addSetting(type.name(), new ItemBuilder(Material.STRUCTURE_VOID,
+          builder.addSetting(type.name(), new LegacyItemBuilder(Material.STRUCTURE_VOID,
             DefaultItem.getItemPrefix() + BukkitStringUtils.getEntityName(type).toPlainText()));
         }
       }
@@ -54,10 +54,10 @@ public class SubSettingsHelper {
 
   public static ChooseMultipleItemSubSettingBuilder createBlockSettingsBuilder() {
     return SubSettingsBuilder.createChooseMultipleItem(BLOCK).fill(builder -> {
-      builder.addSetting(ANY, new ItemBuilder(Material.NETHER_STAR, Message.forName("item-custom-setting-block-any")).build());
+      builder.addSetting(ANY, new LegacyItemBuilder(Material.NETHER_STAR, Message.forName("item-custom-setting-block-any")).build());
       for (Material material : ExperimentalUtils.getMaterials()) {
         if (material.isBlock() && material.isItem() && !BukkitReflectionUtils.isAir(material)) {
-          builder.addSetting(material.name(), new ItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemName(material).toPlainText()).build());
+          builder.addSetting(material.name(), new LegacyItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemName(material).toPlainText()).build());
         }
       }
     });
@@ -65,10 +65,10 @@ public class SubSettingsHelper {
 
   public static ChooseMultipleItemSubSettingBuilder createItemSettingsBuilder() {
     return SubSettingsBuilder.createChooseMultipleItem(ITEM).fill(builder -> {
-      builder.addSetting(ANY, new ItemBuilder(Material.NETHER_STAR, Message.forName("item-custom-setting-item-any")).build());
+      builder.addSetting(ANY, new LegacyItemBuilder(Material.NETHER_STAR, Message.forName("item-custom-setting-item-any")).build());
       for (Material material : ExperimentalUtils.getMaterials()) {
         if (material.isItem() && !BukkitReflectionUtils.isAir(material)) {
-          builder.addSetting(material.name(), new ItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemName(material).toPlainText()).build());
+          builder.addSetting(material.name(), new LegacyItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemName(material).toPlainText()).build());
         }
       }
     });
@@ -86,27 +86,27 @@ public class SubSettingsHelper {
     ChooseItemSubSettingsBuilder builder = SubSettingsBuilder.createChooseItem(TARGET_ENTITY);
 
     if (console) {
-      builder.addSetting("console", new ItemBuilder(Material.COMMAND_BLOCK_MINECART, Message.forName("item-custom-setting-target-console")));
+      builder.addSetting("console", new LegacyItemBuilder(Material.COMMAND_BLOCK_MINECART, Message.forName("item-custom-setting-target-console")));
     }
 
     if (!onlyPlayer) {
-      builder.addSetting("current", new ItemBuilder(Material.DRAGON_HEAD,
+      builder.addSetting("current", new LegacyItemBuilder(Material.DRAGON_HEAD,
         Message.forName("item-custom-setting-target-current")));
     }
 
-    builder.addSetting("current_player", new ItemBuilder(Material.PLAYER_HEAD,
+    builder.addSetting("current_player", new LegacyItemBuilder(Material.PLAYER_HEAD,
       Message.forName("item-custom-setting-target-current_player")));
-    builder.addSetting("random_player", new ItemBuilder(Material.ZOMBIE_HEAD,
+    builder.addSetting("random_player", new LegacyItemBuilder(Material.ZOMBIE_HEAD,
       Message.forName("item-custom-setting-target-random_player")));
-    builder.addSetting("every_player", new ItemBuilder(Material.PLAYER_HEAD,
+    builder.addSetting("every_player", new LegacyItemBuilder(Material.PLAYER_HEAD,
       Message.forName("item-custom-setting-target-every_player")));
 
     if (everyMob && !onlyPlayer) {
-      builder.addSetting("every_mob", new ItemBuilder(Material.WITHER_SKELETON_SKULL,
+      builder.addSetting("every_mob", new LegacyItemBuilder(Material.WITHER_SKELETON_SKULL,
         Message.forName("item-custom-setting-target-every_mob")));
-      builder.addSetting("every_mob_except_current", new ItemBuilder(Material.SKELETON_SKULL,
+      builder.addSetting("every_mob_except_current", new LegacyItemBuilder(Material.SKELETON_SKULL,
         Message.forName("item-custom-setting-target-every_mob_except_current")));
-      builder.addSetting("every_mob_except_players", new ItemBuilder(Material.SKELETON_SKULL,
+      builder.addSetting("every_mob_except_players", new LegacyItemBuilder(Material.SKELETON_SKULL,
         Message.forName("item-custom-setting-target-every_mob_except_players")));
     }
     return builder;
@@ -118,13 +118,13 @@ public class SubSettingsHelper {
     SubSettingsBuilder potionSettings = SubSettingsBuilder.createValueItem().fill(builder -> {
 
       if (potionTime) {
-        builder.addModifierSetting("length", new ItemBuilder(Material.CLOCK,
+        builder.addModifierSetting("length", new LegacyItemBuilder(Material.CLOCK,
             Message.forName("item-random-effect-length-challenge")),
           30, 1, 60,
           value -> "",
           value -> Message.forName(value == 1 ? "second" : "seconds").asString());
       }
-      builder.addModifierSetting("amplifier", new ItemBuilder(Material.STONE_SWORD,
+      builder.addModifierSetting("amplifier", new LegacyItemBuilder(Material.STONE_SWORD,
           Message.forName("item-random-effect-amplifier-challenge")),
         3, 1, 8,
         value -> Message.forName("amplifier").asString(),
@@ -148,9 +148,9 @@ public class SubSettingsHelper {
 
   public static SubSettingsBuilder createStructureSettingsBuilder() {
     return SubSettingsBuilder.createChooseItem(STRUCTURE).fill(builder -> {
-      builder.addSetting("random_structure", new ItemBuilder(Material.STRUCTURE_BLOCK, Message.forName("item-custom-action-place_structure-random")).build());
+      builder.addSetting("random_structure", new LegacyItemBuilder(Material.STRUCTURE_BLOCK, Message.forName("item-custom-action-place_structure-random")).build());
       for (StructureType structure : StructureType.getStructureTypes().values()) {
-        builder.addSetting(structure.getName(), new ItemBuilder(StructureUtils.getStructureIcon(structure), DefaultItem.getItemPrefix() + StringUtils.getEnumName(structure.getName())).build());
+        builder.addSetting(structure.getName(), new LegacyItemBuilder(StructureUtils.getStructureIcon(structure), DefaultItem.getItemPrefix() + StringUtils.getEnumName(structure.getName())).build());
       }
     });
   }

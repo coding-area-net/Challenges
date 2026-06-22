@@ -3,12 +3,16 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.DefaultItems;
 import net.codingarea.commons.common.config.Document;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class Modifier extends AbstractChallenge implements IModifier {
 
@@ -16,20 +20,19 @@ public abstract class Modifier extends AbstractChallenge implements IModifier {
   private final int defaultValue;
   private int value;
 
-  public Modifier(@NotNull MenuType menu) {
-    this(menu, 64);
+  public Modifier(@NotNull MenuType menu, @Nullable SettingCategory category, int max,
+                  @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    this(menu, category, 1, max, displayItemPreset, nameMessageKey);
   }
 
-  public Modifier(@NotNull MenuType menu, int max) {
-    this(menu, 1, max);
+  public Modifier(@NotNull MenuType menu, @Nullable SettingCategory category, int min, int max,
+                  @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    this(menu, category, min, max, min, displayItemPreset, nameMessageKey);
   }
 
-  public Modifier(@NotNull MenuType menu, int min, int max) {
-    this(menu, min, max, min);
-  }
-
-  public Modifier(@NotNull MenuType menu, int min, int max, int defaultValue) {
-    super(menu);
+  public Modifier(@NotNull MenuType menu, @Nullable SettingCategory category, int min, int max, int defaultValue,
+                  @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(menu, category, displayItemPreset, nameMessageKey);
     if (max < min) throw new IllegalArgumentException("max < min");
     if (min < 0) throw new IllegalArgumentException("min < 0");
     if (defaultValue > max) throw new IllegalArgumentException("defaultValue > max");
@@ -42,8 +45,14 @@ public abstract class Modifier extends AbstractChallenge implements IModifier {
 
   @NotNull
   @Override
-  public ItemBuilder createSettingsItem() {
-    return DefaultItem.value(value);
+  public ItemStack getSettingsItemPreset() {
+    return DefaultItems.createValuePreset(value);
+  }
+
+  @NotNull
+  @Override
+  public LocalizableMessage getSettingsName() {
+    return MessageKey.of("challenge.settings-modifier-value").withArgs(value);
   }
 
   @Override

@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
 import net.codingarea.challenges.plugin.utils.misc.CommandHelper;
@@ -22,14 +22,14 @@ public class GamemodeCommand implements SenderCommand, Completer {
     List<Player> targets = new ArrayList<>();
 
     if (args.length == 0) {
-      Message.forName("syntax").send(sender, Prefix.CHALLENGES, "gm <gamemode> [player]");
+      MessageKey.of("syntax").send(sender, Prefix.CHALLENGES, "gm <gamemode> [player]");
       return;
     }
 
     GameMode gamemode = getGameMode(args[0]);
 
     if (gamemode == null) {
-      Message.forName("syntax").send(sender, Prefix.CHALLENGES, "gm <gamemode> [player]");
+      MessageKey.of("syntax").send(sender, Prefix.CHALLENGES, "gm <gamemode> [player]");
       return;
     }
 
@@ -41,21 +41,21 @@ public class GamemodeCommand implements SenderCommand, Completer {
     }
 
     if (targets.isEmpty()) {
-      Message.forName("command-no-target").send(sender, Prefix.CHALLENGES);
+      MessageKey.of("command-no-target").send(sender, Prefix.CHALLENGES);
       return;
     }
 
     boolean otherPlayers = false;
 
     for (Player player : targets) {
-      Message.forName("command-gamemode-gamemode-changed").send(player, Prefix.CHALLENGES, gamemode);
+      MessageKey.of("command-gamemode-gamemode-changed").send(player, Prefix.CHALLENGES, gamemode);
       player.setGameMode(gamemode);
       if (player != sender)
         otherPlayers = true;
 
     }
     if (otherPlayers) {
-      Message.forName("command-gamemode-gamemode-changed-others").send(sender, Prefix.CHALLENGES, gamemode, targets.size());
+      MessageKey.of("command-gamemode-gamemode-changed-others").send(sender, Prefix.CHALLENGES, gamemode, targets.size());
     }
 
   }

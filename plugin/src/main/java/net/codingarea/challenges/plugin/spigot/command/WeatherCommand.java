@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
@@ -20,7 +20,7 @@ public class WeatherCommand implements PlayerCommand, Completer {
   public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
 
     if (args.length == 0) {
-      Message.forName("syntax").send(player, Prefix.CHALLENGES, "weather <sun/clear/rain/thunder>");
+      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "weather <sun/clear/rain/thunder>");
       return;
     }
 
@@ -32,20 +32,20 @@ public class WeatherCommand implements PlayerCommand, Completer {
       case "sun":
         world.setStorm(false);
         world.setThundering(false);
-        Message.forName("command-weather-set-clear").send(player, Prefix.CHALLENGES);
+        MessageKey.of("command-weather-set-clear").send(player, Prefix.CHALLENGES);
         break;
       case "rain":
         world.setThundering(false);
         world.setStorm(true);
-        Message.forName("command-weather-set-rain").send(player, Prefix.CHALLENGES);
+        MessageKey.of("command-weather-set-rain").send(player, Prefix.CHALLENGES);
         break;
       case "thunder":
         world.setStorm(true);
         world.setThundering(true);
-        Message.forName("command-weather-set-thunder").send(player, Prefix.CHALLENGES);
+        MessageKey.of("command-weather-set-thunder").send(player, Prefix.CHALLENGES);
         break;
       default:
-        Message.forName("syntax").send(player, Prefix.CHALLENGES, "weather <sun/clear/rain/thunder>");
+        MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "weather <sun/clear/rain/thunder>");
     }
 
   }

@@ -2,29 +2,29 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class TopCommandSetting extends Setting implements PlayerCommand {
 
   public TopCommandSetting() {
-    super(MenuType.SETTINGS);
+    super(MenuType.SETTINGS, null, new ItemStack(Material.MAGENTA_GLAZED_TERRACOTTA), "top-command-setting");
   }
 
   @Override
   public void onCommand(@NotNull Player player, @NotNull String[] args) {
     if (!isEnabled()) {
-      Message.forName("feature-disabled").send(player, Prefix.CHALLENGES);
+      MessageKey.of("feature-disabled").send(player, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.play(player);
       return;
     }
@@ -33,7 +33,7 @@ public class TopCommandSetting extends Setting implements PlayerCommand {
     Environment environment = world.getEnvironment();
     Location playerLocation = player.getLocation();
     if (environment == Environment.NORMAL) {
-      Message.forName("top-to-surface").send(player, Prefix.CHALLENGES);
+      MessageKey.of("top-to-surface").send(player, Prefix.CHALLENGES);
 
       Location location = player.getWorld().getHighestBlockAt(playerLocation).getLocation().add(0.5, 1, 0.5);
       location.setYaw(playerLocation.getYaw());
@@ -42,7 +42,7 @@ public class TopCommandSetting extends Setting implements PlayerCommand {
       player.teleport(location);
 
     } else {
-      Message.forName("top-to-overworld").send(player, Prefix.CHALLENGES);
+      MessageKey.of("top-to-overworld").send(player, Prefix.CHALLENGES);
 
       if (environment == Environment.NETHER) {
         Location location = playerLocation.clone();
@@ -63,12 +63,6 @@ public class TopCommandSetting extends Setting implements PlayerCommand {
     }
     SoundSample.TELEPORT.play(player);
 
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.MAGENTA_GLAZED_TERRACOTTA, Message.forName("top-command-setting"));
   }
 
 }

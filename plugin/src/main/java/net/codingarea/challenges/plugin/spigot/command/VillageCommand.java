@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.Bukkit;
@@ -16,13 +16,13 @@ public class VillageCommand implements PlayerCommand {
   @Override
   public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
     player.setNoDamageTicks(10);
-    Message.forName("command-village-search").send(player, Prefix.CHALLENGES);
+    MessageKey.of("command-village-search").send(player, Prefix.CHALLENGES);
 
     Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
 
       Location village = player.getWorld().locateNearestStructure(player.getLocation(), StructureType.VILLAGE, 5000, true);
       if (village == null) {
-        Message.forName("command-village-not-found").send(player, Prefix.CHALLENGES);
+        MessageKey.of("command-village-not-found").send(player, Prefix.CHALLENGES);
         return;
       }
 
@@ -33,7 +33,7 @@ public class VillageCommand implements PlayerCommand {
       Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), () -> {
         player.teleport(finalVillage);
         SoundSample.TELEPORT.play(player);
-        Message.forName("command-village-teleport").send(player, Prefix.CHALLENGES);
+        MessageKey.of("command-village-teleport").send(player, Prefix.CHALLENGES);
       }, 20 /* run after 1 second to give the chunks/world time to load/generate */);
 
     });

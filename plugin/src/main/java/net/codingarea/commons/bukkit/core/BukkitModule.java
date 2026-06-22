@@ -270,8 +270,7 @@ public abstract class BukkitModule extends JavaPlugin {
   }
 
   private void registerListener0(@NotNull Listener listener) {
-    if (listener instanceof ActionListener) {
-      ActionListener<?> actionListener = (ActionListener<?>) listener;
+    if (listener instanceof ActionListener<?> actionListener) {
       getServer().getPluginManager().registerEvent(
         actionListener.getClassOfEvent(), actionListener, actionListener.getPriority(),
         new SimpleEventExecutor(actionListener.getClassOfEvent(), actionListener.getListener()), this, actionListener.isIgnoreCancelled()

@@ -3,9 +3,12 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
 import net.codingarea.commons.common.config.Document;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class ModifierCollectionGoal extends CollectionGoal implements IModifier {
 
@@ -13,12 +16,16 @@ public abstract class ModifierCollectionGoal extends CollectionGoal implements I
   private final int defaultValue;
   private int value;
 
-  public ModifierCollectionGoal(int min, int max, @NotNull Object[] target) {
-    this(min, max, min, target);
+  public ModifierCollectionGoal(@Nullable SettingCategory category, int min, int max,
+                                @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey,
+                                @NotNull Object[] target) {
+    this(category, min, max, min, displayItemPreset, nameMessageKey, target);
   }
 
-  public ModifierCollectionGoal(int min, int max, int defaultValue, @NotNull Object[] target) {
-    super(target);
+  public ModifierCollectionGoal(@Nullable SettingCategory category, int min, int max, int defaultValue,
+                                @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey,
+                                @NotNull Object[] target) {
+    super(category, displayItemPreset, nameMessageKey, target);
     if (max < min) throw new IllegalArgumentException("max < min");
     if (min < 0) throw new IllegalArgumentException("min < 0");
     if (defaultValue > max) throw new IllegalArgumentException("defaultValue > max");
@@ -39,10 +46,10 @@ public abstract class ModifierCollectionGoal extends CollectionGoal implements I
     ChallengeHelper.handleModifierClick(info, this);
   }
 
-  @Override
-  public boolean isEnabled() {
-    return true;
-  }
+//  @Override // TODO why was this overridden??
+//  public boolean isEnabled() {
+//    return true;
+//  }
 
   @Override
   public void setEnabled(boolean enabled) {

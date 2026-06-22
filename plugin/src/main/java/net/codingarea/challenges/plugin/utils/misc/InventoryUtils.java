@@ -1,9 +1,9 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
-import net.codingarea.challenges.plugin.management.menu.generator.MenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.MenuGenerator;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.AnimationFrame;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
@@ -79,9 +79,9 @@ public final class InventoryUtils {
     setNavigationItems(inventory, navigationSlots, goBackExit, setter, index, size, DefaultItem.navigateBack(), DefaultItem.navigateNext());
   }
 
-  public static <I> void setNavigationItems(@NotNull I inventory, @NotNull int[] navigationSlots, boolean goBackExit, @NotNull InventorySetter<I> setter, int index, int size, ItemBuilder navigateBack, ItemBuilder navigateNext) {
+  public static <I> void setNavigationItems(@NotNull I inventory, @NotNull int[] navigationSlots, boolean goBackExit, @NotNull InventorySetter<I> setter, int index, int size, LegacyItemBuilder navigateBack, LegacyItemBuilder navigateNext) {
     if (navigationSlots.length >= 1) {
-      ItemBuilder left = index == 0 && goBackExit ? DefaultItem.navigateBackMainMenu() : navigateBack;
+      LegacyItemBuilder left = index == 0 && goBackExit ? DefaultItem.navigateBackMainMenu() : navigateBack;
       setter.set(inventory, navigationSlots[0], left);
     }
     if (navigationSlots.length >= 2 && index < (size - 1))
@@ -114,7 +114,7 @@ public final class InventoryUtils {
 
     for (int slot = 0; slot < inventory.getSize(); slot++) {
       ItemStack item = inventory.getItem(slot);
-      if (item != null && !item.isSimilar(ItemBuilder.BLOCKED_ITEM)) {
+      if (item != null && !item.isSimilar(LegacyItemBuilder.BLOCKED_ITEM)) {
         fullSlots.add(slot);
       }
     }
@@ -129,7 +129,7 @@ public final class InventoryUtils {
 
     for (int slot = 0; slot < inventory.getSize(); slot++) {
       ItemStack item = inventory.getItem(slot);
-      if (item != null && item.isSimilar(ItemBuilder.BLOCKED_ITEM)) continue;
+      if (item != null && item.isSimilar(LegacyItemBuilder.BLOCKED_ITEM)) continue;
       slots.add(slot);
 
     }
@@ -218,7 +218,7 @@ public final class InventoryUtils {
     InventorySetter<AnimationFrame> FRAME = AnimationFrame::setItem;
     InventorySetter<Inventory> INVENTORY = (inventory, slot, item) -> inventory.setItem(slot, item.build());
 
-    void set(@NotNull I inventory, int slot, @NotNull ItemBuilder item);
+    void set(@NotNull I inventory, int slot, @NotNull LegacyItemBuilder item);
 
   }
 

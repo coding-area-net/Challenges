@@ -5,15 +5,14 @@ import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
@@ -22,24 +21,17 @@ public class MovementItemRemovingChallenge extends SettingModifier {
   public static final int BLOCK = 1;
 
   public MovementItemRemovingChallenge() {
-    super(MenuType.CHALLENGES, 1, 2, 2);
-    setCategory(SettingCategory.INVENTORY);
+    super(MenuType.CHALLENGES, SettingCategory.INVENTORY, 1, 2, 2, new ItemStack(Material.DETECTOR_RAIL), "block-chunk-item-remove-challenge");
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.DETECTOR_RAIL, Message.forName("item-block-chunk-item-remove-challenge"));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createSettingsItem() {
-    if (!isEnabled()) return DefaultItem.disabled();
-    if (getValue() == BLOCK)
-      return DefaultItem.create(Material.GRASS_BLOCK, Message.forName("item-block-chunk-item-remove-challenge-block"));
-    return DefaultItem.create(Material.BOOK, Message.forName("item-block-chunk-item-remove-challenge-chunk"));
-  }
+//  @NotNull
+//  @Override
+//  public LegacyItemBuilder createSettingsItem() {
+//    if (!isEnabled()) return DefaultItem.disabled();
+//    if (getValue() == BLOCK)
+//      return DefaultItem.create(Material.GRASS_BLOCK, Message.forName("item-block-chunk-item-remove-challenge-block"));
+//    return DefaultItem.create(Material.BOOK, Message.forName("item-block-chunk-item-remove-challenge-chunk"));
+//  }
 
   @Override
   public void playValueChangeTitle() {

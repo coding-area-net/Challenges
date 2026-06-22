@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+@Deprecated
 public final class ItemDescription {
 
   private static final Document config = Challenges.getInstance().getConfigDocument().getDocument("design");

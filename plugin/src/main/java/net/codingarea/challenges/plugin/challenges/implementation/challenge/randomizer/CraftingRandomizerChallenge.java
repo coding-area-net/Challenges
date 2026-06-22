@@ -1,9 +1,8 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.randomizer;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.RandomizerSetting;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.commons.bukkit.utils.item.ItemUtils;
 import org.bukkit.Material;
@@ -20,13 +19,7 @@ public class CraftingRandomizerChallenge extends RandomizerSetting {
   protected final Map<Material, Material> randomization = new HashMap<>();
 
   public CraftingRandomizerChallenge() {
-    super(MenuType.CHALLENGES);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.CHEST_MINECART, Message.forName("item-crafting-randomizer-challenge"));
+    super(MenuType.CHALLENGES, new ItemStack(Material.CHEST_MINECART), "crafting-randomizer-challenge");
   }
 
   @Override
@@ -61,7 +54,7 @@ public class CraftingRandomizerChallenge extends RandomizerSetting {
     if (item == null) return;
     Material result = randomization.get(item.getType());
     if (result == null) return;
-    event.setCurrentItem(new ItemBuilder(result).amount(item.getAmount()).build());
+    event.setCurrentItem(new LegacyItemBuilder(result).setAmount(item.getAmount()).build());
   }
 
 }

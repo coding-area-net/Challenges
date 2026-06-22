@@ -1,14 +1,14 @@
 package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.challenges.type.abstraction.MenuSetting;
+import net.codingarea.challenges.plugin.challenges.type.abstraction.menu.MenuSetting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.blocks.BlockDropManager.DropPriority;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
@@ -34,31 +34,25 @@ import java.util.function.Supplier;
 public class CutCleanSetting extends MenuSetting {
 
   public CutCleanSetting() {
-    super(MenuType.SETTINGS, Message.forName("menu-cut-clean-setting-settings"));
+    super(MenuType.SETTINGS, null, new ItemStack(Material.IRON_AXE), "menu-cut-clean-setting-settings");
     registerSetting("iron->iron_ingot",
-      new ConvertDropSubSetting(() -> new ItemBuilder(Material.IRON_INGOT, Message.forName("item-cut-clean-iron-setting")), true,
+      new ConvertDropSubSetting(() -> new LegacyItemBuilder(Material.IRON_INGOT, Message.forName("item-cut-clean-iron-setting")), true,
         Material.IRON_INGOT, "IRON_ORE", "DEEPSLATE_IRON_ORE"));
     registerSetting("gold->gold_ingot",
-      new ConvertDropSubSetting(() -> new ItemBuilder(Material.GOLD_INGOT, Message.forName("item-cut-clean-gold-setting")), true,
+      new ConvertDropSubSetting(() -> new LegacyItemBuilder(Material.GOLD_INGOT, Message.forName("item-cut-clean-gold-setting")), true,
         Material.GOLD_INGOT, "GOLD_ORE", "DEEPSLATE_GOLD_ORE"));
     registerSetting("coal->torch",
-      new ConvertDropSubSetting(() -> new ItemBuilder(Material.COAL, Message.forName("item-cut-clean-coal-setting")), false,
+      new ConvertDropSubSetting(() -> new LegacyItemBuilder(Material.COAL, Message.forName("item-cut-clean-coal-setting")), false,
         Material.TORCH, "COAL_ORE", "DEEPSLATE_COAL_ORE"));
     registerSetting("gravel->flint",
-      new ConvertDropSubSetting(() -> new ItemBuilder(Material.FLINT, Message.forName("item-cut-clean-flint-setting")), false,
+      new ConvertDropSubSetting(() -> new LegacyItemBuilder(Material.FLINT, Message.forName("item-cut-clean-flint-setting")), false,
         Material.FLINT, "GRAVEL"));
     registerSetting("ore->veins",
-      new BreakOreVeinsSubSetting(() -> new ItemBuilder(Material.GOLDEN_PICKAXE, Message.forName("item-cut-clean-vein-setting")), 1, 10));
+      new BreakOreVeinsSubSetting(() -> new LegacyItemBuilder(Material.GOLDEN_PICKAXE, Message.forName("item-cut-clean-vein-setting")), 1, 10));
     registerSetting("items->inventory",
-      new DirectIntoInventorySubSetting(() -> new ItemBuilder(Material.CHEST, Message.forName("item-cut-clean-inventory-setting"))));
+      new DirectIntoInventorySubSetting(() -> new LegacyItemBuilder(Material.CHEST, Message.forName("item-cut-clean-inventory-setting"))));
     registerSetting("row->cooked",
-      new CookFoodSubSetting(() -> new ItemBuilder(Material.COOKED_BEEF, Message.forName("item-cut-clean-food-setting")), true));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.IRON_AXE, Message.forName("item-cut-clean-setting"));
+      new CookFoodSubSetting(() -> new LegacyItemBuilder(Material.COOKED_BEEF, Message.forName("item-cut-clean-food-setting")), true));
   }
 
   protected boolean directIntoInventory() {
@@ -67,8 +61,8 @@ public class CutCleanSetting extends MenuSetting {
 
   private class DirectIntoInventorySubSetting extends BooleanSubSetting {
 
-    public DirectIntoInventorySubSetting(@NotNull Supplier<ItemBuilder> item) {
-      super(item);
+    public DirectIntoInventorySubSetting(@NotNull Supplier<LegacyItemBuilder> item) {
+      super(item.get().build());
     }
 
     @NotNull
@@ -84,9 +78,9 @@ public class CutCleanSetting extends MenuSetting {
     protected final Material[] from;
     protected final Material to;
 
-    public ConvertDropSubSetting(@NotNull Supplier<ItemBuilder> item, boolean enabledByDefault,
+    public ConvertDropSubSetting(@NotNull Supplier<LegacyItemBuilder> item, boolean enabledByDefault,
                                  @NotNull Material to, @NotNull String... from) {
-      super(item, enabledByDefault);
+      super(item.get().build(), enabledByDefault);
 
       List<Material> materials = new ArrayList<>();
       for (String s : from) {
@@ -137,8 +131,8 @@ public class CutCleanSetting extends MenuSetting {
 
   private class BreakOreVeinsSubSetting extends NumberAndBooleanSubSetting {
 
-    public BreakOreVeinsSubSetting(@NotNull Supplier<ItemBuilder> item, int min, int max) {
-      super(item, min, max);
+    public BreakOreVeinsSubSetting(@NotNull Supplier<LegacyItemBuilder> item, int min, int max) {
+      super(item.get().build(), min, max); // TODO
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
@@ -201,24 +195,25 @@ public class CutCleanSetting extends MenuSetting {
       return !block.getDrops(tool).isEmpty();
     }
 
-    @NotNull
-    @Override
-    public ItemBuilder getSettingsItem() {
-      return getAsBoolean() ? DefaultItem.value(getValue(), "§7Max Vein Size: §e") : DefaultItem.disabled();
-    }
+    // TODO settings name
+//    @NotNull
+//    @Override
+//    public LegacyItemBuilder getSettingsItem() {
+//      return getAsBoolean() ? DefaultItem.value(getValue(), "§7Max Vein Size: §e") : DefaultItem.disabled();
+//    }
 
   }
 
   private class CookFoodSubSetting extends BooleanSubSetting {
 
-    public CookFoodSubSetting(@NotNull Supplier<ItemBuilder> item, boolean enabledByDefault) {
-      super(item, enabledByDefault);
+    public CookFoodSubSetting(@NotNull Supplier<LegacyItemBuilder> item, boolean enabledByDefault) {
+      super(item.get().toItem(), enabledByDefault);
     }
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEntityKill(@NotNull EntityDeathEvent event) {
       if (!isEnabled()) return;
-      event.getDrops().replaceAll(item -> new ItemBuilder(ItemUtils.convertFoodToCookedFood(item.getType())).amount(item.getAmount()).build());
+      event.getDrops().replaceAll(item -> new LegacyItemBuilder(ItemUtils.convertFoodToCookedFood(item.getType())).setAmount(item.getAmount()).build());
 
       Player killer = event.getEntity().getKiller();
       if (killer != null && directIntoInventory()) {

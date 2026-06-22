@@ -3,10 +3,8 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.eff
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
@@ -14,22 +12,15 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.jetbrains.annotations.NotNull;
 
 @Since("2.1.2")
 public class EntityRandomEffectChallenge extends Setting {
 
   public EntityRandomEffectChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.EFFECT);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.PHANTOM_MEMBRANE, Message.forName("item-entity-effect-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.EFFECT, new ItemStack(Material.PHANTOM_MEMBRANE), "entity-effect-challenge");
   }
 
   @Override

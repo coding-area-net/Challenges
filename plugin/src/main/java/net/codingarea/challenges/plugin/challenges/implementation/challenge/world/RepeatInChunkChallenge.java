@@ -4,11 +4,9 @@ import com.google.common.collect.Lists;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.PlayerIgnoreStatusChangeEvent;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.collection.pair.Triple;
 import net.codingarea.commons.common.config.Document;
@@ -29,6 +27,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -41,14 +40,7 @@ public class RepeatInChunkChallenge extends Setting {
   private final Set<Chunk> updatedChunks = new HashSet<>();
 
   public RepeatInChunkChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.WORLD);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.GRASS_BLOCK, Message.forName("item-repeat-chunk-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.GRASS_BLOCK), "repeat-in-chunk-challenge");
   }
 
   @Override

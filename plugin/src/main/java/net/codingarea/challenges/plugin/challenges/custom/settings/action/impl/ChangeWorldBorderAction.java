@@ -5,7 +5,7 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeExec
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.ChallengeAction;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -19,7 +19,7 @@ public class ChangeWorldBorderAction extends ChallengeAction {
     super(name, SubSettingsBuilder.createValueItem()
       .addModifierSetting(
         "change",
-        new ItemBuilder(Material.MAGENTA_GLAZED_TERRACOTTA, Message.forName("item-custom-action-modify_border-change")),
+        new LegacyItemBuilder(Material.MAGENTA_GLAZED_TERRACOTTA, Message.forName("item-custom-action-modify_border-change")),
         1, -10, 10
       ));
   }

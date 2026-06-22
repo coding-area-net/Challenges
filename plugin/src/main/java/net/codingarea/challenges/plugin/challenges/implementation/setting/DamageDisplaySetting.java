@@ -4,10 +4,10 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.stats.Statistic.Display;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.Material;
@@ -19,13 +19,14 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
 
 public class DamageDisplaySetting extends Setting {
 
   public DamageDisplaySetting() {
-    super(MenuType.SETTINGS, true);
+    super(MenuType.SETTINGS, null, true, new ItemStack(Material.COMMAND_BLOCK), "damage-display");
   }
 
   public static String getCause(@NotNull EntityDamageEvent event) {
@@ -75,11 +76,5 @@ public class DamageDisplaySetting extends Setting {
     double damage = event.getFinalDamage();
     String damageDisplay = damage >= 1000 ? "∞" : Display.HEARTS.formatChat(damage);
     Message.forName("player-damage-display").broadcast(Prefix.DAMAGE, NameHelper.getName((Player) event.getEntity()), damageDisplay, getCause(event));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.COMMAND_BLOCK, Message.forName("item-damage-display-setting"));
   }
 }

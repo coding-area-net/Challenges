@@ -3,12 +3,13 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public abstract class Setting extends AbstractChallenge {
@@ -16,12 +17,14 @@ public abstract class Setting extends AbstractChallenge {
   private final boolean enabledByDefault;
   protected boolean enabled;
 
-  public Setting(@NotNull MenuType menu) {
-    this(menu, false);
+  public Setting(@NotNull MenuType menu, @Nullable SettingCategory category,
+                 @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    this(menu, category, false, displayItemPreset, nameMessageKey);
   }
 
-  public Setting(@NotNull MenuType menu, boolean enabledByDefault) {
-    super(menu);
+  public Setting(@NotNull MenuType menu, @Nullable SettingCategory category, boolean enabledByDefault,
+                 @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(menu, category, displayItemPreset, nameMessageKey);
     this.enabledByDefault = enabledByDefault;
     setEnabled(enabledByDefault);
   }
@@ -40,12 +43,6 @@ public abstract class Setting extends AbstractChallenge {
 
   public void playStatusUpdateTitle() {
     ChallengeHelper.playToggleChallengeTitle(this);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createSettingsItem() {
-    return DefaultItem.status(enabled);
   }
 
   protected void onEnable() {

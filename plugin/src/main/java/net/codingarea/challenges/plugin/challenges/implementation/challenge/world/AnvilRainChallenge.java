@@ -1,14 +1,11 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
-import net.codingarea.challenges.plugin.challenges.type.abstraction.MenuSetting;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.challenges.type.abstraction.menu.MenuSetting;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
-import net.codingarea.challenges.plugin.management.stats.Statistic.Display;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -17,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -29,42 +27,42 @@ public class AnvilRainChallenge extends MenuSetting {
   int currentTime = 0;
 
   public AnvilRainChallenge() {
-    super(MenuType.CHALLENGES, Message.forName("menu-anvil-rain-challenge-settings"));
-    setCategory(SettingCategory.WORLD);
-    registerSetting("time", new NumberSubSetting(
-        () -> new ItemBuilder(Material.CLOCK, Message.forName("item-anvil-rain-time-challenge")),
-        value -> null,
-        value -> "§e" + value + " §7" + Message.forName(value == 1 ? "second" : "seconds").asString(),
-        1,
-        30,
-        7
-      )
-    );
-    registerSetting("count", new NumberSubSetting(
-        () -> new ItemBuilder(Material.FLINT, Message.forName("item-anvil-rain-count-challenge")),
-        1,
-        30,
-        8
-      )
-    );
-    registerSetting("range", new NumberSubSetting(
-        () -> new ItemBuilder(Material.COMPASS, Message.forName("item-anvil-rain-range-challenge")),
-        value -> null,
-        value -> "§e" + value + " §7" + (value == 1 ? "chunk" : "chunks"),
-        1,
-        3,
-        2
-      )
-    );
-    registerSetting("damage", new NumberSubSetting(
-        () -> new ItemBuilder(Material.IRON_SWORD, Message.forName("item-anvil-rain-damage-challenge")),
-        value -> null,
-        value -> "§e" + Display.HEARTS.formatChat(value),
-        1,
-        60,
-        30
-      )
-    );
+//    super(Message.forName("menu-anvil-rain-challenge-settings"));
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.ANVIL), "anvil-rain-challenge");
+//    registerSetting("time", new NumberSubSetting(
+//        () -> new LegacyItemBuilder(Material.CLOCK, Message.forName("item-anvil-rain-time-challenge")),
+//        value -> null,
+//        value -> "§e" + value + " §7" + Message.forName(value == 1 ? "second" : "seconds").asString(),
+//        1,
+//        30,
+//        7
+//      )
+//    );
+//    registerSetting("count", new NumberSubSetting(
+//        () -> new LegacyItemBuilder(Material.FLINT, Message.forName("item-anvil-rain-count-challenge")),
+//        1,
+//        30,
+//        8
+//      )
+//    );
+//    registerSetting("range", new NumberSubSetting(
+//        () -> new LegacyItemBuilder(Material.COMPASS, Message.forName("item-anvil-rain-range-challenge")),
+//        value -> null,
+//        value -> "§e" + value + " §7" + (value == 1 ? "chunk" : "chunks"),
+//        1,
+//        3,
+//        2
+//      )
+//    );
+//    registerSetting("damage", new NumberSubSetting(
+//        () -> new LegacyItemBuilder(Material.IRON_SWORD, Message.forName("item-anvil-rain-damage-challenge")),
+//        value -> null,
+//        value -> "§e" + Display.HEARTS.formatChat(value),
+//        1,
+//        60,
+//        30
+//      )
+//    );
   }
 
   @Override
@@ -86,12 +84,6 @@ public class AnvilRainChallenge extends MenuSetting {
         entity.remove();
       }
     }
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.ANVIL, Message.forName("item-anvil-rain-challenge"));
   }
 
   @ScheduledTask(ticks = 20, async = false)

@@ -1,16 +1,15 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.inventory;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
+import net.codingarea.challenges.plugin.challenges.type.annotation.CanInstaKillOnEnable;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
-import net.codingarea.challenges.plugin.management.challenges.annotations.CanInstaKillOnEnable;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.common.collection.pair.Triple;
 import org.bukkit.Bukkit;
@@ -33,14 +32,7 @@ import java.util.Map.Entry;
 public class NoDupedItemsChallenge extends Setting {
 
   public NoDupedItemsChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.INVENTORY);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.OBSERVER, Message.forName("item-no-duped-items-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.INVENTORY, new ItemStack(Material.OBSERVER), "no-duped-items-challenge");
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

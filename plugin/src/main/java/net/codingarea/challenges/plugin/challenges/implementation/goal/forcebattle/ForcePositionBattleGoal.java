@@ -5,32 +5,26 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleG
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ForcePositionBattleGoal extends ForceBattleGoal<PositionTarget> {
   public ForcePositionBattleGoal() {
-    super(Message.forName("menu-force-position-battle-goal-settings"));
-    registerSetting("radius", new NumberSubSetting(
-      () -> new ItemBuilder(Material.DIAMOND_BOOTS, Message.forName("item-force-position-battle-radius")),
-      value -> null,
-      value -> "§e" + (value * 100),
-      1,
-      100,
-      15
-    ));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.DIAMOND_BOOTS, Message.forName("item-force-position-battle-goal"));
+//    super(Message.forName("menu-force-position-battle-goal-settings"));
+    super(new ItemStack(Material.DIAMOND_BOOTS), "force-position-battle-goal");
+//    registerSetting("radius", new NumberSubSetting(
+//      () -> new LegacyItemBuilder(Material.DIAMOND_BOOTS, Message.forName("item-force-position-battle-radius")),
+//      value -> null,
+//      value -> "§e" + (value * 100),
+//      1,
+//      100,
+//      15
+//    ));
   }
 
   @Override

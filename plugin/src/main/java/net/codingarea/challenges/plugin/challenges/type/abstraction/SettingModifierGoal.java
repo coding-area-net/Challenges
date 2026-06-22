@@ -4,27 +4,33 @@ import net.codingarea.challenges.plugin.challenges.type.IGoal;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class SettingModifierGoal extends SettingModifier implements IGoal {
 
-  public SettingModifierGoal(@NotNull MenuType menu) {
-    super(menu);
+  public SettingModifierGoal(@NotNull MenuType menu, @Nullable SettingCategory category,
+                             @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    super(menu, category, displayItemPreset, messageNameKey);
   }
 
-  public SettingModifierGoal(@NotNull MenuType menu, int max) {
-    super(menu, max);
+  public SettingModifierGoal(@NotNull MenuType menu, @Nullable SettingCategory category, int max,
+                             @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    super(menu, category, max, displayItemPreset, messageNameKey);
   }
 
-  public SettingModifierGoal(@NotNull MenuType menu, int min, int max) {
-    super(menu, min, max);
+  public SettingModifierGoal(@NotNull MenuType menu, @Nullable SettingCategory category, int min, int max,
+                             @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    super(menu, category, min, max, displayItemPreset, messageNameKey);
   }
 
-  public SettingModifierGoal(@NotNull MenuType menu, int min, int max, int defaultValue) {
-    super(menu, min, max, defaultValue);
+  public SettingModifierGoal(@NotNull MenuType menu, @Nullable SettingCategory category, int min, int max, int defaultValue,
+                             @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    super(menu, category, min, max, defaultValue, displayItemPreset, messageNameKey);
   }
 
   @Override

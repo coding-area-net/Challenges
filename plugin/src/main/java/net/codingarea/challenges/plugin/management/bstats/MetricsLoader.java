@@ -17,12 +17,10 @@ public class MetricsLoader {
     Challenges plugin = Challenges.getInstance();
 
     Metrics metrics = new Metrics(plugin, 11494);
-    metrics.addCustomChart(new SimplePie("language", () -> {
-      LanguageLoader loader = Challenges.getInstance().getLoaderRegistry()
-        .getFirstLoaderByClass(LanguageLoader.class);
-      if (loader == null) return "NULL";
-      return loader.getLanguage();
-    }));
+    metrics.addCustomChart(new SimplePie("language", () -> Challenges.getInstance().getLoaderRegistry()
+      .getFirstLoaderByClass(LanguageLoader.class)
+      .map(LanguageLoader::getConfigLanguageTag)
+      .orElse("NULL")));
     metrics.addCustomChart(new SimplePie("cloudType", () -> StringUtils.getEnumName(plugin.getCloudSupportManager().getType())));
     metrics.addCustomChart(new SimplePie("databaseType", () -> StringUtils.getEnumName(plugin.getDatabaseManager().getType())));
     metrics.addCustomChart(new SingleLineChart("totalMemory", this::getMemory));

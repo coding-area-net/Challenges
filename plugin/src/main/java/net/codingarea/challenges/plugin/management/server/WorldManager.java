@@ -86,7 +86,7 @@ public final class WorldManager {
     resetConfigs(seed);
 
     String requester = requestedBy instanceof Player ? NameHelper.getName((Player) requestedBy) : "§4§lConsole";
-    String kickMessage = Message.forName("server-reset").asString(requester);
+    String kickMessage = Message.forName(restartOnReset ? "server-reset-restart" : "server-reset-stop").asString(requester);
     Bukkit.getOnlinePlayers().forEach(player -> player.kickPlayer(kickMessage));
 
     Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), this::stopServerNow, 3);

@@ -5,10 +5,9 @@ import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebatt
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleDisplayGoal;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
@@ -27,6 +26,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -34,24 +34,18 @@ import java.util.function.Function;
 
 public class ExtremeForceBattleGoal extends ForceBattleDisplayGoal<ForceTarget<?>> {
 
-
   public ExtremeForceBattleGoal() {
-    super(Message.forName("menu-extreme-force-battle-goal-settings"));
+//    super(Message.forName("menu-extreme-force-battle-goal-settings"));
+    super(new ItemStack(Material.BOOK), "extreme-force-battle-goal");
 
-    registerSetting("give-item", new BooleanSubSetting(
-      () -> new ItemBuilder(Material.CHEST, Message.forName("item-force-item-battle-goal-give-item")),
-      false
-    ));
-    registerSetting("give-block", new BooleanSubSetting(
-      () -> new ItemBuilder(Material.CHEST, Message.forName("item-force-block-battle-goal-give-block")),
-      false
-    ));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.BOOK, Message.forName("item-extreme-force-battle-goal"));
+//    registerSetting("give-item", new BooleanSubSetting(
+//      () -> new LegacyItemBuilder(Material.CHEST, Message.forName("item-force-item-battle-goal-give-item")),
+//      false
+//    ));
+//    registerSetting("give-block", new BooleanSubSetting(
+//      () -> new LegacyItemBuilder(Material.CHEST, Message.forName("item-force-block-battle-goal-give-block")),
+//      false
+//    ));
   }
 
   @Override

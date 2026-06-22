@@ -2,12 +2,10 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ItemCollectionGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Material;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +15,7 @@ import java.util.List;
 public class CollectSwordsGoal extends ItemCollectionGoal {
 
   public CollectSwordsGoal() {
-    setCategory(SettingCategory.FASTEST_TIME);
+    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.DIAMOND_SWORD), "collect-swords-goal");
     List<Material> targets = new ArrayList<>(Arrays.asList(
       Material.WOODEN_SWORD, Material.STONE_SWORD,
       Material.IRON_SWORD, Material.GOLDEN_SWORD,
@@ -29,12 +27,6 @@ public class CollectSwordsGoal extends ItemCollectionGoal {
     }
 
     setTarget(targets.toArray(new Object[0]));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.DIAMOND_SWORD, Message.forName("item-collect-swords-goal"));
   }
 
 }

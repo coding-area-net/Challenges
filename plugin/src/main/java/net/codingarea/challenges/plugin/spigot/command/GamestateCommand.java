@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
@@ -20,7 +20,7 @@ public class GamestateCommand implements SenderCommand, Completer {
   public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 
     if (args.length != 1) {
-      Message.forName("syntax").send(sender, Prefix.CHALLENGES, "gamestate <reset/reload>");
+      MessageKey.of("syntax").send(sender, Prefix.CHALLENGES, "gamestate <reset/reload>");
       return;
     }
 
@@ -30,15 +30,15 @@ public class GamestateCommand implements SenderCommand, Completer {
         gamestate.clear();
         Challenges.getInstance().getChallengeManager().resetGamestate();
         Challenges.getInstance().getScoreboardManager().updateAll();
-        Message.forName("command-gamestate-reset").send(sender, Prefix.CHALLENGES);
+        MessageKey.of("command-gamestate-reset").send(sender, Prefix.CHALLENGES);
         break;
       case "reload":
         Challenges.getInstance().getChallengeManager().loadGamestate(gamestate.readonly());
         Challenges.getInstance().getScoreboardManager().updateAll();
-        Message.forName("command-gamestate-reload").send(sender, Prefix.CHALLENGES);
+        MessageKey.of("command-gamestate-reload").send(sender, Prefix.CHALLENGES);
         break;
       default:
-        Message.forName("syntax").send(sender, Prefix.CHALLENGES, "gamestate <reset/reload>");
+        MessageKey.of("syntax").send(sender, Prefix.CHALLENGES, "gamestate <reset/reload>");
     }
 
   }

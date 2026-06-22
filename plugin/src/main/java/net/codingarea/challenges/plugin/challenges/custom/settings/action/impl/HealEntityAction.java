@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.action.impl;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.EntityTargetAction;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeInstance;
@@ -19,7 +19,7 @@ public class HealEntityAction extends EntityTargetAction {
       String prefix = DefaultItem.getItemPrefix();
       for (int i = 1; i < 21; i++) {
         builder.addSetting(
-          String.valueOf(i), new ItemBuilder(
+          String.valueOf(i), new LegacyItemBuilder(
             MinecraftNameWrapper.RED_DYE, prefix + "§7" + (i / 2f) + " §c❤").setAmount(i).build());
       }
     }));

@@ -4,10 +4,7 @@ import net.codingarea.challenges.plugin.challenges.implementation.setting.OneTea
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.WorldDependentChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,26 +15,18 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class WaterMLGChallenge extends WorldDependentChallenge {
 
   public WaterMLGChallenge() {
-    super(MenuType.CHALLENGES, 1, 10, 5, false);
-    setCategory(SettingCategory.EXTRA_WORLD);
+    super(MenuType.CHALLENGES, 1, 10, 5, new ItemStack(Material.WATER_BUCKET), "water-mlg-challenge");
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.WATER_BUCKET, Message.forName("item-water-mlg-challenge"));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-time-seconds-range-description").asArray(getValue() * 60 - 10, getValue() * 60 + 10);
-  }
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-time-seconds-range-description").asArray(getValue() * 60 - 10, getValue() * 60 + 10);
+//  }
 
   @Override
   public void playValueChangeTitle() {

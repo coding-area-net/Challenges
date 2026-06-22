@@ -1,9 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.miscellaneous;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,13 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public class OneDurabilityChallenge extends Setting {
 
   public OneDurabilityChallenge() {
-    super(MenuType.CHALLENGES);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.WOODEN_HOE, Message.forName("item-one-durability-challenge"));
+    super(MenuType.CHALLENGES, null, new ItemStack(Material.WOODEN_HOE), "one-durability-challenge");
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

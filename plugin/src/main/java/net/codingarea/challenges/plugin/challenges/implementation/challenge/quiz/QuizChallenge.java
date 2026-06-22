@@ -6,12 +6,12 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallen
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.spigot.events.PlayerJumpEvent;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
@@ -38,8 +38,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -50,7 +50,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
 
   private static QuizChallenge instance;
 
-  private final Prefix prefix = Prefix.forName("quiz", "§6Quiz");
+  private final Prefix prefix = Prefix.create("quiz", "§6Quiz");
   private final IRandom random = IRandom.create();
 
   private IQuestion currentQuestion;
@@ -58,15 +58,15 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
   private int timeLeft;
 
   public QuizChallenge() {
-    super(MenuType.CHALLENGES, 1, 20, 5);
+    super(MenuType.CHALLENGES, null, 1, 20, 5, new ItemStack(Material.WRITABLE_BOOK), "quiz");
     instance = this;
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.BARRIER);
-  }
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return ChallengeHelper.getTimeRangeSettingsDescription(this, 60 * 3, 60);
+//  }
 
   @Override
   protected void onEnable() {
@@ -91,12 +91,6 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
   @Override
   protected void onDisable() {
     bossbar.hide();
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return ChallengeHelper.getTimeRangeSettingsDescription(this, 60 * 3, 60);
   }
 
   @Override
@@ -136,7 +130,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
       onTimeActivation();
       return;
     }
-    Message.forName("quiz-how-to").send(currentQuestionedPlayer, Prefix.CHALLENGES);
+    MessageKey.of("quiz-how-to").send(currentQuestionedPlayer, Prefix.CHALLENGES);
     timeLeft = 60;
 
     bossbar.update();
@@ -171,7 +165,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
     AttributeInstance attribute = currentQuestionedPlayer.getAttribute(MinecraftNameWrapper.MAX_HEALTH);
     if (attribute == null) return;
     if (attribute.getBaseValue() == 2) {
-      kill(currentQuestionedPlayer);
+      ChallengeHelper.kill(currentQuestionedPlayer);
       attribute.setBaseValue(20);
       return;
     }
@@ -190,7 +184,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
     }
 
     if (args.length == 0) {
-      Message.forName("syntax").send(player, prefix, "guess <answer>");
+      MessageKey.of("syntax").send(player, prefix, "guess <answer>");
       return;
     }
 

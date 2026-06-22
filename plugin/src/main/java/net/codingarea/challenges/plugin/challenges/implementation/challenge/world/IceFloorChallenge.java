@@ -5,8 +5,7 @@ import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -30,14 +29,7 @@ public class IceFloorChallenge extends Setting {
   private final List<Player> ignoredPlayers = new ArrayList<>();
 
   public IceFloorChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.WORLD);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.PACKED_ICE, Message.forName("item-ice-floor-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.PACKED_ICE), "ice-floor-challenge");
   }
 
   @Override

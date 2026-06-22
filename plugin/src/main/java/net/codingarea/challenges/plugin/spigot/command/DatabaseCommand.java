@@ -2,8 +2,8 @@ package net.codingarea.challenges.plugin.spigot.command;
 
 import com.google.common.collect.Lists;
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
@@ -35,7 +35,7 @@ public class DatabaseCommand implements PlayerCommand, TabCompleter {
       public void save(Player player) throws Exception {
         if (checkFeatureDisabled(savePlayerConfigs, player)) return;
         Challenges.getInstance().getChallengeManager().saveSettings(player);
-        Message.forName("player-config-loaded").send(player, Prefix.CHALLENGES);
+        MessageKey.of("player-config-loaded").send(player, Prefix.CHALLENGES);
       }
 
       @Override
@@ -47,7 +47,7 @@ public class DatabaseCommand implements PlayerCommand, TabCompleter {
           .where("uuid", player.getUniqueId())
           .execute().firstOrEmpty().getDocument("config");
         Challenges.getInstance().getChallengeManager().loadSettings(config);
-        Message.forName("player-config-loaded").send(player, Prefix.CHALLENGES);
+        MessageKey.of("player-config-loaded").send(player, Prefix.CHALLENGES);
       }
 
       @Override
@@ -57,7 +57,7 @@ public class DatabaseCommand implements PlayerCommand, TabCompleter {
           .where("uuid", player.getUniqueId())
           .set("config", null)
           .execute();
-        Message.forName("player-config-reset").send(player, Prefix.CHALLENGES);
+        MessageKey.of("player-config-reset").send(player, Prefix.CHALLENGES);
       }
     });
     databaseExecutors.put("customs", new DatabaseCommandExecutor() {
@@ -66,7 +66,7 @@ public class DatabaseCommand implements PlayerCommand, TabCompleter {
       public void save(Player player) throws Exception {
         if (checkFeatureDisabled(savePlayerChallenges, player)) return;
         Challenges.getInstance().getChallengeManager().saveCustomChallenges(player);
-        Message.forName("player-custom_challenges-saved").send(player, Prefix.CHALLENGES);
+        MessageKey.of("player-custom_challenges-saved").send(player, Prefix.CHALLENGES);
       }
 
       @Override
@@ -78,7 +78,7 @@ public class DatabaseCommand implements PlayerCommand, TabCompleter {
           .where("uuid", player.getUniqueId())
           .execute().firstOrEmpty().getDocument("custom_challenges");
         Challenges.getInstance().getChallengeManager().loadCustomChallenges(config);
-        Message.forName("player-custom_challenges-loaded").send(player, Prefix.CHALLENGES);
+        MessageKey.of("player-custom_challenges-loaded").send(player, Prefix.CHALLENGES);
       }
 
       @Override
@@ -88,7 +88,7 @@ public class DatabaseCommand implements PlayerCommand, TabCompleter {
           .where("uuid", player.getUniqueId())
           .set("custom_challenges", null)
           .execute();
-        Message.forName("player-custom_challenges-reset").send(player, Prefix.CHALLENGES);
+        MessageKey.of("player-custom_challenges-reset").send(player, Prefix.CHALLENGES);
       }
     });
   }
@@ -101,7 +101,7 @@ public class DatabaseCommand implements PlayerCommand, TabCompleter {
     }
 
     if (args.length != 2 || !databaseExecutors.containsKey(args[1])) {
-      Message.forName("syntax").send(player, Prefix.CHALLENGES, "database <save/load/reset> <settings/customs>");
+      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "database <save/load/reset> <settings/customs>");
       return;
     }
 
@@ -119,7 +119,7 @@ public class DatabaseCommand implements PlayerCommand, TabCompleter {
         executor.reset(player);
         break;
       default:
-        Message.forName("syntax").send(player, Prefix.CHALLENGES, "database <save/load/reset> <settings/customs>");
+        MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "database <save/load/reset> <settings/customs>");
     }
 
   }
@@ -129,7 +129,7 @@ public class DatabaseCommand implements PlayerCommand, TabCompleter {
    */
   private boolean checkFeatureDisabled(boolean enabled, @NotNull Player player) {
     if (!enabled) {
-      Message.forName("feature-disabled").send(player, Prefix.CHALLENGES);
+      MessageKey.of("feature-disabled").send(player, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.play(player);
       return true;
     }

@@ -4,28 +4,21 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class OnlyDownChallenge extends Setting {
 
   public OnlyDownChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.MOVEMENT);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.ACACIA_SLAB, Message.forName("item-only-down-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, new ItemStack(Material.ACACIA_SLAB), "only-down-challenge");
   }
 
   @EventHandler

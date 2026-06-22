@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.management.menu.generator.implementation.custom;
 
-import net.codingarea.challenges.plugin.management.menu.generator.ChooseItemGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.ChooseItemGenerator;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

@@ -1,28 +1,20 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.movement;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.PlayerJumpEvent;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 public class HigherJumpsChallenge extends Setting {
 
   public HigherJumpsChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.MOVEMENT);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.RABBIT_FOOT, Message.forName("item-higher-jumps-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, new ItemStack(Material.RABBIT_FOOT), "higher-jumps-challenge");
   }
 
   @EventHandler(priority = EventPriority.NORMAL)

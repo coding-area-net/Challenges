@@ -4,7 +4,8 @@ import com.google.common.collect.Lists;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
@@ -43,19 +44,19 @@ public class ResetCommand implements SenderCommand, Completer {
       }
 
       if (!Challenges.getInstance().getWorldManager().isEnableFreshReset() && ChallengeAPI.isFresh()) {
-        Message.forName("no-fresh-reset").send(sender, Prefix.CHALLENGES);
+        MessageKey.of("no-fresh-reset").send(sender, Prefix.CHALLENGES);
         SoundSample.BASS_OFF.playIfPlayer(sender);
         return;
       }
 
       if (confirmReset) {
-        Message.forName("confirm-reset").send(sender, Prefix.CHALLENGES, "reset confirm");
+        MessageKey.of("confirm-reset").send(sender, Prefix.CHALLENGES, "reset confirm");
         return;
       }
     }
 
     if (!Challenges.getInstance().getWorldManager().isEnableFreshReset() && ChallengeAPI.isFresh()) {
-      Message.forName("no-fresh-reset").send(sender, Prefix.CHALLENGES);
+      MessageKey.of("no-fresh-reset").send(sender, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.playIfPlayer(sender);
       return;
     }

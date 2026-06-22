@@ -62,37 +62,37 @@ public class MinecraftNameWrapper {
   }
 
   @NotNull
-  private static Material getMaterialByNames(@NotNull String... names) {
+  public static Material getMaterialByNames(@NotNull String... names) {
     return ReflectionUtils.getFirstEnumByNames(Material.class, names);
   }
 
   @NotNull
-  private static EntityType getEntityByNames(@NotNull String... names) {
+  public static EntityType getEntityByNames(@NotNull String... names) {
     return ReflectionUtils.getFirstEnumByNames(EntityType.class, names);
   }
 
   @NotNull
-  private static Particle getParticleByNames(@NotNull String... names) {
+  public static Particle getParticleByNames(@NotNull String... names) {
     return ReflectionUtils.getFirstEnumByNames(Particle.class, names);
   }
 
   @NotNull
-  private static PotionEffectType getPotionByNames(@NotNull String... names) {
+  public static PotionEffectType getPotionByNames(@NotNull String... names) {
     return getFirstConstantByNames(PotionEffectType.class, names);
   }
 
   @NotNull
-  private static Enchantment getEnchantByNames(@NotNull String... names) {
+  public static Enchantment getEnchantByNames(@NotNull String... names) {
     return getFirstConstantByNames(Enchantment.class, names);
   }
 
   @NotNull
-  private static Attribute getAttributeByNames(@NotNull String... names) {
+  public static Attribute getAttributeByNames(@NotNull String... names) {
     return getFirstConstantByNames(Attribute.class, names);
   }
 
   @NotNull
-  private static <T> GameRule<T> getGameRuleByNames(@NotNull String... names) {
+  public static <T> GameRule<T> getGameRuleByNames(@NotNull String... names) {
     return getFirstConstantByNames(GameRule.class, names);
   }
 

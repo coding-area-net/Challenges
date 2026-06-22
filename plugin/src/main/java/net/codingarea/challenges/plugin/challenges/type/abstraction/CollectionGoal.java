@@ -2,12 +2,15 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -19,13 +22,15 @@ public abstract class CollectionGoal extends SettingGoal {
   private final Map<UUID, List<String>> collections = new HashMap<>();
   protected Object[] target;
 
-  public CollectionGoal(@NotNull Object[] target) {
-    super();
+  public CollectionGoal(@Nullable SettingCategory category, @NotNull ItemStack displayItemPreset,
+                        @NotNull String nameMessageKey, @NotNull Object[] target) {
+    super(category, displayItemPreset, nameMessageKey);
     this.target = target;
   }
 
-  public CollectionGoal(boolean enabledByDefault, @NotNull Object[] target) {
-    super(enabledByDefault);
+  public CollectionGoal(@Nullable SettingCategory category, boolean enabledByDefault,
+                        @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey, @NotNull Object[] target) {
+    super(category, enabledByDefault, displayItemPreset, nameMessageKey);
     this.target = target;
   }
 

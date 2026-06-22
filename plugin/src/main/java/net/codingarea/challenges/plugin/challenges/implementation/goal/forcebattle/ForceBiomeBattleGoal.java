@@ -5,13 +5,12 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleG
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.block.Biome;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 import java.util.Objects;
@@ -20,13 +19,8 @@ import java.util.stream.Collectors;
 public class ForceBiomeBattleGoal extends ForceBattleGoal<BiomeTarget> {
 
   public ForceBiomeBattleGoal() {
-    super(Message.forName("menu-force-biome-battle-goal-settings"));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.FILLED_MAP, Message.forName("item-force-biome-battle-goal"));
+//    super(Message.forName("menu-force-biome-battle-goal-settings"));
+    super(new ItemStack(Material.FILLED_MAP), "forice-biome-battle-goal");
   }
 
   @Override

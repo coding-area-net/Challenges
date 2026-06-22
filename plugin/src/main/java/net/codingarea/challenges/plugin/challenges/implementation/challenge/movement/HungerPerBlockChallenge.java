@@ -2,29 +2,21 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.mov
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class HungerPerBlockChallenge extends SettingModifier {
 
   public HungerPerBlockChallenge() {
-    super(MenuType.CHALLENGES, 1, 20, 2);
-    setCategory(SettingCategory.MOVEMENT);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.ROTTEN_FLESH, Message.forName("item-hunger-block-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, 1, 20, 2, new ItemStack(Material.ROTTEN_FLESH), "hunger-block");
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

@@ -3,10 +3,8 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.dam
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -15,29 +13,22 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @Since("2.0.2")
 public class FreezeChallenge extends SettingModifier {
 
   public FreezeChallenge() {
-    super(MenuType.CHALLENGES, 5, 60, 20);
-    setCategory(SettingCategory.DAMAGE);
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 5, 60, 20, new ItemStack(Material.BLUE_ICE), "item-freeze-challenge");
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.BLUE_ICE, Message.forName("item-freeze-challenge"));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-time-seconds-description").asArray(getValue());
-  }
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-time-seconds-description").asArray(getValue());
+//  }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
   public void onDamage(@NotNull EntityDamageEvent event) {

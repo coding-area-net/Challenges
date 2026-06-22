@@ -27,8 +27,7 @@ public class ChallengeExecutionData {
   @Getter
   private int timesExecuting;
 
-  public ChallengeExecutionData(
-    IChallengeTrigger trigger) {
+  public ChallengeExecutionData(IChallengeTrigger trigger) {
     this.trigger = trigger;
     this.triggerData = new HashMap<>();
   }

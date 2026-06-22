@@ -2,11 +2,14 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import lombok.Setter;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class TimedChallenge extends SettingModifier {
 
@@ -17,39 +20,47 @@ public abstract class TimedChallenge extends SettingModifier {
   private boolean timerStatus = false;
   private boolean startedBefore = false;
 
-  public TimedChallenge(@NotNull MenuType menu) {
-    this(menu, true);
+  public TimedChallenge(@NotNull MenuType menu, @Nullable SettingCategory category,
+                        @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    this(menu, category, true, displayItemPreset, messageNameKey);
   }
 
-  public TimedChallenge(@NotNull MenuType menu, int max) {
-    this(menu, max, true);
+  public TimedChallenge(@NotNull MenuType menu, @Nullable SettingCategory category, int max,
+                        @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    this(menu, category, max, true, displayItemPreset, messageNameKey);
   }
 
-  public TimedChallenge(@NotNull MenuType menu, int min, int max) {
-    this(menu, min, max, true);
+  public TimedChallenge(@NotNull MenuType menu, @Nullable SettingCategory category, int min, int max,
+                        @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    this(menu, category, min, max, true, displayItemPreset, messageNameKey);
   }
 
-  public TimedChallenge(@NotNull MenuType menu, int min, int max, int defaultValue) {
-    this(menu, min, max, defaultValue, true);
+  public TimedChallenge(@NotNull MenuType menu, @Nullable SettingCategory category, int min, int max, int defaultValue,
+                        @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    this(menu, category, min, max, defaultValue, true, displayItemPreset, messageNameKey);
   }
 
-  public TimedChallenge(@NotNull MenuType menu, boolean runAsync) {
-    super(menu);
+  public TimedChallenge(@NotNull MenuType menu, @Nullable SettingCategory category, boolean runAsync,
+                        @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    super(menu, category, displayItemPreset, messageNameKey);
     this.runAsync = runAsync;
   }
 
-  public TimedChallenge(@NotNull MenuType menu, int max, boolean runAsync) {
-    super(menu, max);
+  public TimedChallenge(@NotNull MenuType menu, @Nullable SettingCategory category, int max, boolean runAsync,
+                        @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    super(menu, category, max, displayItemPreset, messageNameKey);
     this.runAsync = runAsync;
   }
 
-  public TimedChallenge(@NotNull MenuType menu, int min, int max, boolean runAsync) {
-    super(menu, min, max);
+  public TimedChallenge(@NotNull MenuType menu, @Nullable SettingCategory category, int min, int max, boolean runAsync,
+                        @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    super(menu, category, min, max, displayItemPreset, messageNameKey);
     this.runAsync = runAsync;
   }
 
-  public TimedChallenge(@NotNull MenuType menu, int min, int max, int defaultValue, boolean runAsync) {
-    super(menu, min, max, defaultValue);
+  public TimedChallenge(@NotNull MenuType menu, @Nullable SettingCategory category, int min, int max, int defaultValue, boolean runAsync,
+                        @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    super(menu, category, min, max, defaultValue, displayItemPreset, messageNameKey);
     this.runAsync = runAsync;
   }
 

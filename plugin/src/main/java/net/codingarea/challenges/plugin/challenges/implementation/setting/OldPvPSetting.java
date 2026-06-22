@@ -4,7 +4,7 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeInstance;
@@ -15,6 +15,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
@@ -23,13 +24,7 @@ public class OldPvPSetting extends Setting {
   public static final double DISABLED = 32, NORMAL = 4; // Values copied from BackToTheRoots
 
   public OldPvPSetting() {
-    super(MenuType.SETTINGS);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.IRON_SWORD, Message.forName("item-old-pvp-setting"));
+    super(MenuType.SETTINGS, null, new ItemStack(Material.IRON_SWORD), "old-pvp");
   }
 
   @Override

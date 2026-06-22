@@ -1,21 +1,25 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class SettingModifierCollectionGoal extends ModifierCollectionGoal {
 
-  public SettingModifierCollectionGoal(int min, int max, @NotNull Object... target) {
-    super(min, max, target);
+  public SettingModifierCollectionGoal(@Nullable SettingCategory category, int min, int max,
+                                       @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey, @NotNull Object... target) {
+    super(category, min, max, displayItemPreset, nameMessageKey, target);
   }
 
-  public SettingModifierCollectionGoal(int min, int max, int defaultValue, @NotNull Object... target) {
-    super(min, max, defaultValue, target);
+  public SettingModifierCollectionGoal(@Nullable SettingCategory category, int min, int max, int defaultValue,
+                                       @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey, @NotNull Object... target) {
+    super(category, min, max, defaultValue, displayItemPreset, nameMessageKey, target);
   }
 
   @Override
@@ -35,17 +39,17 @@ public abstract class SettingModifierCollectionGoal extends ModifierCollectionGo
     setEnabled(false);
   }
 
-  @NotNull
-  @Override
-  public ItemStack getSettingsItem() {
-    return isEnabled() ? super.getSettingsItem() : DefaultItem.disabled().build();
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createSettingsItem() {
-    return DefaultItem.enabled().amount(getValue());
-  }
+//  @NotNull
+//  @Override
+//  public ItemStack getSettingsItem() {
+//    return isEnabled() ? super.getSettingsItem() : DefaultItem.disabled().build();
+//  }
+//
+//  @NotNull
+//  @Override
+//  public LegacyItemBuilder createSettingsItem() {
+//    return DefaultItem.enabled().setAmount(getValue());
+//  }
 
   @Override
   public void handleShutdown() {

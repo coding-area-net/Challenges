@@ -3,10 +3,8 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.ParticleUtils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
@@ -18,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -28,13 +27,7 @@ public class RespawnSetting extends Setting {
   private final Map<Player, Location> locationsBeforeRespawn = new ConcurrentHashMap<>();
 
   public RespawnSetting() {
-    super(MenuType.SETTINGS);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.RED_BED, Message.forName("item-respawn-setting"));
+    super(MenuType.SETTINGS, null, new ItemStack(Material.RED_BED), "respawn");
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

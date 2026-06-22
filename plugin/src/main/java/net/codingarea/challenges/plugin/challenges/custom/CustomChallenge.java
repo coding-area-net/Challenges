@@ -11,6 +11,7 @@ import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.InfoMenuGenerator;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -19,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -37,7 +39,7 @@ public class CustomChallenge extends Setting {
 
   public CustomChallenge(MenuType menuType, UUID uuid, Material displayItem, String displayName, ChallengeTrigger trigger,
                          Map<String, String[]> subTriggers, ChallengeAction action, Map<String, String[]> subActions) {
-    super(menuType);
+    super(menuType, null, null, "custom-challenge");
     this.uuid = uuid;
     this.material = displayItem;
     this.name = displayName;
@@ -49,7 +51,7 @@ public class CustomChallenge extends Setting {
 
   @NotNull
   @Override
-  public ItemStack getDisplayItem() {
+  public ItemBuilder getDisplayItem(@NotNull Locale locale) { // TODO
     String name = this.name;
     if (name == null) {
       name = "NULL";
@@ -60,7 +62,7 @@ public class CustomChallenge extends Setting {
       material = Material.BARRIER;
     }
 
-    ItemBuilder builder = new ItemBuilder(material, Message.forName("item-prefix").asString() + "§7" + name);
+    LegacyItemBuilder builder = new LegacyItemBuilder(material, Message.forName("item-prefix").asString() + "§7" + name);
 
     // ADDING CONDITION INFO
     if (getTrigger() != null) {
@@ -84,13 +86,7 @@ public class CustomChallenge extends Setting {
       builder.appendLore(actionDisplay);
     }
 
-    return builder.build();
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.BARRIER);
+    return new ItemBuilder(locale, builder.build());
   }
 
   @Override
@@ -108,12 +104,6 @@ public class CustomChallenge extends Setting {
     document.set("subTrigger", subTriggers);
     document.set("action", action == null ? null : action.getName());
     document.set("subActions", subActions);
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return super.getSettingsDescription();
   }
 
   public final void onTriggerFulfilled(ChallengeExecutionData challengeExecutionData) {

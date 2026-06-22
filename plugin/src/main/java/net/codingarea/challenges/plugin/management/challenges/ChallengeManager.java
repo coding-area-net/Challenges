@@ -16,10 +16,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
 public final class ChallengeManager {
@@ -173,7 +170,7 @@ public final class ChallengeManager {
   }
 
   public void saveGameStateInto(@NotNull Document config) {
-    LinkedList<GamestateSaveable> list = new LinkedList<>(challenges);
+    List<GamestateSaveable> list = new ArrayList<>(challenges);
     list.addAll(additionalSaver);
     for (GamestateSaveable challenge : list) {
       try {

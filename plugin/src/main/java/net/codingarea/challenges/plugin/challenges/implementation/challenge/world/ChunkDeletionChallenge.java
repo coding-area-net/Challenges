@@ -3,9 +3,8 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.wor
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.common.collection.pair.Tuple;
 import org.bukkit.*;
 import org.bukkit.World.Environment;
@@ -15,9 +14,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 
@@ -26,19 +25,13 @@ public class ChunkDeletionChallenge extends SettingModifier {
   private final HashMap<Chunk, Tuple<BukkitTask, Long>> chunks = new HashMap<>();
 
   public ChunkDeletionChallenge() {
-    super(MenuType.CHALLENGES, 1, 120, 60);
-    setCategory(SettingCategory.WORLD);
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 120, 60, new ItemStack(Material.GOLDEN_PICKAXE), "setting-chunk-deletion-challenge");
   }
 
-  @Override
-  public @NotNull ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.GOLDEN_PICKAXE, Message.forName("item-chunk-deletion-challenge"));
-  }
-
-  @Override
-  protected @Nullable String[] getSettingsDescription() {
-    return Message.forName("item-time-seconds-description").asArray(getValue());
-  }
+//  @Override
+//  protected @Nullable String[] getSettingsDescription() {
+//    return Message.forName("item-time-seconds-description").asArray(getValue());
+//  }
 
   @Override
   protected void onEnable() {

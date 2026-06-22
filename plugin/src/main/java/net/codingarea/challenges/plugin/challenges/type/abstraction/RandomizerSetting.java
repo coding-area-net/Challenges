@@ -1,24 +1,24 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.commons.common.collection.SeededRandomWrapper;
 import net.codingarea.commons.common.config.Document;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class RandomizerSetting extends Setting {
 
   protected IRandom random = IRandom.create();
 
-  public RandomizerSetting(@NotNull MenuType menu) {
-    super(menu);
-    setCategory(SettingCategory.RANDOMIZER);
+  public RandomizerSetting(@NotNull MenuType menu, @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    super(menu, SettingCategory.RANDOMIZER, displayItemPreset, messageNameKey);
   }
 
-  public RandomizerSetting(@NotNull MenuType menu, boolean enabledByDefault) {
-    super(menu, enabledByDefault);
-    setCategory(SettingCategory.RANDOMIZER);
+  public RandomizerSetting(@NotNull MenuType menu, boolean enabledByDefault,
+                           @NotNull ItemStack displayItemPreset, @NotNull String messageNameKey) {
+    super(menu, SettingCategory.RANDOMIZER, enabledByDefault, displayItemPreset, messageNameKey);
   }
 
   protected abstract void reloadRandomization();

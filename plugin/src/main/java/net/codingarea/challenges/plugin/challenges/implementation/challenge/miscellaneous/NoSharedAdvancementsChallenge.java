@@ -3,9 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.mis
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
@@ -14,6 +12,7 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
@@ -26,13 +25,7 @@ public class NoSharedAdvancementsChallenge extends Setting {
   private final List<Advancement> advancementsDone = new LinkedList<>();
 
   public NoSharedAdvancementsChallenge() {
-    super(MenuType.CHALLENGES);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.KNOWLEDGE_BOOK, Message.forName("item-no-shared-advancements-challenge"));
+    super(MenuType.CHALLENGES, null, new ItemStack(Material.KNOWLEDGE_BOOK), "no-shared-advancements");
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

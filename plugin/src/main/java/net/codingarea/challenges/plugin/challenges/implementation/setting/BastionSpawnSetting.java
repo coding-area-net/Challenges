@@ -1,16 +1,14 @@
 package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.NetherPortalSpawnSetting;
+import net.codingarea.challenges.plugin.challenges.type.annotation.RequireVersion;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.management.challenges.annotations.RequireVersion;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Material;
 import org.bukkit.StructureType;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -20,14 +18,9 @@ import java.util.stream.Collectors;
 public class BastionSpawnSetting extends NetherPortalSpawnSetting {
 
   public BastionSpawnSetting() {
-    super(MenuType.SETTINGS, StructureType.BASTION_REMNANT, "unable-to-find-bastion",
+    super(MenuType.SETTINGS, null, StructureType.BASTION_REMNANT, new ItemStack(Material.NETHER_BRICK_STAIRS),
+      "bastion-spawn", "unable-to-find-bastion",
       Arrays.stream(ExperimentalUtils.getMaterials()).filter(material -> material.name().contains("BASALT")).collect(Collectors.toList()));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.POLISHED_BLACKSTONE_BRICKS, Message.forName("item-bastion-spawn-setting"));
   }
 
 }

@@ -1,10 +1,9 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.CollectionGoal;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.Material;
@@ -12,19 +11,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class CollectMostDeathsGoal extends CollectionGoal {
 
   public CollectMostDeathsGoal() {
-    super(DamageCause.values());
-    setCategory(SettingCategory.SCORE_POINTS);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.LAVA_BUCKET, Message.forName("item-most-deaths-goal"));
+    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.LAVA_BUCKET), "most-deaths-goal", DamageCause.values());
   }
 
   @EventHandler
@@ -38,7 +31,7 @@ public class CollectMostDeathsGoal extends CollectionGoal {
     if (cause == DamageCause.CUSTOM) return;
 
     collect(event.getEntity(), cause, () -> {
-      Message.forName("death-collected").send(event.getEntity(), Prefix.CHALLENGES, StringUtils.getEnumName(cause));
+      MessageKey.of("death-collected").send(event.getEntity(), Prefix.CHALLENGES, StringUtils.getEnumName(cause));
       SoundSample.PLING.play(event.getEntity());
     });
   }

@@ -6,12 +6,11 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModif
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
@@ -29,13 +28,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
 
-@Since("2.1.0")
+@Since("2.1")
 public class RaceGoal extends SettingModifierGoal {
 
   protected long seed = IRandom.create().getSeed();
@@ -43,9 +42,19 @@ public class RaceGoal extends SettingModifierGoal {
   private Location goal;
 
   public RaceGoal() {
-    super(MenuType.GOAL, 1, 30, 5);
-    setCategory(SettingCategory.FASTEST_TIME);
+    super(MenuType.GOAL, SettingCategory.FASTEST_TIME, 1, 30, 5, new ItemStack(Material.STRUCTURE_VOID), "race-goal");
   }
+
+  @Override
+  public void playValueChangeTitle() {
+    ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("subtitle-range-blocks").asString(getValue() * 100));
+  }
+
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-range-blocks-description").asArray(getValue() * 100);
+//  }
 
   @Override
   public void getWinnersOnEnd(@NotNull List<Player> winners) {
@@ -81,27 +90,9 @@ public class RaceGoal extends SettingModifierGoal {
   }
 
   @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("subtitle-range-blocks").asString(getValue() * 100));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-range-blocks-description").asArray(getValue() * 100);
-  }
-
-
-  @Override
   protected void onValueChange() {
     reloadGoalLocation();
     bossbar.update();
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.STRUCTURE_VOID, Message.forName("item-race-goal"));
   }
 
   @ScheduledTask(ticks = 20)

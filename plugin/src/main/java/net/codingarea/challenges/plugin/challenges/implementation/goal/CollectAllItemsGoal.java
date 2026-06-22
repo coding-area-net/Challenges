@@ -5,12 +5,12 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
@@ -48,15 +48,10 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
   private Material currentItem;
 
   public CollectAllItemsGoal() {
+    super(null, new ItemStack(Material.GRASS_BLOCK), "collect-all-items-goal");
     random = new SeededRandomWrapper();
     reloadItemsToFind();
     totalItemsCount = itemsToFind.size();
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.GRASS_BLOCK, Message.forName("item-all-items-goal"));
   }
 
   private void reloadItemsToFind() {
@@ -102,17 +97,17 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
   @Override
   public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
     if (!isEnabled()) {
-      Message.forName("challenge-disabled").send(sender, Prefix.CHALLENGES);
+      MessageKey.of("challenge-disabled").send(sender, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.playIfPlayer(sender);
       return;
     }
     if (currentItem == null) {
-      Message.forName("all-items-already-finished").send(sender, Prefix.CHALLENGES);
+      MessageKey.of("all-items-already-finished").send(sender, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.playIfPlayer(sender);
       return;
     }
 
-    Message.forName("all-items-skipped").broadcast(Prefix.CHALLENGES, getItemDisplayName(currentItem));
+    MessageKey.of("all-items-skipped").broadcast(Prefix.CHALLENGES, getItemDisplayName(currentItem));
     SoundSample.PLING.broadcast();
     nextItem();
     bossbar.update();

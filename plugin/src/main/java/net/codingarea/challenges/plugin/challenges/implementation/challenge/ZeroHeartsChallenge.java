@@ -4,11 +4,12 @@ import net.codingarea.challenges.plugin.challenges.implementation.setting.MaxHea
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import org.bukkit.Bukkit;
@@ -20,6 +21,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent.Action;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 public class ZeroHeartsChallenge extends SettingModifier {
 
   public ZeroHeartsChallenge() {
-    super(MenuType.CHALLENGES, 5, 30, 10);
+    super(MenuType.CHALLENGES, null, 5, 30, 10, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE), "zero-hearts-challenge");
   }
 
   @Override
@@ -52,12 +54,6 @@ public class ZeroHeartsChallenge extends SettingModifier {
   protected void onDisable() {
     bossbar.hide();
     AbstractChallenge.getFirstInstance(MaxHealthSetting.class).onValueChange();
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.ENCHANTED_GOLDEN_APPLE, Message.forName("item-zero-hearts-challenge"));
   }
 
   @Override
@@ -100,12 +96,11 @@ public class ZeroHeartsChallenge extends SettingModifier {
   @EventHandler(priority = EventPriority.HIGH)
   public void onEntityPotionEffect(@NotNull EntityPotionEffectEvent event) {
     if (event.getAction() != Action.REMOVED) return;
-    if (!(event.getEntity() instanceof Player)) return;
     if (!shouldExecuteEffect()) return;
-    Player player = (Player) event.getEntity();
+    if (!(event.getEntity() instanceof Player player)) return;
     if (ignorePlayer(player)) return;
-    kill(player);
-    Message.forName("zero-hearts-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(player));
+    ChallengeHelper.kill(player);
+    MessageKey.of("zero-hearts-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(player));
   }
 
 }

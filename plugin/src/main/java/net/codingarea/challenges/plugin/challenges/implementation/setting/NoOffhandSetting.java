@@ -2,9 +2,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -14,13 +12,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class NoOffhandSetting extends Setting {
 
   public NoOffhandSetting() {
-    super(MenuType.SETTINGS);
+    super(MenuType.SETTINGS, null, new ItemStack(Material.SHIELD), "no-offhand-setting");
   }
 
   @Override
@@ -32,12 +29,6 @@ public class NoOffhandSetting extends Setting {
       player.getInventory().setItemInOffHand(null);
       player.updateInventory();
     }
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.SHIELD, Message.forName("item-no-offhand-setting"));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

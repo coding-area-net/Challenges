@@ -3,13 +3,14 @@ package net.codingarea.challenges.plugin.management.server;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IGoal;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.commons.common.config.Document;
+import net.codingarea.commons.common.misc.ReflectionUtils;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -21,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 public final class ServerManager {
@@ -29,7 +31,7 @@ public final class ServerManager {
   private final boolean dropItemsOnEnd;
   private final boolean winSounds;
 
-  private boolean isFresh; // This indicated if the timer was never started before
+  private boolean isFresh; // indicates if the timer was never started before
   private boolean hasCheated;
 
   public ServerManager() {
@@ -62,8 +64,19 @@ public final class ServerManager {
   }
 
   public void endChallenge(@NotNull ChallengeEndCause endCause, Supplier<List<Player>> winnerGetter) {
+//    if (!Bukkit.isPrimaryThread()) { // TODO
+//      // calling end challenge logic async results in all kinds of issues as bukkit/paper does not allow certain actions
+//      // to be performed async (in some versions): PlayerGameModeChangeEvent may only be triggered synchronously
+//      Logger.debug("End challenge called from async thread, scheduling sync task (Caller: {}", ReflectionUtils.getCallerName(1));
+//      Bukkit.getScheduler().callSyncMethod(Challenges.getInstance(), (Callable<Void>) () -> {
+//        endChallenge(endCause, winnerGetter);
+//        return null;
+//      });
+//      return;
+//    }
+
     if (ChallengeAPI.isPaused()) {
-      Logger.warn("Tried to end challenge while timer was paused");
+      Logger.warn("{} tried to end challenge while timer was paused", ReflectionUtils.getCallerName(1));
       return;
     }
 

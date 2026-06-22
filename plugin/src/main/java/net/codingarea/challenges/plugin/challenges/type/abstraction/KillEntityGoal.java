@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import lombok.Setter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import org.bukkit.World.Environment;
 import org.bukkit.entity.EntityType;
@@ -10,7 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -23,20 +26,24 @@ public abstract class KillEntityGoal extends SettingGoal {
   protected boolean killerNeeded = false;
   protected Player winner;
 
-  public KillEntityGoal(@NotNull EntityType entity) {
-    this(entity, false);
+  public KillEntityGoal(@Nullable SettingCategory category, @NotNull EntityType entity,
+                        @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    this(category, entity, false, displayItemPreset, nameMessageKey);
   }
 
-  public KillEntityGoal(@NotNull EntityType entity, boolean enabledByDefault) {
-    this(entity, null, enabledByDefault);
+  public KillEntityGoal(@Nullable SettingCategory category, @NotNull EntityType entity, boolean enabledByDefault,
+                        @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    this(category, entity, null, enabledByDefault, displayItemPreset, nameMessageKey);
   }
 
-  public KillEntityGoal(EntityType entity, Environment world) {
-    this(entity, world, false);
+  public KillEntityGoal(@Nullable SettingCategory category, @NotNull EntityType entity, @Nullable Environment world,
+                        @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    this(category, entity, world, false, displayItemPreset, nameMessageKey);
   }
 
-  public KillEntityGoal(EntityType entity, Environment world, boolean enabledByDefault) {
-    super(enabledByDefault);
+  public KillEntityGoal(@Nullable SettingCategory category, @NotNull EntityType entity, @Nullable Environment world, boolean enabledByDefault,
+                        @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(category, enabledByDefault, displayItemPreset, nameMessageKey);
     this.entity = entity;
     this.environment = world;
   }

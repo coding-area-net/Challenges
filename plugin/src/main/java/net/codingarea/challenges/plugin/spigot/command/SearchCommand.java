@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.blocks.BlockDropManager.RegisteredDrops;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
@@ -28,7 +28,7 @@ public class SearchCommand implements SenderCommand, Completer {
   public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 
     if (args.length == 0) {
-      Message.forName("syntax").send(sender, Prefix.CHALLENGES, "search <item>");
+      MessageKey.of("syntax").send(sender, Prefix.CHALLENGES, "search <item>");
       return;
     }
 
@@ -36,11 +36,11 @@ public class SearchCommand implements SenderCommand, Completer {
     Material material = Utils.getMaterial(input);
 
     if (material == null) {
-      Message.forName("no-such-material").send(sender, Prefix.CHALLENGES);
+      MessageKey.of("no-such-material").send(sender, Prefix.CHALLENGES);
       return;
     }
     if (!material.isItem()) {
-      Message.forName("not-an-item").send(sender, Prefix.CHALLENGES, material);
+      MessageKey.of("not-an-item").send(sender, Prefix.CHALLENGES, material);
       return;
     }
 
@@ -54,9 +54,9 @@ public class SearchCommand implements SenderCommand, Completer {
     }
 
     if (blocks.isEmpty()) {
-      Message.forName("command-search-nothing").send(sender, Prefix.CHALLENGES, material);
+      MessageKey.of("command-search-nothing").send(sender, Prefix.CHALLENGES, material);
     } else {
-      Message.forName("command-search-result").send(sender, Prefix.CHALLENGES, material, StringUtils.getIterableAsString(blocks, ", ", StringUtils::getEnumName));
+      MessageKey.of("command-search-result").send(sender, Prefix.CHALLENGES, material, StringUtils.getIterableAsString(blocks, ", ", StringUtils::getEnumName));
     }
   }
 

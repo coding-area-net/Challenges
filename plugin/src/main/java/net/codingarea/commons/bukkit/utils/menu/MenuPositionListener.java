@@ -16,8 +16,7 @@ public final class MenuPositionListener implements Listener {
   public void onClick(@NotNull InventoryClickEvent event) {
 
     HumanEntity human = event.getWhoClicked();
-    if (!(human instanceof Player)) return;
-    Player player = (Player) human;
+    if (!(human instanceof Player player)) return;
 
     Inventory inventory = event.getClickedInventory();
     if (inventory == null) return;

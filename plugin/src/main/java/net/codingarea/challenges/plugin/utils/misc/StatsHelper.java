@@ -2,7 +2,7 @@ package net.codingarea.challenges.plugin.utils.misc;
 
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.stats.Statistic;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.AnimatedInventory;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
@@ -22,13 +22,13 @@ public final class StatsHelper {
   }
 
   public static void setAccent(@NotNull AnimatedInventory inventory, int row) {
-    inventory.createAndAdd().fill(ItemBuilder.FILL_ITEM);
+    inventory.createAndAdd().fill(LegacyItemBuilder.FILL_ITEM);
     int offset = row * 9;
-    inventory.cloneLastAndAdd().setAccent(offset, offset + 8);
-    inventory.cloneLastAndAdd().setAccent(offset + 1, offset + 7);
-    inventory.cloneLastAndAdd().setAccent(offset + 10, offset + 16);
-    inventory.cloneLastAndAdd().setAccent(offset + 11, offset + 15);
-    inventory.cloneLastAndAdd().setAccent(offset + 12, offset + 14);
+    inventory.cloneLastAndAdd().setContrast(offset, offset + 8);
+    inventory.cloneLastAndAdd().setContrast(offset + 1, offset + 7);
+    inventory.cloneLastAndAdd().setContrast(offset + 10, offset + 16);
+    inventory.cloneLastAndAdd().setContrast(offset + 11, offset + 15);
+    inventory.cloneLastAndAdd().setContrast(offset + 12, offset + 14);
   }
 
   @NotNull

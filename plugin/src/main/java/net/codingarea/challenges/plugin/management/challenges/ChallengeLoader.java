@@ -18,7 +18,7 @@ import net.codingarea.challenges.plugin.challenges.implementation.challenge.worl
 import net.codingarea.challenges.plugin.challenges.implementation.goal.*;
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.*;
 import net.codingarea.challenges.plugin.challenges.implementation.setting.*;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder.PotionBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder.PotionBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ArmorUtils;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Material;

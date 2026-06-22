@@ -2,14 +2,15 @@ package net.codingarea.challenges.plugin.spigot.command;
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.cloud.CloudSupportManager;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.stats.PlayerStats;
 import net.codingarea.challenges.plugin.management.stats.Statistic;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder.SkullBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder.SkullBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.challenges.plugin.utils.misc.StatsHelper;
 import net.codingarea.commons.bukkit.utils.animation.AnimatedInventory;
@@ -32,17 +33,17 @@ public class LeaderboardCommand implements PlayerCommand {
 
   static {
     loadingInventory = new AnimatedInventory(InventoryTitleManager.getLeaderboardTitle(), 6 * 9, MenuPosition.HOLDER).setEndSound(null).setFrameSound(null);
-    loadingInventory.createAndAdd().fill(ItemBuilder.FILL_ITEM).setItem(31, new ItemBuilder(Material.BARRIER, "§8» §cLoading.."));
+    loadingInventory.createAndAdd().fill(LegacyItemBuilder.FILL_ITEM).setItem(31, new LegacyItemBuilder(Material.BARRIER, "§8» §cLoading.."));
   }
 
   @Override
   public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
     if (!Challenges.getInstance().getStatsManager().isEnabled()) {
-      Message.forName("feature-disabled").send(player, Prefix.CHALLENGES);
+      MessageKey.of("feature-disabled").send(player, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.play(player);
       return;
     } else if (!Challenges.getInstance().getStatsManager().hasDatabaseConnection()) {
-      Message.forName("no-database-connection").send(player, Prefix.CHALLENGES);
+      MessageKey.of("no-database-connection").send(player, Prefix.CHALLENGES);
       SoundSample.BASS_OFF.play(player);
       return;
     }
@@ -58,7 +59,7 @@ public class LeaderboardCommand implements PlayerCommand {
     SlottedMenuPosition position = new SlottedMenuPosition();
     for (int i = 0; i < Statistic.values().length; i++) {
       Statistic statistic = Statistic.values()[i];
-      ItemBuilder item = new ItemBuilder(StatsHelper.getMaterial(statistic), "§8» " + StatsHelper.getNameMessage(statistic).asString());
+      LegacyItemBuilder item = new LegacyItemBuilder(StatsHelper.getMaterial(statistic), "§8» " + StatsHelper.getNameMessage(statistic).asString());
       inventory.cloneLastAndAdd().setItem(slots[i], item.hideAttributes());
       position.setAction(slots[i], () -> openMenu(player, statistic, 0, false));
     }
@@ -84,7 +85,7 @@ public class LeaderboardCommand implements PlayerCommand {
 
     String statisticName = StatsHelper.getNameMessage(statistic).asString();
     AnimatedInventory inventory = new AnimatedInventory(InventoryTitleManager.getLeaderboardTitle(ChatColor.stripColor(statisticName), page + 1), 6 * 9, MenuPosition.HOLDER);
-    inventory.createAndAdd().fill(ItemBuilder.FILL_ITEM);
+    inventory.createAndAdd().fill(LegacyItemBuilder.FILL_ITEM);
 
     List<PlayerStats> leaderboard = Challenges.getInstance().getStatsManager().getLeaderboard(statistic);
     int pages = leaderboard.size() / slots.length;
@@ -99,7 +100,7 @@ public class LeaderboardCommand implements PlayerCommand {
       int slot = slots[i - offset];
       PlayerStats stats = leaderboard.get(i);
       String coloredName = cloudSupport.isNameSupport() && cloudSupport.hasNameFor(stats.getPlayerUUID()) ? cloudSupport.getColoredName(stats.getPlayerUUID()) : stats.getPlayerName();
-      ItemBuilder item = new SkullBuilder().setOwner(stats.getPlayerUUID(), stats.getPlayerName())
+      LegacyItemBuilder item = new SkullBuilder().setOwner(stats.getPlayerUUID(), stats.getPlayerName())
         .setName(Message.forName("stats-leaderboard-display")
           .asArray(coloredName, statistic.formatChat(stats.getStatisticValue(statistic)), statisticName, i + 1));
       inventory.cloneLastAndAdd().setItem(slot, item.hideAttributes());

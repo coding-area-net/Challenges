@@ -5,10 +5,11 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeConfigHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.ParticleUtils;
@@ -22,6 +23,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,7 +36,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
   private final boolean particleLines;
 
   public PositionSetting() {
-    super(MenuType.SETTINGS, true);
+    super(MenuType.SETTINGS, null, true, new ItemStack(Material.BLUE_BANNER), "position-setting");
     particleLines = ChallengeConfigHelper.getSettingsDocument().getBoolean("position-particle-lines");
     Challenges.getInstance().registerCommand(new DelPosCommand(), "delposition");
     Challenges.getInstance().registerCommand(new SetPosCommand(), "setposition");
@@ -42,34 +44,28 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
 
   public static Environment getWorldEnvironment(@NotNull String name) {
     switch (name.toLowerCase()) {
-      default:
-        return null;
       case "overworld":
         return Environment.NORMAL;
       case "nether":
         return Environment.NETHER;
       case "end":
         return Environment.THE_END;
+      default:
+        return null;
     }
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.BLUE_BANNER, Message.forName("item-position-setting"));
   }
 
   @Override
   public void onCommand(@NotNull Player player, @NotNull String[] args) {
     if (!isEnabled()) {
-      Message.forName("positions-disabled").send(player, Prefix.POSITION);
+      MessageKey.of("positions-disabled").send(player, Prefix.POSITION);
       SoundSample.BASS_OFF.play(player);
       return;
     }
 
     if (args.length == 0) {
       if (positions.entrySet().stream().noneMatch(entry -> player.getWorld() == entry.getValue().getWorld())) {
-        Message.forName("no-positions").send(player, Prefix.POSITION, "position <name>");
+        MessageKey.of("no-positions").send(player, Prefix.POSITION, "position <name>");
         return;
       }
 
@@ -79,21 +75,21 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
         .forEach(entry -> {
 
           Location location = entry.getValue();
-          Message.forName("position").send(player, Prefix.POSITION, location.getBlockX(), location.getBlockY(), location.getBlockZ(), getWorldName(location), entry.getKey(), (int) location.distance(player.getLocation()));
+          MessageKey.of("position").send(player, Prefix.POSITION, location.getBlockX(), location.getBlockY(), location.getBlockZ(), getWorldName(location), entry.getKey(), (int) location.distance(player.getLocation()));
         });
     } else if (args.length == 1) {
       String name = args[0].toLowerCase();
       Location position = positions.get(name);
       if (position != null) {
         if (position.getWorld() != player.getLocation().getWorld()) {
-          Message.forName("position-other-world").send(player, Prefix.POSITION, getWorldName(position));
+          MessageKey.of("position-other-world").send(player, Prefix.POSITION, getWorldName(position));
           SoundSample.BASS_OFF.play(player);
           return;
         }
-        Message.forName("position").send(player, Prefix.POSITION, position.getBlockX(), position.getBlockY(), position.getBlockZ(), getWorldName(position), name, (int) position.distance(player.getLocation()));
+        MessageKey.of("position").send(player, Prefix.POSITION, position.getBlockX(), position.getBlockY(), position.getBlockZ(), getWorldName(position), name, (int) position.distance(player.getLocation()));
         playParticleLine(player, position);
       } else if (ChallengeAPI.isPaused()) {
-        Message.forName("timer-not-started").send(player, Prefix.POSITION);
+        MessageKey.of("timer-not-started").send(player, Prefix.POSITION);
         SoundSample.BASS_OFF.play(player);
       } else {
         positions.put(name, position = player.getLocation());
@@ -103,7 +99,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
       }
 
     } else {
-      Message.forName("syntax").send(player, Prefix.POSITION, "position [name]");
+      MessageKey.of("syntax").send(player, Prefix.POSITION, "position [name]");
     }
   }
 
@@ -117,12 +113,12 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
   public String getWorldName(@NotNull Location location) {
     if (location.getWorld() == null) return "?";
     switch (location.getWorld().getEnvironment()) {
-      default:
-        return "Overworld";
       case NETHER:
         return "Nether";
       case THE_END:
         return "End";
+      default:
+        return "Overworld";
     }
   }
 
@@ -171,19 +167,19 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
     @Override
     public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
       if (!isEnabled()) {
-        Message.forName("positions-disabled").send(player, Prefix.POSITION);
+        MessageKey.of("positions-disabled").send(player, Prefix.POSITION);
         SoundSample.BASS_OFF.play(player);
         return;
       }
       if (!ChallengeAPI.isStarted()) {
-        Message.forName("timer-not-started").send(player, Prefix.POSITION);
+        MessageKey.of("timer-not-started").send(player, Prefix.POSITION);
         SoundSample.BASS_OFF.play(player);
         return;
       }
 
       if (args.length == 0) {
         if (positions.isEmpty()) {
-          Message.forName("no-positions-global").send(player, Prefix.POSITION, "position <name>");
+          MessageKey.of("no-positions-global").send(player, Prefix.POSITION, "position <name>");
           return;
         }
 
@@ -191,22 +187,22 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
           .sorted(Comparator.<Entry<String, Location>>comparingDouble(entry -> entry.getValue().distance(player.getLocation())).reversed())
           .forEach(entry -> {
             Location location = entry.getValue();
-            Message.forName("position").send(player, Prefix.POSITION, location.getBlockX(), location.getBlockY(), location.getBlockZ(), getWorldName(location), entry.getKey(), (int) location.distance(player.getLocation()));
+            MessageKey.of("position").send(player, Prefix.POSITION, location.getBlockX(), location.getBlockY(), location.getBlockZ(), getWorldName(location), entry.getKey(), (int) location.distance(player.getLocation()));
           });
       } else if (args.length == 1) {
         String name = args[0].toLowerCase();
         Location position = positions.get(name);
         if (position != null) {
           positions.remove(name);
-          Message.forName("position-deleted").broadcast(Prefix.POSITION,
+          MessageKey.of("position-deleted").broadcast(Prefix.POSITION,
             position.getBlockX(), position.getBlockY(), position.getBlockZ(),
             getWorldName(position), name, NameHelper.getName(player));
         } else {
-          Message.forName("position-not-exists").send(player, Prefix.POSITION);
+          MessageKey.of("position-not-exists").send(player, Prefix.POSITION);
         }
 
       } else {
-        Message.forName("syntax").send(player, Prefix.POSITION, "delposition <name>");
+        MessageKey.of("syntax").send(player, Prefix.POSITION, "delposition <name>");
       }
 
     }
@@ -225,25 +221,25 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
     @Override
     public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
       if (!isEnabled()) {
-        Message.forName("positions-disabled").send(player, Prefix.POSITION);
+        MessageKey.of("positions-disabled").send(player, Prefix.POSITION);
         SoundSample.BASS_OFF.play(player);
         return;
       }
       if (!ChallengeAPI.isStarted()) {
-        Message.forName("timer-not-started").send(player, Prefix.POSITION);
+        MessageKey.of("timer-not-started").send(player, Prefix.POSITION);
         SoundSample.BASS_OFF.play(player);
         return;
       }
 
       if (args.length < 5) {
-        Message.forName("syntax").send(player, Prefix.POSITION, "setposition <name> <world> <x> <y> <z>");
+        MessageKey.of("syntax").send(player, Prefix.POSITION, "setposition <name> <world> <x> <y> <z>");
         return;
       }
 
       String name = args[0].toLowerCase();
 
       if (positions.containsKey(name)) {
-        Message.forName("position-already-exists").send(player, Prefix.POSITION, name);
+        MessageKey.of("position-already-exists").send(player, Prefix.POSITION, name);
         return;
       }
 
@@ -262,14 +258,14 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
 
         Location position = new Location(world, doubleX, doubleY, doubleZ);
         positions.put(name, position);
-        Message.forName("position-set")
+        MessageKey.of("position-set")
           .broadcast(Prefix.POSITION, position.getBlockX(), position.getBlockY(),
             position.getBlockZ(), getWorldName(position), name, NameHelper.getName(player));
         SoundSample.BASS_ON.play(player);
         broadcastParticleLine(position);
 
       } catch (Exception exception) {
-        Message.forName("syntax").send(player, Prefix.POSITION, "setposition <name> <world> <x> <y> <z>");
+        MessageKey.of("syntax").send(player, Prefix.POSITION, "setposition <name> <world> <x> <y> <z>");
       }
 
     }

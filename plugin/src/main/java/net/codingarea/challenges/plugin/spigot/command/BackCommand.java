@@ -5,7 +5,8 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.implementation.setting.PregameMovementSetting;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -39,7 +40,7 @@ public class BackCommand implements PlayerCommand, TabCompleter, Listener {
         count = Integer.parseInt(args[0]);
       }
     } catch (NumberFormatException formatException) {
-      Message.forName("syntax").send(player, Prefix.CHALLENGES, "back [count]");
+      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "back [count]");
       return;
     }
 
@@ -48,7 +49,7 @@ public class BackCommand implements PlayerCommand, TabCompleter, Listener {
     int savedCount = list.size();
 
     if (savedCount == 0) {
-      Message.forName("command-back-no-locations").send(player, Prefix.CHALLENGES);
+      MessageKey.of("command-back-no-locations").send(player, Prefix.CHALLENGES);
       return;
     }
 

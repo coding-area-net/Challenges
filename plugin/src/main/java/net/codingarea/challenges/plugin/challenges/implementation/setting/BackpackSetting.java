@@ -6,13 +6,14 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModif
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeConfigHelper;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.challenges.plugin.utils.bukkit.container.BukkitSerialization;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
@@ -29,32 +30,31 @@ import java.util.UUID;
 
 public class BackpackSetting extends SettingModifier implements PlayerCommand {
 
-  public static final int SHARED = 1,
-    PLAYER = 2;
+  public static final int SHARED = 1, PLAYER = 2;
 
   private final int size;
   private final Map<UUID, Inventory> backpacks = new HashMap<>();
   private final Inventory sharedBackpack;
 
   public BackpackSetting() {
-    super(MenuType.SETTINGS, 1, 2, SHARED);
-    size = Math.max(Math.min(ChallengeConfigHelper.getSettingsDocument().getInt("backpack-size") * 9, 6 * 9), 9);
+    super(MenuType.SETTINGS, null, 1, 2, SHARED, new ItemStack(Material.CHEST), "backpack-setting");
+    size = Math.clamp(ChallengeConfigHelper.getSettingsDocument().getInt("backpack-size") * 9L, 9, 6 * 9);
     sharedBackpack = createInventory("§5Team Backpack");
   }
 
   @NotNull
   @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.CHEST, Message.forName("item-backpack-setting"));
+  public ItemStack getSettingsItemPreset() {
+    return super.getSettingsItemPreset();
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createSettingsItem() {
-    if (getValue() == SHARED)
-      return DefaultItem.create(Material.ENDER_CHEST, Message.forName("item-backpack-setting-team"));
-    return DefaultItem.create(Material.PLAYER_HEAD, Message.forName("item-backpack-setting-player"));
-  }
+//  @NotNull
+//  @Override
+//  public LegacyItemBuilder createSettingsItem() {
+//    if (getValue() == SHARED)
+//      return DefaultItem.create(Material.ENDER_CHEST, Message.forName("item-backpack-setting-team"));
+//    return DefaultItem.create(Material.PLAYER_HEAD, Message.forName("item-backpack-setting-player"));
+//  }
 
 
   @Override
@@ -74,23 +74,23 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
   @Override
   public void onCommand(@NotNull Player player, @NotNull String[] args) {
     if (ChallengeAPI.isPaused()) {
-      Message.forName("timer-not-started").send(player, Prefix.BACKPACK);
+      MessageKey.of("timer-not-started").send(player, Prefix.BACKPACK);
       SoundSample.BASS_OFF.play(player);
       return;
     }
 
     if (!isEnabled()) {
-      Message.forName("backpacks-disabled").send(player, Prefix.BACKPACK);
+      MessageKey.of("backpacks-disabled").send(player, Prefix.BACKPACK);
       SoundSample.BASS_OFF.play(player);
       return;
     }
 
     if (getValue() == SHARED || getValue() == PLAYER) {
-      Message.forName("backpack-opened").send(player, Prefix.BACKPACK, getValue() == SHARED ? "§5Team Backpack" : "§6Player Backpack");
+      MessageKey.of("backpack-opened").send(player, Prefix.BACKPACK, getValue() == SHARED ? "§5Team Backpack" : "§6Player Backpack");
       player.openInventory(getCurrentBackpack(player));
       SoundSample.OPEN.play(player);
     } else {
-      Message.forName("backpacks-disabled").send(player, Prefix.BACKPACK);
+      MessageKey.of("backpacks-disabled").send(player, Prefix.BACKPACK);
       SoundSample.BASS_OFF.play(player);
     }
   }

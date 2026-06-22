@@ -3,17 +3,18 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ext
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.WorldDependentChallenge;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Updated;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.policy.ExtraWorldPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.challenges.plugin.utils.bukkit.jumpgeneration.RandomJumpGenerator;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
@@ -27,6 +28,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,6 +37,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Updated("2.4")
 public class JumpAndRunChallenge extends WorldDependentChallenge {
 
   private final List<UUID> lastPlayers = new ArrayList<>();
@@ -49,20 +52,12 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
   private UUID currentPlayer;
 
   public JumpAndRunChallenge() {
-    super(MenuType.CHALLENGES, 1, 10, 5, false);
-    setCategory(SettingCategory.EXTRA_WORLD);
+    super(MenuType.CHALLENGES, 1, 10, 5, new ItemStack(Material.ACACIA_STAIRS), "item-jump-and-run-challenge");
   }
 
-  @NotNull
   @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.ACACIA_STAIRS, Message.forName("item-jump-and-run-challenge"));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-time-seconds-range-description").asArray(getValue() * 60 - 30, getValue() * 60 + 30);
+  public LocalizableMessage getSettingsDescription() {
+    return MessageKey.of("item-time-seconds-range-description").withArgs(getValue() * 60 - 30, getValue() * 60 + 30);
   }
 
   @Override
@@ -79,14 +74,14 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
   @Override
   protected void handleCountdown() {
     switch (getSecondsLeftUntilNextActivation()) {
-      case 1:
-        Message.forName("jnr-countdown-one").broadcast(Prefix.CHALLENGES);
+      case 5:
+      case 3:
+      case 2:
+        MessageKey.of("jnr-countdown").broadcast(Prefix.CHALLENGES, getSecondsLeftUntilNextActivation());
         SoundSample.BASS_OFF.broadcast();
         break;
-      case 2:
-      case 3:
-      case 5:
-        Message.forName("jnr-countdown").broadcast(Prefix.CHALLENGES, getSecondsLeftUntilNextActivation());
+      case 1:
+        MessageKey.of("jnr-countdown-one").broadcast(Prefix.CHALLENGES);
         SoundSample.BASS_OFF.broadcast();
         break;
     }
@@ -122,7 +117,6 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
   }
 
   protected void buildNextJump() {
-
     if (lastBlock != null) lastBlock.setType(Material.AIR);
 
     lastBlock = targetBlock != null ? targetBlock : getExtraWorld().getBlockAt(0, 100, 0);
@@ -131,7 +125,6 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
     Material type = getRandomBlockType();
     targetBlock = new RandomJumpGenerator().next(globalRandom, lastBlock, type == Material.CYAN_TERRACOTTA || type == Material.EMERALD_BLOCK, type != Material.COBBLESTONE_WALL && type != Material.SPRUCE_FENCE);
     targetBlock.setType(type);
-
   }
 
   @NotNull
@@ -163,11 +156,11 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
     return globalRandom.choose(players);
   }
 
-  protected void finishJumpAndRun() {
+  protected void finishJumpAndRun(@NotNull Player player) {
     jumps++;
     jumpsDone++;
 
-    Message.forName("jnr-finished").broadcast(Prefix.CHALLENGES, Optional.ofNullable(currentPlayer).map(Bukkit::getPlayer).map(NameHelper::getName).orElse("?"));
+    MessageKey.of("jnr-finished").broadcast(Prefix.CHALLENGES, player);
     exitJumpAndRun();
     SoundSample.KLING.broadcast();
   }
@@ -217,7 +210,7 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
 
     if (BlockUtils.isSameBlockLocation(event.getTo(), targetBlock.getLocation().add(0, 1, 0))) {
       if (++currentJump >= jumps) {
-        finishJumpAndRun();
+        finishJumpAndRun(event.getPlayer()); // is currentPlayer
       } else {
         SoundSample.PLOP.broadcast();
         buildNextJump();

@@ -2,11 +2,9 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.inv
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.misc.CompatibilityUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,20 +13,14 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 @Since("2.0")
 public class PermanentItemChallenge extends Setting {
 
   public PermanentItemChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.INVENTORY);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.VINE, Message.forName("item-permanent-item-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.INVENTORY, new ItemStack(Material.VINE), "permanent-item-challenge");
   }
 
   @EventHandler(priority = EventPriority.HIGH)

@@ -1,8 +1,8 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
@@ -20,7 +20,7 @@ public class ChallengesCommand implements PlayerCommand, Completer {
   @Override
   public void onCommand(@NotNull Player player, @NotNull String[] args) {
     if (args.length > 1) {
-      Message.forName("syntax").send(player, Prefix.CHALLENGES, "challenges [menu]");
+      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "challenges [menu]");
       return;
     }
 
@@ -30,12 +30,12 @@ public class ChallengesCommand implements PlayerCommand, Completer {
         MenuType menuType = MenuType.valueOf(menuName);
         Challenges.getInstance().getMenuManager().openMenu(player, menuType, 0);
       } catch (IllegalArgumentException exception) {
-        Challenges.getInstance().getMenuManager().openGUI(player);
+        Challenges.getInstance().getMenuManager().openMainMenu(player);
       }
       return;
     }
 
-    Challenges.getInstance().getMenuManager().openGUI(player);
+    Challenges.getInstance().getMenuManager().openMainMenu(player);
 
   }
 

@@ -3,29 +3,24 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.PointsGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 @Since("2.1.1")
 public class MostOresGoal extends PointsGoal {
 
   public MostOresGoal() {
-    super();
-    setCategory(SettingCategory.SCORE_POINTS);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.COAL_ORE, Message.forName("item-most-ores-goal"));
+    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.COAL_ORE), "most-ores-goal");
   }
 
   private int getPointsForOre(Material material) {
@@ -61,7 +56,7 @@ public class MostOresGoal extends PointsGoal {
     if (ignorePlayer(event.getPlayer())) return;
     int points = getPointsForOre(event.getBlock().getType());
     if (points > 0) {
-      Message.forName("points-change").send(event.getPlayer(), Prefix.CHALLENGES, "+" + points);
+      MessageKey.of("points-change").send(event.getPlayer(), Prefix.CHALLENGES, "+" + points);
       SoundSample.PLING.play(event.getPlayer());
       addPoints(event.getPlayer().getUniqueId(), points);
     }
@@ -74,7 +69,7 @@ public class MostOresGoal extends PointsGoal {
     int points = getPointsForOre(event.getBlock().getType());
     if (points > 0) {
       SoundSample.BASS_OFF.play(event.getPlayer());
-      Message.forName("points-change").send(event.getPlayer(), Prefix.CHALLENGES, "-" + points);
+      MessageKey.of("points-change").send(event.getPlayer(), Prefix.CHALLENGES, "-" + points);
       removePoints(event.getPlayer().getUniqueId(), points);
     }
   }

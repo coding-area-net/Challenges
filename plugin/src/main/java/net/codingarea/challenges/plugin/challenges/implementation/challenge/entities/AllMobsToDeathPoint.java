@@ -2,15 +2,14 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ent
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.EntityDeathByPlayerEvent;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -19,8 +18,7 @@ import java.util.Collection;
 public class AllMobsToDeathPoint extends Setting {
 
   public AllMobsToDeathPoint() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.ENTITIES);
+    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.SPAWNER), "all-mobs-to-deaht-position");
   }
 
   @EventHandler
@@ -41,13 +39,6 @@ public class AllMobsToDeathPoint extends Setting {
       ((LivingEntity) entity).setNoDamageTicks(20);
       entity.teleport(location);
     }
-
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.SPAWNER, Message.forName("item-all-mobs-to-death-position-challenge"));
   }
 
 }

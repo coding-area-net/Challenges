@@ -4,7 +4,6 @@ import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebatt
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleDisplayGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -13,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -22,7 +22,8 @@ import java.util.stream.Collectors;
 public class ForceMobBattleGoal extends ForceBattleDisplayGoal<MobTarget> {
 
   public ForceMobBattleGoal() {
-    super(Message.forName("menu-force-mob-battle-goal-settings"));
+//    super(Message.forName("menu-force-mob-battle-goal-settings"));
+    super(new ItemStack(Material.BOW), "force-mob-battle-goal");
   }
 
   @Override
@@ -34,12 +35,6 @@ public class ForceMobBattleGoal extends ForceBattleDisplayGoal<MobTarget> {
   @Override
   protected Message getLeaderboardTitleMessage() {
     return Message.forName("force-mob-battle-leaderboard");
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.BOW, Message.forName("item-force-mob-battle-goal"));
   }
 
   @Override

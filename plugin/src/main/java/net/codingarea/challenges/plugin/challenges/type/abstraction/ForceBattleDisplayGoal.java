@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -23,8 +24,8 @@ public abstract class ForceBattleDisplayGoal<T extends ForceTarget<?>> extends F
 
   private Map<Player, ArmorStand> displayStands;
 
-  public ForceBattleDisplayGoal(@NotNull Message title) {
-    super(title);
+  public ForceBattleDisplayGoal(@NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(displayItemPreset, nameMessageKey);
   }
 
   @Override

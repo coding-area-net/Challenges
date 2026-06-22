@@ -5,8 +5,6 @@ import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -14,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -24,24 +23,18 @@ public class DamageTeleportChallenge extends SettingModifier {
   private static final int PLAYER = 1, EVERYONE = 2;
 
   public DamageTeleportChallenge() {
-    super(MenuType.CHALLENGES, 1, 2);
+    super(MenuType.CHALLENGES, null, 1, 2, new ItemStack(Material.SHULKER_SHELL), "item-damage-teleport-challenge");
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.SHULKER_SHELL, Message.forName("item-damage-teleport-challenge"));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createSettingsItem() {
-    if (getValue() == 1) {
-      return DefaultItem.create(Material.ENDER_CHEST, Message.forName("everyone"));
-    } else {
-      return DefaultItem.create(Material.PLAYER_HEAD, Message.forName("player"));
-    }
-  }
+//  @NotNull
+//  @Override
+//  public LegacyItemBuilder createSettingsItem() {
+//    if (getValue() == 1) {
+//      return DefaultItem.create(Material.ENDER_CHEST, Message.forName("everyone"));
+//    } else {
+//      return DefaultItem.create(Material.PLAYER_HEAD, Message.forName("player"));
+//    }
+//  }
 
   @Override
   public void playValueChangeTitle() {

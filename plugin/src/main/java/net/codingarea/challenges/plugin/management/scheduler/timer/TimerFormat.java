@@ -5,6 +5,8 @@ import org.jetbrains.annotations.NotNull;
 
 public final class TimerFormat {
 
+  public static final TimerFormat SIMPLE_FORMAT = new TimerFormat();
+
   private final String seconds, minutes, hours, day, days;
 
   public TimerFormat(@NotNull Document document) {

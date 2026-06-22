@@ -1,7 +1,8 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
@@ -31,7 +32,7 @@ public class TimeCommand implements PlayerCommand, Completer {
   public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
 
     if (args.length == 0) {
-      Message.forName("syntax").send(player, Prefix.CHALLENGES, "time <set/add/remove/query/day/night/noon/midnight>");
+      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "time <set/add/remove/query/day/night/noon/midnight>");
       return;
     }
     World world = player.getWorld();
@@ -51,32 +52,32 @@ public class TimeCommand implements PlayerCommand, Completer {
         break;
       case "set": {
         if (args.length == 1) {
-          Message.forName("syntax").send(player, Prefix.CHALLENGES, "time set <ticks/day/night/noon/midnight>");
+          MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "time set <ticks/day/night/noon/midnight>");
           break;
         }
         long time = getTime(args[1]);
         if (time < 0) {
-          Message.forName("syntax").send(player, Prefix.CHALLENGES, "time set <ticks/day/night/noon/midnight>");
+          MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "time set <ticks/day/night/noon/midnight>");
           break;
         }
         world.setTime(time);
         if (names.containsKey(time)) {
           String timeName = names.get(time).toLowerCase();
           String timeTranslation = Message.forName("command-time-" + timeName).asString();
-          Message.forName("command-time-set-exact").send(player, Prefix.CHALLENGES, timeTranslation, time);
+          MessageKey.of("command-time-set-exact").send(player, Prefix.CHALLENGES, timeTranslation, time);
         } else {
-          Message.forName("command-time-set").send(player, Prefix.CHALLENGES, time, getNearestTime(world));
+          MessageKey.of("command-time-set").send(player, Prefix.CHALLENGES, time, getNearestTime(world));
         }
         break;
       }
       case "add": {
         if (args.length == 1) {
-          Message.forName("syntax").send(player, Prefix.CHALLENGES, "time add <ticks>");
+          MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "time add <ticks>");
           break;
         }
         long time = getLongFromString(args[1]);
         if (time < 0) {
-          Message.forName("syntax").send(player, Prefix.CHALLENGES, "time add <ticks>");
+          MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "time add <ticks>");
           break;
         }
         player.performCommand("time set " + (world.getTime() + time));
@@ -84,19 +85,19 @@ public class TimeCommand implements PlayerCommand, Completer {
       }
       case "subtract": {
         if (args.length == 1) {
-          Message.forName("syntax").send(player, Prefix.CHALLENGES, "time subtract <ticks>");
+          MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "time subtract <ticks>");
           break;
         }
         long time = getLongFromString(args[1]);
         if (time < 0) {
-          Message.forName("syntax").send(player, Prefix.CHALLENGES, "time subtract <ticks>");
+          MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "time subtract <ticks>");
           break;
         }
         player.performCommand("time set " + (world.getTime() - time));
         break;
       }
       case "query": {
-        Message.forName("command-time-query").send(player, Prefix.CHALLENGES, NumberFormatter.MIDDLE_NUMBER.format(world.getFullTime()), world.getFullTime() / 24000, NumberFormatter.MIDDLE_NUMBER.format(world.getTime()), getNearestTime(world));
+        MessageKey.of("command-time-query").send(player, Prefix.CHALLENGES, NumberFormatter.MIDDLE_NUMBER.format(world.getFullTime()), world.getFullTime() / 24000, NumberFormatter.MIDDLE_NUMBER.format(world.getTime()), getNearestTime(world));
         break;
       }
 

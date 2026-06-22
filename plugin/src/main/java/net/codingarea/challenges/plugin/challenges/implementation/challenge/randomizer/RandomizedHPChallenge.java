@@ -3,12 +3,11 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ran
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder.PotionBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
+import net.codingarea.challenges.plugin.utils.item.DefaultItems;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
+import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,8 +21,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,10 +33,16 @@ public class RandomizedHPChallenge extends SettingModifier {
   private final Random random = new Random();
 
   public RandomizedHPChallenge() {
-    super(MenuType.CHALLENGES, 5);
-    setCategory(SettingCategory.RANDOMIZER);
+    super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 5, new StandardItemBuilder.PotionBuilder(Material.POTION).setColor(Color.RED).build(),
+      "randomized-hp");
     randomizeExistingEntityHealth();
   }
+
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-max-health-description").asArray(getValue() * 50);
+//  }
 
   @Override
   protected void onDisable() {
@@ -64,16 +69,21 @@ public class RandomizedHPChallenge extends SettingModifier {
 
   private void randomizeEntityHealth(@NotNull LivingEntity entity) {
     if (entity instanceof Player) return;
-    if (!isEnabled()) {
-      entity.resetMaxHealth();
-      entity.setHealth(entity.getMaxHealth());
-      return;
-    }
-    int health = random.nextInt(getValue() * 100) + 1;
-    entity.setHealth(health);
+
     AttributeInstance attribute = entity.getAttribute(MinecraftNameWrapper.MAX_HEALTH);
     if (attribute == null) return;
+
+    if (!isEnabled()) {
+      attribute.setBaseValue(attribute.getDefaultValue());
+      entity.setHealth(attribute.getDefaultValue());
+//      entity.resetMaxHealth();
+//      entity.setHealth(entity.getMaxHealth());
+      return;
+    }
+
+    int health = random.nextInt(getValue() * 100) + 1;
     attribute.setBaseValue(health);
+    entity.setHealth(health);
   }
 
   private void randomizeExistingEntityHealth() {
@@ -113,25 +123,13 @@ public class RandomizedHPChallenge extends SettingModifier {
 
   @NotNull
   @Override
-  public ItemBuilder createDisplayItem() {
-    return new PotionBuilder(Material.POTION, Message.forName("item-randomized-hp-challenge")).setColor(Color.RED);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createSettingsItem() {
-    return super.createSettingsItem().amount(isEnabled() ? getValue() * 5 : 1);
+  public ItemStack getSettingsItemPreset() {
+    return DefaultItems.createEnabledValuePreset(getValue() * 5);
   }
 
   @Override
   public void playValueChangeTitle() {
     ChallengeHelper.playChallengeHeartsValueChangeTitle(this, getValue() * 100);
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-max-health-description").asArray(getValue() * 50);
   }
 
 }

@@ -8,8 +8,9 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.action.Challe
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.IChallengeTrigger;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.ChallengeMenuGenerator;
-import net.codingarea.challenges.plugin.management.menu.generator.MenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.IMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.ChallengesMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.ChallengeMenuGenerator;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
@@ -52,7 +53,7 @@ public class CustomChallengesLoader extends ModuleChallengeLoader {
   public void loadCustomChallengesFrom(@NotNull Document document) {
     customChallenges.clear();
     Challenges.getInstance().getChallengeManager().unregisterIf(iChallenge -> iChallenge.getType() == MenuType.CUSTOM);
-    ((ChallengeMenuGenerator) MenuType.CUSTOM.getMenuGenerator()).resetChallengeCache();
+    ((ChallengesMenuGenerator) MenuType.CUSTOM.getMenuGenerator()).resetCache();
 
     for (String key : document.keys()) {
       try {
@@ -76,26 +77,26 @@ public class CustomChallengesLoader extends ModuleChallengeLoader {
 
     }
 
-    MenuType.CUSTOM.getMenuGenerator().generateInventories();
+//    MenuType.CUSTOM.getMenuGenerator().generateInventories(); TODO
   }
 
   public void resetChallenges() {
     customChallenges.clear();
     Challenges.getInstance().getChallengeManager().unregisterIf(iChallenge -> iChallenge.getType() == MenuType.CUSTOM);
-    ((ChallengeMenuGenerator) MenuType.CUSTOM.getMenuGenerator()).resetChallengeCache();
+    ((ChallengesMenuGenerator) MenuType.CUSTOM.getMenuGenerator()).resetCache();
   }
 
   private void generateCustomChallenge(CustomChallenge challenge, boolean deleted, boolean generate) {
-    MenuGenerator generator = challenge.getType().getMenuGenerator();
-    if (generator instanceof ChallengeMenuGenerator) {
+    IMenuGenerator generator = challenge.getType().getMenuGenerator(); // TODO!
+    if (generator instanceof ChallengeMenuGenerator) { // TODO !
       ChallengeMenuGenerator menuGenerator = (ChallengeMenuGenerator) generator;
       if (deleted) {
         menuGenerator.removeChallengeFromCache(challenge);
-        if (generate) generator.generateInventories();
+        if (generate) menuGenerator.generateInventories();
       } else {
         if (!menuGenerator.isInChallengeCache(challenge)) {
           menuGenerator.addChallengeToCache(challenge);
-          if (generate) generator.generateInventories();
+          if (generate) menuGenerator.generateInventories();
         } else {
           menuGenerator.updateItem(challenge);
         }

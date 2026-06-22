@@ -2,7 +2,8 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.boss.BarColor;
@@ -11,7 +12,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,7 +25,9 @@ public abstract class KillMobsGoal extends SettingGoal {
 
   protected final List<EntityType> entitiesToKill;
 
-  public KillMobsGoal(List<EntityType> entitiesKilled) {
+  public KillMobsGoal(@Nullable SettingCategory category, @NotNull List<EntityType> entitiesKilled,
+                      @NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
+    super(category, displayItemPreset, nameMessageKey);
     this.entitiesToKill = entitiesKilled;
     resetEntitiesToKill();
   }

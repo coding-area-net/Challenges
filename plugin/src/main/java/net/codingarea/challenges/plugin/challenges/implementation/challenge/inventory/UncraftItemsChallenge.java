@@ -4,8 +4,8 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallen
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Bukkit;
@@ -23,9 +23,14 @@ import java.util.Objects;
 public class UncraftItemsChallenge extends TimedChallenge {
 
   public UncraftItemsChallenge() {
-    super(MenuType.CHALLENGES, 5, 60, 20);
-    setCategory(SettingCategory.INVENTORY);
+    super(MenuType.CHALLENGES, null, 5, 60, 20, new ItemStack(Material.CRAFTING_TABLE), "uncraft-items-challenge");
   }
+
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-time-seconds-description").asArray(getValue());
+//  }
 
   public static void uncraftInventory(@NotNull Player player) {
 
@@ -82,12 +87,8 @@ public class UncraftItemsChallenge extends TimedChallenge {
             if (itemStack.getType() == material) {
               return true;
             }
-
           }
-
         }
-
-
       }
     }
     return false;
@@ -113,18 +114,6 @@ public class UncraftItemsChallenge extends TimedChallenge {
     return ingredients;
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.CRAFTING_TABLE, Message.forName("item-uncraft-challenge"));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-time-seconds-description").asArray(getValue());
-  }
-
   @Override
   protected int getSecondsUntilNextActivation() {
     return getValue();
@@ -133,9 +122,7 @@ public class UncraftItemsChallenge extends TimedChallenge {
   @Override
   protected void onTimeActivation() {
     restartTimer();
-
     broadcastFiltered(UncraftItemsChallenge::uncraftInventory);
-
   }
 
 }

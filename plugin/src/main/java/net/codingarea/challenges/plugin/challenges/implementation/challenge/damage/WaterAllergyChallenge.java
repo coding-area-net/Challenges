@@ -3,24 +3,26 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.dam
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.bukkit.inventory.ItemStack;
 
 @Since("2.0")
 public class WaterAllergyChallenge extends SettingModifier {
 
   public WaterAllergyChallenge() {
-    super(MenuType.CHALLENGES, 1, 40);
-    setCategory(SettingCategory.DAMAGE);
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 40, new ItemStack(Material.CYAN_GLAZED_TERRACOTTA), "water-allergy-challenge");
   }
+
+//  @Nullable
+//  @Override
+//  protected String[] getSettingsDescription() {
+//    return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
+//  }
 
   @ScheduledTask(ticks = 5, async = false)
   public void onFifthTick() {
@@ -30,19 +32,6 @@ public class WaterAllergyChallenge extends SettingModifier {
         player.damage(getValue());
       }
     }
-
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.CYAN_GLAZED_TERRACOTTA, Message.forName("item-water-allergy-challenge"));
-  }
-
-  @Nullable
-  @Override
-  protected String[] getSettingsDescription() {
-    return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
   }
 
   @Override

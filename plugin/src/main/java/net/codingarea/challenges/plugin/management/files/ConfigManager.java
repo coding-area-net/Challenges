@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin.management.files;
 
 import lombok.Getter;
+import lombok.experimental.UtilityClass;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.config.Document;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public final class ConfigManager {
   public ConfigManager() {
     missingConfigSettings = new LinkedList<>();
     GsonDocument.setCleanupEmptyObjects(true);
-    GsonDocument.setCleanupEmptyObjects(true);
+    GsonDocument.setCleanupEmptyArrays(true);
   }
 
   public void loadConfigs() {
@@ -49,12 +51,12 @@ public final class ConfigManager {
 
   }
 
-  public Document getDefaultConfigDocument() {
+  public Document getDefaultConfigDocument() { // TODO extract to BukkitModule
     YamlConfiguration defaultConfig = getDefaultConfig();
     return defaultConfig == null ? null : new YamlDocument(defaultConfig);
   }
 
-  public YamlConfiguration getDefaultConfig() {
+  public YamlConfiguration getDefaultConfig() { // TODO remove
     Challenges plugin = Challenges.getInstance();
     try {
       // Create Temp File for loading the yaml configuration
@@ -103,7 +105,17 @@ public final class ConfigManager {
 
   @NotNull
   public List<String> getMissingConfigSettings() {
-    return new LinkedList<>(missingConfigSettings);
+    return Collections.unmodifiableList(missingConfigSettings);
+  }
+
+  @UtilityClass
+  public class Keys { // type safety
+    public final String LANGUAGE = "language";
+    public final String SKIP_LANGUAGE_MIGRATION = "skip-language-migration"; // hidden
+    public final String ONLINE_UPDATE = "language-online-update";
+    public final String NEW_SUFFIX = "challenge-updates.new.suffix";
+    public final String NEW_IN_FRONT = "challenge-updates.new.in-front";
+    public final String UPDATED_SUFFIX = "challenge-updates.updated.suffix";
   }
 
 }

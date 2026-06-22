@@ -6,12 +6,11 @@ import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,12 +19,13 @@ import java.util.stream.Collectors;
 public class ForceBlockBattleGoal extends ForceBattleDisplayGoal<BlockTarget> {
 
   public ForceBlockBattleGoal() {
-    super(Message.forName("menu-force-block-battle-goal-settings"));
+//    super(Message.forName("menu-force-block-battle-goal-settings"));
+    super(new ItemStack(Material.CHEST), "force-block-battle-goal");
 
-    registerSetting("give-block", new BooleanSubSetting(
-      () -> new ItemBuilder(Material.CHEST, Message.forName("item-force-block-battle-goal-give-block")),
-      false
-    ));
+//    registerSetting("give-block", new BooleanSubSetting(
+//      () -> new LegacyItemBuilder(Material.CHEST, Message.forName("item-force-block-battle-goal-give-block")),
+//      false
+//    ));
   }
 
   @Override
@@ -47,12 +47,6 @@ public class ForceBlockBattleGoal extends ForceBattleDisplayGoal<BlockTarget> {
   @Override
   public Message getLeaderboardTitleMessage() {
     return Message.forName("force-block-battle-leaderboard");
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.GRASS_BLOCK, Message.forName("item-force-block-battle-goal"));
   }
 
   @Override

@@ -3,13 +3,12 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.KillMobsGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Monster;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -19,8 +18,7 @@ import java.util.List;
 public class KillAllMonsterGoal extends KillMobsGoal {
 
   public KillAllMonsterGoal() {
-    super(getAllMobsToKill());
-    setCategory(SettingCategory.KILL_ENTITY);
+    super(SettingCategory.KILL_ENTITY, getAllMobsToKill(), new ItemStack(Material.ARROW), "all-monster-goal");
   }
 
   static List<EntityType> getAllMobsToKill() {
@@ -42,12 +40,6 @@ public class KillAllMonsterGoal extends KillMobsGoal {
       list.add(EntityType.HOGLIN);
     }
     return list;
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.ARROW, Message.forName("item-all-monster-goal"));
   }
 
   @Override

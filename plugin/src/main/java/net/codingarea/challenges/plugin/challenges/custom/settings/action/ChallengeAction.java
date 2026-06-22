@@ -4,20 +4,18 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeSetting;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.common.collection.IRandom;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.LinkedHashMap;
 import java.util.function.Supplier;
 
-public abstract class ChallengeAction extends ChallengeSetting implements
-  IChallengeAction {
+public abstract class ChallengeAction extends ChallengeSetting implements IChallengeAction {
 
   protected static final IRandom random = IRandom.create();
 
-  public ChallengeAction(String name,
-                         SubSettingsBuilder subSettingsBuilder) {
+  public ChallengeAction(String name, SubSettingsBuilder subSettingsBuilder) {
     super(name, subSettingsBuilder);
   }
 
@@ -33,7 +31,7 @@ public abstract class ChallengeAction extends ChallengeSetting implements
     LinkedHashMap<String, ItemStack> map = new LinkedHashMap<>();
 
     for (ChallengeAction value : Challenges.getInstance().getCustomSettingsLoader().getActions().values()) {
-      map.put(value.getName(), new ItemBuilder(value.getMaterial(), Message.forName(value.getMessage())).hideAttributes().build());
+      map.put(value.getName(), new LegacyItemBuilder(value.getMaterial(), Message.forName(value.getMessage())).hideAttributes().build());
     }
 
     return map;

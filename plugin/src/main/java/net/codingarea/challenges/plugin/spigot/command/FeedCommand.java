@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
 import net.codingarea.challenges.plugin.utils.misc.CommandHelper;
@@ -28,14 +28,14 @@ public class FeedCommand implements SenderCommand, Completer {
     }
 
     if (targets.isEmpty()) {
-      Message.forName("command-no-target").send(sender, Prefix.CHALLENGES);
+      MessageKey.of("command-no-target").send(sender, Prefix.CHALLENGES);
       return;
     }
 
     boolean otherPlayers = false;
     for (Player target : targets) {
       target.setFoodLevel(20);
-      Message.forName("command-feed-fed").send(target, Prefix.CHALLENGES);
+      MessageKey.of("command-feed-fed").send(target, Prefix.CHALLENGES);
 
       if (target != sender)
         otherPlayers = true;
@@ -43,7 +43,7 @@ public class FeedCommand implements SenderCommand, Completer {
     }
 
     if (otherPlayers)
-      Message.forName("command-feed-others").send(sender, Prefix.CHALLENGES, targets.size());
+      MessageKey.of("command-feed-others").send(sender, Prefix.CHALLENGES, targets.size());
 
   }
 

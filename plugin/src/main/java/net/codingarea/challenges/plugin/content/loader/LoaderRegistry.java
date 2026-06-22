@@ -78,14 +78,19 @@ public final class LoaderRegistry {
       execute(classOfLoader, action);
   }
 
-  @SuppressWarnings("unchecked")
-  public <T extends ContentLoader> T getFirstLoaderByClass(@NotNull Class<T> clazz) {
+  @NotNull
+  public <T extends ContentLoader> Optional<T> getFirstLoaderByClass(@NotNull Class<T> clazz) {
     for (ContentLoader loader : loaders) {
       if (loader.getClass().equals(clazz)) {
-        return (T) loader;
+        return Optional.of(clazz.cast(loader));
       }
     }
-    return null;
+    return Optional.empty();
+  }
+
+  @NotNull
+  public <T extends ContentLoader> T findLoaderByClassOrThrow(@NotNull Class<T> clazz) {
+    return getFirstLoaderByClass(clazz).orElseThrow(() -> new NoSuchElementException("No loader of type " + clazz.getSimpleName() + " found"));
   }
 
   private static class Subscribers {

@@ -1,24 +1,22 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.damage;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class DamagePerItemChallenge extends Setting {
 
   public DamagePerItemChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.DAMAGE);
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, new ItemStack(Material.SHEARS), "damage-item-challenge");
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -41,12 +39,6 @@ public class DamagePerItemChallenge extends Setting {
   private void applyDamage(@NotNull Player player, int amount) {
     player.setNoDamageTicks(0);
     player.damage(amount);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.SHEARS, Message.forName("item-damage-item-challenge"));
   }
 
 }

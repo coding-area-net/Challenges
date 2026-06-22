@@ -2,12 +2,10 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingGoal;
+import net.codingarea.challenges.plugin.challenges.type.annotation.RequireVersion;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.management.challenges.annotations.RequireVersion;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Material;
 import org.bukkit.Raid.RaidStatus;
@@ -15,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.raid.RaidFinishEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -24,16 +23,9 @@ import java.util.List;
 public class FinishRaidGoal extends SettingGoal {
 
   public FinishRaidGoal() {
-    super();
-    setCategory(SettingCategory.FASTEST_TIME);
+    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.CROSSBOW), "finish-raid-goal");
   }
 
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.CROSSBOW, Message.forName("item-finish-raid-goal"));
-  }
 
   @Override
   public void getWinnersOnEnd(@NotNull List<Player> winners) {

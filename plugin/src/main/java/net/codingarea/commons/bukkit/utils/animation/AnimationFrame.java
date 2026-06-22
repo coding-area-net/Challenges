@@ -1,6 +1,6 @@
 package net.codingarea.commons.bukkit.utils.animation;
 
-import net.codingarea.commons.bukkit.utils.item.ItemBuilder;
+import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -28,15 +28,15 @@ public class AnimationFrame implements Cloneable {
   }
 
   @NotNull
-  public AnimationFrame setAccent(int... slots) {
+  public AnimationFrame setContrast(int... slots) {
     for (int slot : slots) {
-      content[slot] = ItemBuilder.FILL_ITEM_2;
+      content[slot] = StandardItemBuilder.FILL_ITEM_CONTRAST;
     }
     return this;
   }
 
   @NotNull
-  public AnimationFrame setItem(int slot, @NotNull ItemBuilder item) {
+  public AnimationFrame setItem(int slot, @NotNull StandardItemBuilder item) {
     return setItem(slot, item.build());
   }
 

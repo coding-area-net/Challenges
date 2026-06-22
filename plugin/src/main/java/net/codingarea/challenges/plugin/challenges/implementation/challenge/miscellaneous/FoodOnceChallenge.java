@@ -3,16 +3,18 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.mis
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -20,27 +22,21 @@ import java.util.List;
 public class FoodOnceChallenge extends SettingModifier {
 
   public FoodOnceChallenge() {
-    super(MenuType.CHALLENGES, 2);
+    super(MenuType.CHALLENGES, null, 2, new ItemStack(Material.COOKED_BEEF), "food-once-challenge");
   }
 
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.COOKED_BEEF, Message.forName("item-food-once-challenge"));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createSettingsItem() {
-    switch (getValue()) {
-      case 1:
-        return DefaultItem.create(Material.PLAYER_HEAD, Message.forName("item-food-once-challenge-player"));
-      case 2:
-        return DefaultItem.create(Material.ENDER_CHEST, Message.forName("item-food-once-challenge-everyone"));
-      default:
-        return super.createSettingsItem();
-    }
-  }
+//  @NotNull
+//  @Override
+//  public LegacyItemBuilder createSettingsItem() {
+//    switch (getValue()) {
+//      case 1:
+//        return DefaultItem.create(Material.PLAYER_HEAD, Message.forName("item-food-once-challenge-player"));
+//      case 2:
+//        return DefaultItem.create(Material.ENDER_CHEST, Message.forName("item-food-once-challenge-everyone"));
+//      default:
+//        return super.createSettingsItem();
+//    }
+//  }
 
   @Override
   public void playValueChangeTitle() {
@@ -61,7 +57,7 @@ public class FoodOnceChallenge extends SettingModifier {
       if (teamFoodsActivated()) {
         Message.forName("food-once-new-food-team").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), type);
       } else {
-        Message.forName("food-once-new-food").send(event.getPlayer(), Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), type);
+        MessageKey.of("food-once-new-food").send(event.getPlayer(), Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), type);
 
       }
     }

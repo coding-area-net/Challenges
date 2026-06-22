@@ -4,12 +4,13 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.CustomChallenge;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
-import net.codingarea.challenges.plugin.management.menu.generator.ChallengeMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.ChallengeMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import org.bukkit.Material;
@@ -55,8 +56,8 @@ public class MainCustomMenuGenerator extends ChallengeMenuGenerator {
   @Override
   public void generatePage(@NotNull Inventory inventory, int page) {
     if (page == 0) {
-      inventory.setItem(VIEW_SLOT, new ItemBuilder(Material.BOOK, Message.forName("custom-main-view-challenges")).build());
-      inventory.setItem(CREATE_SLOT, new ItemBuilder(Material.WRITABLE_BOOK, Message.forName("custom-main-create-challenge")).build());
+      inventory.setItem(VIEW_SLOT, new LegacyItemBuilder(Material.BOOK, Message.forName("custom-main-view-challenges")).build());
+      inventory.setItem(CREATE_SLOT, new LegacyItemBuilder(Material.WRITABLE_BOOK, Message.forName("custom-main-create-challenge")).build());
     }
   }
 
@@ -64,7 +65,7 @@ public class MainCustomMenuGenerator extends ChallengeMenuGenerator {
   public void onPreChallengePageClicking(@NotNull MenuClickInfo info, int page) {
     if (info.getSlot() == VIEW_SLOT) {
       if (Challenges.getInstance().getCustomChallengesLoader().getCustomChallenges().isEmpty()) {
-        Message.forName("custom-not-loaded").send(info.getPlayer(), Prefix.CUSTOM);
+        MessageKey.of("custom-not-loaded").send(info.getPlayer(), Prefix.CUSTOM);
         return;
       }
       open(info.getPlayer(), 1);
@@ -74,7 +75,7 @@ public class MainCustomMenuGenerator extends ChallengeMenuGenerator {
         return;
       }
       if (Challenges.getInstance().getCustomChallengesLoader().getCustomChallenges().size() > maxCustomChallenges) {
-        Message.forName("custom-limit").send(info.getPlayer(), Prefix.CUSTOM, maxCustomChallenges);
+        MessageKey.of("custom-limit").send(info.getPlayer(), Prefix.CUSTOM, maxCustomChallenges);
         SoundSample.BASS_OFF.play(info.getPlayer());
         return;
       }

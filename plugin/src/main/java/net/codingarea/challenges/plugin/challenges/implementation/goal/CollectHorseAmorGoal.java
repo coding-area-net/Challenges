@@ -2,12 +2,10 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ItemCollectionGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Material;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,8 +15,7 @@ import java.util.List;
 public class CollectHorseAmorGoal extends ItemCollectionGoal {
 
   public CollectHorseAmorGoal() {
-    super();
-    setCategory(SettingCategory.FASTEST_TIME);
+    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.DIAMOND_HORSE_ARMOR), "collect-horse-armor-goal");
     List<Material> targets = new ArrayList<>(Arrays.asList(
       Material.DIAMOND_HORSE_ARMOR,
       Material.GOLDEN_HORSE_ARMOR,
@@ -30,12 +27,6 @@ public class CollectHorseAmorGoal extends ItemCollectionGoal {
     }
 
     setTarget(targets.toArray(new Object[0]));
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.DIAMOND_HORSE_ARMOR, Message.forName("item-collect-horse-armor-goal"));
   }
 
 }

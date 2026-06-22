@@ -6,9 +6,8 @@ import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.categorised.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.EntityDeathByPlayerEvent;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Location;
@@ -19,6 +18,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,14 +33,7 @@ public class MobsRespawnInEndChallenge extends Setting {
   private int totalMobsInEnd = 0;
 
   public MobsRespawnInEndChallenge() {
-    super(MenuType.CHALLENGES);
-    setCategory(SettingCategory.ENTITIES);
-  }
-
-  @NotNull
-  @Override
-  public ItemBuilder createDisplayItem() {
-    return new ItemBuilder(Material.ENDER_EYE, Message.forName("item-respawn-end-challenge"));
+    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.ENDER_EYE), "respawn-end-challenge");
   }
 
   @Override

@@ -2,11 +2,12 @@ package net.codingarea.challenges.plugin.spigot.command;
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import net.codingarea.commons.bukkit.utils.menu.positions.SlottedMenuPosition;
@@ -45,20 +46,20 @@ public class InvseeCommand implements PlayerCommand, Listener {
   public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
 
     if (args.length < 1) {
-      Message.forName("syntax").send(player, Prefix.CHALLENGES, "invsee <player>");
+      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "invsee <player>");
       return;
     }
 
     Player target = Bukkit.getPlayer(args[0]);
 
     if (target == null) {
-      Message.forName("command-no-target").send(player, Prefix.CHALLENGES);
+      MessageKey.of("command-no-target").send(player, Prefix.CHALLENGES);
       return;
     }
 
     player.openInventory(getInventory(target));
     MenuPosition.set(player, new SlottedMenuPosition());
-    Message.forName("command-invsee-open").send(player, Prefix.CHALLENGES, NameHelper.getName(target));
+    MessageKey.of("command-invsee-open").send(player, Prefix.CHALLENGES, NameHelper.getName(target));
   }
 
   public Inventory getInventory(@NotNull Player player) {
@@ -68,8 +69,7 @@ public class InvseeCommand implements PlayerCommand, Listener {
 
     Inventory inventory = Bukkit.createInventory(MenuPosition.HOLDER, 6 * 9, InventoryTitleManager.getTitle(Message.forName("inventory-color").asString() + NameHelper.getName(player)));
     inventories.put(player, inventory);
-    MenuPosition.set(player, event -> {
-    });
+    MenuPosition.setEmpty(player);
     updateInventoryContents(inventory, player.getInventory());
     return inventory;
   }
@@ -78,7 +78,7 @@ public class InvseeCommand implements PlayerCommand, Listener {
     inventory.clear();
 
     for (int slot = startBottom; slot <= endBottom; slot++) {
-      inventory.setItem(slot, ItemBuilder.FILL_ITEM);
+      inventory.setItem(slot, LegacyItemBuilder.FILL_ITEM);
     }
 
     inventory.setItem(helmetSlot, playerInventory.getHelmet());
