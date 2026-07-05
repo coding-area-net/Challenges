@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.utils.item;
 
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder.SkullBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import org.bukkit.Material;

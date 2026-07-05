@@ -27,8 +27,9 @@ repositories {
 dependencies {
   compileOnly(libs.slf4j.api)
 
-  compileOnly(libs.spigot.api)
+  compileOnly(libs.paper.api)
   compileOnly(libs.authlib)
+  compileOnly(libs.protocol.lib)
 
   compileOnly(libs.jetbrains.annotations)
   compileOnly(libs.lombok)
@@ -44,14 +45,8 @@ dependencies {
   // TODO abstract to register dynamically
   implementation(project(":cloud-support:cloudnet2"))
   implementation(project(":cloud-support:cloudnet3"))
-
-  api(project(":platform:api"))
-  implementation(project(":platform:common"))
-  implementation(project(":platform:paper"))
-  implementation(project(":platform:legacy")) {
-    exclude("net.kyori") // see platform/legacy/build.gradle.kts
-  }
 }
+
 tasks {
 
   processResources {
@@ -87,7 +82,6 @@ tasks {
     archiveVersion = ""
 
     // no explicit dependencies block - bundle "implementation" deps by default
-    // relocated adventure-lib in :platform:legacy
   }
 
   build {

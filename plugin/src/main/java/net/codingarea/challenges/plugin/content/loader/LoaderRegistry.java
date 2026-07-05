@@ -81,7 +81,7 @@ public final class LoaderRegistry {
   @NotNull
   public <T extends ContentLoader> Optional<T> getFirstLoaderByClass(@NotNull Class<T> clazz) {
     for (ContentLoader loader : loaders) {
-      if (loader.getClass().equals(clazz)) {
+      if (clazz.isAssignableFrom(loader.getClass())) {
         return Optional.of(clazz.cast(loader));
       }
     }

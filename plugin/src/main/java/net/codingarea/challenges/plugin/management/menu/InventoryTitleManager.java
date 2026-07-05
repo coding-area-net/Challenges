@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.management.menu;
 
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import org.jetbrains.annotations.NotNull;
 
 @Deprecated

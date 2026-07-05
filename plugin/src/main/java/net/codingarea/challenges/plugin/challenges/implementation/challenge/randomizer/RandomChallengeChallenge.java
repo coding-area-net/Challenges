@@ -6,9 +6,9 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChal
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
+import net.codingarea.challenges.plugin.challenges.type.annotation.ChallengeAnnotations;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -43,11 +43,11 @@ public class RandomChallengeChallenge extends TimedChallenge {
   protected void onEnable() {
     bossbar.setContent((bossbar, player) -> {
       if (lastUsed == null) {
-        bossbar.setTitle(Message.forName("bossbar-random-challenge-waiting").asString());
+        bossbar.setTitle(getChallengeMessageKey("bossbar-waiting"));
         return;
       }
       bossbar.setProgress(getProgress());
-      bossbar.setTitle(Message.forName("bossbar-random-challenge-current").asString(ChallengeHelper.getColoredChallengeName(lastUsed)));
+      bossbar.setTitle(getChallengeMessageKey("bossbar-current"), lastUsed.getChallengeName());
     });
     bossbar.show();
   }
@@ -84,14 +84,13 @@ public class RandomChallengeChallenge extends TimedChallenge {
     challenges.remove(this);
     challenges.removeIf(challenge -> challenge.getType() != MenuType.CHALLENGES);
     challenges.removeIf(challenge -> !(challenge instanceof AbstractChallenge));
-    challenges.removeIf(ChallengeHelper::canInstaKillOnEnable);
-    challenges.removeIf(ChallengeHelper::isExcludedFromRandomChallenges);
+    challenges.removeIf(ChallengeAnnotations::isCanInstaKillOnEnable);
+    challenges.removeIf(ChallengeAnnotations::isExcludedFromRandomChallenges);
     challenges.removeIf(IChallenge::isEnabled);
     if (challenges.isEmpty()) return;
 
     AbstractChallenge challenge = (AbstractChallenge) globalRandom.choose(challenges);
-    String name = ChallengeHelper.getColoredChallengeName(challenge);
-    Message.forName("random-challenge-enabled").broadcast(Prefix.CHALLENGES, name);
+    getChallengeMessageKey("challenge-enabled").broadcast(Prefix.CHALLENGES, challenge.getChallengeName(), challenge.getChallengeDescription());
 
     setEnabled(challenge, true);
     lastUsed = challenge;
@@ -100,17 +99,14 @@ public class RandomChallengeChallenge extends TimedChallenge {
   }
 
   private void setEnabled(@NotNull IChallenge challenge, boolean enabled) {
-    if (challenge instanceof Setting) {
-      Setting setting = (Setting) challenge;
+    if (challenge instanceof Setting setting) {
       setting.setEnabled(enabled);
     }
-    if (challenge instanceof SettingModifier) {
-      SettingModifier setting = (SettingModifier) challenge;
+    if (challenge instanceof SettingModifier setting) {
       setting.setEnabled(enabled);
     }
 
-    if (enabled && challenge instanceof TimedChallenge) {
-      TimedChallenge timedChallenge = (TimedChallenge) challenge;
+    if (enabled && challenge instanceof TimedChallenge timedChallenge) {
       if (timedChallenge.isTimerRunning()) {
         int seconds = globalRandom.range(10, 20);
         if (seconds < timedChallenge.getSecondsLeftUntilNextActivation())

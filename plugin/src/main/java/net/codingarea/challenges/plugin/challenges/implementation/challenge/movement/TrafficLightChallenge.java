@@ -3,14 +3,14 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.mov
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
@@ -19,7 +19,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @Since("1.3")
 public class TrafficLightChallenge extends TimedChallenge {
@@ -48,15 +47,15 @@ public class TrafficLightChallenge extends TimedChallenge {
     bossbar.setContent((bossbar, player) -> { // TODO format
       switch (state) {
         case GREEN:
-          bossbar.setColor(BarColor.GREEN);
+          bossbar.setColor(BossBar.Color.GREEN);
           bossbar.setTitle("§8{ §a§l■■■ §8} §8{ §7§l■■■ §8} §8{ §7§l■■■ §8}");
           break;
         case YELLOW:
-          bossbar.setColor(BarColor.YELLOW);
+          bossbar.setColor(BossBar.Color.YELLOW);
           bossbar.setTitle("§8{ §7§l■■■ §8} §8{ §e§l■■■ §8} §8{ §7§l■■■ §8}");
           break;
         case RED:
-          bossbar.setColor(BarColor.RED);
+          bossbar.setColor(BossBar.Color.RED);
           bossbar.setTitle("§8{ §7§l■■■ §8} §8{ §7§l■■■ §8} §8{ §c§l■■■ §8}");
           break;
       }

@@ -4,7 +4,8 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.EndingForceChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -12,6 +13,7 @@ import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBo
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.commons.common.config.Document;
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
@@ -47,13 +49,13 @@ public class ForceHeightChallenge extends EndingForceChallenge {
   protected BiConsumer<BossBarInstance, Player> setupBossbar() {
     return (bossbar, player) -> {
       if (getState() == WAITING) {
-        bossbar.setTitle(Message.forName("bossbar-force-height-waiting").asString());
+        bossbar.setTitle(MessageKey.of("bossbar-force-height-waiting"));
         return;
       }
 
-      bossbar.setColor(BarColor.GREEN);
+      bossbar.setColor(BossBar.Color.GREEN);
       bossbar.setProgress(getProgress());
-      bossbar.setTitle(Message.forName("bossbar-force-height-instruction").asString(height, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation())));
+      bossbar.setTitle(MessageKey.of("bossbar-force-height-instruction"), height, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation()));
     };
   }
 
@@ -64,12 +66,12 @@ public class ForceHeightChallenge extends EndingForceChallenge {
 
   @Override
   protected void broadcastFailedMessage(@NotNull Player player) {
-    Message.forName("force-height-fail").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), player.getLocation().getBlockY());
+    MessageKey.of("force-height-fail").broadcast(Prefix.CHALLENGES, player, player.getLocation().getBlockY());
   }
 
   @Override
   protected void broadcastSuccessMessage() {
-    Message.forName("force-height-success").broadcast(Prefix.CHALLENGES);
+    MessageKey.of("force-height-success").broadcast(Prefix.CHALLENGES);
   }
 
   @Override

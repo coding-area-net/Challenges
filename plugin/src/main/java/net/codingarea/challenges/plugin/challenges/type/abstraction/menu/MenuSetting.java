@@ -95,6 +95,7 @@ public abstract class MenuSetting extends Setting {
     settings.values().forEach(SubSetting::restoreDefaults);
   }
 
+  // TODO extract duplicate logic with AbstractChallenge
   public abstract class SubSetting implements Listener {
 
     @Setter
@@ -143,7 +144,7 @@ public abstract class MenuSetting extends Setting {
 
     @NotNull
     protected LocalizableMessage getSettingsName() {
-      return MessageKey.of("enabled");
+      return MessageKey.of("generic.enabled");
     }
 
     @Nullable
@@ -274,11 +275,11 @@ public abstract class MenuSetting extends Setting {
     }
 
     public NumberSubSetting(@NotNull ItemStack displayItemPreset, int min, int max, int defaultValue) {
+      super(displayItemPreset);
       if (max <= min) throw new IllegalArgumentException("max <= min");
       if (min < 0) throw new IllegalArgumentException("min < 0");
       if (defaultValue > max) throw new IllegalArgumentException("defaultValue > max");
       if (defaultValue < min) throw new IllegalArgumentException("defaultValue < min");
-      super(displayItemPreset);
       this.value = defaultValue;
       this.defaultValue = defaultValue;
       this.max = max;

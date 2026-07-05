@@ -34,12 +34,6 @@ language: "de"
 language-online-update: false
 
 timer:
-  format:
-    seconds: "{mm}:{ss}"
-    minutes: "{mm}:{ss}"
-    hours: "{hh}:{mm}:{ss}"
-    day: "{d} day {hh}:{mm}:{ss}"
-    days: "{d} days {hh}:{mm}:{ss}"
   gradient:
     enabled: false
     duration: 20
@@ -89,6 +83,7 @@ challenge-updates:
     in-front: false
     suffix: true
   updated:
+    in-front: false
     suffix: true
 
 # If activated players need the permission "challenges.manage" to manage settings in the gui

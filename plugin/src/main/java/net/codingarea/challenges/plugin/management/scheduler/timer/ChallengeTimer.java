@@ -5,26 +5,35 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IGoal;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.TimerMenuGenerator;
+import net.codingarea.challenges.plugin.management.scheduler.policy.ExtraWorldPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.policy.PlayerCountPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
+import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeActionBar;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.config.FileDocument;
+import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
 public final class ChallengeTimer {
 
-  @Getter
-  private final TimerFormat format;
+  private final Map<Locale, TimerFormat> compiledFormats = new HashMap<>();
+
   private final boolean specificStartSounds, defaultStartSound;
   @Getter
   private long time = 0;
@@ -32,19 +41,22 @@ public final class ChallengeTimer {
   private boolean countingUp = true;
   @Getter
   private boolean paused = true;
+  @Getter
   private boolean hidden = false;
   private boolean sentEmpty;
 
   public ChallengeTimer() {
-
     Document pluginConfig = Challenges.getInstance().getConfigDocument();
     specificStartSounds = pluginConfig.getBoolean("enable-specific-start-sounds");
     defaultStartSound = pluginConfig.getBoolean("enable-default-start-sounds");
 
-    Document formatConfig = pluginConfig.getDocument("timer.format");
-    format = new TimerFormat(formatConfig);
-
     Challenges.getInstance().getScheduler().register(this);
+    Challenges.getInstance().getLoaderRegistry().subscribe(LanguageLoader.class, this::precompileFormat);
+  }
+
+  private void precompileFormat() {
+    Locale language = Challenges.getInstance().getLoaderRegistry().findLoaderByClassOrThrow(LanguageLoader.class).getConfigLanguage();
+    getOrCompileFormat(language);
   }
 
   public void enable() {
@@ -58,22 +70,38 @@ public final class ChallengeTimer {
     }
   }
 
-  @ScheduledTask(ticks = 20, async = false, timerPolicy = TimerPolicy.ALWAYS, playerPolicy = PlayerCountPolicy.ALWAYS)
-  public void onTimerSecond() {
+  @NotNull
+  private TimerFormat getOrCompileFormat(@NotNull Locale locale) {
+    return compiledFormats.computeIfAbsent(locale, forLocale -> new TimerFormat(MessageKey.empty("timer.bar.format"), forLocale));
+  }
 
-    if (!paused) {
-      if (countingUp) time++;
-      else time--;
+  @ScheduledTask(ticks = 20, async = false, timerPolicy = TimerPolicy.STARTED, playerPolicy = PlayerCountPolicy.ALWAYS)
+  public void incrementTimerSecond() {
+    if (countingUp) time++;
+    else time--;
 
-      if (time <= 0) {
-        time = 0;
-        countingUp = true;
-        handleHitZero();
+    if (time <= 0) {
+      time = 0;
+      countingUp = true;
+      handleHitZero();
+    }
+  }
+
+  @ScheduledTask(ticks = 20, timerPolicy = TimerPolicy.ALWAYS, playerPolicy = PlayerCountPolicy.ALWAYS, worldPolicy = ExtraWorldPolicy.ALWAYS)
+  public void updateActionbar() {
+    if (sentEmpty && hidden) return;
+
+    ChallengeActionBar currentActionBar = Challenges.getInstance().getScoreboardManager().getCurrentActionBar();
+    if (currentActionBar != null) {
+      currentActionBar.send();
+    } else if (!hidden) {
+      this.getCurrentActionbarMessage().broadcastActionBar(getFormattedTime());
+    } else {
+      sentEmpty = true;
+      for (Player player : Bukkit.getOnlinePlayers()) {
+        player.sendActionBar(Component.empty());
       }
     }
-
-    updateActionbar();
-
   }
 
   @ScheduledTask(ticks = 20, timerPolicy = TimerPolicy.PAUSED)
@@ -97,7 +125,7 @@ public final class ChallengeTimer {
     updateActionbar();
     updateTimeRule();
 
-    MessageKey.of("timer-was-started").broadcast(Prefix.TIMER);
+    MessageKey.of("timer.messages.started").broadcast(Prefix.TIMER);
     Challenges.getInstance().getScheduler().fireTimerStatusChange();
     Challenges.getInstance().getTitleManager().sendTimerStatusTitle(MessageKey.of("title-timer-started"));
     Challenges.getInstance().getServerManager().setNotFresh();
@@ -126,7 +154,7 @@ public final class ChallengeTimer {
     Challenges.getInstance().getScheduler().fireTimerStatusChange();
     if (playInGameEffects) {
       Challenges.getInstance().getTitleManager().sendTimerStatusTitle(MessageKey.of("title-timer-paused"));
-      MessageKey.of("timer-was-paused").broadcast(Prefix.TIMER);
+      MessageKey.of("timer.messages.paused").broadcast(Prefix.TIMER);
       SoundSample.BASS_OFF.broadcast();
     }
   }
@@ -146,19 +174,12 @@ public final class ChallengeTimer {
     updateActionbar();
   }
 
-  public void updateActionbar() {
-    if (sentEmpty && hidden) return;
-    if (hidden) sentEmpty = true;
-    if (!hidden) {
-      this.getCurrentActionbarMessage().broadcastActionBar(getFormattedTime());
-    }
-  }
-
   @NotNull
   private MessageKey getCurrentActionbarMessage() {
-    if (paused) return MessageKey.of("stopped-message");
-    if (countingUp) return MessageKey.of("count-up-message");
-    return MessageKey.of("count-down-message");
+    // TODO save references?
+    if (paused) return MessageKey.of("timer.bar.paused");
+    if (countingUp) return MessageKey.of("timer.bar.up");
+    return MessageKey.of("timer.bar.down");
   }
 
   public synchronized void loadSession() {
@@ -189,14 +210,30 @@ public final class ChallengeTimer {
   }
 
   public void setHidden(boolean hide) {
+    if (this.hidden == hide) return;
+
     this.sentEmpty = false;
     this.hidden = hide;
     updateActionbar();
+    TimerMenuGenerator menuGenerator = (TimerMenuGenerator) MenuType.TIMER.getMenuGenerator();
+    menuGenerator.updatePage(TimerMenuGenerator.PAGE_STATE);
+    MessageKey.of("timer.messages." + (hide ? "hidden" : "shown")).broadcast(Prefix.TIMER);
+    SoundSample.BASS_ON.broadcast();
   }
 
   @NotNull
-  public String getFormattedTime() {
-    return format.format(time);
+  public String getFormattedTime(@NotNull Locale locale) {
+    return getOrCompileFormat(locale).format(time);
+  }
+
+  @NotNull
+  public LocalizableMessage getFormattedTime() {
+    return getFormattedTimeFor(time);
+  }
+
+  @NotNull
+  public LocalizableMessage getFormattedTimeFor(long seconds) {
+    return LocalizableMessage.from(locale -> getOrCompileFormat(locale).format(seconds));
   }
 
   @NotNull
@@ -215,7 +252,7 @@ public final class ChallengeTimer {
     updateActionbar();
     TimerMenuGenerator menuGenerator = (TimerMenuGenerator) MenuType.TIMER.getMenuGenerator();
     menuGenerator.updatePage(TimerMenuGenerator.PAGE_STATE);
-    MessageKey.of("timer-mode-set-" + (countingUp ? "up" : "down")).broadcast(Prefix.TIMER);
+    MessageKey.of("timer.messages.counting-" + (countingUp ? "up" : "down")).broadcast(Prefix.TIMER); // TODO
     SoundSample.BASS_ON.broadcast();
   }
 

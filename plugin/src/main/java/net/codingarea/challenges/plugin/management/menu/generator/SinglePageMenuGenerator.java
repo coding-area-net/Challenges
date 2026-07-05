@@ -1,6 +1,8 @@
 package net.codingarea.challenges.plugin.management.menu.generator;
 
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.CheckReturnValue;
@@ -26,8 +28,7 @@ public abstract class SinglePageMenuGenerator extends AbstractMenuGenerator {
 
   @NotNull
   protected Inventory createEmptyInventory(@NotNull Locale locale) {
-    return MessageKey.of("menu.title-format").createInventory(locale, getInventorySize(),
-      getMenuName());
+    return Bukkit.createInventory(MenuPosition.HOLDER, getInventorySize(), MessageKey.of("menu.title-format").asComponent(locale, getMenuName()));
   }
 
   @NotNull

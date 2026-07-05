@@ -4,12 +4,11 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeConfigHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.ParticleUtils;
@@ -73,7 +72,6 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
         .filter(entry -> player.getWorld() == entry.getValue().getWorld())
         .sorted(Comparator.<Entry<String, Location>>comparingDouble(entry -> entry.getValue().distance(player.getLocation())).reversed())
         .forEach(entry -> {
-
           Location location = entry.getValue();
           MessageKey.of("position").send(player, Prefix.POSITION, location.getBlockX(), location.getBlockY(), location.getBlockZ(), getWorldName(location), entry.getKey(), (int) location.distance(player.getLocation()));
         });
@@ -93,7 +91,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
         SoundSample.BASS_OFF.play(player);
       } else {
         positions.put(name, position = player.getLocation());
-        Message.forName("position-set").broadcast(Prefix.POSITION, position.getBlockX(), position.getBlockY(), position.getBlockZ(), getWorldName(position), name, NameHelper.getName(player));
+        MessageKey.of("position-set").broadcast(Prefix.POSITION, position.getBlockX(), position.getBlockY(), position.getBlockZ(), getWorldName(position), name, player);
         SoundSample.BASS_ON.play(player);
         broadcastParticleLine(position);
       }

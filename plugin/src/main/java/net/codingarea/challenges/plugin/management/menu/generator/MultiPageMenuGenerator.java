@@ -5,6 +5,8 @@ import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
+import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -29,8 +31,8 @@ public abstract class MultiPageMenuGenerator extends AbstractMenuGenerator {
 
   @NotNull
   protected Inventory createEmptyInventory(@NotNull Locale locale, int page) {
-    return getMenuTitleKey().createInventory(locale, getInventorySize(),
-      getMenuName(), getMenuTitlePageArg(page));
+    return Bukkit.createInventory(MenuPosition.HOLDER, getInventorySize(),
+      getMenuTitleKey().asComponent(locale, getMenuName(), getMenuTitlePageArg(page)));
   }
 
   @NotNull
@@ -40,8 +42,7 @@ public abstract class MultiPageMenuGenerator extends AbstractMenuGenerator {
 
   @NotNull
   private MessageKey getMenuTitleKey() {
-    int pageCount = getPageCount();
-    if (pageCount == 1) return MessageKey.of("menu.title-format");
+    if (getPageCount() == 1) return MessageKey.of("menu.title-format");
     return MessageKey.of("menu.title-format-page");
   }
 

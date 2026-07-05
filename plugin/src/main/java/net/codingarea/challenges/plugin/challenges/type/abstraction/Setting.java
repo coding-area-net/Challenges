@@ -42,7 +42,7 @@ public abstract class Setting extends AbstractChallenge {
   }
 
   public void playStatusUpdateTitle() {
-    ChallengeHelper.playToggleChallengeTitle(this);
+    ChallengeHelper.playChallengeToggleTitle(this);
   }
 
   protected void onEnable() {

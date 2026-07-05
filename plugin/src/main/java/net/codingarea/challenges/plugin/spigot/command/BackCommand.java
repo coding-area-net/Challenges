@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.implementation.setting.PregameMovementSetting;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;

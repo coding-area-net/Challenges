@@ -3,7 +3,8 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.dam
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -39,7 +40,7 @@ public class JumpDamageChallenge extends SettingModifier {
   public void onSneak(@NotNull PlayerJumpEvent event) {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
-    Message.forName("jump-damage-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+    MessageKey.of("jump-damage-failed").broadcast(Prefix.CHALLENGES, event.getPlayer());
     event.getPlayer().setNoDamageTicks(0);
     event.getPlayer().damage(getValue());
     event.getPlayer().setNoDamageTicks(0);

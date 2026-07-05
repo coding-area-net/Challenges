@@ -1,6 +1,6 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.stats.Statistic;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.AnimatedInventory;

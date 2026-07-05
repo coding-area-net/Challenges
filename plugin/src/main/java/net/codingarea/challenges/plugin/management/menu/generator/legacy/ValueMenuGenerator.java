@@ -2,7 +2,7 @@ package net.codingarea.challenges.plugin.management.menu.generator.legacy;
 
 import lombok.Getter;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSetting;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.position.LegacyGeneratorMenuPosition;

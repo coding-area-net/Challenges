@@ -33,15 +33,10 @@ public final class SoundSample {
     (enabled ? BASS_ON : BASS_OFF).play(player);
   }
 
-  private static final class SoundFrame {
-
-    private final float pitch, volume;
-    private final Sound sound;
+  private record SoundFrame(float pitch, float volume, Sound sound) {
 
     public SoundFrame(@NotNull Sound sound, float volume, float pitch) {
-      this.volume = volume;
-      this.pitch = pitch;
-      this.sound = sound;
+      this(pitch, volume, sound);
     }
 
     public SoundFrame(@NotNull Sound sound, float volume) {
@@ -50,19 +45,6 @@ public final class SoundSample {
 
     public void play(@NotNull Player player, @NotNull Location location) {
       player.playSound(location, sound, volume, pitch);
-    }
-
-    public float getPitch() {
-      return pitch;
-    }
-
-    public float getVolume() {
-      return volume;
-    }
-
-    @NotNull
-    public Sound getSound() {
-      return sound;
     }
 
   }

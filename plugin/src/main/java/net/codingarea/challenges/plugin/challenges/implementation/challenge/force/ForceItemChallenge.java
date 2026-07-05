@@ -4,7 +4,8 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.CompletableForceChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -12,12 +13,12 @@ import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBossBar.BossBarInstance;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.item.ItemUtils;
 import net.codingarea.commons.common.config.Document;
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
@@ -27,7 +28,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,13 +60,13 @@ public class ForceItemChallenge extends CompletableForceChallenge {
   protected BiConsumer<BossBarInstance, Player> setupBossbar() {
     return (bossbar, player) -> {
       if (getState() == WAITING) {
-        bossbar.setTitle(Message.forName("bossbar-force-item-waiting").asString());
+        bossbar.setTitle(MessageKey.of("bossbar-force-item-waiting"));
         return;
       }
 
-      bossbar.setColor(BarColor.GREEN);
+      bossbar.setColor(BossBar.Color.GREEN);
       bossbar.setProgress(getProgress());
-      bossbar.setTitle(Message.forName("bossbar-force-item-instruction").asComponent(item, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation())));
+      bossbar.setTitle(MessageKey.of("bossbar-force-item-instruction"), item, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation()));
     };
   }
 

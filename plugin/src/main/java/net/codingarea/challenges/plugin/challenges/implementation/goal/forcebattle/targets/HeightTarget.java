@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets;
 
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.ExtremeForceBattleGoal;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import org.bukkit.entity.Player;
 
 public class HeightTarget extends ForceTarget<Integer> {

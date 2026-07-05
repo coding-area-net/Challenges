@@ -1,9 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.GameMode;
@@ -14,7 +12,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
-import org.jetbrains.annotations.NotNull;
 
 public class SoupSetting extends Setting {
 

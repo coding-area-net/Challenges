@@ -8,8 +8,8 @@ import java.util.Locale;
 public interface LanguageProvider {
 
   /**
-   * Currently only the language tag of the locale is used, country code and variant are ignored.
    * Default behavior currently implements one global language set in the plugin.yml.
+   * Locale only contains the language tag, no country code or variant.
    */
   @NotNull
   Locale getPlayerLanguage(@NotNull Player player);

@@ -50,12 +50,12 @@ public enum MinecraftVersion implements Version {
   V26_1,    // 26.1
   V26_1_1,  // 26.1.1
   V26_1_2,  // 26.1.2
+  V26_2,    // 26.2
   ;
 
   private final int major, minor, revision;
 
   MinecraftVersion() {
-
     String name = this.name().substring(1);
     String[] version = name.split("_");
 
@@ -65,7 +65,6 @@ public enum MinecraftVersion implements Version {
     major = Integer.parseInt(version[0]);
     minor = Integer.parseInt(version[1]);
     revision = version.length > 2 ? Integer.parseInt(version[2]) : 0;
-
   }
 
   @Override
@@ -97,7 +96,12 @@ public enum MinecraftVersion implements Version {
 
   @NotNull
   public static MinecraftVersion findNearest(@NotNull Version realVersion) {
-    return Version.findNearest(realVersion, values());
+    MinecraftVersion[] versions = values(); // ascending order
+    for (int i = versions.length - 1; i >= 0; i--) {
+      if (versions[i].isNewerThan(realVersion)) continue;
+      return versions[i];
+    }
+    return V1_0;
   }
 
   private static Version currentExact;

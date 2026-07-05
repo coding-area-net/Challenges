@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.inv
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
@@ -36,9 +36,9 @@ public class MovementItemRemovingChallenge extends SettingModifier {
   @Override
   public void playValueChangeTitle() {
     if (getValue() == BLOCK)
-      ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("item-block-chunk-item-remove-challenge-block"));
+      ChallengeHelper.playChallengeValueTitle(this, Message.forName("item-block-chunk-item-remove-challenge-block"));
     else
-      ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("item-block-chunk-item-remove-challenge-chunk"));
+      ChallengeHelper.playChallengeValueTitle(this, Message.forName("item-block-chunk-item-remove-challenge-chunk"));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

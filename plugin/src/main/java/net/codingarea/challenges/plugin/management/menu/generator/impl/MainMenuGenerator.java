@@ -29,7 +29,7 @@ public class MainMenuGenerator extends SingleAnimatedMenuGenerator {
   @NotNull
   @Override
   public AnimatedInventory createAnimatedInventory(@NotNull Locale locale) {
-    AnimatedInventory gui = new AnimatedInventory(SIZE, size -> MessageKey.of("menu-main-title").createInventory(locale, size));
+    AnimatedInventory gui = new AnimatedInventory(MessageKey.of("menu-main-title").asComponent(locale), SIZE, MenuPosition.HOLDER);
     gui.createAndAdd().fill(ItemBuilder.FILL_ITEM);
     gui.cloneLastAndAdd().setContrast(39, 41);
     gui.cloneLastAndAdd().setContrast(38, 42);

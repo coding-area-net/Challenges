@@ -1,14 +1,17 @@
 package net.codingarea.commons.common.version;
 
+import lombok.Getter;
 import net.codingarea.commons.common.logging.ILogger;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class VersionInfo implements Version {
+public class VersionInfo implements Version, Comparable<Version> {
 
   protected static final ILogger logger = ILogger.forThisClass();
 
+  @Getter
   private final int major, minor, revision;
 
   public VersionInfo(int major, int minor, int revision) {
@@ -17,23 +20,16 @@ public class VersionInfo implements Version {
     this.revision = revision;
   }
 
-  public int getMajor() {
-    return major;
-  }
-
-  public int getMinor() {
-    return minor;
-  }
-
-  public int getRevision() {
-    return revision;
-  }
-
   @Override
   public boolean equals(Object other) {
     if (this == other) return true;
     if (!(other instanceof Version)) return false;
     return this.equals((Version) other);
+  }
+
+  @Override
+  public int compareTo(@NotNull Version other) {
+    return Version.super.compareTo(other);
   }
 
   @Override

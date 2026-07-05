@@ -4,7 +4,7 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeExecutionData;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.ChallengeAction;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import org.bukkit.Material;

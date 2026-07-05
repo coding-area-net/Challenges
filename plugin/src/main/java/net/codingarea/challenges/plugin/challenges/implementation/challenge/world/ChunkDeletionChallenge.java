@@ -1,11 +1,12 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.commons.common.collection.pair.Tuple;
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.*;
 import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
@@ -37,7 +38,7 @@ public class ChunkDeletionChallenge extends SettingModifier {
   protected void onEnable() {
     bossbar.setContent((bossbar, player) -> {
       Message message = Message.forName("bossbar-chunk-deletion");
-      bossbar.setColor(BarColor.PINK);
+      bossbar.setColor(BossBar.Color.PINK);
       if (!checkIfAllowed(player)) {
         Tuple<BukkitTask, Long> taskTuple = chunks.get(player.getLocation().getChunk());
         if (taskTuple != null) {
@@ -54,7 +55,7 @@ public class ChunkDeletionChallenge extends SettingModifier {
       long remainingTime = calculateRemainingTime(timeStamp);
 
       bossbar.setTitle(message.asString(remainingTime));
-      bossbar.setProgress((double) remainingTime / getValue());
+      bossbar.setProgress((float) remainingTime / getValue());
     });
     bossbar.show();
   }

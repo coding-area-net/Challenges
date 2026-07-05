@@ -8,7 +8,7 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.SettingType;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.ChallengeAction;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;

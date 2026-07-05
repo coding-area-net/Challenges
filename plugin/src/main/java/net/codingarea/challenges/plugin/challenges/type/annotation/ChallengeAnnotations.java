@@ -45,4 +45,11 @@ public final class ChallengeAnnotations {
     return challengeVersion.isNewerOrEqualThan(pluginVersion);
   }
 
+  public static boolean isCanInstaKillOnEnable(@NotNull IChallenge challenge) {
+    return challenge.getClass().isAnnotationPresent(CanInstaKillOnEnable.class);
+  }
+
+  public static boolean isExcludedFromRandomChallenges(@NotNull IChallenge challenge) {
+    return challenge.getClass().isAnnotationPresent(ExcludeFromRandomChallenges.class);
+  }
 }

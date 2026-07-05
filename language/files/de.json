@@ -1,8 +1,33 @@
 {
   "generic": {
+    "undefined": "undefiniert",
+    "unknown": "unbekannt",
     "disabled": "<red>Deaktiviert</red>",
     "enabled": "<green>Aktiviert</green>",
     "customized": "<gold>Anpassen</gold>"
+  },
+  "language": {
+    "de": "Deutsch",
+    "en": "Englisch"
+  },
+  "timer": {
+    "bar": {
+      "up": "{@actionbar.format('<gray>Zeit: <green><b>{0}</b></green></gray>')}",
+      "down": "{@actionbar.format('<gray>Zeit: <red><b>{0}</b></red></gray>')}",
+      "paused": "{@actionbar.format('<gray>Timer <red><b>pausiert</b></red></gray>')}",
+      "format": {
+        "day": "{d} Tag {hh}:{mm}:{ss}",
+        "days": "{d} Tage {hh}:{mm}:{ss}"
+      }
+    },
+    "messages": {
+      "started": "<gray>Der Timer wurde <green>gestartet</green></gray>",
+      "paused": "<gray>Der Timer wurde <red>pausiert</red></gray>",
+      "counting-up": "<gray>Der Timer zählt nun <green>hoch</green></gray>",
+      "counting-down": "<gray>Der Timer zählt nun <red>runter</red></gray>",
+      "hidden": "<gray>Der Timer ist nun <red>versteckt</red></gray>",
+      "shown": "<gray>Der Timer ist nun <green>sichtbar</green></gray>"
+    }
   },
   "menu": {
     "generic": {
@@ -15,18 +40,48 @@
       "name": "Timer",
       "name-state": "Status",
       "name-time": "Zeit",
+      "item-paused": [
+        "{@item-format('<gray>Timer ist</gray> <red>pausiert</red>')}",
+        " ",
+        "{@generic.click-prefix}<gray>Timer <green>fortsetzen</green><gray>"
+      ],
+      "item-started": [
+        "{@item-format('<gray>Timer ist</gray> <green>gestartet</green>')}",
+        " ",
+        "{@generic.click-prefix}<gray>Timer <red>pausieren</red><gray>"
+      ],
+      "item-hidden": [
+        "{@item-format('<gray>Timer ist</gray> <red>versteckt</red>')}",
+        " ",
+        "{@generic.click-prefix}<gray>Timer <green>anzeigen</green><gray>"
+      ],
+      "item-shown": [
+        "{@item-format('<gray>Timer ist</gray> <green>sichtbar</green>')}",
+        " ",
+        "{@generic.click-prefix}<gray>Timer <red>verstecken</red><gray>"
+      ],
+      "item-counting-up": [
+        "{@item-format('<gray>Timer zählt</gray> <green>hoch</green>')}",
+        " ",
+        "{@generic.click-prefix}<gray>Timer auf <red>runterzählen</red> stellen<gray>"
+      ],
+      "item-counting-down": [
+        "{@item-format('<gray>Timer zählt</gray> <red>runter</red>')}",
+        " ",
+        "{@generic.click-prefix}<gray>Timer auf <green>hochzählen</green> stellen<gray>"
+      ],
       "item-name-format": "{@item-format('<gray>{0}:</gray> <yellow><b>{1}</b></yellow> <dark_gray>(<yellow>{2}</yellow>)</dark_gray>')}",
       "item-add-format": [
         "{@item-name-format('{4}', '{0}', '{1}')}",
         " ",
-        "{@generic.click-prefix}<green>+1</green> {3}</gray>",
-        "{@generic.shift-click-prefix}<dark_gray>{@symbol.arrow}</dark_gray> <green>+{2}</green> {4}</gray>"
+        "{@generic.click-prefix}<green>+1</green> <gray>{3}</gray>",
+        "{@generic.shift-click-prefix}<dark_gray><green>+{2}</green> <gray>{4}</gray>"
       ],
       "item-subtract-format": [
         "{@item-name-format('{4}', '{0}', '{1}')}",
         " ",
-        "{@generic.click-prefix}<red>-1</red> {3}</gray>",
-        "{@generic.shift-click-prefix} <red>-{2}</red> {4}</gray>"
+        "{@generic.click-prefix}<red>-1</red> <gray>{3}</gray>",
+        "{@generic.shift-click-prefix}<red>-{2}</red> <gray>{4}</gray>"
       ],
       "item-state-format": [
         "{@item-name-format('{2}', '{0}', '{1}')}",
@@ -66,6 +121,10 @@
     }
   },
   "category": {
+    "desc-most-points": [
+      "Der Spieler mit den *meisten Punkten*",
+      "*gewinnt*, wenn der Timer *abläuft*"
+    ],
     "misc_challenge": {
       "menu": "Sonstige",
       "desc": [
@@ -165,8 +224,7 @@
         "Erziele die *meisten Punkte* in",
         "einem *bestimmten Bereich*",
         " ",
-        "Der Spieler mit den *meisten Punkten*",
-        "gewinnt, wenn der *Timer abläuft*"
+        "{@desc-most-points}"
       ]
     },
     "fastest_time": {
@@ -182,18 +240,61 @@
         "Erfülle die *vorgegebenen Zwischenziele*,",
         "um Punkte zu erhalten.",
         " ",
-        "Der Spieler mit den *meisten Punkten*",
-        "*gewinnt* die Challenge wenn der Timer *abläuft*"
+        "{@desc-most-points}"
       ]
     }
   },
   "challenge": {
+    "language": {
+      "name": "*Sprache*",
+      "desc": [
+        "Ändert die *Sprache* des Plugins"
+      ],
+      "command-disabled": "<gray>Diese Funktion ist derzeit <red>deaktiviert</red></gray>",
+      "command-unknown": "<gray>Diese Sprache <dark_gray>(<yellow>{0}</yellow>)</dark_gray> wird <red>nicht unterstützt</red></gray>",
+      "command-current": "<gray>Die derzeitige Sprache ist <yellow>{0}</yellow></gray>",
+      "command-changing": "<gray>Die Sprache wird geändert...</gray>",
+      "command-changed": "<gray>Die Sprache wurde auf <yellow>{0}</yellow> <dark_gray>(<yellow>{1}</yellow>)</dark_gray> gesetzt</gray>"
+    },
+    "pregame-movement": {
+      "name": "*Pregame Movement*",
+      "desc": [
+        "Du kannst dich *bewegen*,",
+        "bevor der Timer *gestartet* wurde"
+      ],
+      "title": [
+        "<red>Warte..</red>",
+        "<dark_gray>{@symbol.arrow}</dark_gray> <gray>Der Timer ist gestoppt..</gray>"
+      ]
+    },
+    "difficulty": {
+      "name": "*Schwierigkeit*",
+      "desc": [
+        "Ändert die *Schwierigkeit*",
+        "(*Difficulty*) des Spiels"
+      ],
+      "command-set": "<gray>Schwierigkeit auf {0} geändert</gray>",
+      "command-current": "<gray>Die derzeitige Schwierigkeit ist {0}</gray>"
+    },
+    "hardcore-hearts": {
+      "name": "*Hardcore Herzen*",
+      "desc": [
+        "Die *Herzen* werden im *Hardcore-Stil* angezeigt",
+        "Um die Änderung zu sehen, *musst* du *rejoinen*"
+      ]
+    },
     "random-challenge": {
       "name": "*Random Challenge*",
       "desc": [
         "In einem *gesetzten Intervall*",
         "wird eine *zufällige Challenge* aktiviert"
-      ]
+      ],
+      "challenge-enabled": [
+        "<gray>Die Challenge {0} wurde <green>aktiviert</green></gray>",
+        "<gray>{1}</gray>"
+      ],
+      "bossbar-waiting": "{@bossbar.format('Warten auf neue Challenge..')}",
+      "bossbar-current": "{@bossbar.format('Challenge {0}')}"
     },
     "randomized-hp": {
       "name": "*Zufällige HP*",
@@ -201,6 +302,15 @@
         "Die *Leben* aller *Mobs*",
         "sind *zufällig*"
       ]
+    },
+    "jump-and-run": {
+      "name": "*JumpAndRun*",
+      "desc": [
+        "In einem gesetzten *Intervall* muss ein",
+        "*zufälliger Spieler* ein *JumpAndRun* absolvieren",
+        "Schafft er es *nicht*, *stirbt* er"
+      ],
+      "actionbar": "{@actionbar.format('*Jump & Run* <dark_gray>{@symbol.vertical}</dark_gray> <green><b>{0}</b></green> <gray>/</gray> <yellow>{1}</yellow>')}"
     },
     "goal-ender-dragon": {
       "name": "*Enderdrache*",
@@ -256,7 +366,7 @@
     ],
     "challenge-enabled": [
       "<yellow>{0}</yellow>",
-      "<dark_green><b>{@symbol.check}</b></dark_green> <dark_gray>{@symbol.vertical}</dark_grays> <green>Aktiviert</green>"
+      "<dark_green><b>{@symbol.check}</b></dark_green> <dark_gray>{@symbol.vertical}</dark_gray> <green>Aktiviert</green>"
     ],
     "challenge-disabled": [
       "<yellow>{0}</yellow>",
@@ -265,7 +375,21 @@
     "challenge-value-changed": [
       "<yellow>{0}</yellow>",
       "<dark_gray>{@symbol.arrow}</dark_gray> <yellow>{1}</yellow>"
+    ],
+    "goal-enabled": [
+      "<yellow>{0}</yellow>",
+      "<dark_green><b>{@symbol.check}</b></dark_green> <dark_gray>{@symbol.vertical}</dark_gray> <green>Ziel gewählt</green>"
+    ],
+    "goal-disabled": [
+      "<yellow>{0}</yellow>",
+      "<dark_red>{@symbol.x}</dark_red> <dark_gray>┃</dark_gray> <red>Ziel deaktiviert</red>"
     ]
+  },
+  "command": {
+    "skip-timer": {
+      "none": "<gray>Es ist <red>keine Challenge</red> aktiviert, dessen Timer übersprungen werden könnte</gray>",
+      "done": "<gray>Die Timer folgender Challenges <green>wurden übersprungen</green>: {0}</gray>"
+    }
   },
   "syntax": "Bitte nutze §e/{0}",
   "reload": "Challenges Plugin wird neu geladen...",
@@ -290,10 +414,6 @@
   "player": "§6Aktiver Spieler",
   "none": "Nichts",
   "inventory-color": "§9",
-  "timer-counting-up": "§8» §7Timer zählt §ahoch",
-  "timer-counting-down": "§8» §7Timer zählt §crunter",
-  "timer-is-paused": "§8» §7Timer ist §cpausiert",
-  "timer-is-running": "§8» §7Timer ist §agestartet",
   "confirm-reset": "Bestätige den Reset mit §e/{0}",
   "no-fresh-reset": [
     "Der Server kann §cnicht resettet §7werden",
@@ -303,12 +423,7 @@
   "updated-challenge-suffix": "{@challenge.suffix-format('<b><gradient:#FFEE00:#C7FC4A>Update!</gradient></b>')}",
   "feature-disabled": "Diese Funktion ist derzeit §cdeaktiviert",
   "challenge-disabled": "Diese Challenge ist derzeit §cdeaktiviert",
-  "stopped-message": "§8• §7Timer §c§lpausiert §8•",
-  "count-up-message": "§8• §7Time: §a§l{0} §8•",
-  "count-down-message": "§8• §7Time: §c§l{0} §8•",
   "timer-not-started": "Der Timer wurde noch §cnicht gestartet",
-  "timer-was-started": "Der Timer wurde §agestartet",
-  "timer-was-paused": "Der Timer wurde §cpausiert",
   "timer-was-set": "Der Timer wurde auf §e§l{0} §7gesetzt",
   "timer-already-started": "Der Timer §cläuft bereits",
   "timer-already-paused": "Der Timer ist §cbereits pausiert",
@@ -316,7 +431,6 @@
   "timer-mode-set-up": "Der Timer zählt nun §ahoch",
   "no-database-connection": "Es gibt §ckeine §7Datenbankverbindung",
   "fetching-data": "Daten werden abgerufen..",
-  "undefined": "undefiniert",
   "no-such-material": "Dieses Material gibt es nicht",
   "not-an-item": "§e{0} §7ist kein Item",
   "no-such-entity": "Dieses Entity existiert nicht",
@@ -413,8 +527,6 @@
   "command-weather-set-thunder": "Wetter zu §estürmisch §7geändert",
   "command-invsee-open": "Inventar von §e{0} §7geöffnet",
   "command-enderchest-open": "Du hast deine §5Enderchest §7geöffnet",
-  "command-difficulty-change": "Schwierigkeit auf {0} §7geändert",
-  "command-difficulty-current": "Die derzeitige Schwierigkeit ist {0}",
   "command-search-nothing": "§e{0} §7wird durch keinen speziellen Block gedroppt",
   "command-search-result": "§e{0} §7droppt aus §e{1}",
   "command-searchloot-disabled": "Die Entity Loot Randomizer Challenge ist aktuell §cdeaktiviert",
@@ -477,7 +589,6 @@
   "food-once-new-food": "§eDu §7hast §e{1} §7gegessen",
   "sneak-damage-failed": "§e{0} §7ist geschlichen",
   "jump-damage-failed": "§e{0} §7ist gesprungen",
-  "random-challenge-enabled": "Die Challenge §e{0} §7wurde §aaktiviert",
   "all-items-skipped": "Item §e{0} §7geskippt",
   "all-items-already-finished": "Es wurden bereits alle Items gefunden",
   "all-items-found": "Das Item §e{0} §7wurde von §e{1} §7registriert",
@@ -597,8 +708,6 @@
   "bossbar-biome-time-left": "§8» §7Zeit übrig in §e{0} §8§l┃ §a{1}s",
   "bossbar-height-time-left": "§8» §7Zeit übrig auf §e{0} §8§l┃ §a{1}s",
   "bossbar-zero-hearts": "§8» §7Schutzzeit §8§l┃ §a{0}s",
-  "bossbar-random-challenge-waiting": "§8» §7Warten auf neue Challenge..",
-  "bossbar-random-challenge-current": "§8» §7Challenge §e{0}",
   "bossbar-all-items-current-max": "§8» §f{0} §8┃ §7{1} §8/ §7{2}",
   "bossbar-all-items-finished": "§8» §7Alle Items gefunden",
   "bossbar-force-height-waiting": "§8» §7Warten auf nächste Höhe..",
@@ -709,10 +818,6 @@
     "§e{0}",
     "§8» §e{1}"
   ],
-  "title-pregame-movement-setting": [
-    "§cWarte..",
-    "§8» §7Der Timer ist gestoppt.."
-  ],
   "item-menu-start": "§8• §aStart Challenge §8┃ §e/start §8•",
   "item-menu-challenges": "§8• §cChallenges §8┃ §e/challenge §8•",
   "item-menu-timer": "§8• §5Timer §8┃ §e/timer §8•",
@@ -764,10 +869,6 @@
   ],
   "item-language-setting-german": "§fDeutsch",
   "item-language-setting-english": "§fEnglish",
-  "item-difficulty-setting": [
-    "§aSchwierigkeit",
-    "Stellt die *Schwierigkeitsstufe* ein"
-  ],
   "item-one-life-setting": [
     "§cEin Teamleben",
     "*Jeder* stirbt, wenn *einer stirbt*"
@@ -862,11 +963,6 @@
   "no-hunger-setting": [
     "§cKein Hunger",
     "Du bekommst keinen *Hunger*"
-  ],
-  "pregame-movement-setting": [
-    "§6Pregame Movement",
-    "Du kannst dich *bewegen*, bevor",
-    "das Spiel *gestartet* hat"
   ],
   "item-no-hit-delay-setting": [
     "§fNoHitDelay",
@@ -1971,10 +2067,6 @@
   "item-custom-action-water_mlg": [
     "§9Water MLG",
     "Alle Spieler müssen einen Water MLG machen"
-  ],
-  "item-custom-action-jnr": [
-    "§6Jump And Run",
-    "Ein zufälliger Spieler muss ein Jump And Run machen"
   ],
   "item-custom-action-win": [
     "§6Gewinnen",

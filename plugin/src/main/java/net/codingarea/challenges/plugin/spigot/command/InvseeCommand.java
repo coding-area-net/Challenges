@@ -1,12 +1,13 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
+import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
@@ -59,7 +60,7 @@ public class InvseeCommand implements PlayerCommand, Listener {
 
     player.openInventory(getInventory(target));
     MenuPosition.set(player, new SlottedMenuPosition());
-    MessageKey.of("command-invsee-open").send(player, Prefix.CHALLENGES, NameHelper.getName(target));
+    MessageKey.of("command-invsee-open").send(player, Prefix.CHALLENGES, target);
   }
 
   public Inventory getInventory(@NotNull Player player) {
@@ -78,7 +79,7 @@ public class InvseeCommand implements PlayerCommand, Listener {
     inventory.clear();
 
     for (int slot = startBottom; slot <= endBottom; slot++) {
-      inventory.setItem(slot, LegacyItemBuilder.FILL_ITEM);
+      inventory.setItem(slot, ItemBuilder.FILL_ITEM);
     }
 
     inventory.setItem(helmetSlot, playerInventory.getHelmet());

@@ -11,6 +11,7 @@ main: net.codingarea.challenges.plugin.Challenges
 load: POSTWORLD
 softdepend:
   - CloudNet-Bridge
+  - ProtocolLib
 description: |
   This plugin provides you with lots of challenges for beating minecraft or competing against your friends.
   You can find more information on our discord: https://discord.gg/74Ay5zF.

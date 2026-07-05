@@ -1,6 +1,7 @@
 package net.codingarea.commons.bukkit.utils.animation;
 
 import net.codingarea.commons.bukkit.core.BukkitModule;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -22,11 +23,17 @@ public class AnimatedInventory {
   private SoundSample frameSound = SoundSample.CLICK, endSound = SoundSample.OPEN;
   private int frameDelay = 1;
 
-  public AnimatedInventory(@NotNull String title, int size) {
+  @Deprecated
+  public AnimatedInventory(@NotNull String title, int size, @Nullable InventoryHolder holder) {
+    this.size = size;
+    this.sizeToNewInventory = forSize -> Bukkit.createInventory(holder, forSize, title);
+  }
+
+  public AnimatedInventory(@NotNull Component title, int size) {
     this(title, size, null);
   }
 
-  public AnimatedInventory(@NotNull String title, int size, @Nullable InventoryHolder holder) {
+  public AnimatedInventory(@NotNull Component title, int size, @Nullable InventoryHolder holder) {
     this.size = size;
     this.sizeToNewInventory = forSize -> Bukkit.createInventory(holder, forSize, title);
   }

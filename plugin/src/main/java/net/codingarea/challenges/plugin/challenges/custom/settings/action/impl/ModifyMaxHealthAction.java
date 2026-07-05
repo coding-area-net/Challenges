@@ -5,7 +5,7 @@ import net.codingarea.challenges.plugin.challenges.implementation.setting.MaxHea
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import org.bukkit.Material;

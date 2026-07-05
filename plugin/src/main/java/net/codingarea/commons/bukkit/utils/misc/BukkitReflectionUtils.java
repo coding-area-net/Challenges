@@ -27,13 +27,12 @@ public final class BukkitReflectionUtils {
   }
 
   public static double getAbsorptionAmount(@NotNull Player player) {
-    Class<?> classOfPlayer = player.getClass();
-
     try {
       return player.getAbsorptionAmount();
     } catch (Throwable ignored) {
     }
 
+    Class<?> classOfPlayer = player.getClass();
     try {
       Method getHandleMethod = classOfPlayer.getMethod("getHandle");
       getHandleMethod.setAccessible(true);

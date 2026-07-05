@@ -4,6 +4,7 @@ import net.codingarea.challenges.plugin.challenges.type.IChallenge;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.ChallengeListMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.ChallengesMenuGenerator;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
@@ -12,7 +13,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;
 
 import java.util.*;
 
@@ -20,6 +20,7 @@ public class CategorisedMenuGenerator extends ChallengesMenuGenerator {
 
   public static final int SIZE = 4 * 9;
   public static final int[] SLOTS = {10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25};
+  public static final int MAX_ITEMS_PER_ROW = 7;
 
   protected final Map<SettingCategory, CategorisedListMenuGenerator> categoryGenerators = new HashMap<>();
   protected final List<SettingCategory> orderedCategories = new ArrayList<>();
@@ -82,7 +83,7 @@ public class CategorisedMenuGenerator extends ChallengesMenuGenerator {
   }
 
   @Override
-  public boolean isCached(@NonNull IChallenge element) {
+  public boolean isCached(@NotNull IChallenge element) {
     SettingCategory category = getChallengeCategoryOrMics(element);
     CategorisedListMenuGenerator generator = categoryGenerators.get(category);
     return generator != null && generator.isCached(element);
@@ -98,8 +99,8 @@ public class CategorisedMenuGenerator extends ChallengesMenuGenerator {
       int index = orderedCategories.indexOf(category);
       int[] slots = getSlots();
       int page = index / slots.length;
-      int slot = slots[index % slots.length];
-      updatePage(page, (inventory, locale) -> inventory.setItem(slot, createCategoryDisplayItem(locale, category)));
+      int slotIndex = index % slots.length;
+      updatePage(page, (inventory, locale) -> setCategoryItemsAt(category, inventory, slots, slotIndex, locale));
     }
   }
 
@@ -110,7 +111,30 @@ public class CategorisedMenuGenerator extends ChallengesMenuGenerator {
     int len = categories.size();
     for (int i = 0; i < len; i++) {
       SettingCategory category = categories.get(i);
-      inventory.setItem(slots[i], createCategoryDisplayItem(locale, category));
+      setCategoryDisplayAt(category, inventory, slots, i, locale);
+    }
+  }
+
+  private void setCategoryDisplayAt(@NotNull SettingCategory category, @NotNull Inventory inventory, int[] slots, int slotIndex, @NotNull Locale locale) {
+    setCategoryItemsAt(category, inventory, slots, slotIndex, locale);
+    setCategoryUpdateItemsAt(category, inventory, slots, slotIndex, locale);
+  }
+
+  private void setCategoryItemsAt(@NotNull SettingCategory category, @NotNull Inventory inventory, int[] slots, int slotIndex, @NotNull Locale locale) {
+    inventory.setItem(slots[slotIndex], createCategoryDisplayItem(locale, category));
+  }
+
+  private void setCategoryUpdateItemsAt(@NotNull SettingCategory category, @NotNull Inventory inventory, int[] slots, int slotIndex, @NotNull Locale locale) {
+    CategorisedListMenuGenerator generator = categoryGenerators.get(category);
+    if (generator != null) {
+      // This will break if there are more than 2 rows!
+      int row = slotIndex / getMaxItemsPerRow();
+      int offset = row == 0 ? -9 : +9;
+      if (generator.isNewSuffix() && generator.hasAnyNewChallenges()) {
+        inventory.setItem(slots[slotIndex] + offset, ChallengeListMenuGenerator.NEW_CHALLENGE_ITEM);
+      } else if (generator.isUpdatedSuffix() && generator.hasAnyUpdatedChallenges()) {
+        inventory.setItem(slots[slotIndex] + offset, ChallengeListMenuGenerator.UPDATED_CHALLENGE_ITEM);
+      }
     }
   }
 
@@ -121,9 +145,9 @@ public class CategorisedMenuGenerator extends ChallengesMenuGenerator {
 
     CategorisedListMenuGenerator generator = categoryGenerators.get(category);
     if (generator != null) {
-      if (generator.hasAnyNewChallenges()) {
+      if (generator.isNewSuffix() && generator.hasAnyNewChallenges()) {
         item.appendName(MessageKey.of("new-challenge-suffix"));
-      } else if (generator.hasAnyUpdatedChallenges()) {
+      } else if (generator.isUpdatedSuffix() && generator.hasAnyUpdatedChallenges()) {
         item.appendName(MessageKey.of("updated-challenge-suffix"));
       }
 
@@ -186,6 +210,10 @@ public class CategorisedMenuGenerator extends ChallengesMenuGenerator {
   @NotNull
   public int[] getSlots() {
     return SLOTS;
+  }
+
+  public int getMaxItemsPerRow() {
+    return MAX_ITEMS_PER_ROW;
   }
 
   @Override

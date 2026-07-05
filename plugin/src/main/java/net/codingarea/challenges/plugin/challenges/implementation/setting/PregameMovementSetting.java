@@ -2,18 +2,24 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Updated;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
+import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.BoundingBox;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
+
+@Updated("2.4")
 public class PregameMovementSetting extends Setting {
 
   public PregameMovementSetting() {
@@ -32,20 +38,59 @@ public class PregameMovementSetting extends Setting {
 
     Location target = event.getFrom().clone();
     target.setY(target.getBlockY());
-    findNearestBlock(target);
-    target.add(0, 1, 0);
+
+    BoundingBox playerBoundingBox = event.getPlayer().getBoundingBox();
+    if (event.getPlayer().getLocation().equals(event.getTo())) {
+      Vector shiftVector = event.getFrom().toVector().subtract(event.getPlayer().getLocation().toVector());
+      playerBoundingBox = playerBoundingBox.clone().shift(shiftVector);
+    }
+    findMaxBlockHeightBelow(target, playerBoundingBox);
 
     target.setPitch(to.getPitch());
     target.setYaw(to.getYaw());
-    target.setDirection(to.getDirection());
     event.setTo(target);
 
-    Message.forName("title-pregame-movement-setting").sendTitleInstant(event.getPlayer());
+    getChallengeMessageKey("title").sendTitleInstantly(event.getPlayer());
   }
 
-  private void findNearestBlock(@NotNull Location location) {
-    for (; location.getBlockY() > 0 && location.getBlock().isPassable(); location.subtract(0, 1, 0))
-      ;
+  private void findMaxBlockHeightBelow(@NotNull Location location, @NotNull BoundingBox playerBounds) {
+    Location originalPlayerLocation = location.clone();
+
+    while (location.getBlockY() > BukkitReflectionUtils.getMinHeight(location.getWorld())
+      && (location.getBlock().isPassable() || getTrueStandY(location.getBlock(), originalPlayerLocation, playerBounds) == location.getBlockY())) {
+      location.subtract(0, 1, 0);
+    }
+
+    location.setY(getTrueStandY(location.getBlock(), originalPlayerLocation, playerBounds));
+  }
+
+  public double getTrueStandY(@NotNull Block block, @NotNull Location playerLocation, @NotNull BoundingBox playerBounds) {
+    // getCollisionShape() tracks the actual physical barriers (1.5 for walls/fences)
+    Collection<BoundingBox> boxes = block.getCollisionShape().getBoundingBoxes();
+
+    double playerHalfWidth = playerBounds.getWidthX() / 2.0;
+    double playerHalfDepth = playerBounds.getWidthZ() / 2.0;
+
+    double maxHeight = 0;
+    for (BoundingBox box : boxes) {
+      if (playerLocation.getX() - block.getX() + playerHalfWidth < box.getMinX()
+        || playerLocation.getX() - block.getX() - playerHalfWidth > box.getMaxX()
+        || playerLocation.getZ() - block.getZ() + playerHalfDepth < box.getMinZ()
+        || playerLocation.getZ() - block.getZ() - playerHalfDepth > box.getMaxZ()) {
+        continue; // collision box not applicable
+      }
+
+      double currentBoxAbsoluteTopY = box.getMaxY() + block.getY();
+      if (currentBoxAbsoluteTopY > maxHeight) {
+        maxHeight = currentBoxAbsoluteTopY;
+      }
+    }
+
+    if (maxHeight == 0) { // passable block
+      maxHeight = block.getY();
+    }
+
+    return maxHeight;
   }
 
 }

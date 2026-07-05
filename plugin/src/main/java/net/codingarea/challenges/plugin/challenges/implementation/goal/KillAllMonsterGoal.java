@@ -2,7 +2,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.KillMobsGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Material;

@@ -4,7 +4,7 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -198,8 +198,8 @@ public class MissingItemsChallenge extends TimedChallenge implements PlayerComma
     Material material = globalRandom.choose(materials);
     ItemStack itemStack = new ItemStack(material);
 
-    if (itemStack.getItemMeta() instanceof Damageable && 1 < material.getMaxDurability()) {
-      ((Damageable) itemStack.getItemMeta()).setDamage(globalRandom.range(1, material.getMaxDurability()));
+    if (itemStack.getItemMeta() instanceof Damageable damageable && 1 < material.getMaxDurability()) {
+      damageable.setDamage(globalRandom.range(1, material.getMaxDurability()));
     } else if (1 < itemStack.getMaxStackSize() && globalRandom.nextInt(100) <= 20) {
       itemStack.setAmount(globalRandom.range(1, itemStack.getMaxStackSize()));
     }

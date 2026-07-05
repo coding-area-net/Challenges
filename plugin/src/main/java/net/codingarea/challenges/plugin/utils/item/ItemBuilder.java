@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.utils.item;
 
+import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import lombok.Getter;
 import net.codingarea.challenges.plugin.Challenges;
@@ -7,7 +8,7 @@ import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.commons.bukkit.utils.item.BannerPattern;
 import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
-import net.codingarea.commons.common.config.Document;
+import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
@@ -15,21 +16,15 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BannerMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.inventory.meta.*;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.profile.PlayerProfile;
-import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jspecify.annotations.NonNull;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
 public class ItemBuilder extends StandardItemBuilder {
 
@@ -55,7 +50,8 @@ public class ItemBuilder extends StandardItemBuilder {
   }
 
   public ItemBuilder(@NotNull Player playerLocale, @NotNull Material material, @NotNull MessageKey nameAndLoreKey, @NotNull Object... args) {
-    this(Challenges.getInstance().getTranslationManager().getLanguageProvider().getPlayerLanguage(playerLocale), material, nameAndLoreKey, args);
+    Locale locale = Challenges.getInstance().getTranslationManager().getLanguageProvider().getPlayerLanguage(playerLocale);
+    this(locale, material, nameAndLoreKey, args);
   }
 
   public ItemBuilder(@NotNull Locale locale, @NotNull ItemStack item) {
@@ -65,25 +61,61 @@ public class ItemBuilder extends StandardItemBuilder {
   }
 
   protected void resetToNameAndLore(@NotNull MessageKey nameAndLoreKey, @NotNull Object... args) {
-    nameAndLoreKey.applyAsItemNameAndLore(locale, getItemMeta(), args);
     hideAttributes();
+
+    ItemMeta meta = getItemMeta();
+    List<Component> components = nameAndLoreKey.asComponents(locale, args);
+    if (components.isEmpty()) return;
+    meta.displayName(components.getFirst());
+
+    if (components.size() == 1) return;
+    meta.lore(components.subList(1, components.size()));
+  }
+
+  @NotNull
+  public ItemBuilder setName(@NotNull MessageKey key, @NotNull Object... args) {
+    getItemMeta().displayName(key.asComponent(locale, args));
+    return this;
   }
 
   @NotNull
   public ItemBuilder appendNameWithSpace(@NotNull MessageKey key, @NotNull Object... args) {
-    key.appendToItemName(locale, getItemMeta(), true, args);
+    ItemMeta meta = getItemMeta();
+    Component existingName = meta.displayName();
+    if (existingName == null) return setName(key, args);
+
+    meta.displayName(existingName.append(Component.space()).append(key.asComponent(locale, args)));
     return this;
   }
 
   @NotNull
   public ItemBuilder appendName(@NotNull MessageKey key, @NotNull Object... args) {
-    key.appendToItemName(locale, getItemMeta(), false, args);
+    ItemMeta meta = getItemMeta();
+    Component existingName = meta.displayName();
+    if (existingName == null) return setName(key, args);
+
+    meta.displayName(existingName.append(key.asComponent(locale, args)));
+    return this;
+  }
+
+  @NotNull
+  public ItemBuilder setLore(@NotNull MessageKey key, @NotNull Object... args) {
+    getItemMeta().lore(key.asComponents(locale, args));
     return this;
   }
 
   @NotNull
   public ItemBuilder appendLore(@NotNull MessageKey key, @NotNull Object... args) {
-    key.appendToItemLore(locale, getItemMeta(), args);
+    ItemMeta meta = getItemMeta();
+    List<Component> existingLore = meta.lore();
+    List<Component> loreComponents = key.asComponents(locale, args);
+    if (existingLore == null) {
+      meta.lore(loreComponents);
+      return this;
+    }
+
+    existingLore.addAll(loreComponents); // modifiable copy
+    meta.lore(existingLore);
     return this;
   }
 
@@ -94,7 +126,14 @@ public class ItemBuilder extends StandardItemBuilder {
 
   @NotNull
   public ItemBuilder appendLoreWithEmptyLine(@NotNull MessageKey key, @NotNull Object... args) {
-    super.appendLore(" ");
+    ItemMeta meta = getItemMeta();
+    List<Component> lore = meta.lore();
+    if (lore != null) {
+      lore.add(Component.empty());
+    } else {
+      meta.lore(List.of(Component.empty()));
+    }
+
     return this.appendLore(key, args);
   }
 
@@ -114,13 +153,13 @@ public class ItemBuilder extends StandardItemBuilder {
 
   @NotNull
   @Override
-  public ItemBuilder addFlag(@NonNull @NotNull ItemFlag... flags) {
+  public ItemBuilder addFlag(@NotNull ItemFlag... flags) {
     return (ItemBuilder) super.addFlag(flags);
   }
 
   @NotNull
   @Override
-  public ItemBuilder removeFlag(@NonNull @NotNull ItemFlag... flags) {
+  public ItemBuilder removeFlag(@NotNull ItemFlag... flags) {
     return (ItemBuilder) super.removeFlag(flags);
   }
 
@@ -173,14 +212,14 @@ public class ItemBuilder extends StandardItemBuilder {
   @NotNull
   @Override
   @Deprecated
-  public StandardItemBuilder setLore(@NonNull @NotNull String... lore) {
+  public StandardItemBuilder setLore(@NotNull String... lore) {
     return super.setLore(lore);
   }
 
   @NotNull
   @Override
   @Deprecated
-  public StandardItemBuilder appendLore(@NonNull @NotNull String... lore) {
+  public StandardItemBuilder appendLore(@NotNull String... lore) {
     return super.appendLore(lore);
   }
 
@@ -208,7 +247,7 @@ public class ItemBuilder extends StandardItemBuilder {
   @NotNull
   @Override
   @Deprecated
-  public StandardItemBuilder setName(@NonNull @NotNull String... content) {
+  public StandardItemBuilder setName(@NotNull String... content) {
     return super.setName(content);
   }
 
@@ -221,7 +260,7 @@ public class ItemBuilder extends StandardItemBuilder {
 
   public static class BannerBuilder extends ItemBuilder {
 
-    public BannerBuilder(@NotNull Locale locale, @NotNull Material material, @NotNull MessageKey nameAndLoreKey, @NonNull Object... args) {
+    public BannerBuilder(@NotNull Locale locale, @NotNull Material material, @NotNull MessageKey nameAndLoreKey, @NotNull Object... args) {
       super(locale, material, nameAndLoreKey, args);
     }
 
@@ -246,7 +285,7 @@ public class ItemBuilder extends StandardItemBuilder {
 
   public static class SkullBuilder extends ItemBuilder {
 
-    public SkullBuilder(@NotNull Locale locale, @NotNull MessageKey nameAndLoreKey, @NonNull Object... args) {
+    public SkullBuilder(@NotNull Locale locale, @NotNull MessageKey nameAndLoreKey, @NotNull Object... args) {
       super(locale, Material.PLAYER_HEAD, nameAndLoreKey, args);
     }
 
@@ -258,35 +297,20 @@ public class ItemBuilder extends StandardItemBuilder {
 
     @NotNull
     public SkullBuilder setOwner(@NotNull UUID uuid, @NotNull String name) {
-      PlayerProfile profile = Bukkit.createPlayerProfile(uuid, name); // TODO compatibility 1.17
-      getItemMeta().setOwnerProfile(profile);
+      PlayerProfile profile = Bukkit.createProfile(uuid, name);
+      getItemMeta().setPlayerProfile(profile);
       return this;
     }
 
     @NotNull
     public SkullBuilder setTexture(@NotNull String textureUrl) {
-      UUID uuid = UUID.nameUUIDFromBytes(textureUrl.getBytes());
-
-      PlayerProfile profile = Bukkit.createPlayerProfile(uuid); // TODO does not exist 1.17.1
-      PlayerTextures texture = profile.getTextures();
-
-      try {
-        texture.setSkin(new URL(textureUrl)); // URI.create(textureUrl).toURL()
-      } catch (MalformedURLException e) {
-        throw new IllegalArgumentException("Invalid texture url", e);
-      }
-
-      profile.setTextures(texture);
-      getItemMeta().setOwnerProfile(profile);
+      StandardItemBuilder.SkullBuilder.setTexture(getItemMeta(), textureUrl);
       return this;
     }
 
     public SkullBuilder setBase64Texture(@NotNull String base64Texture) {
-      String textureUrlJson = new String(Base64.getDecoder().decode(base64Texture), StandardCharsets.UTF_8);
-      String textureUrl = Document.parseJson(textureUrlJson)
-        .getString("textures.SKIN.url");
-      if (textureUrl == null) return this; // TODO
-      return setTexture(textureUrl);
+      StandardItemBuilder.SkullBuilder.setBase64Texture(getItemMeta(), base64Texture);
+      return this;
     }
 
     @NotNull
@@ -299,7 +323,7 @@ public class ItemBuilder extends StandardItemBuilder {
 
   public static class PotionBuilder extends ItemBuilder {
 
-    public PotionBuilder(@NotNull Locale locale, @NotNull Material material, @NotNull MessageKey titleAndLoreKey, @NonNull Object... args) {
+    public PotionBuilder(@NotNull Locale locale, @NotNull Material material, @NotNull MessageKey titleAndLoreKey, @NotNull Object... args) {
       super(locale, material, titleAndLoreKey, args);
     }
 

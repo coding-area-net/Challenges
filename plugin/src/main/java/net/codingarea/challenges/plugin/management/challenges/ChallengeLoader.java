@@ -20,7 +20,6 @@ import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebatt
 import net.codingarea.challenges.plugin.challenges.implementation.setting.*;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder.PotionBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ArmorUtils;
-import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import org.bukkit.Material;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
@@ -42,7 +41,7 @@ public final class ChallengeLoader extends ModuleChallengeLoader {
     register(RespawnSetting.class);
     register(SplitHealthSetting.class);
     register(DamageDisplaySetting.class);
-    register(LanguageSetting.class);
+    registerWithCommand(LanguageSetting.class, "setlanguage");
 
     register(PregameMovementSetting.class);
     register(DeathMessageSetting.class);
@@ -76,6 +75,7 @@ public final class ChallengeLoader extends ModuleChallengeLoader {
     register(TotemSaveDeathSetting.class);
     register(SoupSetting.class);
 
+    register(HardcoreHeartsSetting.class);
 
     // Challenges
 
@@ -260,10 +260,7 @@ public final class ChallengeLoader extends ModuleChallengeLoader {
     registerDamageRule("drowning", PotionBuilder.createWaterBottle(), DamageCause.DROWNING);
     registerDamageRule("block", Material.SAND, DamageCause.FALLING_BLOCK, DamageCause.SUFFOCATION, DamageCause.CONTACT);
     registerDamageRule("magic", Material.BREWING_STAND, DamageCause.MAGIC, DamageCause.POISON, DamageCause.WITHER);
-
-    if (MinecraftVersion.current().isNewerOrEqualThan(MinecraftVersion.V1_17)) {
-      registerDamageRule("freeze", Material.POWDER_SNOW_BUCKET, DamageCause.FREEZE);
-    }
+    registerDamageRule("freeze", Material.POWDER_SNOW_BUCKET, DamageCause.FREEZE); // 1.17+
 
     // Material Rules
     registerMaterialRule("§cArmor", "Armor", ArmorUtils.getArmor());

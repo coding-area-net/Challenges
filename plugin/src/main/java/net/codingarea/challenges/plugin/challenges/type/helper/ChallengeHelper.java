@@ -7,9 +7,7 @@ import net.codingarea.challenges.plugin.challenges.type.IChallenge;
 import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
-import net.codingarea.challenges.plugin.challenges.type.annotation.CanInstaKillOnEnable;
-import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.ChallengesMenuGenerator;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
@@ -25,6 +23,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.CheckReturnValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,6 +50,7 @@ public final class ChallengeHelper {
     Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), () -> kill(player), delay);
   }
 
+  @CheckReturnValue
   public static boolean runSyncIfConcurrent(Runnable task) {
     if (Bukkit.isPrimaryThread()) {
       return false;
@@ -59,16 +59,16 @@ public final class ChallengeHelper {
     return true;
   }
 
+  public static void runSync(@NotNull Runnable task) {
+    if (Bukkit.isPrimaryThread()) {
+      task.run();
+      return;
+    }
+    Bukkit.getScheduler().runTask(Challenges.getInstance(), task);
+  }
+
   public static void updateItems(@NotNull IChallenge challenge) {
     challenge.getType().executeWithGenerator(ChallengesMenuGenerator.class, gen -> gen.updateElementDisplay(challenge));
-  }
-
-  public static boolean canInstaKillOnEnable(@NotNull IChallenge challenge) {
-    return challenge.getClass().isAnnotationPresent(CanInstaKillOnEnable.class);
-  }
-
-  public static boolean isExcludedFromRandomChallenges(@NotNull IChallenge challenge) {
-    return challenge.getClass().isAnnotationPresent(ExcludeFromRandomChallenges.class);
   }
 
   public static void handleModifierClick(@NotNull MenuClickInfo info, @NotNull IModifier modifier) {
@@ -155,28 +155,24 @@ public final class ChallengeHelper {
     return Bukkit.getOnlinePlayers().stream().filter(player -> !AbstractChallenge.ignorePlayer(player)).collect(Collectors.toList());
   }
 
-  public static void playToggleChallengeTitle(@NotNull AbstractChallenge challenge) {
-    playToggleChallengeTitle(challenge, challenge.isEnabled());
+  public static void playChallengeToggleTitle(@NotNull AbstractChallenge challenge) {
+    playChallengeToggleTitle(challenge, challenge.isEnabled());
   }
 
-  public static void playToggleChallengeTitle(@NotNull AbstractChallenge challenge, boolean enabled) {
-    Challenges.getInstance().getTitleManager().sendChallengeStatusTitle(enabled ? Message.forName("title-challenge-enabled") : Message.forName("title-challenge-disabled"), getColoredChallengeName(challenge));
+  public static void playChallengeToggleTitle(@NotNull AbstractChallenge challenge, boolean enabled) {
+    Challenges.getInstance().getTitleManager().sendChallengeToggleTitle(challenge, enabled);
   }
 
-  public static void playChangeChallengeValueTitle(@NotNull AbstractChallenge challenge, @NotNull IModifier modifier) {
-    playChangeChallengeValueTitle(challenge, modifier.getValue());
+  public static <T extends AbstractChallenge & IModifier> void playChallengeValueTitle(@NotNull T modifier) {
+    playChallengeValueTitle(modifier, modifier.getValue());
   }
 
-  public static void playChangeChallengeValueTitle(@NotNull Modifier modifier) {
-    playChangeChallengeValueTitle(modifier, modifier.getValue());
-  }
-
-  public static void playChangeChallengeValueTitle(@NotNull AbstractChallenge modifier, @Nullable Object value) {
-    Challenges.getInstance().getTitleManager().sendChallengeStatusTitle(Message.forName("title-challenge-value-changed"), getColoredChallengeName(modifier), value);
+  public static void playChallengeValueTitle(@NotNull AbstractChallenge challenge, @NotNull Object value) {
+    Challenges.getInstance().getTitleManager().sendChallengeValueTitle(challenge, value);
   }
 
   public static void playChallengeHeartsValueChangeTitle(@NotNull AbstractChallenge challenge, int health) {
-    playChangeChallengeValueTitle(challenge, (health / 2f) + " §c❤");
+    playChallengeValueTitle(challenge, (health / 2f) + " §c❤");
   }
 
   public static void playChallengeHeartsValueChangeTitle(@NotNull Modifier modifier) {
@@ -184,15 +180,15 @@ public final class ChallengeHelper {
   }
 
   public static void playChallengeSecondsValueChangeTitle(@NotNull AbstractChallenge challenge, int seconds) {
-    playChangeChallengeValueTitle(challenge, Message.forName("subtitle-time-seconds").asString(seconds));
+    playChallengeValueTitle(challenge, Message.forName("subtitle-time-seconds").asString(seconds));
   }
 
   public static void playChallengeSecondsRangeValueChangeTitle(@NotNull AbstractChallenge challenge, int min, int max) {
-    playChangeChallengeValueTitle(challenge, Message.forName("subtitle-time-seconds-range").asString(min, max));
+    playChallengeValueTitle(challenge, Message.forName("subtitle-time-seconds-range").asString(min, max));
   }
 
   public static void playChallengeMinutesValueChangeTitle(@NotNull AbstractChallenge challenge, int seconds) {
-    playChangeChallengeValueTitle(challenge, Message.forName("subtitle-time-minutes").asString(seconds));
+    playChallengeValueTitle(challenge, Message.forName("subtitle-time-minutes").asString(seconds));
   }
 
   @NotNull

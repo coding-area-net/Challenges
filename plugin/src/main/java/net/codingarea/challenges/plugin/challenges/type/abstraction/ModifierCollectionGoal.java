@@ -86,7 +86,7 @@ public abstract class ModifierCollectionGoal extends CollectionGoal implements I
 
   @Override
   public void playValueChangeTitle() {
-    ChallengeHelper.playChangeChallengeValueTitle(this, this);
+    ChallengeHelper.playChallengeValueTitle(this);
   }
 
   protected void onValueChange() {

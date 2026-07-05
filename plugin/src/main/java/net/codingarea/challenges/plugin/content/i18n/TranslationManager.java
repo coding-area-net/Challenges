@@ -2,8 +2,8 @@ package net.codingarea.challenges.plugin.content.i18n;
 
 import com.google.common.base.Preconditions;
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.i18n.impl.MessageFormatter;
 import net.codingarea.challenges.plugin.content.i18n.impl.MessageKeyImpl;
+import net.codingarea.challenges.plugin.content.i18n.impl.format.MessageFormatter;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.misc.ReflectionUtils;
 import org.jetbrains.annotations.CheckReturnValue;
@@ -41,6 +41,7 @@ public class TranslationManager {
     this.languageProvider = languageProvider;
   }
 
+  @NotNull
   public MessageKey getMessageKey(@NotNull String key) {
     return cachedMessages.computeIfAbsent(key, forKey -> {
       Challenges.getInstance().getILogger().warn("Tried accessing unknown message '{}', called by {}", forKey, ReflectionUtils.getCallerName(3));
@@ -97,6 +98,7 @@ public class TranslationManager {
     cachedLanguages.add(normalizeLocale(locale));
   }
 
+  // TODO remove
   @NotNull
   @CheckReturnValue
   public static Locale normalizeLocale(@Nullable Locale locale) {

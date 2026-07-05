@@ -30,7 +30,7 @@ public class LowDropRateChallenge extends SettingModifier {
 
   @Override
   public void playValueChangeTitle() {
-    ChallengeHelper.playChangeChallengeValueTitle(this, getValue() * 10 + "%");
+    ChallengeHelper.playChallengeValueTitle(this, getValue() * 10 + "%");
   }
 
   @Override

@@ -2,10 +2,12 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ent
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.EntityDamageByPlayerEvent;
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
 import org.bukkit.entity.EnderDragon;
@@ -28,10 +30,10 @@ public class MobTransformationChallenge extends Setting {
   @Override
   protected void onEnable() {
     bossbar.setContent((bossbar, player) -> {
-      bossbar.setColor(BarColor.GREEN);
+      bossbar.setColor(BossBar.Color.GREEN);
       EntityType type = getPlayerData(player).getEnum("type", EntityType.class);
       Object typeName = type == null ? "None" : type;
-      bossbar.setTitle(Message.forName("bossbar-mob-transformation").asString(typeName));
+      bossbar.setTitle(MessageKey.of("bossbar-mob-transformation"), typeName);
     });
     bossbar.show();
   }

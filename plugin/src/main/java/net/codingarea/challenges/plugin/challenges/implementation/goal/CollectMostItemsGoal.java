@@ -25,9 +25,8 @@ public class CollectMostItemsGoal extends CollectionGoal {
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
   public void onPickUp(@NotNull EntityPickupItemEvent event) {
     if (!isEnabled()) return;
-    if (!(event.getEntity() instanceof Player)) return;
+    if (!(event.getEntity() instanceof Player player)) return;
 
-    Player player = (Player) event.getEntity();
     ItemStack item = event.getItem().getItemStack();
     handleNewItem(item.getType(), player);
   }
@@ -35,9 +34,8 @@ public class CollectMostItemsGoal extends CollectionGoal {
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
   public void onClick(@NotNull InventoryClickEvent event) {
     if (!shouldExecuteEffect()) return;
-    if (!(event.getWhoClicked() instanceof Player)) return;
+    if (!(event.getWhoClicked() instanceof Player player)) return;
 
-    Player player = (Player) event.getWhoClicked();
     ItemStack item = event.getCurrentItem();
     if (item == null) return;
     if (!ItemUtils.isObtainableInSurvival(item.getType())) return;

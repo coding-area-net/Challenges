@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.inv
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
@@ -30,7 +30,7 @@ public class PickupItemLaunchChallenge extends SettingModifier {
 
   @Override
   public void playValueChangeTitle() {
-    ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("subtitle-launcher-description").asString(getValue()));
+    ChallengeHelper.playChallengeValueTitle(this, Message.forName("subtitle-launcher-description").asString(getValue()));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

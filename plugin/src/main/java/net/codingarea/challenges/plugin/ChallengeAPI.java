@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.loader.ContentLoader;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
@@ -88,8 +89,8 @@ public final class ChallengeAPI {
   }
 
   @NotNull
-  public static String formatTime(long seconds) {
-    return Challenges.getInstance().getChallengeTimer().getFormat().format(seconds);
+  public static LocalizableMessage formatTime(long seconds) {
+    return Challenges.getInstance().getChallengeTimer().getFormattedTimeFor(seconds);
   }
 
   /**

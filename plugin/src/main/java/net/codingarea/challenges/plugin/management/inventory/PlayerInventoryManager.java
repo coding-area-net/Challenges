@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.management.inventory;
 import lombok.Getter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;

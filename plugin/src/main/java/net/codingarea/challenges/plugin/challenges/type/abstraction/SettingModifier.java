@@ -74,7 +74,7 @@ public abstract class SettingModifier extends Modifier {
   }
 
   public void playStatusUpdateTitle() {
-    ChallengeHelper.playToggleChallengeTitle(this);
+    ChallengeHelper.playChallengeToggleTitle(this);
   }
 
   protected void onEnable() {

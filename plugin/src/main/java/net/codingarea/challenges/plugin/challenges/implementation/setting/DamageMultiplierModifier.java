@@ -2,11 +2,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,11 +17,11 @@ public class DamageMultiplierModifier extends Modifier {
     super(MenuType.SETTINGS, null, 10, new ItemStack(Material.STONE_SWORD), "damage-multiplier-setting");
   }
 
-  @NotNull
-  @Override
-  public LocalizableMessage getSettingsName() {
-    return super.getSettingsName(); // TODO format
-  }
+//  @NotNull
+//  @Override
+//  public LocalizableMessage getSettingsName() {
+//    return super.getSettingsName(); // TODO format
+//  }
 
   @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
   public void onDamage(@NotNull EntityDamageEvent event) {
@@ -35,7 +31,7 @@ public class DamageMultiplierModifier extends Modifier {
 
   @Override
   public void playValueChangeTitle() {
-    ChallengeHelper.playChangeChallengeValueTitle(this, getValue() + "x");
+    ChallengeHelper.playChallengeValueTitle(this, getValue() + "x");
   }
 
 }

@@ -5,12 +5,14 @@ import net.codingarea.challenges.plugin.management.cloud.CloudSupportManager;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 
+@Deprecated
 public final class NameHelper {
 
   private NameHelper() {
   }
 
   @NotNull
+  @Deprecated
   public static String getName(@NotNull OfflinePlayer player) {
     CloudSupportManager cloudSupport = Challenges.getInstance().getCloudSupportManager();
     if (cloudSupport.isNameSupport() && cloudSupport.hasNameFor(player.getUniqueId())) {

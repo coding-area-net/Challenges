@@ -3,12 +3,11 @@ package net.codingarea.challenges.plugin.management.server.scoreboard;
 import lombok.Getter;
 import lombok.ToString;
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
@@ -117,12 +116,12 @@ public final class ChallengeScoreboard {
   @NotNull
   @SuppressWarnings("deprecation")
   private Objective registerDummyObjective(@NotNull Scoreboard scoreboard, @NotNull String name, @NotNull String displayName) {
-    try {
-      return scoreboard.registerNewObjective(name, Criteria.DUMMY, displayName);
-    } catch (Error ignored) {
+//    try {
+//      return scoreboard.registerNewObjective(name, Criteria.DUMMY, displayName);
+//    } catch (Error ignored) {
       // replacement not yet available in this version, use deprecated method
       return scoreboard.registerNewObjective(name, "dummy", displayName);
-    }
+//    }
   }
 
   @ToString

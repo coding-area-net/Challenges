@@ -3,7 +3,6 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -51,7 +50,7 @@ public abstract class Modifier extends AbstractChallenge implements IModifier {
 
   @NotNull
   @Override
-  public LocalizableMessage getSettingsName() {
+  public Object getSettingsName() {
     return MessageKey.of("challenge.settings-modifier-value").withArgs(value);
   }
 
@@ -80,6 +79,10 @@ public abstract class Modifier extends AbstractChallenge implements IModifier {
     updateItems();
   }
 
+  protected void overwriteValue(int value) {
+    this.value = value;
+  }
+
   @Override
   public final int getMaxValue() {
     return max;
@@ -102,7 +105,7 @@ public abstract class Modifier extends AbstractChallenge implements IModifier {
 
   @Override
   public void playValueChangeTitle() {
-    ChallengeHelper.playChangeChallengeValueTitle(this);
+    ChallengeHelper.playChallengeValueTitle(this);
   }
 
   protected void onValueChange() {

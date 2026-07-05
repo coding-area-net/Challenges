@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.management.server;
 
 import lombok.Getter;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

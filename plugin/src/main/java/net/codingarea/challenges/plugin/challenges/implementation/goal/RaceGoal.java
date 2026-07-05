@@ -5,7 +5,7 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifierGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -17,13 +17,13 @@ import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.ParticleUtils;
 import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.commons.common.config.Document;
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle.DustOptions;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
-import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -47,7 +47,7 @@ public class RaceGoal extends SettingModifierGoal {
 
   @Override
   public void playValueChangeTitle() {
-    ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("subtitle-range-blocks").asString(getValue() * 100));
+    ChallengeHelper.playChallengeValueTitle(this, Message.forName("subtitle-range-blocks").asString(getValue() * 100));
   }
 
 //  @Nullable
@@ -64,7 +64,7 @@ public class RaceGoal extends SettingModifierGoal {
   protected void onEnable() {
     reloadGoalLocation();
     bossbar.setContent((bar, player) -> {
-      bar.setColor(BarColor.GREEN);
+      bar.setColor(BossBar.Color.GREEN);
       if (player.getWorld() == goal.getWorld()) {
 
         Location relativeGoal = goal.clone();

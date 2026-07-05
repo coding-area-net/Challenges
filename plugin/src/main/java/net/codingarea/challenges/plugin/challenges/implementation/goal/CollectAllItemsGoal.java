@@ -4,9 +4,9 @@ import lombok.Getter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
@@ -17,6 +17,7 @@ import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.item.ItemUtils;
 import net.codingarea.commons.common.collection.SeededRandomWrapper;
 import net.codingarea.commons.common.config.Document;
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -32,7 +33,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Since("2.0")
 public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
@@ -78,13 +78,12 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
   protected void onEnable() {
     bossbar.setContent((bossbar, player) -> {
       if (currentItem == null) {
-        bossbar.setTitle(Message.forName("bossbar-all-items-finished").asString());
+        bossbar.setTitle(MessageKey.of("bossbar-all-items-finished"));
+        bossbar.setColor(BossBar.Color.GREEN);
         return;
       }
-      bossbar.setTitle(Message.forName("bossbar-all-items-current-max").asComponent(
-        getItemDisplayName(currentItem),
-        totalItemsCount - itemsToFind.size() + 1,
-        totalItemsCount));
+      int foundItemsCount = totalItemsCount - itemsToFind.size() + 1;
+      bossbar.setTitle(MessageKey.of("bossbar-all-items-current-max"), currentItem, foundItemsCount, totalItemsCount);
     });
     bossbar.show();
   }
@@ -107,7 +106,7 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
       return;
     }
 
-    MessageKey.of("all-items-skipped").broadcast(Prefix.CHALLENGES, getItemDisplayName(currentItem));
+    MessageKey.of("all-items-skipped").broadcast(Prefix.CHALLENGES, currentItem);
     SoundSample.PLING.broadcast();
     nextItem();
     bossbar.update();
@@ -141,7 +140,7 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(player)) return;
     if (currentItem != material) return;
-    Message.forName("all-items-found").broadcast(Prefix.CHALLENGES, getItemDisplayName(currentItem), NameHelper.getName(player));
+    MessageKey.of("all-items-found").broadcast(Prefix.CHALLENGES, currentItem, player);
     SoundSample.PLING.broadcast();
     nextItem();
     bossbar.update();
@@ -166,33 +165,5 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
     super.writeGameState(document);
     document.set("seed", random.getSeed());
     document.set("found", totalItemsCount - itemsToFind.size());
-  }
-
-  private String getItemDisplayName(@Nullable Material material) {
-    if (material == null) return "Unbekannt";
-
-    String name = material.name();
-
-    if (name.contains("SMITHING_TEMPLATE")) {
-      String prefix = name.replace("_SMITHING_TEMPLATE", "");
-      String formattedPrefix = Arrays.stream(prefix.split("_"))
-        .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
-        .collect(Collectors.joining(" "));
-
-      return formattedPrefix + " Smithing template";
-    }
-
-    if (name.endsWith("_BANNER_PATTERN")) {
-      String prefix = name.replace("_BANNER_PATTERN", "");
-      String formattedPrefix = Arrays.stream(prefix.split("_"))
-        .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
-        .collect(Collectors.joining(" "));
-
-      return formattedPrefix + " Banner Pattern";
-    }
-
-    return Arrays.stream(name.split("_"))
-      .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
-      .collect(Collectors.joining(" "));
   }
 }

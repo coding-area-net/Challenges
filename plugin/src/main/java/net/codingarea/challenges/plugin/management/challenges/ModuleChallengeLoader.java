@@ -4,6 +4,7 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.implementation.damage.DamageRuleSetting;
 import net.codingarea.challenges.plugin.challenges.implementation.material.BlockMaterialSetting;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
+import net.codingarea.challenges.plugin.challenges.type.annotation.RequireDepend;
 import net.codingarea.challenges.plugin.challenges.type.annotation.RequireVersion;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.core.BukkitModule;
@@ -58,6 +59,16 @@ public class ModuleChallengeLoader {
 
         if (!MinecraftVersion.current().isNewerOrEqualThan(minVersion)) {
           Logger.debug("Did not register challenge {}, requires version {}, server running on {}", classOfChallenge.getSimpleName(), minVersion, MinecraftVersion.current());
+          return;
+        }
+      }
+
+      if (classOfChallenge.isAnnotationPresent(RequireDepend.class)) {
+        RequireDepend annotation = classOfChallenge.getAnnotation(RequireDepend.class);
+        String depend = annotation.plugin();
+
+        if (!plugin.getServer().getPluginManager().isPluginEnabled(depend)) {
+          Logger.debug("Did not register challenge {}, requires plugin {}", classOfChallenge.getSimpleName(), depend);
           return;
         }
       }

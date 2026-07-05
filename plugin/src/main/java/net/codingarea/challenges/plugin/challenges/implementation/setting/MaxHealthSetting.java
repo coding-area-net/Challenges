@@ -2,12 +2,10 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.i18n.ArgumentFormat;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.commons.common.config.Document;
@@ -36,7 +34,7 @@ public class MaxHealthSetting extends Modifier {
   @NotNull
   @Override
   public LocalizableMessage getSettingsName() {
-    return MessageKey.of("").withArgs(getValue(), getValue() / 2); // TODO
+    return ArgumentFormat.HP.apply(getValue());
   }
 
   @Override
@@ -86,7 +84,7 @@ public class MaxHealthSetting extends Modifier {
       if (oldMaxHealth < newMaxHealth) {
         double oldHealth = player.getHealth();
         double newHealth = oldHealth + (newMaxHealth - oldMaxHealth);
-        player.setHealth(Math.min(Math.max(newHealth, 0), newMaxHealth));
+        player.setHealth(Math.clamp(newHealth, 0, newMaxHealth));
       }
       if (MinecraftVersion.current().isNewerThan(MinecraftVersion.V1_19)) {
         player.sendHealthUpdate();

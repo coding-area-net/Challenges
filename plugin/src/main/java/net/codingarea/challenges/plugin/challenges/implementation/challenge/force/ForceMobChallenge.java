@@ -3,16 +3,17 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.for
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.CompletableForceChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBossBar.BossBarInstance;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
 import net.codingarea.commons.common.config.Document;
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
 import org.bukkit.entity.EntityType;
@@ -23,7 +24,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,24 +55,24 @@ public class ForceMobChallenge extends CompletableForceChallenge {
   protected BiConsumer<BossBarInstance, Player> setupBossbar() {
     return (bossbar, player) -> {
       if (getState() == WAITING) {
-        bossbar.setTitle(Message.forName("bossbar-force-mob-waiting").asString());
+        bossbar.setTitle(MessageKey.of("bossbar-force-mob-waiting"));
         return;
       }
 
-      bossbar.setColor(BarColor.GREEN);
+      bossbar.setColor(BossBar.Color.GREEN);
       bossbar.setProgress(getProgress());
-      bossbar.setTitle(Message.forName("bossbar-force-mob-instruction").asComponent(entity, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation())));
+      bossbar.setTitle(MessageKey.of("bossbar-force-mob-instruction"), entity, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation()));
     };
   }
 
   @Override
   protected void broadcastFailedMessage() {
-    Message.forName("force-mob-fail").broadcast(Prefix.CHALLENGES, entity);
+    MessageKey.of("force-mob-fail").broadcast(Prefix.CHALLENGES, entity);
   }
 
   @Override
   protected void broadcastSuccessMessage(@NotNull Player player) {
-    Message.forName("force-mob-success").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), entity);
+    MessageKey.of("force-mob-success").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), entity);
   }
 
   @Override

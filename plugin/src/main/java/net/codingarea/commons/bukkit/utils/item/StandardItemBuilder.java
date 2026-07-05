@@ -1,27 +1,28 @@
 package net.codingarea.commons.bukkit.utils.item;
 
+import com.destroystokyo.paper.profile.PlayerProfile;
+import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.core.BukkitModule;
-import org.bukkit.Color;
-import org.bukkit.DyeColor;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import net.codingarea.commons.common.config.Document;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.EquipmentSlotGroup;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 public class StandardItemBuilder {
 
@@ -149,22 +150,22 @@ public class StandardItemBuilder {
 
   @SuppressWarnings({"UnstableApiUsage"})
   protected void applyDummyAttributeModifier() {
-    try {
-      // hacky fix to make paper hide damage attributes (only works with custom modifiers), "Vanilla behavior since 1.20.5"
-      // see https://github.com/PaperMC/Paper/issues/11224
-      Attribute dummyAttribute = Attribute.LUCK;
-      Collection<AttributeModifier> modifiers = getItemMeta().getAttributeModifiers(dummyAttribute);
-
-      if (modifiers == null || modifiers.isEmpty()) {
-        meta.addAttributeModifier(dummyAttribute, new AttributeModifier(
-          new NamespacedKey(BukkitModule.getFirstInstance(), "dummy"),
-          0,
-          AttributeModifier.Operation.ADD_NUMBER,
-          EquipmentSlotGroup.ANY
-        ));
-      }
-    } catch (Throwable ignored) { // defend against experimental api changes
-    }
+//    try {
+//      // hacky fix to make paper hide damage attributes (only works with custom modifiers), "Vanilla behavior since 1.20.5"
+//      // see https://github.com/PaperMC/Paper/issues/11224
+//      Attribute dummyAttribute = Attribute.LUCK;
+//      Collection<AttributeModifier> modifiers = getItemMeta().getAttributeModifiers(dummyAttribute);
+//
+//      if (modifiers == null || modifiers.isEmpty()) {
+//        meta.addAttributeModifier(dummyAttribute, new AttributeModifier(
+//          new NamespacedKey(BukkitModule.getFirstInstance(), "dummy"),
+//          0,
+//          AttributeModifier.Operation.ADD_NUMBER,
+//          EquipmentSlotGroup.ANY
+//        ));
+//      }
+//    } catch (Throwable ignored) { // defend against experimental api changes
+//    }
   }
 
   @NotNull
@@ -280,22 +281,55 @@ public class StandardItemBuilder {
 
   public static class SkullBuilder extends StandardItemBuilder {
 
+    public static void setBase64Texture(@NotNull SkullMeta item, @NotNull String base64Texture) {
+      String textureUrlJson = new String(Base64.getDecoder().decode(base64Texture), StandardCharsets.UTF_8);
+      String textureUrl = Document.parseJson(textureUrlJson)
+        .getString("textures.SKIN.url");
+      if (textureUrl == null) return; // TODO
+      setTexture(item, textureUrl);
+    }
+
+    public static void setTexture(@NotNull SkullMeta meta, @NotNull String textureUrl) {
+      UUID uuid = UUID.nameUUIDFromBytes(textureUrl.getBytes());
+
+      PlayerProfile profile = Bukkit.createProfile(uuid);
+      PlayerTextures texture = profile.getTextures();
+
+      try {
+        texture.setSkin(URI.create(textureUrl).toURL());
+      } catch (MalformedURLException e) {
+        throw new IllegalArgumentException("Invalid texture url", e);
+      }
+
+      profile.setTextures(texture);
+      meta.setPlayerProfile(profile);
+    }
+
     public SkullBuilder() {
       super(Material.PLAYER_HEAD);
     }
 
-    public SkullBuilder(@NotNull String owner) {
-      super(Material.PLAYER_HEAD);
-      setOwner(owner);
+    @NotNull
+    public SkullBuilder setOwner(@NotNull OfflinePlayer owner) {
+      getItemMeta().setOwningPlayer(owner);
+      return this;
     }
 
-    public SkullBuilder(@NotNull String owner, @NotNull String name, @NotNull String... lore) {
-      super(Material.PLAYER_HEAD, name, lore);
-      setOwner(owner);
+    @NotNull
+    public SkullBuilder setOwner(@NotNull UUID uuid, @NotNull String name) {
+      PlayerProfile profile = Bukkit.createProfile(uuid, name);
+      getItemMeta().setPlayerProfile(profile);
+      return this;
     }
 
-    public SkullBuilder setOwner(@NotNull String owner) {
-      getItemMeta().setOwner(owner);
+    @NotNull
+    public SkullBuilder setTexture(@NotNull String textureUrl) {
+      setTexture(getItemMeta(), textureUrl);
+      return this;
+    }
+
+    public SkullBuilder setBase64Texture(@NotNull String base64Texture) {
+      setBase64Texture(getItemMeta(), base64Texture);
       return this;
     }
 

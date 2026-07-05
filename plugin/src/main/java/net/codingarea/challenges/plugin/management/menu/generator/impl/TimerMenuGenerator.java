@@ -5,6 +5,7 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.management.menu.generator.MultiPageMenuGenerator;
+import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerFormat;
@@ -20,7 +21,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.Locale;
@@ -28,8 +28,9 @@ import java.util.Locale;
 public class TimerMenuGenerator extends MultiPageMenuGenerator {
 
   public static final int SIZE = 5 * 9;
-  public static final int START_SLOT = 21;
-  public static final int MODE_SLOT = 23;
+  public static final int START_SLOT = 20;
+  public static final int SHOW_SLOT = 22;
+  public static final int MODE_SLOT = 24;
   public static final int[] DAYS_SLOTS = {11, 20, 29};
   public static final int[] HOUR_SLOTS = {12, 21, 30};
   public static final int[] MINUTE_SLOTS = {14, 23, 32};
@@ -37,7 +38,6 @@ public class TimerMenuGenerator extends MultiPageMenuGenerator {
   public static final int PAGE_STATE = 0, PAGE_TIME = 1;
   public static final int SHIFT_CHANGE_TIME_AMOUNT = 10;
 
-  private static final Material MID_GOLD_ITEM = MinecraftNameWrapper.getMaterialByNames("RAW_GOLD", "GOLDEN_CARROT");
   private static final List<Tuple<int[], Integer>> SLOTS_AMOUNT_MAPPING = List.of(
     Tuple.of(DAYS_SLOTS, 24 * 60 * 60),
     Tuple.of(HOUR_SLOTS, 60 * 60),
@@ -55,7 +55,7 @@ public class TimerMenuGenerator extends MultiPageMenuGenerator {
     updatePage(PAGE_STATE);
   }
 
-  @ScheduledTask(ticks = 20)
+  @ScheduledTask(ticks = 20, timerPolicy = TimerPolicy.STARTED)
   public void updateTimeInventory() {
     updatePage(PAGE_TIME);
   }
@@ -99,11 +99,14 @@ public class TimerMenuGenerator extends MultiPageMenuGenerator {
 
   public void updateTimerStatePage(@NotNull Inventory inventory, @NotNull Locale locale) {
     inventory.setItem(START_SLOT, Challenges.getInstance().getChallengeTimer().isStarted() ?
-      new ItemBuilder(locale, Material.LIME_DYE, MessageKey.of("timer-is-running")).build() :
-      new ItemBuilder(locale, MinecraftNameWrapper.RED_DYE, MessageKey.of("timer-is-paused")).build());
+      new ItemBuilder(locale, Material.LIME_DYE, MessageKey.of("menu.timer.item-started")).build() :
+      new ItemBuilder(locale, MinecraftNameWrapper.RED_DYE, MessageKey.of("menu.timer.item-paused")).build());
+    inventory.setItem(SHOW_SLOT, Challenges.getInstance().getChallengeTimer().isHidden() ?
+      new ItemBuilder(locale, Material.BARRIER, MessageKey.of("menu.timer.item-hidden")).build() :
+      new ItemBuilder(locale, Material.ENDER_EYE, MessageKey.of("menu.timer.item-shown")).build());
     inventory.setItem(MODE_SLOT, Challenges.getInstance().getChallengeTimer().isCountingUp() ?
-      new ItemBuilder.SkullBuilder(locale, MessageKey.of("timer-counting-up")).setBase64Texture(DefaultItem.SkullTextures.GREEN_ARROW_UP).build() :
-      new ItemBuilder.SkullBuilder(locale, MessageKey.of("timer-counting-down")).setBase64Texture(DefaultItem.SkullTextures.RED_ARROW_DOWN).build());
+      new ItemBuilder.SkullBuilder(locale, MessageKey.of("menu.timer.item-counting-up")).setBase64Texture(DefaultItem.SkullTextures.GREEN_ARROW_UP).build() :
+      new ItemBuilder.SkullBuilder(locale, MessageKey.of("menu.timer.item-counting-down")).setBase64Texture(DefaultItem.SkullTextures.RED_ARROW_DOWN).build());
   }
 
   public void updateTimePage(@NotNull Inventory inventory, @NotNull Locale locale) {
@@ -122,7 +125,7 @@ public class TimerMenuGenerator extends MultiPageMenuGenerator {
       MessageKey.of("menu.timer.item-days"),
       MessageKey.of("menu.timer.item-days-add"),
       MessageKey.of("menu.timer.item-days-subtract"));
-    setTimeItems(inventory, locale, HOUR_SLOTS, hours, format, MID_GOLD_ITEM,
+    setTimeItems(inventory, locale, HOUR_SLOTS, hours, format, Material.RAW_GOLD,
       MessageKey.of("menu.timer.item-hours"),
       MessageKey.of("menu.timer.item-hours-add"),
       MessageKey.of("menu.timer.item-hours-subtract"));
@@ -172,20 +175,28 @@ public class TimerMenuGenerator extends MultiPageMenuGenerator {
       };
     }
 
-    private boolean handleTimerStateMenuClick(@NonNull MenuClickInfo info) {
-      if (info.getSlot() == START_SLOT) {
-        if (playNoPermissionsEffect(info.getPlayer())) return true;
-        Challenges.getInstance().getChallengeTimer().toggle();
-        return true;
-      } else if (info.getSlot() == MODE_SLOT) {
-        if (playNoPermissionsEffect(info.getPlayer())) return true;
-        Challenges.getInstance().getChallengeTimer().setCountingUp(!Challenges.getInstance().getChallengeTimer().isCountingUp());
-        return true;
+    private boolean handleTimerStateMenuClick(@NotNull MenuClickInfo info) {
+      switch (info.getSlot()) {
+        case START_SLOT -> {
+          if (playNoPermissionsEffect(info.getPlayer())) return true;
+          Challenges.getInstance().getChallengeTimer().toggle();
+          return true;
+        }
+        case MODE_SLOT -> {
+          if (playNoPermissionsEffect(info.getPlayer())) return true;
+          Challenges.getInstance().getChallengeTimer().setCountingUp(!Challenges.getInstance().getChallengeTimer().isCountingUp());
+          return true;
+        }
+        case SHOW_SLOT -> {
+          if (playNoPermissionsEffect(info.getPlayer())) return true;
+          Challenges.getInstance().getChallengeTimer().setHidden(!Challenges.getInstance().getChallengeTimer().isHidden());
+          return true;
+        }
       }
       return false;
     }
 
-    private boolean handleTimeMenuClick(@NonNull MenuClickInfo info) {
+    private boolean handleTimeMenuClick(@NotNull MenuClickInfo info) {
       for (Tuple<int[], Integer> mapping : SLOTS_AMOUNT_MAPPING) {
         int[] slots = mapping.getFirst();
         for (int i = 0; i < 3; i++) {

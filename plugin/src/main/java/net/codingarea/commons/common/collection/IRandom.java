@@ -105,14 +105,17 @@ public interface IRandom {
   float nextFloat();
 
   default <T> T choose(@NotNull T... array) {
+    if (array.length == 0) throw new IllegalArgumentException("Array is empty");
     return array[nextInt(array.length)];
   }
 
   default <T> T choose(@NotNull List<? extends T> list) {
+    if (list.isEmpty()) throw new IllegalArgumentException("List is empty");
     return list.get(nextInt(list.size()));
   }
 
   default <T> T choose(@NotNull Collection<? extends T> collection) {
+    if (collection.isEmpty()) throw new IllegalArgumentException("Collection is empty");
     return choose(new ArrayList<>(collection));
   }
 

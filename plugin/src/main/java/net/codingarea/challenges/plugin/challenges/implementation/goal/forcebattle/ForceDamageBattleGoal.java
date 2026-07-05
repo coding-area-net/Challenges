@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebat
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets.DamageTarget;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleGoal;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

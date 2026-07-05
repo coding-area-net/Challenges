@@ -5,7 +5,6 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChal
 import net.codingarea.challenges.plugin.challenges.type.abstraction.WorldDependentChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Updated;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
@@ -17,7 +16,6 @@ import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.challenges.plugin.utils.bukkit.jumpgeneration.RandomJumpGenerator;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
-import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.ParticleUtils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
@@ -30,11 +28,9 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Updated("2.4")
@@ -44,7 +40,7 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
 
   private int jumps = 4;
   private int currentJump;
-  private int jumpsDone;
+  private int jumpAndRunsDone;
 
   private Block targetBlock;
   private Block lastBlock;
@@ -52,7 +48,7 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
   private UUID currentPlayer;
 
   public JumpAndRunChallenge() {
-    super(MenuType.CHALLENGES, 1, 10, 5, new ItemStack(Material.ACACIA_STAIRS), "item-jump-and-run-challenge");
+    super(MenuType.CHALLENGES, 1, 10, 5, new ItemStack(Material.ACACIA_STAIRS), "jump-and-run");
   }
 
   @Override
@@ -109,6 +105,9 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
     currentPlayer = getNextPlayer().getUniqueId();
     lastPlayers.add(currentPlayer);
 
+    actionbar.setContent(player -> getChallengeMessageKey("actionbar").withArgs(currentJump, jumps));
+    actionbar.show();
+
     buildNextJump();
     teleportToWorld(true, (player, index) -> {
       player.setGameMode(player.getUniqueId().equals(currentPlayer) ? GameMode.SURVIVAL : GameMode.SPECTATOR);
@@ -158,7 +157,7 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
 
   protected void finishJumpAndRun(@NotNull Player player) {
     jumps++;
-    jumpsDone++;
+    jumpAndRunsDone++;
 
     MessageKey.of("jnr-finished").broadcast(Prefix.CHALLENGES, player);
     exitJumpAndRun();
@@ -167,6 +166,7 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
 
   protected void exitJumpAndRun() {
     currentPlayer = null;
+    actionbar.hide();
     teleportBack();
     breakJumpAndRun();
     restartTimer();
@@ -184,14 +184,14 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
   public void writeGameState(@NotNull Document document) {
     super.writeGameState(document);
     document.set("jumps", jumps);
-    document.set("jumpsDone", jumpsDone);
+    document.set("jumpsDone", jumpAndRunsDone);
   }
 
   @Override
   public void loadGameState(@NotNull Document document) {
     super.loadGameState(document);
     jumps = document.getInt("jumps", jumps);
-    jumpsDone = document.getInt("jumpsDone", jumpsDone);
+    jumpAndRunsDone = document.getInt("jumpsDone", jumpAndRunsDone);
   }
 
   @ScheduledTask(ticks = 20, timerPolicy = TimerPolicy.ALWAYS, worldPolicy = ExtraWorldPolicy.USED)
@@ -213,6 +213,7 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
         finishJumpAndRun(event.getPlayer()); // is currentPlayer
       } else {
         SoundSample.PLOP.broadcast();
+        actionbar.send();
         buildNextJump();
       }
     } else if (event.getTo().getBlockY() < targetBlock.getY() - 2) {

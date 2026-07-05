@@ -7,11 +7,13 @@ import net.codingarea.challenges.plugin.challenges.type.IChallenge;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
+import net.codingarea.challenges.plugin.management.menu.generator.AbstractMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.MainMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.ChallengesMenuGenerator;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -81,6 +83,19 @@ public final class MenuManager {
     type.getMenuGenerator().openMenu(player, page);
 
     return true;
+  }
+
+  public void reopenCurrentMenus() {
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      reopenCurrentMenu(player);
+    }
+  }
+
+  public void reopenCurrentMenu(@NotNull Player player) {
+    // applies language change
+    MenuPosition position = MenuPosition.get(player);
+    if (!(position instanceof AbstractMenuGenerator.GeneratorMenuPosition generatorPosition)) return;
+    generatorPosition.getGenerator().openMenu(player, generatorPosition.getPage());
   }
 
   public void playNoPermissionsEffect(@NotNull Player player) {

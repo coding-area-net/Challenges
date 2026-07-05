@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.action;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeSetting;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.common.collection.IRandom;
 import org.bukkit.inventory.ItemStack;

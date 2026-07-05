@@ -25,8 +25,8 @@ public abstract class OneEnabledSetting extends Setting {
 
   @Override
   public void setEnabled(boolean enabled) {
-    super.setEnabled(enabled);
     if (isEnabled()) disableOthers();
+    super.setEnabled(enabled);
   }
 
   protected final void disableOthers() {

@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.management.menu.generator.impl.challenge;
 
+import lombok.Getter;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.ChallengeAnnotations;
@@ -15,7 +16,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;
 
 import java.util.*;
 
@@ -29,30 +29,39 @@ public class ChallengeListMenuGenerator extends ChallengesMenuGenerator {
   public static final int SLOT_OFFSET_LOWER = 2 * 9;
   private static final int[] SLOT_OFFSETS = {SLOT_OFFSET_UPPER, SLOT_OFFSET_DISPLAY, SLOT_OFFSET_SETTINGS, SLOT_OFFSET_LOWER};
 
+  public static final ItemStack UPDATED_CHALLENGE_ITEM = new StandardItemBuilder(Material.YELLOW_STAINED_GLASS_PANE, "§0").build();
+  public static final ItemStack NEW_CHALLENGE_ITEM = new StandardItemBuilder(Material.LIME_STAINED_GLASS_PANE, "§0").build();
+
   protected final List<IChallenge> assignedChallengesCache = new LinkedList<>();
 
+  @Getter
   protected final boolean newSuffix;
+  @Getter
   protected final boolean updatedSuffix;
   protected final boolean displayNewInFront;
+  protected final boolean displayUpdatedInFront;
 
   public ChallengeListMenuGenerator() {
     Document config = Challenges.getInstance().getConfigDocument();
     newSuffix = config.getBoolean(ConfigManager.Keys.NEW_SUFFIX);
     updatedSuffix = config.getBoolean(ConfigManager.Keys.UPDATED_SUFFIX);
     displayNewInFront = config.getBoolean(ConfigManager.Keys.NEW_IN_FRONT);
+    displayUpdatedInFront = config.getBoolean(ConfigManager.Keys.UPDATED_IN_FRONT);
   }
 
   @Override
   public void addToCache(@NotNull IChallenge challenge) {
-    if (displayNewInFront) {
+    if (displayNewInFront && ChallengeAnnotations.isNew(challenge)) {
       assignedChallengesCache.add(countNewChallenges(), challenge);
+    } else if (displayUpdatedInFront && ChallengeAnnotations.isUpdated(challenge)) {
+      assignedChallengesCache.add(countNewChallenges() + countUpdatedChallenges(), challenge);
     } else {
       assignedChallengesCache.add(challenge);
     }
   }
 
   @Override
-  public boolean isCached(@NonNull IChallenge challenge) {
+  public boolean isCached(@NotNull IChallenge challenge) {
     return assignedChallengesCache.contains(challenge);
   }
 
@@ -132,11 +141,11 @@ public class ChallengeListMenuGenerator extends ChallengesMenuGenerator {
 
   protected void setChallengeUpdateItemsAt(@NotNull IChallenge challenge, @NotNull Inventory inventory, int slotIndex, @NotNull Locale locale) {
     if (newSuffix && ChallengeAnnotations.isNew(challenge)) {
-      inventory.setItem(DISPLAY_SLOTS[slotIndex] + SLOT_OFFSET_UPPER, new StandardItemBuilder(Material.LIME_STAINED_GLASS_PANE, "§0").build());
-      inventory.setItem(DISPLAY_SLOTS[slotIndex] + SLOT_OFFSET_LOWER, new StandardItemBuilder(Material.LIME_STAINED_GLASS_PANE, "§0").build());
+      inventory.setItem(DISPLAY_SLOTS[slotIndex] + SLOT_OFFSET_UPPER, NEW_CHALLENGE_ITEM);
+      inventory.setItem(DISPLAY_SLOTS[slotIndex] + SLOT_OFFSET_LOWER, NEW_CHALLENGE_ITEM);
     } else if (updatedSuffix && ChallengeAnnotations.isUpdated(challenge)) {
-      inventory.setItem(DISPLAY_SLOTS[slotIndex] + SLOT_OFFSET_UPPER, new StandardItemBuilder(Material.YELLOW_STAINED_GLASS_PANE, "§0").build());
-      inventory.setItem(DISPLAY_SLOTS[slotIndex] + SLOT_OFFSET_LOWER, new StandardItemBuilder(Material.YELLOW_STAINED_GLASS_PANE, "§0").build());
+      inventory.setItem(DISPLAY_SLOTS[slotIndex] + SLOT_OFFSET_UPPER, UPDATED_CHALLENGE_ITEM);
+      inventory.setItem(DISPLAY_SLOTS[slotIndex] + SLOT_OFFSET_LOWER, UPDATED_CHALLENGE_ITEM);
     }
   }
 
@@ -193,6 +202,18 @@ public class ChallengeListMenuGenerator extends ChallengesMenuGenerator {
       if (ChallengeAnnotations.isNew(challenge)) {
         count++;
       } else if (displayNewInFront) {
+        break;
+      }
+    }
+    return count;
+  }
+
+  protected int countUpdatedChallenges() {
+    int count = 0;
+    for (IChallenge challenge : assignedChallengesCache) {
+      if (ChallengeAnnotations.isUpdated(challenge)) {
+        count++;
+      } else if (displayUpdatedInFront) {
         break;
       }
     }

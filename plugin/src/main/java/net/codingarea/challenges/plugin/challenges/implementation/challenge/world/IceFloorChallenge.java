@@ -3,10 +3,11 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.wor
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -36,7 +37,7 @@ public class IceFloorChallenge extends Setting {
   protected void onEnable() {
     bossbar.setContent((bossbar, player) -> {
       bossbar.setTitle(Message.forName("bossbar-ice-floor").asString(ignoreIce(player) ? Message.forName("disabled") : Message.forName("enabled")));
-      bossbar.setColor(ignoreIce(player) ? BarColor.RED : BarColor.GREEN);
+      bossbar.setColor(ignoreIce(player) ? BossBar.Color.RED : BossBar.Color.GREEN);
     });
     bossbar.show();
   }

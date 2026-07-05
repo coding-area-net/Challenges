@@ -5,13 +5,14 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChal
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeInstance;
@@ -39,7 +40,7 @@ public class ZeroHeartsChallenge extends SettingModifier {
       int currentTime = getCurrentTime();
       int maxTime = getValue() * 60;
       bossbar.setTitle(Message.forName("bossbar-zero-hearts").asString(maxTime - currentTime));
-      bossbar.setColor(BarColor.GREEN);
+      bossbar.setColor(BossBar.Color.GREEN);
       bossbar.setProgress(1 - ((float) currentTime / maxTime));
     });
     bossbar.show();
@@ -100,7 +101,7 @@ public class ZeroHeartsChallenge extends SettingModifier {
     if (!(event.getEntity() instanceof Player player)) return;
     if (ignorePlayer(player)) return;
     ChallengeHelper.kill(player);
-    MessageKey.of("zero-hearts-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(player));
+    MessageKey.of("zero-hearts-failed").broadcast(Prefix.CHALLENGES, player);
   }
 
 }

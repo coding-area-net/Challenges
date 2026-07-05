@@ -116,6 +116,7 @@ public final class ConfigManager {
     public final String NEW_SUFFIX = "challenge-updates.new.suffix";
     public final String NEW_IN_FRONT = "challenge-updates.new.in-front";
     public final String UPDATED_SUFFIX = "challenge-updates.updated.suffix";
+    public final String UPDATED_IN_FRONT = "challenge-updates.updated.in-front";
   }
 
 }

@@ -55,9 +55,4 @@ public enum BannerPattern {
     return patternType;
   }
 
-  @NotNull
-  public String getIdentifier() {
-    return patternType.getKeyOrThrow().getKey();
-  }
-
 }

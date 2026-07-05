@@ -4,12 +4,14 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.EntityDeathByPlayerEvent;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -39,8 +41,8 @@ public class MobsRespawnInEndChallenge extends Setting {
   @Override
   protected void onEnable() {
     bossbar.setContent((bar, player) -> {
-      bar.setColor(BarColor.PURPLE);
-      bar.setTitle(Message.forName("bossbar-respawn-end").asString(totalMobsInEnd));
+      bar.setColor(BossBar.Color.PURPLE);
+      bar.setTitle(MessageKey.of("bossbar-respawn-end"), totalMobsInEnd);
     });
     bossbar.show();
   }

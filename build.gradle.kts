@@ -6,6 +6,7 @@ allprojects {
   repositories {
     mavenCentral()
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+    maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://libraries.minecraft.net/")
     maven("https://jitpack.io")
   }
@@ -27,6 +28,7 @@ subprojects {
 
   tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"
+    options.compilerArgs.add("-Xlint:-removal") // TODO
   }
 
   tasks.named<ProcessResources>("processResources") {

@@ -5,7 +5,7 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChal
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -21,6 +21,7 @@ import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.misc.StringUtils;
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.boss.BarColor;
@@ -72,17 +73,17 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
   protected void onEnable() {
     bossbar.setContent((bossbar, player) -> {
       if (currentQuestion == null) {
-        bossbar.setColor(BarColor.YELLOW);
-        bossbar.setTitle(Message.forName("bossbar-quiz-waiting").asString());
+        bossbar.setColor(BossBar.Color.YELLOW);
+        bossbar.setTitle(MessageKey.of("bossbar-quiz-waiting"));
         return;
       }
       String time = "§e" + timeLeft + " §7" + (timeLeft == 1 ? Message.forName("second").asString() : Message.forName("seconds").asString());
       if (currentQuestionedPlayer != player) {
-        bossbar.setColor(BarColor.GREEN);
+        bossbar.setColor(BossBar.Color.GREEN);
         bossbar.setTitle(Message.forName("bossbar-quiz-question-other").asString(time, NameHelper.getName(currentQuestionedPlayer)));
         return;
       }
-      bossbar.setColor(BarColor.RED);
+      bossbar.setColor(BossBar.Color.RED);
       bossbar.setTitle(Message.forName("bossbar-quiz-question").asString(time));
     });
     bossbar.show();

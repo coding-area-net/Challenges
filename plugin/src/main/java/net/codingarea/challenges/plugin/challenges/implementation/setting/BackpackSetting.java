@@ -5,15 +5,13 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeConfigHelper;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.challenges.plugin.utils.bukkit.container.BukkitSerialization;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
@@ -61,13 +59,13 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
   public void playValueChangeTitle() {
     switch (getValue()) {
       case SHARED:
-        ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("item-backpack-setting-team"));
+        ChallengeHelper.playChallengeValueTitle(this, Message.forName("item-backpack-setting-team"));
         break;
       case PLAYER:
-        ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("item-backpack-setting-player"));
+        ChallengeHelper.playChallengeValueTitle(this, Message.forName("item-backpack-setting-player"));
         break;
       default:
-        ChallengeHelper.playToggleChallengeTitle(this, false);
+        ChallengeHelper.playChallengeToggleTitle(this, false);
     }
   }
 

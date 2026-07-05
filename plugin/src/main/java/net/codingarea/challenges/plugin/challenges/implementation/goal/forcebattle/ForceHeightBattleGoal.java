@@ -2,7 +2,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebat
 
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets.HeightTarget;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleGoal;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;

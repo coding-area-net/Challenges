@@ -1,31 +1,27 @@
 package net.codingarea.challenges.plugin.content.i18n.impl;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import net.codingarea.challenges.platform.message.MessageHolder;
-import net.codingarea.challenges.platform.message.MessagePlatform;
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.i18n.Prefix;
-import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
-import net.codingarea.challenges.plugin.content.i18n.TranslationManager;
+import net.codingarea.challenges.plugin.content.i18n.*;
+import net.codingarea.challenges.plugin.content.i18n.impl.format.ComponentFormatter;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.management.server.TitleManager;
-import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import net.codingarea.commons.common.collection.IRandom;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.title.Title;
+import net.kyori.adventure.util.Ticks;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.CheckReturnValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jspecify.annotations.NonNull;
 
+import java.time.Duration;
 import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 public class MessageKeyImpl implements MessageKey {
 
@@ -76,13 +72,13 @@ public class MessageKeyImpl implements MessageKey {
   @NotNull
   @Override
   public LocalizableMessage withArgs(@NotNull Object... args) {
-    return new LocalizableMessageImpl(args);
+    return new LocalizableMessageImpl(this, args);
   }
 
   @NotNull
   @Override
   public MessageHolder localize(@NotNull Locale locale) {
-    return new MessageHolderImpl(localizeRawValue(locale), MessageHolderImpl.EMPTY_ARGS);
+    return new MessageHolder(localizeRawValue(locale), MessageHolder.EMPTY_ARGS);
   }
 
   @NotNull
@@ -100,23 +96,7 @@ public class MessageKeyImpl implements MessageKey {
   @NotNull
   @Override
   public Object[] getLocalizableArgs() {
-    return MessageHolderImpl.EMPTY_ARGS;
-  }
-
-  protected void localizeArgs(@NotNull Locale locale, @NotNull Object[] args) {
-    for (int i = 0; i < args.length; i++) {
-      if (args[i] instanceof LocalizableMessage message) {
-        args[i] = message.localize(locale);
-      }
-    }
-  }
-
-  @CheckReturnValue
-  protected Object[] localizeArgsAsCopy(@NotNull Locale locale, @NotNull Object[] args) {
-    if (args.length == 0) return args;
-    Object[] localizedArgs = Arrays.copyOf(args, args.length); // avoid mutating original array
-    localizeArgs(locale, localizedArgs);
-    return localizedArgs;
+    return MessageHolder.EMPTY_ARGS;
   }
 
   @Override
@@ -136,9 +116,10 @@ public class MessageKeyImpl implements MessageKey {
   }
 
   @Nullable
-  protected String stringifyPrefix(@NotNull Locale locale, @Nullable Prefix prefix) {
+  protected String localizePrefix(@NotNull Locale locale, @Nullable Prefix prefix) {
     if (prefix == null) return null;
     MessageKey asKey = prefix.getKey();
+    // TODO remove when legacy color impl is removed
     if (asKey.isCached(locale)) {
       return asKey.localizeRawValueAsSingleLine(locale);
     }
@@ -146,36 +127,46 @@ public class MessageKeyImpl implements MessageKey {
   }
 
   @NotNull
-  protected Locale getPlayerLocale(@NotNull Player player) {
+  protected static Locale getPlayerLocale(@NotNull Player player) {
     return Challenges.getInstance().getTranslationManager().getLanguageProvider().getPlayerLanguage(player);
   }
 
-  @NotNull
-  protected MessagePlatform getMessagePlatform() {
-    return Challenges.getInstance().getPlatformManager().getMessagePlatform();
+  protected static void localizeArgs(@NotNull Locale locale, @NotNull Object[] args) {
+    for (int i = 0; i < args.length; i++) {
+      if (args[i] instanceof LocalizableMessage message) {
+        args[i] = message.localize(locale);
+      }
+    }
   }
 
+  @NotNull
+  @CheckReturnValue
+  protected static Object[] localizeArgsAsCopy(@NotNull Locale locale, @NotNull Object[] args) {
+    if (args.length == 0) return args;
+    // avoid mutating original array & ensure args array is really of type Object, so MessageHolder can be stored
+    Object[] localizedArgs = new Object[args.length];
+    System.arraycopy(args, 0, localizedArgs, 0, args.length);
+    localizeArgs(locale, localizedArgs);
+    return localizedArgs;
+  }
 
   // Action Implementations
 
   @Override
-  public void send(@NotNull CommandSender target, @Nullable Prefix prefix, @NonNull @NotNull Object... args) {
+  public void send(@NotNull CommandSender target, @Nullable Prefix prefix, @NotNull Object... args) {
     if (target instanceof Player) {
       send((Player) target, prefix, args);
     } else {
       Locale locale = Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class)
         .map(LanguageLoader::getConfigLanguage)
         .orElse(TranslationManager.FALLBACK_LOCALE);
-      localizeArgs(locale, args);
-      getMessagePlatform().sendSenderMessage(target, stringifyPrefix(locale, prefix), localizeRawValue(locale), args);
+      target.sendMessage(asComponent(locale, prefix, args));
     }
   }
 
   @Override
   public void send(@NotNull Player target, @Nullable Prefix prefix, @NotNull Object... args) {
-    Locale locale = getPlayerLocale(target);
-    localizeArgs(locale, args);
-    getMessagePlatform().sendChatMessage(target, stringifyPrefix(locale, prefix), localizeRawValue(locale), args);
+    target.sendMessage(asComponent(getPlayerLocale(target), prefix, args));
   }
 
   @Override
@@ -183,78 +174,89 @@ public class MessageKeyImpl implements MessageKey {
     Locale locale = getPlayerLocale(target);
     localizeArgs(locale, args);
     String raw = random.choose(localizeRawValue(locale));
-    getMessagePlatform().sendChatMessage(target, stringifyPrefix(locale, prefix), new String[]{raw}, args);
+    target.sendMessage(ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), new String[]{raw}, args));
   }
 
   @Override
   public void broadcast(@Nullable Prefix prefix, @NotNull Object... args) {
-    doBroadcast(prefix, args, getMessagePlatform()::sendChatMessage);
+    doBroadcast(prefix, args, Player::sendMessage);
   }
 
   @Override
   public void broadcastRandom(@Nullable Prefix prefix, @NotNull Object... args) {
     int index = random.nextInt(getMinValueLengthIncludingFallback());
-    doBroadcast(prefix, args, (target, localizedPrefix, raw, localizedArgs) ->
-      getMessagePlatform().sendChatMessage(target, localizedPrefix, new String[]{raw[index]}, localizedArgs));
+    doBroadcast0(Player::sendMessage, locale ->
+      ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), new String[]{localizeRawValue(locale)[index]}, localizeArgsAsCopy(locale, args)));
   }
 
   @Override
-  public void sendTitle(@NotNull Player target, @NonNull @NotNull Object... args) {
-    Locale locale = getPlayerLocale(target);
-    localizeArgs(locale, args);
-    getMessagePlatform().sendTitle(target, localizeRawValue(locale), args, TitleManager.FADEIN, TitleManager.DURATION, TitleManager.FADEOUT);
+  public void sendTitle(@NotNull Player target, @NotNull Object... args) {
+    target.showTitle(createTitleFromComponentList(asComponents(target, args),
+      Title.Times.times(Ticks.duration(TitleManager.FADEIN), Ticks.duration(TitleManager.DURATION), Ticks.duration(TitleManager.FADEOUT))));
   }
 
   @Override
-  public void sendTitleInstantly(@NotNull Player target, @NonNull @NotNull Object... args) {
-    Locale locale = getPlayerLocale(target);
-    localizeArgs(locale, args);
-    getMessagePlatform().sendTitle(target, localizeRawValue(locale), args, 0, TitleManager.DURATION, TitleManager.FADEOUT);
+  public void sendTitleInstantly(@NotNull Player target, @NotNull Object... args) {
+    target.showTitle(createTitleFromComponentList(asComponents(target, args),
+      Title.Times.times(Duration.ZERO, Ticks.duration(TitleManager.DURATION), Ticks.duration(TitleManager.FADEOUT))));
   }
 
   @Override
   public void broadcastTitle(@NotNull Object... args) {
-    doBroadcast(null, args, (target, _, raw, localizedArgs) ->
-      getMessagePlatform().sendTitle(target, raw, localizedArgs, TitleManager.FADEIN, TitleManager.DURATION, TitleManager.FADEOUT));
+    doBroadcastAsList(args, (player, components) ->
+      player.showTitle(createTitleFromComponentList(components,
+        Title.Times.times(Ticks.duration(TitleManager.FADEIN), Ticks.duration(TitleManager.DURATION), Ticks.duration(TitleManager.FADEOUT))))
+    );
   }
 
   @Override
-  public void broadcastTitleInstantly(@NonNull @NotNull Object... args) {
-    doBroadcast(null, args, (target, _, raw, localizedArgs) ->
-      getMessagePlatform().sendTitle(target, raw, localizedArgs, 0, TitleManager.DURATION, TitleManager.FADEOUT));
+  public void broadcastTitleInstantly(@NotNull Object... args) {
+    doBroadcastAsList(args, (player, components) ->
+      player.showTitle(createTitleFromComponentList(components,
+        Title.Times.times(Duration.ZERO, Ticks.duration(TitleManager.DURATION), Ticks.duration(TitleManager.FADEOUT))))
+    );
   }
 
   @Override
   public void sendActionBar(@NotNull Player target, @NotNull Object... args) {
-    Locale locale = getPlayerLocale(target);
-    localizeArgs(locale, args);
-    getMessagePlatform().sendActionBar(target, localizeRawValueAsSingleLine(locale), args);
+    target.sendActionBar(asComponent(getPlayerLocale(target), null, args));
   }
 
   @Override
   public void broadcastActionBar(@NotNull Object... args) {
-    // array will never be empty
-    doBroadcast(null, args, (target, _, raw, localizedArgs) ->
-      getMessagePlatform().sendActionBar(target, raw[0], localizedArgs));
+    doBroadcast(null, args, Player::sendActionBar);
   }
 
   @NotNull
-  @Override
-  public Inventory createInventory(@NotNull Locale locale, int size, @NotNull Object... args) {
-    localizeArgs(locale, args);
-    return getMessagePlatform().createInventory(MenuPosition.HOLDER, size, localizeRawValueAsSingleLine(locale), args);
+  protected Title createTitleFromComponentList(@NotNull List<Component> components, @NotNull Title.Times timing) {
+    return Title.title(!components.isEmpty() ? components.getFirst() : Component.empty(),
+      components.size() > 1 ? components.get(1) : Component.empty(), timing);
   }
 
-  @Override
-  public @NotNull Inventory createInventory(@NotNull Locale locale, @NotNull InventoryType type, @NotNull Object... args) {
-    localizeArgs(locale, args);
-    return getMessagePlatform().createInventory(MenuPosition.HOLDER, type, localizeRawValueAsSingleLine(locale), args);
+  protected void doBroadcast(@Nullable Prefix prefix, @NotNull Object[] args, @NotNull BiConsumer<Player, Component> messageSender) {
+    doBroadcast0(messageSender, locale ->
+      ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), localizeRawValue(locale), localizeArgsAsCopy(locale, args)));
   }
 
-  protected void doBroadcast(@Nullable Prefix prefix, @NotNull Object[] args, @NotNull SendMessageConsumer messageSender) {
-    for (Player player : Bukkit.getOnlinePlayers()) {
-      Locale locale = getPlayerLocale(player);
-      messageSender.accept(player, stringifyPrefix(locale, prefix), localizeRawValue(locale), localizeArgsAsCopy(locale, args));
+  protected void doBroadcastAsList(@NotNull Object[] args, @NotNull BiConsumer<Player, List<Component>> messageSender) {
+    doBroadcast0(messageSender, locale ->
+      ComponentFormatter.deserializeLinesAsListWithArgs(localizeRawValue(locale), localizeArgsAsCopy(locale, args)));
+  }
+
+  protected <T> void doBroadcast0(@NotNull BiConsumer<Player, T> messageSender, @NotNull Function<Locale, T> compute) {
+    Collection<? extends Player> targets = Bukkit.getOnlinePlayers();
+    if (targets.isEmpty()) return;
+    if (targets.size() == 1) { // skip overhead
+      Player player = targets.iterator().next();
+      messageSender.accept(player, compute.apply(getPlayerLocale(player)));
+      return;
+    }
+
+    Map<Locale, T> localizedCache = new HashMap<>();
+    for (Player target : targets) {
+      Locale locale = getPlayerLocale(target);
+      T formatted = localizedCache.computeIfAbsent(locale, compute);
+      messageSender.accept(target, formatted);
     }
   }
 
@@ -270,87 +272,18 @@ public class MessageKeyImpl implements MessageKey {
     return min; // > 1
   }
 
-
-  // Item Implementations
-
+  @NotNull
   @Override
-  public void applyAsItemNameAndLore(@NotNull Locale locale, @NotNull ItemMeta item, @NotNull Object... args) {
+  public Component asComponent(@NotNull Locale locale, @Nullable Prefix prefix, @NotNull Object... args) {
     localizeArgs(locale, args);
-
-    String[] rawValue = localizeRawValue(locale); // length >= 1
-    if (rawValue.length == 1) {
-      applyAsItemName(locale, item, args);
-      return;
-    }
-
-    String nameLine = rawValue[0];
-    getMessagePlatform().applyItemName(item, nameLine, args);
-
-    String[] loreLines = Arrays.copyOfRange(rawValue, 1, rawValue.length);
-    getMessagePlatform().applyItemLore(item, loreLines, args);
+    return ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), localizeRawValue(locale), args);
   }
 
+  @NotNull
   @Override
-  public void applyAsItemName(@NotNull Locale locale, @NotNull ItemMeta item, @NotNull Object... args) {
+  public List<Component> asComponents(@NotNull Locale locale, @NotNull Object... args) {
     localizeArgs(locale, args);
-    getMessagePlatform().applyItemName(item, localizeRawValueAsSingleLine(locale), args);
-  }
-
-  @Override
-  public void appendToItemName(@NotNull Locale locale, @NotNull ItemMeta item, boolean withSpace, @NotNull Object... args) {
-    String rawValue = localizeRawValueAsSingleLine(locale);
-    if (withSpace) rawValue = " " + rawValue;
-    getMessagePlatform().appendItemName(item, rawValue, args);
-  }
-
-  @Override
-  public void applyAsItemLore(@NotNull Locale locale, @NotNull ItemMeta item, @NotNull Object... args) {
-    localizeArgs(locale, args);
-    getMessagePlatform().applyItemLore(item, localizeRawValue(locale), args);
-  }
-
-  @Override
-  public void appendToItemLore(@NotNull Locale locale, @NotNull ItemMeta item, @NotNull Object... args) {
-    localizeArgs(locale, args);
-    getMessagePlatform().appendItemLore(item, localizeRawValue(locale), args);
-  }
-
-  @FunctionalInterface
-  public interface SendMessageConsumer {
-    void accept(@NotNull Player target, @Nullable String localizedPrefix, @NotNull String[] raw, @NotNull Object[] localizedArgs);
-  }
-
-  @AllArgsConstructor
-  public class LocalizableMessageImpl implements LocalizableMessage {
-
-    private final Object[] args;
-
-    @NotNull
-    @Override
-    public MessageHolder localize(@NotNull Locale locale) {
-      return new MessageHolderImpl(localizeRawValue(locale), localizeArgsAsCopy(locale, args));
-    }
-
-    @NotNull
-    @Override
-    public MessageHolder localize(@NotNull Player playerLocale) {
-      return localize(getPlayerLocale(playerLocale));
-    }
-
-    @Override
-    public @NotNull MessageKey getLocalizableKey() {
-      return MessageKeyImpl.this;
-    }
-
-    @NotNull
-    @Override
-    public Object[] getLocalizableArgs() {
-      return args;
-    }
-  }
-
-  public record MessageHolderImpl(String[] miniMessageRaw, Object[] positionalArgs) implements MessageHolder {
-    public static final Object[] EMPTY_ARGS = new Object[0];
+    return ComponentFormatter.deserializeLinesAsListWithArgs(localizeRawValue(locale), args);
   }
 
 }

@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.utils.item;
 
-import net.codingarea.challenges.plugin.content.ItemDescription;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.ItemDescription;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.commons.bukkit.utils.item.BannerPattern;
 import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
 import net.codingarea.commons.common.config.Document;

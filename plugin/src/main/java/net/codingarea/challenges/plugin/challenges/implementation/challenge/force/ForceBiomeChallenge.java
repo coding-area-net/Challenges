@@ -5,7 +5,8 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.CompletableF
 import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -13,6 +14,7 @@ import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBo
 import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.common.config.Document;
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -55,24 +57,24 @@ public class ForceBiomeChallenge extends CompletableForceChallenge {
   protected BiConsumer<BossBarInstance, Player> setupBossbar() {
     return (bossbar, player) -> {
       if (getState() == WAITING) {
-        bossbar.setTitle(Message.forName("bossbar-force-biome-waiting").asString());
+        bossbar.setTitle(MessageKey.of("bossbar-force-biome-waiting"));
         return;
       }
 
-      bossbar.setColor(BarColor.GREEN);
+      bossbar.setColor(BossBar.Color.GREEN);
       bossbar.setProgress(getProgress());
-      bossbar.setTitle(Message.forName("bossbar-force-biome-instruction").asComponent(biome, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation())));
+      bossbar.setTitle(MessageKey.of("bossbar-force-biome-instruction"), biome, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation()));
     };
   }
 
   @Override
   protected void broadcastFailedMessage() {
-    Message.forName("force-biome-fail").broadcast(Prefix.CHALLENGES, BukkitStringUtils.getBiomeName(biome));
+    MessageKey.of("force-biome-fail").broadcast(Prefix.CHALLENGES, biome);
   }
 
   @Override
   protected void broadcastSuccessMessage(@NotNull Player player) {
-    Message.forName("force-biome-success").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), BukkitStringUtils.getBiomeName(biome));
+    MessageKey.of("force-biome-success").broadcast(Prefix.CHALLENGES, player, biome);
   }
 
   @Override

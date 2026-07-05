@@ -3,8 +3,7 @@ package net.codingarea.challenges.plugin.management.menu.generator.categorised;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.ChallengeAnnotations;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.menu.generator.implementation.SettingsMenuGenerator;
@@ -12,7 +11,6 @@ import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
-import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 

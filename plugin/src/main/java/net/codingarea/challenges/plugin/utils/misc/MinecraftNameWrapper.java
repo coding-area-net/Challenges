@@ -50,8 +50,8 @@ public class MinecraftNameWrapper {
   public static final GameRule<Boolean> WANDERING_TRADERS = getGameRuleByNames("DO_TRADER_SPAWNING", "SPAWN_WANDERING_TRADERS");
 
   // the game rule for toggling raids has been inverted from "disableRaids" to "raids" in the 1.21->26.1 update
-  public static final GameRule<Boolean> DISABLE_RAIDS = getFirstConstantByNamesOrNull(GameRule.class, "DISABLE_RAIDS");
-  public static final GameRule<Boolean> ENABLE_RAIDS = getFirstConstantByNamesOrNull(GameRule.class, "RAIDS");
+  private static final GameRule<Boolean> DISABLE_RAIDS = getFirstConstantByNamesOrNull(GameRule.class, "DISABLE_RAIDS");
+  private static final GameRule<Boolean> ENABLE_RAIDS = getFirstConstantByNamesOrNull(GameRule.class, "RAIDS");
 
   @NotNull
   public static Tuple<GameRule<Boolean>, Boolean> getDisableRaidsGameRulePair() {

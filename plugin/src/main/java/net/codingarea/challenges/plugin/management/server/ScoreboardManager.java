@@ -5,6 +5,7 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
+import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeActionBar;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBossBar;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeScoreboard;
 import org.bukkit.Bukkit;
@@ -19,6 +20,7 @@ public final class ScoreboardManager {
 
   private final List<ChallengeBossBar> bossbars = new ArrayList<>();
   private ChallengeScoreboard currentScoreboard;
+  private ChallengeActionBar currentActionBar;
 
   public ScoreboardManager() {
     ChallengeAPI.subscribeLoader(LanguageLoader.class, this::updateAll);
@@ -47,6 +49,14 @@ public final class ScoreboardManager {
     if (currentScoreboard != null) {
       currentScoreboard.update();
     }
+    if (currentActionBar != null) {
+      currentActionBar.send();
+    }
+  }
+
+  @NotNull
+  public List<ChallengeBossBar> getCurrentBossBars() {
+    return bossbars;
   }
 
   public void showBossBar(@NotNull ChallengeBossBar bossbar) {
@@ -56,8 +66,8 @@ public final class ScoreboardManager {
   }
 
   public void hideBossBar(@NotNull ChallengeBossBar bossbar) {
-    if (!bossbars.remove(bossbar)) return;
-    Bukkit.getOnlinePlayers().forEach(bossbar::applyHide);
+    bossbar.applyHide();
+    bossbars.remove(bossbar);
   }
 
   @Nullable
@@ -80,6 +90,18 @@ public final class ScoreboardManager {
     scoreboard.update();
   }
 
+  @Nullable
+  public ChallengeActionBar getCurrentActionBar() {
+    return currentActionBar;
+  }
+
+  public void setCurrentActionBar(@Nullable ChallengeActionBar actionbar) {
+    if (currentActionBar == actionbar) return;
+
+    currentActionBar = actionbar;
+    Challenges.getInstance().getChallengeTimer().updateActionbar();
+  }
+
   public void disable() {
     for (ChallengeBossBar bossbar : bossbars.toArray(new ChallengeBossBar[0])) {
       hideBossBar(bossbar);
@@ -93,6 +115,10 @@ public final class ScoreboardManager {
 
   public boolean isShown(@NotNull ChallengeScoreboard scoreboard) {
     return currentScoreboard == scoreboard;
+  }
+
+  public boolean isShown(@NotNull ChallengeActionBar actionbar) {
+    return currentActionBar == actionbar;
   }
 
 }

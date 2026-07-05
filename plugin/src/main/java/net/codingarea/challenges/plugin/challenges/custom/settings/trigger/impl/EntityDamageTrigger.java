@@ -2,7 +2,7 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.trigger.impl
 
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder.PotionBuilder;

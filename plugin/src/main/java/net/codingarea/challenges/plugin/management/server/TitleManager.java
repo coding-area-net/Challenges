@@ -2,7 +2,9 @@ package net.codingarea.challenges.plugin.management.server;
 
 import lombok.Getter;
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.challenges.type.IChallenge;
+import net.codingarea.challenges.plugin.challenges.type.IGoal;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.entity.Player;
@@ -27,6 +29,28 @@ public final class TitleManager {
     message.broadcastTitle();
   }
 
+  public void sendChallengeStatusTitle(@NotNull MessageKey message, @NotNull Object... args) {
+    if (!challengeStatusEnabled) return;
+    message.broadcastTitle(args);
+  }
+
+  public void sendChallengeToggleTitle(@NotNull IChallenge challenge, boolean enabled) {
+    MessageKey titleMessage = enabled ? MessageKey.of("title.challenge-enabled") : MessageKey.of("title.challenge-disabled");
+    sendChallengeStatusTitle(titleMessage, challenge.getChallengeName());
+  }
+
+  public void sendGoalToggleTitle(@NotNull IGoal goal, boolean enabled) {
+    MessageKey titleMessage = enabled ? MessageKey.of("title.goal-enabled") : MessageKey.of("title.goal-disabled");
+    sendChallengeStatusTitle(titleMessage, goal.getChallengeName());
+  }
+
+  public void sendChallengeValueTitle(@NotNull IChallenge challenge, @NotNull Object arg) {
+    MessageKey titleMessage = MessageKey.of("title.challenge-value-changed");
+    sendChallengeStatusTitle(titleMessage, challenge.getChallengeName(), arg);
+  }
+
+
+  @Deprecated
   public void sendChallengeStatusTitle(@NotNull Message message, @NotNull Object... args) {
     if (!challengeStatusEnabled) return;
     message.broadcastTitle(args);

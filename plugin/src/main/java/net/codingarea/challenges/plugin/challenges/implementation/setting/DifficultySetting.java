@@ -3,19 +3,15 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
-import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
-import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.common.config.Document;
-import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.TranslatableComponent;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.Material;
@@ -41,16 +37,18 @@ public class DifficultySetting extends Modifier implements SenderCommand, TabCom
   @NotNull
   @Override
   public ItemStack getSettingsItemPreset() {
-    switch (getValue()) {
-      case 0:
-        return DefaultItem.create(Material.LIME_DYE, getDifficultyName()).build();
-      case 1:
-        return DefaultItem.create(MinecraftNameWrapper.GREEN_DYE, getDifficultyName()).build();
-      case 2:
-        return DefaultItem.create(Material.ORANGE_DYE, getDifficultyName()).build();
-      default:
-        return DefaultItem.create(MinecraftNameWrapper.RED_DYE, getDifficultyName()).build();
-    }
+    return switch (getDifficultyByValue(getValue())) {
+      case PEACEFUL -> new ItemStack(Material.LIME_DYE);
+      case EASY -> new ItemStack(MinecraftNameWrapper.GREEN_DYE);
+      case NORMAL -> new ItemStack(Material.ORANGE_DYE);
+      case HARD -> new ItemStack(MinecraftNameWrapper.RED_DYE);
+    };
+  }
+
+  @NotNull
+  @Override
+  public Component getSettingsName() {
+    return getDifficultyComponent();
   }
 
   @Override
@@ -58,13 +56,9 @@ public class DifficultySetting extends Modifier implements SenderCommand, TabCom
     setDifficulty(getDifficultyByValue(getValue()));
   }
 
-  private String getDifficultyName() {
-    return getDifficultyComponent().toLegacyText();
-  }
-
   @Override
   public void playValueChangeTitle() {
-    ChallengeHelper.playChangeChallengeValueTitle(this, getDifficultyName());
+    ChallengeHelper.playChallengeValueTitle(this, getDifficultyComponent());
   }
 
   private void setDifficulty(Difficulty difficulty) {
@@ -98,7 +92,7 @@ public class DifficultySetting extends Modifier implements SenderCommand, TabCom
   public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 
     if (args.length == 0) {
-      MessageKey.of("command-difficulty-current").send(sender, Prefix.CHALLENGES, getDifficultyComponent());
+      getChallengeMessageKey("command-current").send(sender, Prefix.CHALLENGES, getDifficultyComponent());
       return;
     }
 
@@ -109,27 +103,24 @@ public class DifficultySetting extends Modifier implements SenderCommand, TabCom
     }
 
     setValue(difficulty);
-    Message.forName("command-difficulty-change").broadcast(Prefix.CHALLENGES, getDifficultyComponent());
-
+    getChallengeMessageKey("command-set").broadcast(Prefix.CHALLENGES, getDifficultyComponent());
+    playValueChangeTitle();
   }
 
-  private BaseComponent getDifficultyComponent() {
-    TranslatableComponent name = BukkitStringUtils.getDifficultyName(getDifficultyByValue(getValue()));
-    switch (getValue()) {
-      case 0:
-        name.setColor(ChatColor.GREEN);
-        break;
-      case 1:
-        name.setColor(ChatColor.DARK_GREEN);
-        break;
-      case 2:
-        name.setColor(ChatColor.GOLD);
-        break;
-      default:
-        name.setColor(ChatColor.RED);
-        break;
-    }
-    return name;
+  @NotNull
+  private Component getDifficultyComponent() {
+    Difficulty difficulty = getDifficultyByValue(getValue());
+    return Component.translatable(difficulty).color(getDifficultyColor(difficulty));
+  }
+
+  @NotNull
+  private TextColor getDifficultyColor(@NotNull Difficulty difficulty) {
+    return switch (difficulty) {
+      case PEACEFUL -> NamedTextColor.DARK_GREEN;
+      case EASY -> NamedTextColor.GREEN;
+      case NORMAL -> NamedTextColor.GOLD;
+      case HARD -> NamedTextColor.RED;
+    };
   }
 
   @Nullable

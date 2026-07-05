@@ -2,14 +2,14 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.i18n.ArgumentFormat;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.DefaultItems;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
-import net.codingarea.challenges.plugin.utils.misc.NameHelper;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -47,37 +47,44 @@ public class DeathMessageSetting extends Modifier {
   public void playValueChangeTitle() {
     switch (getValue()) {
       case ENABLED:
-        ChallengeHelper.playToggleChallengeTitle(this, true);
+        ChallengeHelper.playChallengeToggleTitle(this, true);
         return;
       case VANILLA:
-        ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("item-death-message-setting-vanilla"));
+        ChallengeHelper.playChallengeValueTitle(this, Message.forName("item-death-message-setting-vanilla"));
         return;
       default:
-        ChallengeHelper.playToggleChallengeTitle(this, false);
+        ChallengeHelper.playChallengeToggleTitle(this, false);
     }
   }
 
   @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
   public void onDeath(@NotNull PlayerDeathEvent event) {
-    event.setDeathMessage(null);
-    if (hide) return;
-
-    String original = event.getDeathMessage();
-    Player entity = event.getEntity();
-    switch (getValue()) {
-      case ENABLED:
-        EntityDamageEvent cause = entity.getLastDamageCause();
-        if (cause != null && cause.getCause() != DamageCause.CUSTOM) {
-          Message.forName("death-message-cause").broadcast(Prefix.CHALLENGES, NameHelper.getName(entity), DamageDisplaySetting.getCause(cause));
-        } else {
-          Message.forName("death-message").broadcast(Prefix.CHALLENGES, NameHelper.getName(entity));
-        }
-        return;
-      case VANILLA:
-        if (original != null) {
-          Bukkit.broadcastMessage(Prefix.CHALLENGES + "§7" + original);
-        }
+    if (hide) {
+      event.deathMessage(null);
+      return;
     }
+
+    Player player = event.getEntity();
+    switch (getValue()) {
+      case ENABLED -> {
+        EntityDamageEvent cause = player.getLastDamageCause();
+        if (cause != null && cause.getCause() != DamageCause.CUSTOM) {
+          MessageKey.of("death-message-cause").broadcast(Prefix.CHALLENGES, player, ArgumentFormat.DAMAGE_CAUSE.apply(cause));
+        } else {
+          MessageKey.of("death-message").broadcast(Prefix.CHALLENGES, player);
+        }
+      }
+      case VANILLA -> {
+        Component original = event.deathMessage();
+        if (original != null) {
+          for (Player target : Bukkit.getOnlinePlayers()) {
+            target.sendMessage(Component.text().append(Prefix.CHALLENGES.getKey().asComponent(player)).append(original));
+          }
+        }
+      }
+    }
+
+    event.deathMessage(null);
   }
 
   public void setHideMessagesTemporarily(boolean hide) {

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.utils.bukkit.container.PlayerData;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.ReflectionUtil;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
@@ -138,7 +138,7 @@ public final class WorldManager {
     for (Player player : Bukkit.getOnlinePlayers()) {
       if (player.getWorld() != flatWorld) continue;
 
-      Location location = player.getRespawnLocation();
+      Location location = getRespawnLocation(player);
       if (location == null) {
         World world = Bukkit.getWorld(levelName);
         if (world == null) {
@@ -148,6 +148,16 @@ public final class WorldManager {
       }
 
       player.teleport(location);
+    }
+  }
+
+  @Nullable
+  @SuppressWarnings("deprecation")
+  private Location getRespawnLocation(@NotNull Player player) {
+    try {
+      return player.getRespawnLocation(); // introduced in 1.20.4
+    } catch (Error e) {
+      return player.getBedSpawnLocation(); // deprecated since 1.20.4
     }
   }
 

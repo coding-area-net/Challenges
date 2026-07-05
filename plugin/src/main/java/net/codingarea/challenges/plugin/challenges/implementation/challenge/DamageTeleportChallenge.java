@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -38,7 +38,7 @@ public class DamageTeleportChallenge extends SettingModifier {
 
   @Override
   public void playValueChangeTitle() {
-    ChallengeHelper.playChangeChallengeValueTitle(this, getValue() == 0 ? Message.forName("everyone").asString() : Message.forName("player").asString());
+    ChallengeHelper.playChallengeValueTitle(this, getValue() == 0 ? Message.forName("everyone").asString() : Message.forName("player").asString());
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder;
 import com.google.common.collect.Lists;
 import lombok.Getter;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.generator.legacy.MenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.IParentCustomGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.SubSettingChooseMultipleMenuGenerator;

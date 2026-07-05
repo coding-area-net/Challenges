@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class BastionSpawnSetting extends NetherPortalSpawnSetting {
 
   public BastionSpawnSetting() {
-    super(MenuType.SETTINGS, null, StructureType.BASTION_REMNANT, new ItemStack(Material.NETHER_BRICK_STAIRS),
+    super(MenuType.SETTINGS, null, StructureType.BASTION_REMNANT, new ItemStack(Material.POLISHED_BLACKSTONE_BRICKS),
       "bastion-spawn", "unable-to-find-bastion",
       Arrays.stream(ExperimentalUtils.getMaterials()).filter(material -> material.name().contains("BASALT")).collect(Collectors.toList()));
   }

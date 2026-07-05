@@ -3,15 +3,14 @@ package net.codingarea.challenges.plugin.management.server;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IGoal;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
-import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.commons.common.config.Document;
 import net.codingarea.commons.common.misc.ReflectionUtils;
-import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -22,7 +21,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 public final class ServerManager {
@@ -103,11 +101,11 @@ public final class ServerManager {
 
     Challenges.getInstance().getChallengeTimer().pause(false);
 
-    String winnerString = StringUtils.getIterableAsString(winners, "§7, ", player -> "§e§l" + NameHelper.getName(player));
-    String time = Challenges.getInstance().getChallengeTimer().getFormattedTime();
     String seed = Bukkit.getWorlds().isEmpty() ? "?" :
       String.valueOf(ChallengeAPI.getGameWorld(Environment.NORMAL).getSeed());
-    endCause.getMessage(!winners.isEmpty()).broadcast(Prefix.CHALLENGES, time, winnerString, seed);
+    LocalizableMessage winnersFormat = LocalizableMessage.joinList(winners);
+    LocalizableMessage timeFormat = Challenges.getInstance().getChallengeTimer().getFormattedTime();
+    endCause.getMessage(!winners.isEmpty()).broadcast(Prefix.CHALLENGES, timeFormat, winnersFormat, seed);
 
   }
 

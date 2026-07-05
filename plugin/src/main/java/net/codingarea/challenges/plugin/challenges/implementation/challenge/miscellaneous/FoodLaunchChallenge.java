@@ -3,9 +3,8 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.mis
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.EntityUtils;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -14,7 +13,6 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @Since("2.0.2")
 public class FoodLaunchChallenge extends SettingModifier {
@@ -31,7 +29,7 @@ public class FoodLaunchChallenge extends SettingModifier {
 
   @Override
   public void playValueChangeTitle() {
-    ChallengeHelper.playChangeChallengeValueTitle(this, Message.forName("subtitle-launcher-description").asString(getValue()));
+    ChallengeHelper.playChallengeValueTitle(this, Message.forName("subtitle-launcher-description").asString(getValue()));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

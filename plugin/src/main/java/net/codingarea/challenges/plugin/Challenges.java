@@ -55,7 +55,6 @@ public final class Challenges extends BukkitModule {
   private GeneratorWorldPortalManager generatorWorldPortalManager;
   private TeamProvider teamProvider;
   private TranslationManager translationManager;
-  private PlatformManager platformManager;
 
   @NotNull
   public static Challenges getInstance() {
@@ -95,7 +94,6 @@ public final class Challenges extends BukkitModule {
       new UpdateLoader()
     );
 
-    platformManager = new PlatformManager();
     databaseManager = new DatabaseManager();
     worldManager = new WorldManager();
     serverManager = new ServerManager();
@@ -120,14 +118,12 @@ public final class Challenges extends BukkitModule {
   }
 
   private void loadManagers() {
-    platformManager.createPlatforms();
     loaderRegistry.load();
     worldManager.load();
     challengeTimer.loadSession();
   }
 
   private void enableManagers() {
-    platformManager.enablePlatforms();
     gameWorldStorage.enable();
     challengeLoader.enable();
     customSettingsLoader.enable();
@@ -177,7 +173,6 @@ public final class Challenges extends BukkitModule {
     registerCommand(new ForwardingCommand("time set midnight"), "midnight");
     registerCommand(new ResultCommand(), "result");
     registerCommand(new SkipTimerCommand(), "skiptimer");
-    registerCommand(new LanguageCommand(), "setlanguage");
     registerListenerCommand(new GodModeCommand(), "godmode");
   }
 
@@ -221,8 +216,6 @@ public final class Challenges extends BukkitModule {
       }
       challengeManager.clearChallengeCache();
     }
-
-    if (platformManager != null) platformManager.disablePlatforms();
   }
 
 }

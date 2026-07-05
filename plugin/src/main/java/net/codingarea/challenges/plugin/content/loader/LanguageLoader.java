@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.content.loader;
 
 import lombok.Getter;
 import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.i18n.LanguageProvider;
 import net.codingarea.challenges.plugin.content.i18n.TranslationManager;
 import net.codingarea.challenges.plugin.management.files.ConfigManager;
@@ -33,14 +34,11 @@ public final class LanguageLoader extends ContentLoader {
   @Getter
   private Locale configLanguage; // default, will be ignored if custom LanguageProvider is set in TranslationManager
   @Getter
-  @Deprecated
-  private final boolean smallCapsFont = false;
-  @Getter
   private boolean onlineUpdateEnabled;
   @Getter
   private Set<String> availableLanguageTags;
-  @Getter
   private boolean skipMigration;
+  private Set<String> loadedLanguages;
 
   @Override
   protected void load() {
@@ -51,6 +49,7 @@ public final class LanguageLoader extends ContentLoader {
     skipMigration = config.getBoolean(ConfigManager.Keys.SKIP_LANGUAGE_MIGRATION, false);
     configLanguage = Locale.forLanguageTag(configLanguageTag);
     availableLanguageTags = new HashSet<>();
+    loadedLanguages = new HashSet<>();
 
     // extracted the language provider so it can easily be overridden
     Challenges.getInstance().getTranslationManager().setLanguageProvider(new DefaultLanguageProvider());
@@ -62,7 +61,7 @@ public final class LanguageLoader extends ContentLoader {
     if (!skipMigration) migrateLanguages();
     discoverAvailableLanguageTagFiles();
     checkLanguageFileExists();
-    readSelectedLanguage();
+    readSelectedLanguageIfNotPresent();
   }
 
   public void changeLanguage(@NotNull String language) {
@@ -76,12 +75,17 @@ public final class LanguageLoader extends ContentLoader {
     Logger.info("Language changed to '{}'", language);
   }
 
-  private void reloadWithLanguage(String language) {
+  private void reloadWithLanguage(@NotNull String language) {
     this.configLanguageTag = language;
     checkLanguageFileExists(); // do the check first, might change languageTag to fallback
     this.configLanguage = Locale.forLanguageTag(configLanguageTag);
-    readSelectedLanguage(); // TODO async
-    Challenges.getInstance().getScoreboardManager().updateAll();
+    readSelectedLanguageIfNotPresent();
+
+    ChallengeHelper.runSync(() -> {
+      Challenges.getInstance().getChallengeTimer().updateActionbar();
+      Challenges.getInstance().getScoreboardManager().updateAll();
+      Challenges.getInstance().getMenuManager().reopenCurrentMenus(); // must be run sync
+    });
   }
 
   private void checkLanguageFileExists() {
@@ -96,14 +100,15 @@ public final class LanguageLoader extends ContentLoader {
     Logger.debug("Language '{}' is currently selected", configLanguageTag);
   }
 
-  private void readSelectedLanguage() {
+  private void readSelectedLanguageIfNotPresent() {
+    if (loadedLanguages.contains(configLanguageTag)) return;
     populateLanguageFromFile(configLanguage);
   }
 
   private void discoverAvailableLanguageTagFiles() {
     // only .json files supported; global is not a selectable language
     File[] files = getMessagesFolder()
-      .listFiles((_, name) -> name.endsWith(".json") && !name.startsWith(GLOBAL_TAG));
+      .listFiles((file, name) -> name.endsWith(".json") && !name.startsWith(GLOBAL_TAG));
     if (files == null) return;
     for (File file : files) {
       if (!file.isFile()) continue;
@@ -250,6 +255,8 @@ public final class LanguageLoader extends ContentLoader {
         ConsolePrint.unableToGetLanguages();
         return;
       }
+
+      loadedLanguages.add(locale.getLanguage());
 
       Document globalDocument = Document.readJsonFile(globalFile);
       Document languageDocument = Document.readJsonFile(languageFile);

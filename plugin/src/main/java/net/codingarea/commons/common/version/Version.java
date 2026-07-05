@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public interface Version {
+public interface Version { // cannot implement Comparable<Version> due to enum MinecraftVersion conflicting
 
   Version FALLBACK = new VersionInfo(1, 0, 0);
 
@@ -15,24 +15,35 @@ public interface Version {
 
   int getRevision();
 
+  default int compareTo(@NotNull Version other) {
+    // eliminates Comparator chaining overhead
+    int cmp = Integer.compare(this.getMajor(), other.getMajor());
+    if (cmp != 0) return cmp;
+
+    cmp = Integer.compare(this.getMinor(), other.getMinor());
+    if (cmp != 0) return cmp;
+
+    return Integer.compare(this.getRevision(), other.getRevision());
+  }
+
   default boolean isNewerThan(@NotNull Version other) {
-    return this.intValue() > other.intValue();
+    return this.compareTo(other) > 0;
   }
 
   default boolean isNewerOrEqualThan(@NotNull Version other) {
-    return this.intValue() >= other.intValue();
+    return this.compareTo(other) >= 0;
   }
 
   default boolean isOlderThan(@NotNull Version other) {
-    return this.intValue() < other.intValue();
+    return this.compareTo(other) < 0;
   }
 
   default boolean isOlderOrEqualThan(@NotNull Version other) {
-    return this.intValue() <= other.intValue();
+    return this.compareTo(other) <= 0;
   }
 
   default boolean equals(@NotNull Version other) {
-    return this.intValue() == other.intValue();
+    return this.compareTo(other) == 0;
   }
 
   @NotNull
@@ -40,20 +51,6 @@ public interface Version {
     int revision = getRevision();
     return revision > 0 ? String.format("%s.%s.%s", getMajor(), getMinor(), revision)
       : String.format("%s.%s", getMajor(), getMinor());
-  }
-
-  default int intValue() {
-    int major = getMajor();
-    int minor = getMinor();
-    int revision = getRevision();
-
-    if (major > 99) throw new IllegalStateException("Malformed version: major is greater than 99");
-    if (minor > 99) throw new IllegalStateException("Malformed version: minor is greater than 99");
-    if (revision > 99) throw new IllegalStateException("Malformed version: revision is greater than 99");
-
-    return revision
-      + minor * 100
-      + major * 10000;
   }
 
   @NotNull

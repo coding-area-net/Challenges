@@ -60,6 +60,8 @@ public class ItemUtils {
       case "BUNDLE":
       case "REINFORCED_DEEPSLATE":
       case "FROGSPAWN":
+      case "SUSPICIOUS_GRAVEL":
+      case "SUSPICIOUS_SAND":
         return false;
     }
 

@@ -1,18 +1,18 @@
 package net.codingarea.challenges.plugin.content.i18n;
 
 import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.challenges.plugin.content.i18n.impl.MessageKeyImpl;
+import net.codingarea.challenges.plugin.content.i18n.impl.format.MessageFormatter;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.CheckReturnValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -26,7 +26,6 @@ import java.util.Locale;
  *   <li>{@link #sendTitle(Player, Object...)} to send this as a title and subtitle to a player in their language, where the first line in the array in the header, and the second the subtitle</li>
  *   <li>{@link #sendActionBar(Player, Object...)} to send this as an action bar to a player, the translation must be one line</li>
  *   <li>{@link #broadcast(Prefix, Object...)} to send this as a chat message to all players in their language</li>
- *   <li>{@link #createInventory(Locale, int, Object...)} to create an inventory with translated title</li>
  * </ul>
  * See {@link net.codingarea.challenges.plugin.utils.item.ItemBuilder#ItemBuilder(Locale, Material, MessageKey, Object...)}
  * for creating items with translated names and descriptions.
@@ -65,9 +64,7 @@ import java.util.Locale;
  *      (for static linking use {@code {\@x}} reference)</li>
  *      <li>{@link LocalizableMessage} will automatically be localized into the target language,
  *      it can be used to reference messages dynamically with additional object arguments using {@link MessageKey#withArgs(Object...)}</li>
- *      <li>{@link org.bukkit.Material}</li>
- *      <li>{@link org.bukkit.entity.EntityType}</li>
- *      <li>{@link org.bukkit.GameMode}</li>
+ *      <li>{@link net.kyori.adventure.translation.Translatable} like {@link org.bukkit.Material}, {@link org.bukkit.entity.EntityType}, {@link org.bukkit.GameMode}</li>
  *      <li>{@link org.bukkit.entity.Player} using their name</li>
  *      <li>Unknown Enums will be formatted as {@code TEST_ENUM -> "Test Enum"}</li>
  *      <li>Unresolvable types will be serialized using {@link Object#toString()}</li>
@@ -75,8 +72,7 @@ import java.util.Locale;
  *  </li>
  * </ul>
  * @see TranslationManager TranslationManager for localization
- * @see net.codingarea.challenges.platform.message.MessagePlatform MessagePlatform for implementation
- * @see net.codingarea.challenges.plugin.content.i18n.impl.MessageFormatter MessageFormatter for references
+ * @see MessageFormatter MessageFormatter for references
  */
 public interface MessageKey extends LocalizableMessage {
 
@@ -93,8 +89,20 @@ public interface MessageKey extends LocalizableMessage {
   }
 
   @NotNull
+  @CheckReturnValue
+  @ApiStatus.Internal
+  static MessageKey empty(@NotNull String id) {
+    return new MessageKeyImpl(id);
+  }
+
+  @NotNull
   static String formatMissingTranslation(@NotNull String key, @NotNull Locale locale) {
     return String.format("%s/%s", key, locale);
+  }
+
+  @NotNull
+  default MessageKey getChildKey(@NotNull String child) {
+    return of(getKey() + "." + child);
   }
 
   @NotNull
@@ -159,124 +167,35 @@ public interface MessageKey extends LocalizableMessage {
 
   void broadcastActionBar(@NotNull Object... args);
 
-  /**
-   * Creates a new {@link Inventory} with the title of this message translated into the given language
-   * (and replacing the given args) and the given size. It uses {@link net.codingarea.commons.bukkit.utils.menu.MenuPosition#HOLDER}
-   * as the {@link InventoryHolder}.
-   *
-   * @see org.bukkit.Bukkit#createInventory(InventoryHolder, int, String)
-   */
+  // Formatting
+
   @NotNull
-  @CheckReturnValue
-  Inventory createInventory(@NotNull Locale locale, int size, @NotNull Object... args);
+  Component asComponent(@NotNull Locale locale, @Nullable Prefix prefix, @NotNull Object... args);
 
-  /**
-   * Creates a new {@link Inventory} with the title of this message translated into the Player's language
-   * (and replacing the given args) and the given size. It uses {@link net.codingarea.commons.bukkit.utils.menu.MenuPosition#HOLDER}
-   * as the {@link InventoryHolder}.
-   *
-   * @see org.bukkit.Bukkit#createInventory(InventoryHolder, int, String)
-   */
   @NotNull
-  @CheckReturnValue
-  default Inventory createInventory(@NotNull Player playerLocale, int size, @NotNull Object... args) {
-    return createInventory(findPlayerLocale(playerLocale), size, args);
+  default Component asComponent(@NotNull Player playerLocale, @Nullable Prefix prefix, @NotNull Object... args) {
+    return asComponent(findPlayerLocale(playerLocale), prefix, args);
   }
 
-  /**
-   * Creates a new {@link Inventory} with the title of this message translated into the given language
-   * (and replacing the given args) and the given type. It uses {@link net.codingarea.commons.bukkit.utils.menu.MenuPosition#HOLDER}
-   * as the {@link InventoryHolder}.
-   *
-   * @see org.bukkit.Bukkit#createInventory(InventoryHolder, InventoryType, String)
-   */
   @NotNull
-  @CheckReturnValue
-  Inventory createInventory(@NotNull Locale locale, @NotNull InventoryType type, @NotNull Object... args);
+  default Component asComponent(@NotNull Locale locale, @NotNull Object... args) {
+    return asComponent(locale, null, args);
+  }
 
-  /**
-   * Creates a new {@link Inventory} with the title of this message translated into the Player's language
-   * (and replacing the given args) and the given type.It uses {@link net.codingarea.commons.bukkit.utils.menu.MenuPosition#HOLDER}
-   * as the {@link InventoryHolder}.
-   *
-   * @see org.bukkit.Bukkit#createInventory(InventoryHolder, InventoryType, String)
-   */
   @NotNull
-  @CheckReturnValue
-  default Inventory createInventory(@NotNull Player playerLocale, @NotNull InventoryType type, @NotNull Object... args) {
-    return createInventory(findPlayerLocale(playerLocale), type, args);
+  default Component asComponent(@NotNull Player playerLocale, @NotNull Object... args) {
+    return asComponent(findPlayerLocale(playerLocale), args);
   }
 
-  /**
-   * Internal API. Create Items via {@link net.codingarea.challenges.plugin.utils.item.ItemBuilder} instead.
-   */
-  @ApiStatus.Internal
-  void applyAsItemNameAndLore(@NotNull Locale locale, @NotNull ItemMeta item, @NotNull Object... args);
+  @NotNull
+  List<Component> asComponents(@NotNull Locale locale, @NotNull Object... args);
 
-  /**
-   * Internal API. Create Items via {@link net.codingarea.challenges.plugin.utils.item.ItemBuilder} instead.
-   */
-  @ApiStatus.Internal
-  default void applyAsItemNameAndLore(@NotNull Player playerLocale, @NotNull ItemMeta item,@NotNull Object... args) {
-    applyAsItemNameAndLore(findPlayerLocale(playerLocale), item, args);
+  @NotNull
+  default List<Component> asComponents(@NotNull Player playerLocale, @NotNull Object... args) {
+    return asComponents(findPlayerLocale(playerLocale), args);
   }
 
-  /**
-   * Internal API. Create Items via {@link net.codingarea.challenges.plugin.utils.item.ItemBuilder} instead.
-   */
-  @ApiStatus.Internal
-  void applyAsItemName(@NotNull Locale locale, @NotNull ItemMeta item, @NotNull Object... args);
-
-  /**
-   * Internal API. Create Items via {@link net.codingarea.challenges.plugin.utils.item.ItemBuilder} instead.
-   */
-  @ApiStatus.Internal
-  default void applyAsItemName(@NotNull Player playerLocale, @NotNull ItemMeta item, @NotNull Object... args) {
-    applyAsItemName(findPlayerLocale(playerLocale), item, args);
-  }
-
-  /**
-   * Internal API. Create Items via {@link net.codingarea.challenges.plugin.utils.item.ItemBuilder} instead.
-   */
-  @ApiStatus.Internal
-  void appendToItemName(@NotNull Locale locale, @NotNull ItemMeta item, boolean withSpace, @NotNull Object... args);
-
-  /**
-   * Internal API. Create Items via {@link net.codingarea.challenges.plugin.utils.item.ItemBuilder} instead.
-   */
-  @ApiStatus.Internal
-  default void appendToItemName(@NotNull Player playerLocale, @NotNull ItemMeta item, boolean withSpace,
-                                @NotNull Object... args) {
-    appendToItemName(findPlayerLocale(playerLocale), item, withSpace, args);
-  }
-
-  /**
-   * Internal API. Create Items via {@link net.codingarea.challenges.plugin.utils.item.ItemBuilder} instead.
-   */
-  @ApiStatus.Internal
-  void applyAsItemLore(@NotNull Locale locale, @NotNull ItemMeta item, @NotNull Object... args);
-
-  /**
-   * Internal API. Create Items via {@link net.codingarea.challenges.plugin.utils.item.ItemBuilder} instead.
-   */
-  @ApiStatus.Internal
-  default void applyAsItemLore(@NotNull Player playerLocale, @NotNull ItemMeta item, @NotNull Object... args) {
-    applyAsItemLore(findPlayerLocale(playerLocale), item, args);
-  }
-
-  /**
-   * Internal API. Create Items via {@link net.codingarea.challenges.plugin.utils.item.ItemBuilder} instead.
-   */
-  @ApiStatus.Internal
-  void appendToItemLore(@NotNull Locale locale, @NotNull ItemMeta item, @NotNull Object... args);
-
-  /**
-   * Internal API. Create Items via {@link net.codingarea.challenges.plugin.utils.item.ItemBuilder} instead.
-   */
-  @ApiStatus.Internal
-  default void appendToItemLore(@NotNull Player player, @NotNull ItemMeta item, @NotNull Object... args) {
-    appendToItemLore(findPlayerLocale(player), item, args);
-  }
+  // Utils
 
   @NotNull
   private Locale findPlayerLocale(@NotNull Player player) {

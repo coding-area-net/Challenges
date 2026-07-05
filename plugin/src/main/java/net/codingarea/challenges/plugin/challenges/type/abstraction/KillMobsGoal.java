@@ -1,11 +1,12 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
-import net.codingarea.challenges.plugin.content.Message;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.commons.common.config.Document;
+import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.boss.BarColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -48,7 +49,7 @@ public abstract class KillMobsGoal extends SettingGoal {
     bossbar.setContent((bar, player) -> {
       float i = 1 - ((float) getEntitiesLeftToKill().size() / (float) entitiesToKill.size());
       bar.setProgress(i);
-      bar.setColor(BarColor.GREEN);
+      bar.setColor(BossBar.Color.GREEN);
       bar.setTitle(getBossbarMessage().asString(getEntitiesKilled().size(), entitiesToKill.size()));
     });
     bossbar.show();

@@ -9,6 +9,7 @@ import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
+import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeActionBar;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBossBar;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeScoreboard;
 import net.codingarea.challenges.plugin.utils.item.DefaultItems;
@@ -51,6 +52,8 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
   protected final ChallengeBossBar bossbar = new ChallengeBossBar();
   @Getter
   protected final ChallengeScoreboard scoreboard = new ChallengeScoreboard();
+  @Getter
+  protected final ChallengeActionBar actionbar = new ChallengeActionBar();
   @Getter
   protected ItemStack displayItemPreset;
 
@@ -146,8 +149,8 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
   }
 
   @NotNull
-  protected MessageKey getChallengeMessageKey(@NotNull String messageNameSuffix) {
-    return MessageKey.of("challenge." + nameMessageKey + "." + messageNameSuffix);
+  protected MessageKey getChallengeMessageKey(@NotNull String keySuffix) {
+    return MessageKey.of("challenge." + nameMessageKey + "." + keySuffix);
   }
 
   @NotNull
@@ -183,10 +186,12 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
 
   /**
    * @implNote Only used if {@link #isEnabled()}, format will be applied dynamically
+   * @implSpec Should ideally either return a {@link LocalizableMessage}, {@link MessageKey}
+   *           or {@link net.kyori.adventure.text.Component} for dynamic (e.g. translatable) styling
    */
   @NotNull
-  public LocalizableMessage getSettingsName() {
-    return MessageKey.of("enabled");
+  public Object getSettingsName() {
+    return MessageKey.of("generic.enabled");
   }
 
   /**

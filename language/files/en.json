@@ -438,10 +438,6 @@
     "§e{0}",
     "§8» §e{1}"
   ],
-  "title-pregame-movement-setting": [
-    "§cWarte..",
-    "§8» §7Timer is stopped.."
-  ],
   "item-menu-start": "§8• §aStart Challenge §8┃ §e/start §8•",
   "item-menu-challenges": "§8• §cChallenges §8┃ §e/challenge §8•",
   "item-menu-timer": "§8• §5Timer §8┃ §e/timer §8•",

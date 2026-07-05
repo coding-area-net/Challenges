@@ -1,11 +1,10 @@
 {
   "symbol": {
-    "p": "➟ ➡ ➛ ➜ ➸ › ► ▶ ▷ ⇒ →",
     "arrow-back": "«",
     "arrow": "»",
     "chevron": "›",
     "chevron-back": "‹",
-    "dart": "▷",
+    "dart": "→",
     "vertical": "┃",
     "cross": "✞",
     "check": "✔",
@@ -15,7 +14,17 @@
     "circle": "●",
     "altert": "⚠",
     "flag": "⚐",
+    "infinity": "∞",
     "lock": "\uD83D\uDD12"
+  },
+  "generic": {
+    "delimiter": "<dark_gray>, </dark_gray>"
+  },
+  "arg-format": {
+    "hp": "<yellow>{0}</yellow> <gray>HP</gray> <dark_gray>(<red>{1} {@symbol.heart}</red>)</dark_gray>",
+    "hearts": "<red>{0} {@symbol.heart}</red>",
+    "damage-cause": "<yellow>{0}</yellow>",
+    "damage-cause-source": "<yellow>{0}</yellow> <dark_gray>(<gray>{1}</gray>)</dark_gray>"
   },
   "prefix": {
     "format": "<dark_gray><b>{@symbol.vertical}</b> {0} {@symbol.vertical}</dark_gray> ",
@@ -25,6 +34,27 @@
     "position": "{@format('<blue>Position</blue>')}",
     "damage": "{@format('<red>Damage</red>')}",
     "custom": "{@format('<aqua>Custom</aqua>')}"
+  },
+  "item": {
+    "format": "<dark_gray>{@symbol.dot}</dark_gray> {0} <dark_gray>{@symbol.dot}</dark_gray>",
+    "format-with-command": "{@format('{0} <dark_gray>{@symbol.vertical}</dark_gray> <yellow>{1}</yellow>')}"
+  },
+  "actionbar": {
+    "format": "<dark_gray>{@symbol.dot}</dark_gray> {0} <dark_gray>{@symbol.dot}</dark_gray>"
+  },
+  "bossbar": {
+    "format": "<dark_gray>{@symbol.arrow}</dark_gray> <gray>{0}</gray>"
+  },
+  "timer": {
+    "bar": {
+      "format": {
+        "seconds": "{mm}:{ss}",
+        "minutes": "{mm}:{ss}",
+        "hours": "{hh}:{mm}:{ss}",
+        "day": "{d}:{hh}:{mm}:{ss}",
+        "days": "{d}:{hh}:{mm}:{ss}"
+      }
+    }
   },
   "menu": {
     "title-prefix": "<dark_gray>{@symbol.arrow}</dark_gray> ",
@@ -62,87 +92,83 @@
       "<gray>{0} <dark_gray>{@symbol.circle}</dark_gray> {1}</gray>"
     ],
     "misc_challenge": {
-      "*colorize": "<blue>{0}</blue>",
+      "*colorize*": "<blue>{0}</blue>",
       "name": "*{@menu}*"
     },
     "randomizer": {
-      "*colorize": "<color:#ff5100>{0}</color>",
+      "*colorize*": "<color:#ff5100>{0}</color>",
       "name": "*{@menu}*",
       "info": "{@misc_challenge.info}"
     },
     "limited_time": {
-      "*colorize": "<yellow>{0}</yellow>",
+      "*colorize*": "<yellow>{0}</yellow>",
       "name": "*{@menu}*",
       "info": "{@misc_challenge.info}"
     },
     "force": {
-      "*colorize": "<dark_aqua>{0}</dark_aqua>",
+      "*colorize*": "<dark_aqua>{0}</dark_aqua>",
       "name": "*{@menu}*",
       "info": "{@misc_challenge.info}"
     },
     "world": {
-      "*colorize": "<dark_red>{0}</dark_red>",
+      "*colorize*": "<dark_red>{0}</dark_red>",
       "name": "*{@menu}*",
       "info": "{@misc_challenge.info}"
     },
     "damage": {
-      "*colorize": "<red>{0}</red>",
+      "*colorize*": "<red>{0}</red>",
       "name": "*{@menu}*",
       "info": "{@misc_challenge.info}"
     },
     "effect": {
-      "*colorize": "<dark_purple>{0}</dark_purple>",
+      "*colorize*": "<dark_purple>{0}</dark_purple>",
       "name": "*{@menu}*",
       "info": "{@misc_challenge.info}"
     },
     "inventory": {
-      "*colorize": "<gold>{0}</gold>",
+      "*colorize*": "<gold>{0}</gold>",
       "name": "*{@menu}*",
       "info": "{@misc_challenge.info}"
     },
     "movement": {
-      "*colorize": "<green>{0}</green>",
+      "*colorize*": "<green>{0}</green>",
       "name": "*{@menu}*",
       "info": "{@misc_challenge.info}"
     },
     "entities": {
-      "*colorize": "<color:#ff91fa>{0}</color>",
+      "*colorize*": "<color:#ff91fa>{0}</color>",
       "name": "*{@menu}*",
       "info": "{@misc_challenge.info}"
     },
     "extra_world": {
-      "*colorize": "<dark_green>{0}</dark_green>",
+      "*colorize*": "<dark_green>{0}</dark_green>",
       "name": "*{@menu}*",
       "info": "{@misc_challenge.info}"
     },
     "misc_goal": {
-      "*colorize": "<blue>{0}</blue>",
+      "*colorize*": "<blue>{0}</blue>",
       "name": "*{@menu}*"
     },
     "kill_entity": {
-      "*colorize": "<red>{0}</red>",
+      "*colorize*": "<red>{0}</red>",
       "name": "*{@menu}*",
       "info": "{@misc_goal.info}"
     },
     "score_points": {
-      "*colorize": "<yellow>{0}</yellow>",
+      "*colorize*": "<yellow>{0}</yellow>",
       "name": "*{@menu}*",
       "info": "{@misc_goal.info}"
     },
     "fastest_time": {
-      "*colorize": "<gold>{0}</gold>",
+      "*colorize*": "<gold>{0}</gold>",
       "name": "*{@menu}*",
       "info": "{@misc_goal.info}"
     },
     "force_battle": {
-      "*colorize": "<aqua>{0}</aqua>",
+      "*colorize*": "<aqua>{0}</aqua>",
       "name": "*{@menu}*",
       "info": "{@misc_goal.info}"
     }
-  },
-  "item": {
-    "format": "<dark_gray>{@symbol.dot}</dark_gray> {0} <dark_gray>{@symbol.dot}</dark_gray>",
-    "format-with-command": "{@format('{0} <dark_gray>{@symbol.vertical}</dark_gray> <yellow>{1}</yellow>')}"
   },
   "challenge": {
     "display-format": [
@@ -161,29 +187,47 @@
     "settings-modifier-value": "<yellow>{0}</yellow>",
     "settings-modifier-multiplier": "<yellow>{0}x</yellow>",
     "settings-modifier-health": "<yellow>{0}</yellow> <gray>HP</gray> <dark_gray>(<red>{1} {@symbol.heart}</red>)</dark_gray>",
+    "language": {
+      "*colorize*": "<green>{0}</green>"
+    },
+    "damage-display": {
+      "*colorize*": "<red>{0}</red>"
+    },
+    "pregame-movement": {
+      "*colorize*": "<gold>{0}</gold>"
+    },
+    "difficulty": {
+      "*colorize*": "<color:#a6cf13>{0}</color>"
+    },
+    "hardcore-hearts": {
+      "*colorize*": "<color:#FF1313>{0}</color>"
+    },
     "random-challenge": {
-      "*colorize": "<red>{0}</red>"
+      "*colorize*": "<red>{0}</red>"
     },
     "randomized-hp": {
-      "*colorize": "<dark_red>{0}</dark_red>"
+      "*colorize*": "<dark_red>{0}</dark_red>"
+    },
+    "jump-and-run": {
+      "*colorize*": "<gold>{0}</gold>"
     },
     "goal-ender-dragon": {
-      "*colorize": "<gradient:#6600ff:#8F87D9>{0}</gradient>"
+      "*colorize*": "<gradient:#6600ff:#8F87D9>{0}</gradient>"
     },
     "goal-wither": {
-      "*colorize": "<gradient:#CFD2F2:#8F87D9>{0}</gradient>"
+      "*colorize*": "<gradient:#CFD2F2:#8F87D9>{0}</gradient>"
     },
     "goal-elder-guardian": {
-      "*colorize": "<gradient:#69A592:#AFD7CA>{0}</gradient>"
+      "*colorize*": "<gradient:#69A592:#AFD7CA>{0}</gradient>"
     },
     "goal-warden": {
-      "*colorize": "<gradient:#296674:#24454C>{0}</gradient>"
+      "*colorize*": "<gradient:#296674:#24454C>{0}</gradient>"
     },
     "goal-all-bosses": {
-      "*colorize": "<aqua>{0}</aqua>"
+      "*colorize*": "<aqua>{0}</aqua>"
     },
     "goal-all-bosses-new": {
-      "*colorize": "<dark_purple>{0}</dark_purple>"
+      "*colorize*": "<dark_purple>{0}</dark_purple>"
     }
   }
 }

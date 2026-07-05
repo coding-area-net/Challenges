@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
+import io.papermc.paper.world.flag.FeatureDependant;
 import net.codingarea.challenges.plugin.Challenges;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -23,9 +24,11 @@ public class ExperimentalUtils {
   private static void loadMaterials() {
     List<Material> materials = new LinkedList<>();
 
+    World world = Challenges.getInstance().getGameWorldStorage().getWorld(World.Environment.NORMAL);
     for (Material material : Material.values()) {
       try {
-        if (!material.isEnabledByFeature(Challenges.getInstance().getGameWorldStorage().getWorld(World.Environment.NORMAL))) {
+        FeatureDependant feature = material.isItem() ? material.asItemType() : material.asBlockType();
+        if (feature != null && !world.isEnabled(feature)) {
           continue;
         }
       } catch (NoSuchMethodError ignored) {
@@ -46,9 +49,10 @@ public class ExperimentalUtils {
   private static void loadEntityTypes() {
     List<EntityType> entityTypes = new LinkedList<>();
 
+    World world = Challenges.getInstance().getGameWorldStorage().getWorld(World.Environment.NORMAL);
     for (EntityType type : EntityType.values()) {
       try {
-        if (!type.isEnabledByFeature(Challenges.getInstance().getGameWorldStorage().getWorld(World.Environment.NORMAL))) {
+        if (!world.isEnabled(type)) {
           continue;
         }
       } catch (NoSuchMethodError | IllegalArgumentException ignored) {

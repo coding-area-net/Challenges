@@ -77,7 +77,7 @@ public final class ReflectionUtils {
     for (String name : names) {
       try {
         return Enum.valueOf(classOfEnum, name);
-      } catch (IllegalArgumentException | NoSuchFieldError _) {
+      } catch (IllegalArgumentException | NoSuchFieldError ignored) {
       }
     }
     throw new IllegalArgumentException("No enum found in " + classOfEnum.getName() + " for " + Arrays.toString(names));
