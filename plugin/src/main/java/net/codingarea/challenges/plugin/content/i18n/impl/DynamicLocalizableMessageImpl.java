@@ -13,7 +13,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class DynamicLocalizableMessageImpl implements LocalizableMessage {
 
-  public static final MessageKey KEY = new MessageKeyImpl("<dynamic>");
+  public static final MessageKey KEY = MessageKey.empty("<dynamic>");
 
   private final Function<Locale, String[]> valueFunction;
   private final Object[] args;

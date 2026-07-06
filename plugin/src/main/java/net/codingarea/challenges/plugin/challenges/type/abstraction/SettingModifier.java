@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
+import net.codingarea.challenges.plugin.challenges.type.ISetting;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -11,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class SettingModifier extends Modifier {
+public abstract class SettingModifier extends Modifier implements ISetting {
 
   private boolean enabled;
 
@@ -73,6 +74,7 @@ public abstract class SettingModifier extends Modifier {
     updateItems();
   }
 
+  @Override
   public void playStatusUpdateTitle() {
     ChallengeHelper.playChallengeToggleTitle(this);
   }

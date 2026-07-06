@@ -31,10 +31,10 @@
   },
   "menu": {
     "generic": {
-      "click-prefix": "<gray><i>[Klick]</i> <dark_gray>{@symbol.arrow}</dark_gray></gray> ",
-      "shift-click-prefix": "<gray><i>[Shift-Klick]</i> <dark_gray>{@symbol.arrow}</dark_gray></gray> ",
-      "right-click-prefix": "<gray><i>[Rechts-Klick]</i> <dark_gray>{@symbol.arrow}</dark_gray></gray> ",
-      "left-click-prefix": "<gray><i>[Links-Klick]</i> <dark_gray>{@symbol.arrow}</dark_gray></gray> "
+      "click-prefix": "<gray><i>[Klick]</i> <dark_gray>{@symbol.chevron}</dark_gray></gray> ",
+      "shift-click-prefix": "<gray><i>[Shift-Klick]</i> <dark_gray>{@symbol.chevron}</dark_gray></gray> ",
+      "right-click-prefix": "<gray><i>[Rechts-Klick]</i> <dark_gray>{@symbol.chevron}</dark_gray></gray> ",
+      "left-click-prefix": "<gray><i>[Links-Klick]</i> <dark_gray>{@symbol.chevron}</dark_gray></gray> "
     },
     "timer": {
       "name": "Timer",

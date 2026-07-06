@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import net.codingarea.challenges.plugin.challenges.type.IGoal;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -38,4 +39,8 @@ public abstract class SettingGoal extends Setting implements IGoal {
     super.setEnabled(enabled);
   }
 
+  @Override
+  public void playStatusUpdateTitle() {
+    ChallengeHelper.playGoalToggleTitle(this);
+  }
 }

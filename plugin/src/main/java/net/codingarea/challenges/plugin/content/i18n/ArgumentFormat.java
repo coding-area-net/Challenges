@@ -6,6 +6,7 @@ import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.projectiles.ProjectileSource;
@@ -39,9 +40,19 @@ public interface ArgumentFormat<T> {
     return MessageKey.of("arg-format.hp").withArgs(hp, NumberFormatter.FLOATING_POINT.format(hearts));
   });
 
+  ArgumentFormat<Integer> TIME = register(Integer.class, "seconds", arg -> {
+    return LocalizableMessage.from(_ -> NumberFormatter.TIME.format(arg));
+  });
+
   ArgumentFormat<EntityDamageEvent> DAMAGE_CAUSE = register(EntityDamageEvent.class, "damage_cause", event -> {
     if (event.getCause() == EntityDamageEvent.DamageCause.CUSTOM) return MessageKey.of("generic.undefined");
     String cause = StringUtils.getEnumName(event.getCause()); // DamageCause is not a Translatable, impl custom translations?
+
+    if (event instanceof EntityDamageByBlockEvent damageEvent) {
+      if (damageEvent.getDamager() != null) {
+        return MessageKey.of("arg-format.damage-cause-source").withArgs(cause, damageEvent.getDamager().getType());
+      }
+    }
 
     if (!(event instanceof EntityDamageByEntityEvent damageEvent)) {
       return MessageKey.of("arg-format.damage-cause").withArgs(cause);

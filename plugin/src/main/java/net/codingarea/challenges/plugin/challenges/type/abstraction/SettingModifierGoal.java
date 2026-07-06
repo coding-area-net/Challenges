@@ -63,4 +63,8 @@ public abstract class SettingModifierGoal extends SettingModifier implements IGo
     }
   }
 
+  @Override
+  public void playStatusUpdateTitle() {
+    ChallengeHelper.playGoalToggleTitle(this);
+  }
 }

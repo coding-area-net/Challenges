@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction.menu;
 
 import net.codingarea.challenges.plugin.challenges.type.IGoal;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -33,5 +34,10 @@ public abstract class MenuGoal extends MenuSetting implements IGoal {
   @Override
   public SoundSample getWinSound() {
     return SoundSample.WIN;
+  }
+
+  @Override
+  public void playStatusUpdateTitle() {
+    ChallengeHelper.playGoalToggleTitle(this);
   }
 }

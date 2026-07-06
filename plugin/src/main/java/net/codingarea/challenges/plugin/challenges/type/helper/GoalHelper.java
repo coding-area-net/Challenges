@@ -31,8 +31,10 @@ public final class GoalHelper {
   public static void handleSetEnabled(@NotNull IGoal goal, boolean enabled) {
     if (Challenges.getInstance().getChallengeManager().getCurrentGoal() != goal && enabled) {
       Challenges.getInstance().getChallengeManager().setCurrentGoal(goal);
+      goal.playStatusUpdateTitle();
     } else if (Challenges.getInstance().getChallengeManager().getCurrentGoal() == goal && !enabled) {
       Challenges.getInstance().getChallengeManager().setCurrentGoal(null);
+      goal.playStatusUpdateTitle();
     }
   }
 

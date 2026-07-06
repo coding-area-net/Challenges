@@ -13,6 +13,8 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class JoinedMessageImpl implements LocalizableMessage {
 
+  public static final MessageKey KEY = MessageKey.empty("<joined>");
+
   private final MessageKey delimiter;
   private final Object[] elements;
 
@@ -39,7 +41,7 @@ public class JoinedMessageImpl implements LocalizableMessage {
   @NotNull
   @Override
   public MessageKey getLocalizableKey() {
-    return delimiter;
+    return KEY;
   }
 
   @NotNull

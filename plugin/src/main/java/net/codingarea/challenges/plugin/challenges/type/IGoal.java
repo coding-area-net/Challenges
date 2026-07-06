@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public interface IGoal extends IChallenge {
+public interface IGoal extends IChallenge, ISetting {
 
   /**
    * Enabled / disabled this goal.
@@ -19,6 +19,7 @@ public interface IGoal extends IChallenge {
    * This can be checked by comparing {@link ChallengeManager#getCurrentGoal()} to {@code this}.
    * You may just call {@link GoalHelper#handleSetEnabled(IGoal, boolean)} with {@code this}, {@code enabled}
    */
+  @Override
   void setEnabled(boolean enabled);
 
   /**

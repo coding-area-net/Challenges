@@ -4,6 +4,7 @@ import lombok.Getter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
+import net.codingarea.challenges.plugin.challenges.type.IGoal;
 import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
@@ -161,6 +162,14 @@ public final class ChallengeHelper {
 
   public static void playChallengeToggleTitle(@NotNull AbstractChallenge challenge, boolean enabled) {
     Challenges.getInstance().getTitleManager().sendChallengeToggleTitle(challenge, enabled);
+  }
+
+  public static void playGoalToggleTitle(@NotNull IGoal goal) {
+    playGoalToggleTitle(goal, goal.isEnabled());
+  }
+
+  public static void playGoalToggleTitle(@NotNull IGoal goal, boolean enabled) {
+    Challenges.getInstance().getTitleManager().sendGoalToggleTitle(goal, enabled);
   }
 
   public static <T extends AbstractChallenge & IModifier> void playChallengeValueTitle(@NotNull T modifier) {

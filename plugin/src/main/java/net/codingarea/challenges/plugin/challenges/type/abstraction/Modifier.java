@@ -79,7 +79,7 @@ public abstract class Modifier extends AbstractChallenge implements IModifier {
     updateItems();
   }
 
-  protected void overwriteValue(int value) {
+  protected final void overwriteValue(int value) {
     this.value = value;
   }
 

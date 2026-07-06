@@ -30,6 +30,7 @@ public interface LocalizableMessage {
   MessageKey getLocalizableKey();
 
   @NotNull
+  @ApiStatus.Internal
   Object[] getLocalizableArgs();
 
   @NotNull
@@ -71,7 +72,7 @@ public interface LocalizableMessage {
   @NotNull
   @CheckReturnValue
   static LocalizableMessage from(@NotNull Function<Locale, String> valueFunction, @NotNull Object... args) {
-    return new DynamicLocalizableMessageImpl(valueFunction.andThen((string) -> new String[]{string}), args);
+    return fromLines(valueFunction.andThen((string) -> new String[]{string}), args);
   }
 
 }

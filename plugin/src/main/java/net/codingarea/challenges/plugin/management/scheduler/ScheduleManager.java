@@ -57,8 +57,7 @@ public final class ScheduleManager {
   }
 
   private void register(@NotNull ScheduledFunction function, @NotNull AbstractTaskConfig config) {
-    if (config instanceof ScheduledTaskConfig) {
-      ScheduledTaskConfig taskConfig = (ScheduledTaskConfig) config;
+    if (config instanceof ScheduledTaskConfig taskConfig) {
       if (taskConfig.getRate() < 1) {
         Logger.warn("Schedule rate cannot be less than 1; Could not register {}", function);
         return;
@@ -67,9 +66,7 @@ public final class ScheduleManager {
       ScheduledTaskExecutor executor = getOrCreateScheduledTaskExecutor(taskConfig);
       executor.register(function);
     }
-    if (config instanceof TimerTaskConfig) {
-      TimerTaskConfig taskConfig = (TimerTaskConfig) config;
-
+    if (config instanceof TimerTaskConfig taskConfig) {
       TimerTaskExecutor executor = getOrCreateTimerTaskExecutor(taskConfig);
       executor.register(function);
     }

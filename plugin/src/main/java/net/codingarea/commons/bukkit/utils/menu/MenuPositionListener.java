@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,7 +15,6 @@ public final class MenuPositionListener implements Listener {
 
   @EventHandler(priority = EventPriority.LOW)
   public void onClick(@NotNull InventoryClickEvent event) {
-
     HumanEntity human = event.getWhoClicked();
     if (!(human instanceof Player player)) return;
 
@@ -22,7 +22,6 @@ public final class MenuPositionListener implements Listener {
     if (inventory == null) return;
 
     if (inventory == CompatibilityUtils.getTopInventory(event)) {
-
       if (inventory.getHolder() != MenuPosition.HOLDER) return; // No menu inventory
 
       MenuPosition position = MenuPosition.get(player);
@@ -32,14 +31,19 @@ public final class MenuPositionListener implements Listener {
       position.handleClick(new MenuClickInfo(player, inventory, event.isShiftClick(), event.isRightClick(), event.getSlot()));
 
     } else if (event.isShiftClick()) { // Player inventory was clicked
-
       Inventory topInventory = event.getInventory();
       if (topInventory.getHolder() != MenuPosition.HOLDER) return; // No menu inventory
 
       event.setCancelled(true);
-
     }
+  }
 
+  @EventHandler(priority = EventPriority.LOW)
+  public void onClose(@NotNull InventoryCloseEvent event) {
+    if (!(event.getPlayer() instanceof Player player)) return;
+    if (event.getReason() == InventoryCloseEvent.Reason.OPEN_NEW) return;
+    if (event.getInventory().getHolder() != MenuPosition.HOLDER) return; // No menu inventory
+    MenuPosition.remove(player);
   }
 
 }

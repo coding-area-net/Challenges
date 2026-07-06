@@ -15,7 +15,7 @@ public class PlayerInventoryClickEvent extends InventoryClickEventWrapper {
 
   public PlayerInventoryClickEvent(@NotNull InventoryClickEvent event) {
     super(event);
-    player = ((Player) event.getWhoClicked());
+    player = (Player) event.getWhoClicked();
   }
 
   @NotNull

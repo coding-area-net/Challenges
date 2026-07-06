@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.challenges.plugin.challenges.type.ISetting;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -12,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-public abstract class Setting extends AbstractChallenge {
+public abstract class Setting extends AbstractChallenge implements ISetting {
 
   private final boolean enabledByDefault;
   protected boolean enabled;
@@ -41,6 +42,7 @@ public abstract class Setting extends AbstractChallenge {
     setEnabled(enabledByDefault);
   }
 
+  @Override
   public void playStatusUpdateTitle() {
     ChallengeHelper.playChallengeToggleTitle(this);
   }
@@ -64,6 +66,7 @@ public abstract class Setting extends AbstractChallenge {
     return enabled;
   }
 
+  @Override
   public void setEnabled(boolean enabled) {
     if (this.enabled == enabled) return;
     this.enabled = enabled;

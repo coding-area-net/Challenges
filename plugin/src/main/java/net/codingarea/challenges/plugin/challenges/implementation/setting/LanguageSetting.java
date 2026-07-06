@@ -135,6 +135,7 @@ public class LanguageSetting extends Modifier implements SenderCommand, Complete
 
     int value = TAG_TO_VALUE.get(languageTag);
     setValue(value); // trigger change language logic
+    playValueChangeTitle();
   }
 
   @Override

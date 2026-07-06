@@ -105,7 +105,7 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
     currentPlayer = getNextPlayer().getUniqueId();
     lastPlayers.add(currentPlayer);
 
-    actionbar.setContent(player -> getChallengeMessageKey("actionbar").withArgs(currentJump, jumps));
+    actionbar.setContent(_ -> getChallengeMessageKey("actionbar").withArgs(currentJump, jumps));
     actionbar.show();
 
     buildNextJump();

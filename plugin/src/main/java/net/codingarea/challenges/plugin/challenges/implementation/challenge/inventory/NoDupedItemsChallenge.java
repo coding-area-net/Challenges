@@ -4,13 +4,12 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.CanInstaKillOnEnable;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
-import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.common.collection.pair.Triple;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -65,10 +64,10 @@ public class NoDupedItemsChallenge extends Setting {
     for (Player player : Bukkit.getOnlinePlayers()) {
       Triple<Player, Player, Material> result = checkInventory(player, blackList);
       if (result != null) {
-        Message.forName("no-duped-items-failed").broadcast(
+        MessageKey.of("no-duped-items-failed").broadcast(
           Prefix.CHALLENGES,
-          NameHelper.getName(result.getFirst()),
-          NameHelper.getName(result.getSecond()),
+          result.getFirst(),
+          result.getSecond(),
           result.getThird()
         );
         ChallengeHelper.kill(result.getFirst());
