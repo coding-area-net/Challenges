@@ -39,7 +39,7 @@ public class BlockEffectChallenge extends Setting {
   private Map<UUID, PotionEffect> currentPotionEffects = new HashMap<>();
 
   public BlockEffectChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.EFFECT, new ItemStack(Material.CARVED_PUMPKIN), "block-effect-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.EFFECT, new ItemStack(Material.CARVED_PUMPKIN), "block-effect");
   }
 
   @Override

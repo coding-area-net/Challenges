@@ -33,7 +33,7 @@ import java.util.function.Supplier;
 public class CutCleanSetting extends MenuSetting {
 
   public CutCleanSetting() {
-    super(MenuType.SETTINGS, null, new ItemStack(Material.IRON_AXE), "menu-cut-clean-setting-settings");
+    super(MenuType.SETTINGS, null, new ItemStack(Material.IRON_AXE), "cut-clean");
     registerSetting("iron->iron_ingot",
       new ConvertDropSubSetting(() -> new LegacyItemBuilder(Material.IRON_INGOT, Message.forName("item-cut-clean-iron-setting")), true,
         Material.IRON_INGOT, "IRON_ORE", "DEEPSLATE_IRON_ORE"));

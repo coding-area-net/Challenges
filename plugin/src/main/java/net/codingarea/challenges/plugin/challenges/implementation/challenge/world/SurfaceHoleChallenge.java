@@ -18,7 +18,7 @@ import java.util.List;
 public class SurfaceHoleChallenge extends SettingModifier {
 
   public SurfaceHoleChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 60, 30, new ItemStack(Material.BARRIER), "item-surface-hole-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 60, 30, new ItemStack(Material.BARRIER), "surface-hole");
   }
 
   @EventHandler

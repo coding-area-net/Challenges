@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 public class HydraNormalChallenge extends HydraChallenge {
 
   public HydraNormalChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.WITCH_SPAWN_EGG), "hydra-plus");
+    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.WITCH_SPAWN_EGG), "hydra");
   }
 
   @Override

@@ -40,7 +40,7 @@ public class RepeatInChunkChallenge extends Setting {
   private final Set<Chunk> updatedChunks = new HashSet<>();
 
   public RepeatInChunkChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.GRASS_BLOCK), "repeat-in-chunk-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.GRASS_BLOCK), "repeat-in-chunk");
   }
 
   @Override

@@ -63,7 +63,7 @@ public class MoveMouseDamage extends SettingModifier {
       if (yaw != pair.getKey() || pitch != pair.getValue()) {
         Bukkit.getScheduler().runTask(plugin, () -> {
           if (player.getNoDamageTicks() > 0) return;
-          Message.forName("no-mouse-move-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(player));
+          getChallengeMessageKey("failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(player));
           player.damage(getValue());
           player.setNoDamageTicks(5);
           Bukkit.getScheduler().runTaskLater(plugin, () -> lastView.remove(player.getUniqueId()), 3);

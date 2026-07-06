@@ -24,7 +24,7 @@ public class BlocksDisappearAfterTimeChallenge extends SettingModifier {
   private final Map<Block, BukkitTask> tasks = new HashMap<>();
 
   public BlocksDisappearAfterTimeChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.WORLD, 60, 300, new ItemStack(Material.STRING), "blocks-disappear-time-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, 60, 300, new ItemStack(Material.STRING), "blocks-disappear-time");
   }
 
 //  @Nullable

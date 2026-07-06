@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 public class ZeroHeartsChallenge extends SettingModifier {
 
   public ZeroHeartsChallenge() {
-    super(MenuType.CHALLENGES, null, 5, 30, 10, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE), "zero-hearts-challenge");
+    super(MenuType.CHALLENGES, null, 5, 30, 10, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE), "zero-hearts");
   }
 
   @Override
@@ -39,7 +39,7 @@ public class ZeroHeartsChallenge extends SettingModifier {
     bossbar.setContent((bossbar, player) -> {
       int currentTime = getCurrentTime();
       int maxTime = getValue() * 60;
-      bossbar.setTitle(Message.forName("bossbar-zero-hearts").asString(maxTime - currentTime));
+      bossbar.setTitle(getChallengeMessageKey("bossbar"), maxTime - currentTime);
       bossbar.setColor(BossBar.Color.GREEN);
       bossbar.setProgress(1 - ((float) currentTime / maxTime));
     });

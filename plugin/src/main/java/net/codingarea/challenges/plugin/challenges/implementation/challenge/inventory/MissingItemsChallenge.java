@@ -44,7 +44,7 @@ public class MissingItemsChallenge extends TimedChallenge implements PlayerComma
   private List<Material> materials;
 
   public MissingItemsChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.INVENTORY, 1, 10, 5, false, new ItemStack(Material.FISHING_ROD), "missing-items-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.INVENTORY, 1, 10, 5, false, new ItemStack(Material.FISHING_ROD), "missing-items");
   }
 
 //  @Nullable
@@ -151,8 +151,8 @@ public class MissingItemsChallenge extends TimedChallenge implements PlayerComma
   }
 
   private void sendInfoText(@NotNull Player player) {
-    String message = Message.forName("missing-items-inventory").asString("§7");
-    String openMessage = Message.forName("missing-items-inventory-open").asString();
+    String message = Message.forName("challenge.missing-items.inventory").asString("§7");
+    String openMessage = Message.forName("challenge.missing-items.inventory-open").asString();
 
     TextComponent messageComponent = new TextComponent(Prefix.CHALLENGES + message + " ");
 
@@ -173,7 +173,7 @@ public class MissingItemsChallenge extends TimedChallenge implements PlayerComma
   }
 
   private Tuple<Inventory, Integer> generateMissingItemsInventory(@NotNull ItemStack itemStack) {
-    Inventory inventory = Bukkit.createInventory(MenuPosition.HOLDER, 6 * 9, InventoryTitleManager.getTitle(Message.forName("missing-items-inventory").asString(Message.forName("inventory-color").asString())));
+    Inventory inventory = Bukkit.createInventory(MenuPosition.HOLDER, 6 * 9, InventoryTitleManager.getTitle(Message.forName("challenge.missing-items.inventory").asString(Message.forName("inventory-color").asString())));
 
     int targetSlot = globalRandom.nextInt(inventory.getSize());
     inventory.setItem(targetSlot, itemStack);

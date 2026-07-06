@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
@@ -69,7 +70,7 @@ public abstract class KillMobsGoal extends SettingGoal {
     if (entitiesKilled.contains(event.getEntityType())) return;
     entitiesKilled.add(event.getEntityType());
     if (entitiesToKill.contains(event.getEntityType())) {
-      Message.forName("mob-kill").broadcast(Prefix.CHALLENGES, event.getEntityType(), getEntitiesKilled().size(), entitiesToKill.size());
+      MessageKey.of("mob-kill").broadcast(Prefix.CHALLENGES, event.getEntityType(), getEntitiesKilled().size(), entitiesToKill.size());
       bossbar.update();
       if (!getEntitiesLeftToKill().isEmpty()) return;
       resetEntitiesToKill();

@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets;
 
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.ExtremeForceBattleGoal;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import org.bukkit.entity.Player;
 
 public class DamageTarget extends ForceTarget<Integer> {
@@ -26,13 +26,13 @@ public class DamageTarget extends ForceTarget<Integer> {
   }
 
   @Override
-  public Message getNewTargetMessage() {
-    return Message.forName("extreme-force-battle-new-damage");
+  public MessageKey getNewTargetMessage() {
+    return MessageKey.of("extreme-force-battle-new-damage");
   }
 
   @Override
-  public Message getCompletedMessage() {
-    return Message.forName("extreme-force-battle-took-damage");
+  public MessageKey getCompletedMessage() {
+    return MessageKey.of("extreme-force-battle-took-damage");
   }
 
   @Override
@@ -41,8 +41,8 @@ public class DamageTarget extends ForceTarget<Integer> {
   }
 
   @Override
-  public Message getScoreboardDisplayMessage() {
-    return Message.forName("force-battle-damage-target-display");
+  public MessageKey getScoreboardDisplayMessage() {
+    return MessageKey.of("force-battle-damage-target-display");
   }
 
 }

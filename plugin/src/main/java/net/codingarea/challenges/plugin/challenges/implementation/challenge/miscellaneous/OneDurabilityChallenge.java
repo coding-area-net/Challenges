@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public class OneDurabilityChallenge extends Setting {
 
   public OneDurabilityChallenge() {
-    super(MenuType.CHALLENGES, null, new ItemStack(Material.WOODEN_HOE), "one-durability-challenge");
+    super(MenuType.CHALLENGES, null, new ItemStack(Material.WOODEN_HOE), "one-durability");
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

@@ -18,7 +18,7 @@ import java.util.List;
 public class ChunkDeconstructionChallenge extends TimedChallenge {
 
   public ChunkDeconstructionChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 60, 20, new ItemStack(Material.DIAMOND_PICKAXE), "chunk-deconstruction-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 60, 20, new ItemStack(Material.DIAMOND_PICKAXE), "chunk-deconstruction");
   }
 
 //  @Nullable

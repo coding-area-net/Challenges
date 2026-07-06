@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets;
 
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.ExtremeForceBattleGoal;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
@@ -39,13 +39,13 @@ public class BiomeTarget extends ForceTarget<Biome> {
   }
 
   @Override
-  public Message getNewTargetMessage() {
-    return Message.forName("extreme-force-battle-new-biome");
+  public MessageKey getNewTargetMessage() {
+    return MessageKey.of("extreme-force-battle-new-biome");
   }
 
   @Override
-  public Message getCompletedMessage() {
-    return Message.forName("extreme-force-battle-found-biome");
+  public MessageKey getCompletedMessage() {
+    return MessageKey.of("extreme-force-battle-found-biome");
   }
 
   @Override
@@ -54,8 +54,8 @@ public class BiomeTarget extends ForceTarget<Biome> {
   }
 
   @Override
-  public Message getScoreboardDisplayMessage() {
-    return Message.forName("force-battle-biome-target-display");
+  public MessageKey getScoreboardDisplayMessage() {
+    return MessageKey.of("force-battle-biome-target-display");
   }
 
 }

@@ -5,6 +5,7 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChal
 import net.codingarea.challenges.plugin.challenges.type.abstraction.WorldDependentChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Updated;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.ArgumentFormat;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
@@ -18,6 +19,7 @@ import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.ParticleUtils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.common.collection.pair.Tuple;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -51,9 +53,15 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
     super(MenuType.CHALLENGES, 1, 10, 5, new ItemStack(Material.ACACIA_STAIRS), "jump-and-run");
   }
 
+  @NotNull
+  @Override
+  public LocalizableMessage getSettingsName() {
+    return MessageKey.of("generic.enabled");
+  }
+
   @Override
   public LocalizableMessage getSettingsDescription() {
-    return MessageKey.of("item-time-seconds-range-description").withArgs(getValue() * 60 - 30, getValue() * 60 + 30);
+    return MessageKey.of("challenge.settings-modifier-time").withArgs(ArgumentFormat.SECONDS_RANGE.apply(Tuple.of(getValue() * 60, 30)));
   }
 
   @Override
@@ -73,11 +81,11 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
       case 5:
       case 3:
       case 2:
-        MessageKey.of("jnr-countdown").broadcast(Prefix.CHALLENGES, getSecondsLeftUntilNextActivation());
+        getChallengeMessageKey("countdown").broadcast(Prefix.CHALLENGES, getSecondsLeftUntilNextActivation());
         SoundSample.BASS_OFF.broadcast();
         break;
       case 1:
-        MessageKey.of("jnr-countdown-one").broadcast(Prefix.CHALLENGES);
+        getChallengeMessageKey("countdown-one").broadcast(Prefix.CHALLENGES);
         SoundSample.BASS_OFF.broadcast();
         break;
     }
@@ -159,7 +167,7 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
     jumps++;
     jumpAndRunsDone++;
 
-    MessageKey.of("jnr-finished").broadcast(Prefix.CHALLENGES, player);
+    getChallengeMessageKey("finished").broadcast(Prefix.CHALLENGES, player);
     exitJumpAndRun();
     SoundSample.KLING.broadcast();
   }

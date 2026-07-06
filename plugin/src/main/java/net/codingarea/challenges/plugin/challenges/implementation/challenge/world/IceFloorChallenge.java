@@ -4,6 +4,7 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
@@ -30,13 +31,13 @@ public class IceFloorChallenge extends Setting {
   private final List<Player> ignoredPlayers = new ArrayList<>();
 
   public IceFloorChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.PACKED_ICE), "ice-floor-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.PACKED_ICE), "ice-floor");
   }
 
   @Override
   protected void onEnable() {
     bossbar.setContent((bossbar, player) -> {
-      bossbar.setTitle(Message.forName("bossbar-ice-floor").asString(ignoreIce(player) ? Message.forName("disabled") : Message.forName("enabled")));
+      bossbar.setTitle(getChallengeMessageKey("bossbar"), ignoreIce(player) ? MessageKey.of("disabled") : MessageKey.of("enabled"));
       bossbar.setColor(ignoreIce(player) ? BossBar.Color.RED : BossBar.Color.GREEN);
     });
     bossbar.show();

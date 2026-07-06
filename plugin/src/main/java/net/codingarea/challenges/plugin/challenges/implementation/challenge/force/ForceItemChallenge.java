@@ -4,7 +4,6 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.CompletableForceChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
@@ -60,24 +59,24 @@ public class ForceItemChallenge extends CompletableForceChallenge {
   protected BiConsumer<BossBarInstance, Player> setupBossbar() {
     return (bossbar, player) -> {
       if (getState() == WAITING) {
-        bossbar.setTitle(MessageKey.of("bossbar-force-item-waiting"));
+        bossbar.setTitle(getChallengeMessageKey("bossbar-waiting"));
         return;
       }
 
       bossbar.setColor(BossBar.Color.GREEN);
       bossbar.setProgress(getProgress());
-      bossbar.setTitle(MessageKey.of("bossbar-force-item-instruction"), item, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation()));
+      bossbar.setTitle(getChallengeMessageKey("bossbar-instruction"), item, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation()));
     };
   }
 
   @Override
   protected void broadcastFailedMessage() {
-    Message.forName("force-item-fail").broadcast(Prefix.CHALLENGES, item);
+    getChallengeMessageKey("fail").broadcast(Prefix.CHALLENGES, item);
   }
 
   @Override
   protected void broadcastSuccessMessage(@NotNull Player player) {
-    Message.forName("force-item-success").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), item);
+    getChallengeMessageKey("success").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), item);
   }
 
   @Override

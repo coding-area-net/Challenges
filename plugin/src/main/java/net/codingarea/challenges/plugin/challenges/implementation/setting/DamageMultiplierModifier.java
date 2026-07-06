@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class DamageMultiplierModifier extends Modifier {
 
   public DamageMultiplierModifier() {
-    super(MenuType.SETTINGS, null, 10, new ItemStack(Material.STONE_SWORD), "damage-multiplier-setting");
+    super(MenuType.SETTINGS, null, 10, new ItemStack(Material.STONE_SWORD), "damage-multiplier");
   }
 
 //  @NotNull

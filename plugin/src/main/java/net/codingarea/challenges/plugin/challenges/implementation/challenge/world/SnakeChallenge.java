@@ -30,7 +30,7 @@ public class SnakeChallenge extends Setting {
   private final ArrayList<Block> blocks = new ArrayList<>();
 
   public SnakeChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.BLUE_TERRACOTTA), "snake-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.BLUE_TERRACOTTA), "snake");
   }
 
   @Override
@@ -70,7 +70,7 @@ public class SnakeChallenge extends Setting {
     }
 
     if (blocks.contains(to)) {
-      Message.forName("snake-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+      getChallengeMessageKey("failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
       ChallengeHelper.kill(event.getPlayer());
       return;
     }

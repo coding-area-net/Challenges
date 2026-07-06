@@ -4,6 +4,8 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets.*;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleDisplayGoal;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
@@ -36,7 +38,7 @@ public class ExtremeForceBattleGoal extends ForceBattleDisplayGoal<ForceTarget<?
 
   public ExtremeForceBattleGoal() {
 //    super(Message.forName("menu-extreme-force-battle-goal-settings"));
-    super(new ItemStack(Material.BOOK), "extreme-force-battle-goal");
+    super(new ItemStack(Material.BOOK), "extreme-force-battle");
 
 //    registerSetting("give-item", new BooleanSubSetting(
 //      () -> new LegacyItemBuilder(Material.CHEST, Message.forName("item-force-item-battle-goal-give-item")),
@@ -136,24 +138,24 @@ public class ExtremeForceBattleGoal extends ForceBattleDisplayGoal<ForceTarget<?
 
   @Override
   protected void setScoreboardContent() {
-    scoreboard.setContent((board, player) -> {
+    scoreboard.setContent((board, _) -> {
       List<Player> ingamePlayers = ChallengeAPI.getIngamePlayers();
-      int emptyLinesAvailable = 15 - ingamePlayers.size();
+      int emptyLinesAvailable = board.getRemainingLines() - ingamePlayers.size();
 
       if (emptyLinesAvailable > 0) {
-        board.addLine("");
+        board.addEmptyLine();
         emptyLinesAvailable--;
       }
 
       for (int i = 0; i < ingamePlayers.size() && i < 15; i++) {
         Player ingamePlayer = ingamePlayers.get(i);
         ForceTarget<?> target = currentTarget.get(ingamePlayer.getUniqueId());
-        String display = target == null ? Message.forName("none").asString() : (target.getScoreboardDisplayMessage().asString(getTargetName(target)));
-        board.addLine(NameHelper.getName(ingamePlayer) + " §8» §e" + display);
+        LocalizableMessage display = target == null ? MessageKey.of("none") : target.getScoreboardDisplayMessage().withArgs(getTargetName(target));
+//        board.addLine(NameHelper.getName(ingamePlayer) + " §8» §e" + display); // TODO translation format
       }
 
       if (emptyLinesAvailable > 0) {
-        board.addLine("");
+        board.addEmptyLine();
       }
     });
   }
@@ -166,11 +168,9 @@ public class ExtremeForceBattleGoal extends ForceBattleDisplayGoal<ForceTarget<?
   @Override
   public void handleJokerUse(Player player) {
     ForceTarget<?> target = currentTarget.get(player.getUniqueId());
-    if (giveItemOnSkip() && target instanceof ItemTarget) {
-      ItemTarget itemTarget = (ItemTarget) target;
+    if (giveItemOnSkip() && target instanceof ItemTarget itemTarget) {
       InventoryUtils.dropOrGiveItem(player.getInventory(), player.getLocation(), itemTarget.getTarget());
-    } else if (giveBlockOnSkip() && target instanceof BlockTarget) {
-      BlockTarget blockTarget = (BlockTarget) target;
+    } else if (giveBlockOnSkip() && target instanceof BlockTarget blockTarget) {
       InventoryUtils.dropOrGiveItem(player.getInventory(), player.getLocation(), blockTarget.getTarget());
     }
     super.handleJokerUse(player);

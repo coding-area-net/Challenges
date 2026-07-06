@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 public class MinHeightGoal extends FirstPlayerAtHeightGoal {
 
   public MinHeightGoal() {
-    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.BEDROCK), "min-height-goal");
+    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.BEDROCK), "min-height");
     setHeightToGetTo(BukkitReflectionUtils.getMinHeight(ChallengeAPI.getGameWorld(Environment.NORMAL)) + 1);
   }
 

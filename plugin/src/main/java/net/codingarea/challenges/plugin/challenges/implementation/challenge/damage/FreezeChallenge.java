@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 public class FreezeChallenge extends SettingModifier {
 
   public FreezeChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 5, 60, 20, new ItemStack(Material.BLUE_ICE), "item-freeze-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 5, 60, 20, new ItemStack(Material.BLUE_ICE), "freeze");
   }
 
 //  @Nullable

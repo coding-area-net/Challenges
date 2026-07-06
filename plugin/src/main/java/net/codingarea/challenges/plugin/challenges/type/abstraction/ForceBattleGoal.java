@@ -4,6 +4,7 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets.ForceTarget;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.menu.MenuGoal;
 import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -227,11 +228,11 @@ public abstract class ForceBattleGoal<T extends ForceTarget<?>> extends MenuGoal
     return null;
   }
 
-  protected Message getNewTargetMessage(T newTarget) {
+  protected MessageKey getNewTargetMessage(T newTarget) {
     return newTarget.getNewTargetMessage();
   }
 
-  protected Message getTargetCompletedMessage(T target) {
+  protected MessageKey getTargetCompletedMessage(T target) {
     return target.getCompletedMessage();
   }
 
@@ -276,7 +277,7 @@ public abstract class ForceBattleGoal<T extends ForceTarget<?>> extends MenuGoal
         UUID uuid = entry.getKey();
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
         ChatColor color = getPlaceColor(place);
-        Message.forName("force-battle-leaderboard-entry")
+        MessageKey.of("force-battle-leaderboard-entry")
           .broadcast(Prefix.CHALLENGES, color, place, NameHelper.getName(offlinePlayer), entry.getValue().size());
       }
 
@@ -304,7 +305,7 @@ public abstract class ForceBattleGoal<T extends ForceTarget<?>> extends MenuGoal
         UUID uuid = entry.getKey();
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
         ChatColor color = getPlaceColor(place);
-        Message.forName("force-battle-leaderboard-entry")
+        MessageKey.of("force-battle-leaderboard-entry")
           .send(player, Prefix.CHALLENGES, color, place, NameHelper.getName(offlinePlayer), entry.getValue().size());
       }
 
@@ -348,7 +349,7 @@ public abstract class ForceBattleGoal<T extends ForceTarget<?>> extends MenuGoal
       int emptyLinesAvailable = 15 - ingamePlayers.size();
 
       if (emptyLinesAvailable > 0) {
-        board.addLine("");
+        board.addEmptyLine();
         emptyLinesAvailable--;
       }
 
@@ -356,11 +357,11 @@ public abstract class ForceBattleGoal<T extends ForceTarget<?>> extends MenuGoal
         Player ingamePlayer = ingamePlayers.get(i);
         T target = currentTarget.get(ingamePlayer.getUniqueId());
         String display = target == null ? Message.forName("none").asString() : getTargetName(target);
-        board.addLine(NameHelper.getName(ingamePlayer) + " §8» §e" + display);
+//        board.addLine(NameHelper.getName(ingamePlayer) + " §8» §e" + display); // TODO format translation
       }
 
       if (emptyLinesAvailable > 0) {
-        board.addLine("");
+        board.addEmptyLine();
       }
     });
   }

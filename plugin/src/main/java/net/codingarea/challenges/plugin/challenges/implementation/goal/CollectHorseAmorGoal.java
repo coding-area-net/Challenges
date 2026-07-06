@@ -15,7 +15,7 @@ import java.util.List;
 public class CollectHorseAmorGoal extends ItemCollectionGoal {
 
   public CollectHorseAmorGoal() {
-    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.DIAMOND_HORSE_ARMOR), "collect-horse-armor-goal");
+    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.DIAMOND_HORSE_ARMOR), "collect-horse-armor");
     List<Material> targets = new ArrayList<>(Arrays.asList(
       Material.DIAMOND_HORSE_ARMOR,
       Material.GOLDEN_HORSE_ARMOR,

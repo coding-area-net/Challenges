@@ -4,6 +4,7 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.PointsGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
@@ -32,7 +33,7 @@ public class AllAdvancementGoal extends PointsGoal {
   private final int advancementCount;
 
   public AllAdvancementGoal() {
-    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.BOOK), "all-advancements-goal");
+    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.BOOK), "all-advancements");
     allAdvancements = new LinkedList<>();
     Bukkit.getServer().advancementIterator().forEachRemaining(advancement -> {
       if (!advancement.getKey().toString().contains(":recipes/")) {
@@ -46,8 +47,8 @@ public class AllAdvancementGoal extends PointsGoal {
   protected void onEnable() {
     updateAdvancements();
     scoreboard.setContent(GoalHelper.createScoreboard(() ->
-      getPoints(new AtomicInteger(), true), player -> {
-      return Collections.singletonList(Message.forName("all-advancements-goal").asString(advancementCount));
+      getPoints(new AtomicInteger(), true), _ -> {
+      return Collections.singletonList(MessageKey.of("all-advancements-goal").withArgs(advancementCount));
     }));
     scoreboard.show();
   }

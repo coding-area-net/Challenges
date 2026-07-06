@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 public class RandomItemRemovingChallenge extends TimedChallenge {
 
   public RandomItemRemovingChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 1, 30, 30, new ItemStack(Material.DROPPER), "random-item-removing-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 1, 30, 30, new ItemStack(Material.DROPPER), "random-item-removing");
   }
 
 //  @Nullable

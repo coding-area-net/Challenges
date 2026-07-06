@@ -19,7 +19,7 @@ import org.bukkit.util.RayTraceResult;
 public class MobSightDamageChallenge extends SettingModifier {
 
   public MobSightDamageChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.SPIDER_EYE), "no-mob-sight-damage-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.SPIDER_EYE), "mob-sight-damage");
   }
 
 //  @Nullable

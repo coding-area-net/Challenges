@@ -19,7 +19,7 @@ public class CraftingRandomizerChallenge extends RandomizerSetting {
   protected final Map<Material, Material> randomization = new HashMap<>();
 
   public CraftingRandomizerChallenge() {
-    super(MenuType.CHALLENGES, new ItemStack(Material.CHEST_MINECART), "crafting-randomizer-challenge");
+    super(MenuType.CHALLENGES, new ItemStack(Material.CHEST_MINECART), "crafting-randomizer");
   }
 
   @Override

@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 public class MaxHeightGoal extends FirstPlayerAtHeightGoal {
 
   public MaxHeightGoal() {
-    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.FEATHER), "max-height-goal");
+    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.FEATHER), "max-height");
     setHeightToGetTo(ChallengeAPI.getGameWorld(Environment.NORMAL).getMaxHeight());
   }
 

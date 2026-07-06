@@ -4,7 +4,6 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.EndingForceChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -30,7 +29,7 @@ public class ForceHeightChallenge extends EndingForceChallenge {
   private int height;
 
   public ForceHeightChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.FORCE, 2, 15, new ItemStack(Material.IRON_BOOTS), "force-height-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.FORCE, 2, 15, new ItemStack(Material.IRON_BOOTS), "force-height");
   }
 
 //  @Nullable
@@ -49,13 +48,13 @@ public class ForceHeightChallenge extends EndingForceChallenge {
   protected BiConsumer<BossBarInstance, Player> setupBossbar() {
     return (bossbar, player) -> {
       if (getState() == WAITING) {
-        bossbar.setTitle(MessageKey.of("bossbar-force-height-waiting"));
+        bossbar.setTitle(getChallengeMessageKey("bossbar-waiting"));
         return;
       }
 
       bossbar.setColor(BossBar.Color.GREEN);
       bossbar.setProgress(getProgress());
-      bossbar.setTitle(MessageKey.of("bossbar-force-height-instruction"), height, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation()));
+      bossbar.setTitle(getChallengeMessageKey("bossbar-instruction"), height, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation()));
     };
   }
 
@@ -66,12 +65,12 @@ public class ForceHeightChallenge extends EndingForceChallenge {
 
   @Override
   protected void broadcastFailedMessage(@NotNull Player player) {
-    MessageKey.of("force-height-fail").broadcast(Prefix.CHALLENGES, player, player.getLocation().getBlockY());
+    getChallengeMessageKey("fail").broadcast(Prefix.CHALLENGES, player, player.getLocation().getBlockY());
   }
 
   @Override
   protected void broadcastSuccessMessage() {
-    MessageKey.of("force-height-success").broadcast(Prefix.CHALLENGES);
+    getChallengeMessageKey("success").broadcast(Prefix.CHALLENGES);
   }
 
   @Override

@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class ForcePositionBattleGoal extends ForceBattleGoal<PositionTarget> {
   public ForcePositionBattleGoal() {
 //    super(Message.forName("menu-force-position-battle-goal-settings"));
-    super(new ItemStack(Material.DIAMOND_BOOTS), "force-position-battle-goal");
+    super(new ItemStack(Material.DIAMOND_BOOTS), "force-position-battle");
 //    registerSetting("radius", new NumberSubSetting(
 //      () -> new LegacyItemBuilder(Material.DIAMOND_BOOTS, Message.forName("item-force-position-battle-radius")),
 //      value -> null,

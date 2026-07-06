@@ -43,7 +43,7 @@ public class TsunamiChallenge extends TimedChallenge {
   private int waterHeight = Integer.MAX_VALUE, lavaHeight = 0;
 
   public TsunamiChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 40, 4, new ItemStack(Material.ICE), "tsunami-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 40, 4, new ItemStack(Material.ICE), "tsunami");
   }
 
 //  @Nullable
@@ -72,10 +72,10 @@ public class TsunamiChallenge extends TimedChallenge {
 
       if (environment == Environment.NORMAL) {
         bossbar.setColor(BossBar.Color.BLUE);
-        bossbar.setTitle(Message.forName("bossbar-tsunami-water").asString(waterHeight));
+        bossbar.setTitle(getChallengeMessageKey("bossbar-water"), waterHeight);
       } else if (environment == Environment.NETHER) {
         bossbar.setColor(BossBar.Color.RED);
-        bossbar.setTitle(Message.forName("bossbar-tsunami-lava").asString(lavaHeight));
+        bossbar.setTitle(getChallengeMessageKey("bossbar-lava"), lavaHeight);
       } else {
         bossbar.setVisible(false);
       }

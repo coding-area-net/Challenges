@@ -1,27 +1,23 @@
 package net.codingarea.challenges.plugin.management.server;
 
 import lombok.Getter;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import lombok.RequiredArgsConstructor;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @Getter
+@RequiredArgsConstructor
 public enum ChallengeEndCause {
 
-  TIMER_HIT_ZERO(Message.forName("challenge-end-timer-hit-zero"), Message.forName("challenge-end-timer-hit-zero-winner")),
-  GOAL_REACHED(Message.forName("challenge-end-goal-reached"), Message.forName("challenge-end-goal-reached-winner")),
-  GOAL_FAILED(Message.forName("challenge-end-goal-failed"), null);
+  TIMER_HIT_ZERO("challenge-end.timer-hit-zero", "challenge-end.timer-hit-zero-winner"),
+  GOAL_REACHED("challenge-end.goal-reached", "challenge-end.goal-reached-winner"),
+  GOAL_FAILED("challenge-end.goal-failed", null);
 
-  private final Message noWinnerMessage, winnerMessage;
-
-  ChallengeEndCause(@NotNull Message noWinnerMessage, @Nullable Message winnerMessage) {
-    this.noWinnerMessage = noWinnerMessage;
-    this.winnerMessage = winnerMessage;
-  }
+  private final String noWinnerMessage, winnerMessage;
 
   @NotNull
-  public Message getMessage(boolean withWinner) {
-    return withWinner && winnerMessage != null ? winnerMessage : noWinnerMessage;
+  public MessageKey getMessage(boolean withWinner) {
+    return MessageKey.of(withWinner && winnerMessage != null ? winnerMessage : noWinnerMessage);
   }
 
   public boolean isWinnable() {

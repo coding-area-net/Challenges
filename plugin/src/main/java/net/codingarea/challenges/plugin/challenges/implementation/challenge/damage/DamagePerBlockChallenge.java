@@ -17,7 +17,7 @@ public class DamagePerBlockChallenge extends SettingModifier {
 
   public DamagePerBlockChallenge() {
     super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 40, new StandardItemBuilder.LeatherArmorBuilder(Material.LEATHER_BOOTS).setColor(Color.RED).build(),
-      "damage-per-block-challenge");
+      "damage-per-block");
   }
 
 //  @Nullable

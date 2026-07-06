@@ -16,7 +16,7 @@ import java.util.List;
 public class KillAllMobsGoal extends KillMobsGoal {
 
   public KillAllMobsGoal() {
-    super(SettingCategory.KILL_ENTITY, getAllMobsToKill(), new ItemStack(Material.BOW), "all-mobs-goal");
+    super(SettingCategory.KILL_ENTITY, getAllMobsToKill(), new ItemStack(Material.BOW), "all-mobs");
   }
 
   static List<EntityType> getAllMobsToKill() {

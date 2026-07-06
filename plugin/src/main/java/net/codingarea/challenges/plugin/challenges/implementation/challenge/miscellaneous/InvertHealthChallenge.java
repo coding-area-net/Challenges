@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
 public class InvertHealthChallenge extends TimedChallenge {
 
   public InvertHealthChallenge() {
-    super(MenuType.CHALLENGES, null, 1, 10, 5, false, new ItemStack(Material.POPPY), "invert-health-challenge");
+    super(MenuType.CHALLENGES, null, 1, 10, 5, false, new ItemStack(Material.POPPY), "invert-health");
   }
 
   public static void invertHealth(Player player) {
@@ -49,7 +49,7 @@ public class InvertHealthChallenge extends TimedChallenge {
   @Override
   protected void onTimeActivation() {
     SoundSample.PLOP.broadcast();
-    Message.forName("health-inverted").broadcast(Prefix.CHALLENGES);
+    getChallengeMessageKey("inverted").broadcast(Prefix.CHALLENGES);
     for (Player player : Bukkit.getOnlinePlayers()) {
       if (ignorePlayer(player)) continue;
       invertHealth(player);

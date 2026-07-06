@@ -37,7 +37,7 @@ public class ChunkRandomEffectChallenge extends Setting {
   private long worldSeed;
 
   public ChunkRandomEffectChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.EFFECT, new ItemStack(Material.CAULDRON), "chunk-effect-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.EFFECT, new ItemStack(Material.CAULDRON), "chunk-effect");
   }
 
   @Override

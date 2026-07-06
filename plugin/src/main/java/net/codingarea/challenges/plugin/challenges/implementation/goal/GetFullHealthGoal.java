@@ -27,7 +27,7 @@ import java.util.List;
 public class GetFullHealthGoal extends SettingModifierGoal {
 
   public GetFullHealthGoal() {
-    super(MenuType.GOAL, SettingCategory.FASTEST_TIME, 1, 20, 20, new ItemStack(Material.AZURE_BLUET), "get-full-health-goal");
+    super(MenuType.GOAL, SettingCategory.FASTEST_TIME, 1, 20, 20, new ItemStack(Material.AZURE_BLUET), "get-full-health");
   }
 
   @Override

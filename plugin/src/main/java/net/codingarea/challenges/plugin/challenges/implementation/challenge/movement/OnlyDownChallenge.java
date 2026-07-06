@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class OnlyDownChallenge extends Setting {
 
   public OnlyDownChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, new ItemStack(Material.ACACIA_SLAB), "only-down-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, new ItemStack(Material.ACACIA_SLAB), "only-down");
   }
 
   @EventHandler
@@ -27,7 +27,7 @@ public class OnlyDownChallenge extends Setting {
     if (ignorePlayer(event.getPlayer())) return;
     if (event.getTo() == null) return;
     if (event.getTo().getBlockY() <= event.getFrom().getBlockY()) return;
-    Message.forName("only-down-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+    getChallengeMessageKey("failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
     ChallengeHelper.kill(event.getPlayer());
   }
 

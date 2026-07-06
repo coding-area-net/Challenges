@@ -23,7 +23,7 @@ public class LastManStandingGoal extends SettingGoal {
   private Player winner;
 
   public LastManStandingGoal() {
-    super(null, new ItemStack(Material.IRON_HELMET), "last-man-standing-goal");
+    super(null, new ItemStack(Material.IRON_HELMET), "last-man-standing");
   }
 
   @Override

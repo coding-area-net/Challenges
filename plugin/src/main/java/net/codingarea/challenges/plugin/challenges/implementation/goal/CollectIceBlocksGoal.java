@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public class CollectIceBlocksGoal extends ItemCollectionGoal {
 
   public CollectIceBlocksGoal() {
-    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.PACKED_ICE), "collect-ice-goal", Material.ICE, Material.BLUE_ICE, Material.PACKED_ICE, Material.SNOW_BLOCK);
+    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.PACKED_ICE), "collect-ice", Material.ICE, Material.BLUE_ICE, Material.PACKED_ICE, Material.SNOW_BLOCK);
   }
 
 }

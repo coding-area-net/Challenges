@@ -18,7 +18,7 @@ import java.util.List;
 public class BlockRandomizerChallenge extends RandomizerSetting {
 
   public BlockRandomizerChallenge() {
-    super(MenuType.CHALLENGES, new ItemStack(Material.MINECART), "block-randomizer-challenge");
+    super(MenuType.CHALLENGES, new ItemStack(Material.MINECART), "block-randomizer");
   }
 
   @Override

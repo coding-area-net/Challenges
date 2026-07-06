@@ -21,7 +21,7 @@ import java.util.List;
 public class EatCakeGoal extends SettingGoal {
 
   public EatCakeGoal() {
-    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.CAKE), "eat-cake-goal");
+    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.CAKE), "eat-cake");
   }
 
   @Override

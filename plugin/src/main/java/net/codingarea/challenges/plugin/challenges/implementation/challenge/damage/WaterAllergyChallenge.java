@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 public class WaterAllergyChallenge extends SettingModifier {
 
   public WaterAllergyChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 40, new ItemStack(Material.CYAN_GLAZED_TERRACOTTA), "water-allergy-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 40, new ItemStack(Material.CYAN_GLAZED_TERRACOTTA), "water-allergy");
   }
 
 //  @Nullable

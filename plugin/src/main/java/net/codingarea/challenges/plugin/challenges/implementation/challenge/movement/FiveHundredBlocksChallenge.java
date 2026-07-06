@@ -38,7 +38,7 @@ public class FiveHundredBlocksChallenge extends SettingModifier {
   private final Map<UUID, Integer> blocksWalked = new HashMap<>();
 
   public FiveHundredBlocksChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, 1, 5, 5, new ItemStack(MinecraftNameWrapper.SIGN), "five-hundred-blocks-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, 1, 5, 5, new ItemStack(MinecraftNameWrapper.SIGN), "five-hundred-blocks");
 
     // Loot Generate Event was added in 1.15
     try {
@@ -64,7 +64,7 @@ public class FiveHundredBlocksChallenge extends SettingModifier {
   protected void onEnable() {
     bossbar.setContent((bar, player) -> {
       int walked = blocksWalked.getOrDefault(player.getUniqueId(), 0);
-      bar.setTitle(Message.forName("bossbar-five-hundred-blocks").asString(walked, getBlocksToWalk()));
+      bar.setTitle(getChallengeMessageKey("bossbar"), walked, getBlocksToWalk());
     });
     bossbar.show();
   }
@@ -76,7 +76,7 @@ public class FiveHundredBlocksChallenge extends SettingModifier {
 
   @Override
   public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeValueTitle(this, Message.forName("subtitle-blocks").asString(getBlocksToWalk()));
+    ChallengeHelper.playChallengeValueTitle(this, Message.forName("challenge.five-hundred-blocks.subtitle").asString(getBlocksToWalk()));
   }
 
 //  @Nullable

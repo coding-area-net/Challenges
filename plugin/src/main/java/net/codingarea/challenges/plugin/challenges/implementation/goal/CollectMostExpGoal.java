@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public class CollectMostExpGoal extends PointsGoal {
 
   public CollectMostExpGoal() {
-    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.EXPERIENCE_BOTTLE), "most-xp-goal");
+    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.EXPERIENCE_BOTTLE), "most-xp");
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

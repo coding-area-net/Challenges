@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 public class PvPSetting extends Setting {
 
   public PvPSetting() {
-    super(MenuType.SETTINGS, null, true, new ItemStack(Material.STONE_SWORD), "pvp-setting");
+    super(MenuType.SETTINGS, null, true, new ItemStack(Material.STONE_SWORD), "pvp");
   }
 
   @EventHandler

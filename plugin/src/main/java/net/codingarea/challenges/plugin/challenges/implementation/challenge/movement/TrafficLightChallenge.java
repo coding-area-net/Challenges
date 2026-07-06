@@ -28,7 +28,7 @@ public class TrafficLightChallenge extends TimedChallenge {
   private int state;
 
   public TrafficLightChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, 1, 10, 5, new ItemStack(Material.LIME_STAINED_GLASS), "traffic-light-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, 1, 10, 5, new ItemStack(Material.LIME_STAINED_GLASS), "traffic-light");
   }
 
 //  @Nullable
@@ -110,7 +110,7 @@ public class TrafficLightChallenge extends TimedChallenge {
     restartTimer();
 
     Player player = event.getPlayer();
-    Message.forName("traffic-light-challenge-fail").broadcast(Prefix.CHALLENGES, NameHelper.getName(player));
+    getChallengeMessageKey("fail").broadcast(Prefix.CHALLENGES, NameHelper.getName(player));
     ChallengeHelper.kill(player);
   }
 

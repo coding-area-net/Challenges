@@ -34,8 +34,6 @@ public class SkipTimerCommand implements SenderCommand, Completer {
       LocalizableMessage[] names = challenges.stream().map(IChallenge::getChallengeName).toArray(LocalizableMessage[]::new);
       MessageKey.of("command.skip-timer.done").broadcast(Prefix.CHALLENGES, LocalizableMessage.joinArray(names));
     }
-
-    MessageKey.of("test").send(sender, null, Material.MUSIC_DISC_13);
   }
 
   @Nullable

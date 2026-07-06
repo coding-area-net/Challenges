@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public class CollectMostItemsGoal extends CollectionGoal {
 
   public CollectMostItemsGoal() {
-    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.STICK), "most-items-goal", ExperimentalUtils.getMaterials());
+    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.STICK), "most-items", ExperimentalUtils.getMaterials());
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

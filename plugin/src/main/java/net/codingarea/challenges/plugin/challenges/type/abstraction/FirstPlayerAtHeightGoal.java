@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 import lombok.Getter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
@@ -30,7 +31,7 @@ public abstract class FirstPlayerAtHeightGoal extends SettingGoal {
   @Override
   protected void onEnable() {
     bossbar.setContent((bar, player) -> {
-      bar.setTitle(Message.forName("bossbar-first-at-height-goal").asString(getHeightToGetTo()));
+      bar.setTitle(MessageKey.of("bossbar-first-at-height-goal"), getHeightToGetTo());
     });
     bossbar.show();
   }
@@ -51,7 +52,7 @@ public abstract class FirstPlayerAtHeightGoal extends SettingGoal {
     if (ignorePlayer(event.getPlayer())) return;
     if (event.getTo().getBlockY() == event.getFrom().getBlockY()) return;
     if (event.getTo().getBlockY() == heightToGetTo) {
-      Message.forName("height-reached").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), getHeightToGetTo());
+      MessageKey.of("height-reached").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), getHeightToGetTo());
       ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, () -> Collections.singletonList(event.getPlayer()));
     }
   }

@@ -3,7 +3,6 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.tim
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
@@ -28,7 +27,7 @@ public class MaxBiomeTimeChallenge extends SettingModifier {
     bossbar.setContent((bossbar, player) -> {
       int currentTime = getCurrentTime(player);
       int maxTime = (getValue() * 60);
-      bossbar.setTitle(MessageKey.of("bossbar-biome-time-left"), getBiome(player), maxTime - currentTime);
+      bossbar.setTitle(getChallengeMessageKey("bossbar"), getBiome(player), maxTime - currentTime);
       bossbar.setColor(BossBar.Color.GREEN);
       bossbar.setProgress(1 - ((float) currentTime / maxTime));
     });

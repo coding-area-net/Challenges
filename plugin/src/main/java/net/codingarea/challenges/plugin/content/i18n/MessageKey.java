@@ -90,6 +90,18 @@ public interface MessageKey extends LocalizableMessage {
 
   @NotNull
   @CheckReturnValue
+  static MessageKey pluralize(@NotNull String singular, @NotNull String plural, @NotNull Number count) {
+    return of(count.intValue() == 1 ? singular : plural);
+  }
+
+  @NotNull
+  @CheckReturnValue
+  static MessageKey pluralize(@NotNull String baseId, @NotNull Number count) {
+    return pluralize(baseId, baseId + "s", count);
+  }
+
+  @NotNull
+  @CheckReturnValue
   @ApiStatus.Internal
   static MessageKey empty(@NotNull String id) {
     return new MessageKeyImpl(id);

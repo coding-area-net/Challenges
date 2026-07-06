@@ -1,9 +1,8 @@
 package net.codingarea.challenges.plugin.spigot.listener;
 
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
-import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -13,10 +12,22 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class CheatListener implements Listener {
+
+  public static final String[] CHEAT_COMMANDS = {
+    "give",
+    "replaceitem",
+    "effect",
+    "i",
+    "summon",
+    "enchant",
+    "heal",
+    "kill",
+    "setblock",
+    "fill"
+  };
 
   public CheatListener() {
     Bukkit.getOnlinePlayers().stream()
@@ -30,28 +41,8 @@ public class CheatListener implements Listener {
       handleCheatsDetected(event.getPlayer());
   }
 
-  @EventHandler(priority = EventPriority.MONITOR)
-  public void onSneak(PlayerToggleSneakEvent event) {
-    if (!event.isSneaking()) {
-    }
-////		Structure structure = entry.getValue();
-
-  }
-
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
   public void onCommand(@NotNull PlayerCommandPreprocessEvent event) {
-    String[] commands = {
-      "give",
-      "replaceitem",
-      "effect",
-      "i",
-      "summon",
-      "enchant",
-      "heal",
-      "kill",
-      "setblock",
-      "fill"
-    };
     String message = event.getMessage().toLowerCase();
     if (message.isEmpty()) return;
 
@@ -61,7 +52,7 @@ public class CheatListener implements Listener {
       commandName = commandName.substring(commandName.indexOf(':') + 1);
     }
 
-    for (String command : commands) {
+    for (String command : CHEAT_COMMANDS) {
       if (!commandName.equalsIgnoreCase("/" + command)) continue;
       if (!hasPermission(event.getPlayer(), command)) continue;
       handleCheatsDetected(event.getPlayer());
@@ -90,7 +81,7 @@ public class CheatListener implements Listener {
     if (!Challenges.getInstance().getStatsManager().isNoStatsAfterCheating()) return;
     Challenges.getInstance().getServerManager().setHasCheated();
     Logger.info("Detected cheating: No more stats can be collected");
-    Message.forName("cheats-detected").broadcast(Prefix.CHALLENGES, NameHelper.getName(player));
+    MessageKey.of("cheats-detected").broadcast(Prefix.CHALLENGES, player);
   }
 
 }

@@ -4,7 +4,6 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModif
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import org.bukkit.Material;
@@ -20,7 +19,7 @@ import java.util.List;
 public class FoodOnceChallenge extends SettingModifier {
 
   public FoodOnceChallenge() {
-    super(MenuType.CHALLENGES, null, 2, new ItemStack(Material.COOKED_BEEF), "food-once-challenge");
+    super(MenuType.CHALLENGES, null, 2, new ItemStack(Material.COOKED_BEEF), "food-once");
   }
 
 //  @NotNull
@@ -28,9 +27,9 @@ public class FoodOnceChallenge extends SettingModifier {
 //  public LegacyItemBuilder createSettingsItem() {
 //    switch (getValue()) {
 //      case 1:
-//        return DefaultItem.create(Material.PLAYER_HEAD, Message.forName("item-food-once-challenge-player"));
+//        return DefaultItem.create(Material.PLAYER_HEAD, Message.forName("challenge.food-once.player"));
 //      case 2:
-//        return DefaultItem.create(Material.ENDER_CHEST, Message.forName("item-food-once-challenge-everyone"));
+//        return DefaultItem.create(Material.ENDER_CHEST, Message.forName("challenge.food-once.everyone"));
 //      default:
 //        return super.createSettingsItem();
 //    }
@@ -38,7 +37,7 @@ public class FoodOnceChallenge extends SettingModifier {
 
   @Override
   public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeValueTitle(this, getValue() == 1 ? Message.forName("item-food-once-challenge-player") : Message.forName("item-food-once-challenge-everyone"));
+    ChallengeHelper.playChallengeValueTitle(this, getValue() == 1 ? Message.forName("challenge.food-once.player") : Message.forName("challenge.food-once.everyone"));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
@@ -48,14 +47,14 @@ public class FoodOnceChallenge extends SettingModifier {
 
     Material type = event.getItem().getType();
     if (hasEaten(event.getPlayer(), type)) {
-      Message.forName("food-once-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), type);
+      getChallengeMessageKey("failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), type);
       ChallengeHelper.kill(event.getPlayer(), 1);
     } else {
       addFood(event.getPlayer(), type);
       if (teamFoodsActivated()) {
-        Message.forName("food-once-new-food-team").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), type);
+        getChallengeMessageKey("new-food-team").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), type);
       } else {
-        MessageKey.of("food-once-new-food").send(event.getPlayer(), Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), type);
+        getChallengeMessageKey("new-food").send(event.getPlayer(), Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), type);
 
       }
     }

@@ -197,6 +197,7 @@ public final class LanguageLoader extends ContentLoader {
   @NotNull
   private List<String> loadBundledLanguageNames() {
     try (InputStream in = getLanguageResourceStream("languages.json")) {
+      if (in == null) throw new IllegalStateException("Could not load bundled languages.json from jar");
       return Document.parseJsonStringArray(IOUtils.toString(in));
     } catch (Exception ex) {
       Logger.error("Could not load bundled languages", ex);
@@ -206,7 +207,7 @@ public final class LanguageLoader extends ContentLoader {
 
   @Nullable
   private Document loadBundledLanguageDocument(@NotNull String languageName) {
-    try (InputStream in = getLanguageResourceStream("files/" + languageName + ".json")) {
+    try (InputStream in = getLanguageResourceStream("locales/" + languageName + ".json")) {
       if (in == null) return null;
       return Document.parseJson(in);
     } catch (Exception ex) {
@@ -215,7 +216,8 @@ public final class LanguageLoader extends ContentLoader {
     }
   }
 
-  private InputStream getLanguageResourceStream(String path) {
+  @Nullable
+  private InputStream getLanguageResourceStream(@NotNull String path) {
     // no leading slash!
     return Challenges.getInstance().getResource("language/" + path);
   }
@@ -236,7 +238,7 @@ public final class LanguageLoader extends ContentLoader {
 
   @Nullable
   private Document fetchOnlineLanguageDocument(@NotNull String languageName) {
-    String url = getGitHubUrl("language/files/" + languageName + ".json");
+    String url = getGitHubUrl("language/locales/" + languageName + ".json");
     try {
       return Document.parseJson(IOUtils.toString(url));
     } catch (Exception ex) {

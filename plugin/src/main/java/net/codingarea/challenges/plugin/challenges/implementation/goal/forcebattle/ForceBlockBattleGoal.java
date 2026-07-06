@@ -20,7 +20,7 @@ public class ForceBlockBattleGoal extends ForceBattleDisplayGoal<BlockTarget> {
 
   public ForceBlockBattleGoal() {
 //    super(Message.forName("menu-force-block-battle-goal-settings"));
-    super(new ItemStack(Material.CHEST), "force-block-battle-goal");
+    super(new ItemStack(Material.CHEST), "force-block-battle");
 
 //    registerSetting("give-block", new BooleanSubSetting(
 //      () -> new LegacyItemBuilder(Material.CHEST, Message.forName("item-force-block-battle-goal-give-block")),

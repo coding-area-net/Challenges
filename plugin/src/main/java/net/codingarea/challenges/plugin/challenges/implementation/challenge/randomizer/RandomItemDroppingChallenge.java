@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class RandomItemDroppingChallenge extends TimedChallenge {
 
   public RandomItemDroppingChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 1, 60, 5, new ItemStack(Material.DISPENSER), "random-dropping-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 1, 60, 5, new ItemStack(Material.DISPENSER), "random-dropping");
   }
 
   //  @Nullable

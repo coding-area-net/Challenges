@@ -48,7 +48,7 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
   private Material currentItem;
 
   public CollectAllItemsGoal() {
-    super(null, new ItemStack(Material.GRASS_BLOCK), "collect-all-items-goal");
+    super(null, new ItemStack(Material.GRASS_BLOCK), "collect-all-items");
     random = new SeededRandomWrapper();
     reloadItemsToFind();
     totalItemsCount = itemsToFind.size();

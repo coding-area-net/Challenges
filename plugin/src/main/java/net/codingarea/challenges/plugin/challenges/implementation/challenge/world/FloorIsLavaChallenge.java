@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 public class FloorIsLavaChallenge extends SettingModifier {
 
   public FloorIsLavaChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 60, 30, new ItemStack(Material.MAGMA_BLOCK), "floor-is-lava-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 60, 30, new ItemStack(Material.MAGMA_BLOCK), "floor-is-lava");
   }
 
   @EventHandler

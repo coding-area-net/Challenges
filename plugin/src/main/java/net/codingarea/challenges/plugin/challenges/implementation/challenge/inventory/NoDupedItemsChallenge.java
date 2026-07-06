@@ -4,7 +4,6 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.CanInstaKillOnEnable;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -31,7 +30,7 @@ import java.util.Map.Entry;
 public class NoDupedItemsChallenge extends Setting {
 
   public NoDupedItemsChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.INVENTORY, new ItemStack(Material.OBSERVER), "no-duped-items-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.INVENTORY, new ItemStack(Material.OBSERVER), "no-duped-items");
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -64,7 +63,7 @@ public class NoDupedItemsChallenge extends Setting {
     for (Player player : Bukkit.getOnlinePlayers()) {
       Triple<Player, Player, Material> result = checkInventory(player, blackList);
       if (result != null) {
-        MessageKey.of("no-duped-items-failed").broadcast(
+        getChallengeMessageKey("failed").broadcast(
           Prefix.CHALLENGES,
           result.getFirst(),
           result.getSecond(),

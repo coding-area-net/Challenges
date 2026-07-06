@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 public class MineMostBlocksGoal extends PointsGoal {
 
   public MineMostBlocksGoal() {
-    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.GOLDEN_PICKAXE), "mine-most-blocks-goal");
+    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.GOLDEN_PICKAXE), "mine-most-blocks");
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

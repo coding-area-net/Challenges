@@ -27,7 +27,7 @@ public class CollectWoodGoal extends SettingModifierCollectionGoal {
     BOTH = 3;
 
   public CollectWoodGoal() {
-    super(SettingCategory.FASTEST_TIME, 1, newNether ? 3 : 1, new ItemStack(Material.GOLDEN_AXE), "collect-wood-goal");
+    super(SettingCategory.FASTEST_TIME, 1, newNether ? 3 : 1, new ItemStack(Material.GOLDEN_AXE), "collect-wood");
   }
 
 //  @NotNull

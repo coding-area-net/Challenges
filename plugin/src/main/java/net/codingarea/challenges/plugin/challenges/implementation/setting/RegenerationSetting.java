@@ -24,7 +24,7 @@ public class RegenerationSetting extends Modifier {
 
   public RegenerationSetting() {
     super(MenuType.SETTINGS, null, 1, 3, ENABLED,
-      new StandardItemBuilder.PotionBuilder(Material.POTION).setColor(Color.RED).build(), "item-regeneration-setting");
+      new StandardItemBuilder.PotionBuilder(Material.POTION).setColor(Color.RED).build(), "regeneration");
   }
 
   @NotNull

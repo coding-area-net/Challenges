@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 public class SplitHealthSetting extends Setting {
 
   public SplitHealthSetting() {
-    super(MenuType.SETTINGS, null, new StandardItemBuilder.PotionBuilder(Material.TIPPED_ARROW).setColor(Color.RED).build(), "item-split-health-setting");
+    super(MenuType.SETTINGS, null, new StandardItemBuilder.PotionBuilder(Material.TIPPED_ARROW).setColor(Color.RED).build(), "split-health");
   }
 
   @Override

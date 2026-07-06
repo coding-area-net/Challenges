@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 public class RandomItemChallenge extends TimedChallenge {
 
   public RandomItemChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 1, 60, 30, false, new ItemStack(Material.BEACON), "random-item-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 1, 60, 30, false, new ItemStack(Material.BEACON), "random-item");
   }
 
 //  @Nullable

@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 public class EnderChestCommandSetting extends Setting implements PlayerCommand {
 
   public EnderChestCommandSetting() {
-    super(MenuType.SETTINGS, null, new ItemStack(Material.ENDER_CHEST), "item-enderchest-command-setting");
+    super(MenuType.SETTINGS, null, new ItemStack(Material.ENDER_CHEST), "enderchest-command");
   }
 
   @Override

@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 public class DamagePerItemChallenge extends Setting {
 
   public DamagePerItemChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, new ItemStack(Material.SHEARS), "damage-item-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, new ItemStack(Material.SHEARS), "damage-item");
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

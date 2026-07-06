@@ -19,7 +19,7 @@ public class SneakDamageChallenge extends SettingModifier {
 
   public SneakDamageChallenge() {
     super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 60, new StandardItemBuilder.LeatherArmorBuilder(Material.LEATHER_BOOTS).setColor(Color.YELLOW).build(),
-      "sneak-damage-challenge");
+      "sneak-damage");
   }
 
 //  @Nullable
@@ -38,7 +38,7 @@ public class SneakDamageChallenge extends SettingModifier {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (!event.isSneaking()) return;
-    Message.forName("sneak-damage-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+    getChallengeMessageKey("failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
     event.getPlayer().setNoDamageTicks(0);
     event.getPlayer().damage(getValue());
     event.getPlayer().setNoDamageTicks(0);

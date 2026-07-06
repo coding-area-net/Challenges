@@ -21,7 +21,7 @@ public class FirstOneToDieGoal extends SettingGoal {
   private Player winner;
 
   public FirstOneToDieGoal() {
-    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.STONE_SWORD), "first-one-to-die-goal");
+    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.STONE_SWORD), "first-one-to-die");
   }
 
   @Override

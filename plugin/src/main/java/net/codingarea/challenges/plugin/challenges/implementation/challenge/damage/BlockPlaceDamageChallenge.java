@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 public class BlockPlaceDamageChallenge extends SettingModifier {
 
   public BlockPlaceDamageChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 60, new ItemStack(Material.GOLD_BLOCK), "block-place-damange-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 60, new ItemStack(Material.GOLD_BLOCK), "block-place-damage");
   }
 
 //  @Nullable

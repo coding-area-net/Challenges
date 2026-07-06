@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public class NoTradingChallenge extends Setting {
 
   public NoTradingChallenge() {
-    super(MenuType.CHALLENGES, null, new ItemStack(Material.EMERALD), "no-trading-challenge");
+    super(MenuType.CHALLENGES, null, new ItemStack(Material.EMERALD), "no-trading");
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

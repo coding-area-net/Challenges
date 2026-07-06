@@ -17,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
 public class NoOffhandSetting extends Setting {
 
   public NoOffhandSetting() {
-    super(MenuType.SETTINGS, null, new ItemStack(Material.SHIELD), "no-offhand-setting");
+    super(MenuType.SETTINGS, null, new ItemStack(Material.SHIELD), "no-offhand");
   }
 
   @Override

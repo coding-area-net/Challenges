@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public class DeathOnFallChallenge extends Setting {
 
   public DeathOnFallChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, new ItemStack(Material.FEATHER), "item-death-on-fall-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, new ItemStack(Material.FEATHER), "death-on-fall");
   }
 
   @EventHandler(priority = EventPriority.HIGH)

@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffect;
 public class SoupSetting extends Setting {
 
   public SoupSetting() {
-    super(MenuType.SETTINGS, null, new ItemStack(Material.MUSHROOM_STEW), "setting-soup");
+    super(MenuType.SETTINGS, null, new ItemStack(Material.MUSHROOM_STEW), "soup");
   }
 
   @EventHandler

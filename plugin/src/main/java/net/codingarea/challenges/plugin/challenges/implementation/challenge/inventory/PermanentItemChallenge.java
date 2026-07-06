@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 public class PermanentItemChallenge extends Setting {
 
   public PermanentItemChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.INVENTORY, new ItemStack(Material.VINE), "permanent-item-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.INVENTORY, new ItemStack(Material.VINE), "permanent-item");
   }
 
   @EventHandler(priority = EventPriority.HIGH)

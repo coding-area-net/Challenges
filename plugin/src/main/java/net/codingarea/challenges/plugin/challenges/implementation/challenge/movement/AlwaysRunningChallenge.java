@@ -15,7 +15,7 @@ import org.bukkit.util.Vector;
 public class AlwaysRunningChallenge extends Setting {
 
   public AlwaysRunningChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, new ItemStack(Material.CARROT_ON_A_STICK), "always-running-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, new ItemStack(Material.CARROT_ON_A_STICK), "always-running");
   }
 
   @ScheduledTask(ticks = 1)

@@ -25,7 +25,7 @@ import java.util.Objects;
 public class BlockMobsChallenge extends Setting {
 
   public BlockMobsChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.BRICKS), "block-mobs-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.BRICKS), "block-mobs");
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

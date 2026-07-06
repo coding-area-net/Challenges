@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets;
 
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.ExtremeForceBattleGoal;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import org.bukkit.entity.Player;
 
 public class HeightTarget extends ForceTarget<Integer> {
@@ -26,13 +26,13 @@ public class HeightTarget extends ForceTarget<Integer> {
   }
 
   @Override
-  public Message getNewTargetMessage() {
-    return Message.forName("extreme-force-battle-new-height");
+  public MessageKey getNewTargetMessage() {
+    return MessageKey.of("extreme-force-battle-new-height");
   }
 
   @Override
-  public Message getCompletedMessage() {
-    return Message.forName("extreme-force-battle-reached-height");
+  public MessageKey getCompletedMessage() {
+    return MessageKey.of("extreme-force-battle-reached-height");
   }
 
   @Override
@@ -41,8 +41,8 @@ public class HeightTarget extends ForceTarget<Integer> {
   }
 
   @Override
-  public Message getScoreboardDisplayMessage() {
-    return Message.forName("force-battle-height-target-display");
+  public MessageKey getScoreboardDisplayMessage() {
+    return MessageKey.of("force-battle-height-target-display");
   }
 
 }

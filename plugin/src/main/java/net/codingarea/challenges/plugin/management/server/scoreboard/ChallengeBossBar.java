@@ -112,12 +112,6 @@ public final class ChallengeBossBar {
     }
 
     @NotNull
-    @Deprecated
-    public BossBarInstance setTitle(@NotNull BaseComponent title) {
-      return this;
-    }
-
-    @NotNull
     public BossBarInstance setTitle(@NotNull MessageKey title, @NotNull Object... args) {
       this.title = title.asComponent(player, args);
       return this;

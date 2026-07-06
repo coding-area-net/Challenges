@@ -1,0 +1,2468 @@
+{
+  "generic": {
+    "undefined": "undefiniert",
+    "unknown": "unbekannt",
+    "second": "Sekunde",
+    "seconds": "Sekunden",
+    "minute": "Minute",
+    "minutes": "Minuten",
+    "hour": "Stunde",
+    "hours": "Stunden",
+    "day": "Tag",
+    "days": "Tage",
+    "time": "Zeit",
+    "disabled": "<red>Deaktiviert</red>",
+    "enabled": "<green>Aktiviert</green>",
+    "customized": "<gold>Anpassen</gold>",
+    "console": "<dark_red><b>Konsole</b></dark_red>"
+  },
+  "language": {
+    "de": "Deutsch",
+    "en": "Englisch"
+  },
+  "timer": {
+    "bar": {
+      "up": "{@actionbar.format('<gray>Zeit: <green><b>{0}</b></green></gray>')}",
+      "down": "{@actionbar.format('<gray>Zeit: <red><b>{0}</b></red></gray>')}",
+      "paused": "{@actionbar.format('<gray>Timer <red><b>pausiert</b></red></gray>')}"
+    },
+    "messages": {
+      "started": "<gray>Der Timer wurde <green>gestartet</green></gray>",
+      "paused": "<gray>Der Timer wurde <red>pausiert</red></gray>",
+      "counting-up": "<gray>Der Timer zählt nun <green>hoch</green></gray>",
+      "counting-down": "<gray>Der Timer zählt nun <red>runter</red></gray>",
+      "hidden": "<gray>Der Timer ist nun <red>versteckt</red></gray>",
+      "shown": "<gray>Der Timer ist nun <green>sichtbar</green></gray>"
+    }
+  },
+  "menu": {
+    "generic": {
+      "click-prefix": "<gray><i>[Klick]</i> <dark_gray>{@symbol.chevron}</dark_gray></gray> ",
+      "shift-click-prefix": "<gray><i>[Shift-Klick]</i> <dark_gray>{@symbol.chevron}</dark_gray></gray> ",
+      "right-click-prefix": "<gray><i>[Rechts-Klick]</i> <dark_gray>{@symbol.chevron}</dark_gray></gray> ",
+      "left-click-prefix": "<gray><i>[Links-Klick]</i> <dark_gray>{@symbol.chevron}</dark_gray></gray> "
+    },
+    "timer": {
+      "name": "Timer",
+      "name-state": "Status",
+      "name-time": "Zeit",
+      "item-paused": [
+        "{@item-format('<gray>Timer ist</gray> <red>pausiert</red>')}",
+        " ",
+        "{@generic.click-prefix}<gray>Timer <green>fortsetzen</green><gray>"
+      ],
+      "item-started": [
+        "{@item-format('<gray>Timer ist</gray> <green>gestartet</green>')}",
+        " ",
+        "{@generic.click-prefix}<gray>Timer <red>pausieren</red><gray>"
+      ],
+      "item-hidden": [
+        "{@item-format('<gray>Timer ist</gray> <red>versteckt</red>')}",
+        " ",
+        "{@generic.click-prefix}<gray>Timer <green>anzeigen</green><gray>"
+      ],
+      "item-shown": [
+        "{@item-format('<gray>Timer ist</gray> <green>sichtbar</green>')}",
+        " ",
+        "{@generic.click-prefix}<gray>Timer <red>verstecken</red><gray>"
+      ],
+      "item-counting-up": [
+        "{@item-format('<gray>Timer zählt</gray> <green>hoch</green>')}",
+        " ",
+        "{@generic.click-prefix}<gray>Timer auf <red>runterzählen</red> stellen<gray>"
+      ],
+      "item-counting-down": [
+        "{@item-format('<gray>Timer zählt</gray> <red>runter</red>')}",
+        " ",
+        "{@generic.click-prefix}<gray>Timer auf <green>hochzählen</green> stellen<gray>"
+      ],
+      "item-name-format": "{@item-format('<gray>{0}:</gray> <yellow><b>{1}</b></yellow> <dark_gray>(<yellow>{2}</yellow>)</dark_gray>')}",
+      "item-add-format": [
+        "{@item-name-format('{4}', '{0}', '{1}')}",
+        " ",
+        "{@generic.click-prefix}<green>+1</green> <gray>{3}</gray>",
+        "{@generic.shift-click-prefix}<dark_gray><green>+{2}</green> <gray>{4}</gray>"
+      ],
+      "item-subtract-format": [
+        "{@item-name-format('{4}', '{0}', '{1}')}",
+        " ",
+        "{@generic.click-prefix}<red>-1</red> <gray>{3}</gray>",
+        "{@generic.shift-click-prefix}<red>-{2}</red> <gray>{4}</gray>"
+      ],
+      "item-state-format": [
+        "{@item-name-format('{2}', '{0}', '{1}')}",
+        " ",
+        "{@generic.click-prefix}<red>Zeit zurücksetzen</red>"
+      ],
+      "item-seconds": "{@item-state-format('{0}', '{1}', 'Sekunden')}",
+      "item-seconds-add": "{@item-add-format('{0}', '{1}', '{2}', 'Sekunde', 'Sekunden')}",
+      "item-seconds-subtract": "{@item-subtract-format('{0}', '{1}', '{2}', 'Sekunde', 'Sekunden')}",
+      "item-minutes": "{@item-state-format('{0}', '{1}', 'Minuten')}",
+      "item-minutes-add": "{@item-add-format('{0}', '{1}', '{2}', 'Minute', 'Minuten')}",
+      "item-minutes-subtract": "{@item-subtract-format('{0}', '{1}', '{2}', 'Minute', 'Minuten')}",
+      "item-hours": "{@item-state-format('{0}', '{1}', 'Stunden')}",
+      "item-hours-add": "{@item-add-format('{0}', '{1}', '{2}', 'Stunde', 'Stunden')}",
+      "item-hours-subtract": "{@item-subtract-format('{0}', '{1}', '{2}', 'Stunde', 'Stunden')}",
+      "item-days": "{@item-state-format('{0}', '{1}', 'Tage')}",
+      "item-days-add": "{@item-add-format('{0}', '{1}', '{2}', 'Tag', 'Tage')}",
+      "item-days-subtract": "{@item-subtract-format('{0}', '{1}', '{2}', 'Tag', 'Tage')}"
+    },
+    "damage": {
+      "name": "Schaden"
+    },
+    "goal": {
+      "name": "Ziele"
+    },
+    "items-blocks": {
+      "name": "Items & Blöcke"
+    },
+    "challenges": {
+      "name": "Challenges"
+    },
+    "settings": {
+      "name": "Einstellungen"
+    },
+    "custom": {
+      "name": "Individuelle Challenges"
+    }
+  },
+  "category": {
+    "desc-most-points": [
+      "Der Spieler mit den *meisten Punkten*",
+      "*gewinnt*, wenn der Timer *abläuft*"
+    ],
+    "misc_challenge": {
+      "menu": "Sonstige",
+      "desc": [
+        "Challenges, die *keiner Kategorie*",
+        "zugeordnet werden können"
+      ],
+      "info": [
+        "{@info-format('Aktiviert', '<green>{0}</green><dark_gray>/</dark_gray>{1}')}"
+      ]
+    },
+    "randomizer": {
+      "menu": "Randomizer",
+      "desc": [
+        "Erlebe ein komplett",
+        "*durcheinandergebrachtes* Spiel"
+      ]
+    },
+    "limited_time": {
+      "menu": "Limitierte Zeit",
+      "desc": [
+        "Du wirst bei verschiedenen",
+        "Faktoren *zeitlich eingeschränkt*"
+      ]
+    },
+    "force": {
+      "menu": "Zwischenziele",
+      "name": "*{@menu} (Force)*",
+      "desc": [
+        "Du musst *bestimmte Zwischenziele*",
+        "erfüllen, sonst stirbst du"
+      ]
+    },
+    "world": {
+      "menu": "Welteinfluss",
+      "desc": [
+        "Die Welt wird nicht mehr",
+        "*wiedererkennbar* sein"
+      ]
+    },
+    "damage": {
+      "menu": "Schaden",
+      "desc": [
+        "Du wirst auf *verschiedenste*",
+        "Arten *Schaden* nehmen"
+      ]
+    },
+    "effect": {
+      "menu": "Effekte",
+      "desc": [
+        "Erlebe verrückte *Effekte*"
+      ]
+    },
+    "inventory": {
+      "menu": "Inventar",
+      "desc": [
+        "Dein *Inventar* wird *verdreht*"
+      ]
+    },
+    "movement": {
+      "menu": "Bewegung",
+      "desc": [
+        "Du wirst in deinen *Bewegungen*",
+        "*eingeschränkt*"
+      ]
+    },
+    "entities": {
+      "menu": "Entities",
+      "desc": [
+        "Entities werden *verändert*"
+      ]
+    },
+    "extra_world": {
+      "menu": "Extra Welt",
+      "desc": [
+        "Challenges, die in einer",
+        "*anderen Welt* spielen"
+      ]
+    },
+    "misc_goal": {
+      "menu": "Sonstige Ziele",
+      "desc": [
+        "Ziele, die *keiner Kategorie*",
+        "zugeordnet werden können"
+      ],
+      "info": "{@info-format('Aktuell', '{2}')}"
+    },
+    "kill_entity": {
+      "menu": "Entity töten",
+      "desc": [
+        "Töte *bestimmte Entities*,",
+        "um zu gewinnen"
+      ]
+    },
+    "score_points": {
+      "menu": "Punkte sammeln",
+      "desc": [
+        "Erziele die *meisten Punkte* in",
+        "einem *bestimmten Bereich*",
+        " ",
+        "{@desc-most-points}"
+      ]
+    },
+    "fastest_time": {
+      "menu": "Schnellste Zeit",
+      "desc": [
+        "Der *schnellste Spieler*, der das Ziel",
+        "erreicht *gewinnt* die Challenge"
+      ]
+    },
+    "force_battle": {
+      "menu": "Force Battles",
+      "desc": [
+        "Erfülle die *vorgegebenen Zwischenziele*,",
+        "um Punkte zu erhalten.",
+        " ",
+        "{@desc-most-points}"
+      ]
+    }
+  },
+  "challenge": {
+    "difficulty": {
+      "name": "*Schwierigkeit*",
+      "desc": [
+        "Ändert die *Schwierigkeit*",
+        "(*Difficulty*) des Spiels"
+      ],
+      "command-set": "<gray>Schwierigkeit auf {0} geändert</gray>",
+      "command-current": "<gray>Die derzeitige Schwierigkeit ist {0}</gray>"
+    },
+    "regeneration": {
+      "name": "*Regeneration*",
+      "desc": [
+        "Stellt ein, *ob* und",
+        "*wie* man *regeneriert*"
+      ]
+    },
+    "one-life": {
+      "name": "*Ein Teamleben*",
+      "desc": [
+        "*Jeder* stirbt, wenn *einer stirbt*"
+      ]
+    },
+    "respawn": {
+      "name": "*Respawn*",
+      "desc": [
+        "Wenn du *stirbst*, wirst du nicht zu einem *Zuschauer*"
+      ]
+    },
+    "split-health": {
+      "name": "*Geteilte Herzen*",
+      "desc": [
+        "Stellt ein, ob sich *alle*",
+        "*Spieler* eine *Gesundheit teilen*"
+      ]
+    },
+    "damage-display": {
+      "name": "*Damage Display*",
+      "desc": [
+        "Es wird im Chat angezeigt,",
+        "wenn jemand *Schaden* bekommt"
+      ]
+    },
+    "language": {
+      "name": "*Sprache*",
+      "desc": [
+        "Ändert die *Sprache* des Plugins"
+      ],
+      "command-disabled": "<gray>Diese Funktion ist derzeit <red>deaktiviert</red></gray>",
+      "command-unknown": "<gray>Diese Sprache <dark_gray>(<yellow>{0}</yellow>)</dark_gray> wird <red>nicht unterstützt</red></gray>",
+      "command-current": "<gray>Die derzeitige Sprache ist <yellow>{0}</yellow></gray>",
+      "command-changing": "<gray>Die Sprache wird geändert...</gray>",
+      "command-changed": "<gray>Die Sprache wurde auf <yellow>{0}</yellow> <dark_gray>(<yellow>{1}</yellow>)</dark_gray> gesetzt</gray>"
+    },
+    "pregame-movement": {
+      "name": "*Pregame Movement*",
+      "desc": [
+        "Du kannst dich *bewegen*,",
+        "bevor der Timer *gestartet* wurde"
+      ],
+      "title": [
+        "<red>Warte..</red>",
+        "<dark_gray>{@symbol.arrow}</dark_gray> <gray>Der Timer ist gestoppt..</gray>"
+      ]
+    },
+    "death-message": {
+      "name": "*Todesnachrichten*",
+      "desc": [
+        "Schaltet *Todesnachrichten* ein/aus"
+      ]
+    },
+    "health-display": {
+      "name": "*Health Display*",
+      "desc": [
+        "Die *Herzen* aller Spieler",
+        "werden in der *Tablist* angezeigt"
+      ]
+    },
+    "position": {
+      "name": "*Positions*",
+      "desc": [
+        "Erlaubt es dir *Positionen*",
+        "mit */pos*  zu *markieren*"
+      ]
+    },
+    "death-position": {
+      "name": "*Death Position*",
+      "desc": [
+        "Wenn du stirbst, wird mit */pos* ",
+        "eine *Position an deinem Todespunkt* erstellt"
+      ]
+    },
+    "glow": {
+      "name": "*Playerglow*",
+      "desc": [
+        "*Spieler* sind durch die *Wand* sichtbar"
+      ]
+    },
+    "no-item-damage": {
+      "name": "*Kein Itemschaden*",
+      "desc": [
+        "*Items* sind *unzerstörbar*"
+      ]
+    },
+    "mob-griefing": {
+      "name": "*Mob Griefing*",
+      "desc": [
+        "Monster können *nichts zerstören*"
+      ]
+    },
+    "keep-inventory": {
+      "name": "*Keep Inventory*",
+      "desc": [
+        "Du verlierst keine *Items*,",
+        "wenn du *stirbst*"
+      ]
+    },
+    "backpack": {
+      "name": "*Backpack*",
+      "desc": [
+        "Erlaubt es dir, *deinen Backpack* oder den",
+        "*Team Backpack* mit */backpack* zu öffnen"
+      ]
+    },
+    "enderchest-command": {
+      "name": "*Enderchest Command*",
+      "desc": [
+        "Wenn du */ec* ausführst, öffnet",
+        "sich deine *Enderchest*"
+      ]
+    },
+    "timber": {
+      "name": "*Timber*",
+      "desc": [
+        "Du kannst einen *Baum* zerstören,",
+        "indem du *einen Block* des Baumes abbaust"
+      ]
+    },
+    "pvp": {
+      "name": "*PvP*",
+      "desc": []
+    },
+    "no-hit-delay": {
+      "name": "*NoHitDelay*",
+      "desc": [
+        "Nachdem du *Schaden* genommen hast,",
+        "kannst du *sofort* wieder Schaden *bekommen*"
+      ]
+    },
+    "max-health": {
+      "name": "*Maximale Herzen*",
+      "desc": [
+        "Stellt ein, wie viele",
+        "Herzen man hat"
+      ]
+    },
+    "damage-multiplier": {
+      "name": "*Damage Multiplier*",
+      "desc": [
+        "Schaden, den du nimmst, wird *multipliziert*"
+      ]
+    },
+    "cut-clean": {
+      "name": "*CutClean*",
+      "desc": [
+        "Verschiedene *Einstellungen*, die",
+        "das *Farmen* von Items *einfacher* machen"
+      ]
+    },
+    "no-offhand": {
+      "name": "*Keine Offhand*",
+      "desc": [
+        "Die *zweite Hand* wird geblockt"
+      ]
+    },
+    "immediate-respawn": {
+      "name": "*Direkter Respawn*",
+      "desc": [
+        "Wenn du stirbst, *respawnst* du *automatisch,*",
+        "ohne den *Death Screen* zu sehen"
+      ]
+    },
+    "slot-limit": {
+      "name": "*Inventar Slots*",
+      "desc": [
+        "Stellt ein, wie viele *Inventar*",
+        "*Slots* nutzbar sind"
+      ],
+      "settings": "<yellow>{0}</yellow> <gray>von max.</gray> <yellow>{1}</yellow> <gray>Slots</gray>"
+    },
+    "old-pvp": {
+      "name": "*1.8 PvP*",
+      "desc": [
+        "Das *alte 1.8 PvP System* wird genutzt",
+        "Es gibt keinen *Attack Cooldown*"
+      ]
+    },
+    "totem-save-death": {
+      "name": "*Challenge Tod Rettung*",
+      "desc": [
+        "Wenn du durch eine Challenge *instant*",
+        "*stirbst*, können *Totems* dich retten"
+      ]
+    },
+    "soup": {
+      "name": "*Suppen Heilung*",
+      "desc": [
+        "Wenn du eine *Pilzsuppe* benutzt,",
+        "wirst du um *4 Herzen* geheilt"
+      ]
+    },
+    "hardcore-hearts": {
+      "name": "*Hardcore Herzen*",
+      "desc": [
+        "Die *Herzen* werden im *Hardcore-Stil* angezeigt",
+        "Um die Änderung zu sehen, *musst* du *rejoinen*"
+      ]
+    },
+    "random-challenge": {
+      "name": "*Random Challenge*",
+      "desc": [
+        "In einem *gesetzten Intervall*",
+        "wird eine *zufällige Challenge* aktiviert"
+      ],
+      "challenge-enabled": [
+        "<gray>Die Challenge {0} wurde <green>aktiviert</green></gray>",
+        "<gray>{1}</gray>"
+      ],
+      "bossbar-waiting": "{@bossbar.format('Warten auf neue Challenge..')}",
+      "bossbar-current": "{@bossbar.format('Challenge {0}')}"
+    },
+    "randomized-hp": {
+      "name": "*Zufällige HP*",
+      "desc": [
+        "Die *Leben* aller *Mobs*",
+        "sind *zufällig*"
+      ]
+    },
+    "block-randomizer": {
+      "name": "*Block Randomizer*",
+      "desc": [
+        "Jeder *Block* droppt ein *zufälliges Item*"
+      ]
+    },
+    "crafting-randomizer": {
+      "name": "*Crafting Randomizer*",
+      "desc": [
+        "Wenn du *etwas craftest*, bekommst du ein *zufälliges Item*"
+      ]
+    },
+    "hotbar-randomizer": {
+      "name": "*HotBar Randomizer*",
+      "desc": [
+        "Alle *paar Minuten* erhält jeder Spieler *zufällige Items*"
+      ]
+    },
+    "entity-loot-randomizer": {
+      "name": "*Entity Loot Randomizer*",
+      "desc": [
+        "Alle Mob Drops sind *zufällig vertauscht*."
+      ],
+      "command-disabled": "Die Entity Loot Randomizer Challenge ist aktuell <red>deaktiviert</red>",
+      "command-nothing": "Der Loot von <yellow>{0} </yellow><gray>wird durch kein spezielles Entity gedroppt</gray>",
+      "command-result": [
+        "<yellow>{0} </yellow><gray>droppt den Loot von </gray><yellow>{1}</yellow>",
+        "Der Loot von <yellow>{0} </yellow><gray>wird von </gray><yellow>{2} </yellow><gray>gedroppt</gray>"
+      ]
+    },
+    "mob-randomizer": {
+      "name": "*Mob Randomizer*",
+      "desc": [
+        "Wenn ein *Entity* spawnt, spawnt ein *anderes*"
+      ]
+    },
+    "random-dropping": {
+      "name": "*Zufälliges Item Droppen*",
+      "desc": [
+        "Alle paar Sekunden wird ein *zufälliges*",
+        "*Item* aus deinem Inventar *gedroppt*"
+      ]
+    },
+    "random-item-removing": {
+      "name": "*Zufälliges Item Löschen*",
+      "desc": [
+        "Alle paar Sekunden wird ein *zufälliges*",
+        "*Item* aus deinem Inventar *gelöscht*"
+      ]
+    },
+    "random-swapping": {
+      "name": "*Zufälliges Item Mischen*",
+      "desc": [
+        "Alle paar Sekunden wird ein",
+        "*zufälliges Item* aus deinem Inventar",
+        "mit einem anderem *getauscht*"
+      ]
+    },
+    "random-item": {
+      "name": "*Random Items*",
+      "desc": [
+        "Ein *zufälliger Spieler* erhält alle paar",
+        "*Sekunden* ein *zufälliges Item*"
+      ]
+    },
+    "random-event": {
+      "name": "*Random Events*",
+      "desc": [
+        "Alle *paar Minuten* wird eines von",
+        "*{0} random Events* aktiviert"
+      ],
+      "entities": [
+        "Ist das hier ein Zoo?",
+        "Wo kommt ihr denn her?",
+        "Was macht ihr denn hier?"
+      ],
+      "fly": [
+        "Guten Flug :)",
+        "I believe I can fly..",
+        "So fühlt sich also fliegen an"
+      ],
+      "hole": [
+        "Du bist aber ganz schön tief gefallen",
+        "Von ganz oben nach ganz unten..",
+        "Wo kommt denn das Loch her?"
+      ],
+      "ores": [
+        "Wo sind denn die ganzen Erze hin?",
+        "Gibt es hier keine Erze?",
+        "Gab es hier mal Erze?"
+      ],
+      "sickness": [
+        "Bist du etwa krank?",
+        "Was geht denn jetzt ab"
+      ],
+      "speed": [
+        "Sonic? Bist du es?",
+        "Woahh! Das ist aber schnell"
+      ],
+      "webs": [
+        "Liegen die schon lange hier?"
+      ]
+    },
+    "mob-damage-teleport": {
+      "name": "*Mob Tausch Beim Schlagen*",
+      "desc": [
+        "Jedes mal, wenn du einen *Mob schlägst*,",
+        "tauschst du mit einem *zufälligem Mob* die Position"
+      ]
+    },
+    "force-height": {
+      "name": "*Force Height*",
+      "desc": [
+        "Alle *paar Minuten* musst du auf",
+        "eine *bestimmte Höhe* oder du stirbst"
+      ],
+      "bossbar-instruction": "{@bossbar.format-arg('Höhe <yellow>{0}</yellow>', '<green>{1}</green>')}",
+      "bossbar-waiting": "{@bossbar.format('Warten auf nächste Höhe..')}",
+      "fail": "<yellow>{0} </yellow><gray>war auf der </gray><red>falschen Höhe </red><dark_gray>(</dark_gray><yellow>{1}</yellow><dark_gray>)</dark_gray>",
+      "success": "<gray>Alle Spieler waren auf der <green>richtigen Höhe</green></gray>"
+    },
+    "force-block": {
+      "name": "*Force Block*",
+      "desc": [
+        "Alle *paar Minuten* musst du auf",
+        "einen *bestimmten Block* oder du stirbst"
+      ],
+      "bossbar-instruction": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Block </gray><yellow>{0} </yellow><dark_gray>{@symbol.vertical} </dark_gray><green>{1}</green>",
+      "bossbar-waiting": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Warten auf nächsten Block..</gray>",
+      "fail": "<yellow>{0} </yellow><gray>war auf dem </gray><red>falschen Block </red><dark_gray>(</dark_gray><yellow>{1}</yellow><dark_gray>)</dark_gray>",
+      "success": "Alle Spieler waren auf dem <green>richtigen Block</green>"
+    },
+    "force-mob": {
+      "name": "*Force Mob*",
+      "desc": [
+        "Alle *paar Minuten* musst du",
+        "ein *bestimmtes Entity* killen oder du stirbst"
+      ],
+      "bossbar-instruction": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Mob </gray><yellow>{0} </yellow><dark_gray>{@symbol.vertical} </dark_gray><green>{1}</green>",
+      "bossbar-waiting": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Warten auf nächsten Mob..</gray>",
+      "fail": "Das Mob <yellow>{0} </yellow><gray>wurde </gray><red>nicht getötet</red>",
+      "success": "<yellow>{0} </yellow><gray>hat das Mob </gray><yellow>{1} </yellow><green>getötet</green>"
+    },
+    "force-item": {
+      "name": "*Force Item*",
+      "desc": [
+        "Alle *paar Minuten* musst du",
+        "ein *bestimmtes Item* finden oder du stirbst"
+      ],
+      "bossbar-instruction": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Item </gray><yellow>{0} </yellow><dark_gray>{@symbol.vertical} </dark_gray><green>{1}</green>",
+      "bossbar-waiting": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Warten auf nächstes Item..</gray>",
+      "fail": "<gray>Das Item <yellow>{0}</yellow> wurde <red>nicht gefunden</red></gray>",
+      "success": "<gray><yellow>{0}</yellow> hat das Item <yellow>{1}</yellow> <green>gefunden</green></gray>"
+    },
+    "force-biome": {
+      "name": "*Force Biome*",
+      "desc": [
+        "Alle *paar Minuten* musst du in",
+        "ein *bestimmtes Biom* oder du stirbst",
+        "Je *seltener* das Biom ist, desto *mehr Zeit* hast du"
+      ],
+      "bossbar-instruction": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Biom </gray><yellow>{0} </yellow><dark_gray>{@symbol.vertical} </dark_gray><green>{1}</green>",
+      "bossbar-waiting": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Warten auf nächstes Biom..</gray>",
+      "fail": "Das Biom <yellow>{0} </yellow><gray>wurde </gray><red>nicht gefunden</red>",
+      "success": "<yellow>{0} </yellow><gray>hat das Biom </gray><yellow>{1} </yellow><green>gefunden</green>"
+    },
+    "hydra": {
+      "name": "*Hydra*",
+      "desc": [
+        "Wenn du einen *Mob* tötest,",
+        "spawnen *zwei* neue"
+      ]
+    },
+    "hydra-plus": {
+      "name": "*Hydra Plus*",
+      "desc": [
+        "Wenn du einen *Mob* tötest,",
+        "spawnen *doppelt* so viele",
+        "wie beim *vorherigen* mal",
+        " ",
+        "Maximum beträgt *512* Mobs gleichzeitig"
+      ]
+    },
+    "duped-spawning": {
+      "name": "*Doppeltes Spawning*",
+      "desc": [
+        "Wenn ein Monster *spawnt*,",
+        "spawnt es *zweimal*"
+      ]
+    },
+    "jump-entity": {
+      "name": "*Jump Entity*",
+      "desc": [
+        "Wenn du *springst*, *spawnt* ein",
+        "zufälliges *Entity*"
+      ]
+    },
+    "invisible-mobs": {
+      "name": "*Unsichtbare Mobs*",
+      "desc": [
+        "Alle *Mobs* haben einen",
+        "*Unsichtbarkeits* Effekt"
+      ]
+    },
+    "stone-sight": {
+      "name": "*Stein Blick*",
+      "desc": [
+        "*Mobs*, denen du in die *Augen*",
+        "*schaust*, werden zu *Stein*"
+      ]
+    },
+    "mob-sight-damage": {
+      "name": "*Mob Blick Schaden*",
+      "desc": [
+        "Wenn du einen *Mob* in die *Augen*",
+        "*schaust*, erleidest du *Schaden*"
+      ]
+    },
+    "all-mobs-to-death-position": {
+      "name": "*Alle Monster zum Todespunkt*",
+      "desc": [
+        "Wenn ein *Mob* von einem Spieler",
+        "*getötet* wird, werden *alle* anderen",
+        "Monster vom *selben Typen* zum",
+        "*Todespunkt* teleportiert"
+      ]
+    },
+    "respawn-end": {
+      "name": "*Mobs respawnen im End*",
+      "desc": [
+        "Mobs, die *getötet werden*,",
+        "respawnen im *End*"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><dark_purple>Respawnte Mobs im End </dark_purple><dark_gray>{@symbol.vertical} </dark_gray><yellow>{0}</yellow>"
+    },
+    "mob-transformation": {
+      "name": "*Mob Verwandlung*",
+      "desc": [
+        "Wenn du einen Mob schlägst, *verwandelt* sich",
+        "dieser in den *letzen Mob*, den du *geschlagen* hast"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Letzter Mob </gray><dark_gray><bold>{@symbol.vertical} </bold></dark_gray><green>{0}</green>"
+    },
+    "block-mobs": {
+      "name": "*Mob Blöcke*",
+      "desc": [
+        "Aus jedem abgebautem Block, *spawnt ein Mob*,",
+        "dass *getötet* werden muss, um den Block *zu erhalten*"
+      ]
+    },
+    "damage-per-block": {
+      "name": "*Schaden pro Block*",
+      "desc": [
+        "Du bekommst *Schaden* durch",
+        "jeden *Block*, den du gehst"
+      ]
+    },
+    "sneak-damage": {
+      "name": "*Schaden pro Schleichen*",
+      "desc": [
+        "Du *erleidest* den gesetzten",
+        "*Schaden*, wenn du *schleichst*"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>ist geschlichen</gray>"
+    },
+    "jump-damage": {
+      "name": "*Schaden pro Sprung*",
+      "desc": [
+        "Du *erleidest* den gesetzen",
+        "*Schaden*, wenn du *springst*"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>ist gesprungen</gray>"
+    },
+    "block-break-damage": {
+      "name": "*Block Break Damage*",
+      "desc": [
+        "Wenn du einen *Block abbaust*,",
+        "*erleidest* du die gesetze Anzahl *schaden*"
+      ]
+    },
+    "block-place-damage": {
+      "name": "*Block Place Damage*",
+      "desc": [
+        "Wenn du einen *Block plazierst*,",
+        "*erleidest* du die gesetze Anzahl *schaden*"
+      ]
+    },
+    "advancement-damage": {
+      "name": "*Advancement Schaden*",
+      "desc": [
+        "Du bekommst für jedes neue *Advancement*",
+        "die gesetze Anzahl *Schaden*"
+      ]
+    },
+    "damage-item": {
+      "name": "*Schaden pro Item*",
+      "desc": [
+        "Wenn du ein *Item aufhebst* oder es",
+        "in deinem Inventar *anklickst* erleidest",
+        "du *0,5 {@symbol.heart}* multipliziert mit der Anzahl der Items"
+      ]
+    },
+    "water-allergy": {
+      "name": "*Wasserallergie*",
+      "desc": [
+        "Wenn du in *Wasser* bist,",
+        "*erleidest* du den gesetzen Schaden"
+      ]
+    },
+    "death-on-fall": {
+      "name": "*Tod bei Fallschaden*",
+      "desc": [
+        "Wenn du *Fallschaden* erleidest,",
+        "*stirbst* du sofort"
+      ]
+    },
+    "reversed-damage": {
+      "name": "*Reversed Damage*",
+      "desc": [
+        "Wenn du Entities *schlägst* oder *abschießt*,",
+        "bekommst du den *gleichen Schaden*"
+      ]
+    },
+    "freeze": {
+      "name": "*Freeze Challenge*",
+      "desc": [
+        "Für *jedes Herz*, das du *Schaden* erleidest, kannst",
+        "du dich für eine bestimmte Zeit *nicht bewegen*"
+      ]
+    },
+    "delay-damage": {
+      "name": "*Verzögerter Schaden*",
+      "desc": [
+        "Der *schaden* von allen *Spielern* ist",
+        "zusammenaddiert und wird nach einer bestimmten *Zeit* hinzugefügt."
+      ]
+    },
+    "chunk-effect": {
+      "name": "*Zufällige Chunk Effekte*",
+      "desc": [
+        "In *jedem Chunk* bekommst du",
+        "einen *zufälligen Effekt*"
+      ]
+    },
+    "block-effect": {
+      "name": "*Zufällige Block Effekte*",
+      "desc": [
+        "Auf *jedem Block* bekommst du",
+        "einen *zufälligen Effekt*"
+      ]
+    },
+    "entity-effect": {
+      "name": "*Mobs Haben Random Effekte*",
+      "desc": [
+        "*Jedes Mob* hat einen zufälligen",
+        "Effekt auf *höchster Stufe*"
+      ]
+    },
+    "random-effect": {
+      "name": "*Random Effekte*",
+      "desc": [
+        "Du bekommst in einem gesetzen *Intervall*",
+        "einen *zufälligen Trank Effekt*"
+      ]
+    },
+    "permanent-effect-on-damage": {
+      "name": "*Permanente Effekte*",
+      "desc": [
+        "Du bekommst immer, wenn du *Schaden*",
+        "erleidest, einen *zufälligen Effekt*"
+      ],
+      "new-effect": "Effekt <yellow>{0} </yellow><dark_gray>➔ </dark_gray><yellow>{1}</yellow>"
+    },
+    "infection": {
+      "name": "*Infection Challenge*",
+      "desc": [
+        "Du musst *2 Blöcke* Abstand von allen ",
+        "*Mobs* halten oder du wirst *krank*"
+      ]
+    },
+    "surface-hole": {
+      "name": "*Surface Hole*",
+      "desc": [
+        "<gray>Hinter dir *verschwindet* der</gray>",
+        "*Boden* bis ins *Void*"
+      ]
+    },
+    "bedrock-walls": {
+      "name": "*Bedrock Walls*",
+      "desc": [
+        "Hinter dir *spawnen* riesige",
+        "*Wände* aus *Bedrock*"
+      ]
+    },
+    "bedrock-path": {
+      "name": "*Bedrock Path*",
+      "desc": [
+        "*Unter dir* entsteht die",
+        "ganze Zeit *Bedrock*"
+      ]
+    },
+    "floor-is-lava": {
+      "name": "*Der Boden ist Lava*",
+      "desc": [
+        "Alle *Blöcke* unter dir verwandeln sich",
+        "erst zu *Magma* und dann zu *Lava*"
+      ]
+    },
+    "chunk-deconstruction": {
+      "name": "*Chunk Deconstruction*",
+      "desc": [
+        "*Chunks*, in denen sich Spieler befinden,",
+        "*bauen* sich von *oben* aus ab"
+      ]
+    },
+    "all-blocks-disappear": {
+      "name": "*Alle Blöcke verschwinden*",
+      "desc": [
+        "Bei verschiedenen *Interaktionen*",
+        "verschwinden alle *Blöcke* im *Chunk*",
+        "eines *bestimmten Types*"
+      ]
+    },
+    "anvil-rain": {
+      "name": "*Amboss Regen*",
+      "desc": [
+        "Vom *Himmel* fallen *Ambosse*"
+      ]
+    },
+    "tsunami": {
+      "name": "*Tsunami*",
+      "desc": [
+        "In einem *gesetztem Intervall*",
+        "*steigt* das *Wasser* in der *Overworld*",
+        "und die *Lava* in im *Nether*",
+        " ",
+        "Sollte mit wenigen Personen gespielt werden!"
+      ],
+      "bossbar-lava": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Lavahöhe: </gray><red>{0}</red>",
+      "bossbar-water": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Wasserhöhe: </gray><blue>{0}</blue>"
+    },
+    "repeat-in-chunk": {
+      "name": "*Wiederholende Chunks*",
+      "desc": [
+        "Blöcke die *platziert oder zerstört* werden,",
+        "werden in *jedem Chunk* platziert / zerstört"
+      ]
+    },
+    "snake": {
+      "name": "*Snake*",
+      "desc": [
+        "*Jeder Spieler* zieht eine",
+        "tödliche Linie hinter sich her"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>ist über die </gray><blue>Linie </blue><gray>getreten</gray>"
+    },
+    "blocks-fly": {
+      "name": "*Blöcke fliegen in die Luft*",
+      "desc": [
+        "*Blöcke*, auf denen du *gelaufen* bist,",
+        "fliegen nach *einer Sekunde* in die *Luft*"
+      ]
+    },
+    "blocks-disappear-time": {
+      "name": "*Blöcke verschwinden nach Zeit*",
+      "desc": [
+        "Blöcke, die du *platzierst*, *verschwinden*",
+        "nach ein *paar Sekunden* wieder"
+      ]
+    },
+    "loop": {
+      "name": "*Wiederholungs Challenge*",
+      "desc": [
+        "Verschiedene Aktionen *wiederholen* sich",
+        "unendlich oft, bis ein Spieler *schleicht*"
+      ],
+      "cleared": "<yellow>{0} </yellow><gray>Loops abgebrochen</gray>"
+    },
+    "ice-floor": {
+      "name": "*Eisboden*",
+      "desc": [
+        "Unter dir wird *Luft* zu einem",
+        "*3x3* Boden aus *Eis*"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><white>Eisboden </white><dark_gray>{@symbol.vertical} {0}</dark_gray>"
+    },
+    "level-border": {
+      "name": "*Level = Border*",
+      "desc": [
+        "Die *Border-Größe* passt sich dem *Spieler*",
+        "mit den *meisten Leveln* an."
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Border Größe </gray><dark_gray>{@symbol.vertical} </dark_gray><gray>{0}</gray>"
+    },
+    "chunk-deletion": {
+      "name": "*Chunk Löschung*",
+      "desc": [
+        "*Chunks*, in denen sich *Spieler* befinden,",
+        "werden nach gegebener *Zeit* komplett *gelöscht*"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Zeit übrig im Chunk </gray><gold>{0}s</gold>"
+    },
+    "permanent-item": {
+      "name": "*Permanente Items*",
+      "desc": [
+        "*Items* können nicht gedroppt",
+        "oder *weggelegt* werden"
+      ]
+    },
+    "no-duped-items": {
+      "name": "*Keine Doppelten Items*",
+      "desc": [
+        "Wenn *2 Spieler* das gleiche *Item* im",
+        "Inventar haben, *sterben* beide"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>und </gray><yellow>{1} </yellow><gray>hatten beide </gray><yellow>{2} </yellow><gray>im Inventar</gray>"
+    },
+    "damage-inv-clear": {
+      "name": "*Damage Inventory Clear*",
+      "desc": [
+        "Die *Inventare* aller Spieler werden *geleert*,",
+        "wenn ein *Spieler* Schaden erleidet"
+      ]
+    },
+    "uncraft-items": {
+      "name": "*Items craften sich zurück*",
+      "desc": [
+        "Alle *Items* in deinem Inventar *craften*",
+        "sich alle paar Sekunden *zurück*"
+      ]
+    },
+    "missing-items": {
+      "name": "*Items Fehlen*",
+      "desc": [
+        "Alle paar Minuten *verschwindet* ein *Item* aus",
+        "deinem *Inventar* und du musst *erraten*, welches"
+      ],
+      "inventory": "{0}Welches Item fehlt?",
+      "inventory-open": "<dark_gray>[</dark_gray><green>GUI öffnen</green><dark_gray>]</dark_gray>"
+    },
+    "pickup-launch": {
+      "name": "*Pickup Boost*",
+      "desc": [
+        "Wenn du ein *Item aufhebst*,",
+        "wirst du *in die Luft* geschleudert"
+      ]
+    },
+    "block-chunk-item-remove": {
+      "name": "*Movement Item Remove*",
+      "desc": [
+        "Es wird für jeden *Block* / *Chunk*,",
+        "den du dich *fortbewegst*, ein Item",
+        "aus deinem Inventar *gelöscht*"
+      ],
+      "block": "<gold>Block</gold>",
+      "chunk": "<gold>Chunk</gold>"
+    },
+    "traffic-light": {
+      "name": "*Ampelchallenge*",
+      "desc": [
+        "Die *Ampel* schaltet alle paar Minuten um",
+        "Wenn du bei *rot* gehst, stirbst du"
+      ],
+      "fail": "<yellow>{0} </yellow><gray>ist über </gray><red>rot </red><gray>gegangen</gray>"
+    },
+    "hunger-block": {
+      "name": "*Hunger pro Block*",
+      "desc": [
+        "Du bekommst *Hunger* durch",
+        "jeden *Block*, den du gehst"
+      ]
+    },
+    "only-down": {
+      "name": "*Nur nach unten*",
+      "desc": [
+        "Wenn du *einen Block* nach",
+        "*oben* gehst, *stirbst* du"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>ist einen Block nach oben gegangen</gray>"
+    },
+    "only-dirt": {
+      "name": "*Only Dirt*",
+      "desc": [
+        "Wenn du nicht auf *Erde*",
+        "stehst, *stirbst* du"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>stand nicht auf Erde</gray>"
+    },
+    "higher-jumps": {
+      "name": "*Higher Jumps*",
+      "desc": [
+        "*Umso öfter* du springst,",
+        "*desto höher* springst du"
+      ]
+    },
+    "always-running": {
+      "name": "*Always Running*",
+      "desc": [
+        "Du kannst *nicht aufhören*, vorwärts zu laufen"
+      ]
+    },
+    "dont-stop-running": {
+      "name": "*Nicht stehen bleiben*",
+      "desc": [
+        "Du darfst nur eine bestimmte Zeit",
+        "*stehen bleiben* bevor du *stirbst*"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Bewege dich in </gray><dark_gray>{@symbol.vertical} </dark_gray><yellow>{0}</yellow>",
+      "stopped-moving": "<yellow>{0} </yellow><gray>hat sich zu lange nicht bewegt</gray>"
+    },
+    "no-mouse-move": {
+      "name": "*Mausbewegung Schaden*",
+      "desc": [
+        "Wenn du deinen *Blick bewegst*,",
+        "erleidest du den *gesetzen Schaden*"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>hat seine Maus bewegt</gray>"
+    },
+    "five-hundred-blocks": {
+      "name": "*500 Blöcke*",
+      "desc": [
+        "*Alle* 500 Blöcke, die du *läufst*,",
+        "bekommst du *64* eines *zufälliges Items*.",
+        "Es droppen *keine Items* von",
+        "*Blöcken* und *Entities* mehr."
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><white>Blöcke Gelaufen </white><dark_gray>{@symbol.vertical} </dark_gray><gray>{0} </gray><dark_gray>/ </dark_gray><gray>{1}</gray>",
+      "subtitle": "<yellow>{0} </yellow><gray>Blöcke</gray>"
+    },
+    "max-biome-time": {
+      "name": "*Maximale Biom Zeit*",
+      "desc": [
+        "Die *Zeit*, die du in jedem *Biom*",
+        "sein darfst, ist *begrenzt*"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Zeit übrig in </gray><yellow>{0} </yellow><dark_gray><bold>{@symbol.vertical} </bold></dark_gray><green>{1}s</green>"
+    },
+    "max-height-time": {
+      "name": "*Maximale Höhen Zeit*",
+      "desc": [
+        "Die *Zeit*, die du auf jeder *Höhe*",
+        "sein darfst, ist *begrenzt*"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Zeit übrig auf </gray><yellow>{0} </yellow><dark_gray><bold>{@symbol.vertical} </bold></dark_gray><green>{1}s</green>"
+    },
+    "water-mlg": {
+      "name": "*Water MLG*",
+      "desc": [
+        "Du musst *immer wieder*",
+        "einen *Water MLG* absolvieren"
+      ]
+    },
+    "jump-and-run": {
+      "name": "*JumpAndRun*",
+      "desc": [
+        "In einem gesetzten *Intervall* muss ein",
+        "*zufälliger Spieler* ein *JumpAndRun* absolvieren",
+        "Schafft er es *nicht*, *stirbt* er"
+      ],
+      "actionbar": "{@actionbar.format('*Jump & Run* <dark_gray>{@symbol.vertical}</dark_gray> <green><b>{0}</b></green> <gray>/</gray> <yellow>{1}</yellow>')}",
+      "countdown": "Nächstes <gold>JumpAndRun </gold><gray>in </gray><yellow>{0} Sekunden</yellow>",
+      "countdown-one": "Nächstes <gold>JumpAndRun </gold><gray>in </gray><yellow>einer Sekunde</yellow>",
+      "finished": "<yellow>{0} </yellow><gray>hat das </gray><gold>JumpAndRun </gold><green>geschafft</green>"
+    },
+    "one-durability": {
+      "name": "*Eine Haltbarkeit*",
+      "desc": [
+        "*Items* gehen nach *einer* Benutzung *kaputt*"
+      ]
+    },
+    "no-trading": {
+      "name": "*Kein Handeln*",
+      "desc": [
+        "Du kannst *nicht* mit",
+        "Villager *handeln*"
+      ]
+    },
+    "no-exp": {
+      "name": "*Keine XP*",
+      "desc": [
+        "Wenn du *XP* aufsammelst, stirbst du"
+      ],
+      "picked-up": "<yellow>{0} </yellow><gray>hat </gray><red>XP </red><gray>aufgesammelt</gray>"
+    },
+    "food-once": {
+      "name": "*Food Once*",
+      "desc": [
+        "Du kannst jedes *Essen*",
+        "nur einmal *essen*"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>ist an </gray><yellow>{1} </yellow><gray>erstickt</gray>",
+      "new-food": "<yellow>Du </yellow><gray>hast </gray><yellow>{1} </yellow><gray>gegessen</gray>",
+      "new-food-team": "<yellow>{0} </yellow><gray>hat </gray><yellow>{1} </yellow><gray>gegessen</gray>",
+      "everyone": "<dark_purple>Jeder</dark_purple>",
+      "player": "<gold>Spieler</gold>"
+    },
+    "consume-launch": {
+      "name": "*Essens Boost*",
+      "desc": [
+        "Wenn du ein *Item isst*,",
+        "wirst du *in die Luft* geschleudert"
+      ]
+    },
+    "low-drop-rate": {
+      "name": "*Low Drop Chance*",
+      "desc": [
+        "Die *Dropchance* jedes *Blockes* wird auf die",
+        "angegebene *Prozentzahl* gesetzt"
+      ]
+    },
+    "ender-games": {
+      "name": "*Ender Games*",
+      "desc": [
+        "Alle *paar Minuten* wirst du",
+        "mit einem *zufälligem Entity* aus",
+        "einem *200 Block* Radius *getauscht*"
+      ],
+      "teleport": "Du wurdest mit <yellow>{0} </yellow><gray>getauscht</gray>"
+    },
+    "invert-health": {
+      "name": "*Invert Health*",
+      "desc": [
+        "Alle paar Minuten werden deine *Herzen invertiert*.",
+        "Wenn du *8 Herzen* hast,",
+        "hast du danach *2 Herzen* und umgekehrt."
+      ],
+      "inverted": "Deine Herzen wurden <red>invertiert</red>"
+    },
+    "no-shared-advancements": {
+      "name": "*Keine Gleichen Advancements*",
+      "desc": [
+        "Spieler dürfen *nicht* die *gleichen Advancements*",
+        "abschließen, sonst *stirbt* der *Spieler*"
+      ]
+    },
+    "quiz": {
+      "name": "*Quiz*",
+      "desc": [
+        "Alle *paar Minuten* muss ein *zufälliger*",
+        "*Spieler* eine *Quizfrage* beantworten"
+      ]
+    },
+    "goal-ender-dragon": {
+      "name": "*Enderdrache*",
+      "desc": [
+        "Töte den *Enderdrachen* um zu gewinnen"
+      ]
+    },
+    "goal-wither": {
+      "name": "*Wither*",
+      "desc": [
+        "Töte einen *Wither* um zu gewinnen"
+      ]
+    },
+    "goal-elder-guardian": {
+      "name": "*Elder Guardian*",
+      "desc": [
+        "Töte einen *Großen Wächter* um zu gewinnen"
+      ]
+    },
+    "goal-warden": {
+      "name": "*Warden*",
+      "desc": [
+        "Töte einen *Warden* um zu gewinnen"
+      ]
+    },
+    "goal-all-bosses": {
+      "name": "*Alle Bosse*",
+      "desc": [
+        "Es müssen *alle Bosse* einmal",
+        "*getötet* werden, um zu *gewinnen*",
+        " ",
+        "<dark_gray>(</dark_gray>{@goal-ender-dragon.name}, {@goal-wither.name}, {@goal-elder-guardian.name}<dark_gray>)</dark_gray>"
+      ]
+    },
+    "goal-all-bosses-new": {
+      "name": "*Alle Bosse (+ Warden)*",
+      "desc": [
+        "Es müssen *alle Bosse* einmal",
+        "*getötet* werden, um zu *gewinnen*",
+        " ",
+        "<dark_gray>(</dark_gray>{@goal-ender-dragon.name}, {@goal-wither.name}, {@goal-elder-guardian.name}, {@goal-warden.name}<dark_gray>)</dark_gray>"
+      ]
+    },
+    "iron-golem": {
+      "name": "*Eisengolem*",
+      "desc": [
+        "Töte einen *Eisengolem* um zu gewinnen"
+      ]
+    },
+    "snow-golem": {
+      "name": "*Schneemann*",
+      "desc": [
+        "Töte einen *Schneemann* um zu gewinnen"
+      ]
+    },
+    "all-mobs": {
+      "name": "*Alle Mobs*",
+      "desc": [
+        "Es müssen *alle Mobs* einmal",
+        "*getötet* werden, um zu *gewinnen*"
+      ]
+    },
+    "all-monster": {
+      "name": "*Alle Monster*",
+      "desc": [
+        "Es müssen *alle Monster* einmal",
+        "*getötet* werden, um zu *gewinnen*"
+      ]
+    },
+    "most-deaths": {
+      "name": "*Meiste Tode*",
+      "desc": [
+        "Wer die meisten *verschiedenen Tode*",
+        "sammelt, *gewinnt*"
+      ]
+    },
+    "most-items": {
+      "name": "*Meisten Items*",
+      "desc": [
+        "Wer die meisten *verschiedenen Items*",
+        "findet, *gewinnt*"
+      ]
+    },
+    "mine-most-blocks": {
+      "name": "*Meisten Blöcke*",
+      "desc": [
+        "Wer die *meisten Blöcke* abbaut, gewinnt"
+      ]
+    },
+    "most-xp": {
+      "name": "*Meiste XP*",
+      "desc": [
+        "Wer die meiste *XP sammelt*, gewinnt"
+      ]
+    },
+    "most-emeralds": {
+      "name": "*Meisten Emeralds*",
+      "desc": [
+        "Der Spieler mit den *meisten*",
+        "*Emeralds* gewinnt"
+      ]
+    },
+    "most-ores": {
+      "name": "*Meiste Erze*",
+      "desc": [
+        "Der Spieler, der am *meisten Erze*",
+        "*abgebaut* hat, gewinnt"
+      ]
+    },
+    "eat-most": {
+      "name": "*Am Meisten Essen*",
+      "desc": [
+        "Der Spieler, der am *meisten isst*, gewinnt"
+      ]
+    },
+    "first-one-to-die": {
+      "name": "*Erster Tod*",
+      "desc": [
+        "Wer als *erstes stirbt*, gewinnt"
+      ]
+    },
+    "collect-wood": {
+      "name": "*Holzarten Sammeln*",
+      "desc": [
+        "Wer als *erstes* alle *Holzarten*, die",
+        "*eingestellt* sind, gesammelt hat, gewinnt"
+      ]
+    },
+    "finish-raid": {
+      "name": "*Raid Gewinnen*",
+      "desc": [
+        "Der erste Spieler, der einen *Raid*",
+        "*abschließt*, gewinnt"
+      ]
+    },
+    "all-advancements": {
+      "name": "*Alle Advancements*",
+      "desc": [
+        "Der Spieler, der als erstes *alle*",
+        "Errungenschaften *erhalten hat*, gewinnt"
+      ]
+    },
+    "max-height": {
+      "name": "*Maximale Höhe*",
+      "desc": [
+        "Der Spieler, der als *erstes* die",
+        "Höhe *{0}* erreicht hat, gewinnt"
+      ]
+    },
+    "min-height": {
+      "name": "*Minimale Höhe*",
+      "desc": [
+        "Der Spieler, der als *erstes* die",
+        "Höhe *{0}* erreicht hat, gewinnt"
+      ]
+    },
+    "race": {
+      "name": "*Wettrennen*",
+      "desc": [
+        "Der Spieler, der als *erstes* an",
+        "einer *zufälligen* Position ist, gewinnt"
+      ]
+    },
+    "find-elytra": {
+      "name": "*Elytra Finden*",
+      "desc": [
+        "Der Spieler, der als *erstes*",
+        "eine *Elytra findet*, gewinnt"
+      ]
+    },
+    "eat-cake": {
+      "name": "*Kuchen Essen*",
+      "desc": [
+        "Der Spieler, der als *erstes*",
+        "einen *Kuchen isst*, gewinnt"
+      ]
+    },
+    "collect-horse-armor": {
+      "name": "*Sammle Pferderüstungen*",
+      "desc": [
+        "Der Spieler, der als *erstes*",
+        "*alle Pferderüstungen* hat, gewinnt"
+      ]
+    },
+    "collect-ice": {
+      "name": "*Sammle Eisblöcke*",
+      "desc": [
+        "Der Spieler, der als *erstes*",
+        "*alle Eisblöcke* und Schnee hat, gewinnt"
+      ]
+    },
+    "collect-swords": {
+      "name": "*Sammle Schwerter*",
+      "desc": [
+        "Der Spieler, der als *erstes*",
+        "*alle Schwerter* hat, gewinnt"
+      ]
+    },
+    "collect-workstations": {
+      "name": "*Sammle Arbeitsblöcke*",
+      "desc": [
+        "Der Spieler, der als *erstes*",
+        "*alle Villager Arbeitsblöcke* hat, gewinnt"
+      ]
+    },
+    "get-full-health": {
+      "name": "*Regeneriere Volle Leben*",
+      "desc": [
+        "The first player to gain full health wins."
+      ]
+    },
+    "force-item-battle": {
+      "name": "*Force Item Battle*",
+      "desc": [
+        "Jeder Spieler bekommt ein *zufälliges Item*,",
+        "das er finden muss.",
+        "Wer am Ende die *meisten Items* hat, gewinnt"
+      ]
+    },
+    "force-mob-battle": {
+      "name": "*Force Mob Battle*",
+      "desc": [
+        "Jeder Spieler bekommt ein *zufälliges Mob*,",
+        "das er töten muss."
+      ]
+    },
+    "force-advancement-battle": {
+      "name": "*Force Advancement Battle*",
+      "desc": [
+        "Jeder Spieler bekommt ein *zufälliges*",
+        "*Advancement*, welches er erreichen muss."
+      ]
+    },
+    "force-block-battle": {
+      "name": "*Force Block Battle*",
+      "desc": [
+        "Jeder Spieler bekommt einen *zufälligen*",
+        "*Block*, auf welchem er stehen muss"
+      ]
+    },
+    "force-biome-battle": {
+      "name": "*Force Biome Battle*",
+      "desc": [
+        "Jeder Spieler bekommt ein *zufälliges Biom*,",
+        "das er betreten muss"
+      ]
+    },
+    "force-damage-battle": {
+      "name": "*Force Damage Battle*",
+      "desc": [
+        "Jeder Spieler bekommt eine *zufällige Anzahl Schaden*,",
+        "die er *erhalten* muss"
+      ]
+    },
+    "force-height-battle": {
+      "name": "*Force Height Battle*",
+      "desc": [
+        "Jeder Spieler bekommt eine *zufällige Höhe*,",
+        "auf der er sich befinden muss."
+      ]
+    },
+    "force-position-battle": {
+      "name": "*Force Position Battle*",
+      "desc": [
+        "Jeder Spieler bekommt eine *zufällige Position*,",
+        "die er erreichen muss."
+      ]
+    },
+    "extreme-force-battle": {
+      "name": "*Extreme Force Battle*",
+      "desc": [
+        "Jeder Spieler bekommt ein *zufälliges Ziel*,",
+        "welches er erreichen muss"
+      ]
+    },
+    "last-man-standing": {
+      "name": "*Last Man Standing*",
+      "desc": [
+        "Wer *am Ende* noch *lebt*, gewinnt"
+      ]
+    },
+    "collect-all-items": {
+      "name": "*Alle Items*",
+      "desc": [
+        "Finde *alle Items*, die es *in Minecraft gibt*"
+      ]
+    },
+    "damage-teleport": {
+      "name": "*Schaden Random Teleport*",
+      "desc": [
+        "Du wirst *zufällig teleportiert*,",
+        "wenn du *Schaden* erleidest"
+      ]
+    },
+    "zero-hearts": {
+      "name": "*Null Herzen*",
+      "desc": [
+        "Nach einer *Schutzzeit* musst du",
+        "dauerhaft Absorption bekommen"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Schutzzeit </gray><dark_gray><bold>{@symbol.vertical} </bold></dark_gray><green>{0}s</green>"
+    }
+  },
+  "title": {
+    "timer-started": [
+      " ",
+      "<dark_gray>{@symbol.arrow}</dark_gray> <gray>Timer</gray> <green>fortgesetzt</green>"
+    ],
+    "timer-paused": [
+      " ",
+      "<dark_gray>{@symbol.arrow}</dark_gray> <gray>Timer</gray> <green>pausiert</green>"
+    ],
+    "challenge-enabled": [
+      "<yellow>{0}</yellow>",
+      "<dark_green><b>{@symbol.check}</b></dark_green> <dark_gray>{@symbol.vertical}</dark_gray> <green>Aktiviert</green>"
+    ],
+    "challenge-disabled": [
+      "<yellow>{0}</yellow>",
+      "<dark_red>{@symbol.x}</dark_red> <dark_gray>┃</dark_gray> <red>Deaktiviert</red>"
+    ],
+    "challenge-value-changed": [
+      "<yellow>{0}</yellow>",
+      "<dark_gray>{@symbol.arrow}</dark_gray> <yellow>{1}</yellow>"
+    ],
+    "goal-enabled": [
+      "<yellow>{0}</yellow>",
+      "<dark_green><b>{@symbol.check}</b></dark_green> <dark_gray>{@symbol.vertical}</dark_gray> <green>Ziel gewählt</green>"
+    ],
+    "goal-disabled": [
+      "<yellow>{0}</yellow>",
+      "<dark_red>{@symbol.x}</dark_red> <dark_gray>┃</dark_gray> <red>Ziel deaktiviert</red>"
+    ]
+  },
+  "command": {
+    "skip-timer": {
+      "none": "<gray>Es ist <red>keine Challenge</red> aktiviert, dessen Timer übersprungen werden könnte</gray>",
+      "done": "<gray>Die Timer folgender Challenges <green>wurden übersprungen</green>: {0}</gray>"
+    }
+  },
+  "challenge-end": {
+    "timer-hit-zero": [
+      " ",
+      "<red>Die Challenge ist vorbei!</red>",
+      "<gray>Seed:</gray> <yellow><b>{2}</b></yellow>",
+      " "
+    ],
+    "timer-hit-zero-winner": [
+      " ",
+      "<red>Die Challenge ist vorbei!</red>",
+      "<gray>Gewinner: </gray><yellow><b>{1}</b></yellow>",
+      "<gray>Seed: </gray><yellow><b>{2}</b></yellow>",
+      " "
+    ],
+    "goal-reached": [
+      " ",
+      "<gray>Die Challenge wurde beendet!</gray>",
+      "<gray>Zeit benötigt: </gray><green><b>{0}</b></green>",
+      "<gray>Seed: </gray><yellow><b>{2}</b></yellow>",
+      " "
+    ],
+    "goal-reached-winner": [
+      " ",
+      "<gray>Die Challenge wurde beendet!</gray>",
+      "<gray>Gewinner:</gray> <yellow><b>{1}</b></yellow>",
+      "<gray>Zeit benötigt:</gray> <green><b>{0}</b></green>",
+      "<gray>Seed:</gray> <yellow><b>{2}</b></yellow>",
+      " "
+    ],
+    "goal-failed": [
+      " ",
+      "<red>Die Challenge ist vorbei!</red> <gold>#FeelsBadMan {@symbol.cross}</gold>",
+      "<gray>Zeit verschwendet:</gray> <green><b>{0}</b></green>",
+      "<gray>Seed:</gray> <yellow><b>{2}</b></yellow>",
+      " "
+    ]
+  },
+  "server-reset": {
+    "restart": [
+      "<dark_gray><strikethrough>                               </strikethrough></dark_gray>",
+      " ",
+      "<dark_gray>» </dark_gray><red>Serverreset</red>",
+      " ",
+      "<gray>Reset durch </gray><dark_red><bold>{0}</bold></dark_red>",
+      "<gray>Der Server startet nun </gray><red>neu</red>",
+      " ",
+      "<dark_gray><strikethrough>                               </strikethrough></dark_gray>"
+    ],
+    "stop": [
+      "<dark_gray><strikethrough>                               </strikethrough></dark_gray>",
+      " ",
+      "<dark_gray>» </dark_gray><red>Serverreset</red>",
+      " ",
+      "<gray>Reset durch </gray><dark_red><bold>{0}</bold></dark_red>",
+      "<gray>Der Server wird nun </gray><red>gestoppt</red>",
+      " ",
+      "<dark_gray><strikethrough>                               </strikethrough></dark_gray>"
+    ]
+  },
+  "syntax": "Bitte nutze <yellow>/{0}</yellow>",
+  "reload": "Challenges Plugin wird neu geladen...",
+  "reload-failed": "Ein <red>Fehler </red><gray>ist während dem Reload aufgetreten</gray>",
+  "reload-success": "Challenges Plugin wurde <green>erfolgreich </green><gray>neu geladen</gray>",
+  "player-command": "Dazu musst du ein Spieler sein!",
+  "no-permission": "Dazu hast du <red>keine </red><gray>Rechte</gray>",
+  "enabled": "<green>Aktiviert</green>",
+  "disabled": "<red>Deaktiviert</red>",
+  "customize": "<gold>Anpassen</gold>",
+  "navigate-back": "<dark_gray>« </dark_gray><gray>Zurück</gray>",
+  "navigate-next": "<dark_gray>» </dark_gray><gray>Weiter</gray>",
+  "seconds": "Sekunden",
+  "second": "Sekunde",
+  "minutes": "Minuten",
+  "minute": "Minute",
+  "hours": "Stunden",
+  "hour": "Stunde",
+  "amplifier": "Stärke",
+  "open": "Öffnen",
+  "everyone": "<dark_purple>Alle</dark_purple>",
+  "player": "<gold>Aktiver Spieler</gold>",
+  "none": "Nichts",
+  "inventory-color": "<blue></blue>",
+  "confirm-reset": "Bestätige den Reset mit <yellow>/{0}</yellow>",
+  "no-fresh-reset": [
+    "Der Server kann <red>nicht resettet </red><gray>werden</gray>",
+    "Die Challenge wurde <red>noch nicht </red><gray>gestartet</gray>"
+  ],
+  "new-challenge-suffix": "{@challenge.suffix-format('<b><gradient:#0BC418:#5CFC60>Neu!</gradient></b>')}",
+  "updated-challenge-suffix": "{@challenge.suffix-format('<b><gradient:#FFEE00:#C7FC4A>Update!</gradient></b>')}",
+  "feature-disabled": "Diese Funktion ist derzeit <red>deaktiviert</red>",
+  "challenge-disabled": "Diese Challenge ist derzeit <red>deaktiviert</red>",
+  "timer-not-started": "Der Timer wurde noch <red>nicht gestartet</red>",
+  "timer-was-set": "Der Timer wurde auf <yellow><bold>{0} </bold></yellow><gray>gesetzt</gray>",
+  "timer-already-started": "Der Timer <red>läuft bereits</red>",
+  "timer-already-paused": "Der Timer ist <red>bereits pausiert</red>",
+  "timer-mode-set-down": "Der Timer zählt nun <red>runter</red>",
+  "timer-mode-set-up": "Der Timer zählt nun <green>hoch</green>",
+  "no-database-connection": "Es gibt <red>keine </red><gray>Datenbankverbindung</gray>",
+  "fetching-data": "Daten werden abgerufen..",
+  "no-such-material": "Dieses Material gibt es nicht",
+  "not-an-item": "<yellow>{0} </yellow><gray>ist kein Item</gray>",
+  "no-such-entity": "Dieses Entity existiert nicht",
+  "not-alive": "<yellow>{0} </yellow><gray>ist kein lebendes Entity</gray>",
+  "no-loot": "<yellow>{0} </yellow><gray>hat keine Drops</gray>",
+  "deprecated-plugin-version": [
+    " ",
+    "<gray>Ein neues Update ist verfügbar!</gray>",
+    "<gray>Download: </gray><yellow><bold>{0}</bold></yellow>",
+    " "
+  ],
+  "deprecated-config-version": [
+    "Deine Plugin Config ist <red>veraltet </red><gray>(</gray><red>{1} </red><gray>\\< </gray><green>{0}</green><gray>)</gray>",
+    "Du kannst die alte Config löschen oder die fehlenden Einstellungen manuell hinzufügen"
+  ],
+  "missing-config-settings": "Folgende Einstellungen fehlen in der Config: <yellow>{0}</yellow>",
+  "missing-config-settings-separator": "<gray>, </gray><yellow></yellow>",
+  "no-missing-config-settings": [
+    "<red>Es fehlen keine Einstellungen in der Config.</red>",
+    "<red>Du kannst die Version ohne bedenken selbst auf </red><red><bold>{0} </bold></red><red>stellen.</red>"
+  ],
+  "unsuported-language": [
+    "<red>Diese Sprache </red><gray>(</gray><yellow>{0}</yellow><gray>) wird nicht unterstützt</gray>"
+  ],
+  "not-op": [
+    "<gray>Um dieses Plugin zu nutzen, musst du die Berechtigung haben. Gib dir die Berechtigung in der Serverkonsole mit: /op [name]</gray>"
+  ],
+  "join-message": "<gray><yellow>{0}</yellow> hat den Server <green>betreten</green></gray>",
+  "quit-message": "<gray><yellow>{0}</yellow> hat den Server <red>verlassen</red></gray>",
+  "timer-paused-message": [
+    "Der Timer ist noch <red>pausiert</red>",
+    "Nutze <yellow>/timer resume </yellow><gray>um ihn zu starten</gray>"
+  ],
+  "cheats-detected": [
+    "<yellow>{0} </yellow><gray>hat </gray><red>gecheated</red>",
+    "Es können <red>keine weiteren </red><gray>Statistiken gesammelt werden</gray>"
+  ],
+  "cheats-already-detected": [
+    "Auf diesem Server wurde <red>gecheated</red>",
+    "Es können <red>keine weiteren </red><gray>Statistiken gesammelt werden</gray>"
+  ],
+  "custom_challenges-reset": "Die <yellow>Lokalen </yellow><gray>Challenges wurden </gray><green>erfolgreich zurückgesetzt</green>",
+  "config-reset": "Die <yellow>Lokalen </yellow><gray>Einstellungen wurden </gray><green>erfolgreich zurückgesetzt</green>",
+  "player-config-loaded": "Deine Einstellungen wurden <green>erfolgreich geladen</green>",
+  "player-config-saved": "Deine Einstellungen wurden <green>erfolgreich gespeichert</green>",
+  "player-config-reset": "Deine Einstellungen wurden <green>erfolgreich zurückgesetzt</green>",
+  "player-custom_challenges-loaded": "Deine Challenges wurden <green>erfolgreich geladen</green>",
+  "player-custom_challenges-saved": "Deine Challenges wurden <green>erfolgreich gespeichert</green>",
+  "player-custom_challenges-reset": "Deine Challenges wurden <green>erfolgreich zurückgesetzt</green>",
+  "item-prefix": "<dark_gray>» </dark_gray>",
+  "item-setting-info": "<dark_gray>➟ {0}</dark_gray>",
+  "stat-dragon-killed": "Drachen getötet",
+  "stat-deaths": "Tode",
+  "stat-entity-kills": "Kills",
+  "stat-damage-dealt": "Schaden ausgeteilt",
+  "stat-damage-taken": "Schaden genommen",
+  "stat-blocks-mined": "Blöcke abgebaut",
+  "stat-blocks-placed": "Blöcke platziert",
+  "stat-blocks-traveled": "Blöcke gereist",
+  "stat-challenges-played": "Challenges gespielt",
+  "stat-jumps": "Sprünge",
+  "stats-of": "<dark_gray>» </dark_gray><gray>Stats von </gray><yellow>{0}</yellow>",
+  "stats-display": "<dark_gray>» </dark_gray><gray>{0} </gray><dark_gray>(</dark_gray><yellow>{1}. </yellow><gray>Platz</gray><dark_gray>)</dark_gray>",
+  "stats-leaderboard-display": [
+    "<dark_gray>» </dark_gray><yellow>{0}</yellow>",
+    "<dark_gray><bold>┣ </bold></dark_gray><gray>{1} </gray><gray>{2}</gray>",
+    "<dark_gray><bold>┗ </bold></dark_gray><yellow>{3}. </yellow><gray>Platz</gray>"
+  ],
+  "position": "<yellow>{4} </yellow><dark_gray>- </dark_gray><gray>{0}, {1}, {2} </gray><dark_gray>(</dark_gray><yellow>{3}</yellow><dark_gray>) </dark_gray><dark_gray>┃ </dark_gray><yellow>{5}m</yellow>",
+  "positions-disabled": "Positionen sind <red>deaktiviert</red>",
+  "position-other-world": "Diese Position befindet sich in einer anderen Welt <dark_gray>(</dark_gray><yellow>{0}</yellow><dark_gray>)</dark_gray>",
+  "position-not-exists": "Die Position <yellow>{0} </yellow><gray>existiert </gray><red>nicht</red>",
+  "position-already-exists": "Die Position <yellow>{0} </yellow><gray>existiert </gray><red>bereits</red>",
+  "position-set": "<yellow>{5} </yellow><gray>hat </gray><yellow>{4} </yellow><gray>{0}, {1}, {2} </gray><dark_gray>(</dark_gray><yellow>{3}</yellow><dark_gray>) </dark_gray><gray>erstellt</gray>",
+  "position-deleted": "<yellow>{5} </yellow><gray>hat </gray><yellow>{4} </yellow><gray>{0}, {1}, {2} </gray><dark_gray>(</dark_gray><yellow>{3}</yellow><dark_gray>) </dark_gray><gray>gelöscht</gray>",
+  "no-positions": [
+    "Es sind keine <yellow>Positionen </yellow><gray>in dieser Welt gesetzt</gray>",
+    "Erstelle eine mit <yellow>/{0}</yellow>"
+  ],
+  "no-positions-global": [
+    "Es sind keine <yellow>Positionen </yellow><gray>gesetzt</gray>",
+    "Erstelle eine mit <yellow>/{0}</yellow>"
+  ],
+  "command-no-target": "Es wurde <red>kein </red><gray>Spieler gefunden</gray>",
+  "command-heal-healed": "Du wurdest <green>geheilt</green>",
+  "command-heal-healed-others": "Du hast <yellow>{0} Spieler </yellow><green>geheilt</green>",
+  "command-gamemode-gamemode-changed": "Du wurdest in den Gamemode <yellow>{0} </yellow><gray>gesetzt</gray>",
+  "command-gamemode-gamemode-changed-others": "Du hast <yellow>{1} Spieler </yellow><gray>in den Gamemode </gray><yellow>{0} </yellow><gray>gesetzt</gray>",
+  "command-village-search": "Es wird nach einem Dorf gesucht..",
+  "command-village-teleport": "Du wurdest in ein Dorf <green>teleportiert</green>",
+  "command-village-not-found": "Es wurde <red>kein neues </red><gray>Dorf gefunden</gray>",
+  "command-weather-set-clear": "Wetter zu <yellow>klar </yellow><gray>geändert</gray>",
+  "command-weather-set-rain": "Wetter zu <yellow>regnerisch </yellow><gray>geändert</gray>",
+  "command-weather-set-thunder": "Wetter zu <yellow>stürmisch </yellow><gray>geändert</gray>",
+  "command-invsee-open": "Inventar von <yellow>{0} </yellow><gray>geöffnet</gray>",
+  "command-enderchest-open": "Du hast deine <dark_purple>Enderchest </dark_purple><gray>geöffnet</gray>",
+  "command-search-nothing": "<yellow>{0} </yellow><gray>wird durch keinen speziellen Block gedroppt</gray>",
+  "command-search-result": "<yellow>{0} </yellow><gray>droppt aus </gray><yellow>{1}</yellow>",
+  "command-time-set": "Die Zeit wurde auf <yellow>{0} </yellow><gray>Ticks </gray><dark_gray>(</dark_gray><gray>ca. </gray><yellow>{1}</yellow><dark_gray>) </dark_gray><gray>geändert</gray>",
+  "command-time-set-exact": "Die Zeit wurde auf <yellow>{0} </yellow><dark_gray>(</dark_gray><yellow>{1} </yellow><gray>Ticks</gray><dark_gray>) </dark_gray><gray>geändert</gray>",
+  "command-time-query": [
+    "<dark_gray>» </dark_gray><gray>Derzeitige Ingamezeiten</gray>",
+    "Spielzeit <yellow>{0} </yellow><gray>Ticks </gray><dark_gray>(</dark_gray><gray>Tag </gray><yellow>{1}</yellow><dark_gray>)</dark_gray>",
+    "Tageszeit <yellow>{2} </yellow><gray>Ticks </gray><dark_gray>(</dark_gray><gray>ca. </gray><yellow>{3}</yellow><dark_gray>)</dark_gray>"
+  ],
+  "command-time-noon": "Mittag",
+  "command-time-night": "Nacht",
+  "command-time-midnight": "Mitternacht",
+  "command-time-day": "Tag",
+  "command-fly-enabled": "Du kannst <green>nun fliegen</green>",
+  "command-fly-disabled": "Du kannst nun <red>nicht mehr </red><gray>fliegen</gray>",
+  "command-fly-toggled-others": "Du hast <yellow>Fly </yellow><gray>für </gray><yellow>{0} </yellow><gray>Spieler verändert</gray>",
+  "command-feed-fed": "Dein Hunger wurde <green>gestillt</green>",
+  "command-feed-others": "Du hast den Hunger von <yellow>{0} </yellow><gray>Spieler *gestillt*</gray>",
+  "command-gamestate-reload": "Der Gamestate wurde <green>neu geladen</green>",
+  "command-gamestate-reset": "Der Gamestate wurde <green>zurückgesetzt</green>",
+  "command-world-teleport": "Du wirst in die Welt <yellow>{0} </yellow><gray>teleportiert</gray>",
+  "command-back-no-locations": "Du hast dich noch <red>nicht </red><gray>teleportiert</gray>",
+  "command-back-teleported": "Du wurdest <yellow>{0} </yellow><gray>Position zurück teleportiert</gray>",
+  "command-back-teleported-multiple": "Du wurdest <yellow>{0} </yellow><gray>Positionen zurück teleportiert</gray>",
+  "command-result-no-battle-active": "Es ist aktuell <red>kein </red><gray>Force-Battle aktiviert</gray>",
+  "command-god-mode-enabled": "Du bist nun im <green>God-Mode</green>",
+  "command-god-mode-disabled": "Du bist nun <red>nicht mehr im God-Mode</red>",
+  "command-god-mode-toggled-others": "<yellow>{0} </yellow><gray>Spieler sind jetzt im </gray><yellow>God-Mode</yellow>",
+  "player-damage-display": "<yellow>{0} </yellow><gray>nahm </gray><gray>{1} </gray><gray>Schaden durch </gray><yellow>{2}</yellow>",
+  "death-message": "<yellow>{0} </yellow><gray>ist gestorben</gray>",
+  "death-message-cause": "<yellow>{0} </yellow><gray>ist durch </gray><yellow>{1} </yellow><gray>gestorben</gray>",
+  "unable-to-find-fortress": "Es konnte <red>keine Festung </red><gray>gefunden werden</gray>",
+  "unable-to-find-bastion": "Es konnte <red>keine Bastion </red><gray>gefunden werden</gray>",
+  "death-collected": "Todesgrund <yellow>{0} </yellow><gray>wurde registriert</gray>",
+  "item-collected": "Item <yellow>{0} </yellow><gray>wurde registriert</gray>",
+  "items-to-collect": "<gray>Items zu sammeln </gray><dark_gray>» </dark_gray><yellow>{0}</yellow>",
+  "backpacks-disabled": "Rucksäcke sind derzeit <red>deaktiviert</red>",
+  "backpack-opened": "Du hast den {0} <gray>geöffnet</gray>",
+  "top-to-overworld": "Du wurdest zur <yellow>Overworld </yellow><gray>teleportiert</gray>",
+  "top-to-surface": "Du wurdest zur <yellow>Oberfläche </yellow><gray>teleportiert</gray>",
+  "all-items-skipped": "Item <yellow>{0} </yellow><gray>geskippt</gray>",
+  "all-items-already-finished": "Es wurden bereits alle Items gefunden",
+  "all-items-found": "Das Item <yellow>{0} </yellow><gray>wurde von </gray><yellow>{1} </yellow><gray>registriert</gray>",
+  "mob-kill": "<yellow>{0} </yellow><gray>wurde besiegt </gray><dark_gray>(</dark_gray><yellow>{1} </yellow><gray>/ </gray><yellow>{2}</yellow><dark_gray>)</dark_gray>",
+  "all-advancements-goal": "<gray>Advancements </gray><dark_gray>» </dark_gray><yellow>{0}</yellow>",
+  "height-reached": "<yellow>{0} </yellow><gray>hat Höhe </gray><yellow>{1} </yellow><gray>erreicht!</gray>",
+  "race-goal-reached": "<yellow>{0} </yellow><gray>hat das Ziel erreicht!</gray>",
+  "points-change": "<yellow>{0} </yellow><gray>Punkte</gray>",
+  "force-item-battle-found": "Du hast <yellow>{0} </yellow><gray>gefunden!</gray>",
+  "force-item-battle-new-item": "Item zu suchen: <yellow>{0}</yellow>",
+  "force-item-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Item Battle Leaderboard</gray>",
+  "force-mob-battle-killed": "Du hast <yellow>{0} </yellow><gray>gefunden!</gray>",
+  "force-mob-battle-new-mob": "Mob zu suchen: <yellow>{0}</yellow>",
+  "force-mob-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Mob Battle Leaderboard</gray>",
+  "force-advancement-battle-completed": "Du hast <yellow>{0} </yellow><gray>erzielt!</gray>",
+  "force-advancement-battle-new-advancement": "Nächstes Advancement: <yellow>{0}</yellow>",
+  "force-advancement-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Advancement Battle Leaderboard</gray>",
+  "force-block-battle-found": "Du hast <yellow>{0} </yellow><gray>gefunden!</gray>",
+  "force-block-battle-new-block": "Block zu suchen: <yellow>{0}</yellow>",
+  "force-block-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Block Battle Leaderboard</gray>",
+  "force-battle-leaderboard-entry": "{0}#{1} <dark_gray>» </dark_gray><yellow>{2} </yellow><dark_gray>┃ </dark_gray><yellow>{3}</yellow>",
+  "force-battle-block-target-display": "<yellow>Block: {0}</yellow>",
+  "force-battle-item-target-display": "<yellow>Item: {0}</yellow>",
+  "force-battle-height-target-display": "<yellow>Höhe: {0}</yellow>",
+  "force-battle-mob-target-display": "<yellow>Mob: {0}</yellow>",
+  "force-battle-biome-target-display": "<yellow>Biom: {0}</yellow>",
+  "force-battle-damage-target-display": "<yellow>Schaden: </yellow><red>{0} ❤</red>",
+  "force-battle-advancement-target-display": "<yellow>Advancement: {0}</yellow>",
+  "force-battle-position-target-display": "<yellow>Position: {0}</yellow>",
+  "extreme-force-battle-new-height": "Höhe zu erreichen: <yellow>{0}</yellow>",
+  "extreme-force-battle-reached-height": "Du hast die Höhe <yellow>{0} </yellow><gray>erreicht!</gray>",
+  "extreme-force-battle-new-biome": "Biom zu finden: <yellow>{0}</yellow>",
+  "extreme-force-battle-found-biome": "Du hast das Biom <yellow>{0} </yellow><gray>gefunden!</gray>",
+  "extreme-force-battle-new-damage": "Schaden zu nehmen: <red>{0} ❤</red>",
+  "extreme-force-battle-took-damage": "Du hast <red>{0} ❤ </red><gray>Schaden genommen!</gray>",
+  "extreme-force-battle-position": "<yellow>X: {0} </yellow><dark_gray>┃ </dark_gray><yellow>Z: {1}</yellow>",
+  "extreme-force-battle-new-position": "Position zu erreichen: <yellow>{0}</yellow>",
+  "extreme-force-battle-reached-position": "Du hast die Position <yellow>{0} </yellow><gray>erreicht!</gray>",
+  "extreme-force-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Extreme Force Battle Leaderboard</gray>",
+  "force-biome-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Biome Battle Leaderboard</gray>",
+  "force-damage-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Damage Battle Leaderboard</gray>",
+  "force-height-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Height Battle Leaderboard</gray>",
+  "force-position-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Position Battle Leaderboard</gray>",
+  "quiz-how-to": "Schreibe deine Antwort mit <yellow>/guess \\<antwort></yellow>",
+  "quiz-right-answer": "<yellow>{0} </yellow><gray>ist die </gray><green>richtige </green><gray>Antwort!</gray>",
+  "quiz-right-answer-other": "<yellow>{0} </yellow><gray>hat die Frage </gray><green>richtig </green><gray>beantwortet</gray>",
+  "quiz-wrong-answer": "<yellow>{0} </yellow><gray>ist eine </gray><red>falsche </red><gray>Antwort!</gray>",
+  "quiz-wrong-answer-other": "<yellow>{0} </yellow><gray>hat die Frage </gray><red>falsch beantwortet</red>",
+  "quiz-time-up": "Die Zeit ist <red>abgelaufen</red><gray>!</gray>",
+  "quiz-cancel": "Die Frage wurde <red>abgebrochen</red><gray>!</gray>",
+  "quiz-right-answer-was": "Die richtige Antwort lautete: <yellow>{0}</yellow>",
+  "quiz-right-answer-was-multiple": "Die richtigen Antworten lauteten: <yellow>{0}</yellow>",
+  "quiz-question-often-have": "Wie oft hast du <yellow>{0}</yellow><gray>{1}?</gray>",
+  "quiz-question-often-be": "Wie oft bist du <yellow>{0}</yellow><gray>{1}?</gray>",
+  "quiz-question-far-be": "Wie weit bist du {0}?",
+  "quiz-question-most": "Was hast du von diesen {1} am meisten {0}?",
+  "quiz-question-damage-have": "Wie viel Schaden hast du {0}{1}?",
+  "quiz-question-damage-taken-have": "Wie viel Schaden hast du durch {0}{1}?",
+  "quiz-verb-traveled": "gelaufen",
+  "quiz-verb-jumped": "gesprungen",
+  "quiz-verb-sneaked": "geschlichen",
+  "quiz-verb-killed": "getötet",
+  "quiz-verb-damaged": "zugefügt",
+  "quiz-verb-broken": "abgebaut",
+  "quiz-verb-placed": "platziert",
+  "quiz-verb-dropped": "gedropped",
+  "quiz-verb-suffered": "erlitten",
+  "bossbar-timer-paused": "<dark_gray>» </dark_gray><gray>Der Timer ist </gray><red>pausiert</red>",
+  "bossbar-all-items-current-max": "<dark_gray>» </dark_gray><white>{0} </white><dark_gray>┃ </dark_gray><gray>{1} </gray><dark_gray>/ </dark_gray><gray>{2}</gray>",
+  "bossbar-all-items-finished": "<dark_gray>» </dark_gray><gray>Alle Items gefunden</gray>",
+  "bossbar-race-goal-info": "<dark_gray>» </dark_gray><white>Ziel </white><dark_gray>┃ </dark_gray><gray>X: {0} </gray><dark_gray>/ </dark_gray><gray>Z: {1} </gray><dark_gray>┃ </dark_gray><yellow>{2} Blöcke</yellow>",
+  "bossbar-race-goal": "<dark_gray>» </dark_gray><white>Ziel </white><dark_gray>┃ </dark_gray><gray>X: {0} </gray><dark_gray>/ </dark_gray><gray>Z: {1}</gray>",
+  "bossbar-first-at-height-goal": "<dark_gray>» </dark_gray><white>Ziel </white><dark_gray>┃ </dark_gray><gray>Y: {0}</gray>",
+  "bossbar-kill-all-bosses": "<dark_gray>» </dark_gray><red>Alle Bosse </red><dark_gray>┃ </dark_gray><yellow>{0}/{1}</yellow>",
+  "bossbar-kill-all-mobs": "<dark_gray>» </dark_gray><red>Alle Mobs </red><dark_gray>┃ </dark_gray><yellow>{0}/{1}</yellow>",
+  "bossbar-kill-all-monster": "<dark_gray>» </dark_gray><red>Alle Monster </red><dark_gray>┃ </dark_gray><yellow>{0}/{1}</yellow>",
+  "subtitle-time-seconds": "<yellow>{0} </yellow><gray>Sekunden</gray>",
+  "subtitle-time-seconds-range": "<yellow>{0}-{1} </yellow><gray>Sekunden</gray>",
+  "subtitle-time-minutes": "<yellow>{0} </yellow><gray>Minuten</gray>",
+  "subtitle-launcher-description": "<gray>Stärke </gray><yellow>{0}</yellow>",
+  "subtitle-range-blocks": "<gray>Reichweite: </gray><yellow>{0} </yellow><gray>Blöcke</gray>",
+  "scoreboard-title": "<gray>» </gray><white><bold>Challenge</bold></white>",
+  "scoreboard-leaderboard": "<yellow>#{0} </yellow><dark_gray>┃ </dark_gray><gray>{1} </gray><dark_gray>» </dark_gray><yellow>{2}</yellow>",
+  "your-place": "<gray>Dein Platz </gray><dark_gray>» </dark_gray><yellow>{0}</yellow>",
+  "title-timer-started": [
+    " ",
+    "<dark_gray>» </dark_gray><gray>Timer </gray><green>fortgesetzt</green>"
+  ],
+  "title-timer-paused": [
+    " ",
+    "<dark_gray>» </dark_gray><gray>Timer </gray><red>pausiert</red>"
+  ],
+  "title-challenge-enabled": [
+    "<yellow>{0}</yellow>",
+    "<dark_green><bold>✔ </bold></dark_green><dark_gray>┃ </dark_gray><green>Aktiviert</green>"
+  ],
+  "title-challenge-disabled": [
+    "<yellow>{0}</yellow>",
+    "<dark_red>✖ </dark_red><dark_gray>┃ </dark_gray><red>Deaktiviert</red>"
+  ],
+  "title-challenge-value-changed": [
+    "<yellow>{0}</yellow>",
+    "<dark_gray>» </dark_gray><yellow>{1}</yellow>"
+  ],
+  "item-menu-start": "<dark_gray>• </dark_gray><green>Start Challenge </green><dark_gray>┃ </dark_gray><yellow>/start </yellow><dark_gray>•</dark_gray>",
+  "item-menu-challenges": "<dark_gray>• </dark_gray><red>Challenges </red><dark_gray>┃ </dark_gray><yellow>/challenge </yellow><dark_gray>•</dark_gray>",
+  "item-menu-timer": "<dark_gray>• </dark_gray><dark_purple>Timer </dark_purple><dark_gray>┃ </dark_gray><yellow>/timer </yellow><dark_gray>•</dark_gray>",
+  "item-menu-leaderboard": "<dark_gray>• </dark_gray><gold>Leaderboard </gold><dark_gray>┃ </dark_gray><yellow>/leaderboard </yellow><dark_gray>•</dark_gray>",
+  "item-menu-stats": "<dark_gray>• </dark_gray><dark_green>Statistiken </dark_green><dark_gray>┃ </dark_gray><yellow>/stats </yellow><dark_gray>•</dark_gray>",
+  "menu-main-title": "{@menu.title-format('Menu')}",
+  "menu-timer": "<gold>Timer</gold>",
+  "menu-goal": "<dark_purple>Ziel</dark_purple>",
+  "menu-damage": "<gray>Schaden</gray>",
+  "menu-item_blocks": "<dark_red>Blöcke & Items</dark_red>",
+  "menu-challenges": "<red>Challenges</red>",
+  "menu-settings": "<yellow>Einstellungen</yellow>",
+  "menu-custom": "<green>Individuelle Challenges</green>",
+  "lore-category-activated-count": "<gray>Aktiviert </gray><dark_gray>» </dark_gray><green>{0}</green><dark_gray>/</dark_gray><gray>{1}</gray>",
+  "lore-category-activated": "<gray>Aktiviert </gray><dark_gray>» </dark_gray><green>Ja</green>",
+  "lore-category-deactivated": "<gray>Aktiviert </gray><dark_gray>» </dark_gray><red>Nein</red>",
+  "item-time-seconds-description": "<dark_gray>» </dark_gray><gray>Zeit: </gray><yellow>{0} </yellow><gray>Sekunden</gray>",
+  "item-time-seconds-range-description": "<dark_gray>» </dark_gray><gray>Zeit: </gray><yellow>{0}-{1} </yellow><gray>Sekunden</gray>",
+  "item-time-minutes-description": "<dark_gray>» </dark_gray><gray>Zeit: </gray><yellow>{0} </yellow><gray>Minuten</gray>",
+  "item-heart-damage-description": "<dark_gray>» </dark_gray><gray>Schaden: </gray><yellow>{0} </yellow><red>❤</red>",
+  "item-heart-start-description": "<dark_gray>» </dark_gray><gray>Start: </gray><yellow>{0} </yellow><red>❤</red>",
+  "item-max-health-description": "<dark_gray>» </dark_gray><gray>Maximale Leben: </gray><yellow>{0} </yellow><red>❤</red>",
+  "item-chance-description": "<dark_gray>» </dark_gray><gray>Chance: </gray><yellow>{0}%</yellow>",
+  "item-launcher-description": "<dark_gray>» </dark_gray><gray>Stärke: </gray><yellow>{0}</yellow>",
+  "item-permanent-effect-target-player-description": "<dark_gray>» </dark_gray><gray>Nur der aktive Spieler erhält den Effekt</gray>",
+  "item-permanent-effect-target-everyone-description": "<dark_gray>» </dark_gray><gray>Alle erhalten den Effekt</gray>",
+  "item-blocks-description": "<dark_gray>» </dark_gray><gray>Blöcke zu laufen: </gray><yellow>{0}</yellow>",
+  "item-range-blocks-description": "<dark_gray>» </dark_gray><gray>Reichweite: </gray><yellow>{0} </yellow><gray>Blöcke</gray>",
+  "item-force-battle-goal-jokers": [
+    "<gold>Anzahl der Joker</gold>",
+    "Die *Anzahl* der *Joker*,",
+    "die jeder Spieler hat"
+  ],
+  "item-force-battle-show-scoreboard": [
+    "<aqua>Scoreboard anzeigen</aqua>"
+  ],
+  "item-force-battle-duped-targets": [
+    "<red>Doppelte Ziele</red>",
+    "Ziele können *mehrfach* vorkommen"
+  ],
+  "item-force-position-battle-radius": [
+    "<aqua>Radius</aqua>",
+    "Der *maximale Radius*, in dem sich die",
+    "Positionen befinden können"
+  ],
+  "item-language-setting": [
+    "<aqua>Sprache</aqua>",
+    "Setze die *Sprache*"
+  ],
+  "item-language-setting-german": "<white>Deutsch</white>",
+  "item-language-setting-english": "<white>English</white>",
+  "item-death-message-setting-vanilla": "<gold>Vanilla</gold>",
+  "item-backpack-setting-team": "<dark_purple>Team</dark_purple>",
+  "item-backpack-setting-player": "<gold>Player</gold>",
+  "menu-cut-clean-setting-settings": "CutClean",
+  "item-cut-clean-gold-setting": [
+    "<gold>Gold</gold>",
+    "*Golderz* wird direkt zu *Goldbarren*"
+  ],
+  "item-cut-clean-iron-setting": [
+    "<gray>Iron</gray>",
+    "*Eisenerz* wird direkt zu *Eisenbarren*"
+  ],
+  "item-cut-clean-coal-setting": [
+    "<yellow>Coal</yellow>",
+    "*Kohleerz* wird direkt zu *Fackeln*"
+  ],
+  "item-cut-clean-flint-setting": [
+    "<yellow>Flint</yellow>",
+    "*Gravel* droppt immer *Flint*"
+  ],
+  "item-cut-clean-vein-setting": [
+    "<yellow>Ore Veins</yellow>",
+    "*Erz Venen* werden direkt abgebaut"
+  ],
+  "item-cut-clean-inventory-setting": [
+    "<gold>Direkt ins Inventar</gold>",
+    "*Items* werden, *anstatt gedroppt* zu werden,",
+    "*direkt* ins *Inventar* hinzugefügt"
+  ],
+  "item-cut-clean-food-setting": [
+    "<red>Gebratenes Essen</red>",
+    "*Rohes Fleisch* wird direkt zu *gebratenem Fleisch*"
+  ],
+  "no-hunger-setting": [
+    "<red>Kein Hunger</red>",
+    "Du bekommst keinen *Hunger*"
+  ],
+  "item-timber-setting-logs": "<gold>Baumstämme</gold>",
+  "item-timber-setting-logs-and-leaves": "<gold>Baumstämme </gold><gray>und </gray><dark_green>Blätter</dark_green>",
+  "top-command-setting": [
+    "<light_purple>Top Command</light_purple>",
+    "Mit */top* kannst du dich",
+    "zur *Oberfläche* oder in",
+    "die *Overworld* teleportieren"
+  ],
+  "item-fortress-spawn-setting": [
+    "<red>Festungs Spawn</red>",
+    "Wenn du in den *Nether* gehst,",
+    "spawnst du immer in einer *Festung*"
+  ],
+  "item-bastion-spawn-setting": [
+    "<red>Bastions Spawn</red>",
+    "Wenn du in den *Nether* gehst,",
+    "spawnst du immer in einer *Bastion*"
+  ],
+  "item-regeneration-setting-not_natural": "<gold>Nicht natürlich</gold>",
+  "menu-all-blocks-disappear-challenge-settings": "Alle Blöcke verschwinden",
+  "item-all-blocks-disappear-break-challenge": [
+    "<aqua>Beim Abbauen</aqua>",
+    "Wenn du einen Block *abbaust*, werden",
+    "*alle Blöcke* des *selben Types zerstört*"
+  ],
+  "item-all-blocks-disappear-place-challenge": [
+    "<aqua>Beim Platzieren</aqua>",
+    "Wenn du einen Block *platzierst*, werden",
+    "*alle Blöcke* des *selben Types zerstört*"
+  ],
+  "menu-random-effect-challenge-settings": "Random Effekte",
+  "item-random-effect-time-challenge": [
+    "<gold>Intervall</gold>",
+    "Das *Intervall*, in dem man",
+    "einen *Effekt* erhält"
+  ],
+  "item-random-effect-length-challenge": [
+    "<gold>Länge</gold>",
+    "Die *Länge*, die der",
+    "*Effekt* anhält"
+  ],
+  "item-random-effect-amplifier-challenge": [
+    "<gold>Stärke</gold>",
+    "Die *Stärke*, die der",
+    "*Effekt* hat"
+  ],
+  "menu-anvil-rain-challenge-settings": "Amboss Regen",
+  "item-anvil-rain-time-challenge": [
+    "<gold>Intervall</gold>",
+    "Das *Intervall*, in",
+    "dem *Ambosse* spawnen"
+  ],
+  "item-anvil-rain-range-challenge": [
+    "<gold>Range</gold>",
+    "Die *Reichweite*, in",
+    "der *Ambosse* spawnen"
+  ],
+  "item-anvil-rain-count-challenge": [
+    "<gold>Anzahl</gold>",
+    "Die *Anzahl*, an *Ambossen*,",
+    "die in einem *Chunk* spawnen"
+  ],
+  "item-anvil-rain-damage-challenge": [
+    "<gold>Schaden</gold>",
+    "Der *Schaden*, die",
+    "die *Ambosse* machen"
+  ],
+  "item-collect-wood-goal-overworld": "<green>Overworld</green>",
+  "item-collect-wood-goal-nether": "<red>Nether</red>",
+  "item-collect-wood-goal-both": "<blue>Beide</blue>",
+  "menu-force-item-battle-goal-settings": "Force Item Battle",
+  "item-force-item-battle-goal-give-item": [
+    "<aqua>Item bei Skippen geben</aqua>",
+    "Wenn ein Spieler ein Item *skippt*,",
+    "wird dieses in sein *Inventar hinzugefügt*"
+  ],
+  "menu-force-mob-battle-goal-settings": "Force Mob Battle",
+  "menu-force-advancement-battle-goal-settings": "Force Advancement Battle",
+  "menu-force-block-battle-goal-settings": "Force Block Battle",
+  "item-force-block-battle-goal-give-block": [
+    "<aqua>Block bei Skippen geben</aqua>",
+    "Wenn ein Spieler einen Block *skippt*,",
+    "wird dieser in sein *Inventar hinzugefügt*"
+  ],
+  "menu-force-biome-battle-goal-settings": "Force Biome Battle",
+  "menu-force-damage-battle-goal-settings": "Force Damage Battle",
+  "menu-force-height-battle-goal-settings": "Force Height Battle",
+  "menu-force-position-battle-goal-settings": "Force Position Battle",
+  "menu-extreme-force-battle-goal-settings": "Extreme Force Battle",
+  "item-damage-rule-none": [
+    "<gold>Genereller Schaden</gold>",
+    "Stellt ein, ob du Schaden bekommen kannst"
+  ],
+  "item-damage-rule-fire": [
+    "<gold>Feuer Schaden</gold>",
+    "Stellt ein, ob du Schaden durch",
+    "*Lava* und *Feuer* bekommen kannst"
+  ],
+  "item-damage-rule-attack": [
+    "<dark_aqua>Angriff Schaden</dark_aqua>",
+    "Stellt ein, ob du Schaden durch",
+    "*Nahkampfangriffe von Entities* bekommen kannst"
+  ],
+  "item-damage-rule-projectile": [
+    "<gold>Projektil Schaden</gold>",
+    "Stellt ein, ob du Schaden durch",
+    "*Projektile* bekommen kannst"
+  ],
+  "item-damage-rule-fall": [
+    "<white>Fallschaden</white>",
+    "Stellt ein, ob du *Fallschaden* bekommen kannst"
+  ],
+  "item-damage-rule-explosion": [
+    "<red>Explosions Schaden</red>",
+    "Stellt ein, ob du *Explosions Schaden* bekommen kannst"
+  ],
+  "item-damage-rule-drowning": [
+    "<blue>Ertrink Schaden</blue>",
+    "Stellt ein, ob du Schaden durch",
+    "*Ertrinken* bekommen kannst"
+  ],
+  "item-damage-rule-block": [
+    "<yellow>Block Schaden</yellow>",
+    "Stellt ein, ob du Schaden durch",
+    "*Fallende Blöcke* bekommen kannst"
+  ],
+  "item-damage-rule-magic": [
+    "<dark_purple>Magie Schaden</dark_purple>",
+    "Stellt ein, ob du Schaden durch",
+    "*Gift*, *Wither* und andere *Tränke* bekommen kannst"
+  ],
+  "item-damage-rule-freeze": [
+    "<white>Frost Schaden</white>",
+    "Stellt ein, ob du Schaden durch",
+    "*Frost* bekommen kannst"
+  ],
+  "item-block-material": [
+    "{0}",
+    "Stellt ein, ob *{1}*",
+    "genutzt werden *kann*"
+  ],
+  "custom-limit": "Du hast das Limit von <yellow>{0} Challenges </yellow><gray>erreicht</gray>",
+  "custom-not-deleted": "Diese Challenge existiert noch nicht!",
+  "custom-saved": "<gray>Challenge wurde lokal </gray><green>gespeichert</green>",
+  "custom-saved-db": [
+    "Um in <yellow>Datenbank </yellow><gray>zu Speichern benutze </gray><yellow>/db save customs</yellow>",
+    "<red>Achtung: </red><gray>Alte Einstellungen werden dabei überschrieben!</gray>"
+  ],
+  "custom-no-changes": "Du hast an der Challenge <red>keine </red><gray>Änderungen gemacht</gray>",
+  "custom-name-info": "Schreibe den Namen der Challenge in den Chat",
+  "custom-command-info": [
+    "Schreibe den Command den der Spieler ausführen soll <yellow>ohne / </yellow><gray>in den Chat</gray>",
+    "Erlaubte Commands: <yellow>{0}</yellow>",
+    "<red>Weitere Commands können in der Config erlaubt werden</red>"
+  ],
+  "custom-command-not-allowed": "Der Command <yellow>{0} </yellow><gray>ist in der Config nicht als erlaubter Command angegeben</gray>",
+  "custom-chars-max_length": "Du hast die Maximale Anzahl von <yellow>{0} Zeichen </yellow><gray>überschritten</gray>",
+  "custom-not-loaded": [
+    " ",
+    "Es sind derzeit keine Custom Challenges geladen.",
+    "Du vermisst deine Challenges? <yellow>/db load customs</yellow>",
+    "Du hast Probleme beim Speichern?",
+    "Speichere vorm verlassen manuell <yellow>/db save customs</yellow>",
+    " "
+  ],
+  "custom-main-view-challenges": "<gold>Challenges Ansehen</gold>",
+  "custom-main-create-challenge": "<green>Challenge Erstellen</green>",
+  "custom-title-trigger": "Auslöser",
+  "custom-title-action": "Aktion",
+  "custom-title-view": "Gespeichert",
+  "custom-sub-finish": "<green>Fertig</green>",
+  "item-custom-info-delete": [
+    "<red>Löschen</red>",
+    "*Achtung* diese Aktion kann *nicht*",
+    "rückgängig gemacht werden"
+  ],
+  "item-custom-info-save": "<green>Speichern</green>",
+  "item-custom-info-trigger": [
+    "<red>Auslöser</red>",
+    "*Klicke* um einzustellen, was passieren",
+    "muss, damit die *Aktion* ausgeführt wird"
+  ],
+  "item-custom-info-action": [
+    "<aqua>Aktion</aqua>",
+    "*Klicke* um einzustellen, was passieren",
+    "soll, wenn der *Auslöser* erfüllt ist"
+  ],
+  "item-custom-info-material": [
+    "<gold>Anzeige Item</gold>",
+    "*Klicke* um das Anzeigeitem zu ändern"
+  ],
+  "item-custom-info-name": [
+    "<gold>Name</gold>",
+    "*Klicke* um den Namen über den Chat zu ändern",
+    "Maximale Zeichenanzahl: 50"
+  ],
+  "custom-info-currently": "<gray>Eingestellt </gray><dark_gray>» </dark_gray><yellow></yellow>",
+  "custom-info-trigger": "<gray>Auslöser</gray>",
+  "custom-info-action": "<gray>Aktion</gray>",
+  "item-custom-trigger-jump": [
+    "<green>Spieler Springt</green>"
+  ],
+  "item-custom-trigger-sneak": [
+    "<green>Spieler Schleicht</green>"
+  ],
+  "item-custom-trigger-move_block": [
+    "<gold>Spieler Läuft Einen Block</gold>"
+  ],
+  "item-custom-trigger-death": [
+    "<red>Entity Stirbt</red>"
+  ],
+  "item-custom-trigger-damage": [
+    "<red>Entity Erleidet Schaden</red>"
+  ],
+  "item-custom-trigger-damage-any": [
+    "<green>Jeglicher Grund</green>"
+  ],
+  "item-custom-trigger-damage_by_player": [
+    "<red>Entity Bekommt Schaden Von Spieler</red>"
+  ],
+  "item-custom-trigger-intervall": [
+    "<gold>Intervall</gold>"
+  ],
+  "item-custom-trigger-intervall-second": [
+    "<gold>Jede Sekunde</gold>"
+  ],
+  "item-custom-trigger-intervall-seconds": [
+    "<gold>Alle {0} Sekunden</gold>"
+  ],
+  "item-custom-trigger-intervall-minutes": [
+    "<gold>Alle {0} Minuten</gold>"
+  ],
+  "item-custom-trigger-block_place": [
+    "<green>Block Platziert</green>"
+  ],
+  "item-custom-trigger-block_break": [
+    "<red>Block Zerstört</red>"
+  ],
+  "item-custom-trigger-consume_item": [
+    "<dark_green>Item Konsumieren</dark_green>"
+  ],
+  "item-custom-trigger-pickup_item": [
+    "<aqua>Item Aufheben</aqua>"
+  ],
+  "item-custom-trigger-drop_item": [
+    "<blue>Spieler Droppt Item</blue>"
+  ],
+  "item-custom-trigger-advancement": [
+    "<red>Spieler Erhält Errungenschaft</red>"
+  ],
+  "item-custom-trigger-hunger": [
+    "<dark_green>Spieler Verliert Hunger</dark_green>"
+  ],
+  "item-custom-trigger-move_down": [
+    "<gold>Block Nach Unten Bewegen</gold>"
+  ],
+  "item-custom-trigger-move_up": [
+    "<gold>Block Nach Oben Bewegen</gold>"
+  ],
+  "item-custom-trigger-move_camera": [
+    "<gold>Kamera Bewegen</gold>"
+  ],
+  "item-custom-trigger-stands_on_specific_block": [
+    "<gold>Spieler Ist Auf Bestimmten Block</gold>"
+  ],
+  "item-custom-trigger-stands_not_on_specific_block": [
+    "<gold>Spieler Ist Nicht Auf Bestimmten Block</gold>"
+  ],
+  "item-custom-trigger-gain_xp": [
+    "<dark_purple>Spieler Bekommt XP</dark_purple>"
+  ],
+  "item-custom-trigger-level_up": [
+    "<dark_purple>Spieler Levelt Auf</dark_purple>"
+  ],
+  "item-custom-trigger-item_craft": [
+    "<gold>Spieler Craftet Item</gold>"
+  ],
+  "item-custom-trigger-in_liquid": [
+    "<blue>Spieler In Flüssigkeit</blue>"
+  ],
+  "item-custom-trigger-get_item": [
+    "<green>Item bekommen</green>",
+    "Aktion wird für *jedes* anklicken oder aufheben ausgeführt"
+  ],
+  "item-custom-action-cancel": [
+    "<dark_red>Auslöser Abbrechen</dark_red>",
+    "Verhindert, dass der Auslöser ausgeführt wird.",
+    "Nicht abrechenbare Auslöser: *Springen*, *Sneaken*, *Töten*",
+    "*Advancement*, *Auf Leveln*, *In Flüssigkeit*"
+  ],
+  "item-custom-action-command": [
+    "<dark_red>Command Ausführen</dark_red>",
+    "Lasse Spieler einen Command ausführen lassen",
+    "Die Commands werden für Spieler mit */execute as* von",
+    "der Konsole ausgeführt.",
+    "Erlaubte Commands werden in der Config eingestellt.",
+    "Der Spieler braucht *keine Rechte* auf den Command haben.",
+    "Spieler können *keine Plugin Commands* ausführen."
+  ],
+  "item-custom-action-kill": [
+    "<dark_red>Töten</dark_red>",
+    "Töte Entities"
+  ],
+  "item-custom-action-damage": [
+    "<red>Schaden</red>",
+    "Füge Entities Schaden zu"
+  ],
+  "item-custom-action-heal": [
+    "<green>Heilen</green>",
+    "Heile Entities"
+  ],
+  "item-custom-action-hunger": [
+    "<gold>Hunger</gold>",
+    "Füge Spielern Hunger hinzu"
+  ],
+  "item-custom-action-max_health": [
+    "<red>Maximale Leben Verändern</red>",
+    "Verändere die Maximalen Leben von Spielern",
+    "Wird mit einem */gamestate reset* zurückgesetzt"
+  ],
+  "item-custom-action-max_health-offset": [
+    "<red>Veränderung</red>",
+    "Wähle aus wie viele Leben verändert werden sollen"
+  ],
+  "item-custom-action-spawn_entity": [
+    "<dark_aqua>Entity Spawnen</dark_aqua>",
+    "Spawne ein Entity bestimmten Types"
+  ],
+  "item-custom-action-random_mob": [
+    "<gold>Zufälliges Entity</gold>",
+    "Spawne ein zufälliges Entity"
+  ],
+  "item-custom-action-random_item": [
+    "<aqua>Zufälliges Item</aqua>",
+    "Gebe Spielern zufällige Items"
+  ],
+  "item-custom-action-uncraft_inventory": [
+    "<yellow>Inventar Zurück-Craften</yellow>",
+    "Lasse das Inventar von Spielern Zurück-Craften"
+  ],
+  "item-custom-action-boost_in_air": [
+    "<white>In Luft Schleudern</white>",
+    "Schleudere Entities in die Luft"
+  ],
+  "item-custom-action-boost_in_air-strength": [
+    "<white>Stärke</white>"
+  ],
+  "item-custom-action-potion_effect": [
+    "<light_purple>Trank Effekt</light_purple>",
+    "Gebe Entities einen bestimmten Trank Effekt"
+  ],
+  "item-custom-action-permanent_effect": [
+    "<gold>Permanenten Trank Effekt</gold>",
+    "Füge Spieler einen Permanenten Effekt hinzu.",
+    "Die Aktion nutzt die Einstellungen",
+    "von der Permanenten Effekt Challenge."
+  ],
+  "item-custom-action-random_effect": [
+    "<light_purple>Zufälliger Trank Effekt</light_purple>",
+    "Gebe Entities einen zufälligen Trank Effekt"
+  ],
+  "item-custom-action-clear_inventory": [
+    "<red>Inventar Leeren</red>",
+    "Leere das Inventar von Spielern komplett"
+  ],
+  "item-custom-action-drop_random_item": [
+    "<green>Item Aus Inventar Droppen</green>",
+    "Droppe ein Item aus dem Inventar auf den Boden"
+  ],
+  "item-custom-action-remove_random_item": [
+    "<red>Item Aus Inventar Entfernen</red>",
+    "Entferne ein Item aus dem Inventar"
+  ],
+  "item-custom-action-swap_random_item": [
+    "<gold>Items Im Inventar Tauschen</gold>",
+    "Tausche zwei Item im Inventar"
+  ],
+  "item-custom-action-freeze": [
+    "<aqua>Freeze</aqua>",
+    "Friere Mobs Zeitweise ein.",
+    "Die Aktion nutzt die Einstellungen",
+    "von der Freeze On Damage Challenge."
+  ],
+  "item-custom-action-invert_health": [
+    "<red>Invert Health</red>",
+    "Invertiere die Herzen eines Spielers.",
+    "Wenn du *8 Herzen* hast,",
+    "hast du danach *2 Herzen* und umgekehrt."
+  ],
+  "item-custom-action-water_mlg": [
+    "<blue>Water MLG</blue>",
+    "Alle Spieler müssen einen Water MLG machen"
+  ],
+  "item-custom-action-win": [
+    "<gold>Gewinnen</gold>",
+    "Die Challenge wird von *bestimmten Spielern* gewonnen"
+  ],
+  "item-custom-action-random_hotbar": [
+    "<yellow>Zufällige Hotbar</yellow>",
+    "Das Inventar wird geleert und der Spieler",
+    "bekommt zufällige Items in die HotBar"
+  ],
+  "item-custom-action-modify_border": [
+    "<aqua>World Border Verändern</aqua>",
+    "Mache die Worldborder *größer* <gray>oder *kleiner*</gray>"
+  ],
+  "item-custom-action-modify_border-change": [
+    "<light_purple>Veränderung</light_purple>"
+  ],
+  "item-custom-action-swap_mobs": [
+    "<dark_purple>Mobs tauschen</dark_purple>",
+    "Tausche ein Mob mit einem zufälligen",
+    "anderem Mob aus der gleichen Welt"
+  ],
+  "item-custom-action-place_structure": [
+    "<green>Struktur Platzieren</green>",
+    "Platziert eine Struktur"
+  ],
+  "item-custom-action-place_structure-random": "<aqua>Zufällige Struktur</aqua>",
+  "item-custom-setting-target-current": [
+    "<gold>Aktives Entity</gold>",
+    "Die Aktion wird für das *aktive Entity* ausgeführt"
+  ],
+  "item-custom-setting-target-every_mob": [
+    "<dark_red>Alle Mobs</dark_red>",
+    "Die Aktion wird für *alle Mobs* ausgeführt"
+  ],
+  "item-custom-setting-target-every_mob_except_current": [
+    "<dark_red>Alle Mobs Außer Aktives</dark_red>",
+    "Die Aktion wird für *alle Mobs*",
+    "*außer* das Aktive ausgeführt ausgeführt"
+  ],
+  "item-custom-setting-target-every_mob_except_players": [
+    "<dark_red>Alle Mobs Außer Spieler</dark_red>",
+    "Die Aktion wird für *alle Mobs*",
+    "*außer* Spieler ausgeführt"
+  ],
+  "item-custom-setting-target-random_player": [
+    "<dark_purple>Zufälliger Spieler</dark_purple>",
+    "Die Aktion wird für einen *zufälligen Spieler* ausgeführt"
+  ],
+  "item-custom-setting-target-every_player": [
+    "<red>Alle Spieler</red>",
+    "Die Aktion wird für *jeden Spieler* ausgeführt"
+  ],
+  "item-custom-setting-target-current_player": [
+    "<green>Aktiver Spieler</green>",
+    "Die Aktion wird für den *aktiven Spieler* ausgeführt",
+    "<gray><italic>Wenn das Entity kein Spieler ist, wird nichts passieren</italic></gray>"
+  ],
+  "item-custom-setting-target-console": [
+    "<dark_red>Konsole</dark_red>",
+    "Die Aktion wird für die *Konsole* ausgeführt"
+  ],
+  "item-custom-setting-entity_type-any": "<red>Jegliches Entity</red>",
+  "item-custom-setting-entity_type-player": "<green>Spieler</green>",
+  "item-custom-setting-block-any": "<dark_green>Jeglicher Block</dark_green>",
+  "item-custom-setting-item-any": "<dark_green>Jegliches Item</dark_green>",
+  "custom-subsetting-target_entity": "Ziel Entity",
+  "custom-subsetting-entity_type": "Entity Typ",
+  "custom-subsetting-liquid": "Flüssigkeit",
+  "custom-subsetting-time": "Zeit",
+  "custom-subsetting-damage_cause": "Schadens Art",
+  "custom-subsetting-amount": "Anzahl",
+  "custom-subsetting-value": "Werte Editor",
+  "custom-subsetting-health_offset": "Veränderung",
+  "custom-subsetting-length": "Länge",
+  "custom-subsetting-amplifier": "Stärke",
+  "custom-subsetting-change": "Veränderung",
+  "custom-subsetting-swap_targets": "Tausch Ziele"
+}

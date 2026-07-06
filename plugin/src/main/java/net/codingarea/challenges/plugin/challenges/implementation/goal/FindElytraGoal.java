@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public class FindElytraGoal extends FindItemGoal {
 
   public FindElytraGoal() {
-    super(SettingCategory.FASTEST_TIME, Material.ELYTRA, new ItemStack(Material.ELYTRA), "find-elytra-goal");
+    super(SettingCategory.FASTEST_TIME, Material.ELYTRA, new ItemStack(Material.ELYTRA), "find-elytra");
   }
 
 }

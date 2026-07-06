@@ -19,7 +19,7 @@ public class ImmediateRespawnSetting extends Setting {
   private boolean respawnWithEvent;
 
   public ImmediateRespawnSetting() {
-    super(MenuType.SETTINGS, null, new ItemStack(Material.GOLDEN_APPLE), "item-immediate-respawn-setting");
+    super(MenuType.SETTINGS, null, new ItemStack(Material.GOLDEN_APPLE), "immediate-respawn");
   }
 
   @Override

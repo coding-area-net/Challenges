@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class AdvancementDamageChallenge extends SettingModifier {
 
   public AdvancementDamageChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 40, new ItemStack(Material.BOOK), "advancement-damage-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 40, new ItemStack(Material.BOOK), "advancement-damage");
   }
 
 //  @Nullable

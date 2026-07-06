@@ -28,7 +28,7 @@ public class TimberSetting extends SettingModifier {
   public static final int LOGS_LEAVES = 2;
 
   public TimberSetting() {
-    super(MenuType.SETTINGS, null, 2, new ItemStack(Material.DIAMOND_AXE), "item-timber-setting");
+    super(MenuType.SETTINGS, null, 2, new ItemStack(Material.DIAMOND_AXE), "timber");
   }
 
   @NotNull

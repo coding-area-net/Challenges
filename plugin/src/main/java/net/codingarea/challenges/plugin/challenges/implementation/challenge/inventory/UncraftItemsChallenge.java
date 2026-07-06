@@ -19,7 +19,7 @@ import java.util.Objects;
 public class UncraftItemsChallenge extends TimedChallenge {
 
   public UncraftItemsChallenge() {
-    super(MenuType.CHALLENGES, null, 5, 60, 20, new ItemStack(Material.CRAFTING_TABLE), "uncraft-items-challenge");
+    super(MenuType.CHALLENGES, null, 5, 60, 20, new ItemStack(Material.CRAFTING_TABLE), "uncraft-items");
   }
 
 //  @Nullable

@@ -4,7 +4,6 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallen
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.Bukkit;
@@ -23,7 +22,7 @@ import java.util.stream.Collectors;
 public class EnderGamesChallenge extends TimedChallenge {
 
   public EnderGamesChallenge() {
-    super(MenuType.CHALLENGES, null, 1, 10, 5, false, new ItemStack(Material.ENDER_PEARL), "ender-games-challenge");
+    super(MenuType.CHALLENGES, null, 1, 10, 5, false, new ItemStack(Material.ENDER_PEARL), "ender-games");
   }
 
 //  @Nullable
@@ -63,7 +62,7 @@ public class EnderGamesChallenge extends TimedChallenge {
 
     Location playerLocation = player.getLocation().clone();
     player.teleport(targetEntity.getLocation());
-    MessageKey.of("endergames-teleport").send(player, Prefix.CHALLENGES, targetEntity.getType());
+    getChallengeMessageKey("teleport").send(player, Prefix.CHALLENGES, targetEntity.getType());
     targetEntity.teleport(playerLocation);
 
   }

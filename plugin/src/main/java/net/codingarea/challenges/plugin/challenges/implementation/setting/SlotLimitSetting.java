@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
@@ -23,11 +24,19 @@ import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
+
 @Since("2.0")
 public class SlotLimitSetting extends Modifier {
 
   public SlotLimitSetting() {
     super(MenuType.SETTINGS, null, 1, 36, 36, new ItemStack(Material.BARRIER), "slot-limit");
+  }
+
+  @NotNull
+  @Override
+  public LocalizableMessage getSettingsName() {
+    return getChallengeMessageKey("settings").withArgs(getValue(), 36);
   }
 
   @Override
@@ -101,7 +110,7 @@ public class SlotLimitSetting extends Modifier {
     if (!shouldExecuteEffect()) return;
     if (event.getClickedInventory() == null) return;
     if (event.getClickedInventory().getType() != InventoryType.PLAYER) return;
-    if (isBlocked(event.getSlot())) {
+    if (isBlocked(event.getSlot()) || event.getCurrentItem() != null && event.getCurrentItem().isSimilar(LegacyItemBuilder.BLOCKED_ITEM)) {
       event.setCancelled(true);
     }
   }

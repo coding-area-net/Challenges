@@ -35,7 +35,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
   private final boolean particleLines;
 
   public PositionSetting() {
-    super(MenuType.SETTINGS, null, true, new ItemStack(Material.BLUE_BANNER), "position-setting");
+    super(MenuType.SETTINGS, null, true, new ItemStack(Material.BLUE_BANNER), "position");
     particleLines = ChallengeConfigHelper.getSettingsDocument().getBoolean("position-particle-lines");
     Challenges.getInstance().registerCommand(new DelPosCommand(), "delposition");
     Challenges.getInstance().registerCommand(new SetPosCommand(), "setposition");

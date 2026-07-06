@@ -5,7 +5,6 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.CompletableF
 import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -38,7 +37,7 @@ public class ForceBiomeChallenge extends CompletableForceChallenge {
   private Biome biome;
 
   public ForceBiomeChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.FORCE, 2, 20, 5, new ItemStack(Material.CHAINMAIL_BOOTS), "force-biome-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.FORCE, 2, 20, 5, new ItemStack(Material.CHAINMAIL_BOOTS), "force-biome");
   }
 
 //  @Nullable
@@ -57,24 +56,24 @@ public class ForceBiomeChallenge extends CompletableForceChallenge {
   protected BiConsumer<BossBarInstance, Player> setupBossbar() {
     return (bossbar, player) -> {
       if (getState() == WAITING) {
-        bossbar.setTitle(MessageKey.of("bossbar-force-biome-waiting"));
+        bossbar.setTitle(getChallengeMessageKey("bossbar-waiting"));
         return;
       }
 
       bossbar.setColor(BossBar.Color.GREEN);
       bossbar.setProgress(getProgress());
-      bossbar.setTitle(MessageKey.of("bossbar-force-biome-instruction"), biome, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation()));
+      bossbar.setTitle(getChallengeMessageKey("bossbar-instruction"), biome, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation()));
     };
   }
 
   @Override
   protected void broadcastFailedMessage() {
-    MessageKey.of("force-biome-fail").broadcast(Prefix.CHALLENGES, biome);
+    getChallengeMessageKey("fail").broadcast(Prefix.CHALLENGES, biome);
   }
 
   @Override
   protected void broadcastSuccessMessage(@NotNull Player player) {
-    MessageKey.of("force-biome-success").broadcast(Prefix.CHALLENGES, player, biome);
+    getChallengeMessageKey("success").broadcast(Prefix.CHALLENGES, player, biome);
   }
 
   @Override

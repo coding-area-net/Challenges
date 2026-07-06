@@ -4,7 +4,6 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -35,14 +34,14 @@ public class MobsRespawnInEndChallenge extends Setting {
   private int totalMobsInEnd = 0;
 
   public MobsRespawnInEndChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.ENDER_EYE), "respawn-end-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.ENDER_EYE), "respawn-end");
   }
 
   @Override
   protected void onEnable() {
     bossbar.setContent((bar, player) -> {
       bar.setColor(BossBar.Color.PURPLE);
-      bar.setTitle(MessageKey.of("bossbar-respawn-end"), totalMobsInEnd);
+      bar.setTitle(getChallengeMessageKey("bossbar"), totalMobsInEnd);
     });
     bossbar.show();
   }

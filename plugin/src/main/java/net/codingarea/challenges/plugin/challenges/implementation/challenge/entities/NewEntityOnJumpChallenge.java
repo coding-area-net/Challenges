@@ -20,7 +20,7 @@ public class NewEntityOnJumpChallenge extends Setting {
 
   public NewEntityOnJumpChallenge() {
     super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new StandardItemBuilder.LeatherArmorBuilder(Material.LEATHER_BOOTS).setColor(Color.GREEN).build(),
-      "jump-entity-challenge");
+      "jump-entity");
   }
 
   @EventHandler(priority = EventPriority.HIGH)

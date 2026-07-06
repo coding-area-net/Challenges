@@ -1,9 +1,8 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import net.codingarea.challenges.plugin.challenges.type.helper.GoalHelper;
-import net.codingarea.challenges.plugin.content.legacy.Message;
-import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
@@ -23,7 +22,7 @@ public abstract class ItemCollectionGoal extends CollectionGoal {
 
   public ItemCollectionGoal(@Nullable SettingCategory category, @NotNull ItemStack displayItemPreset,
                             @NotNull String nameMessageKey, @NotNull Material... target) {
-    super(category,  displayItemPreset, nameMessageKey, target);
+    super(category, displayItemPreset, nameMessageKey, target);
   }
 
   public ItemCollectionGoal(@Nullable SettingCategory category, boolean enabledByDefault, @NotNull ItemStack displayItemPreset,
@@ -41,7 +40,7 @@ public abstract class ItemCollectionGoal extends CollectionGoal {
   @Override
   protected void onEnable() {
     scoreboard.setContent(GoalHelper.createScoreboard(() -> getPoints(new AtomicInteger(), true),
-      player -> Collections.singletonList(Message.forName("items-to-collect").asString(target.length))));
+      _ -> Collections.singletonList(MessageKey.of("items-to-collect").withArgs(target.length))));
     scoreboard.show();
   }
 

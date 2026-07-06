@@ -29,7 +29,7 @@ public class RandomPotionEffectChallenge extends MenuSetting {
 
   public RandomPotionEffectChallenge() {
 //    super(Message.forName("menu-random-effect-challenge-settings"));
-    super(MenuType.CHALLENGES, SettingCategory.EFFECT, new ItemStack(Material.BREWING_STAND), "random-effect-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.EFFECT, new ItemStack(Material.BREWING_STAND), "random-effect");
 //    registerSetting("time", new NumberSubSetting(
 //        () -> new LegacyItemBuilder(Material.CLOCK, Message.forName("item-random-effect-time-challenge")),
 //        value -> null,

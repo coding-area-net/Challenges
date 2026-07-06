@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class InfectionChallenge extends Setting {
 
   public InfectionChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.EFFECT, new ItemStack(Material.SLIME_BALL), "infection-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.EFFECT, new ItemStack(Material.SLIME_BALL), "infection");
   }
 
   @Override

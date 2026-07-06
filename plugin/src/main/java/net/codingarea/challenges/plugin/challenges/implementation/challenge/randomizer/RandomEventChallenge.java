@@ -79,7 +79,7 @@ public class RandomEventChallenge extends TimedChallenge {
     @NotNull
     @Override
     public Message getActivationMessage() {
-      return Message.forName("random-event-speed");
+      return Message.forName("challenge.random-event.speed");
     }
 
     @Override
@@ -94,7 +94,7 @@ public class RandomEventChallenge extends TimedChallenge {
     @NotNull
     @Override
     public Message getActivationMessage() {
-      return Message.forName("random-event-hole");
+      return Message.forName("challenge.random-event.hole");
     }
 
     @Override
@@ -116,7 +116,7 @@ public class RandomEventChallenge extends TimedChallenge {
     @NotNull
     @Override
     public Message getActivationMessage() {
-      return Message.forName("random-event-fly");
+      return Message.forName("challenge.random-event.fly");
     }
 
     @Override
@@ -131,7 +131,7 @@ public class RandomEventChallenge extends TimedChallenge {
     @NotNull
     @Override
     public Message getActivationMessage() {
-      return Message.forName("random-event-ores");
+      return Message.forName("challenge.random-event.ores");
     }
 
     @Override
@@ -166,7 +166,7 @@ public class RandomEventChallenge extends TimedChallenge {
     @NotNull
     @Override
     public Message getActivationMessage() {
-      return Message.forName("random-event-sickness");
+      return Message.forName("challenge.random-event.sickness");
     }
 
     @Override
@@ -182,7 +182,7 @@ public class RandomEventChallenge extends TimedChallenge {
     @NotNull
     @Override
     public Message getActivationMessage() {
-      return Message.forName("random-event-entities");
+      return Message.forName("challenge.random-event.entities");
     }
 
     @Override
@@ -206,7 +206,7 @@ public class RandomEventChallenge extends TimedChallenge {
     @NotNull
     @Override
     public Message getActivationMessage() {
-      return Message.forName("random-event-webs");
+      return Message.forName("challenge.random-event.webs");
     }
 
     @Override

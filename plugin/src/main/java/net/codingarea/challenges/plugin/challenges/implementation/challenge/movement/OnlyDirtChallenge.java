@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 public class OnlyDirtChallenge extends Setting {
 
   public OnlyDirtChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, new ItemStack(Material.DIRT), "only-dirt-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, new ItemStack(Material.DIRT), "only-dirt");
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
@@ -35,7 +35,7 @@ public class OnlyDirtChallenge extends Setting {
     Block blockBelow = BlockUtils.getBlockBelow(event.getTo());
     if (blockBelow == null) return;
     if (blockBelow.getType() != Material.DIRT && !BukkitReflectionUtils.isAir(blockBelow.getType())) {
-      Message.forName("only-dirt-failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+      getChallengeMessageKey("failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
       ChallengeHelper.kill(event.getPlayer());
     }
 

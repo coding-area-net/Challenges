@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class KillSnowGolemGoal extends KillEntityGoal {
 
   public KillSnowGolemGoal() {
-    super(SettingCategory.KILL_ENTITY, MinecraftNameWrapper.SNOW_GOLEM, new ItemStack(Material.SNOWBALL), "snow-golem-goal");
+    super(SettingCategory.KILL_ENTITY, MinecraftNameWrapper.SNOW_GOLEM, new ItemStack(Material.SNOWBALL), "snow-golem");
     this.killerNeeded = true;
   }
 

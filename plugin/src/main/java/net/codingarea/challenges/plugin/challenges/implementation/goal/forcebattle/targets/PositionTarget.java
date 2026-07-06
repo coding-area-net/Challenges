@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets;
 
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.ExtremeForceBattleGoal;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.commons.common.collection.pair.Tuple;
@@ -44,13 +45,13 @@ public class PositionTarget extends ForceTarget<Tuple<Double, Double>> {
   }
 
   @Override
-  public Message getNewTargetMessage() {
-    return Message.forName("extreme-force-battle-new-position");
+  public MessageKey getNewTargetMessage() {
+    return MessageKey.of("extreme-force-battle-new-position");
   }
 
   @Override
-  public Message getCompletedMessage() {
-    return Message.forName("extreme-force-battle-reached-position");
+  public MessageKey getCompletedMessage() {
+    return MessageKey.of("extreme-force-battle-reached-position");
   }
 
   @Override
@@ -59,8 +60,8 @@ public class PositionTarget extends ForceTarget<Tuple<Double, Double>> {
   }
 
   @Override
-  public Message getScoreboardDisplayMessage() {
-    return Message.forName("force-battle-position-target-display");
+  public MessageKey getScoreboardDisplayMessage() {
+    return MessageKey.of("force-battle-position-target-display");
   }
 
   @Override

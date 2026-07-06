@@ -20,7 +20,7 @@ import org.bukkit.potion.PotionEffectType;
 public class EntityRandomEffectChallenge extends Setting {
 
   public EntityRandomEffectChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.EFFECT, new ItemStack(Material.PHANTOM_MEMBRANE), "entity-effect-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.EFFECT, new ItemStack(Material.PHANTOM_MEMBRANE), "entity-effect");
   }
 
   @Override

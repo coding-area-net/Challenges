@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public class MostEmeraldsGoal extends PointsGoal {
 
   public MostEmeraldsGoal() {
-    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.EMERALD), "most-emeralds-goal");
+    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.EMERALD), "most-emeralds");
   }
 
   @Override

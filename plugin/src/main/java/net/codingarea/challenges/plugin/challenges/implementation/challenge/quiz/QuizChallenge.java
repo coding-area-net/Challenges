@@ -80,11 +80,11 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
       String time = "§e" + timeLeft + " §7" + (timeLeft == 1 ? Message.forName("second").asString() : Message.forName("seconds").asString());
       if (currentQuestionedPlayer != player) {
         bossbar.setColor(BossBar.Color.GREEN);
-        bossbar.setTitle(Message.forName("bossbar-quiz-question-other").asString(time, NameHelper.getName(currentQuestionedPlayer)));
+        bossbar.setTitle(MessageKey.of("bossbar-quiz-question-other"), time, NameHelper.getName(currentQuestionedPlayer));
         return;
       }
       bossbar.setColor(BossBar.Color.RED);
-      bossbar.setTitle(Message.forName("bossbar-quiz-question").asString(time));
+      bossbar.setTitle(MessageKey.of("bossbar-quiz-question"), time);
     });
     bossbar.show();
   }
@@ -107,9 +107,9 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
   private void broadcastMessage(@NotNull String questionedPlayerMessage, @NotNull String othersMessage, Object... args) {
     broadcast(player1 -> {
       if (currentQuestionedPlayer == player1) {
-        Message.forName(questionedPlayerMessage).send(player1, prefix, args);
+        MessageKey.of(questionedPlayerMessage).send(player1, prefix, args);
       } else {
-        Message.forName(othersMessage).send(player1, prefix, NameHelper.getName(currentQuestionedPlayer));
+        MessageKey.of(othersMessage).send(player1, prefix, NameHelper.getName(currentQuestionedPlayer));
       }
     });
   }
@@ -141,14 +141,14 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
   public void onSecond() {
     if (currentQuestion == null) return;
     if (!currentQuestionedPlayer.isOnline() || ignorePlayer(currentQuestionedPlayer)) {
-      Message.forName("quiz-cancel").broadcast(prefix);
+      MessageKey.of("quiz-cancel").broadcast(prefix);
       cancelQuestion();
     }
 
     timeLeft--;
 
     if (timeLeft <= 0) {
-      Message.forName("quiz-time-up").broadcast(prefix);
+      MessageKey.of("quiz-time-up").broadcast(prefix);
       cancelQuestion();
     }
 
@@ -159,7 +159,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
     restartTimer();
 
     List<String> rightAnswers = currentQuestion.getRightAnswers();
-    Message.forName("quiz-right-answer-was" + (rightAnswers.size() != 1 ? "-multiple" : "")).send(currentQuestionedPlayer, prefix, StringUtils.getArrayAsString(rightAnswers.toArray(new String[0]), "§7, §e"));
+    MessageKey.of("quiz-right-answer-was" + (rightAnswers.size() != 1 ? "-multiple" : "")).send(currentQuestionedPlayer, prefix, StringUtils.getArrayAsString(rightAnswers.toArray(new String[0]), "§7, §e"));
     SoundSample.BREAK.play(currentQuestionedPlayer);
 
     currentQuestion = null;

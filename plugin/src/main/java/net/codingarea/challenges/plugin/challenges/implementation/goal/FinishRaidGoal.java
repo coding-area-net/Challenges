@@ -23,7 +23,7 @@ import java.util.List;
 public class FinishRaidGoal extends SettingGoal {
 
   public FinishRaidGoal() {
-    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.CROSSBOW), "finish-raid-goal");
+    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.CROSSBOW), "finish-raid");
   }
 
 

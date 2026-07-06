@@ -22,7 +22,7 @@ public class ForceItemBattleGoal extends ForceBattleDisplayGoal<ItemTarget> {
 
   public ForceItemBattleGoal() {
 //    super(Message.forName("menu-force-item-battle-goal-settings"));
-    super(new ItemStack(Material.ITEM_FRAME), "force-item-battle-goal");
+    super(new ItemStack(Material.ITEM_FRAME), "force-item-battle");
 
 //    registerSetting("give-item", new BooleanSubSetting(
 //      () -> new LegacyItemBuilder(Material.CHEST, Message.forName("item-force-item-battle-goal-give-item")),

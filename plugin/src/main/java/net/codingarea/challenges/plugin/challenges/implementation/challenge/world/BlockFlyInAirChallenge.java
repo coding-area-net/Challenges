@@ -19,7 +19,7 @@ import org.bukkit.util.Vector;
 public class BlockFlyInAirChallenge extends Setting {
 
   public BlockFlyInAirChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.FERN), "blocks-fly-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.FERN), "blocks-fly");
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public class CollectMostDeathsGoal extends CollectionGoal {
 
   public CollectMostDeathsGoal() {
-    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.LAVA_BUCKET), "most-deaths-goal", DamageCause.values());
+    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.LAVA_BUCKET), "most-deaths", DamageCause.values());
   }
 
   @EventHandler

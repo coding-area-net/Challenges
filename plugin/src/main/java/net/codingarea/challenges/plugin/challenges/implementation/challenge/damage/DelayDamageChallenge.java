@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.dam
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -25,7 +26,7 @@ public class DelayDamageChallenge extends TimedChallenge {
   private final Map<Player, Double> damageMap = new HashMap<>();
 
   public DelayDamageChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 64, 4, false, new ItemStack(Material.REDSTONE), "item-delay-damage");
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 64, 4, false, new ItemStack(Material.REDSTONE), "delay-damage");
   }
 
 //  @Nullable
@@ -52,7 +53,7 @@ public class DelayDamageChallenge extends TimedChallenge {
       canGetDamage = true;
       for (Player player : Bukkit.getOnlinePlayers()) {
         player.damage(totalDamage);
-        Message.forName(("extreme-force-battle-took-damage")).send(player, Prefix.DAMAGE, totalDamage / 2);
+        MessageKey.of(("extreme-force-battle-took-damage")).send(player, Prefix.DAMAGE, totalDamage / 2);
       }
       canGetDamage = false;
     }

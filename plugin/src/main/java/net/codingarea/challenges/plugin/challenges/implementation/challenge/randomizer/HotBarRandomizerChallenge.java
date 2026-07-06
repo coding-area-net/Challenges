@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 public class HotBarRandomizerChallenge extends TimedChallenge {
 
   public HotBarRandomizerChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 1, 10, 5, new ItemStack(Material.HOPPER_MINECART), "hotbar-randomizer-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 1, 10, 5, new ItemStack(Material.HOPPER_MINECART), "hotbar-randomizer");
   }
 
 //  @Nullable

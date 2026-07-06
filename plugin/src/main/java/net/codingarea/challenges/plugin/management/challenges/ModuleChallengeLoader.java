@@ -57,7 +57,7 @@ public class ModuleChallengeLoader {
         RequireVersion annotation = classOfChallenge.getAnnotation(RequireVersion.class);
         MinecraftVersion minVersion = annotation.value();
 
-        if (!MinecraftVersion.current().isNewerOrEqualThan(minVersion)) {
+        if (MinecraftVersion.current().isOlderThan(minVersion)) {
           Logger.debug("Did not register challenge {}, requires version {}, server running on {}", classOfChallenge.getSimpleName(), minVersion, MinecraftVersion.current());
           return;
         }

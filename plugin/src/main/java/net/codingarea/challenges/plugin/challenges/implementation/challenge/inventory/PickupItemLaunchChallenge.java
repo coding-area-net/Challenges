@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public class PickupItemLaunchChallenge extends SettingModifier {
 
   public PickupItemLaunchChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.INVENTORY, 1, 10, 2, new ItemStack(Material.BOW), "pickup-launch-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.INVENTORY, 1, 10, 2, new ItemStack(Material.BOW), "pickup-launch");
   }
 
 //  @Nullable

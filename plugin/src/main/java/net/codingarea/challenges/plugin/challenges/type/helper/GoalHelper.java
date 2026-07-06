@@ -4,6 +4,8 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IGoal;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeScoreboard.ScoreboardInstance;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
@@ -82,18 +84,18 @@ public final class GoalHelper {
 
   @NotNull
   public static BiConsumer<ScoreboardInstance, Player> createScoreboard(@NotNull Supplier<Map<Player, Integer>> points) {
-    return createScoreboard(points, player -> new LinkedList<>());
+    return createScoreboard(points, _ -> new LinkedList<>());
   }
 
   @NotNull
-  public static BiConsumer<ScoreboardInstance, Player> createScoreboard(@NotNull Supplier<Map<Player, Integer>> points, Function<Player, List<String>> additionalLines) {
+  public static BiConsumer<ScoreboardInstance, Player> createScoreboard(@NotNull Supplier<Map<Player, Integer>> points, Function<Player, List<LocalizableMessage>> additionalLines) {
     return (scoreboard, player) -> {
       SortedMap<Integer, List<Player>> leaderboard = GoalHelper.createLeaderboardFromPoints(points.get());
       int playerPlace = GoalHelper.determinePosition(leaderboard, player);
 
-      scoreboard.addLine("");
-      scoreboard.addLine(Message.forName("your-place").asString(playerPlace));
-      scoreboard.addLine("");
+      scoreboard.addEmptyLine();
+      scoreboard.addLine(MessageKey.of("your-place"), playerPlace);
+      scoreboard.addEmptyLine();
       {
         int place = 1;
         int displayed = 0;
@@ -102,20 +104,20 @@ public final class GoalHelper {
           for (Player current : players) {
             displayed++;
             if (displayed >= LEADERBOARD_SIZE) break;
-            scoreboard.addLine(Message.forName("scoreboard-leaderboard").asString(place, NameHelper.getName(current), NumberFormatter.MIDDLE_NUMBER.format(entry.getKey())));
+            scoreboard.addLine(MessageKey.of("scoreboard-leaderboard"), place, current, NumberFormatter.MIDDLE_NUMBER.format(entry.getKey()));
           }
           if (displayed == LEADERBOARD_SIZE) break;
           place++;
         }
       }
-      scoreboard.addLine("");
+      scoreboard.addEmptyLine();
 
-      List<String> lines = additionalLines.apply(player);
+      List<LocalizableMessage> lines = additionalLines.apply(player);
       if (!lines.isEmpty()) {
-        int linesThatCanBeAdded = 15 - scoreboard.getLines().size() - 1;
+        int linesThatCanBeAdded = scoreboard.getRemainingLines() - 1;
         for (int i = 0; i < lines.size() && linesThatCanBeAdded > 0; i++) {
           linesThatCanBeAdded--;
-          String line = lines.get(i);
+          LocalizableMessage line = lines.get(i);
           scoreboard.addLine(line);
         }
       }

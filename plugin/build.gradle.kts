@@ -52,7 +52,7 @@ tasks {
   processResources {
     from("../language") {
       into("language")
-      include("**/*.json")
+      include("locales/*.json", "languages.json")
     }
 
     // minify bundled json resources: doLast so we only modify the files AFTER they have been copied

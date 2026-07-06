@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.content.i18n;
 
 import lombok.RequiredArgsConstructor;
 import net.codingarea.commons.common.collection.NumberFormatter;
+import net.codingarea.commons.common.collection.pair.Tuple;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -40,8 +41,22 @@ public interface ArgumentFormat<T> {
     return MessageKey.of("arg-format.hp").withArgs(hp, NumberFormatter.FLOATING_POINT.format(hearts));
   });
 
-  ArgumentFormat<Integer> TIME = register(Integer.class, "seconds", arg -> {
-    return LocalizableMessage.from(_ -> NumberFormatter.TIME.format(arg));
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  ArgumentFormat<Tuple> SECONDS_RANGE = register(Tuple.class, "minute_range", arg -> {
+    Tuple<Integer, Integer> range = (Tuple<Integer, Integer>) arg;
+    int seconds = range.getFirst();
+    int secondsRange = range.getSecond();
+
+    if (seconds % 15 == 0) {
+      float minutes = seconds / 60f;
+      return MessageKey.of("arg-format.time-range").withArgs(
+        NumberFormatter.DEFAULT.format(minutes), MessageKey.pluralize("generic.minute", minutes),
+        NumberFormatter.DEFAULT.format(secondsRange), MessageKey.pluralize("generic.second", secondsRange));
+    }
+
+    return MessageKey.of("arg-format.time-range").withArgs(
+      NumberFormatter.DEFAULT.format(seconds), MessageKey.pluralize("generic.second", seconds),
+      NumberFormatter.DEFAULT.format(secondsRange), MessageKey.pluralize("generic.second", secondsRange));
   });
 
   ArgumentFormat<EntityDamageEvent> DAMAGE_CAUSE = register(EntityDamageEvent.class, "damage_cause", event -> {

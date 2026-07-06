@@ -16,7 +16,7 @@ public class DupedSpawningChallenge extends Setting {
   private boolean inCustomSpawn = false;
 
   public DupedSpawningChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.ELDER_GUARDIAN_SPAWN_EGG), "duped-spawning-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.ELDER_GUARDIAN_SPAWN_EGG), "duped-spawning");
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

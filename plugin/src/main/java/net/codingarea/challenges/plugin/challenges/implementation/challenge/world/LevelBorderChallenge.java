@@ -46,7 +46,7 @@ public class LevelBorderChallenge extends Setting {
   private int bestPlayerLevel = 0;
 
   public LevelBorderChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.ENCHANTING_TABLE), "level-border-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.ENCHANTING_TABLE), "level-border");
   }
 
   @Override
@@ -60,7 +60,7 @@ public class LevelBorderChallenge extends Setting {
     }
 
     bossbar.setContent((bar, player) -> {
-      bar.setTitle(Message.forName("bossbar-level-border").asString(bestPlayerLevel));
+      bar.setTitle(getChallengeMessageKey("bossbar"), bestPlayerLevel);
     });
     bossbar.show();
     updateBorderSize(false);

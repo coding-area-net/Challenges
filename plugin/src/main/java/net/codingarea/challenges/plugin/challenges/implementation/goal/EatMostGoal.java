@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 public class EatMostGoal extends PointsGoal {
 
   public EatMostGoal() {
-    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.COOKIE), "eat-most-goal");
+    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.COOKIE), "eat-most");
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

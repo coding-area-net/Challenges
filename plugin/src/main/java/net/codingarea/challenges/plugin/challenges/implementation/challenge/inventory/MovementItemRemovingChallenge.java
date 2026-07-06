@@ -21,7 +21,7 @@ public class MovementItemRemovingChallenge extends SettingModifier {
   public static final int BLOCK = 1;
 
   public MovementItemRemovingChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.INVENTORY, 1, 2, 2, new ItemStack(Material.DETECTOR_RAIL), "block-chunk-item-remove-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.INVENTORY, 1, 2, 2, new ItemStack(Material.DETECTOR_RAIL), "block-chunk-item-remove");
   }
 
 //  @NotNull
@@ -29,16 +29,16 @@ public class MovementItemRemovingChallenge extends SettingModifier {
 //  public LegacyItemBuilder createSettingsItem() {
 //    if (!isEnabled()) return DefaultItem.disabled();
 //    if (getValue() == BLOCK)
-//      return DefaultItem.create(Material.GRASS_BLOCK, Message.forName("item-block-chunk-item-remove-challenge-block"));
-//    return DefaultItem.create(Material.BOOK, Message.forName("item-block-chunk-item-remove-challenge-chunk"));
+//      return DefaultItem.create(Material.GRASS_BLOCK, Message.forName("challenge.block-chunk-item-remove.block"));
+//    return DefaultItem.create(Material.BOOK, Message.forName("challenge.block-chunk-item-remove.chunk"));
 //  }
 
   @Override
   public void playValueChangeTitle() {
     if (getValue() == BLOCK)
-      ChallengeHelper.playChallengeValueTitle(this, Message.forName("item-block-chunk-item-remove-challenge-block"));
+      ChallengeHelper.playChallengeValueTitle(this, Message.forName("challenge.block-chunk-item-remove.block"));
     else
-      ChallengeHelper.playChallengeValueTitle(this, Message.forName("item-block-chunk-item-remove-challenge-chunk"));
+      ChallengeHelper.playChallengeValueTitle(this, Message.forName("challenge.block-chunk-item-remove.chunk"));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

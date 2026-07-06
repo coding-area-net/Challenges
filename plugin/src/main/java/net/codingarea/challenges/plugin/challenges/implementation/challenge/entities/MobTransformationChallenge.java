@@ -2,7 +2,6 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ent
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -24,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 public class MobTransformationChallenge extends Setting {
 
   public MobTransformationChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.STONE_SWORD), "mob-transformation-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.STONE_SWORD), "mob-transformation");
   }
 
   @Override
@@ -33,7 +32,7 @@ public class MobTransformationChallenge extends Setting {
       bossbar.setColor(BossBar.Color.GREEN);
       EntityType type = getPlayerData(player).getEnum("type", EntityType.class);
       Object typeName = type == null ? "None" : type;
-      bossbar.setTitle(MessageKey.of("bossbar-mob-transformation"), typeName);
+      bossbar.setTitle(getChallengeMessageKey("bossbar"), typeName);
     });
     bossbar.show();
   }

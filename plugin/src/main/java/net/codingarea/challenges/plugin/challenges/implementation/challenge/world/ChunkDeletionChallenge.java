@@ -26,7 +26,7 @@ public class ChunkDeletionChallenge extends SettingModifier {
   private final HashMap<Chunk, Tuple<BukkitTask, Long>> chunks = new HashMap<>();
 
   public ChunkDeletionChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 120, 60, new ItemStack(Material.GOLDEN_PICKAXE), "setting-chunk-deletion-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 120, 60, new ItemStack(Material.GOLDEN_PICKAXE), "chunk-deletion");
   }
 
 //  @Override
@@ -37,7 +37,7 @@ public class ChunkDeletionChallenge extends SettingModifier {
   @Override
   protected void onEnable() {
     bossbar.setContent((bossbar, player) -> {
-      Message message = Message.forName("bossbar-chunk-deletion");
+      Message message = Message.forName("challenge.chunk-deletion.bossbar");
       bossbar.setColor(BossBar.Color.PINK);
       if (!checkIfAllowed(player)) {
         Tuple<BukkitTask, Long> taskTuple = chunks.get(player.getLocation().getChunk());

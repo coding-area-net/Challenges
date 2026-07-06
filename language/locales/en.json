@@ -1,0 +1,2181 @@
+{
+  "generic": {
+    "undefined": "undefined",
+    "unknown": "unknown",
+    "disabled": "<red>Disabled</red>",
+    "enabled": "<green>Enabled</green>",
+    "customized": "<gold>Customize</gold>",
+    "console": "<dark_red><b>Console</b></dark_red>"
+  },
+  "language": {
+    "de": "German",
+    "en": "English"
+  },
+  "challenge": {
+    "regeneration": {
+      "name": "*Regeneration*",
+      "desc": [
+        "Sets *whether* and",
+        "*how* to *regenerate*"
+      ]
+    },
+    "one-life": {
+      "name": "*One Teamlife*",
+      "desc": [
+        "*Everyone* dies when *one player dies*"
+      ]
+    },
+    "respawn": {
+      "name": "*Respawn*",
+      "desc": [
+        "When you *die*, you won't be a *spectator*"
+      ]
+    },
+    "split-health": {
+      "name": "*Split Health*",
+      "desc": [
+        "Sets whether *all players*",
+        "share the same *health*"
+      ]
+    },
+    "damage-display": {
+      "name": "*Damage Display*",
+      "desc": [
+        "It will be displayed in the *chat*",
+        "when anybody takes *damage*"
+      ]
+    },
+    "death-message": {
+      "name": "*Death messages*",
+      "desc": [
+        "Toggles *death messages*"
+      ]
+    },
+    "health-display": {
+      "name": "*Health Display*",
+      "desc": [
+        "The *hearts* of all players",
+        "will be showed in the *tablist*"
+      ]
+    },
+    "position": {
+      "name": "*Positions*",
+      "desc": [
+        "Allows you to mark *positions*",
+        "with */pos*"
+      ]
+    },
+    "death-position": {
+      "name": "*Death Position*",
+      "desc": [
+        "When you die, */pos* creates",
+        "a position at your death point"
+      ]
+    },
+    "glow": {
+      "name": "*Player Glow*",
+      "desc": [
+        "*Players* are visible through *walls*"
+      ]
+    },
+    "no-item-damage": {
+      "name": "*No Item Damage*",
+      "desc": [
+        "*Items* are *unbreakable*"
+      ]
+    },
+    "mob-griefing": {
+      "name": "*Mob Griefing*",
+      "desc": [
+        "Monsters *can't destroy* anything"
+      ]
+    },
+    "keep-inventory": {
+      "name": "*Keep Inventory*",
+      "desc": [
+        "You don't lose any *items*",
+        "when you die"
+      ]
+    },
+    "backpack": {
+      "name": "*Backpack*",
+      "desc": [
+        "Allows you to open *your backpack* or",
+        "the *team backpack* with */backpack*"
+      ]
+    },
+    "enderchest-command": {
+      "name": "*Enderchest Command*",
+      "desc": [
+        "When you execute */ec*,",
+        "your *Enderchest* opens"
+      ]
+    },
+    "timber": {
+      "name": "*Timber*",
+      "desc": [
+        "You can destroy a *tree*",
+        "by breaking down *a single block* of the tree"
+      ]
+    },
+    "pvp": {
+      "name": "*PvP*",
+      "desc": []
+    },
+    "no-hit-delay": {
+      "name": "*NoHitDelay*",
+      "desc": [
+        "After you've *taken* damage",
+        "you can *get* damage *immediately* again"
+      ]
+    },
+    "max-health": {
+      "name": "*Max health*",
+      "desc": [
+        "Sets the *max health*",
+        "for *all players*"
+      ]
+    },
+    "damage-multiplier": {
+      "name": "*Damage Multiplier*",
+      "desc": [
+        "Damage you take will be *multiplied*"
+      ]
+    },
+    "cut-clean": {
+      "name": "*CutClean*",
+      "desc": [
+        "Different *settings* to simplify",
+        "the *farming* of items"
+      ]
+    },
+    "no-offhand": {
+      "name": "*No Offhand*",
+      "desc": [
+        "The *second hand* will be blocked"
+      ]
+    },
+    "immediate-respawn": {
+      "name": "*Direct Respawn*",
+      "desc": [
+        "When you *die* you *respawn* automatically",
+        "*without* seeing the *death screen*"
+      ]
+    },
+    "slot-limit": {
+      "name": "*Inventory Slots*",
+      "desc": [
+        "Sets how many *inventory*",
+        "*slots* are useable"
+      ]
+    },
+    "old-pvp": {
+      "name": "*1.8 PvP*",
+      "desc": [
+        "The *old 1.8 PvP System* will be used",
+        "There will be no *attack damage cooldown*"
+      ]
+    },
+    "totem-save-death": {
+      "name": "*Challenge Death Rescue*",
+      "desc": [
+        "If you *instant die* from a *challenge*",
+        "*totems* can *rescue* you"
+      ]
+    },
+    "soup": {
+      "name": "*Soup healing*",
+      "desc": [
+        "When you use a *mushroom soup*",
+        "you will be healed for *4 hearts*"
+      ]
+    },
+    "random-challenge": {
+      "name": "*Random Challenge*",
+      "desc": [
+        "In a set *interval* a random",
+        "*challenge* will be *activated*"
+      ]
+    },
+    "randomized-hp": {
+      "name": "*Randomized HP*",
+      "desc": [
+        "The *health* of all mobs",
+        "is randomized"
+      ]
+    },
+    "block-randomizer": {
+      "name": "*Block Randomizer*",
+      "desc": [
+        "Each *block* drops a *random item*"
+      ]
+    },
+    "crafting-randomizer": {
+      "name": "*Crafting Randomizer*",
+      "desc": [
+        "If you *craft* something you will get another *random item*"
+      ]
+    },
+    "hotbar-randomizer": {
+      "name": "*HotBar Randomizer*",
+      "desc": [
+        "Every *few minutes* every player gets *random items*"
+      ]
+    },
+    "entity-loot-randomizer": {
+      "name": "*Entity Loot Randomizer*",
+      "desc": [
+        "All mob drops are *randomly swapped*."
+      ],
+      "command-disabled": "The entity loot randomizer challenge is currently <red>deactivated</red>",
+      "command-nothing": "The loot of <yellow>{0} </yellow><gray>isn't dropped by any specific entity</gray>",
+      "command-result": [
+        "<yellow>{0} </yellow><gray>drops the loot of </gray><yellow>{1}</yellow>",
+        "The loot of <yellow>{0} </yellow><gray>is dropped by </gray><yellow>{2}</yellow>"
+      ]
+    },
+    "mob-randomizer": {
+      "name": "*Mob Randomizer*",
+      "desc": [
+        "When an *Entity* spawns, it spawns *twice*"
+      ]
+    },
+    "random-dropping": {
+      "name": "*Random Item Dropping*",
+      "desc": [
+        "Every few seconds a *random item*",
+        "will be *dropped* from your *inventory*"
+      ]
+    },
+    "random-item-removing": {
+      "name": "*Random Item Removing*",
+      "desc": [
+        "Every few seconds a *random item*",
+        "will be *removed* from your *inventory*"
+      ]
+    },
+    "random-swapping": {
+      "name": "*Random Item Swapping*",
+      "desc": [
+        "Every few seconds a *random item*",
+        "will be *swapped* with *another item*",
+        "in your *inventory*"
+      ]
+    },
+    "random-item": {
+      "name": "*Random Items*",
+      "desc": [
+        "A *random player* gets a *random item*",
+        "every *few seconds*"
+      ]
+    },
+    "random-event": {
+      "name": "*Random Events*",
+      "desc": [
+        "Every *few minutes* one of",
+        "*{0} random Events* will be activated"
+      ],
+      "entities": [
+        "Is this a zoo?",
+        "Where did this come from?",
+        "What are you doing here?"
+      ],
+      "fly": [
+        "Good flight :)",
+        "I believe I can fly..",
+        "So this is what flying feels like"
+      ],
+      "hole": [
+        "But you fell pretty deep",
+        "From the very top to the very bottom..",
+        "Where did this hole come from?"
+      ],
+      "ores": [
+        "Where did all the ores go?",
+        "Aren't there any ores here?",
+        "Was there any ore here??"
+      ],
+      "sickness": [
+        "Are you sick??",
+        "What's going on now?!"
+      ],
+      "speed": [
+        "Sonic? Is it you?",
+        "Woahh! That's fast"
+      ],
+      "webs": [
+        "Have they been here for a long time?"
+      ]
+    },
+    "mob-damage-teleport": {
+      "name": "*Mob Swap On Hit*",
+      "desc": [
+        "Every time you *hit a mob*, you",
+        "swap positions with a *random mob*"
+      ]
+    },
+    "force-height": {
+      "name": "*Force Height*",
+      "desc": [
+        "Every *few minutes* you have to be",
+        "on a *certain height*, else you die"
+      ],
+      "bossbar-instruction": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Height </gray><yellow>{0} </yellow><dark_gray>{@symbol.vertical} </dark_gray><green>{1}</green>",
+      "bossbar-waiting": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Waiting for next height..</gray>",
+      "fail": "<yellow>{0} </yellow><gray>was on the </gray><red>wrong </red><gray>height </gray><dark_gray>(</dark_gray><yellow>{1}</yellow><dark_gray>)</dark_gray>",
+      "success": "All players were on the <green>right </green><gray>height</gray>"
+    },
+    "force-block": {
+      "name": "*Force Block*",
+      "desc": [
+        "Every *few minutes* you have to be",
+        "on a *certain block*, else you die"
+      ],
+      "bossbar-instruction": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Block </gray><yellow>{0} </yellow><dark_gray>{@symbol.vertical} </dark_gray><green>{1}</green>",
+      "bossbar-waiting": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Waiting for next block..</gray>",
+      "fail": "<yellow>{0} </yellow><gray>was on the </gray><red>wrong </red><gray>block </gray><dark_gray>(</dark_gray><yellow>{1}</yellow><dark_gray>)</dark_gray>",
+      "success": "All players were on the <green>right </green><gray>block</gray>"
+    },
+    "force-mob": {
+      "name": "*Force Mob*",
+      "desc": [
+        "Every *few minutes* you have to",
+        "*kill* a *certain mob*, else you die"
+      ],
+      "bossbar-instruction": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Mob </gray><yellow>{0} </yellow><dark_gray>{@symbol.vertical} </dark_gray><green>{1}</green>",
+      "bossbar-waiting": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Waiting for next mob..</gray>",
+      "fail": "The mob <yellow>{0} </yellow><red>hasn't been killed</red>",
+      "success": "<yellow>{0} </yellow><gray>killed the mob </gray><yellow>{1}</yellow>"
+    },
+    "force-item": {
+      "name": "*Force Item*",
+      "desc": [
+        "Every *few minutes* you have to get",
+        "a *certain item*, else you die"
+      ],
+      "bossbar-instruction": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Item </gray><yellow>{0} </yellow><dark_gray>{@symbol.vertical} </dark_gray><green>{1}</green>",
+      "bossbar-waiting": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Waiting for next item..</gray>",
+      "fail": "Item <yellow>{0} </yellow><red>hasn't been found</red>",
+      "success": "<yellow>{0} </yellow><green>found </green><gray>the item </gray><yellow>{1}</yellow>"
+    },
+    "force-biome": {
+      "name": "*Force Biome*",
+      "desc": [
+        "Every *few minutes* you have to be",
+        "in a *certain biome*, else you die",
+        "The *rarer* the biome, the *more time* you have"
+      ],
+      "bossbar-instruction": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Biome </gray><yellow>{0} </yellow><dark_gray>{@symbol.vertical} </dark_gray><green>{1}</green>",
+      "bossbar-waiting": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Waiting for next biome..</gray>",
+      "fail": "The biome <yellow>{0} </yellow><red>hasn't been found</red>",
+      "success": "<yellow>{0} </yellow><gray>found the biome </gray><yellow>{1}</yellow>"
+    },
+    "hydra": {
+      "name": "*Hydra*",
+      "desc": [
+        "If you *kill* a mob",
+        "*two new* are spawning"
+      ]
+    },
+    "hydra-plus": {
+      "name": "*Hydra Plus*",
+      "desc": [
+        "If you kill a *mob* it",
+        "spawns *twice* as many",
+        "times as the *previous* time",
+        " ",
+        "Maximum are *512* Mobs each time"
+      ]
+    },
+    "duped-spawning": {
+      "name": "*Duped Spawning*",
+      "desc": [
+        "If a mob *spawns*",
+        "it spawns *two times*"
+      ]
+    },
+    "jump-entity": {
+      "name": "*Jump Entity*",
+      "desc": [
+        "A *random entity* spawns",
+        "everytime you *jump*"
+      ]
+    },
+    "invisible-mobs": {
+      "name": "*Invisible Mobs*",
+      "desc": [
+        "All *Mobs* have an",
+        "*invisibility* effect"
+      ]
+    },
+    "stone-sight": {
+      "name": "*Stone Sight*",
+      "desc": [
+        "*Mobs* that you look in the",
+        "*eyes* turn to stone"
+      ]
+    },
+    "mob-sight-damage": {
+      "name": "*Mob Sight Damage*",
+      "desc": [
+        "When you look into the *eyes* of an",
+        "*entity*, you get *damage*"
+      ]
+    },
+    "all-mobs-to-death-position": {
+      "name": "*All Mobs To Death Point*",
+      "desc": [
+        "If a *Mob* gets *killed* by a player",
+        "all mobs of the *same type* will be",
+        "*teleported* to its *death point*"
+      ]
+    },
+    "respawn-end": {
+      "name": "*Mobs Respawn In End*",
+      "desc": [
+        "*Killed mobs* respawn in *end dimension*"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><dark_purple>Respawned Mobs in End </dark_purple><dark_gray>{@symbol.vertical} </dark_gray><yellow>{0}</yellow>"
+    },
+    "mob-transformation": {
+      "name": "*Mob Transformation*",
+      "desc": [
+        "When you hit a mob, it *turns*",
+        "into the last mob *you* hit"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Last mob </gray><dark_gray><bold>{@symbol.vertical} </bold></dark_gray><green>{0}</green>"
+    },
+    "block-mobs": {
+      "name": "*Mob Blocks*",
+      "desc": [
+        "A *random mob* spawns out of *every broken block*",
+        "and to *get the block* you have to *kill it*"
+      ]
+    },
+    "damage-per-block": {
+      "name": "*Damage per Block*",
+      "desc": [
+        "You take *damage* for",
+        "every *block* you walk"
+      ]
+    },
+    "sneak-damage": {
+      "name": "*Damage per Sneak*",
+      "desc": [
+        "You *take* the set amount",
+        "of *damage* if you *sneak*"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>sneaked</gray>"
+    },
+    "jump-damage": {
+      "name": "*Damage per Jump*",
+      "desc": [
+        "You *take* the set amount",
+        "of *damage* if you *jump*"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>jumped</gray>"
+    },
+    "block-break-damage": {
+      "name": "*Block Break Damage*",
+      "desc": [
+        "If you *break* a *block*, you",
+        "will *take* the set amount of *damage*"
+      ]
+    },
+    "block-place-damage": {
+      "name": "*Block Place Damage*",
+      "desc": [
+        "If you *place* a *block*, you",
+        "will *take* the set amount of *damage*"
+      ]
+    },
+    "advancement-damage": {
+      "name": "*Advancement Damage*",
+      "desc": [
+        "You *take* the set amount of *damage*",
+        "for every new *advancement*"
+      ]
+    },
+    "damage-item": {
+      "name": "*Damage Per Item*",
+      "desc": [
+        "When you *pickup* or *click* an item",
+        "in your *inventory* you take the",
+        "*amount* of the items as *damage*"
+      ]
+    },
+    "water-allergy": {
+      "name": "*Water Allergy*",
+      "desc": [
+        "You *take* the set amount of *damage*",
+        "while you are in *water*"
+      ]
+    },
+    "death-on-fall": {
+      "name": "*Death On Fall Damage*",
+      "desc": [
+        "You *die instantly*, when",
+        "you take *fall damage*"
+      ]
+    },
+    "reversed-damage": {
+      "name": "*Reversed Damage*",
+      "desc": [
+        "If you deal damage to entites",
+        "you take the same damage"
+      ]
+    },
+    "freeze": {
+      "name": "*Freeze Challenge*",
+      "desc": [
+        "For each heart of *damage*, you'll be",
+        "*frozen* for a certain time"
+      ]
+    },
+    "delay-damage": {
+      "name": "*Damage delay*",
+      "desc": [
+        "All *damage* from all *players* is",
+        "added up and dealt after *5 minutes*."
+      ]
+    },
+    "chunk-effect": {
+      "name": "*Random Chunk Effects*",
+      "desc": [
+        "In *each chunk* you'll get",
+        "a random *potion effect*"
+      ]
+    },
+    "block-effect": {
+      "name": "*Random Block Effects*",
+      "desc": [
+        "On *each block* you'll get",
+        "a random *potion effect*"
+      ]
+    },
+    "entity-effect": {
+      "name": "*Mobs Got Random Effects*",
+      "desc": [
+        "*Every Mob* has a random",
+        "potion effect with *max amplifier*"
+      ]
+    },
+    "random-effect": {
+      "name": "*Random Effects*",
+      "desc": [
+        "You get a *random potion effect*",
+        "in a set *interval*"
+      ]
+    },
+    "permanent-effect-on-damage": {
+      "name": "*Permanent Effects*",
+      "desc": [
+        "Everytime you *take damage* you get",
+        "a random *permanent potion effect*"
+      ],
+      "new-effect": "Effect <yellow>{0} </yellow><dark_gray>➔ </dark_gray><yellow>{1}</yellow>"
+    },
+    "infection": {
+      "name": "*Infection Challenge*",
+      "desc": [
+        "You have to keep *2 blocks* away",
+        "from all *mobs* or you will *get* sick"
+      ]
+    },
+    "surface-hole": {
+      "name": "*Surface Hole*",
+      "desc": [
+        "The *floor* is disappearing",
+        "to *void* behind you"
+      ]
+    },
+    "bedrock-walls": {
+      "name": "*Bedrock Walls*",
+      "desc": [
+        "Huge *walls of bedrock*",
+        "are *generating* behind you"
+      ]
+    },
+    "bedrock-path": {
+      "name": "*Bedrock Path*",
+      "desc": [
+        "*Bedrock *generates* under you*",
+        "the whole time"
+      ]
+    },
+    "floor-is-lava": {
+      "name": "*The Floor Is Lava*",
+      "desc": [
+        "*Blocks* below you transform first",
+        "to *magma* and then to *lava*"
+      ]
+    },
+    "chunk-deconstruction": {
+      "name": "*Chunk Deconstruction*",
+      "desc": [
+        "*Chunks* that players are in",
+        "*break* down from *above*"
+      ]
+    },
+    "all-blocks-disappear": {
+      "name": "*All Blocks Disappear*",
+      "desc": [
+        "With different *interactions* all",
+        "*blocks* of a certain type",
+        "disappear in the same chunk"
+      ]
+    },
+    "anvil-rain": {
+      "name": "*Anvil Rain*",
+      "desc": [
+        "*Anvils* are falling from the *sky*"
+      ]
+    },
+    "tsunami": {
+      "name": "*Tsunami*",
+      "desc": [
+        "In a *set interval* ",
+        "the water rises in the *Overworld*",
+        "and the *lava* in the nether",
+        " ",
+        "Should be played with a *few people*!"
+      ],
+      "bossbar-lava": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Lavaheight: </gray><red>{0}</red>",
+      "bossbar-water": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Waterheight: </gray><blue>{0}</blue>"
+    },
+    "repeat-in-chunk": {
+      "name": "*Repeated Chunk*",
+      "desc": [
+        "Blocks that are *placed or destroyed*",
+        "will be placed / destroyed in *every chunk*"
+      ]
+    },
+    "snake": {
+      "name": "*Snake*",
+      "desc": [
+        "Each player draws a *deadly line*",
+        "behind them"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>stepped over the </gray><blue>line</blue>"
+    },
+    "blocks-fly": {
+      "name": "*Blocks Fly in Air*",
+      "desc": [
+        "*Blocks* you've *walked* on fly",
+        "into the air after *one second*"
+      ]
+    },
+    "blocks-disappear-time": {
+      "name": "*Blocks Disappear After Time*",
+      "desc": [
+        "Placed *blocks*, will *disappear*",
+        "after a *few seconds*"
+      ]
+    },
+    "loop": {
+      "name": "*Loop Challenge*",
+      "desc": [
+        "Certain actions are *looped*",
+        "until a player *sneaks*"
+      ],
+      "cleared": "<yellow>{0} </yellow><gray>Loops cancelled</gray>"
+    },
+    "ice-floor": {
+      "name": "*Ice Floor*",
+      "desc": [
+        "*Air* will be replaced in a",
+        "*3x3* area with *packed ice*"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><aqua>Ice floor </aqua><dark_gray>{@symbol.vertical} {0}</dark_gray>"
+    },
+    "level-border": {
+      "name": "*Level = Border*",
+      "desc": [
+        "The *border size* adjusts to *the player*",
+        "with the *most levels*."
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Border size </gray><dark_gray>{@symbol.vertical} </dark_gray><gray>{0}</gray>"
+    },
+    "chunk-deletion": {
+      "name": "*Chunk Deletion*",
+      "desc": [
+        "*Chunks* that players are in *delete*",
+        "completely after the given *time*"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Time left in chunk </gray><gold>{0}s</gold>"
+    },
+    "permanent-item": {
+      "name": "*Permanent Items*",
+      "desc": [
+        "*Items* cannot be dropped",
+        "or put *away*"
+      ]
+    },
+    "no-duped-items": {
+      "name": "*No Duped Items*",
+      "desc": [
+        "Players are *not allowed* to have",
+        "the *same item* in their *inventories*",
+        "at the same time"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>and </gray><yellow>{1} </yellow><gray>both had </gray><yellow>{2} </yellow><gray>in their inventory</gray>"
+    },
+    "damage-inv-clear": {
+      "name": "*Damage Inventory Clear*",
+      "desc": [
+        "Player *inventories* are *cleared*",
+        "when a *player* takes damage"
+      ]
+    },
+    "uncraft-items": {
+      "name": "*Items Crafting Back*",
+      "desc": [
+        "*Items* in your inventory are",
+        "*crafting* back all few seconds"
+      ]
+    },
+    "missing-items": {
+      "name": "*Items Missing*",
+      "desc": [
+        "Every few minutes a *random item disappears* from",
+        "your *inventory* and you have to *guess* which it was"
+      ],
+      "inventory": "{0}Which item is missing?",
+      "inventory-open": "<dark_gray>[</dark_gray><green>Open GUI</green><dark_gray>]</dark_gray>"
+    },
+    "pickup-launch": {
+      "name": "*Pickup Boost*",
+      "desc": [
+        "When you *pick up* an *item*",
+        "you will be *launched* into the air"
+      ]
+    },
+    "block-chunk-item-remove": {
+      "name": "*Movement Item Remove*",
+      "desc": [
+        "A random item will be removed from",
+        "your inventory for every",
+        "*block* / *chunk* you walk"
+      ],
+      "block": "<gold>Block</gold>",
+      "chunk": "<gold>Chunk</gold>"
+    },
+    "traffic-light": {
+      "name": "*Traffic Light Challenge*",
+      "desc": [
+        "The *traffic light* switches every few minutes.",
+        "If you go on *red*, you die"
+      ],
+      "fail": "<yellow>{0} </yellow><gray>went over </gray><red>red</red>"
+    },
+    "hunger-block": {
+      "name": "*Hunger per Block*",
+      "desc": [
+        "You lose *food* for",
+        "every *block* you walk"
+      ]
+    },
+    "only-down": {
+      "name": "*Only Down*",
+      "desc": [
+        "If you go *up* by *a block*, you *die*"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>went up one block</gray>"
+    },
+    "only-dirt": {
+      "name": "*Only Dirt*",
+      "desc": [
+        "You must stay on *dirt*",
+        "otherwise you will *die*"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>did not stand on dirt</gray>"
+    },
+    "higher-jumps": {
+      "name": "*Higher Jumps*",
+      "desc": [
+        "The more *you jump*, the *higher* you jump"
+      ]
+    },
+    "always-running": {
+      "name": "*Always Running*",
+      "desc": [
+        "You *cannot stop* to *walk forwards*"
+      ]
+    },
+    "dont-stop-running": {
+      "name": "*Dont stop running*",
+      "desc": [
+        "You are only allowed to stand *still*",
+        "a certain *time* before you *die*"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Move in </gray><dark_gray>{@symbol.vertical} </dark_gray><yellow>{0}</yellow>",
+      "stopped-moving": "<yellow>{0} </yellow><gray>hasn't moved for too long</gray>"
+    },
+    "no-mouse-move": {
+      "name": "*Mouse Movement Damage*",
+      "desc": [
+        "You take *damage* everytime",
+        "you *move* your *view*"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>moved his mouse</gray>"
+    },
+    "five-hundred-blocks": {
+      "name": "*500 Blocks*",
+      "desc": [
+        "*Every 500 Blocks walked* players",
+        "will get a *64 stack* of a random item.",
+        "*Blocks* and *Entities* won't *drop* any items."
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><white>Blocks Walked </white><dark_gray>{@symbol.vertical} </dark_gray><gray>{0} </gray><dark_gray>/ </dark_gray><gray>{1}</gray>",
+      "subtitle": "<yellow>{0} </yellow><gray>Blocks</gray>"
+    },
+    "max-biome-time": {
+      "name": "*Max Biome Time*",
+      "desc": [
+        "The *time* that you may spend",
+        "in every *biome* is limited"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Time left in </gray><yellow>{0} </yellow><dark_gray><bold>{@symbol.vertical} </bold></dark_gray><green>{1}s</green>"
+    },
+    "max-height-time": {
+      "name": "*Max Height Time*",
+      "desc": [
+        "The *time* that you may spend",
+        "on every *height* is limited"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Time left on </gray><yellow>{0} </yellow><dark_gray><bold>{@symbol.vertical} </bold></dark_gray><green>{1}s</green>"
+    },
+    "water-mlg": {
+      "name": "*Water MLG*",
+      "desc": [
+        "You have to do a *Water MLG*",
+        "over and over again"
+      ]
+    },
+    "jump-and-run": {
+      "name": "*Jump and Run*",
+      "desc": [
+        "Every *few minutes* you have to do a random",
+        "*jump and run* which gets *harder* every time"
+      ],
+      "countdown": "Next <gold>JumpAndRun </gold><gray>in </gray><yellow>{0} seconds</yellow>",
+      "countdown-one": "Next <gold>JumpAndRun </gold><gray>in </gray><yellow>one second</yellow>",
+      "finished": "<yellow>{0} </yellow><green>finished </green><gray>the </gray><gold>JumpAndRun</gold>"
+    },
+    "one-durability": {
+      "name": "*One Durability*",
+      "desc": [
+        "Items are *destroyed* after one *use*"
+      ]
+    },
+    "no-trading": {
+      "name": "*No Trading*",
+      "desc": [
+        "You *cannot* trade",
+        "with villagers"
+      ]
+    },
+    "no-exp": {
+      "name": "*No EXP*",
+      "desc": [
+        "If you pickup *EXP* you die"
+      ],
+      "picked-up": "<yellow>{0} </yellow><gray>collected </gray><red>EXP</red>"
+    },
+    "food-once": {
+      "name": "*Food Once*",
+      "desc": [
+        "Each *food* can be*",
+        "*eaten* only once"
+      ],
+      "failed": "<yellow>{0} </yellow><gray>suffocated by </gray><yellow>{1}</yellow>",
+      "new-food": "<yellow>You </yellow><gray>ate </gray><yellow>{1}</yellow>",
+      "new-food-team": "<yellow>{0} </yellow><gray>ate </gray><yellow>{1}</yellow>",
+      "everyone": "<dark_purple>Everyone</dark_purple>",
+      "player": "<gold>Player</gold>"
+    },
+    "consume-launch": {
+      "name": "*Consume Boost*",
+      "desc": [
+        "When you *eat* an *item*",
+        "you will be *launched* into the air"
+      ]
+    },
+    "low-drop-rate": {
+      "name": "*Low Drop Chance*",
+      "desc": [
+        "The *drop chance* of each *block*",
+        "will be set to the defined *percentage*"
+      ]
+    },
+    "ender-games": {
+      "name": "*Ender Games*",
+      "desc": [
+        "Every *few minutes* you will be",
+        "*swapped* with a *random entity*",
+        "in a *200 blocks* range"
+      ],
+      "teleport": "Swapped with <yellow>{0}</yellow>"
+    },
+    "invert-health": {
+      "name": "*Invert Health*",
+      "desc": [
+        "Every few minutes the *hearts are inverted*.",
+        "If you have *8 hearts*, you will have *2 hearts*",
+        "and the other way around"
+      ],
+      "inverted": "Your hearts have been <red>inverted</red>"
+    },
+    "no-shared-advancements": {
+      "name": "*No Shared Advancements*",
+      "desc": [
+        "You're *not allowed* to get *advancements* someone else",
+        "*already did*. Else *you'll die*."
+      ]
+    },
+    "quiz": {
+      "name": "*Quiz*",
+      "desc": [
+        "Every *few minutes* a *random player*",
+        "must answer a *quiz question*"
+      ]
+    },
+    "iron-golem": {
+      "name": "*Iron Golem*",
+      "desc": [
+        "Kill an *Iron Golem* to win"
+      ]
+    },
+    "snow-golem": {
+      "name": "*Snowman*",
+      "desc": [
+        "Kill a *Snowman* to win"
+      ]
+    },
+    "all-mobs": {
+      "name": "*All Mobs*",
+      "desc": [
+        "Each mob has to be killed once to win"
+      ]
+    },
+    "all-monster": {
+      "name": "*All Monsters*",
+      "desc": [
+        "Each monster has to be killed once to win"
+      ]
+    },
+    "most-deaths": {
+      "name": "*Most Deaths*",
+      "desc": [
+        "Who *collects* the most *different deaths* wins"
+      ]
+    },
+    "most-items": {
+      "name": "*Most Items*",
+      "desc": [
+        "Who *collects* the most *different items* wins"
+      ]
+    },
+    "mine-most-blocks": {
+      "name": "*Most Blocks*",
+      "desc": [
+        "Who *breaks* the most *blocks* wins"
+      ]
+    },
+    "most-xp": {
+      "name": "*Most XP*",
+      "desc": [
+        "Who *collects* the most *EXP* wins"
+      ]
+    },
+    "most-emeralds": {
+      "name": "*Most Emeralds*",
+      "desc": [
+        "The player with the *most*",
+        "*emeralds* wins"
+      ]
+    },
+    "most-ores": {
+      "name": "*Most Ores*",
+      "desc": [
+        "The player that mines the most ores wins"
+      ]
+    },
+    "eat-most": {
+      "name": "*Eat most*",
+      "desc": [
+        "The player that fills the mods hunger bars *wins*"
+      ]
+    },
+    "first-one-to-die": {
+      "name": "*First Death*",
+      "desc": [
+        "Who *dies* first wins"
+      ]
+    },
+    "collect-wood": {
+      "name": "*Collect Wood*",
+      "desc": [
+        "Who first collected all types of wood set wins"
+      ]
+    },
+    "finish-raid": {
+      "name": "*Finish Raid*",
+      "desc": [
+        "The first player that *finishes* a *raid* wins"
+      ]
+    },
+    "all-advancements": {
+      "name": "*All Advancements*",
+      "desc": [
+        "The first player that *gets* all *advancements* wins"
+      ]
+    },
+    "max-height": {
+      "name": "*Maximum Height*",
+      "desc": [
+        "The *first* player to reach",
+        "*Y = {0}* wins"
+      ]
+    },
+    "min-height": {
+      "name": "*Minimum Height*",
+      "desc": [
+        "The *first* player to reach",
+        "*Y = {0}* wins"
+      ]
+    },
+    "race": {
+      "name": "*Race*",
+      "desc": [
+        "The *first* player to *reach* a",
+        "*random* location in the overworld wins"
+      ]
+    },
+    "find-elytra": {
+      "name": "*Find Elytra*",
+      "desc": [
+        "The *player* that finds an elytra *wins*"
+      ]
+    },
+    "eat-cake": {
+      "name": "*Eat Cake*",
+      "desc": [
+        "The player that *eats a cake* first *wins*"
+      ]
+    },
+    "collect-horse-armor": {
+      "name": "*Collect Horse Armor*",
+      "desc": [
+        "The player that *collects* every",
+        "horse armor first *wins*"
+      ]
+    },
+    "collect-ice": {
+      "name": "*Collect Ice Blocks*",
+      "desc": [
+        "The player that *collects* every",
+        "ice blocks and snow first *wins*"
+      ]
+    },
+    "collect-swords": {
+      "name": "*Collect Swords*",
+      "desc": [
+        "The player that *collects* every",
+        "sword first *wins*"
+      ]
+    },
+    "collect-workstations": {
+      "name": "*Collect Workstations*",
+      "desc": [
+        "The player that *collects* every",
+        "villager workstation first *wins*"
+      ]
+    },
+    "get-full-health": {
+      "name": "*Get Full Health*",
+      "desc": [
+        "The first player to gain full health wins."
+      ]
+    },
+    "force-item-battle": {
+      "name": "*Force Item Battle*",
+      "desc": [
+        "Each player gets *a random item* that",
+        "he has *to find*.",
+        "The player that *found* the *most items*, wins."
+      ]
+    },
+    "force-mob-battle": {
+      "name": "*Force Mob Battle*",
+      "desc": [
+        "Each player gets *a random mob* that",
+        "he has to *kill*.",
+        "The player that *killed* the *most mobs*, wins."
+      ]
+    },
+    "force-advancement-battle": {
+      "name": "*Force Advancement Battle*",
+      "desc": [
+        "Each player gets a *random advancement*,",
+        "that he has to complete."
+      ]
+    },
+    "force-block-battle": {
+      "name": "*Force Block Battle*",
+      "desc": [
+        "Every player gets a *random*",
+        "*block*, on which he has to stand"
+      ]
+    },
+    "force-biome-battle": {
+      "name": "*Force Biome Battle*",
+      "desc": [
+        "Each player gets a *random biome*,",
+        "that he has to *enter*."
+      ]
+    },
+    "force-damage-battle": {
+      "name": "*Force Damage Battle*",
+      "desc": [
+        "Each player gets a *random damage amount*,",
+        "that he has to *take*."
+      ]
+    },
+    "force-height-battle": {
+      "name": "*Force Height Battle*",
+      "desc": [
+        "Each player gets a *random height*,",
+        "that he has to *reach*."
+      ]
+    },
+    "force-position-battle": {
+      "name": "*Force Position Battle*",
+      "desc": [
+        "Each player gets a *random position*,",
+        "that he has to *reach*."
+      ]
+    },
+    "extreme-force-battle": {
+      "name": "*Extreme Force Battle*",
+      "desc": [
+        "Each player gets a *random target*,",
+        "that he has to reach."
+      ]
+    },
+    "last-man-standing": {
+      "name": "*Last Man Standing*",
+      "desc": [
+        "Who survived until the end wins"
+      ]
+    },
+    "collect-all-items": {
+      "name": "*All Items*",
+      "desc": [
+        "Find *all items* that are in *Minecraft*"
+      ]
+    },
+    "damage-teleport": {
+      "name": "*Random Teleport On Damage*",
+      "desc": [
+        "You'll be teleported randomly",
+        "when you take damage"
+      ]
+    },
+    "zero-hearts": {
+      "name": "*Zero Hearts*",
+      "desc": [
+        "After a *protection time* you have to",
+        "get *absorption permanently* else you will die"
+      ],
+      "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Protection time </gray><dark_gray><bold>{@symbol.vertical} </bold></dark_gray><green>{0}s</green>"
+    }
+  },
+  "syntax": "Please use <yellow>/{0}</yellow>",
+  "reload": "Challenges Plugin is reloading...",
+  "reload-failed": "An <red>error &7occurred while reloading the plugin</red>",
+  "reload-success": "Challenges Plugin <green>successfully </green><gray>reloaded</gray>",
+  "player-command": "You must be a player!",
+  "no-permission": "You <red>don't </red><gray>have permissions to do this</gray>",
+  "enabled": "<green>Activated</green>",
+  "disabled": "<red>Deactivated</red>",
+  "customize": "<gold>Customize</gold>",
+  "navigate-back": "<dark_gray>« </dark_gray><gray>Back</gray>",
+  "navigate-next": "<dark_gray>» </dark_gray><gray>Next</gray>",
+  "seconds": "seconds",
+  "second": "second",
+  "minutes": "minutes",
+  "minute": "minute",
+  "hours": "hours",
+  "hour": "hour",
+  "amplifier": "amplifier",
+  "open": "Open",
+  "everyone": "<dark_purple>Everyone</dark_purple>",
+  "player": "<gold>Active player</gold>",
+  "none": "None",
+  "inventory-color": "<blue></blue>",
+  "timer-counting-up": "<dark_gray>» </dark_gray><gray>Timer counting </gray><green>up</green>",
+  "timer-counting-down": "<dark_gray>» </dark_gray><gray>Timer counting </gray><red>down</red>",
+  "timer-is-paused": "<dark_gray>» </dark_gray><gray>Timer </gray><red>paused</red>",
+  "timer-is-running": "<dark_gray>» </dark_gray><gray>Timer </gray><green>started</green>",
+  "confirm-reset": "Confirm reset with <yellow>/{0}</yellow>",
+  "no-fresh-reset": [
+    "The Server <red>can't </red><gray>be reset yet</gray>",
+    "The Challenge <red>hasn't been </red><gray>started</gray>"
+  ],
+  "new-challenge": "<green><bold>New!</bold></green>",
+  "updated-challenge": "<yellow><bold>Updated!</bold></yellow>",
+  "feature-disabled": "This function is currently <red>deactivated</red>",
+  "challenge-disabled": "This challenge is currently <red>deactivated</red>",
+  "stopped-message": "<dark_gray>• </dark_gray><gray>Timer </gray><red><bold>paused </bold></red><dark_gray>•</dark_gray>",
+  "count-up-message": "<dark_gray>• </dark_gray><gray>Time: </gray><green><bold>{0} </bold></green><dark_gray>•</dark_gray>",
+  "count-down-message": "<dark_gray>• </dark_gray><gray>Time: </gray><red><bold>{0} </bold></red><dark_gray>•</dark_gray>",
+  "timer-not-started": "The timer <red>hasn't been started</red>",
+  "timer-was-started": "The timer has been <green>started</green>",
+  "timer-was-paused": "The timer has been <red>paused</red>",
+  "timer-was-set": "The timer has ben set on <yellow><bold>{0}</bold></yellow>",
+  "timer-already-started": "The timer is <red>already running</red>",
+  "timer-already-paused": "The timer is <red>already paused</red>",
+  "timer-mode-set-down": "The timer is counting <red>down</red>",
+  "timer-mode-set-up": "The timer is counting <green>up</green>",
+  "no-database-connection": "There is <red>no </red><gray>database connection</gray>",
+  "fetching-data": "Data is being retrieved..",
+  "undefined": "undefined",
+  "no-such-material": "This material doesn't exist",
+  "not-an-item": "<yellow>{0} </yellow><gray>is not an item</gray>",
+  "no-such-entity": "This entity doesn't exist",
+  "not-alive": "<yellow>{0} </yellow><gray>is not a living entity</gray>",
+  "no-loot": "<yellow>{0} </yellow><gray>doesn't have any drops</gray>",
+  "deprecated-plugin-version": [
+    " ",
+    "An update for the plugin is available",
+    "Download: <yellow>{0}</yellow>",
+    " "
+  ],
+  "deprecated-config-version": [
+    "The plugin config version is <red>outdated </red><gray>(</gray><red>{1} </red><gray>\\< </gray><green>{0}</green><gray>)</gray>",
+    "You can either manually add all missing settings or delete the old one"
+  ],
+  "missing-config-settings": "There are missing config settings: <yellow>{0}</yellow>",
+  "missing-config-settings-separator": "<gray>, </gray><yellow></yellow>",
+  "no-missing-config-settings": [
+    "<red>There are no missing config settings.</red>",
+    "<red>You can manually update it to </red><red><bold>{0}</bold></red>"
+  ],
+  "unsuported-language": [
+    "<red>The language </red><gray>(</gray><yellow>{0}</yellow><gray>) is not supported</gray>"
+  ],
+  "not-op": [
+    "<gray>To use this plugin you need to have permissions. Give yourself permissions in the Server Console with: /op [name]</gray>"
+  ],
+  "join-message": "<yellow>{0} </yellow><gray>has </gray><green>joined </green><gray>the server</gray>",
+  "quit-message": "<yellow>{0} </yellow><gray>has </gray><red>left </red><gray>the server</gray>",
+  "timer-paused-message": [
+    "The timer is <red>paused</red>",
+    "Use <yellow>/timer resume </yellow><gray>to start it</gray>"
+  ],
+  "cheats-detected": [
+    "<yellow>{0} </yellow><gray>has </gray><red>cheated</red>",
+    "<red>No </red><gray>further statistics can be collected</gray>"
+  ],
+  "cheats-already-detected": [
+    "On this server has been <red>cheated</red>",
+    "<red>No </red><gray>further statistics can be collected</gray>"
+  ],
+  "custom_challenges-reset": "The <yellow>lokal </yellow><gray>settings were reset </gray><green>successfully</green>",
+  "config-reset": "The <yellow>local </yellow><gray>settings were reset </gray><green>successfully</green>",
+  "player-config-loaded": "Your settings have been loaded <green>successfully</green>",
+  "player-config-saved": "Your settings have been saved <green>successfully</green>",
+  "player-config-reset": "Your settings were reset <green>successfully</green>",
+  "player-custom_challenges-loaded": "Your challenges have been loaded <green>successfully</green>",
+  "player-custom_challenges-saved": "Your challenges have been saved <green>successfully</green>",
+  "player-custom_challenges-reset": "Your challenges were <green>successfully </green><gray>reset</gray>",
+  "item-prefix": "<dark_gray>» </dark_gray>",
+  "item-setting-info": "<dark_gray>➟ {0}</dark_gray>",
+  "stat-dragon-killed": "Dragons killed",
+  "stat-deaths": "Deaths",
+  "stat-entity-kills": "Kills",
+  "stat-damage-dealt": "Damage dealt",
+  "stat-damage-taken": "Damage taken",
+  "stat-blocks-mined": "Blocks destroyed",
+  "stat-blocks-placed": "Blocks placed",
+  "stat-blocks-traveled": "Blocks travelled",
+  "stat-challenges-played": "Challenges played",
+  "stat-jumps": "Jumps",
+  "stats-of": "<dark_gray>» </dark_gray><gray>Stats of </gray><yellow>{0}</yellow>",
+  "stats-display": "<dark_gray>» </dark_gray><gray>{0} </gray><dark_gray>(</dark_gray><yellow>{1}. </yellow><gray>Platz</gray><dark_gray>)</dark_gray>",
+  "stats-leaderboard-display": [
+    "<dark_gray>» </dark_gray><yellow>{0}</yellow>",
+    "<dark_gray><bold>┣ </bold></dark_gray><gray>{1} </gray><gray>{2}</gray>",
+    "<dark_gray><bold>┗ </bold></dark_gray><yellow>{3}. </yellow><gray>Place</gray>"
+  ],
+  "position": "<yellow>{4} </yellow><dark_gray>- </dark_gray><gray>{0}, {1}, {2} </gray><dark_gray>(</dark_gray><yellow>{3}</yellow><dark_gray>) </dark_gray><dark_gray>┃ </dark_gray><yellow>{5}m</yellow>",
+  "positions-disabled": "Positions are <red>deactivated</red>",
+  "position-other-world": "This position is in another world <dark_gray>(</dark_gray><yellow>{0}</yellow><dark_gray>)</dark_gray>",
+  "position-not-exists": "The position <yellow>{0} </yellow><red>doesn't </red><gray>exist</gray>",
+  "position-already-exists": "The position {0} <red>already </red><gray>exist</gray>",
+  "position-set": "<yellow>{5} </yellow><gray>created position </gray><yellow>{4} </yellow><gray>{0}, {1}, {2} </gray><dark_gray>(</dark_gray><yellow>{3}</yellow><dark_gray>)</dark_gray>",
+  "position-deleted": "<yellow>{5} </yellow><gray>deleted </gray><yellow>{4} </yellow><gray>{0}, {1}, {2} </gray><dark_gray>(</dark_gray><yellow>{3}</yellow><dark_gray>)</dark_gray>",
+  "no-positions": [
+    "There are no <yellow>positions </yellow><gray>set in this world</gray>",
+    "Create on with <yellow>/{0}</yellow>"
+  ],
+  "no-positions-global": [
+    "There are no <yellow>positions </yellow><gray>set</gray>",
+    "Create on with <yellow>/{0}</yellow>"
+  ],
+  "command-no-target": "<red>No </red><gray>players has been found</gray>",
+  "command-heal-healed": "You have been <green>healed</green>",
+  "command-heal-healed-others": "You healed <yellow>{0} player/s</yellow>",
+  "command-gamemode-gamemode-changed": "Your gamemode has been changed to <yellow>{0}</yellow>",
+  "command-gamemode-gamemode-changed-others": "The gamemode of <yellow>{1} </yellow><gray>player/s has been changed to </gray><yellow>{0}</yellow>",
+  "command-village-search": "A village is being searched..",
+  "command-village-teleport": "You have been <green>teleported to a village</green>",
+  "command-village-not-found": "<red>No </red><gray>new village was found</gray>",
+  "command-weather-set-clear": "Weather was changed to <yellow>clear</yellow>",
+  "command-weather-set-rain": "Weather was changed to <yellow>rainy</yellow>",
+  "command-weather-set-thunder": "Weather was changed to <yellow>thundery</yellow>",
+  "command-invsee-open": "Inventory of <yellow>{0} </yellow><gray>opened</gray>",
+  "command-enderchest-open": "You opened your <dark_purple>Enderchest</dark_purple>",
+  "command-difficulty-change": "Difficulty changed to {0}",
+  "command-difficulty-current": "Current difficulty is {0}",
+  "command-search-nothing": "<yellow>{0} </yellow><gray>is not dropped by any special block</gray>",
+  "command-search-result": "<yellow>{0} </yellow><gray>drops from </gray><yellow>{1}</yellow>",
+  "command-time-set": "Time was changed to <yellow>{0} </yellow><gray>Ticks </gray><dark_gray>(</dark_gray><gray>ca. </gray><yellow>{1}</yellow><dark_gray>)</dark_gray>",
+  "command-time-set-exact": "Time was changed to <yellow>{0} </yellow><dark_gray>(</dark_gray><yellow>{1} </yellow><gray>Ticks</gray><dark_gray>)</dark_gray>",
+  "command-time-query": [
+    "<dark_gray>» </dark_gray><gray>Current ingame times</gray>",
+    "Playtime <yellow>{0} </yellow><gray>Ticks </gray><dark_gray>(</dark_gray><gray>Tag </gray><yellow>{1}</yellow><dark_gray>)</dark_gray>",
+    "Time of day <yellow>{2} </yellow><gray>Ticks </gray><dark_gray>(</dark_gray><gray>ca. </gray><yellow>{3}</yellow><dark_gray>)</dark_gray>"
+  ],
+  "command-time-noon": "Noon",
+  "command-time-night": "Night",
+  "command-time-midnight": "Midnight",
+  "command-time-day": "Day",
+  "command-fly-enabled": "You can fly <green>now</green>",
+  "command-fly-disabled": "You can <red>no longer </red><gray>fly</gray>",
+  "command-fly-toggled-others": "You toggled <yellow>fly </yellow><gray>for </gray><yellow>{0} </yellow><gray>player/s</gray>",
+  "command-feed-fed": "Your appetite was <yellow>sated</yellow>",
+  "command-feed-others": "You satiated the appetite of <yellow>{0} </yellow><gray>player/s</gray>",
+  "command-gamestate-reload": "The gamestate was <green>reloaded</green>",
+  "command-gamestate-reset": "The gamestate was <green>reset</green>",
+  "command-world-teleport": "You'll be teleported into the <yellow>{0}</yellow>",
+  "command-back-no-locations": "You <red>weren't </red><gray>teleported yet</gray>",
+  "command-back-teleported": "You were teleported <yellow>{0} </yellow><gray>location back</gray>",
+  "command-back-teleported-multiple": "You were teleported <yellow>{0} </yellow><gray>locations back</gray>",
+  "command-result-no-battle-active": "There is currently <red>no </red><gray>Force Battle enabled</gray>",
+  "command-god-mode-enabled": "You are now in <green>God mode</green>",
+  "command-god-mode-disabled": "You are <red>no longer in God mode</red>",
+  "command-god-mode-toggled-others": "<yellow>{0} </yellow><gray>players are now in </gray><yellow>God mode</yellow>",
+  "player-damage-display": "<yellow>{0} </yellow><gray>took </gray><gray>{1} </gray><gray>damage by </gray><yellow>{2}</yellow>",
+  "death-message": "<yellow>{0} </yellow><gray>died</gray>",
+  "death-message-cause": "<yellow>{0} </yellow><gray>died by </gray><yellow>{1}</yellow>",
+  "unable-to-find-fortress": "<red>No fortress </red><gray>could be found</gray>",
+  "unable-to-find-bastion": "<red>No bastion </red><gray>could be found</gray>",
+  "death-collected": "Death reason <yellow>{0} </yellow><gray>registered</gray>",
+  "item-collected": "Item <yellow>{0} </yellow><gray>registered</gray>",
+  "items-to-collect": "<gray>Items to collect </gray><dark_gray>» </dark_gray><yellow>{0}</yellow>",
+  "backpacks-disabled": "Backpacks are currently <red>deactivated</red>",
+  "backpack-opened": "You opened the {0}",
+  "top-to-overworld": "You have been teleported to the <yellow>overworld</yellow>",
+  "top-to-surface": "You have been teleported to the <yellow>top</yellow>",
+  "random-challenge-enabled": "The challenge <yellow>{0} </yellow><gray>has been </gray><green>activated</green>",
+  "all-items-skipped": "Item <yellow>{0} </yellow><gray>skipped</gray>",
+  "all-items-already-finished": "All items has been already found",
+  "all-items-found": "Item <yellow>{0} </yellow><gray>registered by </gray><yellow>{1}</yellow>",
+  "mob-kill": "<yellow>{0} </yellow><yellow>has been killed </yellow><dark_gray>(</dark_gray><yellow>{1} </yellow><gray>/ </gray><yellow>{2}</yellow><dark_gray>)</dark_gray>",
+  "all-advancements-goal": "<gray>Advancements </gray><dark_gray>» </dark_gray><yellow>{0}</yellow>",
+  "height-reached": "<yellow>{0} </yellow><gray>reached </gray><yellow>Y = {1} </yellow><gray>first!</gray>",
+  "race-goal-reached": "<yellow>{0} </yellow><gray>reached the goal!</gray>",
+  "points-change": "<yellow>{0} </yellow><gray>Points</gray>",
+  "force-item-battle-found": "You've found <yellow>{0}!</yellow>",
+  "force-item-battle-new-item": "Item to find: <yellow>{0}</yellow>",
+  "force-item-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Item Battle Leaderboard</gray>",
+  "force-mob-battle-killed": "You've killed <yellow>{0}!</yellow>",
+  "force-mob-battle-new-mob": "Mob to kill: <yellow>{0}</yellow>",
+  "force-mob-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Mob Battle Leaderboard</gray>",
+  "force-advancement-battle-completed": "You've completed <yellow>{0}!</yellow>",
+  "force-advancement-battle-new-advancement": "Nächstes Advancement: <yellow>{0}</yellow>",
+  "force-advancement-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Advancement Battle Leaderboard</gray>",
+  "force-block-battle-found": "You've found <yellow>{0}!</yellow>",
+  "force-block-battle-new-block": "Block to find: <yellow>{0}</yellow>",
+  "force-block-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Block Battle Leaderboard</gray>",
+  "force-battle-leaderboard-entry": "{0}#{1} <dark_gray>» </dark_gray><yellow>{2} </yellow><dark_gray>┃ </dark_gray><yellow>{3}</yellow>",
+  "force-battle-block-target-display": "<yellow>Block: {0}</yellow>",
+  "force-battle-item-target-display": "<yellow>Item: {0}</yellow>",
+  "force-battle-height-target-display": "<yellow>Height: {0}</yellow>",
+  "force-battle-mob-target-display": "<yellow>Mob: {0}</yellow>",
+  "force-battle-biome-target-display": "<yellow>Biome: {0}</yellow>",
+  "force-battle-damage-target-display": "<yellow>Damage: </yellow><red>{0} ❤</red>",
+  "force-battle-advancement-target-display": "<yellow>Advancement: {0}</yellow>",
+  "force-battle-position-target-display": "<yellow>Position: {0}</yellow>",
+  "extreme-force-battle-new-height": "Height to reach: <yellow>{0}</yellow>",
+  "extreme-force-battle-reached-height": "You've reached height <yellow>{0}!</yellow>",
+  "extreme-force-battle-new-biome": "Biome to find: <yellow>{0}</yellow>",
+  "extreme-force-battle-found-biome": "You've found the biome <yellow>{0}!</yellow>",
+  "extreme-force-battle-new-damage": "Damage to take: <red>{0} ❤</red>",
+  "extreme-force-battle-took-damage": "You took <red>{0} ❤ </red><gray>damage!</gray>",
+  "extreme-force-battle-position": "<yellow>X: {0} </yellow><dark_gray>┃ </dark_gray><yellow>Z: {1}</yellow>",
+  "extreme-force-battle-new-position": "Position to reach: <yellow>{0}</yellow>",
+  "extreme-force-battle-reached-position": "You've reached the position <yellow>{0}!</yellow>",
+  "extreme-force-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Extreme Force Battle Leaderboard</gray>",
+  "force-biome-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Biome Battle Leaderboard</gray>",
+  "force-damage-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Damage Battle Leaderboard</gray>",
+  "force-height-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Height Battle Leaderboard</gray>",
+  "force-position-battle-leaderboard": "<dark_gray>➜ </dark_gray><gray>Force Position Battle Leaderboard</gray>",
+  "quiz-how-to": "Write your answer with <yellow>/guess \\<answer></yellow>",
+  "quiz-right-answer": "<yellow>{0} </yellow><gray>is the </gray><green>right </green><gray>answer!</gray>",
+  "quiz-right-answer-other": "<yellow>{0} </yellow><gray>answered the question </gray><green>correctly</green><gray>!</gray>",
+  "quiz-wrong-answer": "<yellow>{0} </yellow><gray>is a </gray><red>wrong </red><gray>answer!</gray>",
+  "quiz-wrong-answer-other": "<yellow>{0} </yellow><gray>answered the question </gray><red>incorrectly</red><gray>!</gray>",
+  "quiz-time-up": "The time is <red>up</red><gray>!</gray>",
+  "quiz-cancel": "The question was <red>cancelled</red><gray>!</gray>",
+  "quiz-right-answer-was": "The right answer was: <yellow>{0}</yellow>",
+  "quiz-right-answer-was-multiple": "the right answers were: <yellow>{0}</yellow>",
+  "quiz-question-often-have": "How often have you{1} <yellow>{0}?</yellow>",
+  "quiz-question-often-be": "How often did you{1} <yellow>{0}?</yellow>",
+  "quiz-question-far-be": "How far did you {0}?",
+  "quiz-question-most": "What do you have the most of these {1} {0}?",
+  "quiz-question-damage-have": "How much damage have you {0}",
+  "quiz-question-damage-taken-have": "How much damage have you taken from {0}",
+  "quiz-verb-traveled": "walk",
+  "quiz-verb-jumped": "jump",
+  "quiz-verb-sneaked": "sneak",
+  "quiz-verb-killed": "killed",
+  "quiz-verb-damaged": "hurt",
+  "quiz-verb-broken": "broken",
+  "quiz-verb-placed": "placed",
+  "quiz-verb-dropped": "dropped",
+  "quiz-verb-suffered": "suffered",
+  "bossbar-timer-paused": "<dark_gray>» </dark_gray><gray>The timer is </gray><red>paused</red>",
+  "bossbar-random-challenge-waiting": "<dark_gray>» </dark_gray><gray>Waiting for new challenge..</gray>",
+  "bossbar-random-challenge-current": "<dark_gray>» </dark_gray><gray>Challenge </gray><yellow>{0}</yellow>",
+  "bossbar-all-items-current-max": "<dark_gray>» </dark_gray><white>{0} </white><dark_gray>┃ </dark_gray><gray>{1} </gray><dark_gray>/ </dark_gray><gray>{2}</gray>",
+  "bossbar-all-items-finished": "<dark_gray>» </dark_gray><gray>All items found</gray>",
+  "bossbar-race-goal-info": "<dark_gray>» </dark_gray><white>Goal </white><dark_gray>┃ </dark_gray><gray>X: {0} </gray><dark_gray>/ </dark_gray><gray>Z: {1} </gray><dark_gray>┃ </dark_gray><yellow>{2} Blocks</yellow>",
+  "bossbar-race-goal": "<dark_gray>» </dark_gray><white>Goal </white><dark_gray>┃ </dark_gray><gray>X: {0} </gray><dark_gray>/ </dark_gray><gray>Z: {1}</gray>",
+  "bossbar-first-at-height-goal": "<dark_gray>» </dark_gray><white>Goal </white><dark_gray>┃ </dark_gray><gray>Y: {0}</gray>",
+  "bossbar-kill-all-bosses": "<dark_gray>» </dark_gray><red>All Bosses </red><dark_gray>┃ </dark_gray><yellow>{0}/{1}</yellow>",
+  "bossbar-kill-all-mobs": "<dark_gray>» </dark_gray><red>All Mobs </red><dark_gray>┃ </dark_gray><yellow>{0}/{1}</yellow>",
+  "bossbar-kill-all-monster": "<dark_gray>» </dark_gray><red>All Monsters </red><dark_gray>┃ </dark_gray><yellow>{0}/{1}</yellow>",
+  "subtitle-time-seconds": "<yellow>{0} </yellow><gray>seconds</gray>",
+  "subtitle-time-seconds-range": "<yellow>{0}-{1} </yellow><gray>seconds</gray>",
+  "subtitle-time-minutes": "<yellow>{0} </yellow><gray>minutes</gray>",
+  "subtitle-launcher-description": "<gray>Power </gray><yellow>{0}</yellow>",
+  "subtitle-range-blocks": "<yellow>Range: </yellow><yellow>{0} </yellow><gray>Blöcke</gray>",
+  "scoreboard-title": "<gray>» </gray><white><bold>Challenge</bold></white>",
+  "scoreboard-leaderboard": "<yellow>#{0} </yellow><dark_gray>┃ </dark_gray><gray>{1} </gray><dark_gray>» </dark_gray><yellow>{2}</yellow>",
+  "your-place": "<gray>Your place </gray><dark_gray>» </dark_gray><yellow>{0}</yellow>",
+  "server-reset": [
+    "<dark_gray>————————————————————</dark_gray>",
+    " ",
+    "<dark_gray>» </dark_gray><red>Server reset</red>",
+    " ",
+    "<gray>Reset by </gray><dark_red><bold>{0}</bold></dark_red>",
+    "<gray>The server is </gray><red>restarting</red>",
+    " ",
+    "<dark_gray>————————————————————</dark_gray>"
+  ],
+  "challenge-end-timer-hit-zero": [
+    " ",
+    "<red>The challenge is over!</red>",
+    "<gray>Seed: </gray><yellow><bold>{2}</bold></yellow>",
+    " "
+  ],
+  "challenge-end-timer-hit-zero-winner": [
+    " ",
+    "<red>The challenge is over!</red>",
+    "<gray>Gewinner: </gray><yellow><bold>{1}</bold></yellow>",
+    "<gray>Seed: </gray><yellow><bold>{2}</bold></yellow>",
+    " "
+  ],
+  "challenge-end-goal-reached": [
+    " ",
+    "<gray>The challenge was ended!</gray>",
+    "<gray>Time needed: </gray><green><bold>{0}</bold></green>",
+    "<gray>Seed: </gray><yellow><bold>{2}</bold></yellow>",
+    " "
+  ],
+  "challenge-end-goal-reached-winner": [
+    " ",
+    "<gray>The challenge was ended!</gray>",
+    "<gray>Winner: </gray><yellow><bold>{1}</bold></yellow>",
+    "<gray>Time needed: </gray><green><bold>{0}</bold></green>",
+    "<gray>Seed: </gray><yellow><bold>{2}</bold></yellow>",
+    " "
+  ],
+  "challenge-end-goal-failed": [
+    " ",
+    "<red>The challenge is over! </red><gold>#FeelsBadMan ✞</gold>",
+    "<gray>Time wasted: </gray><green><bold>{0}</bold></green>",
+    "<gray>Seed: </gray><yellow><bold>{2}</bold></yellow>",
+    " "
+  ],
+  "title-timer-started": [
+    " ",
+    "<dark_gray>» </dark_gray><gray>Timer </gray><green>continued</green>"
+  ],
+  "title-timer-paused": [
+    " ",
+    "<dark_gray>» </dark_gray><gray>Timer </gray><red>paused</red>"
+  ],
+  "title-challenge-enabled": [
+    "<yellow>{0}</yellow>",
+    "<dark_green><bold>✔ </bold></dark_green><dark_gray>┃ </dark_gray><green>Activated</green>"
+  ],
+  "title-challenge-disabled": [
+    "<yellow>{0}</yellow>",
+    "<dark_red>✖ </dark_red><dark_gray>┃ </dark_gray><red>Deactivated</red>"
+  ],
+  "title-challenge-value-changed": [
+    "<yellow>{0}</yellow>",
+    "<dark_gray>» </dark_gray><yellow>{1}</yellow>"
+  ],
+  "item-menu-start": "<dark_gray>• </dark_gray><green>Start Challenge </green><dark_gray>┃ </dark_gray><yellow>/start </yellow><dark_gray>•</dark_gray>",
+  "item-menu-challenges": "<dark_gray>• </dark_gray><red>Challenges </red><dark_gray>┃ </dark_gray><yellow>/challenge </yellow><dark_gray>•</dark_gray>",
+  "item-menu-timer": "<dark_gray>• </dark_gray><dark_purple>Timer </dark_purple><dark_gray>┃ </dark_gray><yellow>/timer </yellow><dark_gray>•</dark_gray>",
+  "item-menu-leaderboard": "<dark_gray>• </dark_gray><gold>Leaderboard </gold><dark_gray>┃ </dark_gray><yellow>/leaderboard </yellow><dark_gray>•</dark_gray>",
+  "item-menu-stats": "<dark_gray>• </dark_gray><dark_green>Statistics </dark_green><dark_gray>┃ </dark_gray><yellow>/stats </yellow><dark_gray>•</dark_gray>",
+  "menu-title": "Menu",
+  "menu-timer": "<gold>Timer</gold>",
+  "menu-goal": "<dark_purple>Goal</dark_purple>",
+  "menu-damage": "<gray>Schaden</gray>",
+  "menu-item_blocks": "<dark_red>Blocks & Items</dark_red>",
+  "menu-challenges": "<red>Challenges</red>",
+  "menu-settings": "<yellow>Settings</yellow>",
+  "menu-custom": "<green>Custom Challenges</green>",
+  "lore-category-activated-count": "<gray>Activated </gray><dark_gray>» </dark_gray><green>{0}</green><dark_gray>/</dark_gray><gray>{1}</gray>",
+  "lore-category-activated": "<gray>Activated </gray><dark_gray>» </dark_gray><green>Yes</green>",
+  "lore-category-deactivated": "<gray>Activated </gray><dark_gray>» </dark_gray><red>No</red>",
+  "category-misc_challenge": [
+    "<blue>Miscellaneous</blue>",
+    "Challenges that *couldn't be*",
+    "*assigned* with a category"
+  ],
+  "category-randomizer": [
+    "<gold>Randomizer</gold>",
+    "Experience a *randomized gameplay*"
+  ],
+  "category-limited_time": [
+    "<green>Limited Time</green>",
+    "Some things are timely restricted"
+  ],
+  "category-force": [
+    "<dark_aqua>Force</dark_aqua>",
+    "You have to fulfill specific",
+    "*intermediate goals* to survive"
+  ],
+  "category-world": [
+    "<dark_red>World Change</dark_red>",
+    "The world will be *modified* significant"
+  ],
+  "category-damage": [
+    "<red>Schaden</red>",
+    "New *damage rules*"
+  ],
+  "category-effect": [
+    "<dark_purple>Effekte</dark_purple>",
+    "Have fun with *lots of effects*"
+  ],
+  "category-inventory": [
+    "<gold>Inventory</gold>",
+    "You'll have problems managing *your inventory*"
+  ],
+  "category-movement": [
+    "<green>Bewegung</green>",
+    "You're *restricted in your movements*"
+  ],
+  "category-entities": [
+    "<aqua>Entities</aqua>",
+    "Entities will be *modified*"
+  ],
+  "category-extra_world": [
+    "<green>Extra Welt</green>",
+    "Challenges that will *send*",
+    "you to *another world*"
+  ],
+  "category-misc_goal": [
+    "<blue>Miscellaneous</blue>",
+    "Goals that *couldn't be*",
+    "*assigned* with a category"
+  ],
+  "category-kill_entity": [
+    "<red>Entities töten</red>",
+    "Kill *specific entities* to win"
+  ],
+  "category-score_points": [
+    "<yellow>Best Score</yellow>",
+    "Get the best score *to win*"
+  ],
+  "category-fastest_time": [
+    "<gold>Fastest Time</gold>",
+    "Be the fastest *to win*"
+  ],
+  "category-force_battle": [
+    "<aqua>Force Battles</aqua>",
+    "Fulfill the given *intermediate goals*",
+    "to earn points.",
+    " ",
+    "The player with the *most points* wins."
+  ],
+  "item-time-seconds-description": "<dark_gray>» </dark_gray><gray>Time: </gray><yellow>{0} </yellow><gray>seconds</gray>",
+  "item-time-seconds-range-description": "<dark_gray>» </dark_gray><gray>Time: </gray><yellow>{0}-{1} </yellow><gray>Sekunden</gray>",
+  "item-time-minutes-description": "<dark_gray>» </dark_gray><gray>Time: </gray><yellow>{0} </yellow><gray>minutes</gray>",
+  "item-heart-damage-description": "<dark_gray>» </dark_gray><gray>Damage: </gray><yellow>{0} </yellow><red>❤</red>",
+  "item-heart-start-description": "<dark_gray>» </dark_gray><gray>Start: </gray><yellow>{0} </yellow><red>❤</red>",
+  "item-max-health-description": "<dark_gray>» </dark_gray><gray>Max health: </gray><yellow>{0} </yellow><red>❤</red>",
+  "item-chance-description": "<dark_gray>» </dark_gray><gray>Chance: </gray><yellow>{0}%</yellow>",
+  "item-launcher-description": "<dark_gray>» </dark_gray><gray>Strength: </gray><yellow>{0}</yellow>",
+  "item-permanent-effect-target-player-description": "<dark_gray>» </dark_gray><gray>Only the active players gets the effect</gray>",
+  "item-permanent-effect-target-everyone-description": "<dark_gray>» </dark_gray><gray>All players are getting the effect</gray>",
+  "item-blocks-description": "<dark_gray>» Blocks to walk: </dark_gray><yellow>{0}</yellow>",
+  "item-range-blocks-description": "<dark_gray>» </dark_gray><gray>Range: </gray><yellow>{0} </yellow><gray>Block</gray>",
+  "item-force-battle-goal-jokers": [
+    "<gold>Number of jokers</gold>",
+    "The *amount* of *jokers*",
+    "hat every player has"
+  ],
+  "item-force-battle-show-scoreboard": [
+    "<aqua>Show Scoreboard</aqua>"
+  ],
+  "item-force-battle-duped-targets": [
+    "<red>Duped Targets</red>",
+    "Targets can occur *multiple times*"
+  ],
+  "item-force-position-battle-radius": [
+    "<aqua>Radius</aqua>",
+    "The *maximum radius*, in which the",
+    "positions will be located"
+  ],
+  "item-difficulty-setting": [
+    "<green>Difficulty</green>",
+    "Sets the *Difficulty*"
+  ],
+  "item-language-setting": [
+    "<aqua>Language</aqua>",
+    "Sets the *Language*"
+  ],
+  "item-language-setting-german": "<white>Deutsch</white>",
+  "item-language-setting-english": "<white>English</white>",
+  "item-death-message-setting-vanilla": "<gold>Vanilla</gold>",
+  "item-backpack-setting-team": "<dark_purple>Team</dark_purple>",
+  "item-backpack-setting-player": "<gold>Player</gold>",
+  "menu-cut-clean-setting-settings": "CutClean",
+  "item-cut-clean-gold-setting": [
+    "<gold>Gold</gold>",
+    "*Gold ore* will be directly dropped as *Gold ingot*"
+  ],
+  "item-cut-clean-iron-setting": [
+    "<gray>Iron</gray>",
+    "*Iron ore* will be directly dropped as *Iron ingot*"
+  ],
+  "item-cut-clean-coal-setting": [
+    "<yellow>Coal</yellow>",
+    "*Coal* will be directly dropped as *torches*"
+  ],
+  "item-cut-clean-flint-setting": [
+    "<yellow>Flint</yellow>",
+    "*Gravel* will always drop *flint*"
+  ],
+  "item-cut-clean-vein-setting": [
+    "<yellow>Ore Veins</yellow>",
+    "*Ore veins* will be directly destroyed"
+  ],
+  "item-cut-clean-inventory-setting": [
+    "<gold>Direct Into Inventory</gold>",
+    "*Items* will be put *directly* into your",
+    "*inventory* instead of dropping"
+  ],
+  "item-cut-clean-food-setting": [
+    "<red>Cooked Food</red>",
+    "*Raw meat* will be directly dropped as *cooked meat*"
+  ],
+  "no-hunger-setting": [
+    "<red>No Hunger</red>",
+    "You don't get *hungry*"
+  ],
+  "pregame-movement-setting": [
+    "<gold>Pregame Movement</gold>",
+    "You can *move* before",
+    "the game has been *started*"
+  ],
+  "item-timber-setting-logs": "<gold>Logs</gold>",
+  "item-timber-setting-logs-and-leaves": "<gold>Logs </gold><gray>and </gray><dark_green>Leaves</dark_green>",
+  "top-command-setting": [
+    "<light_purple>Top Command</light_purple>",
+    "You can *teleport* to the *top*",
+    "of the world or to the *overworld*",
+    "with /top"
+  ],
+  "item-fortress-spawn-setting": [
+    "<red>Fortress Spawn</red>",
+    "When you go into the *nether*",
+    "you will always spawn in a *fortress*"
+  ],
+  "item-bastion-spawn-setting": [
+    "<red>Bastion Spawn</red>",
+    "When you go into the *nether*",
+    "you will always spawn in a *bastion*"
+  ],
+  "item-regeneration-setting-not_natural": "<gold>Not Natural</gold>",
+  "menu-all-blocks-disappear-challenge-settings": "All blocks disappear",
+  "item-all-blocks-disappear-break-challenge": [
+    "<aqua>By breaking</aqua>",
+    "If you *break* a *block* all blocks",
+    "of the same types disappear"
+  ],
+  "item-all-blocks-disappear-place-challenge": [
+    "<aqua>By Placing</aqua>",
+    "If you *place* a *block* all blocks",
+    "of the same types disappear"
+  ],
+  "menu-random-effect-challenge-settings": "Random Effects",
+  "item-random-effect-time-challenge": [
+    "<gold>Interval</gold>",
+    "The *interval* you get the *effect* in"
+  ],
+  "item-random-effect-length-challenge": [
+    "<gold>Length</gold>",
+    "The *length* you have the *effect*"
+  ],
+  "item-random-effect-amplifier-challenge": [
+    "<gold>Amplifier</gold>",
+    "The *amplifier* the effect has"
+  ],
+  "menu-anvil-rain-challenge-settings": "Anvil Rain",
+  "item-anvil-rain-time-challenge": [
+    "<gold>Interval</gold>",
+    "The *interval*, the *anvils* are spawning in"
+  ],
+  "item-anvil-rain-range-challenge": [
+    "<gold>Range</gold>",
+    "The *range* of chunks, the *anvils* are spawning in"
+  ],
+  "item-anvil-rain-count-challenge": [
+    "<gold>Amount</gold>",
+    "The *amount* of anvils that",
+    "are spawning in one chunk"
+  ],
+  "item-anvil-rain-damage-challenge": [
+    "<gold>Damage</gold>",
+    "The *damage* you take from an *anvil*"
+  ],
+  "item-dragon-goal": [
+    "<dark_purple>Ender Dragon</dark_purple>",
+    "Kill the *Ender Dragon* to win"
+  ],
+  "item-wither-goal": [
+    "<light_purple>Wither</light_purple>",
+    "Kill a *Wither* to win"
+  ],
+  "item-elder-guardian-goal": [
+    "<aqua>Elder Guardian</aqua>",
+    "Kill an *Elder Guardian* to win"
+  ],
+  "item-warden-goal": [
+    "<dark_purple>Warden</dark_purple>",
+    "Kill an *Warden* to win"
+  ],
+  "item-collect-wood-goal-overworld": "<green>Overworld</green>",
+  "item-collect-wood-goal-nether": "<red>Nether</red>",
+  "item-collect-wood-goal-both": "<blue>Both</blue>",
+  "item-all-bosses-goal": [
+    "<aqua>All Bosses</aqua>",
+    "Each boss must has to be killed once to win"
+  ],
+  "item-all-bosses-new-goal": [
+    "<dark_purple>All Bosses (+ Warden)</dark_purple>",
+    "Each boss must has to be killed once to win"
+  ],
+  "menu-force-item-battle-goal-settings": "Force Item Battle",
+  "item-force-item-battle-goal-give-item": [
+    "<aqua>Give Item On Skip</aqua>",
+    "If a player *skips* an item,",
+    "they will *receive* it"
+  ],
+  "menu-force-mob-battle-goal-settings": "Force Mob Battle",
+  "menu-force-advancement-battle-goal-settings": "Force Advancement Battle",
+  "menu-force-block-battle-goal-settings": "Force Block Battle",
+  "item-force-block-battle-goal-give-block": [
+    "<aqua>Give Block On Skip</aqua>",
+    "If a player *skips* a block,",
+    "they will *receive* it"
+  ],
+  "menu-force-biome-battle-goal-settings": "Force Biome Battle",
+  "menu-force-damage-battle-goal-settings": "Force Damage Battle",
+  "menu-force-height-battle-goal-settings": "Force Height Battle",
+  "menu-force-position-battle-goal-settings": "Force Position Battle",
+  "menu-extreme-force-battle-goal-settings": "Extreme Force Battle",
+  "item-damage-rule-none": [
+    "<gold>General Damage</gold>",
+    "Sets whether you can get damage or not"
+  ],
+  "item-damage-rule-fire": [
+    "<gold>Fire Damage</gold>",
+    "Sets whether you get *damage* from *Fire* and *Lava*"
+  ],
+  "item-damage-rule-attack": [
+    "<dark_aqua>Attack Damage</dark_aqua>",
+    "Sets whether you get *damage* from *Melee Attacks* of entites"
+  ],
+  "item-damage-rule-projectile": [
+    "<gold>Projectile Damage</gold>",
+    "Sets whether you get *damage* from *Projectiles*"
+  ],
+  "item-damage-rule-fall": [
+    "<white>Fall Damage</white>",
+    "Sets whether you get *damage* from *Fall Damage"
+  ],
+  "item-damage-rule-explosion": [
+    "<red>Explosion Damage</red>",
+    "Sets whether you get *damage* from *Explosions"
+  ],
+  "item-damage-rule-drowning": [
+    "<blue>Drowning Damage</blue>",
+    "Sets whether you get *damage* from *Drowning"
+  ],
+  "item-damage-rule-block": [
+    "<yellow>Block Damage</yellow>",
+    "Sets whether you get *damage* from *Falling Blocks"
+  ],
+  "item-damage-rule-magic": [
+    "<dark_purple>Magic Damage</dark_purple>",
+    "Sets whether you get *damage* from",
+    "*Poison, Wither or other Potions"
+  ],
+  "item-damage-rule-freeze": [
+    "<red>Freeze Damage</red>",
+    "Sets whether you get *damage* from *Freezing*"
+  ],
+  "item-block-material": [
+    "{0}",
+    "Sets whether *{1}* can be used"
+  ],
+  "custom-limit": "You've reached the limit of <yellow>{0} challenges</yellow>",
+  "custom-not-deleted": "Challenge doesn't exist yet!",
+  "custom-saved": "<gray>Challenge </gray><green>saved </green><gray>locally</gray>",
+  "custom-saved-db": [
+    "To save it in your database use <yellow>/db save customs</yellow>",
+    "<red>Warning: </red><gray>Old challenges will be overwritten!</gray>"
+  ],
+  "custom-no-changes": "You haven't made any changes",
+  "custom-name-info": "Type the new name into the chat",
+  "custom-command-info": [
+    "Type the command <yellow>without / </yellow><gray>in chat</gray>",
+    "Allowed commands: <yellow>{0}</yellow>",
+    "<red>Other commands can be allowed in the config</red>"
+  ],
+  "custom-command-not-allowed": "Command <yellow>{0} </yellow><gray>is not set as allowed command in config</gray>",
+  "custom-chars-max_length": "You've reached the limit of {0} characters",
+  "custom-not-loaded": [
+    " ",
+    "There are no currently loaded challenges.",
+    "You're missing your challenges? <yellow>/db load customs</yellow>",
+    "You've got problems with saving them?",
+    "Save your challenges before leaving with <yellow>/db save customs</yellow>",
+    " "
+  ],
+  "custom-main-view-challenges": "<gold>View Challenges</gold>",
+  "custom-main-create-challenge": "<green>Create Challenge</green>",
+  "custom-title-trigger": "Trigger",
+  "custom-title-action": "Action",
+  "custom-title-view": "View",
+  "custom-sub-finish": "<green>Finished</green>",
+  "item-custom-info-delete": [
+    "<red>Delete</red>",
+    "*Warning* This Action cannot be made *undone*"
+  ],
+  "item-custom-info-save": "<green>Save</green>",
+  "item-custom-info-trigger": [
+    "<red>Trigger</red>",
+    "*Click here* to set what has to be happening",
+    "for the *action* to execute"
+  ],
+  "item-custom-info-action": [
+    "<aqua>Action</aqua>",
+    "*Click here* to set what should happen",
+    "once the *trigger* is met"
+  ],
+  "item-custom-info-material": [
+    "<gold>Display Item</gold>",
+    "*Click here* to change the display item"
+  ],
+  "item-custom-info-name": [
+    "<gold>Name</gold>",
+    "*Click here* to change the name via chat",
+    "Max Characters: 50"
+  ],
+  "custom-info-currently": "<gray>Set </gray><dark_gray>» </dark_gray><yellow></yellow>",
+  "custom-info-trigger": "<gray>Trigger</gray>",
+  "custom-info-action": "<gray>Action</gray>",
+  "item-custom-trigger-jump": [
+    "<green>Player Jumps</green>"
+  ],
+  "item-custom-trigger-sneak": [
+    "<green>Player Sneaks</green>"
+  ],
+  "item-custom-trigger-move_block": [
+    "<gold>Player Walks A Block</gold>"
+  ],
+  "item-custom-trigger-death": [
+    "<red>Entity Dies</red>"
+  ],
+  "item-custom-trigger-damage": [
+    "<red>Entity Takes Damage</red>"
+  ],
+  "item-custom-trigger-damage-any": [
+    "<green>Any Cause</green>"
+  ],
+  "item-custom-trigger-damage_by_player": [
+    "<red>Entity Takes Damage By Player</red>"
+  ],
+  "item-custom-trigger-intervall": [
+    "<gold>Interval</gold>"
+  ],
+  "item-custom-trigger-intervall-second": [
+    "<gold>Each Second</gold>"
+  ],
+  "item-custom-trigger-intervall-seconds": [
+    "<gold>Every {0} Seconds</gold>"
+  ],
+  "item-custom-trigger-intervall-minutes": [
+    "<gold>Every {0} Minutes</gold>"
+  ],
+  "item-custom-trigger-block_place": [
+    "<green>Block Placed</green>"
+  ],
+  "item-custom-trigger-block_break": [
+    "<red>Block Destroyed</red>"
+  ],
+  "item-custom-trigger-consume_item": [
+    "<dark_green>Consume Item</dark_green>"
+  ],
+  "item-custom-trigger-pickup_item": [
+    "<aqua>Pickup Item</aqua>"
+  ],
+  "item-custom-trigger-drop_item": [
+    "<blue>Player Dropped Item</blue>"
+  ],
+  "item-custom-trigger-advancement": [
+    "<red>Player Gets Advancement</red>"
+  ],
+  "item-custom-trigger-hunger": [
+    "<dark_green>Player Looses Hunger</dark_green>"
+  ],
+  "item-custom-trigger-move_down": [
+    "<gold>Player Moves Block Down</gold>"
+  ],
+  "item-custom-trigger-move_up": [
+    "<gold>Player Moves Block Up</gold>"
+  ],
+  "item-custom-trigger-move_camera": [
+    "<gold>Moves Camera</gold>"
+  ],
+  "item-custom-trigger-stands_on_specific_block": [
+    "<gold>Player Is On Specific Block</gold>"
+  ],
+  "item-custom-trigger-stands_not_on_specific_block": [
+    "<gold>Player Is Not On Specific Block</gold>"
+  ],
+  "item-custom-trigger-gain_xp": [
+    "<dark_purple>Player Gets XP</dark_purple>"
+  ],
+  "item-custom-trigger-level_up": [
+    "<dark_purple>Player Gets Level</dark_purple>"
+  ],
+  "item-custom-trigger-item_craft": [
+    "<gold>Player Crafts Item</gold>"
+  ],
+  "item-custom-trigger-in_liquid": [
+    "<blue>Player Is In Liquid</blue>"
+  ],
+  "item-custom-trigger-get_item": [
+    "<green>Get Item</green>",
+    "Action will be executed *every time*",
+    "item is clicked or picked up"
+  ],
+  "item-custom-action-cancel": [
+    "<dark_red>Cancel Trigger</dark_red>",
+    "Prevent that the trigger will be executed",
+    "Non preventable Trigger: *Jump*, *Sneak*, *Death*",
+    "*Advancement*, *Level Up*, *In Liquid*"
+  ],
+  "item-custom-action-command": [
+    "<dark_red>Execute Command</dark_red>",
+    "Make players execute commands.",
+    "Commands are executed for players via */execute as*.",
+    "Allowed commands can be set in plugin config.",
+    "The player doesn't need the *permission* to the commands.",
+    "Player aren't able to execute *plugin commands*."
+  ],
+  "item-custom-action-kill": [
+    "<dark_red>Kill</dark_red>",
+    "Kill entities"
+  ],
+  "item-custom-action-damage": [
+    "<red>Damage</red>",
+    "Hurt entities"
+  ],
+  "item-custom-action-heal": [
+    "<green>Heal</green>",
+    "Restore entity health"
+  ],
+  "item-custom-action-hunger": [
+    "<gold>Hunger</gold>",
+    "Make Entities get hunger"
+  ],
+  "item-custom-action-max_health": [
+    "<red>Change Max Health</red>",
+    "Modify the max health of players.",
+    "Will be reset with */gamestate reset*"
+  ],
+  "item-custom-action-max_health-offset": [
+    "<red>Health Change</red>",
+    "Choose how the max health should be changed"
+  ],
+  "item-custom-action-spawn_entity": [
+    "<dark_aqua>Spawn Entity</dark_aqua>",
+    "Spawn an entity with a specific type"
+  ],
+  "item-custom-action-random_mob": [
+    "<gold>Random Entity</gold>",
+    "Spawn a random entity"
+  ],
+  "item-custom-action-random_item": [
+    "<aqua>Random Item</aqua>",
+    "Give random items to players"
+  ],
+  "item-custom-action-uncraft_inventory": [
+    "<yellow>Uncraft Inventory</yellow>",
+    "Make players inventories uncraft"
+  ],
+  "item-custom-action-boost_in_air": [
+    "<white>Boost In Air</white>",
+    "Boost entities into the air"
+  ],
+  "item-custom-action-boost_in_air-strength": [
+    "<white>Amplifier</white>"
+  ],
+  "item-custom-action-potion_effect": [
+    "<light_purple>Potion Effect</light_purple>",
+    "Add a potion effect to entities"
+  ],
+  "item-custom-action-permanent_effect": [
+    "<gold>Permanent Potion Effect</gold>",
+    "Add a permanent potion effect to players.",
+    "Uses the settings of the permanent effect challenge."
+  ],
+  "item-custom-action-random_effect": [
+    "<light_purple>Random Potion Effect</light_purple>",
+    "Add a random potion effect to entities"
+  ],
+  "item-custom-action-clear_inventory": [
+    "<red>Clear Inventory</red>",
+    "Clear the inventory of players"
+  ],
+  "item-custom-action-drop_random_item": [
+    "<green>Drop Item From Inventory</green>",
+    "Drop a random item from the inventory onto the floor"
+  ],
+  "item-custom-action-remove_random_item": [
+    "<red>Remove Item From Inventory</red>",
+    "Remove a random item from the inventory"
+  ],
+  "item-custom-action-swap_random_item": [
+    "<gold>Swap Items In Inventory</gold>",
+    "Swap two items in the inventory"
+  ],
+  "item-custom-action-freeze": [
+    "<aqua>Freeze</aqua>",
+    "Temporarily freeze mobs",
+    "Uses the settings of the freeze challenge"
+  ],
+  "item-custom-action-invert_health": [
+    "<red>Invert Health</red>",
+    "Invert the current health of players"
+  ],
+  "item-custom-action-water_mlg": [
+    "<blue>Water MLG</blue>",
+    "All players have to do a water mlg to survive"
+  ],
+  "item-custom-action-jnr": [
+    "<gold>Jump And Run</gold>",
+    "A random player has to a a jump and run",
+    "that gets longer everytime"
+  ],
+  "item-custom-action-win": [
+    "<gold>Win</gold>",
+    "The challenge will be won *by specific players*"
+  ],
+  "item-custom-action-random_hotbar": [
+    "<yellow>Random Hotbar</yellow>",
+    "The inventory is emptied and the player",
+    "gets a full hotbar of random items"
+  ],
+  "item-custom-action-modify_border": [
+    "<aqua>Modify World Border</aqua>",
+    "Make the world border *bigger* or *tinier*"
+  ],
+  "item-custom-action-modify_border-change": [
+    "<light_purple>Change</light_purple>"
+  ],
+  "item-custom-action-swap_mobs": [
+    "<dark_purple>Swap mobs</dark_purple>",
+    "Swap a mob with another of the same world"
+  ],
+  "item-custom-action-place_structure": [
+    "<green>Place Structure</green>",
+    "Places a structure"
+  ],
+  "item-custom-action-place_structure-random": "<aqua>Random structure</aqua>",
+  "item-custom-setting-target-current": [
+    "<gold>Current Entity</gold>",
+    "The action will be executed for the *current entity*"
+  ],
+  "item-custom-setting-target-every_mob": [
+    "<dark_red>Every Mob</dark_red>",
+    "The action will be executed for *every mob*"
+  ],
+  "item-custom-setting-target-every_mob_except_current": [
+    "<dark_red>Every Mob Except Current</dark_red>",
+    "The action will be executed for *every mob*",
+    "*except* the current one"
+  ],
+  "item-custom-setting-target-every_mob_except_players": [
+    "<dark_red>Every Mob Except Players</dark_red>",
+    "The action will be executed for *every mob except players*"
+  ],
+  "item-custom-setting-target-random_player": [
+    "<dark_purple>Random Player</dark_purple>",
+    "The action will be executed for a *random player*"
+  ],
+  "item-custom-setting-target-every_player": [
+    "<red>Every Player</red>",
+    "The action will be executed for *every player*"
+  ],
+  "item-custom-setting-target-current_player": [
+    "<green>Current Player</green>",
+    "The action will be executed for the *active player*.",
+    "<gray><italic>If the current entity is not a player nothing will be happen</italic></gray>"
+  ],
+  "item-custom-setting-target-console": [
+    "<dark_red>Console</dark_red>",
+    "The action will be executed for the *console*"
+  ],
+  "item-custom-setting-entity_type-any": "<red>Any Entity</red>",
+  "item-custom-setting-entity_type-player": "<green>Player</green>",
+  "item-custom-setting-block-any": "<dark_green>Any Block</dark_green>",
+  "item-custom-setting-item-any": "<dark_green>Any Item</dark_green>",
+  "custom-subsetting-target_entity": "Target Entity",
+  "custom-subsetting-entity_type": "Entity Type",
+  "custom-subsetting-liquid": "Liquid",
+  "custom-subsetting-time": "Time",
+  "custom-subsetting-damage_cause": "Damage Cause",
+  "custom-subsetting-amount": "Amount",
+  "custom-subsetting-value": "Value Editor",
+  "custom-subsetting-health_offset": "Change",
+  "custom-subsetting-length": "Length",
+  "custom-subsetting-amplifier": "Amplifier",
+  "custom-subsetting-change": "Change",
+  "custom-subsetting-swap_targets": "Swap Targets"
+}

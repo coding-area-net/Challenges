@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class MostOresGoal extends PointsGoal {
 
   public MostOresGoal() {
-    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.COAL_ORE), "most-ores-goal");
+    super(SettingCategory.SCORE_POINTS, new ItemStack(Material.COAL_ORE), "most-ores");
   }
 
   private int getPointsForOre(Material material) {

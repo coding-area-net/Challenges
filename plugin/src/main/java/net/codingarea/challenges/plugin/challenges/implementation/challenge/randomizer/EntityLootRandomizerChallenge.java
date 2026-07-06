@@ -33,7 +33,7 @@ public class EntityLootRandomizerChallenge extends RandomizerSetting implements 
   protected Map<EntityType, LootTable> randomization;
 
   public EntityLootRandomizerChallenge() {
-    super(MenuType.CHALLENGES, new ItemStack(Material.FURNACE_MINECART), "entity-loot-randomizer-challenge");
+    super(MenuType.CHALLENGES, new ItemStack(Material.FURNACE_MINECART), "entity-loot-randomizer");
   }
 
   @Override
@@ -119,7 +119,7 @@ public class EntityLootRandomizerChallenge extends RandomizerSetting implements 
   public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 
     if (!isEnabled()) {
-      MessageKey.of("command-searchloot-disabled").send(sender, Prefix.CHALLENGES);
+      getChallengeMessageKey("command-disabled").send(sender, Prefix.CHALLENGES);
       return;
     }
 
@@ -152,9 +152,9 @@ public class EntityLootRandomizerChallenge extends RandomizerSetting implements 
     LootTable droppedLootTable = getLootTableForEntity(entityType);
 
     if (optionalEntity.isPresent()) {
-      MessageKey.of("command-searchloot-result").send(sender, Prefix.CHALLENGES, entityType, droppedLootTable, optionalEntity.get());
+      getChallengeMessageKey("command-result").send(sender, Prefix.CHALLENGES, entityType, droppedLootTable, optionalEntity.get());
     } else {
-      MessageKey.of("command-searchloot-nothing").send(sender, Prefix.CHALLENGES, entityType);
+      getChallengeMessageKey("command-nothing").send(sender, Prefix.CHALLENGES, entityType);
     }
 
   }

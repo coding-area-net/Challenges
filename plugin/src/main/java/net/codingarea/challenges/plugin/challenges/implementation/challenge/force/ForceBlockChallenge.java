@@ -4,7 +4,6 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.EndingForceChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -50,13 +49,13 @@ public class ForceBlockChallenge extends EndingForceChallenge {
   protected BiConsumer<BossBarInstance, Player> setupBossbar() {
     return (bossbar, player) -> {
       if (getState() == WAITING) {
-        bossbar.setTitle(MessageKey.of("bossbar-force-block-waiting"));
+        bossbar.setTitle(getChallengeMessageKey("bossbar-waiting"));
         return;
       }
 
       bossbar.setColor(BossBar.Color.GREEN);
       bossbar.setProgress(getProgress());
-      bossbar.setTitle(MessageKey.of("bossbar-force-block-instruction"), block, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation()));
+      bossbar.setTitle(getChallengeMessageKey("bossbar-instruction"), block, ChallengeAPI.formatTime(getSecondsLeftUntilNextActivation()));
     };
   }
 
@@ -75,12 +74,12 @@ public class ForceBlockChallenge extends EndingForceChallenge {
 
   @Override
   protected void broadcastFailedMessage(@NotNull Player player) {
-    Message.forName("force-block-fail").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), player.getLocation().subtract(0, 1, 0).getBlock().getType());
+    getChallengeMessageKey("fail").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), player.getLocation().subtract(0, 1, 0).getBlock().getType());
   }
 
   @Override
   protected void broadcastSuccessMessage() {
-    Message.forName("force-block-success").broadcast(Prefix.CHALLENGES);
+    getChallengeMessageKey("success").broadcast(Prefix.CHALLENGES);
   }
 
   @Override

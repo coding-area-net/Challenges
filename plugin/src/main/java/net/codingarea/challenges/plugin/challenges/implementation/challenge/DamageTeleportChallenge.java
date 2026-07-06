@@ -23,7 +23,7 @@ public class DamageTeleportChallenge extends SettingModifier {
   private static final int PLAYER = 1, EVERYONE = 2;
 
   public DamageTeleportChallenge() {
-    super(MenuType.CHALLENGES, null, 1, 2, new ItemStack(Material.SHULKER_SHELL), "item-damage-teleport-challenge");
+    super(MenuType.CHALLENGES, null, 1, 2, new ItemStack(Material.SHULKER_SHELL), "damage-teleport");
   }
 
 //  @NotNull

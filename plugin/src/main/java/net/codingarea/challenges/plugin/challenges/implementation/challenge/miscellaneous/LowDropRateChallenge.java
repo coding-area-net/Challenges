@@ -19,7 +19,7 @@ public class LowDropRateChallenge extends SettingModifier {
   private final Random random = new Random();
 
   public LowDropRateChallenge() {
-    super(MenuType.CHALLENGES, null, 9, new ItemStack(Material.WOODEN_AXE), "low-drop-rate-challenge");
+    super(MenuType.CHALLENGES, null, 9, new ItemStack(Material.WOODEN_AXE), "low-drop-rate");
   }
 
 //  @Nullable

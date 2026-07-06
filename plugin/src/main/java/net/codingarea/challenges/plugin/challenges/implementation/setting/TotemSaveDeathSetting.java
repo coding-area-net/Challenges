@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public class TotemSaveDeathSetting extends Setting {
 
   public TotemSaveDeathSetting() {
-    super(MenuType.SETTINGS, null, new ItemStack(Material.TOTEM_OF_UNDYING), "setting-totem-save-death");
+    super(MenuType.SETTINGS, null, new ItemStack(Material.TOTEM_OF_UNDYING), "totem-save-death");
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

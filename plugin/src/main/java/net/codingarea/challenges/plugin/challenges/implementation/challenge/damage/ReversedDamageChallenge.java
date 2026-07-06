@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public class ReversedDamageChallenge extends Setting {
 
   public ReversedDamageChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, new ItemStack(Material.GOLDEN_SWORD), "reversed-damange-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, new ItemStack(Material.GOLDEN_SWORD), "reversed-damage");
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

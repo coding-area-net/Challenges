@@ -26,7 +26,7 @@ public class ForceAdvancementBattleGoal extends ForceBattleGoal<AdvancementTarge
 
   public ForceAdvancementBattleGoal() {
 //    super(Message.forName("menu-force-advancement-battle-goal-settings"));
-    super(new ItemStack(Material.EXPERIENCE_BOTTLE), "force-advancement-battle-goal");
+    super(new ItemStack(Material.EXPERIENCE_BOTTLE), "force-advancement-battle");
   }
 
   private void resetAdvancementProgress(Player player, Advancement advancement) {

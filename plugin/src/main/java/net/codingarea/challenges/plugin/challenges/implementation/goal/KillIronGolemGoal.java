@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class KillIronGolemGoal extends KillEntityGoal {
 
   public KillIronGolemGoal() {
-    super(SettingCategory.KILL_ENTITY, EntityType.IRON_GOLEM, new ItemStack(Material.IRON_INGOT), "iron-golem-goal");
+    super(SettingCategory.KILL_ENTITY, EntityType.IRON_GOLEM, new ItemStack(Material.IRON_INGOT), "iron-golem");
     this.killerNeeded = true;
   }
 

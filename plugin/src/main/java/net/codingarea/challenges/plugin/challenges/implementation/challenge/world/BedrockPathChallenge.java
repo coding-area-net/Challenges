@@ -16,7 +16,7 @@ public class BedrockPathChallenge extends Setting {
 
   public BedrockPathChallenge() {
     super(MenuType.CHALLENGES, SettingCategory.WORLD, new StandardItemBuilder.LeatherArmorBuilder(Material.LEATHER_BOOTS).setColor(Color.GRAY).build(),
-      "bedrock-path-challenge");
+      "bedrock-path");
   }
 
   @EventHandler

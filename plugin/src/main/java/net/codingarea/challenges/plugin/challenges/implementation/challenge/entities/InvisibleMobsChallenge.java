@@ -25,7 +25,7 @@ public class InvisibleMobsChallenge extends Setting {
 
   public InvisibleMobsChallenge() {
     super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new StandardItemBuilder.PotionBuilder(Material.POTION).setColor(Color.WHITE).build(),
-      "invsible-mobs-challenge");
+      "invisible-mobs");
   }
 
   @Override

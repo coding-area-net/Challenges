@@ -18,7 +18,7 @@ import java.util.Collection;
 public class AllMobsToDeathPoint extends Setting {
 
   public AllMobsToDeathPoint() {
-    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.SPAWNER), "all-mobs-to-deaht-position");
+    super(MenuType.CHALLENGES, SettingCategory.ENTITIES, new ItemStack(Material.SPAWNER), "all-mobs-to-death-position");
   }
 
   @EventHandler

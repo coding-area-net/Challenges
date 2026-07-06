@@ -80,6 +80,9 @@ public class LanguageSetting extends Modifier implements SenderCommand, Complete
     }
 
     super.handleClick(info);
+
+    String languageTag = VALUE_TO_TAG.get(getValue());
+    getChallengeMessageKey("command-changing").send(info.getPlayer(), Prefix.CHALLENGES, languageTag);
   }
 
   @Override

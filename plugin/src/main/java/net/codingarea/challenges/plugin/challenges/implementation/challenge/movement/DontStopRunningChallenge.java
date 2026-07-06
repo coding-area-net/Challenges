@@ -46,7 +46,7 @@ public class DontStopRunningChallenge extends SettingModifier {
 
       String time = "§e" + timeLeft + " §7" + (timeLeft == 1 ? Message.forName("second").asString() : Message.forName("seconds").asString());
 
-      bossbar.setTitle(Message.forName("bossbar-dont-stop-running").asString(time));
+      bossbar.setTitle(getChallengeMessageKey("bossbar"), time);
     });
     bossbar.show();
   }
@@ -74,7 +74,7 @@ public class DontStopRunningChallenge extends SettingModifier {
     broadcastFiltered(player -> {
       Integer count = playerStandingCount.getOrDefault(player, 0);
       if (count >= getValue()) {
-        Message.forName("stopped-moving").broadcast(Prefix.CHALLENGES, NameHelper.getName(player));
+        getChallengeMessageKey("stopped-moving").broadcast(Prefix.CHALLENGES, NameHelper.getName(player));
         playerStandingCount.remove(player);
         ChallengeHelper.kill(player);
         return;

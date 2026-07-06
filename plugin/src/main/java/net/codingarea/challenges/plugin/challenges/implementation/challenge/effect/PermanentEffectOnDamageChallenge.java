@@ -4,7 +4,6 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModif
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.legacy.Message;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -41,7 +40,7 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
   private final Random random = new Random();
 
   public PermanentEffectOnDamageChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.EFFECT, 1, 2, new ItemStack(Material.MAGMA_CREAM), "permanent-effect-on-damage-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.EFFECT, 1, 2, new ItemStack(Material.MAGMA_CREAM), "permanent-effect-on-damage");
   }
 
   //  @NotNull
@@ -143,9 +142,9 @@ public class PermanentEffectOnDamageChallenge extends SettingModifier {
     }
 
     if (effectsToEveryone()) {
-      MessageKey.of("new-effect").broadcast(Prefix.CHALLENGES, potionEffectType, amplifier);
+      getChallengeMessageKey("new-effect").broadcast(Prefix.CHALLENGES, potionEffectType, amplifier);
     } else {
-      MessageKey.of("new-effect").send(player, Prefix.CHALLENGES, potionEffectType, amplifier);
+      getChallengeMessageKey("new-effect").send(player, Prefix.CHALLENGES, potionEffectType, amplifier);
     }
 
     getGameStateData().set(path, effects);

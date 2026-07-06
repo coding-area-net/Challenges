@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets;
 
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.ExtremeForceBattleGoal;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
 import net.codingarea.challenges.plugin.utils.misc.EntityUtils;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
@@ -41,13 +41,13 @@ public class BlockTarget extends ForceTarget<Material> {
   }
 
   @Override
-  public Message getNewTargetMessage() {
-    return Message.forName("force-block-battle-new-block");
+  public MessageKey getNewTargetMessage() {
+    return MessageKey.of("force-block-battle-new-block");
   }
 
   @Override
-  public Message getCompletedMessage() {
-    return Message.forName("force-block-battle-found");
+  public MessageKey getCompletedMessage() {
+    return MessageKey.of("force-block-battle-found");
   }
 
   @Override
@@ -56,8 +56,8 @@ public class BlockTarget extends ForceTarget<Material> {
   }
 
   @Override
-  public Message getScoreboardDisplayMessage() {
-    return Message.forName("force-battle-block-target-display");
+  public MessageKey getScoreboardDisplayMessage() {
+    return MessageKey.of("force-battle-block-target-display");
   }
 
   @Override

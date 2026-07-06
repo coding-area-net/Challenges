@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class FoodLaunchChallenge extends SettingModifier {
 
   public FoodLaunchChallenge() {
-    super(MenuType.CHALLENGES, null, 1, 10, 2, new ItemStack(Material.CAKE), "food-launch-challenge");
+    super(MenuType.CHALLENGES, null, 1, 10, 2, new ItemStack(Material.CAKE), "consume-launch");
   }
 
 //  @Nullable

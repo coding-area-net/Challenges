@@ -1,27 +1,37 @@
 package net.codingarea.challenges.plugin.management.server.scoreboard;
 
+import io.papermc.paper.scoreboard.numbers.NumberFormat;
 import lombok.Getter;
 import lombok.ToString;
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.LanguageProvider;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.impl.format.ComponentArguments;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
-import net.codingarea.commons.common.misc.StringUtils;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 
 public final class ChallengeScoreboard {
 
+  public static final int MAX_LINES = 15;
+
   private final Map<Player, Objective> objectives = new ConcurrentHashMap<>();
-  private BiConsumer<ScoreboardInstance, Player> content = (scoreboard, player) -> {
+  private BiConsumer<ScoreboardInstance, Player> content = (_, _) -> {
   };
 
   public void setContent(@NotNull BiConsumer<ScoreboardInstance, Player> content) {
@@ -55,15 +65,15 @@ public final class ChallengeScoreboard {
       ScoreboardInstance instance = new ScoreboardInstance();
       content.accept(instance, player);
 
-      Collection<String> lines = instance.getLines();
+      LanguageProvider languageProvider = Challenges.getInstance().getTranslationManager().getLanguageProvider();
+      Locale locale = languageProvider.getPlayerLanguage(player);
+
+      ArrayList<Component> lines = instance.getLines(locale);
       if (lines.isEmpty()) {
         return;
       }
 
       Scoreboard scoreboard = player.getScoreboard();
-      if (Bukkit.getScoreboardManager() == null) {
-        return;
-      }
       if (scoreboard == Bukkit.getScoreboardManager().getMainScoreboard()) {
         player.setScoreboard(scoreboard = Bukkit.getScoreboardManager().getNewScoreboard());
       }
@@ -75,12 +85,14 @@ public final class ChallengeScoreboard {
         unregister(oldObjective);
       }
 
-      Objective objective = registerDummyObjective(scoreboard, name, String.valueOf(instance.getTitle()));
-      int score = lines.size();
-      for (String line : lines) {
-        if (line.isEmpty()) line = StringUtils.repeat(' ', score + 1);
-        score--;
-        objective.getScore(line).setScore(score);
+      Component title = instance.getTitle().getLocalizableKey().asComponent(player, instance.getTitle().getLocalizableArgs());
+      Objective objective = registerDummyObjective(scoreboard, name, title);
+      for (int i = 0; i < lines.size(); i++) {
+        Component line = lines.get(i);
+        Score entry = objective.getScore(String.valueOf(i));
+        entry.customName(line);
+        entry.setScore(MAX_LINES - i);
+        entry.numberFormat(NumberFormat.blank());
       }
 
       objective.setDisplaySlot(DisplaySlot.SIDEBAR);
@@ -115,48 +127,85 @@ public final class ChallengeScoreboard {
 
   @NotNull
   @SuppressWarnings("deprecation")
-  private Objective registerDummyObjective(@NotNull Scoreboard scoreboard, @NotNull String name, @NotNull String displayName) {
-//    try {
-//      return scoreboard.registerNewObjective(name, Criteria.DUMMY, displayName);
-//    } catch (Error ignored) {
+  private Objective registerDummyObjective(@NotNull Scoreboard scoreboard, @NotNull String name, @NotNull Component displayName) {
+    try {
+      return scoreboard.registerNewObjective(name, org.bukkit.scoreboard.Criteria.DUMMY, displayName);
+    } catch (Error ignored) {
       // replacement not yet available in this version, use deprecated method
       return scoreboard.registerNewObjective(name, "dummy", displayName);
-//    }
+    }
   }
 
   @ToString
   public static final class ScoreboardInstance {
 
-    private final String[] lines = new String[15];
+    private final Object[] lines = new Object[MAX_LINES]; // either LocalizableMessage or Component
     @Getter
-    private String title = Message.forName("scoreboard-title").asString();
+    private LocalizableMessage title = MessageKey.of("scoreboard.title");
     private int linesIndex = 0;
 
     private ScoreboardInstance() {
     }
 
     @NotNull
-    public ScoreboardInstance addLine(@NotNull String text) {
-      if (linesIndex >= lines.length)
-        throw new IllegalStateException("All lines are already used! (" + lines.length + ")");
-      lines[linesIndex++] = text;
+    public ScoreboardInstance addEmptyLine() {
+      return addLine(Component.empty());
+    }
+
+    public ScoreboardInstance addLine(@NotNull Component text) {
+      addLine((Object) text);
       return this;
     }
 
     @NotNull
-    public Collection<String> getLines() {
-      List<String> list = new ArrayList<>();
-      for (String line : lines) {
+    public ScoreboardInstance addLine(@NotNull LocalizableMessage line) {
+      addLine((Object) line);
+      return this;
+    }
+
+    @NotNull
+    public ScoreboardInstance addLine(@NotNull MessageKey line, @NotNull Object... args) {
+      if (args.length == 0) {
+        addLine((Object) line);
+      } else {
+        addLine((Object) line.withArgs(args));
+      }
+      return this;
+    }
+
+    private void addLine(@NotNull Object lineObj) {
+      if (linesIndex >= lines.length)
+        throw new IllegalStateException("All lines are already used! (" + lines.length + ")");
+      lines[linesIndex++] = lineObj;
+    }
+
+    @NotNull
+    public ArrayList<Component> getLines(@NotNull Locale locale) {
+      ArrayList<Component> list = new ArrayList<>(lines.length);
+      for (Object line : lines) {
         if (line == null) continue;
-        list.add(line);
+
+        if (line instanceof LocalizableMessage message) {
+          list.add(message.getLocalizableKey().asComponent(locale, message.getLocalizableArgs()));
+        } else {
+          list.add(ComponentArguments.convertToComponent(line));
+        }
       }
       return list;
     }
 
     @NotNull
-    public ScoreboardInstance setTitle(@NotNull String title) {
+    public ScoreboardInstance setTitle(@NotNull LocalizableMessage title) {
       this.title = title;
       return this;
+    }
+
+    public int getRemainingLines() {
+      return MAX_LINES - linesIndex;
+    }
+
+    public int getTotalLines() {
+      return linesIndex + 1;
     }
   }
 

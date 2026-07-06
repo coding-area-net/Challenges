@@ -1,7 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets;
 
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.ExtremeForceBattleGoal;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.advancement.Advancement;
@@ -43,13 +43,13 @@ public class AdvancementTarget extends ForceTarget<Advancement> {
   }
 
   @Override
-  public Message getNewTargetMessage() {
-    return Message.forName("force-advancement-battle-new-advancement");
+  public MessageKey getNewTargetMessage() {
+    return MessageKey.of("force-advancement-battle-new-advancement");
   }
 
   @Override
-  public Message getCompletedMessage() {
-    return Message.forName("force-advancement-battle-completed");
+  public MessageKey getCompletedMessage() {
+    return MessageKey.of("force-advancement-battle-completed");
   }
 
   @Override
@@ -58,8 +58,8 @@ public class AdvancementTarget extends ForceTarget<Advancement> {
   }
 
   @Override
-  public Message getScoreboardDisplayMessage() {
-    return Message.forName("force-battle-advancement-target-display");
+  public MessageKey getScoreboardDisplayMessage() {
+    return MessageKey.of("force-battle-advancement-target-display");
   }
 
   @Override

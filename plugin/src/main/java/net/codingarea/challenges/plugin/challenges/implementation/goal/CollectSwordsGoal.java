@@ -15,7 +15,7 @@ import java.util.List;
 public class CollectSwordsGoal extends ItemCollectionGoal {
 
   public CollectSwordsGoal() {
-    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.DIAMOND_SWORD), "collect-swords-goal");
+    super(SettingCategory.FASTEST_TIME, new ItemStack(Material.DIAMOND_SWORD), "collect-swords");
     List<Material> targets = new ArrayList<>(Arrays.asList(
       Material.WOODEN_SWORD, Material.STONE_SWORD,
       Material.IRON_SWORD, Material.GOLDEN_SWORD,

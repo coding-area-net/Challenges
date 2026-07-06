@@ -55,7 +55,7 @@ public class BackCommand implements PlayerCommand, TabCompleter, Listener {
 
     int countToTeleport = Math.min(list.size(), count);
 
-    Message.forName("command-back-teleported" + (countToTeleport > 1 ? "-multiple" : ""))
+    MessageKey.of("command-back-teleported" + (countToTeleport > 1 ? "-multiple" : ""))
       .send(player, Prefix.CHALLENGES, countToTeleport);
     Location location = list.get(countToTeleport - 1);
     inTeleport = true;

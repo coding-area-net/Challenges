@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class HigherJumpsChallenge extends Setting {
 
   public HigherJumpsChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, new ItemStack(Material.RABBIT_FOOT), "higher-jumps-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, new ItemStack(Material.RABBIT_FOOT), "higher-jumps");
   }
 
   @EventHandler(priority = EventPriority.NORMAL)

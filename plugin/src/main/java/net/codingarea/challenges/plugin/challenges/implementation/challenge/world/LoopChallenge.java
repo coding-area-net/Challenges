@@ -49,7 +49,7 @@ public class LoopChallenge extends Setting {
   private static final Map<Loop, Long> loops = new HashMap<>();
 
   public LoopChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.LEAD), "loop-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.LEAD), "loop");
   }
 
   @ScheduledTask(ticks = 1, async = false)
@@ -75,7 +75,7 @@ public class LoopChallenge extends Setting {
   private void clearLoops() {
     if (loops.isEmpty()) return;
     broadcast(player -> new SoundSample().addSound(Sound.ENTITY_ITEM_BREAK, 0.5f).play(player));
-    Message.forName("loops-cleared").broadcast(Prefix.CHALLENGES, loops.size());
+    getChallengeMessageKey("cleared").broadcast(Prefix.CHALLENGES, loops.size());
     loops.clear();
   }
 

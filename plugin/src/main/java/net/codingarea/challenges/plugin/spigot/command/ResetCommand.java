@@ -35,11 +35,11 @@ public class ResetCommand implements SenderCommand, Completer {
     if (confirmReset && (args.length < 1 || !args[0].equalsIgnoreCase("confirm")) || (args.length > 0 && !args[0].equalsIgnoreCase("confirm"))) {
       if (args.length > 0 && args[0].equalsIgnoreCase("settings")) {
         Challenges.getInstance().getChallengeManager().restoreDefaults();
-        Message.forName("config-reset").broadcast(Prefix.CHALLENGES);
+        MessageKey.of("config-reset").broadcast(Prefix.CHALLENGES);
         return;
       } else if (args.length > 0 && args[0].equalsIgnoreCase("customs")) {
         Challenges.getInstance().getCustomChallengesLoader().resetChallenges();
-        Message.forName("custom_challenges-reset").broadcast(Prefix.CHALLENGES);
+        MessageKey.of("custom_challenges-reset").broadcast(Prefix.CHALLENGES);
         return;
       }
 

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.utils.bukkit.container.PlayerData;
 import net.codingarea.challenges.plugin.utils.bukkit.nms.ReflectionUtil;
@@ -85,9 +86,11 @@ public final class WorldManager {
 
     resetConfigs(seed);
 
-    String requester = requestedBy instanceof Player ? NameHelper.getName((Player) requestedBy) : "§4§lConsole";
-    String kickMessage = Message.forName(restartOnReset ? "server-reset-restart" : "server-reset-stop").asString(requester);
-    Bukkit.getOnlinePlayers().forEach(player -> player.kickPlayer(kickMessage));
+    Object requester = requestedBy instanceof Player ? requestedBy : "<dark_red><b>Console<dark";
+    MessageKey disconnectKey = MessageKey.of(restartOnReset ? "server-reset.restart" : "server-reset.stop");
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      player.kick(disconnectKey.asComponent(player, requester));
+    }
 
     Bukkit.getScheduler().runTaskLater(Challenges.getInstance(), this::stopServerNow, 3);
   }

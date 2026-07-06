@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 public class BlockBreakDamageChallenge extends SettingModifier {
 
   public BlockBreakDamageChallenge() {
-    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 60, new ItemStack(Material.GOLDEN_PICKAXE), "item-block-break-damage-challenge");
+    super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 60, new ItemStack(Material.GOLDEN_PICKAXE), "block-break-damage");
   }
 
 //  @Nullable

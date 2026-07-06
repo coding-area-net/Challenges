@@ -6,6 +6,7 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModif
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -42,7 +43,7 @@ public class RaceGoal extends SettingModifierGoal {
   private Location goal;
 
   public RaceGoal() {
-    super(MenuType.GOAL, SettingCategory.FASTEST_TIME, 1, 30, 5, new ItemStack(Material.STRUCTURE_VOID), "race-goal");
+    super(MenuType.GOAL, SettingCategory.FASTEST_TIME, 1, 30, 5, new ItemStack(Material.STRUCTURE_VOID), "race");
   }
 
   @Override
@@ -121,7 +122,7 @@ public class RaceGoal extends SettingModifierGoal {
     if (event.getTo().getWorld() != goal.getWorld()) return;
     if (event.getTo() == null) return;
     if (BlockUtils.isSameBlockLocationIgnoreHeight(event.getTo(), goal)) {
-      Message.forName("race-goal-reached").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+      MessageKey.of("race-goal-reached").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
       ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, () -> Collections.singletonList(event.getPlayer()));
       ParticleUtils.spawnParticleCylinderAroundRadius(Challenges.getInstance(), event.getTo(),
         MinecraftNameWrapper.ENTITY_EFFECT, null, 0.75, 2);
