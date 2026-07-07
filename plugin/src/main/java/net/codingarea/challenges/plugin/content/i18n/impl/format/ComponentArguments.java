@@ -42,6 +42,14 @@ public final class ComponentArguments {
   public static Component getDetailedMaterialTranslatable(@NotNull Material material) {
     String key = material.translationKey(); // e.g., "item.minecraft.music_disc_strad"
     Component baseComponent = Component.translatable(key);
+
+//    try {
+//      baseComponent = ComponentSprites.createSpriteComponent(material).appendSpace().append(baseComponent);
+//    } catch (Throwable ex) {
+//      ex.printStackTrace();
+//      // sprites (and appendSpace) not available in this paper/adventure version
+//    }
+
     String name = material.name();
 
     if (name.startsWith("MUSIC_DISC_")) {

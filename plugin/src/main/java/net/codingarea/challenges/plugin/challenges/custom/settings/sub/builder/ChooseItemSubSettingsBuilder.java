@@ -3,9 +3,10 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder;
 import com.google.common.collect.Lists;
 import lombok.Getter;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
-import net.codingarea.challenges.plugin.management.menu.generator.legacy.MenuGenerator;
-import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.IParentCustomGenerator;
-import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.SubSettingChooseMenuGenerator;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.management.menu.generator.AbstractMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.choose.SubSettingChooseMenuGenerator;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -30,7 +31,7 @@ public class ChooseItemSubSettingsBuilder extends GeneratorSubSettingsBuilder {
   }
 
   @Override
-  public MenuGenerator getGenerator(Player player, IParentCustomGenerator parentGenerator, String title) {
+  public AbstractMenuGenerator getGenerator(Player player, IParentCustomGenerator parentGenerator, LocalizableMessage title) {
     return new SubSettingChooseMenuGenerator(getKey(), parentGenerator, getSettings(), title);
   }
 

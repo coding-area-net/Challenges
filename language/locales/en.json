@@ -4,7 +4,7 @@
     "unknown": "unknown",
     "disabled": "<red>Disabled</red>",
     "enabled": "<green>Enabled</green>",
-    "customized": "<gold>Customize</gold>",
+    "customize": "<gold>Customize</gold>",
     "console": "<dark_red><b>Console</b></dark_red>"
   },
   "language": {

@@ -14,12 +14,16 @@
     "time": "Zeit",
     "disabled": "<red>Deaktiviert</red>",
     "enabled": "<green>Aktiviert</green>",
-    "customized": "<gold>Anpassen</gold>",
+    "customize": "<gold>Anpassen</gold>",
     "console": "<dark_red><b>Konsole</b></dark_red>"
   },
   "language": {
     "de": "Deutsch",
     "en": "Englisch"
+  },
+  "suffix": {
+    "new-challenge": "{@format('<b><gradient:#0BC418:#5CFC60>Neu!</gradient></b>')}",
+    "updated-challenge": "{@format('<b><gradient:#FFEE00:#C7FC4A>Update!</gradient></b>')}"
   },
   "timer": {
     "bar": {
@@ -127,9 +131,11 @@
       "name": "Individuelle Challenges",
       "sub-name": "Individuell",
       "selected-format": "<gray>Eingestellt</gray> <dark_gray>{@symbol.circle}</dark_gray> <yellow>{0}</yellow>",
+      "trigger-format": "<gray>Auslöser</gray> <dark_gray>{@symbol.circle}</dark_gray> {0}",
+      "action-format": "<gray>Aktion</gray> <dark_gray>{@symbol.circle}</dark_gray> {0}",
       "home": {
         "item-view": "{@item-format('<gold>Challenges ansehen</gold>')}",
-        "item-create": "{@item-format('<green>Challenge erstellen</green>')}"
+        "item-create": "{@item-format('<green>Neue Challenge erstellen</green>')}"
       },
       "info": {
         "name": "Info",
@@ -141,7 +147,7 @@
           " ",
           "<gray><red>Achtung</red> diese Aktion kann <red>nicht</red></gray>",
           "<gray>rückgängig gemacht werden</gray>"
-          ],
+        ],
         "item-material": [
           "{@item-format('<gold>Anzeige Item</gold>')}",
           " ",
@@ -175,7 +181,7 @@
         ]
       },
       "material": {
-        "name": "Anzeige",
+        "name": "Anzeige-Item",
         "format": "{@item-format('<gold>{0}</gold>')}"
       }
     }
@@ -1681,6 +1687,108 @@
       "<dark_gray><strikethrough>                               </strikethrough></dark_gray>"
     ]
   },
+  "custom": {
+    "trigger": {
+      "interval": {
+        "name": "*Intervall*"
+      },
+      "jump": {
+        "name": "<green>Spieler Springt</green>"
+      },
+      "sneak": {
+        "name": "<green>Spieler Schleicht</green>"
+      },
+      "move_block": {
+        "name": "<gold>Spieler Läuft Einen Block</gold>"
+      },
+      "death": [
+        "<red>Entity Stirbt</red>"
+      ],
+      "item-custom-trigger-damage": [
+        "<red>Entity Erleidet Schaden</red>"
+      ],
+      "item-custom-trigger-damage-any": [
+        "<green>Jeglicher Grund</green>"
+      ],
+      "item-custom-trigger-damage_by_player": [
+        "<red>Entity Bekommt Schaden Von Spieler</red>"
+      ],
+      "item-custom-trigger-intervall": [
+        "<gold>Intervall</gold>"
+      ],
+      "item-custom-trigger-intervall-second": [
+        "<gold>Jede Sekunde</gold>"
+      ],
+      "item-custom-trigger-intervall-seconds": [
+        "<gold>Alle {0} Sekunden</gold>"
+      ],
+      "item-custom-trigger-intervall-minutes": [
+        "<gold>Alle {0} Minuten</gold>"
+      ],
+      "item-custom-trigger-block_place": [
+        "<green>Block Platziert</green>"
+      ],
+      "item-custom-trigger-block_break": [
+        "<red>Block Zerstört</red>"
+      ],
+      "item-custom-trigger-consume_item": [
+        "<dark_green>Item Konsumieren</dark_green>"
+      ],
+      "item-custom-trigger-pickup_item": [
+        "<aqua>Item Aufheben</aqua>"
+      ],
+      "item-custom-trigger-drop_item": [
+        "<blue>Spieler Droppt Item</blue>"
+      ],
+      "item-custom-trigger-advancement": [
+        "<red>Spieler Erhält Errungenschaft</red>"
+      ],
+      "item-custom-trigger-hunger": [
+        "<dark_green>Spieler Verliert Hunger</dark_green>"
+      ],
+      "item-custom-trigger-move_down": [
+        "<gold>Block Nach Unten Bewegen</gold>"
+      ],
+      "item-custom-trigger-move_up": [
+        "<gold>Block Nach Oben Bewegen</gold>"
+      ],
+      "item-custom-trigger-move_camera": [
+        "<gold>Kamera Bewegen</gold>"
+      ],
+      "item-custom-trigger-stands_on_specific_block": [
+        "<gold>Spieler Ist Auf Bestimmten Block</gold>"
+      ],
+      "item-custom-trigger-stands_not_on_specific_block": [
+        "<gold>Spieler Ist Nicht Auf Bestimmten Block</gold>"
+      ],
+      "item-custom-trigger-gain_xp": [
+        "<dark_purple>Spieler Bekommt XP</dark_purple>"
+      ],
+      "item-custom-trigger-level_up": [
+        "<dark_purple>Spieler Levelt Auf</dark_purple>"
+      ],
+      "item-custom-trigger-item_craft": [
+        "<gold>Spieler Craftet Item</gold>"
+      ],
+      "item-custom-trigger-in_liquid": [
+        "<blue>Spieler In Flüssigkeit</blue>"
+      ],
+      "item-custom-trigger-get_item": [
+        "<green>Item bekommen</green>",
+        "Aktion wird für *jedes* anklicken oder aufheben ausgeführt"
+      ]
+    },
+    "action": {
+      "cancel": {
+        "name": "*Auslöser Abbrechen*",
+        "desc": [
+          "Verhindert, dass der Auslöser ausgeführt wird.",
+          "Nicht abrechenbare Auslöser: *Springen*, *Sneaken*, *Töten*",
+          "*Advancement*, *Auf Leveln*, *In Flüssigkeit*"
+        ]
+      }
+    }
+  },
   "syntax": "Bitte nutze <yellow>/{0}</yellow>",
   "reload": "Challenges Plugin wird neu geladen...",
   "reload-failed": "Ein <red>Fehler </red><gray>ist während dem Reload aufgetreten</gray>",
@@ -1709,8 +1817,6 @@
     "Der Server kann <red>nicht resettet </red><gray>werden</gray>",
     "Die Challenge wurde <red>noch nicht </red><gray>gestartet</gray>"
   ],
-  "new-challenge-suffix": "{@challenge.suffix-format('<b><gradient:#0BC418:#5CFC60>Neu!</gradient></b>')}",
-  "updated-challenge-suffix": "{@challenge.suffix-format('<b><gradient:#FFEE00:#C7FC4A>Update!</gradient></b>')}",
   "feature-disabled": "Diese Funktion ist derzeit <red>deaktiviert</red>",
   "challenge-disabled": "Diese Challenge ist derzeit <red>deaktiviert</red>",
   "timer-not-started": "Der Timer wurde noch <red>nicht gestartet</red>",
@@ -2248,97 +2354,6 @@
   "custom-info-currently": "<gray>Eingestellt </gray><dark_gray>» </dark_gray><yellow></yellow>",
   "custom-info-trigger": "<gray>Auslöser</gray>",
   "custom-info-action": "<gray>Aktion</gray>",
-  "item-custom-trigger-jump": [
-    "<green>Spieler Springt</green>"
-  ],
-  "item-custom-trigger-sneak": [
-    "<green>Spieler Schleicht</green>"
-  ],
-  "item-custom-trigger-move_block": [
-    "<gold>Spieler Läuft Einen Block</gold>"
-  ],
-  "item-custom-trigger-death": [
-    "<red>Entity Stirbt</red>"
-  ],
-  "item-custom-trigger-damage": [
-    "<red>Entity Erleidet Schaden</red>"
-  ],
-  "item-custom-trigger-damage-any": [
-    "<green>Jeglicher Grund</green>"
-  ],
-  "item-custom-trigger-damage_by_player": [
-    "<red>Entity Bekommt Schaden Von Spieler</red>"
-  ],
-  "item-custom-trigger-intervall": [
-    "<gold>Intervall</gold>"
-  ],
-  "item-custom-trigger-intervall-second": [
-    "<gold>Jede Sekunde</gold>"
-  ],
-  "item-custom-trigger-intervall-seconds": [
-    "<gold>Alle {0} Sekunden</gold>"
-  ],
-  "item-custom-trigger-intervall-minutes": [
-    "<gold>Alle {0} Minuten</gold>"
-  ],
-  "item-custom-trigger-block_place": [
-    "<green>Block Platziert</green>"
-  ],
-  "item-custom-trigger-block_break": [
-    "<red>Block Zerstört</red>"
-  ],
-  "item-custom-trigger-consume_item": [
-    "<dark_green>Item Konsumieren</dark_green>"
-  ],
-  "item-custom-trigger-pickup_item": [
-    "<aqua>Item Aufheben</aqua>"
-  ],
-  "item-custom-trigger-drop_item": [
-    "<blue>Spieler Droppt Item</blue>"
-  ],
-  "item-custom-trigger-advancement": [
-    "<red>Spieler Erhält Errungenschaft</red>"
-  ],
-  "item-custom-trigger-hunger": [
-    "<dark_green>Spieler Verliert Hunger</dark_green>"
-  ],
-  "item-custom-trigger-move_down": [
-    "<gold>Block Nach Unten Bewegen</gold>"
-  ],
-  "item-custom-trigger-move_up": [
-    "<gold>Block Nach Oben Bewegen</gold>"
-  ],
-  "item-custom-trigger-move_camera": [
-    "<gold>Kamera Bewegen</gold>"
-  ],
-  "item-custom-trigger-stands_on_specific_block": [
-    "<gold>Spieler Ist Auf Bestimmten Block</gold>"
-  ],
-  "item-custom-trigger-stands_not_on_specific_block": [
-    "<gold>Spieler Ist Nicht Auf Bestimmten Block</gold>"
-  ],
-  "item-custom-trigger-gain_xp": [
-    "<dark_purple>Spieler Bekommt XP</dark_purple>"
-  ],
-  "item-custom-trigger-level_up": [
-    "<dark_purple>Spieler Levelt Auf</dark_purple>"
-  ],
-  "item-custom-trigger-item_craft": [
-    "<gold>Spieler Craftet Item</gold>"
-  ],
-  "item-custom-trigger-in_liquid": [
-    "<blue>Spieler In Flüssigkeit</blue>"
-  ],
-  "item-custom-trigger-get_item": [
-    "<green>Item bekommen</green>",
-    "Aktion wird für *jedes* anklicken oder aufheben ausgeführt"
-  ],
-  "item-custom-action-cancel": [
-    "<dark_red>Auslöser Abbrechen</dark_red>",
-    "Verhindert, dass der Auslöser ausgeführt wird.",
-    "Nicht abrechenbare Auslöser: *Springen*, *Sneaken*, *Töten*",
-    "*Advancement*, *Auf Leveln*, *In Flüssigkeit*"
-  ],
   "item-custom-action-command": [
     "<dark_red>Command Ausführen</dark_red>",
     "Lasse Spieler einen Command ausführen lassen",

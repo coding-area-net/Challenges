@@ -158,10 +158,11 @@ public class ChallengeListMenuGenerator extends ChallengesMenuGenerator {
   protected ItemStack createChallengeDisplayItem(@NotNull IChallenge challenge, @NotNull Locale locale) {
     ItemBuilder item = challenge.getDisplayItem(locale);
 
+    // TODO centralize suffix logic
     if (newSuffix && ChallengeAnnotations.isNew(challenge)) {
-      item.appendName(MessageKey.of("new-challenge-suffix"));
+      item.appendName(MessageKey.of("suffix.new-challenge"));
     } else if (updatedSuffix && ChallengeAnnotations.isUpdated(challenge)) {
-      item.appendName(MessageKey.of("updated-challenge-suffix"));
+      item.appendName(MessageKey.of("suffix.updated-challenge"));
     }
 
     return item.build();

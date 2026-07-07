@@ -6,11 +6,12 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettin
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSetting;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.impl.BooleanSetting;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.impl.ModifierSetting;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.legacy.MessageManager;
-import net.codingarea.challenges.plugin.management.menu.generator.legacy.MenuGenerator;
-import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.IParentCustomGenerator;
-import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.SubSettingValueMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.AbstractMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.choose.SubSettingValueMenuGenerator;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.entity.Player;
@@ -36,7 +37,7 @@ public class ValueSubSettingsBuilder extends GeneratorSubSettingsBuilder {
   }
 
   @Override
-  public MenuGenerator getGenerator(Player player, IParentCustomGenerator parentGenerator, String title) {
+  public AbstractMenuGenerator getGenerator(Player player, IParentCustomGenerator parentGenerator, LocalizableMessage title) {
     return new SubSettingValueMenuGenerator(parentGenerator, new LinkedHashMap<>(getDefaultSettings()), title);
   }
 

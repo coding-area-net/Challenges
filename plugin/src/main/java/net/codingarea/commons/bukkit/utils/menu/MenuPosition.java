@@ -24,11 +24,17 @@ public interface MenuPosition {
   InventoryHolder HOLDER = new MenuPositionHolder();
 
   static void set(@NotNull Player player, @Nullable MenuPosition position) {
-    Holder.positions.put(player, position);
+    MenuPosition prev = Holder.positions.put(player, position);
+    if (prev != null) {
+      prev.handleClose(player);
+    }
   }
 
   static void remove(@NotNull Player player) {
-    Holder.positions.remove(player);
+    MenuPosition prev = Holder.positions.remove(player);
+    if (prev != null) {
+      prev.handleClose(player);
+    }
   }
 
   @Nullable
@@ -41,5 +47,8 @@ public interface MenuPosition {
   }
 
   void handleClick(@NotNull MenuClickInfo info);
+
+  default void handleClose(@NotNull Player player) {
+  }
 
 }

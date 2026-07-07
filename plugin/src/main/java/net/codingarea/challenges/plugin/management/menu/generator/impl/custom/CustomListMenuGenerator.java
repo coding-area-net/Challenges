@@ -3,10 +3,12 @@ package net.codingarea.challenges.plugin.management.menu.generator.impl.custom;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.CustomChallenge;
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.ChallengeListMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
 import net.codingarea.challenges.plugin.utils.item.DefaultItems;
+import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import org.bukkit.entity.Player;
@@ -32,7 +34,7 @@ public class CustomListMenuGenerator extends ChallengeListMenuGenerator {
       return true;
     } else if (slotOffset == SLOT_OFFSET_SETTINGS && challenge instanceof CustomChallenge customChallenge) {
       // TODO save & reuse?
-      InfoMenuGenerator generator = new InfoMenuGenerator(customChallenge);
+      CustomChallengeMenuGenerator generator = new CustomChallengeMenuGenerator(customChallenge);
       generator.openMenu(info.getPlayer());
       SoundSample.CLICK.play(info.getPlayer());
       return true;
@@ -49,7 +51,8 @@ public class CustomListMenuGenerator extends ChallengeListMenuGenerator {
 
   @NotNull
   protected ItemStack createChallengeCustomizeItem(@NotNull IChallenge challenge, @NotNull Locale locale) {
-    return DefaultItems.createCustomizePreset();
+    return new ItemBuilder(locale, DefaultItems.createCustomizePreset(), MessageKey.of("challenge.settings-format"),
+      MessageKey.of("generic.customize")).build();
   }
 
   @Override

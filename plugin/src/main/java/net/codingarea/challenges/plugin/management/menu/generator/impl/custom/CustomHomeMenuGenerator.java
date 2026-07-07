@@ -24,13 +24,18 @@ public class CustomHomeMenuGenerator extends SinglePageMenuGenerator implements 
   public static final int CREATE_SLOT = 23;
   public static final int SIZE = 5 * 9;
 
-  private final CustomListMenuGenerator viewGenerator = new CustomListMenuGenerator();
+  private final CustomListMenuGenerator listGenerator = new CustomListMenuGenerator();
+
+  @NotNull
+  public CustomListMenuGenerator getListGenerator() {
+    return listGenerator;
+  }
 
   @Override
   public void setMenuType(MenuType menuType) {
     // MenuType.CUSTOM instance not initialized when creating CustomListMenuGenerator
     super.setMenuType(menuType);
-    viewGenerator.setMenuType(menuType);
+    listGenerator.setMenuType(menuType);
   }
 
   @NotNull
@@ -60,32 +65,32 @@ public class CustomHomeMenuGenerator extends SinglePageMenuGenerator implements 
 
   @Override
   public void addToCache(@NonNull IChallenge element) {
-    viewGenerator.addToCache(element);
+    listGenerator.addToCache(element);
   }
 
   @Override
   public void removeFromCache(@NonNull IChallenge element) {
-    viewGenerator.removeFromCache(element);
+    listGenerator.removeFromCache(element);
   }
 
   @Override
   public boolean isCached(@NonNull IChallenge element) {
-    return viewGenerator.isCached(element);
+    return listGenerator.isCached(element);
   }
 
   @Override
   public int getCachedCount() {
-    return viewGenerator.getCachedCount();
+    return listGenerator.getCachedCount();
   }
 
   @Override
   public void resetCache() {
-    viewGenerator.resetCache();
+    listGenerator.resetCache();
   }
 
   @Override
   public void updateElementDisplay(@NonNull IChallenge element) {
-    viewGenerator.updateElementDisplay(element);
+    listGenerator.updateElementDisplay(element);
   }
 
   public class CustomMainMenuPosition extends SinglePageGeneratorMenuPosition {
@@ -98,14 +103,14 @@ public class CustomHomeMenuGenerator extends SinglePageMenuGenerator implements 
           SoundSample.BASS_OFF.play(info.getPlayer());
           return true;
         }
-        viewGenerator.openMenu(info.getPlayer());
+        listGenerator.openMenu(info.getPlayer());
         SoundSample.PLOP.play(info.getPlayer());
         return true;
       } else if (info.getSlot() == CREATE_SLOT) {
         // TODO check permission, limit, abstract logic
-        InfoMenuGenerator generator = new InfoMenuGenerator();
+        CustomChallengeMenuGenerator generator = new CustomChallengeMenuGenerator();
         generator.openMenu(info.getPlayer());
-        SoundSample.PLOP.play(info.getPlayer());
+        SoundSample.PLING.play(info.getPlayer());
         return true;
       }
 

@@ -67,7 +67,7 @@ public abstract class MenuSetting extends Setting {
   @NotNull
   @Override
   public LocalizableMessage getSettingsName() {
-    return MessageKey.of("customize");
+    return MessageKey.of("generic.customize");
   }
 
   @Override
@@ -114,8 +114,7 @@ public abstract class MenuSetting extends Setting {
 
     @NotNull
     public ItemBuilder getDisplayItem(@NotNull Locale locale) {
-      return new ItemBuilder(locale, displayItemPreset, MessageKey.of("challenge.display-format"),
-        getDisplayName(), getDisplayDescription());
+      return DefaultItems.createChallengeDisplayFormat(displayItemPreset, getDisplayName(), getDisplayDescription(), locale);
     }
 
     @NotNull

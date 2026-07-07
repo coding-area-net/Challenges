@@ -61,11 +61,12 @@ public class MainMenuGenerator extends SingleAnimatedMenuGenerator {
     ItemBuilder item = new ItemBuilder(locale, menuType.getDisplayItemMaterial(), MessageKey.of("menu.item-format"),
       menuType.getDisplayName());
 
+    // TODO centralize suffix logic
     if (menuType.getMenuGenerator() instanceof ChallengesMenuGenerator generator) {
       if (generator.hasAnyNewChallenges()) {
-        item.appendName(MessageKey.of("new-challenge-suffix"));
+        item.appendName(MessageKey.of("suffix.new-challenge"));
       } else if (generator.hasAnyUpdatedChallenges()) {
-        item.appendName(MessageKey.of("updated-challenge-suffix"));
+        item.appendName(MessageKey.of("suffix.updated-challenge"));
       }
     }
 

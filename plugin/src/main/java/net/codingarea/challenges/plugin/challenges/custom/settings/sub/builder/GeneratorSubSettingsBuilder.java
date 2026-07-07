@@ -1,9 +1,10 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder;
 
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
-import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
-import net.codingarea.challenges.plugin.management.menu.generator.legacy.MenuGenerator;
-import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.IParentCustomGenerator;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.management.menu.generator.AbstractMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
 import org.bukkit.entity.Player;
 
 public abstract class GeneratorSubSettingsBuilder extends SubSettingsBuilder {
@@ -16,18 +17,19 @@ public abstract class GeneratorSubSettingsBuilder extends SubSettingsBuilder {
     super(key, parent);
   }
 
-  public boolean open(Player player, IParentCustomGenerator parentGenerator, String title) {
+  public boolean open(Player player, IParentCustomGenerator parentGenerator, LocalizableMessage title) {
 
     if (hasSettings()) {
-      MenuGenerator generator = getGenerator(player, parentGenerator, title + InventoryTitleManager.getTitleSplitter() + getKeyTranslation());
+      LocalizableMessage subTitle = MessageKey.of("menu.title-name-format-sub").withArgs(title, getKeyTranslation());
+      AbstractMenuGenerator generator = getGenerator(player, parentGenerator, subTitle);
       if (generator == null) return false;
-      generator.open(player, 0);
+      generator.openMenu(player);
       return true;
     }
 
     return false;
   }
 
-  public abstract MenuGenerator getGenerator(Player player, IParentCustomGenerator parentGenerator, String title);
+  public abstract AbstractMenuGenerator getGenerator(Player player, IParentCustomGenerator parentGenerator, LocalizableMessage title);
 
 }

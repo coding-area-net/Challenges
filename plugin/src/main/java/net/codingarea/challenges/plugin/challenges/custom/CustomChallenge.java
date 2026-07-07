@@ -5,16 +5,21 @@ import lombok.ToString;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeExecutionData;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.ChallengeAction;
+import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.InfoMenuGenerator;
+import net.codingarea.challenges.plugin.utils.item.DefaultItems;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -37,7 +42,7 @@ public class CustomChallenge extends Setting {
 
   public CustomChallenge(MenuType menuType, UUID uuid, Material displayItem, String displayName, ChallengeTrigger trigger,
                          Map<String, String[]> subTriggers, ChallengeAction action, Map<String, String[]> subActions) {
-    super(menuType, null, null, "custom-challenge");
+    super(menuType, null, new ItemStack(displayItem), "custom-challenge");
     this.uuid = uuid;
     this.material = displayItem;
     this.name = displayName;
@@ -50,41 +55,35 @@ public class CustomChallenge extends Setting {
   @NotNull
   @Override
   public ItemBuilder getDisplayItem(@NotNull Locale locale) { // TODO
-    String name = this.name;
-    if (name == null) {
-      name = "NULL";
-
-    }
-    Material material = this.material;
-    if (material == null) {
-      material = Material.BARRIER;
-    }
-
-    LegacyItemBuilder builder = new LegacyItemBuilder(material, Message.forName("item-prefix").asString() + "§7" + name);
+    ItemBuilder item = new ItemBuilder(locale, displayItemPreset, MessageKey.of("custom.display-format"), name);
 
     // ADDING CONDITION INFO
     if (getTrigger() != null) {
-      builder.appendLore(" ");
-      List<String> triggerDisplay = InfoMenuGenerator
-        .getSubSettingsDisplay(getTrigger().getSubSettingsBuilder(), getSubTriggers());
+//      List<String> triggerDisplay = SubSettingsBuilder
+//        .getSubSettingsDisplay(getTrigger().getSubSettingsBuilder(), getSubTriggers());
+//
+//      String triggerName = Message.forName(getTrigger().getMessageKey()).asItemDescription().getName();
+//      builder.appendLore(Message.forName("custom-info-trigger").asString() + " " + triggerName);
+//      builder.appendLore(triggerDisplay);
 
-      String triggerName = Message.forName(getTrigger().getMessage()).asItemDescription().getName();
-      builder.appendLore(Message.forName("custom-info-trigger").asString() + " " + triggerName);
-      builder.appendLore(triggerDisplay);
+      item.appendBlankLoreLine()
+        .appendLore(MessageKey.of("menu.custom.trigger-format"), getTrigger().getSettingName());
     }
 
     // ADDING ACTION INFO
     if (getAction() != null) {
-      builder.appendLore(" ");
-      List<String> actionDisplay = InfoMenuGenerator
-        .getSubSettingsDisplay(getAction().getSubSettingsBuilder(), getSubActions());
+//      builder.appendLore(" ");
+//      List<String> actionDisplay = SubSettingsBuilder
+//        .getSubSettingsDisplay(getAction().getSubSettingsBuilder(), getSubActions());
+//
+//      String actionName = Message.forName(getAction().getMessageKey()).asItemDescription().getName();
+//      builder.appendLore(Message.forName("custom-info-action").asString() + " " + actionName);
+//      builder.appendLore(actionDisplay);
 
-      String actionName = Message.forName(getAction().getMessage()).asItemDescription().getName();
-      builder.appendLore(Message.forName("custom-info-action").asString() + " " + actionName);
-      builder.appendLore(actionDisplay);
+      item.appendBlankLoreLine().appendLore(MessageKey.of("menu.custom.action-format"), getAction().getSettingName());
     }
 
-    return new ItemBuilder(locale, builder.build());
+    return item;
   }
 
   @Override
@@ -98,9 +97,9 @@ public class CustomChallenge extends Setting {
 
     document.set("material", material == null ? null : material.name());
     document.set("name", name);
-    document.set("trigger", trigger == null ? null : trigger.getName());
+    document.set("trigger", trigger == null ? null : trigger.getUniqueName());
     document.set("subTrigger", subTriggers);
-    document.set("action", action == null ? null : action.getName());
+    document.set("action", action == null ? null : action.getUniqueName());
     document.set("subActions", subActions);
   }
 

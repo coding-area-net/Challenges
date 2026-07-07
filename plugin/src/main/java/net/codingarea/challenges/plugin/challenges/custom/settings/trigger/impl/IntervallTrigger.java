@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.trigger.impl;
 
 import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.challenges.plugin.challenges.custom.settings.FallbackNames;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
 import net.codingarea.challenges.plugin.content.legacy.Message;
@@ -12,6 +13,7 @@ import org.bukkit.Material;
 import java.util.LinkedList;
 import java.util.List;
 
+@FallbackNames("intervall")
 public class IntervallTrigger extends ChallengeTrigger {
 
   public IntervallTrigger(String name) {

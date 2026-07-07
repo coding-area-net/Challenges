@@ -53,6 +53,11 @@
     "title-format": "<dark_gray>{@symbol.arrow}</dark_gray> <white><b>{0}</b></white>",
     "title": "{@title-format('Challenges')}"
   },
+  "suffix": {
+    "format": " <dark_gray>{@symbol.vertical}</dark_gray> {0}",
+    "selected": "{@format('<dark_green><b>{@symbol.check}</b></dark_green>')}",
+    "unselected": "{@format('<dark_red><b>{@symbol.x}</b></dark_red>')}"
+  },
   "timer": {
     "bar": {
       "format": {
@@ -698,6 +703,19 @@
     },
     "zero-hearts": {
       "*colorize*": "<gold>{0}</gold>"
+    }
+  },
+  "custom": {
+    "display-format": "<dark_gray>{@symbol.arrow}</dark_gray> {0}",
+    "trigger": {
+      "interval": {
+        "*colorize*": "<gold>{0}</gold>"
+      }
+    },
+    "action": {
+      "cancel": {
+        "*colorize*": "<dark_red>{0}</dark_red>"
+      }
     }
   }
 }

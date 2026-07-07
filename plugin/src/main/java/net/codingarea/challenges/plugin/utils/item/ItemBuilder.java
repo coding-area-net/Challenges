@@ -106,16 +106,8 @@ public class ItemBuilder extends StandardItemBuilder {
 
   @NotNull
   public ItemBuilder appendLore(@NotNull MessageKey key, @NotNull Object... args) {
-    ItemMeta meta = getItemMeta();
-    List<Component> existingLore = meta.lore();
     List<Component> loreComponents = key.asComponents(locale, args);
-    if (existingLore == null) {
-      meta.lore(loreComponents);
-      return this;
-    }
-
-    existingLore.addAll(loreComponents); // modifiable copy
-    meta.lore(existingLore);
+    addToLore(loreComponents);
     return this;
   }
 
@@ -125,21 +117,20 @@ public class ItemBuilder extends StandardItemBuilder {
   }
 
   @NotNull
-  public ItemBuilder appendLoreWithEmptyLine(@NotNull MessageKey key, @NotNull Object... args) {
-    ItemMeta meta = getItemMeta();
-    List<Component> lore = meta.lore();
-    if (lore != null) {
-      lore.add(Component.empty());
-    } else {
-      meta.lore(List.of(Component.empty()));
-    }
-
-    return this.appendLore(key, args);
+  public ItemBuilder appendBlankLoreLine() {
+    addToLore(List.of(Component.space()));
+    return this;
   }
 
-  @NotNull
-  public ItemBuilder appendLoreWithEmptyLine(@NotNull LocalizableMessage localizable) {
-    return this.appendLoreWithEmptyLine(localizable.getLocalizableKey(), localizable.getLocalizableArgs());
+  protected void addToLore(@NotNull Collection<Component> components) {
+    ItemMeta meta = getItemMeta();
+    List<Component> existingLore = meta.lore();
+    if (existingLore != null) {
+      existingLore.addAll(components);
+      meta.lore(existingLore);
+    } else {
+      meta.lore(List.copyOf(components));
+    }
   }
 
 

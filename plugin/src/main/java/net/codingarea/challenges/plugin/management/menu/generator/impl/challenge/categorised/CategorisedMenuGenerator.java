@@ -6,6 +6,7 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.ChallengeListMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.ChallengesMenuGenerator;
+import net.codingarea.challenges.plugin.utils.item.DefaultItems;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
@@ -140,15 +141,15 @@ public class CategorisedMenuGenerator extends ChallengesMenuGenerator {
 
   @NotNull
   protected ItemStack createCategoryDisplayItem(@NotNull Locale locale, @NotNull SettingCategory category) {
-    ItemBuilder item = new ItemBuilder(locale, category.getDisplayItemPreset(), MessageKey.of("challenge.display-format"),
-      category.getDisplayName(), category.getDescription());
+    ItemBuilder item = DefaultItems.createChallengeDisplayFormat(category.getDisplayItemPreset(), category.getDisplayName(), category.getDescription(), locale);
 
     CategorisedListMenuGenerator generator = categoryGenerators.get(category);
     if (generator != null) {
+      // TODO centralize suffix logic
       if (generator.isNewSuffix() && generator.hasAnyNewChallenges()) {
-        item.appendName(MessageKey.of("new-challenge-suffix"));
+        item.appendName(MessageKey.of("suffix.new-challenge"));
       } else if (generator.isUpdatedSuffix() && generator.hasAnyUpdatedChallenges()) {
-        item.appendName(MessageKey.of("updated-challenge-suffix"));
+        item.appendName(MessageKey.of("suffix.updated-challenge"));
       }
 
       item.appendLore(category.getDescriptionInfo(),

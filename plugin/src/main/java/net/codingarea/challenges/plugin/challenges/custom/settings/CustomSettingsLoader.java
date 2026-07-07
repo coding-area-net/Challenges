@@ -39,7 +39,7 @@ public class CustomSettingsLoader {
 
   private void loadTrigger() {
     registerTriggers(
-      new IntervallTrigger("intervall"),
+      new IntervallTrigger("interval"),
       new PlayerJumpTrigger("jump"),
       new PlayerSneakTrigger("sneak"),
       new MoveBlockTrigger("move_block"),
@@ -118,7 +118,7 @@ public class CustomSettingsLoader {
           fallbackTriggers.put(name, trigger1);
         }
       }
-      triggers.put(trigger1.getName(), trigger1);
+      triggers.put(trigger1.getUniqueName(), trigger1);
       Bukkit.getPluginManager().registerEvents(trigger1, Challenges.getInstance());
     }
   }
@@ -142,7 +142,7 @@ public class CustomSettingsLoader {
           fallbackActions.put(name, action1);
         }
       }
-      actions.put(action1.getName(), action1);
+      actions.put(action1.getUniqueName(), action1);
     }
   }
 

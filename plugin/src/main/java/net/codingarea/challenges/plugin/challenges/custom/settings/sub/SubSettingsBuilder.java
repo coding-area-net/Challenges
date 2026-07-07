@@ -2,9 +2,10 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.sub;
 
 import lombok.Getter;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder.*;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.legacy.MessageManager;
-import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.IParentCustomGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -55,11 +56,23 @@ public abstract class SubSettingsBuilder {
     return new EmptySubSettingsBuilder();
   }
 
-  public abstract boolean open(Player player, IParentCustomGenerator parentGenerator, String title);
+  public abstract boolean open(Player player, IParentCustomGenerator parentGenerator, LocalizableMessage title);
 
   public abstract List<String> getDisplay(Map<String, String[]> activated);
 
   public abstract boolean hasSettings();
+
+  /**
+   * Collects the display lines of a builder and all of its children for the currently activated data.
+   * Relocated from the legacy custom {@code InfoMenuGenerator}.
+   */
+  public static List<String> getSubSettingsDisplay(SubSettingsBuilder builder, Map<String, String[]> activated) {
+    List<String> display = new LinkedList<>();
+    for (SubSettingsBuilder child : builder.getAllChildren()) {
+      display.addAll(child.getDisplay(activated));
+    }
+    return display;
+  }
 
   public SubSettingsBuilder setParent(SubSettingsBuilder parent) {
 

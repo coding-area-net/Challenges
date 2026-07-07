@@ -1,11 +1,11 @@
-package net.codingarea.challenges.plugin.management.menu.generator.impl.custom;
+package net.codingarea.challenges.plugin.management.menu.generator.impl.custom.choose;
 
 import net.codingarea.challenges.plugin.challenges.custom.settings.SettingType;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.UncachedMultiPageMenuGenerator;
-import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.IParentCustomGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;

@@ -42,7 +42,7 @@ public final class MenuPositionListener implements Listener {
   @EventHandler(priority = EventPriority.LOW)
   public void onClose(@NotNull InventoryCloseEvent event) {
     if (!(event.getPlayer() instanceof Player player)) return;
-    if (event.getReason() == InventoryCloseEvent.Reason.OPEN_NEW) return;
+    if (event.getReason() == InventoryCloseEvent.Reason.OPEN_NEW) return; // New menu inventory
     if (event.getInventory().getHolder() != MenuPosition.HOLDER) return; // No menu inventory
     MenuPosition.remove(player);
   }

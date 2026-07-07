@@ -17,7 +17,8 @@ import java.util.Locale;
 public abstract class UncachedMultiPageMenuGenerator<T> extends AbstractMenuGenerator {
 
   public static int[] calcSlots(int rows, int cols, int size) {
-    if (rows * cols > size) throw new IllegalArgumentException("rows (" + rows + ") * cols (" + cols + ") must be <= size (" + size + ")");
+    if (rows * cols > size)
+      throw new IllegalArgumentException("rows (" + rows + ") * cols (" + cols + ") must be <= size (" + size + ")");
 
     final int sizeRows = size / 9;
     final int rowOffset = Math.floorDiv(sizeRows - rows, 2);

@@ -126,8 +126,7 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
   @NotNull
   @Override
   public ItemBuilder getDisplayItem(@NotNull Locale locale) {
-    return new ItemBuilder(locale, displayItemPreset, MessageKey.of("challenge.display-format"),
-      getChallengeName(), getChallengeDescription());
+    return DefaultItems.createChallengeDisplayFormat(displayItemPreset, getChallengeName(), getChallengeDescription(), locale);
   }
 
   /**

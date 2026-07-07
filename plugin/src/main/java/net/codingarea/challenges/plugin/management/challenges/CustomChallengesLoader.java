@@ -10,7 +10,7 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.IChal
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.IChallengesMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.IMenuGenerator;
-import net.codingarea.challenges.plugin.management.menu.generator.legacy.ChallengeMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.CustomHomeMenuGenerator;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Material;
@@ -87,21 +87,24 @@ public class CustomChallengesLoader extends ModuleChallengeLoader {
   }
 
   private void generateCustomChallenge(CustomChallenge challenge, boolean deleted, boolean generate) {
-    IMenuGenerator generator = challenge.getType().getMenuGenerator(); // TODO!
-    if (generator instanceof ChallengeMenuGenerator) { // TODO !
-      ChallengeMenuGenerator menuGenerator = (ChallengeMenuGenerator) generator;
-      if (deleted) {
-        menuGenerator.removeChallengeFromCache(challenge);
-        if (generate) menuGenerator.generateInventories();
-      } else {
-        if (!menuGenerator.isInChallengeCache(challenge)) {
-          menuGenerator.addChallengeToCache(challenge);
-          if (generate) menuGenerator.generateInventories();
-        } else {
-          menuGenerator.updateItem(challenge);
-        }
+    IMenuGenerator generator = challenge.getType().getMenuGenerator();
+    if (!(generator instanceof IChallengesMenuGenerator menuGenerator)) return;
 
-      }
+    if (deleted) {
+      menuGenerator.removeFromCache(challenge);
+      if (generate) refreshCustomList(generator);
+    } else if (!menuGenerator.isCached(challenge)) {
+      menuGenerator.addToCache(challenge);
+      if (generate) refreshCustomList(generator);
+    } else {
+      menuGenerator.updateElementDisplay(challenge);
+    }
+  }
+
+  private void refreshCustomList(IMenuGenerator generator) {
+    // page count may have changed; regenerate the cached list pages for all known locales
+    if (generator instanceof CustomHomeMenuGenerator home) {
+      home.getListGenerator().updatePages();
     }
   }
 
