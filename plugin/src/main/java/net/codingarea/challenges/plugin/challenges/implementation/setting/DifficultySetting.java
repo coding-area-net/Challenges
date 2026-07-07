@@ -38,8 +38,8 @@ public class DifficultySetting extends Modifier implements SenderCommand, TabCom
   @Override
   public ItemStack getSettingsItemPreset() {
     return switch (getDifficultyByValue(getValue())) {
-      case PEACEFUL -> new ItemStack(Material.LIME_DYE);
-      case EASY -> new ItemStack(MinecraftNameWrapper.GREEN_DYE);
+      case PEACEFUL -> new ItemStack(MinecraftNameWrapper.GREEN_DYE);
+      case EASY -> new ItemStack(Material.LIME_DYE);
       case NORMAL -> new ItemStack(Material.ORANGE_DYE);
       case HARD -> new ItemStack(MinecraftNameWrapper.RED_DYE);
     };

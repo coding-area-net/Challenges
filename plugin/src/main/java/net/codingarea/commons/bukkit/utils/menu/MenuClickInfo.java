@@ -1,5 +1,8 @@
 package net.codingarea.commons.bukkit.utils.menu;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -7,6 +10,9 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@Getter
+@ToString
+@EqualsAndHashCode
 public class MenuClickInfo {
 
   protected final Player player;
@@ -23,30 +29,8 @@ public class MenuClickInfo {
     this.slot = slot;
   }
 
-  @NotNull
-  public Player getPlayer() {
-    return player;
-  }
-
-  @NotNull
-  public Inventory getInventory() {
-    return inventory;
-  }
-
-  public boolean isRightClick() {
-    return rightClick;
-  }
-
   public boolean isLeftClick() {
     return !rightClick;
-  }
-
-  public boolean isShiftClick() {
-    return shiftClick;
-  }
-
-  public int getSlot() {
-    return slot;
   }
 
   @Nullable
@@ -56,18 +40,8 @@ public class MenuClickInfo {
 
   @NotNull
   public Material getClickedMaterial() {
-    return getClickedItem() == null ? Material.AIR : getClickedItem().getType();
-  }
-
-  @Override
-  public String toString() {
-    return "MenuClickInfo{" +
-      "player=" + player +
-      ", inventory=" + inventory +
-      ", shiftClick=" + shiftClick +
-      ", rightClick=" + rightClick +
-      ", slot=" + slot +
-      '}';
+    ItemStack item = getClickedItem();
+    return item == null ? Material.AIR : item.getType();
   }
 
 }

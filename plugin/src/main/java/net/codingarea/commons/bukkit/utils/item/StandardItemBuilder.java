@@ -34,7 +34,8 @@ public class StandardItemBuilder {
   protected ItemMeta meta;
 
   public StandardItemBuilder(@NotNull ItemStack item) {
-    this(item, item.getItemMeta());
+    ItemStack cloned = item.clone();
+    this(cloned, cloned.getItemMeta());
   }
 
   public StandardItemBuilder(@NotNull ItemStack item, @Nullable ItemMeta meta) {
