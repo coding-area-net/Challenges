@@ -8,6 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,6 +45,11 @@ public final class MenuPositionListener implements Listener {
     if (event.getReason() == InventoryCloseEvent.Reason.OPEN_NEW) return;
     if (event.getInventory().getHolder() != MenuPosition.HOLDER) return; // No menu inventory
     MenuPosition.remove(player);
+  }
+
+  @EventHandler(priority = EventPriority.LOW)
+  public void onQuit(@NotNull PlayerQuitEvent event) {
+    MenuPosition.remove(event.getPlayer());
   }
 
 }

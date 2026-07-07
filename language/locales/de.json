@@ -2,6 +2,7 @@
   "generic": {
     "undefined": "undefiniert",
     "unknown": "unbekannt",
+    "none": "Nichts",
     "second": "Sekunde",
     "seconds": "Sekunden",
     "minute": "Minute",
@@ -123,7 +124,60 @@
       "name": "Einstellungen"
     },
     "custom": {
-      "name": "Individuelle Challenges"
+      "name": "Individuelle Challenges",
+      "sub-name": "Individuell",
+      "selected-format": "<gray>Eingestellt</gray> <dark_gray>{@symbol.circle}</dark_gray> <yellow>{0}</yellow>",
+      "home": {
+        "item-view": "{@item-format('<gold>Challenges ansehen</gold>')}",
+        "item-create": "{@item-format('<green>Challenge erstellen</green>')}"
+      },
+      "info": {
+        "name": "Info",
+        "item-save": [
+          "{@item-format('<green>Speichern</green>')}"
+        ],
+        "item-delete": [
+          "{@item-format('<red>Löschen</red>')}",
+          " ",
+          "<gray><red>Achtung</red> diese Aktion kann <red>nicht</red></gray>",
+          "<gray>rückgängig gemacht werden</gray>"
+          ],
+        "item-material": [
+          "{@item-format('<gold>Anzeige Item</gold>')}",
+          " ",
+          "<gray><gold>Klicke</gold> um das Anzeigeitem zu ändern</gray>",
+          " ",
+          "{@selected-format}"
+        ],
+        "item-trigger": [
+          "{@item-format('<red>Auslöser</red>')}",
+          " ",
+          "<gray><red>Klicke</red> um einzustellen, was passieren</gray>",
+          "<gray>muss, damit die <red>Aktion</red> ausgeführt wird</gray>",
+          " ",
+          "{@selected-format}"
+        ],
+        "item-action": [
+          "{@item-format('<aqua>Aktion</aqua>')}",
+          " ",
+          "<gray><aqua>Klicke</aqua> um einzustellen, was passieren</gray>",
+          "<gray>soll, wenn der <aqua>Auslöser</aqua> erfüllt ist</gray>",
+          " ",
+          "{@selected-format}"
+        ],
+        "item-name": [
+          "{@item-format('<gold>Name</gold>')}",
+          " ",
+          "<gray><gold>Klicke</gold> um den Namen über den Chat zu ändern</gray>",
+          "<gray>Maximale Zeichenanzahl: {1}</gray>",
+          " ",
+          "{@selected-format}"
+        ]
+      },
+      "material": {
+        "name": "Anzeige",
+        "format": "{@item-format('<gold>{0}</gold>')}"
+      }
     }
   },
   "category": {

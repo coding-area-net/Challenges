@@ -1,4 +1,4 @@
-package net.codingarea.challenges.plugin.management.menu.generator.implementation.custom;
+package net.codingarea.challenges.plugin.management.menu.generator.legacy.custom;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -32,10 +32,12 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.*;
 
 @ToString
+@Deprecated
 public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGenerator {
 
   public static final int DELETE_SLOT = 19 + 9, SAVE_SLOT = 25 + 9, CONDITION_SLOT = 21 + 9, ACTION_SLOT = 23 + 9, MATERIAL_SLOT = 14, NAME_SLOT = 12;
@@ -154,7 +156,7 @@ public class InfoMenuGenerator extends MenuGenerator implements IParentCustomGen
   }
 
   @Override
-  public void accept(Player player, SettingType type, Map<String, String[]> data) {
+  public void accept(Player player, @NonNull SettingType type, @NonNull Map<String, String[]> data) {
     open(player, 0);
 
     switch (type) {

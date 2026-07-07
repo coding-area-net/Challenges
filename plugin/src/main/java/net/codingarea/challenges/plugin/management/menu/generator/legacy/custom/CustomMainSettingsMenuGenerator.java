@@ -1,4 +1,4 @@
-package net.codingarea.challenges.plugin.management.menu.generator.implementation.custom;
+package net.codingarea.challenges.plugin.management.menu.generator.legacy.custom;
 
 import lombok.Getter;
 import net.codingarea.challenges.plugin.challenges.custom.settings.IChallengeSetting;
@@ -8,6 +8,7 @@ import net.codingarea.challenges.plugin.management.menu.generator.legacy.ChooseI
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -42,7 +43,7 @@ public class CustomMainSettingsMenuGenerator extends ChooseItemGenerator impleme
   }
 
   @Override
-  public void accept(Player player, SettingType type, Map<String, String[]> data) {
+  public void accept(Player player, @NonNull SettingType type, @NonNull Map<String, String[]> data) {
 
     subSettings.putAll(data);
 

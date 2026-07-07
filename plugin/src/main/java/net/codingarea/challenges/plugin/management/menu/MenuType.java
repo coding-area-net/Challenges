@@ -7,6 +7,7 @@ import net.codingarea.challenges.plugin.management.menu.generator.IMenuGenerator
 import net.codingarea.challenges.plugin.management.menu.generator.impl.TimerMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.ChallengeListMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.categorised.CategorisedMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.CustomHomeMenuGenerator;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,8 +22,7 @@ public enum MenuType {
   ITEMS("items-blocks", Material.STICK, new ChallengeListMenuGenerator()),
   CHALLENGES("challenges", Material.BOOK, new CategorisedMenuGenerator()),
   SETTINGS("settings", Material.COMPARATOR, new ChallengeListMenuGenerator()),
-  CUSTOM("custom", Material.WRITABLE_BOOK, new ChallengeListMenuGenerator());
-//  CUSTOM("custom", Material.WRITABLE_BOOK, new MainCustomMenuGenerator());
+  CUSTOM("custom", Material.WRITABLE_BOOK, new CustomHomeMenuGenerator());
 
   private final String key;
   @Getter

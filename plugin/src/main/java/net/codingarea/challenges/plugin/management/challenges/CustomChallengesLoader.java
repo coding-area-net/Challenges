@@ -8,8 +8,8 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.action.Challe
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.IChallengeTrigger;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
+import net.codingarea.challenges.plugin.management.menu.generator.IChallengesMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.IMenuGenerator;
-import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.ChallengesMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.legacy.ChallengeMenuGenerator;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;
 import net.codingarea.commons.common.config.Document;
@@ -53,7 +53,7 @@ public class CustomChallengesLoader extends ModuleChallengeLoader {
   public void loadCustomChallengesFrom(@NotNull Document document) {
     customChallenges.clear();
     Challenges.getInstance().getChallengeManager().unregisterIf(iChallenge -> iChallenge.getType() == MenuType.CUSTOM);
-    ((ChallengesMenuGenerator) MenuType.CUSTOM.getMenuGenerator()).resetCache();
+    ((IChallengesMenuGenerator) MenuType.CUSTOM.getMenuGenerator()).resetCache();
 
     for (String key : document.keys()) {
       try {
@@ -83,7 +83,7 @@ public class CustomChallengesLoader extends ModuleChallengeLoader {
   public void resetChallenges() {
     customChallenges.clear();
     Challenges.getInstance().getChallengeManager().unregisterIf(iChallenge -> iChallenge.getType() == MenuType.CUSTOM);
-    ((ChallengesMenuGenerator) MenuType.CUSTOM.getMenuGenerator()).resetCache();
+    ((IChallengesMenuGenerator) MenuType.CUSTOM.getMenuGenerator()).resetCache();
   }
 
   private void generateCustomChallenge(CustomChallenge challenge, boolean deleted, boolean generate) {

@@ -9,7 +9,7 @@ import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
 import net.codingarea.challenges.plugin.content.legacy.Message;
-import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.ChallengesMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.IChallengesMenuGenerator;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
@@ -69,7 +69,7 @@ public final class ChallengeHelper {
   }
 
   public static void updateItems(@NotNull IChallenge challenge) {
-    challenge.getType().executeWithGenerator(ChallengesMenuGenerator.class, gen -> gen.updateElementDisplay(challenge));
+    challenge.getType().executeWithGenerator(IChallengesMenuGenerator.class, gen -> gen.updateElementDisplay(challenge));
   }
 
   public static void handleModifierClick(@NotNull MenuClickInfo info, @NotNull IModifier modifier) {

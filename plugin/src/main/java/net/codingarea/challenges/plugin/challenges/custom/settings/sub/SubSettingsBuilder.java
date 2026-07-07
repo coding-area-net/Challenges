@@ -4,7 +4,7 @@ import lombok.Getter;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder.*;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.legacy.MessageManager;
-import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.IParentCustomGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.IParentCustomGenerator;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;

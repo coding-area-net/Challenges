@@ -1,19 +1,19 @@
-package net.codingarea.challenges.plugin.management.menu.generator.implementation.custom;
+package net.codingarea.challenges.plugin.management.menu.generator.legacy.custom;
 
-import net.codingarea.challenges.plugin.management.menu.generator.legacy.ChooseMultipleItemGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.ChooseItemGenerator;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.LinkedHashMap;
 
-public class SubSettingChooseMultipleMenuGenerator extends ChooseMultipleItemGenerator {
+public class SubSettingChooseMenuGenerator extends ChooseItemGenerator {
 
   private final IParentCustomGenerator parent;
   private final String key;
   private final String title;
 
-  public SubSettingChooseMultipleMenuGenerator(String key, IParentCustomGenerator parent, LinkedHashMap<String, ItemStack> map, String title) {
+  public SubSettingChooseMenuGenerator(String key, IParentCustomGenerator parent, LinkedHashMap<String, ItemStack> map, String title) {
     super(map);
     this.key = key;
     this.title = title;
@@ -26,8 +26,8 @@ public class SubSettingChooseMultipleMenuGenerator extends ChooseMultipleItemGen
   }
 
   @Override
-  public void onItemClick(Player player, String[] itemKeys) {
-    parent.accept(player, null, MapUtils.createStringArrayMap(key, itemKeys));
+  public void onItemClick(Player player, String itemKey) {
+    parent.accept(player, null, MapUtils.createStringArrayMap(key, itemKey));
   }
 
   @Override

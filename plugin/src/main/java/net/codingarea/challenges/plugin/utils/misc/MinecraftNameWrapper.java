@@ -40,6 +40,7 @@ public class MinecraftNameWrapper {
 
   public static final Attribute MAX_HEALTH = getAttributeByNames("GENERIC_MAX_HEALTH", "MAX_HEALTH");
   public static final Attribute ATTACK_SPEED = getAttributeByNames("GENERIC_ATTACK_SPEED", "ATTACK_SPEED");
+  public static final Attribute LUCK = getAttributeByNames("GENERIC_LUCK", "LUCK");
 
   // replacement for wrapping via GameRule.getByName (marked for removal as of 1.21.11),
   // access via namespace key would be a viable alternative

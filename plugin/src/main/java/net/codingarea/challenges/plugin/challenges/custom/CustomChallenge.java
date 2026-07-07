@@ -9,7 +9,7 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.Chall
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.InfoMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.InfoMenuGenerator;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.common.config.Document;

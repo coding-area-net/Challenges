@@ -2,7 +2,7 @@ package net.codingarea.challenges.plugin.management.menu.generator.legacy;
 
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.MainCustomMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.MainCustomMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.position.LegacyGeneratorMenuPosition;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;

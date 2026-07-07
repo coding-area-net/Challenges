@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.management.menu.generator.legacy;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.MainCustomMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.MainCustomMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.position.LegacyGeneratorMenuPosition;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;

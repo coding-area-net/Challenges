@@ -1,4 +1,4 @@
-package net.codingarea.challenges.plugin.management.menu.generator.implementation.custom;
+package net.codingarea.challenges.plugin.management.menu.generator.legacy.custom;
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.CustomChallenge;
@@ -17,6 +17,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 
+@Deprecated
 public class MainCustomMenuGenerator extends ChallengeMenuGenerator {
 
   public static final int[] SLOTS = {10, 11, 12, 13, 14, 15, 16};

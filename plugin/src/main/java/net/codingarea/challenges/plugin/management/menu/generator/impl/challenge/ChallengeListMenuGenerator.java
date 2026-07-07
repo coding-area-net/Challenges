@@ -105,7 +105,7 @@ public class ChallengeListMenuGenerator extends ChallengesMenuGenerator {
    * @param slotOffset See {@link #SLOT_OFFSETS}
    * @return Whether an action can be executed at this offset (otherwise fallback behavior/sound will be played)
    */
-  public boolean executeChallengeAction(@NotNull IChallenge challenge, int slotOffset, @NotNull MenuClickInfo info) {
+  public boolean executeChallengeClickAction(@NotNull IChallenge challenge, int slotOffset, @NotNull MenuClickInfo info) {
     if (slotOffset == SLOT_OFFSET_DISPLAY || slotOffset == SLOT_OFFSET_SETTINGS) {
       challenge.handleClick(new ChallengeMenuClickInfo(info, slotOffset == SLOT_OFFSET_DISPLAY));
       return true;
@@ -152,7 +152,6 @@ public class ChallengeListMenuGenerator extends ChallengesMenuGenerator {
   protected void setChallengeItemsAt(@NotNull IChallenge challenge, @NotNull Inventory inventory, int slotsIndex, @NotNull Locale locale) {
     inventory.setItem(DISPLAY_SLOTS[slotsIndex] + SLOT_OFFSET_DISPLAY, createChallengeDisplayItem(challenge, locale));
     inventory.setItem(DISPLAY_SLOTS[slotsIndex] + SLOT_OFFSET_SETTINGS, createChallengeSettingsItem(challenge, locale));
-    // TODO might need overrideable getter for settings slot
   }
 
   @NotNull
@@ -276,7 +275,7 @@ public class ChallengeListMenuGenerator extends ChallengesMenuGenerator {
         if (challengeIndex >= assignedChallengesCache.size()) return false; // page not full
 
         IChallenge challenge = assignedChallengesCache.get(challengeIndex); // TODO slow LinkedList random access
-        return executeChallengeAction(challenge, offset, info);
+        return executeChallengeClickAction(challenge, offset, info);
       }
 
       return false;

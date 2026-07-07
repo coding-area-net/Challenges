@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder;
 import com.google.common.collect.Lists;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
-import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.IParentCustomGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.IParentCustomGenerator;
 import net.codingarea.challenges.plugin.spigot.listener.ChatInputListener;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;

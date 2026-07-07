@@ -3,7 +3,7 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.menu.generator.legacy.MenuGenerator;
-import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.IParentCustomGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.IParentCustomGenerator;
 import org.bukkit.entity.Player;
 
 public abstract class GeneratorSubSettingsBuilder extends SubSettingsBuilder {

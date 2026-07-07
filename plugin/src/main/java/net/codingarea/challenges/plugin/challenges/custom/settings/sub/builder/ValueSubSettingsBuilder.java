@@ -9,8 +9,8 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.sub.impl.Modi
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.legacy.MessageManager;
 import net.codingarea.challenges.plugin.management.menu.generator.legacy.MenuGenerator;
-import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.IParentCustomGenerator;
-import net.codingarea.challenges.plugin.management.menu.generator.implementation.custom.SubSettingValueMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.IParentCustomGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.legacy.custom.SubSettingValueMenuGenerator;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.entity.Player;

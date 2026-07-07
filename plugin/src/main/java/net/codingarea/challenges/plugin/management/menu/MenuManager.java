@@ -8,8 +8,8 @@ import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.management.menu.generator.AbstractMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.IChallengesMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.MainMenuGenerator;
-import net.codingarea.challenges.plugin.management.menu.generator.impl.challenge.ChallengesMenuGenerator;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
@@ -40,12 +40,12 @@ public final class MenuManager {
 
   public void generateMenus() {
     for (MenuType value : MenuType.values()) {
-      value.executeWithGenerator(ChallengesMenuGenerator.class, ChallengesMenuGenerator::resetCache);
+      value.executeWithGenerator(IChallengesMenuGenerator.class, IChallengesMenuGenerator::resetCache);
     }
 
     for (IChallenge challenge : Challenges.getInstance().getChallengeManager().getChallenges()) {
       MenuType type = challenge.getType();
-      type.executeWithGenerator(ChallengesMenuGenerator.class, gen -> gen.addToCache(challenge));
+      type.executeWithGenerator(IChallengesMenuGenerator.class, gen -> gen.addToCache(challenge));
     }
 
     Locale language = Challenges.getInstance().getLoaderRegistry().findLoaderByClassOrThrow(LanguageLoader.class).getConfigLanguage();

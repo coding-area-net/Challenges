@@ -36,7 +36,8 @@ public final class ChallengeManager {
   }
 
   public void register(@NotNull IChallenge challenge) {
-    if (!challenge.getType().isUsable()) throw new IllegalArgumentException("Invalid MenuType");
+    if (!challenge.getType().isUsable())
+      throw new IllegalArgumentException("Invalid MenuType " + challenge.getType() + " for challenge " + challenge.getClass());
     challenges.add(challenge);
   }
 

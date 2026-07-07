@@ -1,7 +1,7 @@
 package net.codingarea.commons.bukkit.utils.item;
 
 import com.destroystokyo.paper.profile.PlayerProfile;
-import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.commons.bukkit.core.BukkitModule;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.*;
@@ -10,7 +10,6 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
@@ -150,22 +149,22 @@ public class StandardItemBuilder {
 
   @SuppressWarnings({"UnstableApiUsage"})
   protected void applyDummyAttributeModifier() {
-//    try {
-//      // hacky fix to make paper hide damage attributes (only works with custom modifiers), "Vanilla behavior since 1.20.5"
-//      // see https://github.com/PaperMC/Paper/issues/11224
-//      Attribute dummyAttribute = Attribute.LUCK;
-//      Collection<AttributeModifier> modifiers = getItemMeta().getAttributeModifiers(dummyAttribute);
-//
-//      if (modifiers == null || modifiers.isEmpty()) {
-//        meta.addAttributeModifier(dummyAttribute, new AttributeModifier(
-//          new NamespacedKey(BukkitModule.getFirstInstance(), "dummy"),
-//          0,
-//          AttributeModifier.Operation.ADD_NUMBER,
-//          EquipmentSlotGroup.ANY
-//        ));
-//      }
-//    } catch (Throwable ignored) { // defend against experimental api changes
-//    }
+    try {
+      // hacky fix to make paper hide damage attributes (only works with custom modifiers), "Vanilla behavior since 1.20.5"
+      // see https://github.com/PaperMC/Paper/issues/11224
+      Attribute dummyAttribute = MinecraftNameWrapper.LUCK;
+      Collection<AttributeModifier> modifiers = getItemMeta().getAttributeModifiers(dummyAttribute);
+
+      if (modifiers == null || modifiers.isEmpty()) {
+        meta.addAttributeModifier(dummyAttribute, new AttributeModifier(
+          new NamespacedKey(BukkitModule.getFirstInstance(), "dummy"),
+          0,
+          AttributeModifier.Operation.ADD_NUMBER,
+          org.bukkit.inventory.EquipmentSlotGroup.ANY
+        ));
+      }
+    } catch (Throwable ignored) { // defend against experimental api changes
+    }
   }
 
   @NotNull

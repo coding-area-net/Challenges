@@ -1,6 +1,8 @@
 package net.codingarea.challenges.plugin.management.menu.generator;
 
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -22,7 +24,9 @@ public abstract class SinglePageMenuGenerator extends AbstractMenuGenerator {
   @NotNull
   public abstract GeneratorMenuPosition createMenuPosition(@NotNull Player player);
 
-  public abstract void initInventoryDecoration(@NotNull Inventory inventory, @NotNull Locale locale);
+  public void setInventoryDecoration(@NotNull Inventory inventory, @NotNull Locale locale) {
+    InventoryUtils.fillInventory(inventory, ItemBuilder.FILL_ITEM);
+  }
 
   public abstract void updateInventoryContent(@NotNull Inventory inventory, @NotNull Locale locale);
 
@@ -64,7 +68,7 @@ public abstract class SinglePageMenuGenerator extends AbstractMenuGenerator {
   @CheckReturnValue
   protected Inventory createAndInitInventory(@NotNull Locale locale) {
     Inventory inventory = createEmptyInventory(locale);
-    initInventoryDecoration(inventory, locale);
+    setInventoryDecoration(inventory, locale);
     setNavigationItems(inventory, 0, locale);
     updateInventoryContent(inventory, locale);
     return inventory;
@@ -82,4 +86,13 @@ public abstract class SinglePageMenuGenerator extends AbstractMenuGenerator {
   public final int getPageCount() {
     return 1;
   }
+
+  public abstract class SinglePageGeneratorMenuPosition extends GeneratorMenuPosition {
+
+    public SinglePageGeneratorMenuPosition() {
+      super(0);
+    }
+
+  }
+
 }

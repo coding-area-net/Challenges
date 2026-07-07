@@ -47,15 +47,11 @@ public abstract class MultiPageMenuGenerator extends AbstractMenuGenerator {
   }
 
   @NotNull
-  protected LocalizableMessage createSubMenuTitle(@NotNull Object menuNameArg, @NotNull Object subMenuNameArg) {
-    return MessageKey.of("menu.title-name-format-sub").withArgs(menuNameArg, subMenuNameArg);
-  }
-
-  @NotNull
   @CheckReturnValue
   protected final List<Inventory> generateInventories(@NotNull Locale locale) {
-    List<Inventory> inventories = new ArrayList<>(getPageCount());
-    for (int page = 0; page < getPageCount(); page++) {
+    int pageCount = getPageCount();
+    List<Inventory> inventories = new ArrayList<>(pageCount);
+    for (int page = 0; page < pageCount; page++) {
       Inventory inventory = createEmptyInventory(locale, page);
       setInventoryDecoration(inventory, page, locale);
       setNavigationItems(inventory, page, locale);

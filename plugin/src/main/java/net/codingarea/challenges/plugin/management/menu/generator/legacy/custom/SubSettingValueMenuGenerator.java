@@ -1,4 +1,4 @@
-package net.codingarea.challenges.plugin.management.menu.generator.implementation.custom;
+package net.codingarea.challenges.plugin.management.menu.generator.legacy.custom;
 
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSetting;
 import net.codingarea.challenges.plugin.management.menu.generator.legacy.ValueMenuGenerator;

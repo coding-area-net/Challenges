@@ -6,16 +6,21 @@ import lombok.Setter;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.i18n.LanguageProvider;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.DefaultItems;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 
 public abstract class AbstractMenuGenerator implements IMenuGenerator {
@@ -41,8 +46,13 @@ public abstract class AbstractMenuGenerator implements IMenuGenerator {
   @NotNull
   public LocalizableMessage getMenuName() {
     if (menuType == null)
-      throw new IllegalStateException("MenuType not set, was it not initialized by MenuType directly?");
+      throw new IllegalStateException("MenuType not set in " + this.getClass() + ", was it not initialized by MenuType directly?");
     return menuType.getMenuName();
+  }
+
+  @NotNull
+  protected LocalizableMessage createSubMenuTitle(@NotNull Object menuNameArg, @NotNull Object subMenuNameArg) {
+    return MessageKey.of("menu.title-name-format-sub").withArgs(menuNameArg, subMenuNameArg);
   }
 
   @Override
@@ -80,6 +90,19 @@ public abstract class AbstractMenuGenerator implements IMenuGenerator {
   @NotNull
   protected LanguageProvider findLanguageProvider() {
     return Challenges.getInstance().getTranslationManager().getLanguageProvider();
+  }
+
+  @NotNull
+  public Collection<Player> retrieveViewers() {
+    List<Player> viewers = new ArrayList<>(); // default capacity: 10
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      MenuPosition position = MenuPosition.get(player);
+      if (position == null) continue;
+      if (position instanceof GeneratorMenuPosition generatorPosition && generatorPosition.getGenerator() == this) {
+        viewers.add(player);
+      }
+    }
+    return viewers;
   }
 
   @Getter

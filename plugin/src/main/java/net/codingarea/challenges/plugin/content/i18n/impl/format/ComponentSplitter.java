@@ -6,6 +6,7 @@ import org.intellij.lang.annotations.RegExp;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -72,7 +73,9 @@ public final class ComponentSplitter {
   @NotNull
   private static List<Component> splitComponentContent(@NotNull Component component, @NotNull @RegExp String regex) {
     if (!(component instanceof TextComponent t)) {
-      return List.of(component);
+      List<Component> components = new ArrayList<>(1);
+      components.add(component);
+      return components;
     }
     String[] segments = t.content().split(regex);
     if (segments.length == 0) {
