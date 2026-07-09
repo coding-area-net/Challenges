@@ -105,14 +105,7 @@ public class ItemBuilder extends StandardItemBuilder {
 
   @NotNull
   public ItemBuilder appendLore(@NotNull MessageKey key, @NotNull Object... args) {
-    List<Component> components = key.asComponents(locale, args);
-    addToLore(components);
-    System.out.println(key.withArgs(args).localize(locale));
-    System.out.println(key.getKey());
-    System.out.println(components.size());
-    for (Component component : components) {
-      System.out.println(ComponentFormatter.MINI_MESSAGE.serialize(component));
-    }
+    addToLore(key.asComponents(locale, args));
     return this;
   }
 

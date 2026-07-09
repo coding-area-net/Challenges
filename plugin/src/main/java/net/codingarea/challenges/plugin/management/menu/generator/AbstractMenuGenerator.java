@@ -57,9 +57,13 @@ public abstract class AbstractMenuGenerator implements IMenuGenerator {
 
   @Override
   public void openMenu(@NotNull Player player, int page) {
+    openMenuWithPositionOverwrite(player, page, createMenuPosition(page, player));
+  }
+
+  private void openMenuWithPositionOverwrite(@NotNull Player player, int page, @NotNull GeneratorMenuPosition menuPosition) {
     Locale locale = findLanguageProvider().getPlayerLanguage(player);
     Inventory inventory = getOrInitInventory(locale, page);
-    MenuPosition.set(player, createMenuPosition(page, player));
+    MenuPosition.set(player, menuPosition);
     player.openInventory(inventory);
   }
 
@@ -163,6 +167,7 @@ public abstract class AbstractMenuGenerator implements IMenuGenerator {
   public abstract class HistoryAwareGeneratorMenuPosition extends GeneratorMenuPosition {
 
     private final GeneratorMenuPosition previousPosition;
+    private volatile boolean forgotten = false;
 
     public HistoryAwareGeneratorMenuPosition(int page, @Nullable GeneratorMenuPosition previousPosition) {
       super(page);
@@ -172,10 +177,8 @@ public abstract class AbstractMenuGenerator implements IMenuGenerator {
     public HistoryAwareGeneratorMenuPosition(int page, @NotNull Player player) {
       super(page);
       if (MenuPosition.get(player) instanceof GeneratorMenuPosition prevPosition) {
-        // skip other pages of same menu (we only care about the menu before!)
-        while (prevPosition.getGenerator() == AbstractMenuGenerator.this
-          && prevPosition instanceof HistoryAwareGeneratorMenuPosition historyAwarePosition
-          && historyAwarePosition.getPreviousPosition() != null) {
+        while (prevPosition instanceof HistoryAwareGeneratorMenuPosition historyAwarePosition
+          && shouldSkipPreviousPosition(historyAwarePosition)) {
           prevPosition = historyAwarePosition.getPreviousPosition();
         }
         this.previousPosition = prevPosition;
@@ -184,8 +187,17 @@ public abstract class AbstractMenuGenerator implements IMenuGenerator {
       }
     }
 
+    protected boolean shouldSkipPreviousPosition(@NotNull HistoryAwareGeneratorMenuPosition prevPosition) {
+      // skip other pages of same menu (we only care about the menu before!) + skip all forgotten positions
+      return prevPosition.isForgotten()
+        || prevPosition.getGenerator() == AbstractMenuGenerator.this
+        && prevPosition.getPreviousPosition() != null;
+    }
+
     @Override
     protected void handleNavigateOutOfMenu(@NotNull Player player) {
+      this.forgotten = true;
+
       if (previousPosition == null) {
         super.handleNavigateOutOfMenu(player);
         return;
@@ -195,9 +207,9 @@ public abstract class AbstractMenuGenerator implements IMenuGenerator {
       int previousPage = previousPosition.getPage();
       int previousMenuPageCount = previousMenu.getPageCount();
       if (previousPage < previousMenuPageCount) { // dynamic page count might have changed
-        previousMenu.openMenu(player, previousPage);
+        previousMenu.openMenuWithPositionOverwrite(player, previousPage, previousPosition);
       } else {
-        previousMenu.openMenu(player, previousMenuPageCount - 1);
+        previousMenu.openMenuWithPositionOverwrite(player, previousMenuPageCount - 1, previousPosition);
       }
     }
   }
