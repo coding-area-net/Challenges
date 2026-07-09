@@ -6,6 +6,7 @@ import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 
+@Deprecated
 public final class DefaultItem {
 
   public static final class SkullTextures {

@@ -97,7 +97,6 @@ public abstract class AbstractMenuGenerator implements IMenuGenerator {
     List<Player> viewers = new ArrayList<>(); // default capacity: 10
     for (Player player : Bukkit.getOnlinePlayers()) {
       MenuPosition position = MenuPosition.get(player);
-      if (position == null) continue;
       if (position instanceof GeneratorMenuPosition generatorPosition && generatorPosition.getGenerator() == this) {
         viewers.add(player);
       }

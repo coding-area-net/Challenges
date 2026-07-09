@@ -1,21 +1,21 @@
 package net.codingarea.challenges.plugin.management.menu.generator.impl.custom.choose;
 
+import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SelectableKey;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashMap;
 
-public class SubSettingChooseMenuGenerator extends CustomChooseItemMenuGenerator {
+public class SubSettingChooseMenuGenerator extends CustomChooseOptionMenuGenerator {
 
   private final IParentCustomGenerator parent;
   private final String key;
 
   public SubSettingChooseMenuGenerator(@NotNull String key, @NotNull IParentCustomGenerator parent,
-                                       @NotNull LinkedHashMap<String, ItemStack> items, @NotNull LocalizableMessage title) {
+                                       @NotNull LinkedHashMap<String, ? extends SelectableKey> items, @NotNull LocalizableMessage title) {
     super(title, items);
     this.key = key;
     this.parent = parent;

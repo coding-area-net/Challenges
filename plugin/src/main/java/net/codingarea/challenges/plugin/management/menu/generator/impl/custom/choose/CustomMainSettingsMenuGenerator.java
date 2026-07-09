@@ -1,20 +1,19 @@
-package net.codingarea.challenges.plugin.management.menu.generator.impl.custom;
+package net.codingarea.challenges.plugin.management.menu.generator.impl.custom.choose;
 
 import lombok.Getter;
 import net.codingarea.challenges.plugin.challenges.custom.settings.IChallengeSetting;
 import net.codingarea.challenges.plugin.challenges.custom.settings.SettingType;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
+import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SelectableKey;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
-import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.choose.CustomChooseItemMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -23,7 +22,7 @@ import java.util.function.Function;
  * collecting the sub-setting data before handing it back to the parent generator.
  * Replaces the legacy {@code custom.CustomMainSettingsMenuGenerator}.
  */
-public class CustomMainSettingsMenuGenerator extends CustomChooseItemMenuGenerator implements IParentCustomGenerator {
+public class CustomMainSettingsMenuGenerator extends CustomChooseOptionMenuGenerator implements IParentCustomGenerator {
 
   @Getter
   private final IParentCustomGenerator parent;
@@ -37,7 +36,7 @@ public class CustomMainSettingsMenuGenerator extends CustomChooseItemMenuGenerat
 
   public CustomMainSettingsMenuGenerator(@NotNull IParentCustomGenerator parent, @NotNull SettingType type,
                                          @NotNull String key, @NotNull LocalizableMessage baseTitle,
-                                         @NotNull LinkedHashMap<String, ItemStack> items,
+                                         @NotNull Map<String, SelectableKey> items,
                                          @NotNull Function<String, IChallengeSetting> instanceGetter) {
     super(baseTitle, items);
     this.parent = parent;

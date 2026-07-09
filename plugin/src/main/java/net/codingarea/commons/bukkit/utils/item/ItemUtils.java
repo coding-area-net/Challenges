@@ -63,10 +63,8 @@ public class ItemUtils {
       case "SUSPICIOUS_GRAVEL":
       case "SUSPICIOUS_SAND":
         return false;
-    }
-
-    if (MinecraftVersion.current().isOlderThan(MinecraftVersion.V1_19)) {
-      return !name.equals("SCULK_SENSOR");
+      case "SCULK_SENSOR":
+        return MinecraftVersion.currentExact().isNewerOrEqualThan(MinecraftVersion.V1_19);
     }
 
     return true;

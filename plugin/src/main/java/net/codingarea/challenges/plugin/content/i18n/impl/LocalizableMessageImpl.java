@@ -6,6 +6,7 @@ import net.codingarea.challenges.plugin.content.i18n.MessageHolder;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Locale;
 
@@ -25,6 +26,12 @@ public class LocalizableMessageImpl implements LocalizableMessage {
   @Override
   public MessageHolder localize(@NotNull Player playerLocale) {
     return localize(MessageKeyImpl.getPlayerLocale(playerLocale));
+  }
+
+  @NotNull
+  @Override
+  public LocalizableMessage withArgs(@NotNull Object... args) {
+    return new LocalizableMessageImpl(messageKey, args);
   }
 
   @NotNull

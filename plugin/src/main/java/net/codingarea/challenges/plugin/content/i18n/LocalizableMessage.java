@@ -1,13 +1,12 @@
 package net.codingarea.challenges.plugin.content.i18n;
 
-import net.codingarea.challenges.plugin.content.i18n.impl.DynamicLocalizableMessageImpl;
-import net.codingarea.challenges.plugin.content.i18n.impl.JoinedMessageImpl;
+import net.codingarea.challenges.plugin.content.i18n.impl.dynamic.DynamicMessageImpl;
+import net.codingarea.challenges.plugin.content.i18n.impl.dynamic.JoinedMessageImpl;
+import net.codingarea.challenges.plugin.content.i18n.impl.dynamic.WrappedObjMessageImpl;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.CheckReturnValue;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.*;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Locale;
 import java.util.function.Function;
 
@@ -19,14 +18,28 @@ import java.util.function.Function;
  */
 public interface LocalizableMessage {
 
+  // TODO add LocalizableMessage helper methods (same as in MessageKey without args!)
+
   @NotNull
+  @CheckReturnValue
   MessageHolder localize(@NotNull Locale locale);
 
   @NotNull
+  @CheckReturnValue
   MessageHolder localize(@NotNull Player playerLocale);
 
+  /**
+   * @return a new {@link LocalizableMessage} instance with the same {@link MessageKey} but with the new provided arguments.
+   */
   @NotNull
-  @ApiStatus.Internal
+  @Contract(pure = true)
+  LocalizableMessage withArgs(@NotNull Object... args);
+
+  /**
+   * @return the {@link MessageKey} of this {@link LocalizableMessage}
+   * or {@code null} if this is a dynamic message that does not have a key.
+   */
+  @Nullable
   MessageKey getLocalizableKey();
 
   @NotNull
@@ -41,20 +54,44 @@ public interface LocalizableMessage {
 
   @NotNull
   @CheckReturnValue
-  static LocalizableMessage join(@NotNull MessageKey delimiter, @NotNull Object... elements) {
-    return new JoinedMessageImpl(delimiter, elements);
+  static LocalizableMessage join(@NotNull MessageKey delimiter, @NotNull MessageKey remainingPlaceholder, int limit, @NotNull Object... elements) {
+    return new JoinedMessageImpl(delimiter, remainingPlaceholder, limit, elements);
+  }
+
+  @NotNull
+  @CheckReturnValue
+  static LocalizableMessage join(int limit, @NotNull Object... elements) {
+    return join(MessageKey.of("arg-format.delimiter"), MessageKey.of("arg-format.remaining"), limit, elements);
+  }
+
+  @NotNull
+  @CheckReturnValue
+  static LocalizableMessage joinArray(int limit, @NotNull Object[] elements) {
+    return join(limit, elements);
   }
 
   @NotNull
   @CheckReturnValue
   static LocalizableMessage joinArray(@NotNull Object[] elements) {
-    return join(MessageKey.of("generic.delimiter"), elements);
+    return join(elements.length, elements);
   }
 
   @NotNull
   @CheckReturnValue
-  static LocalizableMessage joinList(@NotNull List<?> elements) {
+  static LocalizableMessage joinList(int limit, @NotNull Collection<?> elements) {
+    return joinArray(limit, elements.toArray());
+  }
+
+  @NotNull
+  @CheckReturnValue
+  static LocalizableMessage joinList(@NotNull Collection<?> elements) {
     return joinArray(elements.toArray());
+  }
+
+  @NotNull
+  @CheckReturnValue
+  static LocalizableMessage joinArgsLimited(int limit, @NotNull Object... elements) { // prevents ambiguous var-args
+    return joinArray(limit, elements);
   }
 
   @NotNull
@@ -66,13 +103,21 @@ public interface LocalizableMessage {
   @NotNull
   @CheckReturnValue
   static LocalizableMessage fromLines(@NotNull Function<Locale, String[]> valueFunction, @NotNull Object... args) {
-    return new DynamicLocalizableMessageImpl(valueFunction, args);
+    return new DynamicMessageImpl(valueFunction, args);
   }
 
   @NotNull
   @CheckReturnValue
   static LocalizableMessage from(@NotNull Function<Locale, String> valueFunction, @NotNull Object... args) {
     return fromLines(valueFunction.andThen((string) -> new String[]{string}), args);
+  }
+
+  @NotNull
+  @CheckReturnValue
+  @ApiStatus.Internal
+  @ApiStatus.Experimental
+  static LocalizableMessage wrap(@NotNull Object arg) {
+    return new WrappedObjMessageImpl(arg);
   }
 
 }

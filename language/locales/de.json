@@ -130,9 +130,9 @@
     "custom": {
       "name": "Individuelle Challenges",
       "sub-name": "Individuell",
-      "selected-format": "<gray>Eingestellt</gray> <dark_gray>{@symbol.circle}</dark_gray> <yellow>{0}</yellow>",
-      "trigger-format": "<gray>Auslöser</gray> <dark_gray>{@symbol.circle}</dark_gray> {0}",
-      "action-format": "<gray>Aktion</gray> <dark_gray>{@symbol.circle}</dark_gray> {0}",
+      "selected-format": "{@subsetting-format('Eingestellt', '{0}')}",
+      "trigger-format": "{@subsetting-format('Auslöser', '{0}')}",
+      "action-format": "{@subsetting-format('Aktion', '{0}')}",
       "home": {
         "item-view": "{@item-format('<gold>Challenges ansehen</gold>')}",
         "item-create": "{@item-format('<green>Neue Challenge erstellen</green>')}"
@@ -408,6 +408,12 @@
         "*Spieler* sind durch die *Wand* sichtbar"
       ]
     },
+    "no-hunger": {
+      "name": "*Kein Hunger*",
+      "desc": [
+        "Du bekommst keinen *Hunger*"
+      ]
+    },
     "no-item-damage": {
       "name": "*Kein Itemschaden*",
       "desc": [
@@ -459,6 +465,14 @@
         "kannst du *sofort* wieder Schaden *bekommen*"
       ]
     },
+    "top-command": {
+      "name": "*Top Command*",
+      "desc": [
+        "Mit */top* kannst du dich",
+        "zur *Oberfläche* oder in",
+        "die *Overworld* teleportieren"
+      ]
+    },
     "max-health": {
       "name": "*Maximale Herzen*",
       "desc": [
@@ -477,6 +491,20 @@
       "desc": [
         "Verschiedene *Einstellungen*, die",
         "das *Farmen* von Items *einfacher* machen"
+      ]
+    },
+    "fortress-spawn": {
+      "name": "*Festungs Spawn*",
+      "desc": [
+        "Wenn du in den *Nether* gehst,",
+        "spawnst du immer in einer *Festung*"
+      ]
+    },
+    "bastion-spawn": {
+      "name": "*Bastions Spawn*",
+      "desc": [
+        "Wenn du in den *Nether* gehst,",
+        "spawnst du immer in einer *Bastion*"
       ]
     },
     "no-offhand": {
@@ -1574,7 +1602,9 @@
       "name": "*Alle Items*",
       "desc": [
         "Finde *alle Items*, die es *in Minecraft gibt*"
-      ]
+      ],
+      "bossbar-current": "{@bossbar.format-arg('{3}{0}', '{1} <dark_gray>/</dark_gray> {2}')}",
+      "bossbar-finished": "{@bossbar.format('<green>Alle Items gefunden</green>')}"
     },
     "damage-teleport": {
       "name": "*Schaden Random Teleport*",
@@ -2031,8 +2061,6 @@
   "quiz-verb-dropped": "gedropped",
   "quiz-verb-suffered": "erlitten",
   "bossbar-timer-paused": "<dark_gray>» </dark_gray><gray>Der Timer ist </gray><red>pausiert</red>",
-  "bossbar-all-items-current-max": "<dark_gray>» </dark_gray><white>{0} </white><dark_gray>┃ </dark_gray><gray>{1} </gray><dark_gray>/ </dark_gray><gray>{2}</gray>",
-  "bossbar-all-items-finished": "<dark_gray>» </dark_gray><gray>Alle Items gefunden</gray>",
   "bossbar-race-goal-info": "<dark_gray>» </dark_gray><white>Ziel </white><dark_gray>┃ </dark_gray><gray>X: {0} </gray><dark_gray>/ </dark_gray><gray>Z: {1} </gray><dark_gray>┃ </dark_gray><yellow>{2} Blöcke</yellow>",
   "bossbar-race-goal": "<dark_gray>» </dark_gray><white>Ziel </white><dark_gray>┃ </dark_gray><gray>X: {0} </gray><dark_gray>/ </dark_gray><gray>Z: {1}</gray>",
   "bossbar-first-at-height-goal": "<dark_gray>» </dark_gray><white>Ziel </white><dark_gray>┃ </dark_gray><gray>Y: {0}</gray>",
@@ -2151,28 +2179,8 @@
     "<red>Gebratenes Essen</red>",
     "*Rohes Fleisch* wird direkt zu *gebratenem Fleisch*"
   ],
-  "no-hunger-setting": [
-    "<red>Kein Hunger</red>",
-    "Du bekommst keinen *Hunger*"
-  ],
   "item-timber-setting-logs": "<gold>Baumstämme</gold>",
   "item-timber-setting-logs-and-leaves": "<gold>Baumstämme </gold><gray>und </gray><dark_green>Blätter</dark_green>",
-  "top-command-setting": [
-    "<light_purple>Top Command</light_purple>",
-    "Mit */top* kannst du dich",
-    "zur *Oberfläche* oder in",
-    "die *Overworld* teleportieren"
-  ],
-  "item-fortress-spawn-setting": [
-    "<red>Festungs Spawn</red>",
-    "Wenn du in den *Nether* gehst,",
-    "spawnst du immer in einer *Festung*"
-  ],
-  "item-bastion-spawn-setting": [
-    "<red>Bastions Spawn</red>",
-    "Wenn du in den *Nether* gehst,",
-    "spawnst du immer in einer *Bastion*"
-  ],
   "item-regeneration-setting-not_natural": "<gold>Nicht natürlich</gold>",
   "menu-all-blocks-disappear-challenge-settings": "Alle Blöcke verschwinden",
   "item-all-blocks-disappear-break-challenge": [

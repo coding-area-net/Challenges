@@ -2,90 +2,171 @@ package net.codingarea.challenges.plugin.content.i18n.impl.format;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
-import org.intellij.lang.annotations.RegExp;
+import net.kyori.adventure.text.format.Style;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
+/**
+ * Splits an Adventure {@link Component} into multiple components by newline
+ * characters ({@code \n}), while preserving all styling (colors, decorations,
+ * click/hover events, fonts, etc.).
+ * <p>
+ * Designed for frequent calls: no regex, no component builders, no redundant
+ * allocations, and a zero-copy fast path for components without newlines.
+ */
 public final class ComponentSplitter {
-
-  @RegExp
-  public static final String NEW_LINE = "\\n";
 
   private ComponentSplitter() {
   }
 
   /**
-   * Splits a component and the underlying component tree by a regex. Styles are being preserved, so
-   * splitting {@code <green>line1\nline2</green>} by the regex "\n" will produce two components
-   * with {@link net.kyori.adventure.text.format.TextColor} green. It matches the regex for all
-   * components and their content but not for a pattern that goes beyond one component.
-   * {@code line1<green>ab</green>cline2} can therefore not be split with the regex "abc", because
-   * only "ab" or "c" would match.
+   * Splits the given component at every {@code \n} into separate components.
+   * Styles are resolved against their parents before splitting, so each
+   * resulting line renders exactly like the corresponding part of the input.
+   * <p>
+   * A trailing newline produces a trailing empty line; an input without any
+   * newline is returned unchanged as a single-element list.
    *
-   * @param self      A component to split at a regex.
-   * @param separator A regex to split the TextComponent content at.
-   * @return A list of new components
+   * @param component the component to split
+   * @return the line components (never empty); the list is freshly allocated
+   * and owned by the caller, except for the newline-free fast path
+   * which returns an immutable singleton
    */
   @NotNull
   @Contract(pure = true)
-  public static List<Component> split(@NotNull Component self, @NotNull @RegExp String separator) {
-    // First split component content
-    List<Component> lines = splitComponentContent(self, separator);
-
-    if (self.children().isEmpty()) {
-      return lines;
+  public static List<Component> split(@NotNull Component component) {
+    // Fast path: nothing to split -> return the original instance untouched.
+    if (!containsNewline(component)) {
+      return Collections.singletonList(component);
     }
 
-    // Extract last split, which will contain all children of the same line
-    Component parent = lines.removeLast();
+    final SplitState state = new SplitState();
+    visit(component, Style.empty(), state);
+    state.finishLine(); // flush the last line
+    return state.lines;
+  }
 
-    // Process each child in order
-    for (Component child : self.children()) {
-      // Split child to List<Component>
-      List<? extends Component> childSegments = split(child, separator);
-
-      // each split will be a new row, except the first which will stick to the parent
-      parent = parent.append(childSegments.get(0));
-      for (int i = 1; i < childSegments.size(); i++) {
-        lines.add(parent);
-        parent = Component.empty().style(parent.style());
-        parent = parent.append(childSegments.get(i));
+  private static boolean containsNewline(final Component component) {
+    if (component instanceof TextComponent
+      && ((TextComponent) component).content().indexOf('\n') >= 0) {
+      return true;
+    }
+    for (final Component child : component.children()) {
+      if (containsNewline(child)) {
+        return true;
       }
     }
-    lines.add(parent);
-    return lines;
+    return false;
+  }
+
+  private static void visit(final Component component, final Style parentStyle, final SplitState state) {
+    // Resolve the effective style like vanilla rendering does, but skip the
+    // merge entirely when one side cannot contribute anything.
+    final Style own = component.style();
+    final Style style;
+    if (parentStyle.isEmpty()) {
+      style = own;
+    } else if (own.isEmpty()) {
+      style = parentStyle;
+    } else {
+      style = own.merge(parentStyle, Style.Merge.Strategy.IF_ABSENT_ON_TARGET);
+    }
+
+    if (component instanceof TextComponent) {
+      final String content = ((TextComponent) component).content();
+      final int firstNewline = content.indexOf('\n');
+
+      if (firstNewline < 0) {
+        if (!content.isEmpty()) {
+          // Reuse the original component when it already carries the
+          // resolved style and has no children; otherwise re-wrap.
+          if (style == own && component.children().isEmpty()) {
+            state.append(component);
+          } else {
+            state.append(Component.text(content, style));
+          }
+        }
+      } else {
+        // Manual scan instead of String#split: no regex, no String[].
+        int start = 0;
+        int newline = firstNewline;
+        do {
+          if (newline > start) {
+            state.append(Component.text(content.substring(start, newline), style));
+          }
+          state.finishLine();
+          start = newline + 1;
+        } while ((newline = content.indexOf('\n', start)) >= 0);
+
+        if (start < content.length()) {
+          state.append(Component.text(content.substring(start), style));
+        }
+      }
+    } else {
+      // Non-text components (translatable, keybind, score, selector, ...)
+      // cannot be split internally. Append them with the resolved style
+      // and without children - those are visited separately below so
+      // newlines inside them are still handled.
+      if (style == own && component.children().isEmpty()) {
+        state.append(component);
+      } else {
+        state.append(component.children(Collections.<Component>emptyList()).style(style));
+      }
+    }
+
+    for (final Component child : component.children()) {
+      visit(child, style, state);
+    }
   }
 
   /**
-   * Splits a {@link TextComponent} by a regex.
-   *
-   * @param component A {@link TextComponent} to split. If the provided Component is no instance of
-   *                  TextComponent, a list with only the component is returned.
-   * @param regex     A regex that splits the content of the TextComponent, similar to
-   *                  {@link String#split(String)}
-   * @return A list of TextComponents that contain the string segments of the original content.
+   * Mutable state used while walking the component tree. Lines are assembled
+   * without component builders: a single-part line is used as-is, and
+   * multi-part lines are attached as children of an empty root via
+   * {@link Component#children(List)}.
    */
-  @NotNull
-  private static List<Component> splitComponentContent(@NotNull Component component, @NotNull @RegExp String regex) {
-    if (!(component instanceof TextComponent t)) {
-      List<Component> components = new ArrayList<>(1);
-      components.add(component);
-      return components;
-    }
-    String[] segments = t.content().split(regex);
-    if (segments.length == 0) {
-      // Special case if the split regex is equals to the content.
-      segments = new String[]{"", ""};
-    }
-    return Arrays.stream(segments)
-      .map(s -> Component.text(s).style(t.style()))
-      .map(c -> (Component) c)
-      .collect(Collectors.toList());
-  }
+  private static final class SplitState {
+    private final List<Component> lines = new ArrayList<>();
 
+    /**
+     * The only part of the current line, while it has exactly one.
+     */
+    private Component single;
+    /**
+     * All parts of the current line, once it has two or more.
+     */
+    private List<Component> parts;
+
+    void append(final Component part) {
+      if (this.parts != null) {
+        this.parts.add(part);
+        return;
+      }
+      if (this.single == null) {
+        this.single = part;
+        return;
+      }
+      // Second part arrived: promote to a list.
+      this.parts = new ArrayList<>(8);
+      this.parts.add(this.single);
+      this.parts.add(part);
+      this.single = null;
+    }
+
+    void finishLine() {
+      if (this.parts != null) {
+        this.lines.add(Component.empty().children(this.parts));
+        this.parts = null;
+      } else if (this.single != null) {
+        this.lines.add(this.single);
+        this.single = null;
+      } else {
+        this.lines.add(Component.empty());
+      }
+    }
+  }
 }

@@ -10,10 +10,10 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.Chall
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
-import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.SinglePageMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.choose.CustomChooseMaterialMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.choose.CustomMainSettingsMenuGenerator;
 import net.codingarea.challenges.plugin.spigot.listener.ChatInputListener;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
@@ -107,8 +107,7 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
     ItemBuilder triggerItem = new ItemBuilder(locale, Material.WITHER_SKELETON_SKULL, MessageKey.of("menu.custom.info.item-trigger"),
       triggerName);
     if (trigger != null) {
-      List<String> lines = SubSettingsBuilder.getSubSettingsDisplay(trigger.getSubSettingsBuilder(), subTriggers);
-      if (!lines.isEmpty()) triggerItem.appendLore(lines);
+      appendSubSettingDisplay(triggerItem, trigger.getSubSettingsBuilder().getCurrentDisplayFor(subTriggers));
     }
     inventory.setItem(CONDITION_SLOT, triggerItem.build());
 
@@ -117,8 +116,7 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
     ItemBuilder actionItem = new ItemBuilder(locale, Material.NETHER_STAR, MessageKey.of("menu.custom.info.item-action"),
       actionName);
     if (action != null) {
-      List<String> lines = SubSettingsBuilder.getSubSettingsDisplay(action.getSubSettingsBuilder(), subActions);
-      if (!lines.isEmpty()) actionItem.appendLore(lines);
+      appendSubSettingDisplay(actionItem, action.getSubSettingsBuilder().getCurrentDisplayFor(subActions));
     }
     inventory.setItem(ACTION_SLOT, actionItem.build());
 
@@ -131,6 +129,12 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
     int maxNameLength = Challenges.getInstance().getCustomChallengesLoader().getMaxNameLength();
     inventory.setItem(NAME_SLOT, new ItemBuilder(locale, Material.NAME_TAG, MessageKey.of("menu.custom.info.item-name"),
       name, maxNameLength).build());
+  }
+
+  protected void appendSubSettingDisplay(@NotNull ItemBuilder item, @NotNull Collection<SubSettingsBuilder.SubSettingDisplay> display) {
+    for (SubSettingsBuilder.SubSettingDisplay settingDisplay : display) {
+      item.appendLore(MessageKey.of("menu.custom.subsetting-format"), settingDisplay.keyName(), settingDisplay.valueFormatted());
+    }
   }
 
   @Override

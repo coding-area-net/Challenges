@@ -3,12 +3,12 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.trigger.impl
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.FallbackNames;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
+import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SelectableKey;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
-import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.scheduler.policy.PlayerCountPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,21 +16,21 @@ import java.util.List;
 @FallbackNames("intervall")
 public class IntervallTrigger extends ChallengeTrigger {
 
-  public IntervallTrigger(String name) {
+  public IntervallTrigger(@NotNull String name) {
     super(name, SubSettingsBuilder.createChooseItem("time").fill(builder -> {
-      builder.addSetting("1", new LegacyItemBuilder(Material.MUSIC_DISC_13, Message.forName("item-custom-trigger-intervall-second"), "1").build());
+      builder.addSetting(SelectableKey.of("1", Material.MUSIC_DISC_13, "item-custom-trigger-intervall-second", "1"));
       String seconds = "item-custom-trigger-intervall-seconds";
-      builder.addSetting("2", new LegacyItemBuilder(Material.MUSIC_DISC_CAT, Message.forName(seconds), "2"));
-      builder.addSetting("5", new LegacyItemBuilder(Material.MUSIC_DISC_BLOCKS, Message.forName(seconds), "5"));
-      builder.addSetting("10", new LegacyItemBuilder(Material.MUSIC_DISC_CHIRP, Message.forName(seconds), "10"));
-      builder.addSetting("20", new LegacyItemBuilder(Material.MUSIC_DISC_FAR, Message.forName(seconds), "20"));
-      builder.addSetting("30", new LegacyItemBuilder(Material.MUSIC_DISC_MALL, Message.forName(seconds), "30"));
-      builder.addSetting("60", new LegacyItemBuilder(Material.MUSIC_DISC_MELLOHI, Message.forName(seconds), "60"));
+      builder.addSetting(SelectableKey.of("2", Material.MUSIC_DISC_CAT, seconds, "2"));
+      builder.addSetting(SelectableKey.of("5", Material.MUSIC_DISC_BLOCKS, seconds, "5"));
+      builder.addSetting(SelectableKey.of("10", Material.MUSIC_DISC_CHIRP, seconds, "10"));
+      builder.addSetting(SelectableKey.of("20", Material.MUSIC_DISC_FAR, seconds, "20"));
+      builder.addSetting(SelectableKey.of("30", Material.MUSIC_DISC_MALL, seconds, "30"));
+      builder.addSetting(SelectableKey.of("60", Material.MUSIC_DISC_MELLOHI, seconds, "60"));
       String minutes = "item-custom-trigger-intervall-minutes";
-      builder.addSetting("120", new LegacyItemBuilder(Material.MUSIC_DISC_STAL, Message.forName(minutes), "2"));
-      builder.addSetting("180", new LegacyItemBuilder(Material.MUSIC_DISC_STRAD, Message.forName(minutes), "3"));
-      builder.addSetting("240", new LegacyItemBuilder(Material.MUSIC_DISC_WARD, Message.forName(minutes), "4"));
-      builder.addSetting("300", new LegacyItemBuilder(Material.MUSIC_DISC_11, Message.forName(minutes), "5"));
+      builder.addSetting(SelectableKey.of("120", Material.MUSIC_DISC_STAL, minutes, "2"));
+      builder.addSetting(SelectableKey.of("180", Material.MUSIC_DISC_STRAD, minutes, "3"));
+      builder.addSetting(SelectableKey.of("240", Material.MUSIC_DISC_WARD, minutes, "4"));
+      builder.addSetting(SelectableKey.of("300", Material.MUSIC_DISC_11, minutes, "5"));
     }));
     Challenges.getInstance().getScheduler().register(this);
   }

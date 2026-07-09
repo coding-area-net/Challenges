@@ -1,20 +1,17 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder;
 
-import com.google.common.collect.Lists;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
 import net.codingarea.challenges.plugin.spigot.listener.ChatInputListener;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -69,16 +66,16 @@ public class TextInputSubSettingsBuilder extends SubSettingsBuilder {
     return true;
   }
 
+  @NotNull
   @Override
-  public List<String> getDisplay(Map<String, String[]> activated) {
-    List<String> display = Lists.newLinkedList();
+  public Collection<SubSettingDisplay> getCurrentDisplayFor(@NotNull Map<String, String[]> activated) {
+    // TODO ported logic from legacy code; needs optimization / complete impl overhaul
+    String[] values = activated.get(this.getKey());
+    if (values == null) return Collections.emptyList();
 
-    for (Entry<String, String[]> entry : activated.entrySet()) {
-      if (entry.getKey().equals(getKey())) {
-        for (String value : entry.getValue()) {
-          display.add("§7" + getKeyTranslation() + " " + DefaultItem.getItemPrefix() + value);
-        }
-      }
+    List<SubSettingDisplay> display = new ArrayList<>(values.length);
+    for (String value : values) {
+      display.add(new SubSettingDisplay(getKeyTranslation(this.getKey()), LocalizableMessage.wrap(value)));
     }
 
     return display;

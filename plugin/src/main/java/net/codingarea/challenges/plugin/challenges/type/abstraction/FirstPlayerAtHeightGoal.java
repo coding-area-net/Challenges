@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import lombok.Getter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
@@ -55,6 +56,12 @@ public abstract class FirstPlayerAtHeightGoal extends SettingGoal {
       MessageKey.of("height-reached").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), getHeightToGetTo());
       ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED, () -> Collections.singletonList(event.getPlayer()));
     }
+  }
+
+  @NotNull
+  @Override
+  public LocalizableMessage getChallengeDescription() {
+    return super.getChallengeDescription().withArgs(heightToGetTo);
   }
 
   protected void setHeightToGetTo(int heightToGetTo) {

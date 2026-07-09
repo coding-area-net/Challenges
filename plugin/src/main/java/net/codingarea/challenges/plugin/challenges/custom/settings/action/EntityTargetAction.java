@@ -6,8 +6,7 @@ import java.util.function.Supplier;
 
 public abstract class EntityTargetAction extends ChallengeAction implements IEntityTargetAction {
 
-  public EntityTargetAction(String name,
-                            SubSettingsBuilder subSettingsBuilder) {
+  public EntityTargetAction(String name, SubSettingsBuilder subSettingsBuilder) {
     super(name, subSettingsBuilder);
   }
 

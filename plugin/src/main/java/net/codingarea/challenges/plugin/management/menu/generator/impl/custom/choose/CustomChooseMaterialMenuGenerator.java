@@ -4,7 +4,7 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.SettingType;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.UncachedMultiPageMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.UncachedMultiPageSelectMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
@@ -20,10 +20,10 @@ import org.jspecify.annotations.NonNull;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class CustomChooseMaterialMenuGenerator extends UncachedMultiPageMenuGenerator<Material> {
+public class CustomChooseMaterialMenuGenerator extends UncachedMultiPageSelectMenuGenerator<Material> {
 
-  public static final int SIZE = 5 * 9;
-  public static final int[] SLOTS = calcSlots(3, 7, SIZE);
+  public static final int SIZE = CustomChooseOptionMenuGenerator.SIZE;
+  public static final int[] SLOTS = CustomChooseOptionMenuGenerator.SLOTS;
   public static final Material[] MATERIALS;
 
   static {

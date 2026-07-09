@@ -1,12 +1,12 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.trigger.impl;
 
 import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SelectableKey;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -19,8 +19,8 @@ public class InLiquidTrigger extends ChallengeTrigger {
 
   public InLiquidTrigger(String name) {
     super(name, SubSettingsBuilder.createChooseMultipleItem(SubSettingsHelper.LIQUID).fill(builder -> {
-      builder.addSetting("LAVA", new LegacyItemBuilder(Material.LAVA_BUCKET, DefaultItem.getItemPrefix() + "§cLava"));
-      builder.addSetting("WATER", new LegacyItemBuilder(Material.WATER_BUCKET, DefaultItem.getItemPrefix() + "§9Water"));
+      builder.addSetting(SelectableKey.of("LAVA", Material.LAVA_BUCKET, LocalizableMessage.wrap("§cLava")));
+      builder.addSetting(SelectableKey.of("WATER", Material.WATER_BUCKET, LocalizableMessage.wrap("§9Water")));
     }));
     Challenges.getInstance().getScheduler().register(this);
   }

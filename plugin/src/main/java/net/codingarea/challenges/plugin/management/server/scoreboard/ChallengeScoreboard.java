@@ -186,7 +186,7 @@ public final class ChallengeScoreboard {
         if (line == null) continue;
 
         if (line instanceof LocalizableMessage message) {
-          list.add(message.getLocalizableKey().asComponent(locale, message.getLocalizableArgs()));
+          list.add(ComponentArguments.convertMessageHolderToComponent(message.localize(locale)));
         } else {
           list.add(ComponentArguments.convertToComponent(line));
         }

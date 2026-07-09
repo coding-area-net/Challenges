@@ -1,12 +1,13 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder;
 
-import com.google.common.collect.Lists;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
 public class EmptySubSettingsBuilder extends SubSettingsBuilder {
@@ -16,8 +17,8 @@ public class EmptySubSettingsBuilder extends SubSettingsBuilder {
   }
 
   @Override
-  public List<String> getDisplay(Map<String, String[]> activated) {
-    return Lists.newLinkedList();
+  public @NotNull Collection<SubSettingDisplay> getCurrentDisplayFor(@NotNull Map<String, String[]> activated) {
+    return Collections.emptyList();
   }
 
   @Override

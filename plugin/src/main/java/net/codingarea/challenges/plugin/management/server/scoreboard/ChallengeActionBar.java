@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.management.server.scoreboard;
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.impl.format.ComponentArguments;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -29,7 +30,8 @@ public final class ChallengeActionBar {
 
     try {
       LocalizableMessage actionbar = content.apply(player);
-      actionbar.getLocalizableKey().sendActionBar(player, actionbar.getLocalizableArgs());
+      // TODO add LocalizableMessage helper methods (same as in MessageKey without args!)
+      player.sendActionBar(ComponentArguments.convertMessageHolderToComponent(actionbar.localize(player)));
     } catch (Exception ex) {
       Logger.error("Unable to update actionbar for player '{}'", player.getName(), ex);
     }

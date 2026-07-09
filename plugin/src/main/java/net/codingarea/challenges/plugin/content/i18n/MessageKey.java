@@ -7,10 +7,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.CheckReturnValue;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
 
 import java.util.List;
 import java.util.Locale;
@@ -90,14 +87,14 @@ public interface MessageKey extends LocalizableMessage {
 
   @NotNull
   @CheckReturnValue
-  static MessageKey pluralize(@NotNull String singular, @NotNull String plural, @NotNull Number count) {
-    return of(count.intValue() == 1 ? singular : plural);
+  static MessageKey pluralize(@NotNull String singularKey, @NotNull String pluralKey, @NotNull Number count) {
+    return of(count.intValue() == 1 ? singularKey : pluralKey);
   }
 
   @NotNull
   @CheckReturnValue
-  static MessageKey pluralize(@NotNull String baseId, @NotNull Number count) {
-    return pluralize(baseId, baseId + "s", count);
+  static MessageKey pluralize(@NotNull String baseKey, @NotNull Number count) {
+    return pluralize(baseKey, baseKey + "s", count);
   }
 
   @NotNull
@@ -119,6 +116,11 @@ public interface MessageKey extends LocalizableMessage {
 
   @NotNull
   String getKey();
+
+  /**
+   * @return whether this key exists in any language
+   */
+  boolean exists();
 
   boolean isCached(@NotNull Locale locale);
 
@@ -143,6 +145,7 @@ public interface MessageKey extends LocalizableMessage {
   String localizeRawValueAsSingleLine(@NotNull Locale locale);
 
   @NotNull
+  @Contract(pure = true)
   LocalizableMessage withArgs(@NotNull Object... args);
 
   // Helpers

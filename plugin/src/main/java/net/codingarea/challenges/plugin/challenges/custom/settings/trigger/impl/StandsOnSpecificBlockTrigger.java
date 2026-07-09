@@ -8,6 +8,7 @@ import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -17,6 +18,7 @@ public class StandsOnSpecificBlockTrigger extends ChallengeTrigger {
     super(name, SubSettingsHelper.createBlockSettingsBuilder());
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.PACKED_ICE;
@@ -25,8 +27,7 @@ public class StandsOnSpecificBlockTrigger extends ChallengeTrigger {
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
   public void onMove(PlayerMoveEvent event) {
     if (BlockUtils.isSameBlockLocation(event.getTo(), event.getFrom())) return;
-    Block blockBelow = BlockUtils.getBlockBelow(
-      Objects.requireNonNull(event.getTo()));
+    Block blockBelow = BlockUtils.getBlockBelow(event.getTo());
     if (blockBelow == null) return;
 
     createData()

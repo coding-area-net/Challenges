@@ -7,6 +7,7 @@ import net.kyori.adventure.text.ComponentLike;
 import net.kyori.adventure.translation.Translatable;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,6 +24,7 @@ public final class ComponentArguments {
       case ComponentLike like -> like.asComponent();
       case MessageHolder holder -> convertMessageHolderToComponent(holder);
       case Material material -> getDetailedMaterialTranslatable(material);
+      case ItemStack item -> getItemSpriteOrEmpty(item);
       case Translatable translatable -> // net.kyori.adventure.translation.Translatable
         Component.translatable(translatable);
       case Player player -> player.displayName();
@@ -39,17 +41,21 @@ public final class ComponentArguments {
   }
 
   @NotNull
+  public static Component getItemSpriteOrEmpty(@NotNull ItemStack item) {
+    try {
+      Component sprite = ItemSprites.sprite(item);
+      if (sprite.equals(Component.empty())) return sprite; // don't append space
+      return sprite.appendSpace();
+    } catch (Throwable ignored) {
+      // not yet available in this version
+      return Component.empty();
+    }
+  }
+
+  @NotNull
   public static Component getDetailedMaterialTranslatable(@NotNull Material material) {
     String key = material.translationKey(); // e.g., "item.minecraft.music_disc_strad"
     Component baseComponent = Component.translatable(key);
-
-//    try {
-//      baseComponent = ComponentSprites.createSpriteComponent(material).appendSpace().append(baseComponent);
-//    } catch (Throwable ex) {
-//      ex.printStackTrace();
-//      // sprites (and appendSpace) not available in this paper/adventure version
-//    }
-
     String name = material.name();
 
     if (name.startsWith("MUSIC_DISC_")) {

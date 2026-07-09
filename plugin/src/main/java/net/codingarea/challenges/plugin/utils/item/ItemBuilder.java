@@ -6,6 +6,8 @@ import lombok.Getter;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.impl.format.ComponentFormatter;
+import net.codingarea.challenges.plugin.content.i18n.impl.format.MessageFormatter;
 import net.codingarea.commons.bukkit.utils.item.BannerPattern;
 import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
 import net.kyori.adventure.text.Component;
@@ -21,10 +23,7 @@ import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
+import java.util.*;
 
 public class ItemBuilder extends StandardItemBuilder {
 
@@ -106,14 +105,28 @@ public class ItemBuilder extends StandardItemBuilder {
 
   @NotNull
   public ItemBuilder appendLore(@NotNull MessageKey key, @NotNull Object... args) {
-    List<Component> loreComponents = key.asComponents(locale, args);
-    addToLore(loreComponents);
+    List<Component> components = key.asComponents(locale, args);
+    addToLore(components);
+    System.out.println(key.withArgs(args).localize(locale));
+    System.out.println(key.getKey());
+    System.out.println(components.size());
+    for (Component component : components) {
+      System.out.println(ComponentFormatter.MINI_MESSAGE.serialize(component));
+    }
     return this;
   }
 
   @NotNull
   public ItemBuilder appendLore(@NotNull LocalizableMessage localizable) {
     return this.appendLore(localizable.getLocalizableKey(), localizable.getLocalizableArgs());
+  }
+
+  @NotNull
+  public ItemBuilder appendLoreList(@NotNull Collection<? extends LocalizableMessage> lines) {
+    for (LocalizableMessage line : lines) {
+      appendLore(line);
+    }
+    return this;
   }
 
   @NotNull

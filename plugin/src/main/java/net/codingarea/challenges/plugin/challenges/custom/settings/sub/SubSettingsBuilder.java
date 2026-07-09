@@ -3,17 +3,14 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.sub;
 import lombok.Getter;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder.*;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
-import net.codingarea.challenges.plugin.content.legacy.Message;
-import net.codingarea.challenges.plugin.content.legacy.MessageManager;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -58,18 +55,16 @@ public abstract class SubSettingsBuilder {
 
   public abstract boolean open(Player player, IParentCustomGenerator parentGenerator, LocalizableMessage title);
 
-  public abstract List<String> getDisplay(Map<String, String[]> activated);
+  @NotNull
+  public abstract Collection<SubSettingDisplay> getCurrentDisplayFor(@NotNull Map<String, String[]> activated);
 
   public abstract boolean hasSettings();
 
-  /**
-   * Collects the display lines of a builder and all of its children for the currently activated data.
-   * Relocated from the legacy custom {@code InfoMenuGenerator}.
-   */
-  public static List<String> getSubSettingsDisplay(SubSettingsBuilder builder, Map<String, String[]> activated) {
-    List<String> display = new LinkedList<>();
-    for (SubSettingsBuilder child : builder.getAllChildren()) {
-      display.addAll(child.getDisplay(activated));
+  @NotNull
+  public final Collection<SubSettingDisplay> collectCurrentDisplayFor(@NotNull Map<String, String[]> activated) {
+    List<SubSettingDisplay> display = new LinkedList<>();
+    for (SubSettingsBuilder setting : getAllChildren()) {
+      display.addAll(setting.getCurrentDisplayFor(activated));
     }
     return display;
   }
@@ -91,10 +86,13 @@ public abstract class SubSettingsBuilder {
     return this;
   }
 
-  public String getKeyTranslation() {
-    String messageName = "custom-subsetting-" + key;
-    return MessageManager.hasMessageInCache(messageName)
-      ? Message.forName(messageName).asString() : StringUtils.getEnumName(key);
+  @NotNull
+  protected static LocalizableMessage getKeyTranslation(@NotNull String key) {
+    // TODO ported legacy logic to new translation system; please overhaul this
+    MessageKey nameKey = MessageKey.of("custom-subsetting-" + key);
+    if (nameKey.exists()) return nameKey;
+    // TODO remove fallback, everything should be translated!
+    return LocalizableMessage.wrap(StringUtils.getEnumName(key));
   }
 
   public List<SubSettingsBuilder> getAllChildren() {
@@ -149,13 +147,15 @@ public abstract class SubSettingsBuilder {
     return builder;
   }
 
-  public TextInputSubSettingsBuilder createTextInputChild(String key,
-                                                          Consumer<Player> onOpen,
+  public TextInputSubSettingsBuilder createTextInputChild(String key, Consumer<Player> onOpen,
                                                           Predicate<AsyncPlayerChatEvent> isValid) {
     TextInputSubSettingsBuilder builder = new TextInputSubSettingsBuilder(key,
       this, onOpen, isValid);
     this.child = builder;
     return builder;
+  }
+
+  public record SubSettingDisplay(@NotNull LocalizableMessage keyName, @NotNull LocalizableMessage valueFormatted) {
   }
 
 }

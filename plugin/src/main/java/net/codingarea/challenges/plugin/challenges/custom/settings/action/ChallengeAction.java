@@ -2,13 +2,11 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.action;
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeSetting;
+import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SelectableKey;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
-import net.codingarea.challenges.plugin.content.legacy.Message;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.common.collection.IRandom;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashMap;
@@ -31,11 +29,11 @@ public abstract class ChallengeAction extends ChallengeSetting implements IChall
     super(name, builderSupplier);
   }
 
-  public static LinkedHashMap<String, ItemStack> getMenuItems() {
-    LinkedHashMap<String, ItemStack> map = new LinkedHashMap<>();
+  public static LinkedHashMap<String, SelectableKey> getMenuItems() {
+    LinkedHashMap<String, SelectableKey> map = new LinkedHashMap<>();
 
     for (ChallengeAction value : Challenges.getInstance().getCustomSettingsLoader().getActions().values()) {
-      map.put(value.getUniqueName(), value.getDisplayItem(Locale.GERMAN).build()); // TODO
+      map.put(value.getUniqueName(), value);
     }
 
     return map;

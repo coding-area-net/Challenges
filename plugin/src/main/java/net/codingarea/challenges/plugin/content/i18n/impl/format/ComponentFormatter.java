@@ -110,7 +110,7 @@ public final class ComponentFormatter {
     }
 
     Component replaced = replacePositionalArgs(component, positionalArgs);
-    return ComponentSplitter.split(replaced, ComponentSplitter.NEW_LINE);
+    return ComponentSplitter.split(replaced);
   }
 
   @NotNull

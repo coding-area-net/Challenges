@@ -1,26 +1,25 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.action.impl;
 
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.EntityTargetAction;
+import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SelectableKey;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
+import net.codingarea.challenges.plugin.content.i18n.ArgumentFormat;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Map;
 
 public class HealEntityAction extends EntityTargetAction {
 
   public HealEntityAction(String name) {
+    // TODO centralize with DamageEntityAction / value chooser
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true).createChooseItemChild("amount").fill(builder -> {
-      String prefix = DefaultItem.getItemPrefix();
       for (int i = 1; i < 21; i++) {
-        builder.addSetting(
-          String.valueOf(i), new LegacyItemBuilder(
-            MinecraftNameWrapper.RED_DYE, prefix + "§7" + (i / 2f) + " §c❤").setAmount(i).build());
+        builder.addSetting(SelectableKey.of(String.valueOf(i), new ItemStack(Material.FERMENTED_SPIDER_EYE, i), ArgumentFormat.HEARTS.apply(i)));
       }
     }));
   }
@@ -28,13 +27,11 @@ public class HealEntityAction extends EntityTargetAction {
   @Override
   public void executeFor(Entity entity, Map<String, String[]> subActions) {
     int amount = Integer.parseInt(subActions.get("amount")[0]);
-    if (entity instanceof LivingEntity) {
-      LivingEntity livingEntity = (LivingEntity) entity;
+    if (entity instanceof LivingEntity livingEntity) {
       AttributeInstance attribute = livingEntity.getAttribute(MinecraftNameWrapper.MAX_HEALTH);
 
       if (attribute == null) return;
-      double newHealth = Math.min(livingEntity.getHealth() + amount,
-        attribute.getBaseValue());
+      double newHealth = Math.min(livingEntity.getHealth() + amount, attribute.getBaseValue());
       livingEntity.setHealth(newHealth);
     }
   }

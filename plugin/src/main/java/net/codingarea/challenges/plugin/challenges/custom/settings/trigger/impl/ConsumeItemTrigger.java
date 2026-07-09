@@ -1,11 +1,9 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.trigger.impl;
 
+import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SelectableKey;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
-import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -18,7 +16,7 @@ public class ConsumeItemTrigger extends ChallengeTrigger {
     super(name, SubSettingsBuilder.createChooseMultipleItem(SubSettingsHelper.ITEM).fill(builder -> {
       for (Material material : ExperimentalUtils.getMaterials()) {
         if (material.isEdible()) {
-          builder.addSetting(material.name(), new LegacyItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemComponent(material).toPlainText()).build());
+          builder.addSetting(SelectableKey.of(material.name(), material, material));
         }
       }
     }));

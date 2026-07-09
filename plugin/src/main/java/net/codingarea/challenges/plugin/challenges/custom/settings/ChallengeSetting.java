@@ -4,6 +4,7 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettin
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.item.DefaultItems;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,6 +29,10 @@ public abstract class ChallengeSetting implements IChallengeSetting {
     this(name, builderSupplier.get());
   }
 
+  @NotNull
+  public abstract Material getMaterial();
+
+  @NotNull
   public String getRelativeMessageKey() {
     return name.toLowerCase();
   }
@@ -36,6 +41,12 @@ public abstract class ChallengeSetting implements IChallengeSetting {
   @Override
   public ItemBuilder getDisplayItem(@NotNull Locale locale) {
     return DefaultItems.createChallengeDisplayFormat(new ItemStack(getMaterial()), getSettingName(), getSettingDescription(), locale);
+  }
+
+  @NotNull
+  @Override
+  public final String getKey() {
+    return this.getUniqueName();
   }
 
   @NotNull

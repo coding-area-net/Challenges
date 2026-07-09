@@ -1,26 +1,22 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder;
 
-import com.google.common.collect.Lists;
 import lombok.Getter;
+import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SelectableKey;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.generator.AbstractMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.choose.SubSettingChooseMenuGenerator;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.*;
 import java.util.function.Consumer;
 
 @Getter
 public class ChooseItemSubSettingsBuilder extends GeneratorSubSettingsBuilder {
 
-  protected final LinkedHashMap<String, ItemStack> settings = new LinkedHashMap<>();
+  protected final LinkedHashMap<String, SelectableKey.Option> settings = new LinkedHashMap<>();
 
   public ChooseItemSubSettingsBuilder(String key) {
     super(key);
@@ -35,36 +31,29 @@ public class ChooseItemSubSettingsBuilder extends GeneratorSubSettingsBuilder {
     return new SubSettingChooseMenuGenerator(getKey(), parentGenerator, getSettings(), title);
   }
 
+  @NotNull
   @Override
-  public List<String> getDisplay(Map<String, String[]> activated) {
-    List<String> display = Lists.newLinkedList();
+  public Collection<SubSettingDisplay> getCurrentDisplayFor(@NotNull Map<String, String[]> activated) {
+    String[] values = activated.get(getKey());
+    if (values == null) return Collections.emptyList();
 
-    for (Entry<String, String[]> entry : activated.entrySet()) {
-      if (entry.getKey().equals(getKey())) {
-        for (String value : entry.getValue()) {
-          ItemStack itemStack = getSettings().get(value);
-          if (itemStack != null) {
-            if (itemStack.getItemMeta() == null) continue;
-            display.add("§7" + getKeyTranslation() + " " + itemStack.getItemMeta().getDisplayName());
-          }
-        }
-      }
+    // overkill; there should only be ever a single value/setting selected!
+    List<Object> valueNameArgs = new ArrayList<>(values.length);
+    for (String value : values) {
+      SelectableKey.Option option = settings.get(value);
+      if (option != null) valueNameArgs.add(option.getLocalizableNameArg());
     }
 
-    return display;
+    SubSettingDisplay display = new SubSettingDisplay(getKeyTranslation(this.getKey()), LocalizableMessage.joinList(2, valueNameArgs));
+    return List.of(display);
   }
 
-  public ChooseItemSubSettingsBuilder addSetting(String key, ItemStack value) {
-    settings.put(key, value);
+  public ChooseItemSubSettingsBuilder addSetting(@NotNull SelectableKey.Option value) {
+    settings.put(value.getKey(), value);
     return this;
   }
 
-  public ChooseItemSubSettingsBuilder addSetting(String key, LegacyItemBuilder value) {
-    settings.put(key, value.hideAttributes().build());
-    return this;
-  }
-
-  public ChooseItemSubSettingsBuilder fill(Consumer<ChooseItemSubSettingsBuilder> actions) {
+  public ChooseItemSubSettingsBuilder fill(@NotNull Consumer<ChooseItemSubSettingsBuilder> actions) {
     actions.accept(this);
     return this;
   }

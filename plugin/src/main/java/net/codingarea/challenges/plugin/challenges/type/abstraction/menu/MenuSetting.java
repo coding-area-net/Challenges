@@ -122,7 +122,7 @@ public abstract class MenuSetting extends Setting {
       ItemStack preset = isEnabled() ? getSettingsItemPreset() : DefaultItems.createDisabledPreset();
       // apply formatting dynamically, to prevent duplicate format references
       ItemBuilder item = new ItemBuilder(locale, preset, MessageKey.of("challenge.subsettings-format"),
-        isEnabled() ? getSettingsName() : MessageKey.of("disabled")); // no need to override disabled name/item
+        isEnabled() ? getSettingsName() : MessageKey.of("generic.disabled")); // no need to override disabled name/item
 
       LocalizableMessage description = getSettingsDescription();
       if (description != null && isEnabled()) {

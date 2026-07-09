@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class TopCommandSetting extends Setting implements PlayerCommand {
 
   public TopCommandSetting() {
-    super(MenuType.SETTINGS, null, new ItemStack(Material.MAGENTA_GLAZED_TERRACOTTA), "top-command-setting");
+    super(MenuType.SETTINGS, null, new ItemStack(Material.MAGENTA_GLAZED_TERRACOTTA), "top-command");
   }
 
   @Override

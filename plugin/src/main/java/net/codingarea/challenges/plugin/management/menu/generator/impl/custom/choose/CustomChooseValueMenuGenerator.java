@@ -5,13 +5,14 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSett
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.management.menu.generator.UncachedMultiPageMenuGenerator;
+import net.codingarea.challenges.plugin.management.menu.generator.UncachedMultiPageSelectMenuGenerator;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
@@ -21,11 +22,11 @@ import java.util.Map;
  * Displays adjustable {@link ValueSetting} rows with a finish button.
  * Replaces the legacy {@code ValueMenuGenerator}.
  */
-public abstract class CustomChooseValueMenuGenerator extends UncachedMultiPageMenuGenerator<ValueSetting> {
+public abstract class CustomChooseValueMenuGenerator extends UncachedMultiPageSelectMenuGenerator<ValueSetting> {
 
-  public static final int SIZE = 4 * 9;
+  public static final int SIZE = 5 * 9;
   public static final int[] SLOTS = {10, 11, 12, 13}; // settings item at +9 each
-  public static final int FINISH_SLOT = 31;
+  public static final int FINISH_SLOT = 40;
 
   private final LocalizableMessage menuName;
 
@@ -56,7 +57,7 @@ public abstract class CustomChooseValueMenuGenerator extends UncachedMultiPageMe
 
   @NotNull
   @Override
-  public org.bukkit.inventory.ItemStack createDisplayItem(@NotNull ValueSetting element, @NotNull Locale locale) {
+  public ItemStack createDisplayItem(@NotNull ValueSetting element, @NotNull Locale locale) {
     return element.getDisplayItem(settings.get(element)).build();
   }
 

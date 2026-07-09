@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
-public abstract class UncachedMultiPageMenuGenerator<T> extends AbstractMenuGenerator {
+public abstract class UncachedMultiPageSelectMenuGenerator<T> extends AbstractMenuGenerator {
 
   public static int[] calcSlots(int rows, int cols, int size) {
     if (rows * cols > size)
@@ -41,7 +41,7 @@ public abstract class UncachedMultiPageMenuGenerator<T> extends AbstractMenuGene
 
   protected final T[] elements;
 
-  public UncachedMultiPageMenuGenerator(@NotNull T[] elements) {
+  public UncachedMultiPageSelectMenuGenerator(@NotNull T[] elements) {
     this.elements = elements;
   }
 
@@ -58,6 +58,12 @@ public abstract class UncachedMultiPageMenuGenerator<T> extends AbstractMenuGene
   @Override
   public void updatePage(int page) {
     // because pages are not cached, there is noting to update
+  }
+
+  @NotNull
+  @Override
+  public GeneratorMenuPosition createMenuPosition(int page, @NotNull Player player) {
+    return new UncachedMultiPageMenuPosition(page, player);
   }
 
   @NotNull
@@ -89,12 +95,6 @@ public abstract class UncachedMultiPageMenuGenerator<T> extends AbstractMenuGene
   private MessageKey getMenuTitleKey() {
     if (getPageCount() == 1) return MessageKey.of("menu.title-format");
     return MessageKey.of("menu.title-format-page");
-  }
-
-  @NotNull
-  @Override
-  public GeneratorMenuPosition createMenuPosition(int page, @NotNull Player player) {
-    return new UncachedMultiPageMenuPosition(page, player);
   }
 
   public void updateInventoryContent(@NotNull Inventory inventory, int page, @NotNull Locale locale) {

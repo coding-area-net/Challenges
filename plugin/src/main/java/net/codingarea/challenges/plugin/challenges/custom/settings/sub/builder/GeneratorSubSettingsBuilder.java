@@ -20,7 +20,7 @@ public abstract class GeneratorSubSettingsBuilder extends SubSettingsBuilder {
   public boolean open(Player player, IParentCustomGenerator parentGenerator, LocalizableMessage title) {
 
     if (hasSettings()) {
-      LocalizableMessage subTitle = MessageKey.of("menu.title-name-format-sub").withArgs(title, getKeyTranslation());
+      LocalizableMessage subTitle = MessageKey.of("menu.title-name-format-sub").withArgs(title, getKeyTranslation(this.getKey()));
       AbstractMenuGenerator generator = getGenerator(player, parentGenerator, subTitle);
       if (generator == null) return false;
       generator.openMenu(player);

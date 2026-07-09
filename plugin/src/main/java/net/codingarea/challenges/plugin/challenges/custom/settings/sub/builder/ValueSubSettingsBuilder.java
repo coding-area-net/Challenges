@@ -15,7 +15,9 @@ import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.ch
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,35 +43,23 @@ public class ValueSubSettingsBuilder extends GeneratorSubSettingsBuilder {
     return new SubSettingValueMenuGenerator(parentGenerator, new LinkedHashMap<>(getDefaultSettings()), title);
   }
 
+  @NotNull
   @Override
-  public List<String> getDisplay(Map<String, String[]> activated) {
-    List<String> display = Lists.newLinkedList();
+  public Collection<SubSettingDisplay> getCurrentDisplayFor(@NotNull Map<String, String[]> activated) {
+    List<SubSettingDisplay> display = Lists.newLinkedList();
 
-    for (Entry<String, String[]> entry : activated.entrySet()) {
+    // TODO logic ported from legacy code; overhaul system
+    for (ValueSetting setting : defaultSettings.keySet()) {
+      String[] values = activated.get(setting.getKey());
+      if (values == null || values.length == 0) continue;
 
-      for (ValueSetting setting : defaultSettings.keySet()) {
+      String value = values[0];
 
-        if (entry.getKey().equals(setting.getKey())) {
-
-          LegacyItemBuilder builder = setting.getSettingsItem(entry.getValue()[0]);
-          if (builder != null) {
-            display.add("§7" + getKeyTranslation(entry.getKey()) + " " + builder.getName());
-
-          }
-
-        }
-
-      }
-
+      // TODO get setting value formatted name
+      display.add(new SubSettingDisplay(getKeyTranslation(setting.getKey()), LocalizableMessage.wrap(setting.getSettingsItem(value).getName())));
     }
 
     return display;
-  }
-
-  public String getKeyTranslation(String key) {
-    String messageName = "custom-subsetting-" + key;
-    return MessageManager.hasMessageInCache(messageName)
-      ? Message.forName(messageName).asString() : StringUtils.getEnumName(key);
   }
 
   public ValueSubSettingsBuilder addBooleanSetting(String key, LegacyItemBuilder displayItem,

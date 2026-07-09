@@ -4,15 +4,15 @@ import lombok.Getter;
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingGoal;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
+import net.codingarea.challenges.plugin.challenges.type.annotation.Updated;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.impl.format.ComponentArguments;
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
-import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.item.ItemUtils;
 import net.codingarea.commons.common.collection.SeededRandomWrapper;
@@ -35,6 +35,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Since("2.0")
+@Updated("2.4")
 public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
 
   @Getter
@@ -71,19 +72,20 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
       ChallengeAPI.endChallenge(ChallengeEndCause.GOAL_REACHED);
       return;
     }
-    currentItem = itemsToFind.remove(0);
+    currentItem = itemsToFind.removeFirst();
   }
 
   @Override
   protected void onEnable() {
     bossbar.setContent((bossbar, player) -> {
       if (currentItem == null) {
-        bossbar.setTitle(MessageKey.of("bossbar-all-items-finished"));
+        bossbar.setTitle(getChallengeMessageKey("bossbar-finished"));
         bossbar.setColor(BossBar.Color.GREEN);
         return;
       }
       int foundItemsCount = totalItemsCount - itemsToFind.size() + 1;
-      bossbar.setTitle(MessageKey.of("bossbar-all-items-current-max"), currentItem, foundItemsCount, totalItemsCount);
+      bossbar.setTitle(getChallengeMessageKey("bossbar-current"),
+        currentItem, foundItemsCount, totalItemsCount, new ItemStack(currentItem));
     });
     bossbar.show();
   }

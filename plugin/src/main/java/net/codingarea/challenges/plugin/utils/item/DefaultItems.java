@@ -46,6 +46,11 @@ public final class DefaultItems {
       name, desc);
   }
 
+  @Contract("_, _, _ -> new")
+  public static ItemBuilder createMenuDisplayFormat(@NotNull ItemStack displayItemPreset, @NotNull Object nameArg, @NotNull Locale locale) {
+    return new ItemBuilder(locale, displayItemPreset, MessageKey.of("menu.item-format"), nameArg);
+  }
+
   @Contract("-> new")
   public static ItemStack createEnabledPreset() {
     return new ItemStack(Material.LIME_DYE);

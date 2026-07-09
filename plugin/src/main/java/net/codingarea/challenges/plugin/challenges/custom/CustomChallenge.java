@@ -80,7 +80,8 @@ public class CustomChallenge extends Setting {
 //      builder.appendLore(Message.forName("custom-info-action").asString() + " " + actionName);
 //      builder.appendLore(actionDisplay);
 
-      item.appendBlankLoreLine().appendLore(MessageKey.of("menu.custom.action-format"), getAction().getSettingName());
+      item.appendBlankLoreLine()
+        .appendLore(MessageKey.of("menu.custom.action-format"), getAction().getSettingName());
     }
 
     return item;

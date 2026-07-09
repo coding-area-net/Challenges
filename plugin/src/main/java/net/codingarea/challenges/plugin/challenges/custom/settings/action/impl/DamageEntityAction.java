@@ -1,12 +1,13 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.action.impl;
 
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.EntityTargetAction;
+import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SelectableKey;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
+import net.codingarea.challenges.plugin.content.i18n.ArgumentFormat;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Map;
 
@@ -14,10 +15,8 @@ public class DamageEntityAction extends EntityTargetAction {
 
   public DamageEntityAction(String name) {
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true).createChooseItemChild("amount").fill(builder -> {
-      String prefix = DefaultItem.getItemPrefix();
       for (int i = 1; i < 21; i++) {
-        builder.addSetting(
-          String.valueOf(i), new LegacyItemBuilder(Material.FERMENTED_SPIDER_EYE, prefix + "§7" + (i / 2f) + " §c❤").setAmount(i).build());
+        builder.addSetting(SelectableKey.of(String.valueOf(i), new ItemStack(Material.FERMENTED_SPIDER_EYE, i), ArgumentFormat.HEARTS.apply(i)));
       }
     }));
   }

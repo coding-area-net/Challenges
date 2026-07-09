@@ -1,20 +1,21 @@
 package net.codingarea.challenges.plugin.challenges.type.helper;
 
+import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SelectableKey;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder.ChooseItemSubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder.ChooseMultipleItemSubSettingBuilder;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.legacy.Message;
-import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.StructureUtils;
-import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder.PotionBuilder;
+import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.StructureType;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
 public class SubSettingsHelper {
@@ -32,32 +33,31 @@ public class SubSettingsHelper {
     return SubSettingsBuilder.createChooseMultipleItem(ENTITY_TYPE).fill(builder -> {
 
       if (any) {
-        builder.addSetting(ANY, new LegacyItemBuilder(
-          Material.NETHER_STAR, Message.forName("item-custom-setting-entity_type-any")).build());
+        builder.addSetting(SelectableKey.of(ANY, Material.NETHER_STAR, "item-custom-setting-entity_type-any"));
       }
       if (player) {
-        builder.addSetting("PLAYER", new LegacyItemBuilder(Material.PLAYER_HEAD, Message.forName("item-custom-setting-entity_type-player")).build());
+        builder.addSetting(SelectableKey.of("PLAYER", Material.PLAYER_HEAD, "item-custom-setting-entity_type-player"));
       }
       for (EntityType type : EntityType.values()) {
         if (!type.isSpawnable() || !type.isAlive()) continue;
+        Material displayMaterial;
         try {
-          Material spawnEgg = Material.valueOf(type.name() + "_SPAWN_EGG");
-          builder.addSetting(type.name(), new LegacyItemBuilder(spawnEgg,
-            DefaultItem.getItemPrefix() + BukkitStringUtils.getEntityName(type).toPlainText()).build());
+          displayMaterial = Material.valueOf(type.name() + "_SPAWN_EGG");
         } catch (Exception ex) {
-          builder.addSetting(type.name(), new LegacyItemBuilder(Material.STRUCTURE_VOID,
-            DefaultItem.getItemPrefix() + BukkitStringUtils.getEntityName(type).toPlainText()));
+          displayMaterial = Material.STRUCTURE_VOID;
         }
+
+        builder.addSetting(SelectableKey.of(type.name(), displayMaterial, type));
       }
     });
   }
 
   public static ChooseMultipleItemSubSettingBuilder createBlockSettingsBuilder() {
     return SubSettingsBuilder.createChooseMultipleItem(BLOCK).fill(builder -> {
-      builder.addSetting(ANY, new LegacyItemBuilder(Material.NETHER_STAR, Message.forName("item-custom-setting-block-any")).build());
+      builder.addSetting(SelectableKey.of(ANY, Material.NETHER_STAR, "item-custom-setting-block-any"));
       for (Material material : ExperimentalUtils.getMaterials()) {
         if (material.isBlock() && material.isItem() && !BukkitReflectionUtils.isAir(material)) {
-          builder.addSetting(material.name(), new LegacyItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemName(material).toPlainText()).build());
+          builder.addSetting(SelectableKey.of(material.name(), material, material));
         }
       }
     });
@@ -65,10 +65,10 @@ public class SubSettingsHelper {
 
   public static ChooseMultipleItemSubSettingBuilder createItemSettingsBuilder() {
     return SubSettingsBuilder.createChooseMultipleItem(ITEM).fill(builder -> {
-      builder.addSetting(ANY, new LegacyItemBuilder(Material.NETHER_STAR, Message.forName("item-custom-setting-item-any")).build());
+      builder.addSetting(SelectableKey.of(ANY, Material.NETHER_STAR, "item-custom-setting-item-any"));
       for (Material material : ExperimentalUtils.getMaterials()) {
         if (material.isItem() && !BukkitReflectionUtils.isAir(material)) {
-          builder.addSetting(material.name(), new LegacyItemBuilder(material, DefaultItem.getItemPrefix() + BukkitStringUtils.getItemName(material).toPlainText()).build());
+          builder.addSetting(SelectableKey.of(material.name(), material, material));
         }
       }
     });
@@ -86,37 +86,30 @@ public class SubSettingsHelper {
     ChooseItemSubSettingsBuilder builder = SubSettingsBuilder.createChooseItem(TARGET_ENTITY);
 
     if (console) {
-      builder.addSetting("console", new LegacyItemBuilder(Material.COMMAND_BLOCK_MINECART, Message.forName("item-custom-setting-target-console")));
+      // TODO generic translation; constant keys?
+      builder.addSetting(SelectableKey.of("console", Material.COMMAND_BLOCK_MINECART, "item-custom-setting-target-console"));
     }
 
     if (!onlyPlayer) {
-      builder.addSetting("current", new LegacyItemBuilder(Material.DRAGON_HEAD,
-        Message.forName("item-custom-setting-target-current")));
+      builder.addSetting(SelectableKey.of("current", Material.DRAGON_HEAD, "item-custom-setting-target-current"));
     }
 
-    builder.addSetting("current_player", new LegacyItemBuilder(Material.PLAYER_HEAD,
-      Message.forName("item-custom-setting-target-current_player")));
-    builder.addSetting("random_player", new LegacyItemBuilder(Material.ZOMBIE_HEAD,
-      Message.forName("item-custom-setting-target-random_player")));
-    builder.addSetting("every_player", new LegacyItemBuilder(Material.PLAYER_HEAD,
-      Message.forName("item-custom-setting-target-every_player")));
+    builder.addSetting(SelectableKey.of("current_player", Material.PLAYER_HEAD, "item-custom-setting-target-current_player"));
+    builder.addSetting(SelectableKey.of("random_player", Material.ZOMBIE_HEAD, "item-custom-setting-target-random_player"));
+    builder.addSetting(SelectableKey.of("every_player", Material.PLAYER_HEAD, "item-custom-setting-target-every_player"));
 
     if (everyMob && !onlyPlayer) {
-      builder.addSetting("every_mob", new LegacyItemBuilder(Material.WITHER_SKELETON_SKULL,
-        Message.forName("item-custom-setting-target-every_mob")));
-      builder.addSetting("every_mob_except_current", new LegacyItemBuilder(Material.SKELETON_SKULL,
-        Message.forName("item-custom-setting-target-every_mob_except_current")));
-      builder.addSetting("every_mob_except_players", new LegacyItemBuilder(Material.SKELETON_SKULL,
-        Message.forName("item-custom-setting-target-every_mob_except_players")));
+      builder.addSetting(SelectableKey.of("every_mob", Material.WITHER_SKELETON_SKULL, "item-custom-setting-target-every_mob"));
+      builder.addSetting(SelectableKey.of("every_mob_except_current", Material.SKELETON_SKULL, "item-custom-setting-target-every_mob_except_current"));
+      builder.addSetting(SelectableKey.of("every_mob_except_players", Material.SKELETON_SKULL, "item-custom-setting-target-every_mob_except_players"));
     }
     return builder;
   }
 
-  public static SubSettingsBuilder createPotionSettingsBuilder(boolean potionType,
-                                                               boolean potionTime) {
-
+  public static SubSettingsBuilder createPotionSettingsBuilder(boolean potionType, boolean potionTime) {
     SubSettingsBuilder potionSettings = SubSettingsBuilder.createValueItem().fill(builder -> {
 
+      // TODO also port
       if (potionTime) {
         builder.addModifierSetting("length", new LegacyItemBuilder(Material.CLOCK,
             Message.forName("item-random-effect-length-challenge")),
@@ -134,10 +127,12 @@ public class SubSettingsHelper {
     if (potionType) {
       potionSettings = potionSettings.createChooseItemChild("potion_type").fill(builder -> {
         for (PotionEffectType effectType : PotionEffectType.values()) {
-          builder.addSetting(effectType.getName(), new PotionBuilder(Material.POTION,
-            DefaultItem.getItemPrefix() + StringUtils.getEnumName(effectType.getName()))
+          ItemStack displayItemPreset = new StandardItemBuilder.PotionBuilder(Material.POTION)
             .addEffect(effectType.createEffect(1, 0))
-            .color(effectType.getColor()).build());
+            .color(effectType.getColor()).build();
+
+          // TODO custom centralized translation?
+          builder.addSetting(SelectableKey.of(effectType.getName(), displayItemPreset, LocalizableMessage.wrap(StringUtils.getEnumName(effectType.getName()))));
         }
       });
     }
@@ -148,9 +143,9 @@ public class SubSettingsHelper {
 
   public static SubSettingsBuilder createStructureSettingsBuilder() {
     return SubSettingsBuilder.createChooseItem(STRUCTURE).fill(builder -> {
-      builder.addSetting("random_structure", new LegacyItemBuilder(Material.STRUCTURE_BLOCK, Message.forName("item-custom-action-place_structure-random")).build());
+      builder.addSetting(SelectableKey.of("random_structure", Material.STRUCTURE_BLOCK, "item-custom-action-place_structure-random"));
       for (StructureType structure : StructureType.getStructureTypes().values()) {
-        builder.addSetting(structure.getName(), new LegacyItemBuilder(StructureUtils.getStructureIcon(structure), DefaultItem.getItemPrefix() + StringUtils.getEnumName(structure.getName())).build());
+        builder.addSetting(SelectableKey.of(structure.getName(), StructureUtils.getStructureIcon(structure), StringUtils.getEnumName(structure.getName())));
       }
     });
   }

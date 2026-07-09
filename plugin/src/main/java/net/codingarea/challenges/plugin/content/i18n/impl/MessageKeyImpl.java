@@ -48,6 +48,11 @@ public class MessageKeyImpl implements MessageKey {
   }
 
   @Override
+  public boolean exists() {
+    return !values.isEmpty();
+  }
+
+  @Override
   public boolean isCached(@NotNull Locale locale) {
     return values.containsKey(locale);
   }
@@ -57,7 +62,7 @@ public class MessageKeyImpl implements MessageKey {
   public String[] localizeRawValue(@NotNull Locale locale) {
     String[] value = values.get(locale);
     if (value != null && value.length != 0) return value;
-    return new String[]{MessageKey.formatMissingTranslation(key, locale)};
+    return arrayOf(MessageKey.formatMissingTranslation(key, locale));
   }
 
   @NotNull
@@ -127,11 +132,11 @@ public class MessageKeyImpl implements MessageKey {
   }
 
   @NotNull
-  protected static Locale getPlayerLocale(@NotNull Player player) {
+  public static Locale getPlayerLocale(@NotNull Player player) {
     return Challenges.getInstance().getTranslationManager().getLanguageProvider().getPlayerLanguage(player);
   }
 
-  protected static void localizeArgs(@NotNull Locale locale, @NotNull Object[] args) {
+  public static void localizeArgs(@NotNull Locale locale, @NotNull Object[] args) {
     for (int i = 0; i < args.length; i++) {
       if (args[i] instanceof LocalizableMessage message) {
         args[i] = message.localize(locale);
@@ -141,13 +146,18 @@ public class MessageKeyImpl implements MessageKey {
 
   @NotNull
   @CheckReturnValue
-  protected static Object[] localizeArgsAsCopy(@NotNull Locale locale, @NotNull Object[] args) {
+  public static Object[] localizeArgsAsCopy(@NotNull Locale locale, @NotNull Object[] args) {
     if (args.length == 0) return args;
     // avoid mutating original array & ensure args array is really of type Object, so MessageHolder can be stored
     Object[] localizedArgs = new Object[args.length];
     System.arraycopy(args, 0, localizedArgs, 0, args.length);
     localizeArgs(locale, localizedArgs);
     return localizedArgs;
+  }
+
+  @NotNull
+  public static String[] arrayOf(@NotNull String single) {
+    return new String[]{single};
   }
 
   // Action Implementations
@@ -174,7 +184,7 @@ public class MessageKeyImpl implements MessageKey {
     Locale locale = getPlayerLocale(target);
     localizeArgs(locale, args);
     String raw = random.choose(localizeRawValue(locale));
-    target.sendMessage(ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), new String[]{raw}, args));
+    target.sendMessage(ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), arrayOf(raw), args));
   }
 
   @Override
@@ -186,7 +196,7 @@ public class MessageKeyImpl implements MessageKey {
   public void broadcastRandom(@Nullable Prefix prefix, @NotNull Object... args) {
     int index = random.nextInt(getMinValueLengthIncludingFallback());
     doBroadcast0(Player::sendMessage, locale ->
-      ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), new String[]{localizeRawValue(locale)[index]}, localizeArgsAsCopy(locale, args)));
+      ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), arrayOf(localizeRawValue(locale)[index]), localizeArgsAsCopy(locale, args)));
   }
 
   @Override
