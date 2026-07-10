@@ -6,8 +6,6 @@ import lombok.Getter;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
-import net.codingarea.challenges.plugin.content.i18n.impl.format.ComponentFormatter;
-import net.codingarea.challenges.plugin.content.i18n.impl.format.MessageFormatter;
 import net.codingarea.commons.bukkit.utils.item.BannerPattern;
 import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
 import net.kyori.adventure.text.Component;
@@ -23,7 +21,10 @@ import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
 public class ItemBuilder extends StandardItemBuilder {
 

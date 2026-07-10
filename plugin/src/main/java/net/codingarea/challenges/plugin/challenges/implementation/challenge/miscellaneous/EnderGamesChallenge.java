@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.mis
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
@@ -25,15 +26,9 @@ public class EnderGamesChallenge extends TimedChallenge {
     super(MenuType.CHALLENGES, null, 1, 10, 5, false, new ItemStack(Material.ENDER_PEARL), "ender-games");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-range-description").asArray(getValue() * 60 - 20, getValue() * 60 + 20);
-//  }
-
   @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 - 20, getValue() * 60 + 20);
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionIntervalSecondsRange(getValue() * 60, 20);
   }
 
   @Override

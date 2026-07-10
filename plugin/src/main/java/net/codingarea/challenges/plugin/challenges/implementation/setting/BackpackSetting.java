@@ -5,9 +5,10 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeConfigHelper;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.legacy.Message;
-import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
@@ -43,30 +44,17 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
   @NotNull
   @Override
   public ItemStack getSettingsItemPreset() {
-    return super.getSettingsItemPreset();
+    if (getValue() == SHARED)
+      return new ItemStack(Material.ENDER_CHEST);
+    return new ItemStack(Material.PLAYER_HEAD);
   }
 
-//  @NotNull
-//  @Override
-//  public LegacyItemBuilder createSettingsItem() {
-//    if (getValue() == SHARED)
-//      return DefaultItem.create(Material.ENDER_CHEST, Message.forName("item-backpack-setting-team"));
-//    return DefaultItem.create(Material.PLAYER_HEAD, Message.forName("item-backpack-setting-player"));
-//  }
-
-
+  @NotNull
   @Override
-  public void playValueChangeTitle() {
-    switch (getValue()) {
-      case SHARED:
-        ChallengeHelper.playChallengeValueTitle(this, Message.forName("item-backpack-setting-team"));
-        break;
-      case PLAYER:
-        ChallengeHelper.playChallengeValueTitle(this, Message.forName("item-backpack-setting-player"));
-        break;
-      default:
-        ChallengeHelper.playChallengeToggleTitle(this, false);
-    }
+  public LocalizableMessage getSettingsName() {
+    if (getValue() == SHARED)
+      return getChallengeMessageKey("settings.shared");
+    return getChallengeMessageKey("settings.player");
   }
 
   @Override
@@ -116,7 +104,7 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
         if (value == null) return;
         BukkitSerialization.fromBase64(inventory, value);
       } catch (IOException exception) {
-        Challenges.getInstance().getILogger().error("", exception);
+        Challenges.getInstance().getILogger().error(exception);
       }
     }
 

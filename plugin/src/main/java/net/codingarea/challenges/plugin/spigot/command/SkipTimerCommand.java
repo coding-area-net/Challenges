@@ -6,12 +6,9 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallen
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
-import net.codingarea.challenges.plugin.content.i18n.impl.format.ComponentArguments;
 import net.codingarea.challenges.plugin.utils.bukkit.command.Completer;
 import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
-import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

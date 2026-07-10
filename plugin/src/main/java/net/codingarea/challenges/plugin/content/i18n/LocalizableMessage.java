@@ -48,12 +48,6 @@ public interface LocalizableMessage {
 
   @NotNull
   @CheckReturnValue
-  static LocalizableMessage of(@NotNull String messageKey, @NotNull Object[] args) {
-    return MessageKey.of(messageKey).withArgs(args);
-  }
-
-  @NotNull
-  @CheckReturnValue
   static LocalizableMessage join(@NotNull MessageKey delimiter, @NotNull MessageKey remainingPlaceholder, int limit, @NotNull Object... elements) {
     return new JoinedMessageImpl(delimiter, remainingPlaceholder, limit, elements);
   }

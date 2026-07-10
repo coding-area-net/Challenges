@@ -1,14 +1,13 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.legacy.Message;
-import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import net.codingarea.commons.bukkit.utils.menu.positions.SlottedMenuPosition;

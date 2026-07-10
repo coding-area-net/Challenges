@@ -5,20 +5,18 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.CompletableF
 import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBossBar.BossBarInstance;
-import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
-import net.codingarea.challenges.plugin.utils.misc.NameHelper;
+import net.codingarea.challenges.plugin.utils.item.DefaultItems;
 import net.codingarea.commons.common.config.Document;
 import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.block.Biome;
-import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -40,15 +38,15 @@ public class ForceBiomeChallenge extends CompletableForceChallenge {
     super(MenuType.CHALLENGES, SettingCategory.FORCE, 2, 20, 5, new ItemStack(Material.CHAINMAIL_BOOTS), "force-biome");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return ChallengeHelper.getTimeRangeSettingsDescription(this, 60 * 3, 60);
-//  }
-
   @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 * 3 - 60, getValue() * 60 * 3 + 60);
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionTimeSecondsRange(getValue() * 60 * 3, 60);
+  }
+
+  @NotNull
+  @Override
+  public ItemStack getSettingsItemPreset() {
+    return DefaultItems.createEnabledValuePreset(getValue() * 3);
   }
 
   @NotNull

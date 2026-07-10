@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.dam
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
@@ -24,11 +25,10 @@ public class FreezeChallenge extends SettingModifier {
     super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 5, 60, 20, new ItemStack(Material.BLUE_ICE), "freeze");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-description").asArray(getValue());
-//  }
+  @Override
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionTimeSeconds(getValue());
+  }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
   public void onDamage(@NotNull EntityDamageEvent event) {

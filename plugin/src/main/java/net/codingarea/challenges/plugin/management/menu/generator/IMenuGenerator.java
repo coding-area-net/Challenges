@@ -17,7 +17,7 @@ public interface IMenuGenerator {
 
   /**
    * @implSpec regenerates all pages (only for locales already generated!)
-   *           use {@link #updateOrGeneratePages(Locale)} to create the menu for a new locale
+   * use {@link #updateOrGeneratePages(Locale)} to create the menu for a new locale
    */
   void updatePages();
 

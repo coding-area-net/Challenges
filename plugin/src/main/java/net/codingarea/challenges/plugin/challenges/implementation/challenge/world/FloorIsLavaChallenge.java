@@ -1,6 +1,8 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
@@ -17,6 +19,11 @@ public class FloorIsLavaChallenge extends SettingModifier {
 
   public FloorIsLavaChallenge() {
     super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 60, 30, new ItemStack(Material.MAGMA_BLOCK), "floor-is-lava");
+  }
+
+  @Override
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionTimeSeconds(getValue());
   }
 
   @EventHandler
@@ -42,11 +49,5 @@ public class FloorIsLavaChallenge extends SettingModifier {
   private void createLavaFloor(@NotNull Location to) {
     BlockUtils.setBlockNatural(BlockUtils.getBlockBelow(to), Material.LAVA, true);
   }
-
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-description").asArray(getValue());
-//  }
 
 }

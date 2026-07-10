@@ -4,8 +4,9 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -47,15 +48,9 @@ public class MissingItemsChallenge extends TimedChallenge implements PlayerComma
     super(MenuType.CHALLENGES, SettingCategory.INVENTORY, 1, 10, 5, false, new ItemStack(Material.FISHING_ROD), "missing-items");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-range-description").asArray(getValue() * 60 - 10, getValue() * 60 + 10);
-//  }
-
   @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 - 10, getValue() * 60 + 10);
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionIntervalSecondsRange(getValue() * 60, 10);
   }
 
   @Override

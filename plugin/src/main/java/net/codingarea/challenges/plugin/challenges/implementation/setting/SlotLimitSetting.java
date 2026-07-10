@@ -24,8 +24,6 @@ import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Locale;
-
 @Since("2.0")
 public class SlotLimitSetting extends Modifier {
 

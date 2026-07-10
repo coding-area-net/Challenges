@@ -3,9 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.commons.bukkit.utils.item.ItemUtils;
@@ -42,12 +40,7 @@ public class TimberSetting extends SettingModifier {
   @NotNull
   @Override
   public LocalizableMessage getSettingsName() {
-    return getValue() == LOGS_LEAVES ? MessageKey.of("item-timber-setting-logs-and-leaves") : MessageKey.of("item-timber-setting-logs");
-  }
-
-  @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeValueTitle(this, getValue() == LOGS_LEAVES ? Message.forName("item-timber-setting-logs-and-leaves") : Message.forName("item-timber-setting-logs"));
+    return getValue() == LOGS_LEAVES ? getChallengeMessageKey("settings.logs-leaves") : getChallengeMessageKey("settings.logs");
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

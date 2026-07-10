@@ -1,11 +1,11 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.miscellaneous;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
+import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
-import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import org.bukkit.Bukkit;
@@ -21,6 +21,11 @@ public class InvertHealthChallenge extends TimedChallenge {
     super(MenuType.CHALLENGES, null, 1, 10, 5, false, new ItemStack(Material.POPPY), "invert-health");
   }
 
+  @Override
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionIntervalSecondsRange(getValue() * 60, 20);
+  }
+
   public static void invertHealth(Player player) {
     double health = player.getMaxHealth() - player.getHealth();
     if (health <= 0) {
@@ -28,17 +33,6 @@ public class InvertHealthChallenge extends TimedChallenge {
       return;
     }
     player.setHealth(health);
-  }
-
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-range-description").asArray(getValue() * 60 - 20, getValue() * 60 + 20);
-//  }
-
-  @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 - 20, getValue() * 60 + 20);
   }
 
   @Override

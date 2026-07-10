@@ -2,8 +2,6 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.inventory.ItemStack;

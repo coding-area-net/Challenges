@@ -155,8 +155,7 @@ public final class ChallengeManager {
       try {
         challenge.loadGameState(Document.empty());
 
-        if (challenge instanceof AbstractChallenge) {
-          AbstractChallenge abstractChallenge = (AbstractChallenge) challenge;
+        if (challenge instanceof AbstractChallenge abstractChallenge) {
           if (abstractChallenge.getBossbar().isShown()) {
             abstractChallenge.getBossbar().update();
           }

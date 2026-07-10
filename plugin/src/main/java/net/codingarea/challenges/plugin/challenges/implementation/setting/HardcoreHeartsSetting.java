@@ -66,6 +66,7 @@ public class HardcoreHeartsSetting extends Setting {
   /**
    * Finds the ProtocolLib boolean index for the 'hardcore' flag.
    * * @param packet The packet container to scan (e.g., LOGIN or RESPAWN)
+   *
    * @return The integer index for .getBooleans(), or -1 if not found.
    */
   public int getHardcoreFieldIndex(PacketContainer packet) {

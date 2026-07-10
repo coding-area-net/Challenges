@@ -175,8 +175,8 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
 
   /**
    * @implNote Only used if {@link #isEnabled()}.
-   *           Name/Lore will be overwritten by formatting.
-   *           Set name in {@link #getSettingsName()} and lore in {@link #getSettingsDescription()}
+   * Name/Lore will be overwritten by formatting.
+   * Set name in {@link #getSettingsName()} and lore in {@link #getSettingsDescription()}
    */
   @NotNull
   public ItemStack getSettingsItemPreset() {
@@ -186,11 +186,11 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
   /**
    * @implNote Only used if {@link #isEnabled()}, format will be applied dynamically
    * @implSpec Should ideally either return a {@link LocalizableMessage}, {@link MessageKey}
-   *           or {@link net.kyori.adventure.text.Component} for dynamic (e.g. translatable) styling
+   * or {@link net.kyori.adventure.text.Component} for dynamic (e.g. translatable) styling
    */
   @NotNull
   public Object getSettingsName() {
-    return MessageKey.of("generic.enabled");
+    return ChallengeHelper.getChallengeEnabledName();
   }
 
   /**

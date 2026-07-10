@@ -2,9 +2,7 @@ package net.codingarea.challenges.plugin.content.legacy;
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
-import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.utils.bukkit.misc.BukkitStringUtils;
-import net.codingarea.challenges.plugin.utils.misc.FontUtils;
 import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.commons.common.misc.StringUtils;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -15,8 +13,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 

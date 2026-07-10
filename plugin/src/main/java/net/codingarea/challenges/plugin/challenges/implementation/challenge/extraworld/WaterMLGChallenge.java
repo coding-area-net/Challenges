@@ -4,11 +4,8 @@ import net.codingarea.challenges.plugin.challenges.implementation.setting.OneTea
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.WorldDependentChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.i18n.ArgumentFormat;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.commons.common.collection.pair.Tuple;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -26,20 +23,9 @@ public class WaterMLGChallenge extends WorldDependentChallenge {
     super(MenuType.CHALLENGES, 1, 10, 5, new ItemStack(Material.WATER_BUCKET), "water-mlg");
   }
 
-  @NotNull
-  @Override
-  public LocalizableMessage getSettingsName() {
-    return MessageKey.of("generic.enabled");
-  }
-
   @Override
   public LocalizableMessage getSettingsDescription() {
-    return MessageKey.of("challenge.settings-modifier-time").withArgs(ArgumentFormat.SECONDS_RANGE.apply(Tuple.of(getValue() * 60, 10)));
-  }
-
-  @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 - 10, getValue() * 60 + 10);
+    return ChallengeHelper.getSettingsDescriptionIntervalSecondsRange(getValue() * 60, 10);
   }
 
   @Override
@@ -79,13 +65,12 @@ public class WaterMLGChallenge extends WorldDependentChallenge {
 
   @EventHandler(priority = EventPriority.HIGH)
   public void onEntityDamage(@NotNull EntityDamageEvent event) {
-    if (!(event.getEntity() instanceof Player)) return;
+    if (!(event.getEntity() instanceof Player player)) return;
     if (!isInExtraWorld()) return;
 
     if (AbstractChallenge.getFirstInstance(OneTeamLifeSetting.class).isEnabled()) {
       teleportBack();
     } else {
-      Player player = (Player) event.getEntity();
       teleportBack(player);
     }
   }

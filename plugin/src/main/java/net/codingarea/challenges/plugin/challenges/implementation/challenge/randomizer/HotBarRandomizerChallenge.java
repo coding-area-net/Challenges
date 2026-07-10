@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ran
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
@@ -33,12 +34,10 @@ public class HotBarRandomizerChallenge extends TimedChallenge {
     super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 1, 10, 5, new ItemStack(Material.HOPPER_MINECART), "hotbar-randomizer");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-minutes-description").asArray(getValue());
-//  }
-
+  @Override
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionIntervalSeconds(getValue() * 60);
+  }
 
   /**
    * @param force if true only sets items if inventory is empty
@@ -59,11 +58,6 @@ public class HotBarRandomizerChallenge extends TimedChallenge {
   @Override
   protected int getSecondsUntilNextActivation() {
     return getValue() * 60;
-  }
-
-  @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeMinutesValueChangeTitle(this, getValue());
   }
 
   @Override

@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ran
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
@@ -10,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 @Since("2.0")
 public class RandomItemRemovingChallenge extends TimedChallenge {
@@ -18,15 +20,10 @@ public class RandomItemRemovingChallenge extends TimedChallenge {
     super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 1, 30, 30, new ItemStack(Material.DROPPER), "random-item-removing");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-description").asArray(getValue() * 10);
-//  }
-
+  @Nullable
   @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeSecondsValueChangeTitle(this, getValue() * 10);
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionIntervalSeconds(getValue());
   }
 
   @Override

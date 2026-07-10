@@ -7,13 +7,10 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSett
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.impl.BooleanSetting;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.impl.ModifierSetting;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
-import net.codingarea.challenges.plugin.content.legacy.Message;
-import net.codingarea.challenges.plugin.content.legacy.MessageManager;
 import net.codingarea.challenges.plugin.management.menu.generator.AbstractMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.choose.SubSettingValueMenuGenerator;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
-import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +18,6 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.function.Consumer;
 import java.util.function.Function;
 

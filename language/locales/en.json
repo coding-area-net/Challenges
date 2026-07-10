@@ -1197,9 +1197,6 @@
   "reload-success": "Challenges Plugin <green>successfully </green><gray>reloaded</gray>",
   "player-command": "You must be a player!",
   "no-permission": "You <red>don't </red><gray>have permissions to do this</gray>",
-  "enabled": "<green>Activated</green>",
-  "disabled": "<red>Deactivated</red>",
-  "customize": "<gold>Customize</gold>",
   "navigate-back": "<dark_gray>« </dark_gray><gray>Back</gray>",
   "navigate-next": "<dark_gray>» </dark_gray><gray>Next</gray>",
   "seconds": "seconds",
@@ -1618,8 +1615,6 @@
     " ",
     "The player with the *most points* wins."
   ],
-  "item-time-seconds-description": "<dark_gray>» </dark_gray><gray>Time: </gray><yellow>{0} </yellow><gray>seconds</gray>",
-  "item-time-seconds-range-description": "<dark_gray>» </dark_gray><gray>Time: </gray><yellow>{0}-{1} </yellow><gray>Sekunden</gray>",
   "item-time-minutes-description": "<dark_gray>» </dark_gray><gray>Time: </gray><yellow>{0} </yellow><gray>minutes</gray>",
   "item-heart-damage-description": "<dark_gray>» </dark_gray><gray>Damage: </gray><yellow>{0} </yellow><red>❤</red>",
   "item-heart-start-description": "<dark_gray>» </dark_gray><gray>Start: </gray><yellow>{0} </yellow><red>❤</red>",

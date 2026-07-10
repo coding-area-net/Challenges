@@ -1,7 +1,6 @@
 package net.codingarea.challenges.plugin.management.menu.generator;
 
 import com.google.common.base.Preconditions;
-import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;

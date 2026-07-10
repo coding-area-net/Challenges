@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.tim
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
@@ -20,6 +21,11 @@ public class MaxBiomeTimeChallenge extends SettingModifier {
 
   public MaxBiomeTimeChallenge() {
     super(MenuType.CHALLENGES, SettingCategory.LIMITED_TIME, 3, 20, new ItemStack(Material.SPRUCE_SAPLING), "max-biome-time");
+  }
+
+  @Override
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionTimeSeconds(getValue() * 60);
   }
 
   @Override
@@ -42,17 +48,6 @@ public class MaxBiomeTimeChallenge extends SettingModifier {
   @Override
   protected void onValueChange() {
     bossbar.update();
-  }
-
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-description").asArray(getValue() * 60);
-//  }
-
-  @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeSecondsValueChangeTitle(this, getValue() * 60);
   }
 
   @EventHandler

@@ -2,10 +2,10 @@ package net.codingarea.challenges.plugin.challenges.implementation.material;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.spigot.events.PlayerInventoryClickEvent;
 import net.codingarea.challenges.plugin.spigot.events.PlayerPickupItemEvent;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,28 +17,27 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class BlockMaterialSetting extends Setting {
 
   private final String name;
-  private final Object[] replacements;
-  private final Material[] materials;
+  private final List<Material> materials;
 
-  public BlockMaterialSetting(@NotNull String name, @NotNull LegacyItemBuilder preset, @NotNull Object[] replacements, @NotNull Material... materials) {
-    super(MenuType.ITEMS, null, true, preset.build(), "lol");
+  public BlockMaterialSetting(@NotNull String name, @NotNull ItemStack displayItemPreset, @NotNull Material... materials) {
+    super(MenuType.ITEMS, null, true, displayItemPreset, "material-rule." + name);
     this.name = name;
-    this.replacements = replacements;
-    this.materials = materials;
+    this.materials = Arrays.asList(materials);
   }
 
-//  @NotNull
-//  @Override
-//  public LegacyItemBuilder createDisplayItem() {
-//    return preset.clone().applyFormat(Message.forName(name).asItemDescription(replacements));
-//  }
+  @NotNull
+  @Override
+  public LocalizableMessage getChallengeDescription() {
+    return super.getChallengeDescription().withArgs(LocalizableMessage.joinList(3, materials));
+  }
 
-  private boolean blockMaterial(Material material) {
-    return Arrays.asList(materials).contains(material);
+  private boolean isMaterialAllowed(Material material) {
+    return !materials.contains(material);
   }
 
   @EventHandler(priority = EventPriority.HIGH)
@@ -46,9 +45,9 @@ public class BlockMaterialSetting extends Setting {
     if (isEnabled()) return;
     if (ChallengeAPI.isWorldInUse()) return;
     if (ignorePlayer(event.getPlayer())) return;
-    if (!blockMaterial(event.getMaterial())) {
+    if (isMaterialAllowed(event.getMaterial())) {
       if (event.getClickedBlock() == null) return;
-      if (!blockMaterial(event.getClickedBlock().getType())) return;
+      if (isMaterialAllowed(event.getClickedBlock().getType())) return;
       event.setCancelled(true);
       return;
     }
@@ -65,7 +64,7 @@ public class BlockMaterialSetting extends Setting {
     if (event.getCurrentItem() == null) return;
     if (event.getClickedInventory() == null) return;
     if (event.getClickedInventory().getHolder() != event.getPlayer()) return;
-    if (!blockMaterial(event.getCurrentItem().getType())) return;
+    if (isMaterialAllowed(event.getCurrentItem().getType())) return;
     event.setCancelled(true);
 
     dropMaterial(event.getPlayer().getLocation(), event.getClickedInventory());
@@ -76,7 +75,7 @@ public class BlockMaterialSetting extends Setting {
     if (isEnabled()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (ChallengeAPI.isWorldInUse()) return;
-    if (!blockMaterial(event.getItem().getItemStack().getType())) return;
+    if (isMaterialAllowed(event.getItem().getItemStack().getType())) return;
     event.setCancelled(true);
   }
 
@@ -84,17 +83,16 @@ public class BlockMaterialSetting extends Setting {
     for (int slot = 0; slot < inventory.getSize(); slot++) {
       ItemStack item = inventory.getItem(slot);
       if (item == null) continue;
-      if (!blockMaterial(item.getType())) continue;
+      if (isMaterialAllowed(item.getType())) continue;
       InventoryUtils.dropItemByPlayer(location, item);
       inventory.setItem(slot, null);
     }
-
   }
 
   @NotNull
   @Override
   public String getUniqueName() {
-    return "blockmaterial" + materials[0].name().toLowerCase();
+    return "blockmaterial" + name;
   }
 
 }

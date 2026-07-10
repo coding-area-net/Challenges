@@ -6,7 +6,6 @@ import net.codingarea.challenges.plugin.content.i18n.MessageHolder;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;
 
 import java.util.Locale;
 

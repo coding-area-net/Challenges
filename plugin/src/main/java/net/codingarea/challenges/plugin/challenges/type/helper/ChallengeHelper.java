@@ -8,11 +8,15 @@ import net.codingarea.challenges.plugin.challenges.type.IGoal;
 import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
+import net.codingarea.challenges.plugin.content.i18n.ArgumentFormat;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.generator.IChallengesMenuGenerator;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
+import net.codingarea.commons.common.collection.pair.Tuple;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -25,6 +29,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -173,41 +178,85 @@ public final class ChallengeHelper {
   }
 
   public static <T extends AbstractChallenge & IModifier> void playChallengeValueTitle(@NotNull T modifier) {
-    playChallengeValueTitle(modifier, modifier.getValue());
+    LocalizableMessage description = modifier.getSettingsDescription();
+    playChallengeValueTitle(modifier, description != null ? description : modifier.getSettingsName()); // TODO or #getValue instead of#getSettingsName
   }
 
   public static void playChallengeValueTitle(@NotNull AbstractChallenge challenge, @NotNull Object value) {
     Challenges.getInstance().getTitleManager().sendChallengeValueTitle(challenge, value);
   }
 
+  @Deprecated
   public static void playChallengeHeartsValueChangeTitle(@NotNull AbstractChallenge challenge, int health) {
     playChallengeValueTitle(challenge, (health / 2f) + " §c❤");
   }
 
+  @Deprecated
   public static void playChallengeHeartsValueChangeTitle(@NotNull Modifier modifier) {
     playChallengeHeartsValueChangeTitle(modifier, modifier.getValue());
   }
 
+  @Deprecated
   public static void playChallengeSecondsValueChangeTitle(@NotNull AbstractChallenge challenge, int seconds) {
     playChallengeValueTitle(challenge, Message.forName("subtitle-time-seconds").asString(seconds));
   }
 
+  @Deprecated
   public static void playChallengeSecondsRangeValueChangeTitle(@NotNull AbstractChallenge challenge, int min, int max) {
     playChallengeValueTitle(challenge, Message.forName("subtitle-time-seconds-range").asString(min, max));
   }
 
+  @Deprecated
   public static void playChallengeMinutesValueChangeTitle(@NotNull AbstractChallenge challenge, int seconds) {
     playChallengeValueTitle(challenge, Message.forName("subtitle-time-minutes").asString(seconds));
   }
 
   @NotNull
-  public static String[] getTimeRangeSettingsDescription(@NotNull Modifier modifier, int multiplier, int range) {
-    return Message.forName("item-time-seconds-range-description").asArray(modifier.getValue() * multiplier - range, modifier.getValue() * multiplier + range);
+  @Contract(pure = true)
+  public static LocalizableMessage getSettingsDescriptionModifierMultiplier(int value) {
+    return MessageKey.of("challenge.settings-modifier-multiplier").withArgs(value);
   }
 
   @NotNull
-  public static String[] getTimeRangeSettingsDescription(@NotNull Modifier modifier, int range) {
-    return getTimeRangeSettingsDescription(modifier, 1, range);
+  @Contract(pure = true)
+  public static LocalizableMessage getSettingsDescriptionIntervalSecondsRange(int baseSeconds, int rangeSecondsAround) {
+    return MessageKey.of("challenge.settings-modifier-interval").withArgs(ArgumentFormat.SECONDS_RANGE.apply(Tuple.of(baseSeconds, rangeSecondsAround)));
+  }
+
+  @NotNull
+  @Contract(pure = true)
+  public static LocalizableMessage getSettingsDescriptionIntervalSeconds(int timeInSeconds) {
+    return MessageKey.of("challenge.settings-modifier-interval").withArgs(ArgumentFormat.TIME.apply(timeInSeconds));
+  }
+
+  @NotNull
+  @Contract(pure = true)
+  public static LocalizableMessage getSettingsDescriptionTimeSeconds(int timeInSeconds) {
+    return MessageKey.of("challenge.settings-modifier-time").withArgs(ArgumentFormat.TIME.apply(timeInSeconds));
+  }
+
+  @NotNull
+  @Contract(pure = true)
+  public static LocalizableMessage getSettingsDescriptionTimeSecondsRange(int baseSeconds, int rangeSecondsAround) {
+    return MessageKey.of("challenge.settings-modifier-time").withArgs(ArgumentFormat.SECONDS_RANGE.apply(Tuple.of(baseSeconds, rangeSecondsAround)));
+  }
+
+  @NotNull
+  @Contract(pure = true)
+  public static LocalizableMessage getSettingsDescriptionMaxHealth(int hp) {
+    return MessageKey.of("challenge.settings-modifier-max-health").withArgs(ArgumentFormat.HP.apply(hp));
+  }
+
+  @NotNull
+  @Contract(pure = true)
+  public static LocalizableMessage getChallengeEnabledName() {
+    return MessageKey.of("generic.enabled");
+  }
+
+  @NotNull
+  @Contract(pure = true)
+  public static LocalizableMessage getChallengeDisabledName() {
+    return MessageKey.of("generic.disabled");
   }
 
   public static boolean finalDamageIsNull(@NotNull EntityDamageEvent event) {

@@ -12,6 +12,7 @@
     "day": "Tag",
     "days": "Tage",
     "time": "Zeit",
+    "interval": "Intervall",
     "disabled": "<red>Deaktiviert</red>",
     "enabled": "<green>Aktiviert</green>",
     "customize": "<gold>Anpassen</gold>",
@@ -311,6 +312,7 @@
     }
   },
   "challenge": {
+    "settings-modifier-max-health": "<gray>Maximale Leben: {0}</gray>",
     "difficulty": {
       "name": "*Schwierigkeit*",
       "desc": [
@@ -351,7 +353,8 @@
       "desc": [
         "Es wird im Chat angezeigt,",
         "wenn jemand *Schaden* bekommt"
-      ]
+      ],
+      "message": "<yellow>{0}</yellow> <gray>nahm {1} Schaden durch</gray> <yellow>{2}</yellow>"
     },
     "language": {
       "name": "*Sprache*",
@@ -379,7 +382,10 @@
       "name": "*Todesnachrichten*",
       "desc": [
         "Schaltet *Todesnachrichten* ein/aus"
-      ]
+      ],
+      "vanilla": "<yellow>Vanilla</yellow>",
+      "message": "<yellow>{0} </yellow><gray>ist gestorben</gray>",
+      "message-cause": "<yellow>{0} </yellow><gray>ist durch </gray><yellow>{1} </yellow><gray>gestorben</gray>"
     },
     "health-display": {
       "name": "*Health Display*",
@@ -452,11 +458,18 @@
       "desc": [
         "Du kannst einen *Baum* zerstören,",
         "indem du *einen Block* des Baumes abbaust"
-      ]
+      ],
+      "settings": {
+        "logs": "<gold>Baumstämme</gold>",
+        "logs-leaves": "<gold>Baumstämme</gold> <gray>und</gray> <dark_green>Blätter</dark_green>"
+      }
     },
     "pvp": {
       "name": "*PvP*",
-      "desc": []
+      "desc": [
+        "Du kannst anderen Spielern *Schaden*",
+        "*direkt zufügen* und umgekehrt"
+      ]
     },
     "no-hit-delay": {
       "name": "*NoHitDelay*",
@@ -1654,6 +1667,137 @@
         "dauerhaft Absorption bekommen"
       ],
       "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Schutzzeit </gray><dark_gray><bold>{@symbol.vertical} </bold></dark_gray><green>{0}s</green>"
+    },
+    "damage-rule": {
+      "desc-format": [
+        "Stellt ein, ob du Schaden durch",
+        "{0} bekommen kannst",
+        " ",
+        "Dazu zählt: *{1}*"
+      ],
+      "none": {
+        "name": "*Genereller Schaden*",
+        "desc": [
+          "Stellt ein, ob du Schaden bekommen kannst",
+          "Du kannst *weiterhin* Schaden durch *Challenges* bekommen"
+        ]
+      },
+      "fire": {
+        "name": "*Feuer Schaden*",
+        "desc": "{@desc-format('*Lava* und *Feuer*', '{0}')}"
+      },
+      "attack": {
+        "name": "*Angriff Schaden*",
+        "desc": "{@desc-format('*Nahkampfangriffe von Kreaturen*', '{0}')}"
+      },
+      "projectile": {
+        "name": "*Projektil Schaden*",
+        "desc": "{@desc-format('*Projektile*', '{0}')}"
+      },
+      "fall": {
+        "name": "*Fallschaden*",
+        "desc": "{@desc-format('*Fallschaden*', '{0}')}"
+      },
+      "explosion": {
+        "name": "*Explosions Schaden*",
+        "desc": "{@desc-format('*Explosionen*', '{0}')}"
+      },
+      "drowning": {
+        "name": "*Ertrink Schaden*",
+        "desc": "{@desc-format('*Ertrinken*', '{0}')}"
+      },
+      "block": {
+        "name": "*Block Schaden*",
+        "desc": "{@desc-format('*Blöcke*', '{0}')}"
+      },
+      "magic": {
+        "name": "*Magie Schaden*",
+        "desc": "{@desc-format('*Gift*, *Wither* oder andere *Tränke*', '{0}')}"
+      },
+      "freeze": {
+        "name": "*Frost Schaden*",
+        "desc": "{@desc-format('*Frost*', '{0}')}"
+      }
+    },
+    "material-rule": {
+      "desc-format": [
+        "Stellt ein, ob *{0}*",
+        "benutzt werden kann",
+        " ",
+        "Dazu zählt: *{1}*"
+      ],
+      "armor": {
+        "name": "*Rüstung*",
+        "desc": "{@desc-format('Rüstung', '{0}')}"
+      },
+      "golden_apple": {
+        "name": "*Goldener Apfel*",
+        "desc": "{@desc-format('Goldener Apfel', '{0}')}"
+      },
+      "crafting_table": {
+        "name": "*Werkbank*",
+        "desc": "{@desc-format('Werkbank', '{0}')}"
+      },
+      "chest": {
+        "name": "*Truhe*",
+        "desc": "{@desc-format('Truhe', '{0}')}"
+      },
+      "furnace": {
+        "name": "*Ofen*",
+        "desc": "{@desc-format('Ofen', '{0}')}"
+      },
+      "enchant": {
+        "name": "*Verzauberungstisch*",
+        "desc": "{@desc-format('Verzauberungstisch', '{0}')}"
+      },
+      "anvil": {
+        "name": "*Amboss*",
+        "desc": "{@desc-format('Amboss', '{0}')}"
+      },
+      "brewing_stand": {
+        "name": "*Braustand*",
+        "desc": "{@desc-format('Braustand', '{0}')}"
+      },
+      "bow": {
+        "name": "*Bogen*",
+        "desc": "{@desc-format('Bogen', '{0}')}"
+      },
+      "throwable": {
+        "name": "*Wurfprojektile*",
+        "desc": "{@desc-format('Wurfprojektile', '{0}')}"
+      },
+      "flint_and_steel": {
+        "name": "*Feuerzeug*",
+        "desc": "{@desc-format('Feuerzeug', '{0}')}"
+      },
+      "bucket": {
+        "name": "*Eimer*",
+        "desc": "{@desc-format('Eimer', '{0}')}"
+      },
+      "sword": {
+        "name": "*Schwert*",
+        "desc": "{@desc-format('Schwert', '{0}')}"
+      },
+      "pickaxe": {
+        "name": "*Spitzhacke*",
+        "desc": "{@desc-format('Spitzhacke', '{0}')}"
+      },
+      "elytra": {
+        "name": "*Elytra*",
+        "desc": "{@desc-format('Elytra', '{0}')}"
+      },
+      "shield": {
+        "name": "*Schild*",
+        "desc": "{@desc-format('Schild', '{0}')}"
+      },
+      "totem": {
+        "name": "*Totem*",
+        "desc": "{@desc-format('Totem', '{0}')}"
+      },
+      "ender_pearl": {
+        "name": "*Enderperle*",
+        "desc": "{@desc-format('Enderperle', '{0}')}"
+      }
     }
   },
   "title": {
@@ -1689,7 +1833,7 @@
   "command": {
     "skip-timer": {
       "none": "<gray>Es ist <red>keine Challenge</red> aktiviert, dessen Timer übersprungen werden könnte</gray>",
-      "done": "<gray>Die Timer folgender Challenges <green>wurden übersprungen</green>: {0}</gray>"
+      "done": "<gray>Die Timer folgender Challenges wurden übersprungen: {0}</gray>"
     }
   },
   "challenge-end": {
@@ -1859,9 +2003,6 @@
   "reload-success": "Challenges Plugin wurde <green>erfolgreich </green><gray>neu geladen</gray>",
   "player-command": "Dazu musst du ein Spieler sein!",
   "no-permission": "Dazu hast du <red>keine </red><gray>Rechte</gray>",
-  "enabled": "<green>Aktiviert</green>",
-  "disabled": "<red>Deaktiviert</red>",
-  "customize": "<gold>Anpassen</gold>",
   "navigate-back": "<dark_gray>« </dark_gray><gray>Zurück</gray>",
   "navigate-next": "<dark_gray>» </dark_gray><gray>Weiter</gray>",
   "seconds": "Sekunden",
@@ -2015,9 +2156,6 @@
   "command-god-mode-enabled": "Du bist nun im <green>God-Mode</green>",
   "command-god-mode-disabled": "Du bist nun <red>nicht mehr im God-Mode</red>",
   "command-god-mode-toggled-others": "<yellow>{0} </yellow><gray>Spieler sind jetzt im </gray><yellow>God-Mode</yellow>",
-  "player-damage-display": "<yellow>{0} </yellow><gray>nahm </gray><gray>{1} </gray><gray>Schaden durch </gray><yellow>{2}</yellow>",
-  "death-message": "<yellow>{0} </yellow><gray>ist gestorben</gray>",
-  "death-message-cause": "<yellow>{0} </yellow><gray>ist durch </gray><yellow>{1} </yellow><gray>gestorben</gray>",
   "unable-to-find-fortress": "Es konnte <red>keine Festung </red><gray>gefunden werden</gray>",
   "unable-to-find-bastion": "Es konnte <red>keine Bastion </red><gray>gefunden werden</gray>",
   "death-collected": "Todesgrund <yellow>{0} </yellow><gray>wurde registriert</gray>",
@@ -2145,9 +2283,6 @@
   "lore-category-activated-count": "<gray>Aktiviert </gray><dark_gray>» </dark_gray><green>{0}</green><dark_gray>/</dark_gray><gray>{1}</gray>",
   "lore-category-activated": "<gray>Aktiviert </gray><dark_gray>» </dark_gray><green>Ja</green>",
   "lore-category-deactivated": "<gray>Aktiviert </gray><dark_gray>» </dark_gray><red>Nein</red>",
-  "item-time-seconds-description": "<dark_gray>» </dark_gray><gray>Zeit: </gray><yellow>{0} </yellow><gray>Sekunden</gray>",
-  "item-time-seconds-range-description": "<dark_gray>» </dark_gray><gray>Zeit: </gray><yellow>{0}-{1} </yellow><gray>Sekunden</gray>",
-  "item-time-minutes-description": "<dark_gray>» </dark_gray><gray>Zeit: </gray><yellow>{0} </yellow><gray>Minuten</gray>",
   "item-heart-damage-description": "<dark_gray>» </dark_gray><gray>Schaden: </gray><yellow>{0} </yellow><red>❤</red>",
   "item-heart-start-description": "<dark_gray>» </dark_gray><gray>Start: </gray><yellow>{0} </yellow><red>❤</red>",
   "item-max-health-description": "<dark_gray>» </dark_gray><gray>Maximale Leben: </gray><yellow>{0} </yellow><red>❤</red>",
@@ -2180,12 +2315,9 @@
   ],
   "item-language-setting-german": "<white>Deutsch</white>",
   "item-language-setting-english": "<white>English</white>",
-  "item-death-message-setting-vanilla": "<gold>Vanilla</gold>",
   "item-backpack-setting-team": "<dark_purple>Team</dark_purple>",
   "item-backpack-setting-player": "<gold>Player</gold>",
   "menu-cut-clean-setting-settings": "CutClean",
-  "item-timber-setting-logs": "<gold>Baumstämme</gold>",
-  "item-timber-setting-logs-and-leaves": "<gold>Baumstämme </gold><gray>und </gray><dark_green>Blätter</dark_green>",
   "item-regeneration-setting-not_natural": "<gold>Nicht natürlich</gold>",
   "menu-all-blocks-disappear-challenge-settings": "Alle Blöcke verschwinden",
   "item-all-blocks-disappear-break-challenge": [
@@ -2257,53 +2389,6 @@
   "menu-force-height-battle-goal-settings": "Force Height Battle",
   "menu-force-position-battle-goal-settings": "Force Position Battle",
   "menu-extreme-force-battle-goal-settings": "Extreme Force Battle",
-  "item-damage-rule-none": [
-    "<gold>Genereller Schaden</gold>",
-    "Stellt ein, ob du Schaden bekommen kannst"
-  ],
-  "item-damage-rule-fire": [
-    "<gold>Feuer Schaden</gold>",
-    "Stellt ein, ob du Schaden durch",
-    "*Lava* und *Feuer* bekommen kannst"
-  ],
-  "item-damage-rule-attack": [
-    "<dark_aqua>Angriff Schaden</dark_aqua>",
-    "Stellt ein, ob du Schaden durch",
-    "*Nahkampfangriffe von Entities* bekommen kannst"
-  ],
-  "item-damage-rule-projectile": [
-    "<gold>Projektil Schaden</gold>",
-    "Stellt ein, ob du Schaden durch",
-    "*Projektile* bekommen kannst"
-  ],
-  "item-damage-rule-fall": [
-    "<white>Fallschaden</white>",
-    "Stellt ein, ob du *Fallschaden* bekommen kannst"
-  ],
-  "item-damage-rule-explosion": [
-    "<red>Explosions Schaden</red>",
-    "Stellt ein, ob du *Explosions Schaden* bekommen kannst"
-  ],
-  "item-damage-rule-drowning": [
-    "<blue>Ertrink Schaden</blue>",
-    "Stellt ein, ob du Schaden durch",
-    "*Ertrinken* bekommen kannst"
-  ],
-  "item-damage-rule-block": [
-    "<yellow>Block Schaden</yellow>",
-    "Stellt ein, ob du Schaden durch",
-    "*Fallende Blöcke* bekommen kannst"
-  ],
-  "item-damage-rule-magic": [
-    "<dark_purple>Magie Schaden</dark_purple>",
-    "Stellt ein, ob du Schaden durch",
-    "*Gift*, *Wither* und andere *Tränke* bekommen kannst"
-  ],
-  "item-damage-rule-freeze": [
-    "<white>Frost Schaden</white>",
-    "Stellt ein, ob du Schaden durch",
-    "*Frost* bekommen kannst"
-  ],
   "item-block-material": [
     "{0}",
     "Stellt ein, ob *{1}*",
@@ -2546,5 +2631,42 @@
   "custom-subsetting-length": "Länge",
   "custom-subsetting-amplifier": "Stärke",
   "custom-subsetting-change": "Veränderung",
-  "custom-subsetting-swap_targets": "Tausch Ziele"
+  "custom-subsetting-swap_targets": "Tausch Ziele",
+  "translatable": {
+    "damage-cause": {
+      "kill": "Kill",
+      "world_border": "Weltbarriere",
+      "contact": "Kontakt",
+      "entity_attack": "Angriff",
+      "entity_sweep_attack": "Schwungangriff",
+      "projectile": "Projektil",
+      "suffocation": "Ersticken",
+      "fall": "Fall",
+      "fire": "Feuer",
+      "fire_tick": "Verbrennen",
+      "melting": "Schmelzen",
+      "lava": "Lava",
+      "drowning": "Ertrinken",
+      "block_explosion": "Blockexplosion",
+      "entity_explosion": "Kreaturenexplosion",
+      "void": "Leere",
+      "lightning": "Blitzeinschlag",
+      "suicide": "Selbstmord",
+      "starvation": "Verhungern",
+      "poison": "Gift",
+      "magic": "Magie",
+      "wither": "Wither",
+      "falling_block": "Fallender Block",
+      "thorns": "Dornen",
+      "dragon_breath": "Drachenatem",
+      "fly_into_wall": "kinetische Energie",
+      "hot_floor": "Heißen Boden",
+      "campfire": "Lagerfeuer",
+      "cramming": "Überfüllung",
+      "dried_out": "Austrocknen",
+      "freeze": "Erfrieren",
+      "sonic_boom": "Schallknall",
+      "custom": "unbekannte Ursache"
+    }
+  }
 }

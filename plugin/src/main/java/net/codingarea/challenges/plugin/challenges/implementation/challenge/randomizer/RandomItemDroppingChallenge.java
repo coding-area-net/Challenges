@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ran
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
@@ -21,11 +22,10 @@ public class RandomItemDroppingChallenge extends TimedChallenge {
     super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 1, 60, 5, new ItemStack(Material.DISPENSER), "random-dropping");
   }
 
-  //  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-description").asArray(getValue());
-//  }
+  @Override
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionIntervalSeconds(getValue());
+  }
 
   public static void dropRandomItem(Player player) {
     if (player.getInventory().getContents().length == 0) return;
@@ -40,11 +40,6 @@ public class RandomItemDroppingChallenge extends TimedChallenge {
     if (item == null) return;
     inventory.setItem(slot, null);
     InventoryUtils.dropItemByPlayer(location, item);
-  }
-
-  @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeSecondsValueChangeTitle(this, getValue());
   }
 
   @Override

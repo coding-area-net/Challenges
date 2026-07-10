@@ -2,7 +2,8 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.dam
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -29,11 +30,10 @@ public class DelayDamageChallenge extends TimedChallenge {
     super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 64, 4, false, new ItemStack(Material.REDSTONE), "delay-damage");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-description").asArray(getValue() * 30);
-//  }
+  @Override
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionTimeSeconds(getValue() * 30);
+  }
 
   @Override
   protected int getSecondsUntilNextActivation() {

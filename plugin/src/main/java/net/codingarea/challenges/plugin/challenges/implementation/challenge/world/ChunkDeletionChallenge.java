@@ -1,6 +1,8 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -10,7 +12,6 @@ import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.*;
 import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
-import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -29,10 +30,10 @@ public class ChunkDeletionChallenge extends SettingModifier {
     super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 120, 60, new ItemStack(Material.GOLDEN_PICKAXE), "chunk-deletion");
   }
 
-//  @Override
-//  protected @Nullable String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-description").asArray(getValue());
-//  }
+  @Override
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionTimeSeconds(getValue());
+  }
 
   @Override
   protected void onEnable() {

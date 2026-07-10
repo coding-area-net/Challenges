@@ -2,6 +2,8 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.inv
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
@@ -22,11 +24,10 @@ public class UncraftItemsChallenge extends TimedChallenge {
     super(MenuType.CHALLENGES, null, 5, 60, 20, new ItemStack(Material.CRAFTING_TABLE), "uncraft-items");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-description").asArray(getValue());
-//  }
+  @Override
+  public @NotNull LocalizableMessage getChallengeDescription() {
+    return ChallengeHelper.getSettingsDescriptionIntervalSeconds(getValue());
+  }
 
   public static void uncraftInventory(@NotNull Player player) {
 

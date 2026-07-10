@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.wor
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.ListBuilder;
@@ -21,15 +22,9 @@ public class ChunkDeconstructionChallenge extends TimedChallenge {
     super(MenuType.CHALLENGES, SettingCategory.WORLD, 1, 60, 20, new ItemStack(Material.DIAMOND_PICKAXE), "chunk-deconstruction");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-description").asArray(getValue());
-//  }
-
   @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeSecondsValueChangeTitle(this, getValue());
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionTimeSeconds(getValue());
   }
 
   @Override

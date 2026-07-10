@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ran
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.item.DefaultItems;
@@ -38,11 +39,10 @@ public class RandomizedHPChallenge extends SettingModifier {
     randomizeExistingEntityHealth();
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-max-health-description").asArray(getValue() * 50);
-//  }
+  @Override
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionMaxHealth(getValue() * 100);
+  }
 
   @Override
   protected void onDisable() {
@@ -62,8 +62,7 @@ public class RandomizedHPChallenge extends SettingModifier {
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
   public void onSpawn(@NotNull EntitySpawnEvent event) {
     if (!shouldExecuteEffect()) return;
-    if (!(event.getEntity() instanceof LivingEntity)) return;
-    LivingEntity entity = (LivingEntity) event.getEntity();
+    if (!(event.getEntity() instanceof LivingEntity entity)) return;
     randomizeEntityHealth(entity);
   }
 
@@ -76,8 +75,6 @@ public class RandomizedHPChallenge extends SettingModifier {
     if (!isEnabled()) {
       attribute.setBaseValue(attribute.getDefaultValue());
       entity.setHealth(attribute.getDefaultValue());
-//      entity.resetMaxHealth();
-//      entity.setHealth(entity.getMaxHealth());
       return;
     }
 
@@ -124,12 +121,7 @@ public class RandomizedHPChallenge extends SettingModifier {
   @NotNull
   @Override
   public ItemStack getSettingsItemPreset() {
-    return DefaultItems.createEnabledValuePreset(getValue() * 5);
-  }
-
-  @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeHeartsValueChangeTitle(this, getValue() * 100);
+    return DefaultItems.createEnabledValuePreset(getValue() * 10);
   }
 
 }

@@ -157,15 +157,15 @@ public final class TimerFormat {
   @Nullable
   private static Token getTokenByTag(@NotNull String tag) {
     return switch (tag) {
-      case "{d}"   -> TOKEN_D;
-      case "{dd}"  -> TOKEN_DD;
-      case "{h}"   -> TOKEN_H;
-      case "{hh}"  -> TOKEN_HH;
-      case "{m}"   -> TOKEN_M;
-      case "{mm}"  -> TOKEN_MM;
-      case "{s}"   -> TOKEN_S;
-      case "{ss}"  -> TOKEN_SS;
-      default      -> null;
+      case "{d}" -> TOKEN_D;
+      case "{dd}" -> TOKEN_DD;
+      case "{h}" -> TOKEN_H;
+      case "{hh}" -> TOKEN_HH;
+      case "{m}" -> TOKEN_M;
+      case "{mm}" -> TOKEN_MM;
+      case "{s}" -> TOKEN_S;
+      case "{ss}" -> TOKEN_SS;
+      default -> null;
     };
   }
 

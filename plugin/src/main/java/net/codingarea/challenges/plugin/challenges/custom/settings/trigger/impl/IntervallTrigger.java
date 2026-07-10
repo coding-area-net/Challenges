@@ -2,8 +2,8 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.trigger.impl
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.FallbackNames;
-import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SelectableKey;
+import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
 import net.codingarea.challenges.plugin.management.scheduler.policy.PlayerCountPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;

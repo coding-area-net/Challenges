@@ -3,7 +3,6 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebat
 import lombok.Getter;
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.ExtremeForceBattleGoal;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
-import net.codingarea.challenges.plugin.content.legacy.Message;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;

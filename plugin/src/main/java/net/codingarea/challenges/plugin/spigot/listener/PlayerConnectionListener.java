@@ -2,9 +2,9 @@ package net.codingarea.challenges.plugin.spigot.listener;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
-import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.content.loader.UpdateLoader;
 import net.codingarea.challenges.plugin.utils.misc.DatabaseHelper;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;

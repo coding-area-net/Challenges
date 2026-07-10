@@ -4,6 +4,7 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.action.impl.R
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import org.bukkit.Material;
@@ -16,15 +17,9 @@ public class RandomItemChallenge extends TimedChallenge {
     super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 1, 60, 30, false, new ItemStack(Material.BEACON), "random-item");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-description").asArray(getValue());
-//  }
-
   @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeSecondsValueChangeTitle(this, getValue());
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionIntervalSeconds(getValue());
   }
 
   @Override

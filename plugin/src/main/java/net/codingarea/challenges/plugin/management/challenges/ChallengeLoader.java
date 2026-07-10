@@ -18,8 +18,8 @@ import net.codingarea.challenges.plugin.challenges.implementation.challenge.worl
 import net.codingarea.challenges.plugin.challenges.implementation.goal.*;
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.*;
 import net.codingarea.challenges.plugin.challenges.implementation.setting.*;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder.PotionBuilder;
 import net.codingarea.challenges.plugin.utils.misc.ArmorUtils;
+import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
@@ -257,24 +257,30 @@ public final class ChallengeLoader extends ModuleChallengeLoader {
     registerDamageRule("projectile", Material.ARROW, DamageCause.PROJECTILE);
     registerDamageRule("fall", Material.FEATHER, DamageCause.FALL);
     registerDamageRule("explosion", Material.TNT, DamageCause.ENTITY_EXPLOSION, DamageCause.BLOCK_EXPLOSION);
-    registerDamageRule("drowning", PotionBuilder.createWaterBottle(), DamageCause.DROWNING);
+    registerDamageRule("drowning", StandardItemBuilder.PotionBuilder.createWaterBottle().build(), DamageCause.DROWNING);
     registerDamageRule("block", Material.SAND, DamageCause.FALLING_BLOCK, DamageCause.SUFFOCATION, DamageCause.CONTACT);
     registerDamageRule("magic", Material.BREWING_STAND, DamageCause.MAGIC, DamageCause.POISON, DamageCause.WITHER);
     registerDamageRule("freeze", Material.POWDER_SNOW_BUCKET, DamageCause.FREEZE); // 1.17+
 
     // Material Rules
-    registerMaterialRule("§cArmor", "Armor", ArmorUtils.getArmor());
-    registerMaterialRule("§6Golden Apple", "Golden Apple", Material.GOLDEN_APPLE, Material.ENCHANTED_GOLDEN_APPLE);
-    registerMaterialRule("§6Crafting Table", "Crafting Table", Material.CRAFTING_TABLE);
-    registerMaterialRule("§6Chest", "Chest", Material.CHEST);
-    registerMaterialRule("§cFurnace", "Furnace", Material.FURNACE, Material.FURNACE_MINECART);
-    registerMaterialRule("§5Enchanting Table", "Enchanting Table", Material.ENCHANTING_TABLE);
-    registerMaterialRule("§cAnvil", "Anvil", Material.ANVIL, Material.CHIPPED_ANVIL, Material.DAMAGED_ANVIL);
-    registerMaterialRule("§dBrewing Stand", "Brewing Stand", Material.BREWING_STAND);
-    registerMaterialRule("§cBow", "Bow", Material.BOW);
-    registerMaterialRule("§fSnowball", "Snowball", Material.SNOWBALL);
-    registerMaterialRule("§cFlint and Steel", "Flint and Steel", Material.FLINT_AND_STEEL);
-    registerMaterialRule("§cBucket", "Bucket", Material.BUCKET);
+    registerMaterialRule("armor", ArmorUtils.getArmor());
+    registerMaterialRule("golden_apple", Material.GOLDEN_APPLE, Material.ENCHANTED_GOLDEN_APPLE);
+    registerMaterialRule("crafting_table", Material.CRAFTING_TABLE);
+    registerMaterialRule("chest", Material.CHEST, Material.CHEST_MINECART, Material.TRAPPED_CHEST);
+    registerMaterialRule("furnace", Material.FURNACE, Material.FURNACE_MINECART);
+    registerMaterialRule("enchant", Material.ENCHANTING_TABLE);
+    registerMaterialRule("anvil", Material.ANVIL, Material.CHIPPED_ANVIL, Material.DAMAGED_ANVIL);
+    registerMaterialRule("brewing_stand", Material.BREWING_STAND);
+    registerMaterialRule("bow", Material.BOW, Material.CROSSBOW);
+    registerMaterialRule("throwable", Material.SNOWBALL, Material.EGG);
+    registerMaterialRule("flint_and_steel", Material.FLINT_AND_STEEL, Material.FIRE_CHARGE);
+    registerMaterialRule("bucket", ArmorUtils.getBuckets());
+    registerMaterialRule("sword", ArmorUtils.getSwords());
+    registerMaterialRule("pickaxe", ArmorUtils.getPickaxes());
+    registerMaterialRule("elytra", Material.ELYTRA);
+    registerMaterialRule("shield", Material.SHIELD);
+    registerMaterialRule("totem", Material.TOTEM_OF_UNDYING);
+    registerMaterialRule("ender_pearl", Material.ENDER_PEARL);
   }
 
 }

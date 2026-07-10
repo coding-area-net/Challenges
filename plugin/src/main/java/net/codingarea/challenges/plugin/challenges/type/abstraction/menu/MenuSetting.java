@@ -1,10 +1,9 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction.menu;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Setter;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
@@ -105,7 +104,7 @@ public abstract class MenuSetting extends Setting {
 
     protected final ItemStack displayItemPreset;
 
-    public SubSetting(@NotNull ItemStack displayItemPreset,  @NotNull MessageKey nameMessageKeySpace) {
+    public SubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace) {
       this.displayItemPreset = displayItemPreset;
       this.nameMessageKeySpace = nameMessageKeySpace;
     }
@@ -137,8 +136,8 @@ public abstract class MenuSetting extends Setting {
 
     /**
      * @implNote Only used if {@link #isEnabled()}.
-     *           Name/Lore will be overwritten by formatting.
-     *           Set name in {@link #getSettingsName()} and lore in {@link #getSettingsDescription()}
+     * Name/Lore will be overwritten by formatting.
+     * Set name in {@link #getSettingsName()} and lore in {@link #getSettingsDescription()}
      */
     @NotNull
     public abstract ItemStack getSettingsItemPreset();
@@ -155,7 +154,7 @@ public abstract class MenuSetting extends Setting {
 
     @NotNull
     protected LocalizableMessage getSettingsName() {
-      return MessageKey.of("generic.enabled");
+      return ChallengeHelper.getChallengeEnabledName();
     }
 
     @Nullable

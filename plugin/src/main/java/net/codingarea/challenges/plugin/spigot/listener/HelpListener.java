@@ -2,8 +2,6 @@ package net.codingarea.challenges.plugin.spigot.listener;
 
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
-import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
-import net.codingarea.challenges.plugin.utils.misc.FontUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;

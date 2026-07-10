@@ -59,6 +59,12 @@ public abstract class SettingModifier extends Modifier implements ISetting {
     return DefaultItems.createEnabledValuePreset(getValue());
   }
 
+  @NotNull
+  @Override
+  public Object getSettingsName() {
+    return ChallengeHelper.getChallengeEnabledName();
+  }
+
   @Override
   public final boolean isEnabled() {
     return enabled;

@@ -4,7 +4,7 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.EndingForceChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.ExcludeFromRandomChallenges;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -16,7 +16,6 @@ import net.codingarea.commons.bukkit.utils.item.ItemUtils;
 import net.codingarea.commons.common.config.Document;
 import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Material;
-import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -33,15 +32,9 @@ public class ForceBlockChallenge extends EndingForceChallenge {
     super(MenuType.CHALLENGES, SettingCategory.FORCE, 2, 15, new ItemStack(Material.GOLDEN_BOOTS), "force-block");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return ChallengeHelper.getTimeRangeSettingsDescription(this, 60, 30);
-//  }
-
   @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 - 30, getValue() * 60 + 30);
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionTimeSecondsRange(getValue() * 60, 30);
   }
 
   @NotNull

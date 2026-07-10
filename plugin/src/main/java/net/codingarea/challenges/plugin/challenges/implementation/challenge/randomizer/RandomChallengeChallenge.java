@@ -9,6 +9,7 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallen
 import net.codingarea.challenges.plugin.challenges.type.annotation.ChallengeAnnotations;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
@@ -28,15 +29,9 @@ public class RandomChallengeChallenge extends TimedChallenge {
     super(MenuType.CHALLENGES, SettingCategory.RANDOMIZER, 3, 60, 6, false, new ItemStack(Material.REDSTONE), "random-challenge");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-description").asArray(getValue() * 10);
-//  }
-
   @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeSecondsValueChangeTitle(this, getValue() * 10);
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionIntervalSeconds(getValue() * 10);
   }
 
   @Override

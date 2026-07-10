@@ -2,6 +2,8 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.wor
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import org.bukkit.Bukkit;
@@ -27,11 +29,10 @@ public class BlocksDisappearAfterTimeChallenge extends SettingModifier {
     super(MenuType.CHALLENGES, SettingCategory.WORLD, 60, 300, new ItemStack(Material.STRING), "blocks-disappear-time");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-time-seconds-description").asArray(getValue());
-//  }
+  @Override
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionTimeSeconds(getValue());
+  }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
   public void onBlockPlace(@NotNull BlockPlaceEvent event) {

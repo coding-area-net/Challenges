@@ -2,13 +2,11 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.ent
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
-import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.spigot.events.EntityDamageByPlayerEvent;
 import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Material;
-import org.bukkit.boss.BarColor;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;

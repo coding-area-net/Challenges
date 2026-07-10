@@ -39,7 +39,8 @@ public class WrappedObjMessageImpl implements LocalizableMessage {
   @NotNull
   @Override
   public LocalizableMessage withArgs(@NotNull Object... args) {
-    if (args.length != 1) throw new IllegalArgumentException("WrappedObjMessageImpl must wrap a single object, but got " + args.length + " arguments.");
+    if (args.length != 1)
+      throw new IllegalArgumentException("WrappedObjMessageImpl must wrap a single object, but got " + args.length + " arguments.");
     return new WrappedObjMessageImpl(args);
   }
 

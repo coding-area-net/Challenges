@@ -72,6 +72,11 @@ public abstract class TimedChallenge extends SettingModifier {
     }
   }
 
+  @Override
+  protected void onValueChange() {
+    restartTimer();
+  }
+
   // Don't execute async to prevent sync issues with timer
   @ScheduledTask(ticks = 20, async = false)
   public final void handleTimedChallengeSecond() {

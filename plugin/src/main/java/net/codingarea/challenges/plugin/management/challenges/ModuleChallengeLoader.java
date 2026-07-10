@@ -6,7 +6,6 @@ import net.codingarea.challenges.plugin.challenges.implementation.material.Block
 import net.codingarea.challenges.plugin.challenges.type.IChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.RequireDepend;
 import net.codingarea.challenges.plugin.challenges.type.annotation.RequireVersion;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.core.BukkitModule;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
@@ -15,6 +14,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
@@ -102,26 +102,21 @@ public class ModuleChallengeLoader {
     registerWithCommand(classOfChallenge, commandNames, new Class[0]);
   }
 
-  public final void registerDamageRule(@NotNull String name, @NotNull Material material, @NotNull DamageCause... causes) {
-    registerDamageRule(name, new LegacyItemBuilder(material), causes);
+  public final void registerDamageRule(@NotNull String name, @NotNull Material displayItemMaterial, @NotNull DamageCause... causes) {
+    registerDamageRule(name, new ItemStack(displayItemMaterial), causes);
   }
 
-  public final void registerDamageRule(@NotNull String name, @NotNull LegacyItemBuilder preset, @NotNull DamageCause... causes) {
-    register(DamageRuleSetting.class, new Class[]{LegacyItemBuilder.class, String.class, DamageCause[].class}, preset, name, causes);
+  public final void registerDamageRule(@NotNull String name, @NotNull ItemStack displayItemPreset, @NotNull DamageCause... causes) {
+    register(DamageRuleSetting.class, new Class[]{ItemStack.class, String.class, DamageCause[].class}, displayItemPreset, name, causes);
   }
 
-  public final void registerMaterialRule(@NotNull String title, @NotNull String replacement, @NotNull Material... materials) {
-    registerMaterialRule("item-block-material", new Object[]{title, replacement}, materials);
+  public final void registerMaterialRule(@NotNull String name, @NotNull Material... materials) {
+    registerMaterialRule(name, new ItemStack(materials[0]), materials);
   }
 
-  public final void registerMaterialRule(@NotNull String name, Object[] replacements, @NotNull Material... materials) {
-    registerMaterialRule(name, new LegacyItemBuilder(materials[0]), replacements, materials);
+  public final void registerMaterialRule(@NotNull String name, @NotNull ItemStack preset, @NotNull Material... materials) {
+    register(BlockMaterialSetting.class, new Class[]{String.class, ItemStack.class, Material[].class}, name, preset, materials);
   }
-
-  public final void registerMaterialRule(@NotNull String name, @NotNull LegacyItemBuilder preset, Object[] replacements, @NotNull Material... materials) {
-    register(BlockMaterialSetting.class, new Class[]{String.class, LegacyItemBuilder.class, Object[].class, Material[].class}, name, preset, replacements, materials);
-  }
-
 
   /**
    * Unregisters an existing challenge and deletes its settings.

@@ -10,8 +10,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 public class StandsOnSpecificBlockTrigger extends ChallengeTrigger {
 
   public StandsOnSpecificBlockTrigger(String name) {

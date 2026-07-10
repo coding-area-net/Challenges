@@ -28,7 +28,7 @@
     "damage-cause": "<yellow>{0}</yellow>",
     "damage-cause-source": "<yellow>{0}</yellow> <dark_gray>(<gray>{1}</gray>)</dark_gray>",
     "time": "<yellow>{0}</yellow> <gray>{1}</gray>",
-    "time-range": "{@time} <dark_gray>{@symbol.plus-minus}</dark_gray> <yellow>{2}</yellow> <gray>{3}</gray>"
+    "time-range": "{@time} <dark_gray>{@symbol.plus-minus}</dark_gray> {@time('{2}', '{3}')}"
   },
   "prefix": {
     "format": "<dark_gray><b>{@symbol.vertical}</b> {0} {@symbol.vertical}</dark_gray> ",
@@ -202,6 +202,7 @@
     "settings-modifier-value": "<yellow>{0}</yellow>",
     "settings-modifier-multiplier": "<yellow>{0}x</yellow>",
     "settings-modifier-time": "<gray>{@generic.time}: {0}</gray>",
+    "settings-modifier-interval": "<gray>{@generic.interval}: {0}</gray>",
     "difficulty": {
       "*colorize*": "<color:#a6cf13>{0}</color>"
     },
@@ -737,6 +738,94 @@
     },
     "zero-hearts": {
       "*colorize*": "<gold>{0}</gold>"
+    },
+    "damage-rule": {
+      "none": {
+        "*colorize*": "<green>{0}</green>"
+      },
+      "fire": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "attack": {
+        "*colorize*": "<dark_aqua>{0}</dark_aqua>"
+      },
+      "projectile": {
+        "*colorize*": "<dark_purple>{0}</dark_purple>"
+      },
+      "fall": {
+        "*colorize*": "<white>{0}</white>"
+      },
+      "explosion": {
+        "*colorize*": "<dark_red>{0}</dark_red>"
+      },
+      "drowning": {
+        "*colorize*": "<blue>{0}</blue>"
+      },
+      "block": {
+        "*colorize*": "<yellow>{0}</yellow>"
+      },
+      "magic": {
+        "*colorize*": "<dark_purple>{0}</dark_purple>"
+      },
+      "freeze": {
+        "*colorize*": "<aqua>{0}</aqua>"
+      }
+    },
+    "material-rule": {
+      "armor": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "golden_apple": {
+        "*colorize*": "<yellow>{0}</yellow>"
+      },
+      "crafting_table": {
+        "*colorize*": "<gold>{0}</gold>"
+      },
+      "chest": {
+        "*colorize*": "<gold>{0}</gold>"
+      },
+      "furnace": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "enchant": {
+        "*colorize*": "<dark_purple>{0}</dark_purple>"
+      },
+      "anvil": {
+        "*colorize*": "<color:#686868>{0}</color>"
+      },
+      "brewing_stand": {
+        "*colorize*": "<dark_aqua>{0}</dark_aqua>"
+      },
+      "bow": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "throwable": {
+        "*colorize*": "<white>{0}</white>"
+      },
+      "flint_and_steel": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "bucket": {
+        "*colorize*": "<blue>{0}</blue>"
+      },
+      "sword": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "pickaxe": {
+        "*colorize*": "<dark_green>{0}</dark_green>"
+      },
+      "elytra": {
+        "*colorize*": "<light_purple>{0}</light_purple>"
+      },
+      "shield": {
+        "*colorize*": "<color:#69583D>{0}</color>"
+      },
+      "totem": {
+        "*colorize*": "<yellow>{0}</yellow>"
+      },
+      "ender_pearl": {
+        "*colorize*": "<dark_purple>{0}</dark_purple>"
+      }
     }
   },
   "custom": {

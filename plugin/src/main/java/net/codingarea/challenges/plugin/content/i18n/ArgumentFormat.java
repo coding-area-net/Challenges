@@ -3,7 +3,6 @@ package net.codingarea.challenges.plugin.content.i18n;
 import lombok.RequiredArgsConstructor;
 import net.codingarea.commons.common.collection.NumberFormatter;
 import net.codingarea.commons.common.collection.pair.Tuple;
-import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -16,6 +15,8 @@ import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -42,7 +43,7 @@ public interface ArgumentFormat<T> {
   });
 
   @SuppressWarnings({"unchecked", "rawtypes"})
-  ArgumentFormat<Tuple> SECONDS_RANGE = register(Tuple.class, "minute_range", arg -> {
+  ArgumentFormat<Tuple> SECONDS_RANGE = register(Tuple.class, "time_range", arg -> {
     Tuple<Integer, Integer> range = (Tuple<Integer, Integer>) arg;
     int seconds = range.getFirst();
     int secondsRange = range.getSecond();
@@ -59,9 +60,33 @@ public interface ArgumentFormat<T> {
       NumberFormatter.DEFAULT.format(secondsRange), MessageKey.pluralize("generic.second", secondsRange));
   });
 
+  ArgumentFormat<Number> TIME = register(Number.class, "time", arg -> {
+    long time = arg.longValue();
+    long s = time % 60;
+    long m = (time / 60) % 60;
+    long h = (time / 3_600) % 24;
+    long d = time / 86_400;
+
+    List<LocalizableMessage> components = new LinkedList<>();
+    if (s > 0 || time == 0) { // show 0s
+      components.add(MessageKey.of("arg-format.time").withArgs(s, MessageKey.pluralize("generic.second", s)));
+    }
+    if (m > 0) {
+      components.addFirst(MessageKey.of("arg-format.time").withArgs(m, MessageKey.pluralize("generic.minute", m)));
+    }
+    if (h > 0) {
+      components.addFirst(MessageKey.of("arg-format.time").withArgs(h, MessageKey.pluralize("generic.hour", h)));
+    }
+    if (d > 0) {
+      components.addFirst(MessageKey.of("arg-format.time").withArgs(d, MessageKey.pluralize("generic.day", d)));
+    }
+
+    return LocalizableMessage.joinList(components);
+  });
+
   ArgumentFormat<EntityDamageEvent> DAMAGE_CAUSE = register(EntityDamageEvent.class, "damage_cause", event -> {
     if (event.getCause() == EntityDamageEvent.DamageCause.CUSTOM) return MessageKey.of("generic.undefined");
-    String cause = StringUtils.getEnumName(event.getCause()); // DamageCause is not a Translatable, impl custom translations?
+    MessageKey cause = CustomTranslatable.of(event.getCause());
 
     if (event instanceof EntityDamageByBlockEvent damageEvent) {
       if (damageEvent.getDamager() != null) {

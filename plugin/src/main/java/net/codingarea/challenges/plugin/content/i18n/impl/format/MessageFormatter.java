@@ -206,18 +206,34 @@ public final class MessageFormatter { // pre expansion for better server runtime
   @CheckReturnValue
   private static String qualifyRelativeKey(@NotNull String relativeReferenceName, @NotNull String[] originSubDocumentPath,
                                            @NotNull Map<String, String[]> messagesBundle) {
-    String qualifiedReferenceName = relativeReferenceName;
-    for (int path = 0; path < originSubDocumentPath.length && !messagesBundle.containsKey(qualifiedReferenceName); path++) {
-      StringBuilder pathQualifierUntilX = new StringBuilder(originSubDocumentPath.length * 12);
-      for (int j = 0; j <= path; j++) {
-        pathQualifierUntilX.append(originSubDocumentPath[j]).append(SUB_DOCUMENT_DELIMITER);
-      }
-      String pathQualifierUntilXString = pathQualifierUntilX.toString();
-      if (!qualifiedReferenceName.startsWith(pathQualifierUntilXString)) {
-        qualifiedReferenceName = pathQualifierUntilXString + relativeReferenceName;
+    // pre-build the full path prefix once; prefix lengths per depth let us "truncate" cheaply
+    StringBuilder fullPrefix = new StringBuilder(originSubDocumentPath.length * 12);
+    int[] prefixLengthAtDepth = new int[originSubDocumentPath.length];
+    for (int depth = 0; depth < originSubDocumentPath.length; depth++) {
+      fullPrefix.append(originSubDocumentPath[depth]).append(SUB_DOCUMENT_DELIMITER);
+      prefixLengthAtDepth[depth] = fullPrefix.length();
+    }
+
+    String mostSpecificKey = fullPrefix + relativeReferenceName;
+    if (messagesBundle.containsKey(mostSpecificKey)) {
+      return mostSpecificKey;
+    }
+
+    // walk from the second-deepest scope toward global
+    for (int depth = originSubDocumentPath.length - 2; depth >= 0; depth--) {
+      String candidate = fullPrefix.substring(0, prefixLengthAtDepth[depth]) + relativeReferenceName;
+      if (messagesBundle.containsKey(candidate)) {
+        return candidate;
       }
     }
-    return qualifiedReferenceName;
+
+    // finally the global (unqualified) scope
+    if (messagesBundle.containsKey(relativeReferenceName)) {
+      return relativeReferenceName;
+    }
+
+    // nothing found anywhere -> return the fully qualified (most specific) key anyway
+    return mostSpecificKey;
   }
 
   private static String[] extractSubDocumentPath(@NotNull String key) {

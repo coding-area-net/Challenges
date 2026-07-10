@@ -54,11 +54,6 @@ public class MaxHealthSetting extends Modifier {
     broadcast(this::updateHealth);
   }
 
-  @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
-  }
-
   @EventHandler
   public void onJoin(@NotNull PlayerJoinEvent event) {
     updateHealth(event.getPlayer());

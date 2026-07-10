@@ -8,7 +8,6 @@ import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
-import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

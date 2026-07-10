@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.item.DefaultItems;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.kyori.adventure.text.Component;
@@ -46,7 +47,7 @@ public interface SelectableKey {
 
   @Contract(pure = true)
   static SelectableKey.Option of(@NotNull String key, @NotNull Material displayMaterial, @NotNull String nameKey, @NotNull Object... nameArgs) {
-    return of(key, displayMaterial, LocalizableMessage.of(nameKey, nameArgs));
+    return of(key, displayMaterial, MessageKey.of(nameKey).withArgs(nameArgs));
   }
 
   @Contract(pure = true)
@@ -66,7 +67,7 @@ public interface SelectableKey {
 
   @Contract(pure = true)
   static SelectableKey.Option of(@NotNull String key, @NotNull ItemStack displayPreset, @NotNull String nameKey, @NotNull Object... nameArgs) {
-    return of(key, displayPreset, LocalizableMessage.of(nameKey, nameArgs));
+    return of(key, displayPreset, MessageKey.of(nameKey).withArgs(nameArgs));
   }
 
   @Getter

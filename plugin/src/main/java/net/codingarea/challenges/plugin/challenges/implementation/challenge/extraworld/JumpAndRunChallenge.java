@@ -5,9 +5,7 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChal
 import net.codingarea.challenges.plugin.challenges.type.abstraction.WorldDependentChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Updated;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.i18n.ArgumentFormat;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.scheduler.policy.ExtraWorldPolicy;
@@ -19,7 +17,6 @@ import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import net.codingarea.challenges.plugin.utils.misc.ParticleUtils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
-import net.codingarea.commons.common.collection.pair.Tuple;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -53,20 +50,9 @@ public class JumpAndRunChallenge extends WorldDependentChallenge {
     super(MenuType.CHALLENGES, 1, 10, 5, new ItemStack(Material.ACACIA_STAIRS), "jump-and-run");
   }
 
-  @NotNull
-  @Override
-  public LocalizableMessage getSettingsName() {
-    return MessageKey.of("generic.enabled");
-  }
-
   @Override
   public LocalizableMessage getSettingsDescription() {
-    return MessageKey.of("challenge.settings-modifier-time").withArgs(ArgumentFormat.SECONDS_RANGE.apply(Tuple.of(getValue() * 60, 30)));
-  }
-
-  @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 - 30, getValue() * 60 + 30);
+    return ChallengeHelper.getSettingsDescriptionIntervalSecondsRange(getValue() * 60, 30);
   }
 
   @Override
