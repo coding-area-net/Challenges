@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin.spigot.command;
 
 import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.blocks.BlockDropManager.RegisteredDrops;
@@ -56,7 +57,8 @@ public class SearchCommand implements SenderCommand, Completer {
     if (blocks.isEmpty()) {
       MessageKey.of("command-search-nothing").send(sender, Prefix.CHALLENGES, material);
     } else {
-      MessageKey.of("command-search-result").send(sender, Prefix.CHALLENGES, material, StringUtils.getIterableAsString(blocks, ", ", StringUtils::getEnumName));
+      System.out.println(blocks);
+      MessageKey.of("command-search-result").send(sender, Prefix.CHALLENGES, material, LocalizableMessage.joinList(blocks));
     }
   }
 

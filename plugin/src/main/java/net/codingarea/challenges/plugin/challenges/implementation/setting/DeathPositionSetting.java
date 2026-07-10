@@ -32,7 +32,7 @@ public class DeathPositionSetting extends Setting {
     }
 
     Player player = event.getEntity();
-    player.performCommand("pos " + POSITION_PREFIX + index);
+    setting.setPosition(POSITION_PREFIX + index, player);
   }
 
 }

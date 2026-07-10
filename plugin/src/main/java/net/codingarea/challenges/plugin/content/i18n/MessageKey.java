@@ -145,6 +145,12 @@ public interface MessageKey extends LocalizableMessage {
   String localizeRawValueAsSingleLine(@NotNull Locale locale);
 
   @NotNull
+  String[] localizeWithPrimitiveArgs(@NotNull Locale locale, @NotNull Object... args);
+
+  @NotNull
+  String localizeWithPrimitiveArgAsSingleLine(@NotNull Locale locale, @NotNull Object... args);
+
+  @NotNull
   @Contract(pure = true)
   LocalizableMessage withArgs(@NotNull Object... args);
 

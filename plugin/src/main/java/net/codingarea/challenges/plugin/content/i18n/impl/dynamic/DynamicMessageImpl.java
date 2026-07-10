@@ -33,7 +33,7 @@ public class DynamicMessageImpl implements LocalizableMessage {
 
   @NotNull
   @Override
-  public LocalizableMessage withArgs(@NonNull @NotNull Object... args) {
+  public LocalizableMessage withArgs(@NotNull Object... args) {
     return new DynamicMessageImpl(valueFunction, args);
   }
 

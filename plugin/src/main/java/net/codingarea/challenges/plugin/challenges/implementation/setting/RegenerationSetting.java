@@ -2,9 +2,6 @@ package net.codingarea.challenges.plugin.challenges.implementation.setting;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
-import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.DefaultItems;
 import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
@@ -38,20 +35,11 @@ public class RegenerationSetting extends Modifier {
 
   @NotNull
   @Override
-  public LocalizableMessage getSettingsName() {
+  public Object getSettingsName() {
     if (getValue() == NOT_NATURAL) {
-      return MessageKey.of("item-regeneration-setting-not_natural");
+      return getChallengeMessageKey("not_natural");
     }
-    return MessageKey.of("enabled");
-  }
-
-  @Override
-  public void playValueChangeTitle() {
-    if (getValue() == 1) {
-      ChallengeHelper.playChallengeToggleTitle(this, false);
-      return;
-    }
-    ChallengeHelper.playChallengeValueTitle(this, getValue() == 2 ? Message.forName("enabled") : Message.forName("item-regeneration-setting-not_natural"));
+    return ChallengeHelper.getChallengeEnabledName();
   }
 
   @Override

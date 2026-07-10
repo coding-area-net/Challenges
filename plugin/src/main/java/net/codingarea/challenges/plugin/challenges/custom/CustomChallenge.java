@@ -5,10 +5,11 @@ import lombok.ToString;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeExecutionData;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.ChallengeAction;
+import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
-import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.common.config.Document;
@@ -17,11 +18,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.UUID;
 
 @Getter
 @ToString
@@ -37,7 +35,7 @@ public class CustomChallenge extends Setting {
 
   public CustomChallenge(MenuType menuType, UUID uuid, Material displayItem, String displayName, ChallengeTrigger trigger,
                          Map<String, String[]> subTriggers, ChallengeAction action, Map<String, String[]> subActions) {
-    super(menuType, null, new ItemStack(displayItem), "custom-challenge");
+    super(menuType, null, new ItemStack(Material.BARRIER), "custom-challenge");
     this.uuid = uuid;
     this.material = displayItem;
     this.name = displayName;
@@ -47,44 +45,48 @@ public class CustomChallenge extends Setting {
     this.subActions = subActions;
   }
 
+  @Override
+  public ItemStack getDisplayItemPreset() {
+    if (displayItemPreset != null) return displayItemPreset;
+    Material material = this.material;
+    if (material == null) material = Material.BARRIER;
+    return this.displayItemPreset = new ItemStack(material);
+  }
+
   @NotNull
   @Override
-  public ItemBuilder getDisplayItem(@NotNull Locale locale) { // TODO
-    ItemBuilder item = new ItemBuilder(locale, displayItemPreset, MessageKey.of("custom.display-format"), name);
+  public ItemBuilder getDisplayItem(@NotNull Locale locale) {
+    ItemBuilder item = new ItemBuilder(locale, getDisplayItemPreset(), MessageKey.of("custom.display-format"), name);
 
     // ADDING CONDITION INFO
     if (getTrigger() != null) {
-//      List<String> triggerDisplay = SubSettingsBuilder
-//        .getSubSettingsDisplay(getTrigger().getSubSettingsBuilder(), getSubTriggers());
-//
-//      String triggerName = Message.forName(getTrigger().getMessageKey()).asItemDescription().getName();
-//      builder.appendLore(Message.forName("custom-info-trigger").asString() + " " + triggerName);
-//      builder.appendLore(triggerDisplay);
-
       item.appendBlankLoreLine()
-        .appendLore(MessageKey.of("menu.custom.trigger-format"), getTrigger().getSettingName());
+        .appendLore(MessageKey.of("menu.custom.trigger-format"), trigger.getSettingName());
+
+      Collection<SubSettingsBuilder.SubSettingDisplay> display = trigger.getSubSettingsBuilder().getCurrentDisplayFor(subTriggers);
+      for (SubSettingsBuilder.SubSettingDisplay subSettingDisplay : display) {
+        item.appendLore(MessageKey.of("menu.custom.subsetting-format"), subSettingDisplay.keyName(), subSettingDisplay.valueFormatted());
+      }
     }
 
     // ADDING ACTION INFO
     if (getAction() != null) {
-//      builder.appendLore(" ");
-//      List<String> actionDisplay = SubSettingsBuilder
-//        .getSubSettingsDisplay(getAction().getSubSettingsBuilder(), getSubActions());
-//
-//      String actionName = Message.forName(getAction().getMessageKey()).asItemDescription().getName();
-//      builder.appendLore(Message.forName("custom-info-action").asString() + " " + actionName);
-//      builder.appendLore(actionDisplay);
-
       item.appendBlankLoreLine()
-        .appendLore(MessageKey.of("menu.custom.action-format"), getAction().getSettingName());
+        .appendLore(MessageKey.of("menu.custom.action-format"), action.getSettingName());
+
+      Collection<SubSettingsBuilder.SubSettingDisplay> display = action.getSubSettingsBuilder().getCurrentDisplayFor(subActions);
+      for (SubSettingsBuilder.SubSettingDisplay subSettingDisplay : display) {
+        item.appendLore(MessageKey.of("menu.custom.subsetting-format"), subSettingDisplay.keyName(), subSettingDisplay.valueFormatted());
+      }
     }
 
     return item;
   }
 
+  @NotNull
   @Override
-  public void playStatusUpdateTitle() {
-    Challenges.getInstance().getTitleManager().sendChallengeStatusTitle(enabled ? Message.forName("title-challenge-enabled") : Message.forName("title-challenge-disabled"), getDisplayName());
+  public LocalizableMessage getChallengeName() {
+    return LocalizableMessage.wrap(getDisplayName());
   }
 
   @Override

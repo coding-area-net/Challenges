@@ -5,6 +5,7 @@ import lombok.Setter;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.content.i18n.*;
 import net.codingarea.challenges.plugin.content.i18n.impl.format.ComponentFormatter;
+import net.codingarea.challenges.plugin.content.i18n.impl.format.MessageFormatter;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.management.server.TitleManager;
 import net.codingarea.commons.common.collection.IRandom;
@@ -70,6 +71,34 @@ public class MessageKeyImpl implements MessageKey {
   public String localizeRawValueAsSingleLine(@NotNull Locale locale) {
     String[] value = values.get(locale);
     if (value == null || value.length == 0) return MessageKey.formatMissingTranslation(key, locale);
+    return asSingleLine(value);
+  }
+
+  @NotNull
+  @Override
+  public String[] localizeWithPrimitiveArgs(@NotNull Locale locale, @NotNull Object... args) {
+    String[] rawValue = localizeRawValue(locale);
+    if (args.length == 0) return rawValue;
+
+    Object[] primitiveArgsCopy = new Object[args.length];
+    for (int i = 0; i < primitiveArgsCopy.length; i++) {
+      if (MessageFormatter.isPrimitiveArg(args[i])) {
+        primitiveArgsCopy[i] = args[i];
+      }
+      // else leave null
+    }
+    // embedPositionalArgs will skip null arguments
+    return MessageFormatter.embedPositionalArgs(rawValue, primitiveArgsCopy);
+  }
+
+  @NotNull
+  @Override
+  public String localizeWithPrimitiveArgAsSingleLine(@NotNull Locale locale, @NotNull Object... args) {
+    return asSingleLine(localizeWithPrimitiveArgs(locale, args));
+  }
+
+  @NotNull
+  private String asSingleLine(@NotNull String[] value) {
     if (value.length == 1) return value[0];
     return String.join("\n", value);
   }
@@ -183,7 +212,7 @@ public class MessageKeyImpl implements MessageKey {
   public void sendRandom(@NotNull Player target, @Nullable Prefix prefix, @NotNull Object... args) {
     Locale locale = getPlayerLocale(target);
     localizeArgs(locale, args);
-    String raw = random.choose(localizeRawValue(locale));
+    String raw = random.choose(localizeWithPrimitiveArgs(locale, args));
     target.sendMessage(ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), arrayOf(raw), args));
   }
 
@@ -196,7 +225,7 @@ public class MessageKeyImpl implements MessageKey {
   public void broadcastRandom(@Nullable Prefix prefix, @NotNull Object... args) {
     int index = random.nextInt(getMinValueLengthIncludingFallback());
     doBroadcast0(Player::sendMessage, locale ->
-      ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), arrayOf(localizeRawValue(locale)[index]), localizeArgsAsCopy(locale, args)));
+      ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), arrayOf(localizeWithPrimitiveArgs(locale, args)[index]), localizeArgsAsCopy(locale, args)));
   }
 
   @Override
@@ -245,12 +274,12 @@ public class MessageKeyImpl implements MessageKey {
 
   protected void doBroadcast(@Nullable Prefix prefix, @NotNull Object[] args, @NotNull BiConsumer<Player, Component> messageSender) {
     doBroadcast0(messageSender, locale ->
-      ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), localizeRawValue(locale), localizeArgsAsCopy(locale, args)));
+      ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), localizeWithPrimitiveArgs(locale, args), localizeArgsAsCopy(locale, args)));
   }
 
   protected void doBroadcastAsList(@NotNull Object[] args, @NotNull BiConsumer<Player, List<Component>> messageSender) {
     doBroadcast0(messageSender, locale ->
-      ComponentFormatter.deserializeLinesAsListWithArgs(localizeRawValue(locale), localizeArgsAsCopy(locale, args)));
+      ComponentFormatter.deserializeLinesAsListWithArgs(localizeWithPrimitiveArgs(locale, args), localizeArgsAsCopy(locale, args)));
   }
 
   protected <T> void doBroadcast0(@NotNull BiConsumer<Player, T> messageSender, @NotNull Function<Locale, T> compute) {
@@ -286,14 +315,14 @@ public class MessageKeyImpl implements MessageKey {
   @Override
   public Component asComponent(@NotNull Locale locale, @Nullable Prefix prefix, @NotNull Object... args) {
     localizeArgs(locale, args);
-    return ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), localizeRawValue(locale), args);
+    return ComponentFormatter.deserializeLinesWithArgs(localizePrefix(locale, prefix), localizeWithPrimitiveArgs(locale, args), args);
   }
 
   @NotNull
   @Override
   public List<Component> asComponents(@NotNull Locale locale, @NotNull Object... args) {
     localizeArgs(locale, args);
-    return ComponentFormatter.deserializeLinesAsListWithArgs(localizeRawValue(locale), args);
+    return ComponentFormatter.deserializeLinesAsListWithArgs(localizeWithPrimitiveArgs(locale, args), args);
   }
 
 }

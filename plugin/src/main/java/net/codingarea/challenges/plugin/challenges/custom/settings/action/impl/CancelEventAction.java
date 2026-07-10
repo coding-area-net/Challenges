@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.challenges.custom.settings.action.impl;
 import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeExecutionData;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.ChallengeAction;
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -27,6 +28,7 @@ public class CancelEventAction extends ChallengeAction {
   }
 
   @Override
+  @NotNull
   public Material getMaterial() {
     return Material.BARRIER;
   }

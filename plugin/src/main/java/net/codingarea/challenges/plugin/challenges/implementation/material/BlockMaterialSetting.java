@@ -33,7 +33,7 @@ public class BlockMaterialSetting extends Setting {
   @NotNull
   @Override
   public LocalizableMessage getChallengeDescription() {
-    return super.getChallengeDescription().withArgs(LocalizableMessage.joinList(3, materials));
+    return super.getChallengeDescription().withArgs(LocalizableMessage.joinList(2, materials));
   }
 
   private boolean isMaterialAllowed(Material material) {

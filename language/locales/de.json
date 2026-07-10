@@ -28,9 +28,15 @@
   },
   "timer": {
     "bar": {
-      "up": "{@actionbar.format('<gray>Zeit: <green><b>{0}</b></green></gray>')}",
-      "down": "{@actionbar.format('<gray>Zeit: <red><b>{0}</b></red></gray>')}",
-      "paused": "{@actionbar.format('<gray>Timer <red><b>pausiert</b></red></gray>')}"
+      "up": {
+        "display": "{@actionbar.format('<gray>Zeit: *{0}*</gray>')}"
+      },
+      "down": {
+        "display": "{@actionbar.format('<gray>Zeit: *{0}*</gray>')}"
+      },
+      "paused": {
+        "display": "{@actionbar.format('<gray>Timer *pausiert*</gray>')}"
+      }
     },
     "messages": {
       "started": "<gray>Der Timer wurde <green>gestartet</green></gray>",
@@ -327,7 +333,8 @@
       "desc": [
         "Stellt ein, *ob* und",
         "*wie* man *regeneriert*"
-      ]
+      ],
+      "not_natural": "<gold>Nicht natürlich</gold>"
     },
     "one-life": {
       "name": "*Ein Teamleben*",
@@ -1658,7 +1665,7 @@
       "desc": [
         "Finde *alle Items*, die es *in Minecraft gibt*"
       ],
-      "bossbar-current": "{@bossbar.format-arg('{3}{0}', '{1} <dark_gray>/</dark_gray> {2}')}",
+      "bossbar-current": "{@bossbar.format-arg('{0}', '{1} <dark_gray>/</dark_gray> {2}')}",
       "bossbar-finished": "{@bossbar.format('<green>Alle Items gefunden</green>')}"
     },
     "damage-teleport": {
@@ -1687,7 +1694,8 @@
         "name": "*Genereller Schaden*",
         "desc": [
           "Stellt ein, ob du Schaden bekommen kannst",
-          "Du kannst *weiterhin* Schaden durch *Challenges* bekommen"
+          "Du kannst *weiterhin* Schaden durch",
+          "*Challenges* sterben"
         ]
       },
       "fire": {
@@ -1909,28 +1917,25 @@
         "name": "*Intervall*"
       },
       "jump": {
-        "name": "<green>Spieler Springt</green>"
+        "name": "*Spieler springt*"
       },
       "sneak": {
-        "name": "<green>Spieler Schleicht</green>"
+        "name": "*Spieler schleicht*"
       },
       "move_block": {
-        "name": "<gold>Spieler Läuft Einen Block</gold>"
+        "name": "*Spieler läuft einen Block*"
       },
-      "death": [
-        "<red>Entity Stirbt</red>"
-      ],
-      "item-custom-trigger-damage": [
-        "<red>Entity Erleidet Schaden</red>"
-      ],
+      "death": {
+        "name": "*Entity stirbt*"
+      },
+      "damage": {
+        "name": "*Entity erleidet Schaden*"
+      },
       "item-custom-trigger-damage-any": [
         "<green>Jeglicher Grund</green>"
       ],
       "item-custom-trigger-damage_by_player": [
         "<red>Entity Bekommt Schaden Von Spieler</red>"
-      ],
-      "item-custom-trigger-intervall": [
-        "<gold>Intervall</gold>"
       ],
       "item-custom-trigger-intervall-second": [
         "<gold>Jede Sekunde</gold>"
@@ -1941,66 +1946,244 @@
       "item-custom-trigger-intervall-minutes": [
         "<gold>Alle {0} Minuten</gold>"
       ],
-      "item-custom-trigger-block_place": [
-        "<green>Block Platziert</green>"
-      ],
-      "item-custom-trigger-block_break": [
-        "<red>Block Zerstört</red>"
-      ],
-      "item-custom-trigger-consume_item": [
-        "<dark_green>Item Konsumieren</dark_green>"
-      ],
-      "item-custom-trigger-pickup_item": [
-        "<aqua>Item Aufheben</aqua>"
-      ],
-      "item-custom-trigger-drop_item": [
-        "<blue>Spieler Droppt Item</blue>"
-      ],
-      "item-custom-trigger-advancement": [
-        "<red>Spieler Erhält Errungenschaft</red>"
-      ],
-      "item-custom-trigger-hunger": [
-        "<dark_green>Spieler Verliert Hunger</dark_green>"
-      ],
-      "item-custom-trigger-move_down": [
-        "<gold>Block Nach Unten Bewegen</gold>"
-      ],
-      "item-custom-trigger-move_up": [
-        "<gold>Block Nach Oben Bewegen</gold>"
-      ],
-      "item-custom-trigger-move_camera": [
-        "<gold>Kamera Bewegen</gold>"
-      ],
-      "item-custom-trigger-stands_on_specific_block": [
-        "<gold>Spieler Ist Auf Bestimmten Block</gold>"
-      ],
-      "item-custom-trigger-stands_not_on_specific_block": [
-        "<gold>Spieler Ist Nicht Auf Bestimmten Block</gold>"
-      ],
-      "item-custom-trigger-gain_xp": [
-        "<dark_purple>Spieler Bekommt XP</dark_purple>"
-      ],
-      "item-custom-trigger-level_up": [
-        "<dark_purple>Spieler Levelt Auf</dark_purple>"
-      ],
-      "item-custom-trigger-item_craft": [
-        "<gold>Spieler Craftet Item</gold>"
-      ],
-      "item-custom-trigger-in_liquid": [
-        "<blue>Spieler In Flüssigkeit</blue>"
-      ],
-      "item-custom-trigger-get_item": [
-        "<green>Item bekommen</green>",
-        "Aktion wird für *jedes* anklicken oder aufheben ausgeführt"
-      ]
+      "block_place": {
+        "name": "*Block platziert*"
+      },
+      "block_break": {
+        "name": "*Block zerstört*"
+      },
+      "consume_item": {
+        "name": "*Item konsumieren*"
+      },
+      "pickup_item": {
+        "name": "*Item aufheben*"
+      },
+      "drop_item": {
+        "name": "*Spieler droppt Item*"
+      },
+      "advancement": {
+        "name": "*Spieler erhält Errungenschaft*"
+      },
+      "hunger": {
+        "name": "*Spieler verliert Hunger*"
+      },
+      "move_down": {
+        "name": "*Block nach unten bewegen*"
+      },
+      "move_up": {
+        "name": "*Block nach oben bewegen*"
+      },
+      "move_camera": {
+        "name": "*Kamera bewegen*"
+      },
+      "stands_on_specific_block": {
+        "name": "*Spieler ist auf bestimmten Block*"
+      },
+      "stands_not_on_specific_block": {
+        "name": "*Spieler ist nicht auf bestimmten Block*"
+      },
+      "gain_xp": {
+        "name": "*Spieler bekommt XP*"
+      },
+      "level_up": {
+        "name": "*Spieler levelt auf*"
+      },
+      "item_craft": {
+        "name": "*Spieler craftet Item*"
+      },
+      "in_liquid": {
+        "name": "*Spieler in Flüssigkeit*"
+      },
+      "get_item": {
+        "name": "*Item bekommen*",
+        "desc": "Aktion wird für *jedes* anklicken oder aufheben ausgeführt"
+      }
     },
     "action": {
       "cancel": {
-        "name": "*Auslöser Abbrechen*",
+        "name": "*Auslöser abbrechen*",
         "desc": [
           "Verhindert, dass der Auslöser ausgeführt wird.",
           "Nicht abrechenbare Auslöser: *Springen*, *Sneaken*, *Töten*",
           "*Advancement*, *Auf Leveln*, *In Flüssigkeit*"
+        ]
+      },
+      "command": {
+        "name": "*Befehl ausführen*",
+        "desc": [
+          "Lasse Spieler einen Command ausführen lassen",
+          "Die Commands werden für Spieler mit */execute as* von",
+          "der Konsole ausgeführt.",
+          "Erlaubte Commands werden in der Config eingestellt.",
+          "Der Spieler braucht *keine Rechte* auf den Command haben.",
+          "Spieler können *keine Plugin Commands* ausführen."
+        ]
+      },
+      "kill": {
+        "name": "*Töten*",
+        "desc": [
+          "Töte *Kreaturen* oder *Spieler*"
+        ]
+      },
+      "damage": {
+        "name": "*Schaden*",
+        "desc": [
+          "Füge *Kreaturen* oder *Spielern* Schaden zu"
+        ]
+      },
+      "heal": {
+        "name": "*Heilen*",
+        "desc": [
+          "Heile *Kreaturen* oder *Spieler*"
+        ]
+      },
+      "hunger": {
+        "name": "*Hunger*",
+        "desc": [
+          "Füge *Spielern* Hunger hinzu"
+        ]
+      },
+      "max_health": {
+        "name": "*Maximale Leben*",
+        "desc": [
+          "Verändere die Maximalen Leben von Spielern",
+          "Wird mit einem */gamestate reset* zurückgesetzt"
+        ]
+      },
+      "spawn_entity": {
+        "name": "*Kreatur spawnen*",
+        "desc": [
+          "Spawne eine Kreatur einer *bestimmten Art*"
+        ]
+      },
+      "random_mob": {
+        "name": "*Zufällige Kreatur*",
+        "desc": [
+          "Spawne eine *zufälliges Kreatur*"
+        ]
+      },
+      "random_item": {
+        "name": "*Zufälliges Item*",
+        "desc": [
+          "Gebe Spielern ein *zufällige Items*"
+        ]
+      },
+      "uncraft_inventory": {
+        "name": "*Inventar zurück craften*",
+        "desc": [
+          "Lasse das *Inventar von Spielern* zurück craften"
+        ]
+      },
+      "boost_in_air": {
+        "name": "*In Luft schleudern*",
+        "desc": [
+          "Schleudere *Kreaturen* oder *Spieler* in die Luft"
+        ]
+      },
+      "potion_effect": {
+        "name": "*Trank Effekt*",
+        "desc": [
+          "Gebe *Kreaturen* oder *Spielern* einen Trank Effekt"
+        ]
+      },
+      "permanent_effect": {
+        "name": "*Permanenter Effekt*",
+        "desc": [
+          "Füge *Spielern* einen permanenten Effekt hinzu",
+          "Die Aktion nutzt die Einstellungen",
+          "von der *Permanenten Effekt Challenge*"
+        ]
+      },
+      "random_effect": {
+        "name": "*Zufälliger Trank Effekt*",
+        "desc": [
+          "Gebe *Kreaturen* oder *Spielern* einen *zufälligen Trank* Effekt"
+        ]
+      },
+      "clear_inventory": {
+        "name": "*Inventar leeren*",
+        "desc": [
+          "Leere das *Inventar von Spielern* komplett"
+        ]
+      },
+      "drop_random_item": {
+        "name": "*Zufälliges Item droppen*",
+        "desc": [
+          "Lasse *Spieler* ein *zufälliges Item* aus",
+          "ihrem Inventar auf *den Boden* fallen"
+        ]
+      },
+      "remove_random_item": {
+        "name": "*Zufälliges Item entfernen*",
+        "desc": [
+          "Entferne ein *zufälliges Item* aus dem Inventar von Spielern"
+        ]
+      },
+      "swap_random_item": {
+        "name": "*Items tauschen*",
+        "desc": [
+          "Tausche zwei *zufälliges Items* im dem Inventar von Spielern"
+        ]
+      },
+      "freeze": {
+        "name": "*Einfrieren*",
+        "desc": [
+          "Friere Mobs *zeitweise* ein",
+          "Die Aktion nutzt die Einstellungen",
+          "von der *Freeze On Damage Challenge*"
+        ]
+      },
+      "invert_health": {
+        "name": "*Herzen invertieren*",
+        "desc": [
+          "Invertiere die Herzen eines *Spielers*",
+          "Wenn du *8 Herzen* hast,",
+          "hast du danach *2 Herzen* und umgekehrt"
+        ]
+      },
+      "water_mlg": {
+        "name": "*Water MLG*",
+        "desc": [
+          "Alle Spieler müssen einen Water MLG machen"
+        ]
+      },
+      "win": {
+        "name": "*Gewinnen*",
+        "desc": [
+          "Die Challenge wird von *bestimmten Spielern* gewonnen"
+        ]
+      },
+      "random_hotbar": {
+        "name": "*Zufällige Hotbar*",
+        "desc": [
+          "Das Inventar wird *geleert* und der *Spieler*",
+          "bekommt *zufällige Items* in die HotBar"
+        ]
+      },
+      "modify_border": {
+        "name": "*World Border verändern*",
+        "desc": [
+          "Mache die World Border *größer* oder *kleiner*"
+        ]
+      },
+      "swap_mobs": {
+        "name": "*Kreaturen tauschen*",
+        "desc": [
+          "Tausche eine Kreatur mit einer *zufälligen*",
+          "anderen Kreatur aus *der gleichen Welt*"
+        ]
+      },
+      "place_structure": {
+        "name": "*Struktur platzieren*",
+        "desc": [
+          "Platziere eine *Struktur an der Position* von Spielern"
+        ]
+      },
+      "jnr": {
+        "name": "*Jump and Run*",
+        "desc": [
+          "Ein *zufälliger* Spieler muss ein *Jump And Run*",
+          "absolvieren oder er *stirbt*"
         ]
       }
     }
@@ -2322,7 +2505,6 @@
   "item-language-setting-german": "<white>Deutsch</white>",
   "item-language-setting-english": "<white>English</white>",
   "menu-cut-clean-setting-settings": "CutClean",
-  "item-regeneration-setting-not_natural": "<gold>Nicht natürlich</gold>",
   "menu-all-blocks-disappear-challenge-settings": "Alle Blöcke verschwinden",
   "item-all-blocks-disappear-break-challenge": [
     "<aqua>Beim Abbauen</aqua>",
@@ -2652,7 +2834,7 @@
       "lava": "Lava",
       "drowning": "Ertrinken",
       "block_explosion": "Blockexplosion",
-      "entity_explosion": "Kreaturenexplosion",
+      "entity_explosion": "Kreaturexplosion",
       "void": "Leere",
       "lightning": "Blitzeinschlag",
       "suicide": "Selbstmord",
@@ -2667,7 +2849,7 @@
       "hot_floor": "Heißen Boden",
       "campfire": "Lagerfeuer",
       "cramming": "Überfüllung",
-      "dried_out": "Austrocknen",
+      "dryout": "Austrocknen",
       "freeze": "Erfrieren",
       "sonic_boom": "Schallknall",
       "custom": "unbekannte Ursache"

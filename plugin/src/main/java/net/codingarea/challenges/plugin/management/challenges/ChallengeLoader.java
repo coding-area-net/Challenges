@@ -18,7 +18,7 @@ import net.codingarea.challenges.plugin.challenges.implementation.challenge.worl
 import net.codingarea.challenges.plugin.challenges.implementation.goal.*;
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.*;
 import net.codingarea.challenges.plugin.challenges.implementation.setting.*;
-import net.codingarea.challenges.plugin.utils.misc.ArmorUtils;
+import net.codingarea.challenges.plugin.utils.misc.MaterialCategories;
 import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -263,7 +263,7 @@ public final class ChallengeLoader extends ModuleChallengeLoader {
     registerDamageRule("freeze", Material.POWDER_SNOW_BUCKET, DamageCause.FREEZE); // 1.17+
 
     // Material Rules
-    registerMaterialRule("armor", ArmorUtils.getArmor());
+    registerMaterialRule("armor", MaterialCategories.getArmor());
     registerMaterialRule("golden_apple", Material.GOLDEN_APPLE, Material.ENCHANTED_GOLDEN_APPLE);
     registerMaterialRule("crafting_table", Material.CRAFTING_TABLE);
     registerMaterialRule("chest", Material.CHEST, Material.CHEST_MINECART, Material.TRAPPED_CHEST);
@@ -272,11 +272,11 @@ public final class ChallengeLoader extends ModuleChallengeLoader {
     registerMaterialRule("anvil", Material.ANVIL, Material.CHIPPED_ANVIL, Material.DAMAGED_ANVIL);
     registerMaterialRule("brewing_stand", Material.BREWING_STAND);
     registerMaterialRule("bow", Material.BOW, Material.CROSSBOW);
-    registerMaterialRule("throwable", Material.SNOWBALL, Material.EGG);
+    registerMaterialRule("throwable", MaterialCategories.getSnowballAndEggs());
     registerMaterialRule("flint_and_steel", Material.FLINT_AND_STEEL, Material.FIRE_CHARGE);
-    registerMaterialRule("bucket", ArmorUtils.getBuckets());
-    registerMaterialRule("sword", ArmorUtils.getSwords());
-    registerMaterialRule("pickaxe", ArmorUtils.getPickaxes());
+    registerMaterialRule("bucket", MaterialCategories.getBuckets());
+    registerMaterialRule("sword", MaterialCategories.getSwords());
+    registerMaterialRule("pickaxe", MaterialCategories.getPickaxes());
     registerMaterialRule("elytra", Material.ELYTRA);
     registerMaterialRule("shield", Material.SHIELD);
     registerMaterialRule("totem", Material.TOTEM_OF_UNDYING);

@@ -8,6 +8,7 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChal
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
+import net.codingarea.challenges.plugin.content.i18n.TranslationManager;
 import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.TimerMenuGenerator;
@@ -35,6 +36,10 @@ public final class ChallengeTimer {
   private final Map<Locale, TimerFormat> compiledFormats = new HashMap<>();
 
   private final boolean specificStartSounds, defaultStartSound;
+  private final boolean gradientEnabled;
+  private final int gradientDuration;
+  private final TimerActionBarUpdateScheduler updateActionbarScheduler;
+
   @Getter
   private long time = 0;
   @Getter
@@ -49,8 +54,17 @@ public final class ChallengeTimer {
     Document pluginConfig = Challenges.getInstance().getConfigDocument();
     specificStartSounds = pluginConfig.getBoolean("enable-specific-start-sounds");
     defaultStartSound = pluginConfig.getBoolean("enable-default-start-sounds");
+    gradientEnabled = pluginConfig.getBoolean("timer.gradient.enabled");
+    gradientDuration = pluginConfig.getInt("timer.gradient.duration");
+
+    if (gradientEnabled) {
+      updateActionbarScheduler = new GradientActionBarUpdateScheduler();
+    } else {
+      updateActionbarScheduler = new DefaultActionBarUpdateScheduler();
+    }
 
     Challenges.getInstance().getScheduler().register(this);
+    Challenges.getInstance().getScheduler().register(updateActionbarScheduler);
     Challenges.getInstance().getLoaderRegistry().subscribe(LanguageLoader.class, this::precompileFormat);
   }
 
@@ -87,23 +101,6 @@ public final class ChallengeTimer {
     }
   }
 
-  @ScheduledTask(ticks = 20, timerPolicy = TimerPolicy.ALWAYS, playerPolicy = PlayerCountPolicy.ALWAYS, worldPolicy = ExtraWorldPolicy.ALWAYS)
-  public void updateActionbar() {
-    if (sentEmpty && hidden) return;
-
-    ChallengeActionBar currentActionBar = Challenges.getInstance().getScoreboardManager().getCurrentActionBar();
-    if (currentActionBar != null) {
-      currentActionBar.send();
-    } else if (!hidden) {
-      this.getCurrentActionbarMessage().broadcastActionBar(getFormattedTime());
-    } else {
-      sentEmpty = true;
-      for (Player player : Bukkit.getOnlinePlayers()) {
-        player.sendActionBar(Component.empty());
-      }
-    }
-  }
-
   @ScheduledTask(ticks = 20, timerPolicy = TimerPolicy.PAUSED)
   public void playPausedParticles() {
     for (Player player : Bukkit.getOnlinePlayers()) {
@@ -112,6 +109,10 @@ public final class ChallengeTimer {
       if (location.getWorld() == null) continue;
       location.getWorld().playEffect(location, Effect.ENDER_SIGNAL, 1);
     }
+  }
+
+  public void updateActionbar() {
+    updateActionbarScheduler.updateActionbar();
   }
 
   private void handleHitZero() {
@@ -177,9 +178,9 @@ public final class ChallengeTimer {
   @NotNull
   private MessageKey getCurrentActionbarMessage() {
     // TODO save references?
-    if (paused) return MessageKey.of("timer.bar.paused");
-    if (countingUp) return MessageKey.of("timer.bar.up");
-    return MessageKey.of("timer.bar.down");
+    if (paused) return MessageKey.of("timer.bar.paused.display");
+    if (countingUp) return MessageKey.of("timer.bar.up.display");
+    return MessageKey.of("timer.bar.down.display");
   }
 
   public synchronized void loadSession() {
@@ -254,6 +255,65 @@ public final class ChallengeTimer {
     menuGenerator.updatePage(TimerMenuGenerator.PAGE_STATE);
     MessageKey.of("timer.messages.counting-" + (countingUp ? "up" : "down")).broadcast(Prefix.TIMER); // TODO
     SoundSample.BASS_ON.broadcast();
+  }
+
+  private abstract class TimerActionBarUpdateScheduler {
+
+    public abstract void updateActionbar();
+
+    protected boolean shouldNotSendActionbarOrSendEmpty() {
+      if (sentEmpty && hidden) return true;
+
+      ChallengeActionBar currentActionBar = Challenges.getInstance().getScoreboardManager().getCurrentActionBar();
+      if (currentActionBar == null && !hidden) {
+        return false;
+      }
+
+      if (currentActionBar != null) {
+        currentActionBar.send();
+      } else {
+        sentEmpty = true;
+        for (Player player : Bukkit.getOnlinePlayers()) {
+          player.sendActionBar(Component.empty());
+        }
+      }
+
+      return true;
+    }
+
+  }
+
+  public class DefaultActionBarUpdateScheduler extends TimerActionBarUpdateScheduler {
+
+    @Override
+    @ScheduledTask(ticks = 20, timerPolicy = TimerPolicy.ALWAYS, playerPolicy = PlayerCountPolicy.ALWAYS, worldPolicy = ExtraWorldPolicy.ALWAYS)
+    public void updateActionbar() {
+      if (shouldNotSendActionbarOrSendEmpty()) return;
+      getCurrentActionbarMessage().broadcastActionBar(getFormattedTime(), 0); // default phase to 0 if present
+    }
+
+  }
+
+  public class GradientActionBarUpdateScheduler extends TimerActionBarUpdateScheduler {
+
+    private final int maxGradientTickProgress = gradientDuration * 2;
+    private int currentGradientTickProgress;
+
+    @Override
+    @ScheduledTask(ticks = 1, timerPolicy = TimerPolicy.ALWAYS, playerPolicy = PlayerCountPolicy.ALWAYS, worldPolicy = ExtraWorldPolicy.ALWAYS)
+    public void updateActionbar() {
+      if (shouldNotSendActionbarOrSendEmpty()) return;
+
+      if (currentGradientTickProgress == maxGradientTickProgress) {
+        currentGradientTickProgress = 0;
+      } else {
+        currentGradientTickProgress++;
+      }
+
+      float phase = (float) currentGradientTickProgress / gradientDuration - 1; // [-1; 1]
+      getCurrentActionbarMessage().broadcastActionBar(getFormattedTime(), phase);
+    }
+
   }
 
 }

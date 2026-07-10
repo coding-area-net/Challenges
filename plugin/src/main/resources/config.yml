@@ -33,10 +33,12 @@ language: "de"
 # on every load. Defaults to off so the plugin doesn't make outbound HTTP calls without consent.
 language-online-update: false
 
+# In order to use a timer gradient, you must edit the '*colorize*' values in the global.json of "timer.bar.up/down/paused"
+# and replace the value with a "MiniMessage gradient tag" like "<gradient:#FFFFFF:#000000:{1}>{0}</gradient>"
 timer:
   gradient:
     enabled: false
-    duration: 20
+    duration: 30
 
 # When the worlds are reset using /reset, the given seed will be used, if enabled, to generate the new worlds
 # When a seed is written in the reset command, the seed of the command will be taken

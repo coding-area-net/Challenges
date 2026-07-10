@@ -25,7 +25,7 @@ public class UncraftItemsChallenge extends TimedChallenge {
   }
 
   @Override
-  public @NotNull LocalizableMessage getChallengeDescription() {
+  public @NotNull LocalizableMessage getSettingsDescription() {
     return ChallengeHelper.getSettingsDescriptionIntervalSeconds(getValue());
   }
 

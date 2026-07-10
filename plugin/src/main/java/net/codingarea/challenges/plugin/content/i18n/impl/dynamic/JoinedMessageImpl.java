@@ -36,13 +36,12 @@ public class JoinedMessageImpl implements LocalizableMessage {
       if (i > 0) raw.append(localizedDelimiter);
       raw.append(START_ARG_CHAR).append(i).append(END_ARG_CHAR);
     }
-
-    Object[] args = new Object[shown + (remaining > 0 ? 1 : 0)];
-    System.arraycopy(elements, 0, args, 0, shown);
     if (remaining > 0) {
-      raw.append(START_ARG_CHAR).append(shown).append(END_ARG_CHAR);
-      args[shown] = remainingPlaceholder.withArgs(remaining);
+      raw.append(remainingPlaceholder.localizeWithPrimitiveArgAsSingleLine(locale, remaining));
     }
+
+    Object[] args = new Object[shown];
+    System.arraycopy(elements, 0, args, 0, shown);
 
     MessageKeyImpl.localizeArgs(locale, args);
     return new MessageHolder(arrayOf(raw.toString()), args);
@@ -56,7 +55,7 @@ public class JoinedMessageImpl implements LocalizableMessage {
 
   @NotNull
   @Override
-  public LocalizableMessage withArgs(@NonNull @NotNull Object... args) {
+  public LocalizableMessage withArgs(@NotNull Object... args) {
     return new JoinedMessageImpl(delimiter, remainingPlaceholder, limit, args);
   }
 

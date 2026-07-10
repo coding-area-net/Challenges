@@ -12,7 +12,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jspecify.annotations.NonNull;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -136,7 +135,7 @@ public interface ArgumentFormat<T> {
 
     @NotNull
     @Override
-    public LocalizableMessage apply(@NonNull T arg) {
+    public LocalizableMessage apply(@NotNull T arg) {
       return formatter.apply(arg);
     }
 

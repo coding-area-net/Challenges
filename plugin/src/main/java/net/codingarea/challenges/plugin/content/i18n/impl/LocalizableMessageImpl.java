@@ -18,7 +18,7 @@ public class LocalizableMessageImpl implements LocalizableMessage {
   @NotNull
   @Override
   public MessageHolder localize(@NotNull Locale locale) {
-    return new MessageHolder(messageKey.localizeRawValue(locale), MessageKeyImpl.localizeArgsAsCopy(locale, args));
+    return new MessageHolder(messageKey.localizeWithPrimitiveArgs(locale, args), MessageKeyImpl.localizeArgsAsCopy(locale, args));
   }
 
   @NotNull

@@ -22,6 +22,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.CheckReturnValue;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -148,6 +149,7 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
   }
 
   @NotNull
+  @Contract(pure = true)
   protected MessageKey getChallengeMessageKey(@NotNull String keySuffix) {
     return MessageKey.of("challenge." + nameMessageKey + "." + keySuffix);
   }

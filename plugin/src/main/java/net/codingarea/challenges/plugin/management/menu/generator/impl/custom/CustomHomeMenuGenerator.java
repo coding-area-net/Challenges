@@ -14,7 +14,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;
 
 import java.util.Locale;
 
@@ -64,17 +63,17 @@ public class CustomHomeMenuGenerator extends SinglePageMenuGenerator implements 
   }
 
   @Override
-  public void addToCache(@NonNull IChallenge element) {
+  public void addToCache(@NotNull IChallenge element) {
     listGenerator.addToCache(element);
   }
 
   @Override
-  public void removeFromCache(@NonNull IChallenge element) {
+  public void removeFromCache(@NotNull IChallenge element) {
     listGenerator.removeFromCache(element);
   }
 
   @Override
-  public boolean isCached(@NonNull IChallenge element) {
+  public boolean isCached(@NotNull IChallenge element) {
     return listGenerator.isCached(element);
   }
 
@@ -89,7 +88,7 @@ public class CustomHomeMenuGenerator extends SinglePageMenuGenerator implements 
   }
 
   @Override
-  public void updateElementDisplay(@NonNull IChallenge element) {
+  public void updateElementDisplay(@NotNull IChallenge element) {
     listGenerator.updateElementDisplay(element);
   }
 

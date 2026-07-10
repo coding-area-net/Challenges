@@ -4,6 +4,7 @@ import net.codingarea.challenges.plugin.content.i18n.MessageHolder;
 import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentLike;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.translation.Translatable;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -23,8 +24,7 @@ public final class ComponentArguments {
       case Component component -> component;
       case ComponentLike like -> like.asComponent();
       case MessageHolder holder -> convertMessageHolderToComponent(holder);
-      case Material material -> getDetailedMaterialTranslatable(material);
-      case ItemStack item -> getItemSpriteOrEmpty(item);
+      case Material material -> getDetailedMaterialWithSprite(material);
       case Translatable translatable -> // net.kyori.adventure.translation.Translatable
         Component.translatable(translatable);
       case Player player -> player.displayName();
@@ -41,15 +41,34 @@ public final class ComponentArguments {
   }
 
   @NotNull
+  public static Component getDetailedMaterialWithSprite(@NotNull Material material) {
+    return Component.text().append(getItemSpriteOrEmpty(material)).append(getDetailedMaterialTranslatable(material)).asComponent();
+  }
+
+  @NotNull
   public static Component getItemSpriteOrEmpty(@NotNull ItemStack item) {
     try {
-      Component sprite = ItemSprites.sprite(item);
-      if (sprite.equals(Component.empty())) return sprite; // don't append space
-      return sprite.appendSpace();
-    } catch (Throwable ignored) {
+      return formatSpriteOrEmpty(ItemSprites.sprite(item));
+    } catch (Throwable _) {
       // not yet available in this version
       return Component.empty();
     }
+  }
+
+  @NotNull
+  public static Component getItemSpriteOrEmpty(@NotNull Material item) {
+    try {
+      return formatSpriteOrEmpty(ItemSprites.sprite(item));
+    } catch (Throwable _) {
+      // not yet available in this version
+      return Component.empty();
+    }
+  }
+
+  @NotNull
+  private static Component formatSpriteOrEmpty(@NotNull Component sprite) throws Error {
+    if (sprite.equals(Component.empty())) return sprite; // don't append space
+    return sprite.color(NamedTextColor.WHITE).appendSpace();
   }
 
   @NotNull

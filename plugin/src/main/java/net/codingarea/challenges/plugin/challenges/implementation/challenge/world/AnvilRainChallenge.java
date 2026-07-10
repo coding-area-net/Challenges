@@ -27,7 +27,6 @@ public class AnvilRainChallenge extends MenuSetting {
   int currentTime = 0;
 
   public AnvilRainChallenge() {
-//    super(Message.forName("menu-anvil-rain-challenge-settings"));
     super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.ANVIL), "anvil-rain");
 //    registerSetting("time", new NumberSubSetting(
 //        () -> new LegacyItemBuilder(Material.CLOCK, Message.forName("item-anvil-rain-time-challenge")),
@@ -217,6 +216,5 @@ public class AnvilRainChallenge extends MenuSetting {
   private int getHeight(int currentHeight) {
     return currentHeight + 50;
   }
-
 
 }

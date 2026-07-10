@@ -84,7 +84,7 @@ public class CollectAllItemsGoal extends SettingGoal implements SenderCommand {
       }
       int foundItemsCount = totalItemsCount - itemsToFind.size() + 1;
       bossbar.setTitle(getChallengeMessageKey("bossbar-current"),
-        currentItem, foundItemsCount, totalItemsCount, new ItemStack(currentItem));
+        currentItem, foundItemsCount, totalItemsCount);
     });
     bossbar.show();
   }

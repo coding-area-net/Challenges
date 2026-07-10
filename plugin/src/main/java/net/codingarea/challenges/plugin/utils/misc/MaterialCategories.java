@@ -2,9 +2,9 @@ package net.codingarea.challenges.plugin.utils.misc;
 
 import org.bukkit.Material;
 
-public final class ArmorUtils {
+public final class MaterialCategories {
 
-  private ArmorUtils() {
+  private MaterialCategories() {
   }
 
   public static Material[] getArmor() {
@@ -20,17 +20,22 @@ public final class ArmorUtils {
     };
   }
 
-  // TODO wrong class...
   public static Material[] getBuckets() {
     return new Material[]{
       Material.BUCKET, Material.WATER_BUCKET, Material.LAVA_BUCKET, Material.MILK_BUCKET,
-      Material.FISHING_ROD, Material.SALMON_BUCKET, Material.COD_BUCKET, Material.PUFFERFISH_BUCKET,
-      Material.SALMON_BUCKET, Material.TROPICAL_FISH_BUCKET, Utils.getMaterial("AXOLOTL_BUCKET"),
-      Utils.getMaterial("POWDER_SNOW_BUCKET")
+      Material.COD_BUCKET, Material.SALMON_BUCKET, Material.PUFFERFISH_BUCKET, Material.TROPICAL_FISH_BUCKET, // 1.13
+      Material.AXOLOTL_BUCKET, Material.POWDER_SNOW_BUCKET, // 1.17
+      Utils.getMaterial("TADPOLE_BUCKET"), // 1.19
+      Utils.getMaterial("SULFUR_CUBE_BUCKET") // 26.2
     };
   }
 
-  // TODO wrong class...
+  public static Material[] getSnowballAndEggs() {
+    return new Material[]{
+      Material.SNOWBALL, Material.EGG, Utils.getMaterial("BLUE_EGG"), Utils.getMaterial("BROWN_EGG")
+    };
+  }
+
   public static Material[] getSwords() {
     return new Material[]{
       Material.WOODEN_SWORD, Material.STONE_SWORD, Material.IRON_SWORD, Material.DIAMOND_SWORD,
@@ -38,7 +43,6 @@ public final class ArmorUtils {
     };
   }
 
-  // TODO wrong class...
   public static Material[] getPickaxes() {
     return new Material[]{
       Material.WOODEN_PICKAXE, Material.STONE_PICKAXE, Material.IRON_PICKAXE, Material.DIAMOND_PICKAXE,

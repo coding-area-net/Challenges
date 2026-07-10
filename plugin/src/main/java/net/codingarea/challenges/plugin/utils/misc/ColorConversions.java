@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Deprecated
 public final class ColorConversions {
 
   private static final Map<ChatColor, Color> colorsByChatColor = new HashMap<>();

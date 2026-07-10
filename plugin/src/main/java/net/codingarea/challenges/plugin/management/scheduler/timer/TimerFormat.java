@@ -38,6 +38,8 @@ public final class TimerFormat {
 
   public static final TimerFormat SIMPLE_FORMAT = new TimerFormat();
 
+  // TODO impl primitive args token?
+
   private record LiteralToken(String text) implements Token {
     @Override
     public void append(@NotNull StringBuilder sb, long d, long h, long m, long s) {

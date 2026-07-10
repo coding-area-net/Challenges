@@ -39,8 +39,7 @@ public class OneDurabilityChallenge extends Setting {
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
   public void onInteract(EntityPickupItemEvent event) {
-    if (!(event.getEntity() instanceof Player)) return;
-    Player player = (Player) event.getEntity();
+    if (!(event.getEntity() instanceof Player player)) return;
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(player)) return;
     setDurability(event.getItem().getItemStack());
@@ -48,10 +47,10 @@ public class OneDurabilityChallenge extends Setting {
 
   private void setDurability(@NotNull ItemStack item) {
     ItemMeta meta = item.getItemMeta();
-    if (meta instanceof Damageable) {
+    if (meta instanceof Damageable damageable) {
       meta.setUnbreakable(false);
       int durability = item.getType().getMaxDurability() - 1;
-      ((Damageable) meta).setDamage(durability);
+      damageable.setDamage(durability);
       item.setItemMeta(meta);
     }
   }

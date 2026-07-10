@@ -44,7 +44,7 @@
     "format-with-command": "{@format('{0} <dark_gray>{@symbol.vertical}</dark_gray> <yellow>{1}</yellow>')}"
   },
   "actionbar": {
-    "format": "<dark_gray>{@symbol.dot}</dark_gray> {0} <dark_gray>{@symbol.dot}</dark_gray>"
+    "format": "<dark_gray>{@symbol.dot}</dark_gray> <gray>{0}</gray> <dark_gray>{@symbol.dot}</dark_gray>"
   },
   "bossbar": {
     "format": "<dark_gray>{@symbol.arrow}</dark_gray> <gray>{0}</gray>",
@@ -61,6 +61,10 @@
   },
   "timer": {
     "bar": {
+      "*colorize*": "<gradient:#FFAA00:#8E44AD:{1}><b>{0}</b></gradient>",
+      "paused": {
+        "*colorize*": "<red><b>{0}</b></red>"
+      },
       "format": {
         "seconds": "{mm}:{ss}",
         "minutes": "{mm}:{ss}",
@@ -475,10 +479,10 @@
       "*colorize*": "<red>{0}</red>"
     },
     "bedrock-walls": {
-      "*colorize*": "<gray>{0}</gray>"
+      "*colorize*": "<color:#6c6e73>{0}</color>"
     },
     "bedrock-path": {
-      "*colorize*": "<gray>{0}</gray>"
+      "*colorize*": "<color:#6c6e73>{0}</color>"
     },
     "floor-is-lava": {
       "*colorize*": "<gold>{0}</gold>"
@@ -835,11 +839,158 @@
     "trigger": {
       "interval": {
         "*colorize*": "<gold>{0}</gold>"
+      },
+      "jump": {
+        "*colorize*": "<green>{0}</green>"
+      },
+      "sneak": {
+        "*colorize*": "<green>{0}</green>"
+      },
+      "move_block": {
+        "*colorize*": "<gold>{0}</gold>"
+      },
+      "death": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "damage": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "block_place": {
+        "*colorize*": "<dark_green>{0}</dark_green>"
+      },
+      "block_break": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "consume_item": {
+        "*colorize*": "<dark_green>{0}</dark_green>"
+      },
+      "pickup_item": {
+        "*colorize*": "<aqua>{0}</aqua>"
+      },
+      "drop_item": {
+        "*colorize*": "<blue>{0}</blue>"
+      },
+      "advancement": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "hunger": {
+        "*colorize*": "<dark_green>{0}</dark_green>"
+      },
+      "move_down": {
+        "*colorize*": "<dark_red>{0}</dark_red>"
+      },
+      "move_up": {
+        "*colorize*": "<light_purple>{0}</light_purple>"
+      },
+      "move_camera": {
+        "*colorize*": "<gold>{0}</gold>"
+      },
+      "stands_on_specific_block": {
+        "*colorize*": "<blue>{0}</blue>"
+      },
+      "stands_not_on_specific_block": {
+        "*colorize*": "<yellow>{0}</yellow>"
+      },
+      "gain_xp": {
+        "*colorize*": "<green>{0}</green>"
+      },
+      "level_up": {
+        "*colorize*": "<dark_purple>{0}</dark_purple>"
+      },
+      "item_craft": {
+        "*colorize*": "<gold>{0}</gold>"
+      },
+      "in_liquid": {
+        "*colorize*": "<blue>{0}</blue>"
+      },
+      "get_item": {
+        "*colorize*": "<aqua>{0}</aqua>"
       }
     },
     "action": {
       "cancel": {
         "*colorize*": "<dark_red>{0}</dark_red>"
+      },
+      "command": {
+        "*colorize*": "<dark_red>{0}</dark_red>"
+      },
+      "kill": {
+        "*colorize*": "<dark_red>{0}</dark_red>"
+      },
+      "damage": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "heal": {
+        "*colorize*": "<green>{0}</green>"
+      },
+      "hunger": {
+        "*colorize*": "<gold>{0}</gold>"
+      },
+      "max_health": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "spawn_entity": {
+        "*colorize*": "<dark_aqua>{0}</dark_aqua>"
+      },
+      "random_mob": {
+        "*colorize*": "<gold>{0}</gold>"
+      },
+      "random_item": {
+        "*colorize*": "<aqua>{0}</aqua>"
+      },
+      "uncraft_inventory": {
+        "*colorize*": "<yellow>{0}</yellow>"
+      },
+      "boost_in_air": {
+        "*colorize*": "<white>{0}</white>"
+      },
+      "potion_effect": {
+        "*colorize*": "<light_purple>{0}</light_purple>"
+      },
+      "permanent_effect": {
+        "*colorize*": "<gold>{0}</gold>"
+      },
+      "random_effect": {
+        "*colorize*": "<light_purple>{0}</light_purple>"
+      },
+      "clear_inventory": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "drop_random_item": {
+        "*colorize*": "<green>{0}</green>"
+      },
+      "remove_random_item": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "swap_random_item": {
+        "*colorize*": "<gold>{0}</gold>"
+      },
+      "freeze": {
+        "*colorize*": "<aqua>{0}</aqua>"
+      },
+      "invert_health": {
+        "*colorize*": "<red>{0}</red>"
+      },
+      "water_mlg": {
+        "*colorize*": "<blue>{0}</blue>"
+      },
+      "win": {
+        "*colorize*": "<gold>{0}</gold>"
+      },
+      "random_hotbar": {
+        "*colorize*": "<yellow>{0}</yellow>"
+      },
+      "modify_border": {
+        "*colorize*": "<aqua>{0}</aqua>"
+      },
+      "swap_mobs": {
+        "*colorize*": "<dark_purple>{0}</dark_purple>"
+      },
+      "place_structure": {
+        "*colorize*": "<green>{0}</green>"
+      },
+      "jnr": {
+        "*colorize*": "<gold>{0}</gold>"
       }
     }
   }

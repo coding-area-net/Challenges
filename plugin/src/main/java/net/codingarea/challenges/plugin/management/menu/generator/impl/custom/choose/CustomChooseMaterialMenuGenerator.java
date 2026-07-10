@@ -15,7 +15,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -55,13 +54,13 @@ public class CustomChooseMaterialMenuGenerator extends UncachedMultiPageSelectMe
   }
 
   @Override
-  public void handleElementClick(@NonNull Material element, @NotNull MenuClickInfo info) {
+  public void handleElementClick(@NotNull Material element, @NotNull MenuClickInfo info) {
     parent.accept(info.getPlayer(), SettingType.MATERIAL, MapUtils.createStringArrayMap("material", element.name()));
   }
 
   @NotNull
   @Override
-  public ItemStack createDisplayItem(@NonNull Material element, @NotNull Locale locale) {
+  public ItemStack createDisplayItem(@NotNull Material element, @NotNull Locale locale) {
     return new ItemBuilder(locale, element, MessageKey.of("menu.custom.material.format"),
       element).build();
   }

@@ -56,5 +56,4 @@ public class ImmediateRespawnSetting extends Setting {
     Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> event.getEntity().spigot().respawn(), 1);
   }
 
-
 }

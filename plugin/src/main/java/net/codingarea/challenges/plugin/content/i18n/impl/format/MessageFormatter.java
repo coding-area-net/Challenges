@@ -3,6 +3,7 @@ package net.codingarea.challenges.plugin.content.i18n.impl.format;
 import net.codingarea.commons.common.logging.ILogger;
 import org.jetbrains.annotations.CheckReturnValue;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -254,7 +255,7 @@ public final class MessageFormatter { // pre expansion for better server runtime
 
   @NotNull
   @CheckReturnValue
-  public static String embedPositionalArgs(@NotNull String sequence, @NotNull Object[] args) {
+  public static String embedPositionalArgs(@NotNull String sequence, Object[] args) {
     if (args.length == 0) return sequence;
 
     // faster (maybe more error-prone) impl than regex matching
@@ -276,7 +277,11 @@ public final class MessageFormatter { // pre expansion for better server runtime
 
         int argIndex = parsePositiveInt(argument);
         if (argIndex >= 0 && argIndex < args.length) {
-          builder.append(args[argIndex]); // String.valueOf
+          if (args[argIndex] != null) {
+            builder.append(args[argIndex]); // String.valueOf
+          } else {
+            builder.append(START_ARG_CHAR).append(argument).append(END_ARG_CHAR); // leave null values as is
+          }
         } else {
           // fallback if index is invalid or out of bounds
           logger.warn("Invalid argument index '{}' in '{}'", argument, sequence);
@@ -371,6 +376,10 @@ public final class MessageFormatter { // pre expansion for better server runtime
       num = num * 10 + (c - '0');
     }
     return num;
+  }
+
+  public static boolean isPrimitiveArg(@Nullable Object arg) {
+    return arg instanceof String || arg instanceof Number || arg instanceof Character;
   }
 
 }

@@ -89,10 +89,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
         MessageKey.of("timer-not-started").send(player, Prefix.POSITION);
         SoundSample.BASS_OFF.play(player);
       } else {
-        positions.put(name, position = player.getLocation());
-        MessageKey.of("position-set").broadcast(Prefix.POSITION, position.getBlockX(), position.getBlockY(), position.getBlockZ(), getWorldName(position), name, player);
-        SoundSample.BASS_ON.play(player);
-        broadcastParticleLine(position);
+        setPosition(name, player);
       }
 
     } else {
@@ -121,6 +118,14 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
 
   public boolean containsPosition(@NotNull String name) {
     return positions.containsKey(name);
+  }
+
+  public void setPosition(@NotNull String name, @NotNull Player player) {
+    Location position = player.getLocation();
+    positions.put(name, position);
+    MessageKey.of("position-set").broadcast(Prefix.POSITION, position.getBlockX(), position.getBlockY(), position.getBlockZ(), getWorldName(position), name, player);
+    SoundSample.BASS_ON.play(player);
+    broadcastParticleLine(position);
   }
 
   private void broadcastParticleLine(@NotNull Location location) {

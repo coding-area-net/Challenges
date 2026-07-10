@@ -38,7 +38,7 @@ public class DamageRuleSetting extends Setting {
   @Override
   public LocalizableMessage getChallengeDescription() {
     return super.getChallengeDescription()
-      .withArgs(LocalizableMessage.joinList(3, causes.stream().map(CustomTranslatable::of).toList()));
+      .withArgs(LocalizableMessage.joinList(2, causes.stream().map(CustomTranslatable::of).toList()));
   }
 
   @EventHandler(priority = EventPriority.NORMAL)
