@@ -102,7 +102,15 @@
       "desc": [
         "Allows you to open *your backpack* or",
         "the *team backpack* with */backpack*"
-      ]
+      ],
+      "settings": {
+        "player": "<green>Player</green>",
+        "shared": "<dark_purple>Team</dark_purple>"
+      },
+      "disabled": "<gray>Backpacks are currently</gray> <red>deactivated</red>",
+      "opened": "<gray>You opened the {0}</gray>",
+      "player-name": "<gold>Player Backpack</gold>",
+      "inventory-player": "{@menu.title-format('{@player-name}')}"
     },
     "enderchest-command": {
       "name": "*Enderchest Command*",
@@ -1372,8 +1380,6 @@
   "death-collected": "Death reason <yellow>{0} </yellow><gray>registered</gray>",
   "item-collected": "Item <yellow>{0} </yellow><gray>registered</gray>",
   "items-to-collect": "<gray>Items to collect </gray><dark_gray>» </dark_gray><yellow>{0}</yellow>",
-  "backpacks-disabled": "Backpacks are currently <red>deactivated</red>",
-  "backpack-opened": "You opened the {0}",
   "top-to-overworld": "You have been teleported to the <yellow>overworld</yellow>",
   "top-to-surface": "You have been teleported to the <yellow>top</yellow>",
   "random-challenge-enabled": "The challenge <yellow>{0} </yellow><gray>has been </gray><green>activated</green>",
@@ -1653,8 +1659,6 @@
   "item-language-setting-german": "<white>Deutsch</white>",
   "item-language-setting-english": "<white>English</white>",
   "item-death-message-setting-vanilla": "<gold>Vanilla</gold>",
-  "item-backpack-setting-team": "<dark_purple>Team</dark_purple>",
-  "item-backpack-setting-player": "<gold>Player</gold>",
   "menu-cut-clean-setting-settings": "CutClean",
   "item-cut-clean-gold-setting": [
     "<gold>Gold</gold>",

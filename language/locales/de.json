@@ -440,11 +440,19 @@
       ]
     },
     "backpack": {
-      "name": "*Backpack*",
+      "name": "*Rucksack*",
       "desc": [
         "Erlaubt es dir, *deinen Backpack* oder den",
         "*Team Backpack* mit */backpack* zu öffnen"
-      ]
+      ],
+      "settings": {
+        "player": "<green>Pro Spieler</green>",
+        "shared": "<dark_purple>Gemeinsam</dark_purple>"
+      },
+      "disabled": "<gray>Rucksäcke sind derzeit</gray> <red>deaktiviert</red>",
+      "opened": "<gray>Du hast den {0} geöffnet</gray>",
+      "player-name": "<gold>Spieler Rucksack</gold>",
+      "inventory-player": "{@menu.title-format('{@player-name}')}"
     },
     "enderchest-command": {
       "name": "*Enderchest Command*",
@@ -2161,8 +2169,6 @@
   "death-collected": "Todesgrund <yellow>{0} </yellow><gray>wurde registriert</gray>",
   "item-collected": "Item <yellow>{0} </yellow><gray>wurde registriert</gray>",
   "items-to-collect": "<gray>Items zu sammeln </gray><dark_gray>» </dark_gray><yellow>{0}</yellow>",
-  "backpacks-disabled": "Rucksäcke sind derzeit <red>deaktiviert</red>",
-  "backpack-opened": "Du hast den {0} <gray>geöffnet</gray>",
   "top-to-overworld": "Du wurdest zur <yellow>Overworld </yellow><gray>teleportiert</gray>",
   "top-to-surface": "Du wurdest zur <yellow>Oberfläche </yellow><gray>teleportiert</gray>",
   "all-items-skipped": "Item <yellow>{0} </yellow><gray>geskippt</gray>",
@@ -2315,8 +2321,6 @@
   ],
   "item-language-setting-german": "<white>Deutsch</white>",
   "item-language-setting-english": "<white>English</white>",
-  "item-backpack-setting-team": "<dark_purple>Team</dark_purple>",
-  "item-backpack-setting-player": "<gold>Player</gold>",
   "menu-cut-clean-setting-settings": "CutClean",
   "item-regeneration-setting-not_natural": "<gold>Nicht natürlich</gold>",
   "menu-all-blocks-disappear-challenge-settings": "Alle Blöcke verschwinden",

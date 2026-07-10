@@ -4,17 +4,17 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeConfigHelper;
-import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
-import net.codingarea.challenges.plugin.content.legacy.Message;
-import net.codingarea.challenges.plugin.management.menu.InventoryTitleManager;
+import net.codingarea.challenges.plugin.content.i18n.TranslationManager;
+import net.codingarea.challenges.plugin.content.loader.LanguageLoader;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.challenges.plugin.utils.bukkit.container.BukkitSerialization;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.common.config.Document;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -38,23 +39,21 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
   public BackpackSetting() {
     super(MenuType.SETTINGS, null, 1, 2, SHARED, new ItemStack(Material.CHEST), "backpack");
     size = Math.clamp(ChallengeConfigHelper.getSettingsDocument().getInt("backpack-size") * 9L, 9, 6 * 9);
-    sharedBackpack = createInventory("§5Team Backpack");
+    // The shared backpack is a single inventory used by every player, so its title cannot depend
+    // on the viewer. It is resolved once with the server language via a locale-independent key.
+    sharedBackpack = createInventory(getSharedBackpackTitle());
   }
 
   @NotNull
   @Override
   public ItemStack getSettingsItemPreset() {
-    if (getValue() == SHARED)
-      return new ItemStack(Material.ENDER_CHEST);
-    return new ItemStack(Material.PLAYER_HEAD);
+    return new ItemStack(getValue() == SHARED ? Material.ENDER_CHEST : Material.PLAYER_HEAD);
   }
 
   @NotNull
   @Override
   public LocalizableMessage getSettingsName() {
-    if (getValue() == SHARED)
-      return getChallengeMessageKey("settings.shared");
-    return getChallengeMessageKey("settings.player");
+    return getChallengeMessageKey(getValue() == SHARED ? "settings.shared" : "settings.player");
   }
 
   @Override
@@ -66,17 +65,17 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
     }
 
     if (!isEnabled()) {
-      MessageKey.of("backpacks-disabled").send(player, Prefix.BACKPACK);
+      getChallengeMessageKey("disabled").send(player, Prefix.BACKPACK);
       SoundSample.BASS_OFF.play(player);
       return;
     }
 
     if (getValue() == SHARED || getValue() == PLAYER) {
-      MessageKey.of("backpack-opened").send(player, Prefix.BACKPACK, getValue() == SHARED ? "§5Team Backpack" : "§6Player Backpack");
+      getChallengeMessageKey("opened").send(player, Prefix.BACKPACK, getBackpackName());
       player.openInventory(getCurrentBackpack(player));
       SoundSample.OPEN.play(player);
     } else {
-      MessageKey.of("backpacks-disabled").send(player, Prefix.BACKPACK);
+      getChallengeMessageKey("disabled").send(player, Prefix.BACKPACK);
       SoundSample.BASS_OFF.play(player);
     }
   }
@@ -89,7 +88,8 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
 
     Document players = document.getDocument("players");
     for (String key : players.keys()) {
-      loadChecked(players, key, backpacks.computeIfAbsent(UUID.fromString(key), k -> createInventory("§6Backpack")));
+      loadChecked(players, key, backpacks.computeIfAbsent(UUID.fromString(key), playerId ->
+        createInventory(getPlayerBackpackTitle(getPlayerLanguageOrServer(playerId)))));
     }
 
   }
@@ -139,13 +139,49 @@ public class BackpackSetting extends SettingModifier implements PlayerCommand {
   }
 
   @NotNull
-  protected Inventory createInventory(@NotNull String title) {
-    return Bukkit.createInventory(null, size, InventoryTitleManager.getTitle(title));
+  protected Inventory createInventory(@NotNull Component title) {
+    return Bukkit.createInventory(null, size, title);
   }
 
   @NotNull
   protected Inventory getCurrentBackpack(@NotNull Player player) {
-    return (getValue() == SHARED) ? sharedBackpack : backpacks.computeIfAbsent(player.getUniqueId(), key -> createInventory("§6Backpack"));
+    return (getValue() == SHARED) ? sharedBackpack : backpacks.computeIfAbsent(player.getUniqueId(), key -> createInventory(getPlayerBackpackTitle(player)));
+  }
+
+  @NotNull
+  protected LocalizableMessage getBackpackName() {
+    return getChallengeMessageKey(getValue() == SHARED ? "shared-name" : "player-name");
+  }
+
+  // TODO (hopefully) temp solution for translation port; brought to you by claude :D
+  @NotNull
+  protected Component getSharedBackpackTitle() {
+    // lives in global.json
+    return getChallengeMessageKey("inventory-shared").asComponent(getServerLanguage());
+  }
+
+  @NotNull
+  protected Component getPlayerBackpackTitle(@NotNull Player player) {
+    return getChallengeMessageKey("inventory-player").asComponent(player);
+  }
+
+  @NotNull
+  protected Component getPlayerBackpackTitle(@NotNull Locale locale) {
+    return getChallengeMessageKey("inventory-player").asComponent(locale);
+  }
+
+  @NotNull
+  private Locale getServerLanguage() {
+    return Challenges.getInstance().getLoaderRegistry().getFirstLoaderByClass(LanguageLoader.class)
+      .map(LanguageLoader::getConfigLanguage)
+      .orElse(TranslationManager.FALLBACK_LOCALE);
+  }
+
+  @NotNull
+  private Locale getPlayerLanguageOrServer(@NotNull UUID playerId) {
+    Player player = Bukkit.getPlayer(playerId);
+    if (player == null) return getServerLanguage();
+    return Challenges.getInstance().getTranslationManager().getLanguageProvider().getPlayerLanguage(player);
   }
 
 }

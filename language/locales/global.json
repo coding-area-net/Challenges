@@ -255,7 +255,9 @@
       "*colorize*": "<dark_purple>{0}</dark_purple>"
     },
     "backpack": {
-      "*colorize*": "<gold>{0}</gold>"
+      "*colorize*": "<gold>{0}</gold>",
+      "shared-name": "<dark_purple>Team Backpack</dark_purple>",
+      "inventory-shared": "{@menu.title-format('{@shared-name}')}"
     },
     "enderchest-command": {
       "*colorize*": "<dark_purple>{0}</dark_purple>"
