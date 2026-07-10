@@ -187,7 +187,7 @@
   },
   "challenge": {
     "display-format": [
-      "<dark_gray>{@symbol.arrow}</dark_gray> {0}",
+      "{@menu.item-format}",
       " ",
       "<gray>{1}</gray>"
     ],
@@ -269,7 +269,7 @@
       "*colorize*": "<white>{0}</white>"
     },
     "top-command": {
-      "*colorize*": "<purple>{0}</purple>"
+      "*colorize*": "<light_purple>{0}</light_purple>"
     },
     "max-health": {
       "*colorize*": "<red>{0}</red>"
@@ -278,7 +278,27 @@
       "*colorize*": "<red>{0}</red>"
     },
     "cut-clean": {
-      "*colorize*": "<blue>{0}</blue>"
+      "*colorize*": "<blue>{0}</blue>",
+      "sub": {
+        "iron": {
+          "*colorize*": "<color:#d5d9db>{0}</color>"
+        },
+        "gold": {
+          "*colorize*": "<color:#fbdb61>{0}</color>"
+        },
+        "coal": {
+          "*colorize*": "<color:#4c4c4c>{0}</color>"
+        },
+        "flint": {
+          "*colorize*": "<color:#8c8c8c>{0}</color>"
+        },
+        "vein": {
+          "*colorize*": "<yellow>{0}</yellow>"
+        },
+        "inventory": {
+          "*colorize*": "<gold>{0}</gold>"
+        }
+      }
     },
     "fortress-spawn": {
       "*colorize*": "<red>{0}</red>"

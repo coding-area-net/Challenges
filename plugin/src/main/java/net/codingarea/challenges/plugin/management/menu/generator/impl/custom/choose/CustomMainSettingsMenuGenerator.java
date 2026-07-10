@@ -3,8 +3,8 @@ package net.codingarea.challenges.plugin.management.menu.generator.impl.custom.c
 import lombok.Getter;
 import net.codingarea.challenges.plugin.challenges.custom.settings.IChallengeSetting;
 import net.codingarea.challenges.plugin.challenges.custom.settings.SettingType;
-import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SelectableKey;
+import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
@@ -36,7 +36,7 @@ public class CustomMainSettingsMenuGenerator extends CustomChooseOptionMenuGener
 
   public CustomMainSettingsMenuGenerator(@NotNull IParentCustomGenerator parent, @NotNull SettingType type,
                                          @NotNull String key, @NotNull LocalizableMessage baseTitle,
-                                         @NotNull Map<String, SelectableKey> items,
+                                         @NotNull Map<String, ? extends SelectableKey> items,
                                          @NotNull Function<String, IChallengeSetting> instanceGetter) {
     super(baseTitle, items);
     this.parent = parent;

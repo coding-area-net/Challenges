@@ -9,8 +9,8 @@ import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.commons.common.collection.IRandom;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.LinkedHashMap;
-import java.util.Locale;
+import java.util.Collections;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public abstract class ChallengeAction extends ChallengeSetting implements IChallengeAction {
@@ -29,14 +29,9 @@ public abstract class ChallengeAction extends ChallengeSetting implements IChall
     super(name, builderSupplier);
   }
 
-  public static LinkedHashMap<String, SelectableKey> getMenuItems() {
-    LinkedHashMap<String, SelectableKey> map = new LinkedHashMap<>();
-
-    for (ChallengeAction value : Challenges.getInstance().getCustomSettingsLoader().getActions().values()) {
-      map.put(value.getUniqueName(), value);
-    }
-
-    return map;
+  @NotNull
+  public static Map<String, SelectableKey> getMenuItems() {
+    return Collections.unmodifiableMap(Challenges.getInstance().getCustomSettingsLoader().getActions());
   }
 
   @NotNull

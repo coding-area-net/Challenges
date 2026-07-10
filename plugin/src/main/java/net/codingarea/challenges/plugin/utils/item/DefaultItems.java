@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
 
@@ -41,9 +42,9 @@ public final class DefaultItems {
 
   @Contract("_, _, _, _ -> new")
   public static ItemBuilder createChallengeDisplayFormat(@NotNull ItemStack displayItemPreset, @NotNull LocalizableMessage name,
-                                                         @NotNull LocalizableMessage desc, @NotNull Locale locale) {
-    return new ItemBuilder(locale, displayItemPreset, MessageKey.of("challenge.display-format"),
-      name, desc);
+                                                         @Nullable LocalizableMessage desc, @NotNull Locale locale) {
+    if (desc == null) return createMenuDisplayFormat(displayItemPreset, name, locale);
+    return new ItemBuilder(locale, displayItemPreset, MessageKey.of("challenge.display-format"), name, desc);
   }
 
   @Contract("_, _, _ -> new")

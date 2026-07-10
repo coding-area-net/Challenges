@@ -487,11 +487,45 @@
       ]
     },
     "cut-clean": {
-      "name": "*CutClean*",
+      "name": "*{@menu}*",
       "desc": [
         "Verschiedene *Einstellungen*, die",
         "das *Farmen* von Items *einfacher* machen"
-      ]
+      ],
+      "menu": "CutClean",
+      "sub": {
+        "iron": {
+          "name": "*Eisen*",
+          "desc": "*Eisenerz* wird direkt zu *Eisenbarren*"
+        },
+        "gold": {
+          "name": "*Gold*",
+          "desc": "*Golderz* wird direkt zu *Goldbarren*"
+        },
+        "coal": {
+          "name": "*Kohle*",
+          "desc": "*Kohleerz* wird direkt zu *Fackeln*"
+        },
+        "flint": {
+          "name": "*Kies*",
+          "desc": "*Kies* wird direkt zu *Feuerstein*"
+        },
+        "vein": {
+          "name": "*Erzvenen*",
+          "desc": "*Erzvenen* werden direkt *komplett abgebaut*"
+        },
+        "inventory": {
+          "name": "*Direkt ins Inventar*",
+          "desc": [
+            "*Items* werden, *anstatt gedroppt* zu werden,",
+            "*direkt* ins *Inventar* hinzugefügt"
+          ]
+        },
+        "food": {
+          "name": "*Gebratenes Essen*",
+          "desc": "*Rohes Fleisch* wird direkt zu *gebratenem Fleisch*"
+        }
+      }
     },
     "fortress-spawn": {
       "name": "*Festungs Spawn*",
@@ -2150,35 +2184,6 @@
   "item-backpack-setting-team": "<dark_purple>Team</dark_purple>",
   "item-backpack-setting-player": "<gold>Player</gold>",
   "menu-cut-clean-setting-settings": "CutClean",
-  "item-cut-clean-gold-setting": [
-    "<gold>Gold</gold>",
-    "*Golderz* wird direkt zu *Goldbarren*"
-  ],
-  "item-cut-clean-iron-setting": [
-    "<gray>Iron</gray>",
-    "*Eisenerz* wird direkt zu *Eisenbarren*"
-  ],
-  "item-cut-clean-coal-setting": [
-    "<yellow>Coal</yellow>",
-    "*Kohleerz* wird direkt zu *Fackeln*"
-  ],
-  "item-cut-clean-flint-setting": [
-    "<yellow>Flint</yellow>",
-    "*Gravel* droppt immer *Flint*"
-  ],
-  "item-cut-clean-vein-setting": [
-    "<yellow>Ore Veins</yellow>",
-    "*Erz Venen* werden direkt abgebaut"
-  ],
-  "item-cut-clean-inventory-setting": [
-    "<gold>Direkt ins Inventar</gold>",
-    "*Items* werden, *anstatt gedroppt* zu werden,",
-    "*direkt* ins *Inventar* hinzugefügt"
-  ],
-  "item-cut-clean-food-setting": [
-    "<red>Gebratenes Essen</red>",
-    "*Rohes Fleisch* wird direkt zu *gebratenem Fleisch*"
-  ],
   "item-timber-setting-logs": "<gold>Baumstämme</gold>",
   "item-timber-setting-logs-and-leaves": "<gold>Baumstämme </gold><gray>und </gray><dark_green>Blätter</dark_green>",
   "item-regeneration-setting-not_natural": "<gold>Nicht natürlich</gold>",

@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.challenges.type.abstraction.menu;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import net.codingarea.challenges.plugin.Challenges;
@@ -34,11 +35,13 @@ public abstract class MenuSetting extends Setting {
     this.menuGenerator = new SubSettingsMenuGenerator(this);
   }
 
-  protected final void registerSetting(@NotNull String name, @NotNull SubSetting setting) {
+  @NotNull
+  protected final <T extends SubSetting> T registerSetting(@NotNull String name, @NotNull T setting) {
     if (name.equals("enabled")) throw new IllegalArgumentException("SubSetting name 'enabled' is reserved");
     settings.put(name, setting);
     menuGenerator.addToCache(setting);
     Challenges.getInstance().registerListener(setting);
+    return setting;
   }
 
   public final SubSetting getSetting(@NotNull String name) {
@@ -98,14 +101,13 @@ public abstract class MenuSetting extends Setting {
   // TODO extract duplicate logic with AbstractChallenge
   public abstract class SubSetting implements Listener {
 
-    @Setter
-    @Getter
-    private int page = -1, slot = -1;
+    private final MessageKey nameMessageKeySpace; // TODO this is might not be an really elegant solution...
 
     protected final ItemStack displayItemPreset;
 
-    public SubSetting(@NotNull ItemStack displayItemPreset) {
+    public SubSetting(@NotNull ItemStack displayItemPreset,  @NotNull MessageKey nameMessageKeySpace) {
       this.displayItemPreset = displayItemPreset;
+      this.nameMessageKeySpace = nameMessageKeySpace;
     }
 
     public final void updateItems() {
@@ -119,6 +121,7 @@ public abstract class MenuSetting extends Setting {
 
     @NotNull
     public ItemBuilder getSettingsItem(@NotNull Locale locale) {
+      // TODO abstract duplicate logic with AbstractChallenge!
       ItemStack preset = isEnabled() ? getSettingsItemPreset() : DefaultItems.createDisabledPreset();
       // apply formatting dynamically, to prevent duplicate format references
       ItemBuilder item = new ItemBuilder(locale, preset, MessageKey.of("challenge.subsettings-format"),
@@ -132,14 +135,23 @@ public abstract class MenuSetting extends Setting {
       return item;
     }
 
+    /**
+     * @implNote Only used if {@link #isEnabled()}.
+     *           Name/Lore will be overwritten by formatting.
+     *           Set name in {@link #getSettingsName()} and lore in {@link #getSettingsDescription()}
+     */
     @NotNull
     public abstract ItemStack getSettingsItemPreset();
 
     @NotNull
-    protected abstract LocalizableMessage getDisplayName();
+    public LocalizableMessage getDisplayName() {
+      return nameMessageKeySpace.getChildKey("name");
+    }
 
     @NotNull
-    protected abstract LocalizableMessage getDisplayDescription();
+    public LocalizableMessage getDisplayDescription() {
+      return nameMessageKeySpace.getChildKey("desc");
+    }
 
     @NotNull
     protected LocalizableMessage getSettingsName() {
@@ -174,12 +186,12 @@ public abstract class MenuSetting extends Setting {
     private final boolean enabledByDefault;
     private boolean enabled;
 
-    public BooleanSubSetting(@NotNull ItemStack displayItemPreset) {
-      this(displayItemPreset, false);
+    public BooleanSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace) {
+      this(displayItemPreset, nameMessageKeySpace, false);
     }
 
-    public BooleanSubSetting(@NotNull ItemStack displayItemPreset, boolean enabledByDefault) {
-      super(displayItemPreset);
+    public BooleanSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, boolean enabledByDefault) {
+      super(displayItemPreset, nameMessageKeySpace);
       this.enabledByDefault = enabledByDefault;
       this.setEnabled(enabledByDefault);
     }
@@ -188,18 +200,6 @@ public abstract class MenuSetting extends Setting {
     @Override
     public ItemStack getSettingsItemPreset() {
       return DefaultItems.createEnabledPreset();
-    }
-
-    @NotNull
-    @Override
-    protected LocalizableMessage getDisplayName() {
-      return null; // TODO
-    }
-
-    @NotNull
-    @Override
-    protected LocalizableMessage getDisplayDescription() {
-      return null; // TODO
     }
 
     @Override
@@ -255,26 +255,25 @@ public abstract class MenuSetting extends Setting {
 
   public class NumberSubSetting extends SubSetting {
 
-    // TODO name, desc
     private final int max, min;
     private final int defaultValue;
     @Getter
     private int value;
 
-    public NumberSubSetting(@NotNull ItemStack displayItemPreset) {
-      this(displayItemPreset, 64);
+    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace) {
+      this(displayItemPreset, nameMessageKeySpace, 64);
     }
 
-    public NumberSubSetting(@NotNull ItemStack displayItemPreset, int max) {
-      this(displayItemPreset, max, 1);
+    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int max) {
+      this(displayItemPreset, nameMessageKeySpace, max, 1);
     }
 
-    public NumberSubSetting(@NotNull ItemStack displayItemPreset, int min, int max) {
-      this(displayItemPreset, min, max, min);
+    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int min, int max) {
+      this(displayItemPreset, nameMessageKeySpace, min, max, min);
     }
 
-    public NumberSubSetting(@NotNull ItemStack displayItemPreset, int min, int max, int defaultValue) {
-      super(displayItemPreset);
+    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int min, int max, int defaultValue) {
+      super(displayItemPreset, nameMessageKeySpace);
       if (max <= min) throw new IllegalArgumentException("max <= min");
       if (min < 0) throw new IllegalArgumentException("min < 0");
       if (defaultValue > max) throw new IllegalArgumentException("defaultValue > max");
@@ -285,8 +284,9 @@ public abstract class MenuSetting extends Setting {
       this.min = min;
     }
 
+    @NotNull
     @Override
-    public @NotNull ItemStack getSettingsItemPreset() {
+    public ItemStack getSettingsItemPreset() {
       return DefaultItems.createValuePreset(value);
     }
 
@@ -301,18 +301,6 @@ public abstract class MenuSetting extends Setting {
 
       updateItems();
       onValueChange();
-    }
-
-    @NotNull
-    @Override
-    protected LocalizableMessage getDisplayName() {
-      return null; // TODO
-    }
-
-    @NotNull
-    @Override
-    protected LocalizableMessage getDisplayDescription() {
-      return null; // TODO
     }
 
 
@@ -365,20 +353,20 @@ public abstract class MenuSetting extends Setting {
     private final boolean enabledByDefault = false; // Implement in future
     private boolean enabled;
 
-    public NumberAndBooleanSubSetting(@NotNull ItemStack displayItemPreset) {
-      super(displayItemPreset);
+    public NumberAndBooleanSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace) {
+      super(displayItemPreset, nameMessageKeySpace);
     }
 
-    public NumberAndBooleanSubSetting(@NotNull ItemStack displayItemPreset, int max) {
-      super(displayItemPreset, max);
+    public NumberAndBooleanSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int max) {
+      super(displayItemPreset, nameMessageKeySpace, max);
     }
 
-    public NumberAndBooleanSubSetting(@NotNull ItemStack displayItemPreset, int min, int max) {
-      super(displayItemPreset, min, max);
+    public NumberAndBooleanSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int min, int max) {
+      super(displayItemPreset, nameMessageKeySpace, min, max);
     }
 
-    public NumberAndBooleanSubSetting(@NotNull ItemStack displayItemPreset, int min, int max, int defaultValue) {
-      super(displayItemPreset, min, max, defaultValue);
+    public NumberAndBooleanSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int min, int max, int defaultValue) {
+      super(displayItemPreset, nameMessageKeySpace, min, max, defaultValue);
     }
 
     @Override

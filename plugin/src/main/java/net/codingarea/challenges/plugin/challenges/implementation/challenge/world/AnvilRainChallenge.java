@@ -196,8 +196,7 @@ public class AnvilRainChallenge extends MenuSetting {
   public void applyDamageToNearEntities(@NotNull Location location) {
     if (location.getWorld() == null) return;
     for (Entity entity : location.getWorld().getNearbyEntities(location, 0.25, 0.25, 0.25)) {
-      if (!(entity instanceof LivingEntity)) continue;
-      LivingEntity livingEntity = (LivingEntity) entity;
+      if (!(entity instanceof LivingEntity livingEntity)) continue;
       livingEntity.damage(getDamage());
     }
 

@@ -77,8 +77,6 @@ public class SubSettingsMenuGenerator extends MultiPageMenuGenerator implements 
 
     int i = 0;
     for (MenuSetting.SubSetting setting : settings) {
-      setting.setPage(page);
-      setting.setSlot(slots[i]);
       setSubSettingItemsAt(setting, inventory, slots[i], locale);
       i++;
     }
@@ -91,7 +89,7 @@ public class SubSettingsMenuGenerator extends MultiPageMenuGenerator implements 
 
     int page = getPageOfSubSetting(settingsIndex);
     int settingsOnPage = getSubSettingsCountForPage(page);
-    int slotIndex = settingsIndex % settingsOnPage;
+    int slotIndex = settingsIndex % MAX_SLOTS_PER_PAGE; // don't use settingsOnPage here; pages before might have more
     int displaySlot = getSlots(settingsOnPage)[slotIndex];
 
     updatePage(page, (inventory, locale) -> setSubSettingItemsAt(setting, inventory, displaySlot, locale));
@@ -144,11 +142,12 @@ public class SubSettingsMenuGenerator extends MultiPageMenuGenerator implements 
     @Override
     public boolean handleMenuClick(@NotNull MenuClickInfo info) {
       List<MenuSetting.SubSetting> settings = getSubSettingsForPage(page);
-      for (MenuSetting.SubSetting setting : settings) {
-        int settingsSlot = setting.getSlot(); // TODO
-        if (info.getSlot() != settingsSlot && info.getSlot() != settingsSlot + 9) continue;
-
-        setting.handleClick(new ChallengeMenuClickInfo(info, info.getSlot() == settingsSlot));
+      int[] slots = getSlots(settings.size());
+      for (int i = 0; i < settings.size() && i < slots.length; i++) {
+        int slot = slots[i];
+        if (info.getSlot() != slot && info.getSlot() != slot + 9) continue;
+        MenuSetting.SubSetting setting = settings.get(i);
+        setting.handleClick(new ChallengeMenuClickInfo(info, info.getSlot() == slot));
         return true;
       }
 

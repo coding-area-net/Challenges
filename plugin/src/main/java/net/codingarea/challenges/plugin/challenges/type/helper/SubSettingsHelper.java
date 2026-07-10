@@ -18,7 +18,10 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-public class SubSettingsHelper {
+public final class SubSettingsHelper {
+
+  private SubSettingsHelper() {
+  }
 
   public static final String
     ENTITY_TYPE = "entity_type",

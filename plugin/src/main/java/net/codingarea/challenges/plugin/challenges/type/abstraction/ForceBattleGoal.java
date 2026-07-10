@@ -51,24 +51,22 @@ public abstract class ForceBattleGoal<T extends ForceTarget<?>> extends MenuGoal
     super(MenuType.GOAL, SettingCategory.FORCE_BATTLE, displayItemPreset, nameMessageKey);
 
     // TODO !
-//    registerSetting("jokers", new NumberSubSetting(
-//      () -> new LegacyItemBuilder(Material.BARRIER, Message.forName("item-force-battle-goal-jokers")),
-//      value -> null,
-//      value -> "§e" + value,
-//      1,
-//      32,
-//      5
-//    ));
-//    registerSetting("showScoreboard", new BooleanSubSetting(
-//      () -> new LegacyItemBuilder(Material.BOOK, Message.forName("item-force-battle-show-scoreboard")),
-//      true
-//    ));
-//    if (shouldRegisterDupedTargetsSetting()) {
-//      registerSetting("dupedTargets", new BooleanSubSetting(
-//        () -> new LegacyItemBuilder(Material.PAPER, Message.forName("item-force-battle-duped-targets")),
-//        true
-//      ));
-//    }
+    registerSetting("jokers", new NumberSubSetting(
+      new ItemStack(Material.BARRIER), MessageKey.of("challenge.force-battle.sub.goal-jokers"),
+      1,
+      32,
+      5
+    ));
+    registerSetting("showScoreboard", new BooleanSubSetting(
+      new ItemStack(Material.BOOK), MessageKey.of("challenge.force-battle.sub.scoreboard"),
+      true
+    ));
+    if (shouldRegisterDupedTargetsSetting()) {
+      registerSetting("dupedTargets", new BooleanSubSetting(
+        new ItemStack(Material.PAPER), MessageKey.of("challenge.force-battle.sub.duped-targets"),
+        true
+      ));
+    }
   }
 
   @Override

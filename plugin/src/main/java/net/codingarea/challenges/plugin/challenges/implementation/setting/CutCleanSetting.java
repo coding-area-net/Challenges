@@ -4,10 +4,9 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.menu.MenuSetting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.legacy.Message;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.blocks.BlockDropManager.DropPriority;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
@@ -27,31 +26,40 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Supplier;
 
 @Since("2.0")
 public class CutCleanSetting extends MenuSetting {
 
   public CutCleanSetting() {
     super(MenuType.SETTINGS, null, new ItemStack(Material.IRON_AXE), "cut-clean");
-    registerSetting("iron->iron_ingot",
-      new ConvertDropSubSetting(() -> new LegacyItemBuilder(Material.IRON_INGOT, Message.forName("item-cut-clean-iron-setting")), true,
-        Material.IRON_INGOT, "IRON_ORE", "DEEPSLATE_IRON_ORE"));
-    registerSetting("gold->gold_ingot",
-      new ConvertDropSubSetting(() -> new LegacyItemBuilder(Material.GOLD_INGOT, Message.forName("item-cut-clean-gold-setting")), true,
-        Material.GOLD_INGOT, "GOLD_ORE", "DEEPSLATE_GOLD_ORE"));
-    registerSetting("coal->torch",
-      new ConvertDropSubSetting(() -> new LegacyItemBuilder(Material.COAL, Message.forName("item-cut-clean-coal-setting")), false,
-        Material.TORCH, "COAL_ORE", "DEEPSLATE_COAL_ORE"));
-    registerSetting("gravel->flint",
-      new ConvertDropSubSetting(() -> new LegacyItemBuilder(Material.FLINT, Message.forName("item-cut-clean-flint-setting")), false,
-        Material.FLINT, "GRAVEL"));
-    registerSetting("ore->veins",
-      new BreakOreVeinsSubSetting(() -> new LegacyItemBuilder(Material.GOLDEN_PICKAXE, Message.forName("item-cut-clean-vein-setting")), 1, 10));
-    registerSetting("items->inventory",
-      new DirectIntoInventorySubSetting(() -> new LegacyItemBuilder(Material.CHEST, Message.forName("item-cut-clean-inventory-setting"))));
-    registerSetting("row->cooked",
-      new CookFoodSubSetting(() -> new LegacyItemBuilder(Material.COOKED_BEEF, Message.forName("item-cut-clean-food-setting")), true));
+    registerSetting("iron->iron_ingot", new ConvertDropSubSetting(
+      new ItemStack(Material.IRON_INGOT), getChallengeMessageKey("sub.iron"),
+      true, Material.IRON_INGOT, "IRON_ORE", "DEEPSLATE_IRON_ORE"
+    ));
+    registerSetting("gold->gold_ingot", new ConvertDropSubSetting(
+      new ItemStack(Material.GOLD_INGOT), getChallengeMessageKey("sub.gold"),
+      true, Material.GOLD_INGOT, "GOLD_ORE", "DEEPSLATE_GOLD_ORE"
+    ));
+    registerSetting("coal->torch", new ConvertDropSubSetting(
+      new ItemStack(Material.COAL), getChallengeMessageKey("sub.coal"),
+      false, Material.TORCH, "COAL_ORE", "DEEPSLATE_COAL_ORE"
+    ));
+    registerSetting("gravel->flint", new ConvertDropSubSetting(
+      new ItemStack(Material.FLINT), getChallengeMessageKey("sub.flint"),
+      false, Material.FLINT, "GRAVEL"
+    ));
+    registerSetting("ore->veins", new BreakOreVeinsSubSetting(
+      new ItemStack(Material.GOLDEN_PICKAXE), getChallengeMessageKey("sub.vein"),
+      1, 10, 3
+    ));
+    registerSetting("items->inventory", new DirectIntoInventorySubSetting(
+      new ItemStack(Material.CHEST), getChallengeMessageKey("sub.inventory"),
+      false
+    ));
+    registerSetting("row->cooked", new CookFoodSubSetting(
+      new ItemStack(Material.COOKED_BEEF), getChallengeMessageKey("sub.food"),
+      true
+    ));
   }
 
   protected boolean directIntoInventory() {
@@ -60,14 +68,8 @@ public class CutCleanSetting extends MenuSetting {
 
   private class DirectIntoInventorySubSetting extends BooleanSubSetting {
 
-    public DirectIntoInventorySubSetting(@NotNull Supplier<LegacyItemBuilder> item) {
-      super(item.get().build());
-    }
-
-    @NotNull
-    @Override
-    public BooleanSubSetting setEnabled(boolean enabled) {
-      return super.setEnabled(enabled);
+    public DirectIntoInventorySubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, boolean enabledByDefault) {
+      super(displayItemPreset, nameMessageKeySpace, enabledByDefault);
     }
 
   }
@@ -77,9 +79,9 @@ public class CutCleanSetting extends MenuSetting {
     protected final Material[] from;
     protected final Material to;
 
-    public ConvertDropSubSetting(@NotNull Supplier<LegacyItemBuilder> item, boolean enabledByDefault,
-                                 @NotNull Material to, @NotNull String... from) {
-      super(item.get().build(), enabledByDefault);
+    public ConvertDropSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace,
+                                 boolean enabledByDefault, @NotNull Material to, @NotNull String... from) {
+      super(displayItemPreset, nameMessageKeySpace, enabledByDefault);
 
       List<Material> materials = new ArrayList<>();
       for (String s : from) {
@@ -130,8 +132,9 @@ public class CutCleanSetting extends MenuSetting {
 
   private class BreakOreVeinsSubSetting extends NumberAndBooleanSubSetting {
 
-    public BreakOreVeinsSubSetting(@NotNull Supplier<LegacyItemBuilder> item, int min, int max) {
-      super(item.get().build(), min, max); // TODO
+    public BreakOreVeinsSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace,
+                                   int min, int max, int defaultValue) {
+      super(displayItemPreset, nameMessageKeySpace, min, max, defaultValue);
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
@@ -205,14 +208,14 @@ public class CutCleanSetting extends MenuSetting {
 
   private class CookFoodSubSetting extends BooleanSubSetting {
 
-    public CookFoodSubSetting(@NotNull Supplier<LegacyItemBuilder> item, boolean enabledByDefault) {
-      super(item.get().toItem(), enabledByDefault);
+    public CookFoodSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, boolean enabledByDefault) {
+      super(displayItemPreset, nameMessageKeySpace, enabledByDefault);
     }
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEntityKill(@NotNull EntityDeathEvent event) {
       if (!isEnabled()) return;
-      event.getDrops().replaceAll(item -> new LegacyItemBuilder(ItemUtils.convertFoodToCookedFood(item.getType())).setAmount(item.getAmount()).build());
+      event.getDrops().replaceAll(item -> new ItemStack(ItemUtils.convertFoodToCookedFood(item.getType()), item.getAmount()));
 
       Player killer = event.getEntity().getKiller();
       if (killer != null && directIntoInventory()) {

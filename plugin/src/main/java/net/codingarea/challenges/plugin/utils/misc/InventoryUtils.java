@@ -1,7 +1,6 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
 import net.codingarea.challenges.plugin.ChallengeAPI;
-import net.codingarea.challenges.plugin.management.menu.generator.legacy.MenuGenerator;
 import net.codingarea.challenges.plugin.utils.item.DefaultItem;
 import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.AnimationFrame;
@@ -181,35 +180,6 @@ public final class InventoryUtils {
     Material material = random.choose(items);
     int stackSize = onlyOne ? 1 : (respectMaxStackSize && material.getMaxStackSize() == 1 ? 1 : random.range(1, respectMaxStackSize ? material.getMaxStackSize() : 64));
     return new ItemStack(material, stackSize);
-  }
-
-  /**
-   * @return if a navigation item was clicked
-   */
-  public static boolean handleNavigationClicking(MenuGenerator generator, int[] navigationSlots, int page, MenuClickInfo info, Runnable onDoorClick) {
-    int pagesSwitching = info.isShiftClick() ? 5 : 1;
-    if (navigationSlots.length >= 1 && info.getSlot() == navigationSlots[0]) {
-      if (page <= 0) {
-        if (page == 0) {
-          onDoorClick.run();
-        } else {
-          SoundSample.CLICK.play(info.getPlayer());
-        }
-        return page == 0;
-      } else {
-        SoundSample.CLICK.play(info.getPlayer());
-        generator.open(info.getPlayer(), Math.max(page - pagesSwitching, 0));
-        return true;
-      }
-    } else if (navigationSlots.length >= 2 && info.getSlot() == navigationSlots[1]) {
-      SoundSample.CLICK.play(info.getPlayer());
-      if (page < (generator.getInventories().size())) {
-        generator.open(info.getPlayer(), Math.min(page + pagesSwitching, generator.getInventories().size()));
-        return true;
-      }
-      return false;
-    }
-    return false;
   }
 
   @FunctionalInterface

@@ -8,7 +8,8 @@ import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.LinkedHashMap;
+import java.util.Collections;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public abstract class ChallengeTrigger extends ChallengeSetting implements IChallengeTrigger {
@@ -25,14 +26,9 @@ public abstract class ChallengeTrigger extends ChallengeSetting implements IChal
     super(name, builderSupplier);
   }
 
-  public static LinkedHashMap<String, SelectableKey> getMenuItems() {
-    LinkedHashMap<String, SelectableKey> map = new LinkedHashMap<>();
-
-    for (ChallengeTrigger value : Challenges.getInstance().getCustomSettingsLoader().getTriggers().values()) {
-      map.put(value.getUniqueName(), value); // TODO
-    }
-
-    return map;
+  @NotNull
+  public static Map<String, SelectableKey> getMenuItems() {
+    return Collections.unmodifiableMap(Challenges.getInstance().getCustomSettingsLoader().getTriggers());
   }
 
   @NotNull
