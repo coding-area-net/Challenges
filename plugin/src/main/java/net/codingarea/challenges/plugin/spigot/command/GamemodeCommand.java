@@ -22,14 +22,14 @@ public class GamemodeCommand implements SenderCommand, Completer {
     List<Player> targets = new ArrayList<>();
 
     if (args.length == 0) {
-      MessageKey.of("syntax").send(sender, Prefix.CHALLENGES, "gm <gamemode> [player]");
+      MessageKey.of("command.syntax").send(sender, Prefix.CHALLENGES, "gm <gamemode> [player]");
       return;
     }
 
     GameMode gamemode = getGameMode(args[0]);
 
     if (gamemode == null) {
-      MessageKey.of("syntax").send(sender, Prefix.CHALLENGES, "gm <gamemode> [player]");
+      MessageKey.of("command.syntax").send(sender, Prefix.CHALLENGES, "gm <gamemode> [player]");
       return;
     }
 

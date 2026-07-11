@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
+@Deprecated
 public class BukkitStringUtils {
 
   @NotNull

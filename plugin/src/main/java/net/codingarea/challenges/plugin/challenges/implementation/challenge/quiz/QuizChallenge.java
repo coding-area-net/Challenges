@@ -184,7 +184,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
     }
 
     if (args.length == 0) {
-      MessageKey.of("syntax").send(player, prefix, "guess <answer>");
+      MessageKey.of("command.syntax").send(player, prefix, "guess <answer>");
       return;
     }
 

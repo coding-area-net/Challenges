@@ -7,7 +7,6 @@ spigot = "26.1.2-R0.1-SNAPSHOT"
 paper = "26.2.build.+" # 1.21.4-R0.1-SNAPSHOT
 authlib = "1.5.21"
 
-adventure = "4.8.0"
 protocol-lib = "5.4.0"
 
 # utilities
@@ -38,9 +37,6 @@ paper-api = { group = "io.papermc.paper", name = "paper-api", version.ref = "pap
 authlib = { group = "com.mojang", name = "authlib", version.ref = "authlib" }
 
 protocol-lib = { group = "net.dmulloy2", name = "ProtocolLib", version.ref = "protocol-lib" }
-
-adventure-text-minimessage = { module = "net.kyori:adventure-text-minimessage", version.ref = "adventure" }
-adventure-text-serializer-legacy = { module = "net.kyori:adventure-text-serializer-legacy", version.ref = "adventure" }
 
 # utilities
 slf4j-api = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }

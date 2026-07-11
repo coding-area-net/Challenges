@@ -25,7 +25,7 @@ public class WorldCommand implements PlayerCommand, TabCompleter {
   public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
 
     if (args.length < 1) {
-      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "world <world>");
+      MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "world <world>");
       return;
     }
 
@@ -35,13 +35,13 @@ public class WorldCommand implements PlayerCommand, TabCompleter {
 
     boolean targetIsVoidMap = worldName.equalsIgnoreCase("void");
     if (environment == null && !targetIsVoidMap) {
-      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "world <world>");
+      MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "world <world>");
       return;
     }
 
     World world = targetIsVoidMap ? Challenges.getInstance().getGameWorldStorage().getOrCreateVoidWorld() : ChallengeAPI.getGameWorld(environment);
     if (world == null) {
-      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "world <world>");
+      MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "world <world>");
       return;
     }
 

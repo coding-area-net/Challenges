@@ -93,7 +93,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
       }
 
     } else {
-      MessageKey.of("syntax").send(player, Prefix.POSITION, "position [name]");
+      MessageKey.of("command.syntax").send(player, Prefix.POSITION, "position [name]");
     }
   }
 
@@ -204,7 +204,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
         }
 
       } else {
-        MessageKey.of("syntax").send(player, Prefix.POSITION, "delposition <name>");
+        MessageKey.of("command.syntax").send(player, Prefix.POSITION, "delposition <name>");
       }
 
     }
@@ -234,7 +234,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
       }
 
       if (args.length < 5) {
-        MessageKey.of("syntax").send(player, Prefix.POSITION, "setposition <name> <world> <x> <y> <z>");
+        MessageKey.of("command.syntax").send(player, Prefix.POSITION, "setposition <name> <world> <x> <y> <z>");
         return;
       }
 
@@ -267,7 +267,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
         broadcastParticleLine(position);
 
       } catch (Exception exception) {
-        MessageKey.of("syntax").send(player, Prefix.POSITION, "setposition <name> <world> <x> <y> <z>");
+        MessageKey.of("command.syntax").send(player, Prefix.POSITION, "setposition <name> <world> <x> <y> <z>");
       }
 
     }

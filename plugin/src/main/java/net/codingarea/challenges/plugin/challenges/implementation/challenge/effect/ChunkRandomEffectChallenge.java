@@ -7,8 +7,10 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.spigot.events.PlayerIgnoreStatusChangeEvent;
+import net.codingarea.challenges.plugin.utils.misc.PotionEffectUtils;
 import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.commons.common.collection.SeededRandomWrapper;
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -90,9 +92,7 @@ public class ChunkRandomEffectChallenge extends Setting {
 
   @ScheduledTask(ticks = 20, async = false)
   public void onSecond() {
-    broadcastFiltered(player -> {
-      addEffect(player, player.getLocation());
-    });
+    broadcastFiltered(player -> addEffect(player, player.getLocation()));
   }
 
   public void removeEffect(Player player, Location location) {
@@ -128,7 +128,7 @@ public class ChunkRandomEffectChallenge extends Setting {
     PotionEffectType[] types = PotionEffectType.values();
     PotionEffectType type = types[random.nextInt(types.length)];
 
-    return type.createEffect(Integer.MAX_VALUE, random.nextInt(type.isInstant() ? 1 : 4));
+    return type.createEffect(PotionEffectUtils.INFINITE_DURATION, random.nextInt(type.isInstant() ? 1 : 4));
   }
 
 }

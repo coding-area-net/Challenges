@@ -98,7 +98,7 @@ public class DifficultySetting extends Modifier implements SenderCommand, TabCom
 
     int difficulty = getDifficultyValue(args[0]);
     if (difficulty == -1) {
-      MessageKey.of("syntax").send(sender, Prefix.CHALLENGES, "difficulty <difficulty>");
+      MessageKey.of("command.syntax").send(sender, Prefix.CHALLENGES, "difficulty <difficulty>");
       return;
     }
 

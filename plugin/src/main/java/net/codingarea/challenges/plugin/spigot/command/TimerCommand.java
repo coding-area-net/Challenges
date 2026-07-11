@@ -35,7 +35,7 @@ public class TimerCommand implements SenderCommand, Completer {
 
     switch (args[0].toLowerCase()) {
       default:
-        MessageKey.of("syntax").send(sender, Prefix.TIMER, "timer <resume/pause/reset/set/mode>");
+        MessageKey.of("command.syntax").send(sender, Prefix.TIMER, "timer <resume/pause/reset/set/mode>");
         return;
       case "resume":
       case "start":
@@ -74,7 +74,7 @@ public class TimerCommand implements SenderCommand, Completer {
         break;
       case "mode":
         if (args.length != 2) {
-          MessageKey.of("syntax").send(sender, Prefix.TIMER, "timer mode <up/down>");
+          MessageKey.of("command.syntax").send(sender, Prefix.TIMER, "timer mode <up/down>");
           break;
         }
         switch (args[1].toLowerCase()) {
@@ -88,7 +88,7 @@ public class TimerCommand implements SenderCommand, Completer {
             Challenges.getInstance().getChallengeTimer().setCountingUp(false);
             break;
           default:
-            MessageKey.of("syntax").send(sender, Prefix.TIMER, "timer mode <up/down>");
+            MessageKey.of("command.syntax").send(sender, Prefix.TIMER, "timer mode <up/down>");
             break;
         }
 

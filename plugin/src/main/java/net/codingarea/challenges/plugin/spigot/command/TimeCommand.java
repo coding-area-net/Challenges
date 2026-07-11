@@ -32,7 +32,7 @@ public class TimeCommand implements PlayerCommand, Completer {
   public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
 
     if (args.length == 0) {
-      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "time <set/add/remove/query/day/night/noon/midnight>");
+      MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "time <set/add/remove/query/day/night/noon/midnight>");
       return;
     }
     World world = player.getWorld();
@@ -52,12 +52,12 @@ public class TimeCommand implements PlayerCommand, Completer {
         break;
       case "set": {
         if (args.length == 1) {
-          MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "time set <ticks/day/night/noon/midnight>");
+          MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "time set <ticks/day/night/noon/midnight>");
           break;
         }
         long time = getTime(args[1]);
         if (time < 0) {
-          MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "time set <ticks/day/night/noon/midnight>");
+          MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "time set <ticks/day/night/noon/midnight>");
           break;
         }
         world.setTime(time);
@@ -72,12 +72,12 @@ public class TimeCommand implements PlayerCommand, Completer {
       }
       case "add": {
         if (args.length == 1) {
-          MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "time add <ticks>");
+          MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "time add <ticks>");
           break;
         }
         long time = getLongFromString(args[1]);
         if (time < 0) {
-          MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "time add <ticks>");
+          MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "time add <ticks>");
           break;
         }
         player.performCommand("time set " + (world.getTime() + time));
@@ -85,12 +85,12 @@ public class TimeCommand implements PlayerCommand, Completer {
       }
       case "subtract": {
         if (args.length == 1) {
-          MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "time subtract <ticks>");
+          MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "time subtract <ticks>");
           break;
         }
         long time = getLongFromString(args[1]);
         if (time < 0) {
-          MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "time subtract <ticks>");
+          MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "time subtract <ticks>");
           break;
         }
         player.performCommand("time set " + (world.getTime() - time));

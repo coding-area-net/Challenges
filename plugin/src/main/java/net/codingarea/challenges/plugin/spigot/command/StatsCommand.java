@@ -58,7 +58,7 @@ public class StatsCommand implements PlayerCommand {
         handleCommand(player, args[0]);
         break;
       default:
-        MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "stats [player]");
+        MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "stats [player]");
     }
   }
 

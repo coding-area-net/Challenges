@@ -188,7 +188,7 @@
         ]
       },
       "material": {
-        "name": "Anzeige-Item",
+        "name": "Anzeige Item",
         "format": "{@item-format('<gold>{0}</gold>')}"
       }
     }
@@ -1059,7 +1059,24 @@
         "Bei verschiedenen *Interaktionen*",
         "verschwinden alle *Blöcke* im *Chunk*",
         "eines *bestimmten Types*"
-      ]
+      ],
+      "menu": "Blöcke entfernen",
+      "sub": {
+        "break": {
+          "name": "*Beim abbauen*",
+          "desc": [
+            "Wenn du einen Block *abbaust*, werden",
+            "*alle Blöcke* des *selben Types zerstört*"
+          ]
+        },
+        "place": {
+          "name": "*Beim platzieren*",
+          "desc": [
+            "Wenn du einen Block *platzierst*, werden",
+            "*alle Blöcke* des *selben Types zerstört*"
+          ]
+        }
+      }
     },
     "anvil-rain": {
       "name": "*Amboss Regen*",
@@ -1899,6 +1916,7 @@
     ]
   },
   "command": {
+    "syntax": "<gray>Bitte nutze</gray> <yellow>/{0}</yellow>",
     "skip-timer": {
       "none": "<gray>Es ist <red>keine Challenge</red> aktiviert, dessen Timer übersprungen werden könnte</gray>",
       "done": "<gray>Die Timer folgender Challenges wurden übersprungen: {0}</gray>"
@@ -2317,10 +2335,17 @@
         "random": {
           "name": "*Zufällige Struktur*"
         }
+      },
+      "entity_type": {
+        "any": {
+          "name": "*Jegliche Kreatur*"
+        },
+        "player": {
+          "name": "*Spieler*"
+        }
       }
     }
   },
-  "syntax": "Bitte nutze <yellow>/{0}</yellow>",
   "reload": "Challenges Plugin wird neu geladen...",
   "reload-failed": "Ein <red>Fehler </red><gray>ist während dem Reload aufgetreten</gray>",
   "reload-success": "Challenges Plugin wurde <green>erfolgreich </green><gray>neu geladen</gray>",

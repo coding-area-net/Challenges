@@ -6,6 +6,7 @@ import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
+import net.codingarea.challenges.plugin.utils.misc.PotionEffectUtils;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -37,7 +38,7 @@ public class PlayerGlowSetting extends Setting {
       broadcast(player -> player.removePotionEffect(PotionEffectType.GLOWING));
       return;
     }
-    broadcast(player -> player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 1, true, false, false)));
+    broadcast(player -> player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, PotionEffectUtils.INFINITE_DURATION, 1, true, false, false)));
   }
 
   @EventHandler

@@ -10,6 +10,7 @@ import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
 import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
 import net.codingarea.challenges.plugin.spigot.events.PlayerIgnoreStatusChangeEvent;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
+import net.codingarea.challenges.plugin.utils.misc.PotionEffectUtils;
 import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.commons.common.collection.SeededRandomWrapper;
 import org.bukkit.Location;
@@ -155,7 +156,7 @@ public class BlockEffectChallenge extends Setting {
     IRandom random = new SeededRandomWrapper(seed / material.ordinal());
     PotionEffectType[] types = PotionEffectType.values();
     PotionEffectType type = types[random.nextInt(types.length)];
-    return type.createEffect(Integer.MAX_VALUE, random.nextInt(type.isInstant() ? 1 : 4));
+    return type.createEffect(PotionEffectUtils.INFINITE_DURATION, random.nextInt(type.isInstant() ? 1 : 4));
   }
 
 }

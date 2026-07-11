@@ -11,6 +11,9 @@
     "de": "German",
     "en": "English"
   },
+  "command": {
+    "syntax": "Please use <yellow>/{0}</yellow>"
+  },
   "challenge": {
     "regeneration": {
       "name": "*Regeneration*",
@@ -1199,7 +1202,6 @@
       "bossbar": "<dark_gray>{@symbol.arrow} </dark_gray><gray>Protection time </gray><dark_gray><bold>{@symbol.vertical} </bold></dark_gray><green>{0}s</green>"
     }
   },
-  "syntax": "Please use <yellow>/{0}</yellow>",
   "reload": "Challenges Plugin is reloading...",
   "reload-failed": "An <red>error &7occurred while reloading the plugin</red>",
   "reload-success": "Challenges Plugin <green>successfully </green><gray>reloaded</gray>",

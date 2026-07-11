@@ -29,7 +29,7 @@ public class SearchCommand implements SenderCommand, Completer {
   public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 
     if (args.length == 0) {
-      MessageKey.of("syntax").send(sender, Prefix.CHALLENGES, "search <item>");
+      MessageKey.of("command.syntax").send(sender, Prefix.CHALLENGES, "search <item>");
       return;
     }
 

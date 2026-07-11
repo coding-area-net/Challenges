@@ -20,7 +20,7 @@ public class WeatherCommand implements PlayerCommand, Completer {
   public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
 
     if (args.length == 0) {
-      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "weather <sun/clear/rain/thunder>");
+      MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "weather <sun/clear/rain/thunder>");
       return;
     }
 
@@ -45,7 +45,7 @@ public class WeatherCommand implements PlayerCommand, Completer {
         MessageKey.of("command-weather-set-thunder").send(player, Prefix.CHALLENGES);
         break;
       default:
-        MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "weather <sun/clear/rain/thunder>");
+        MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "weather <sun/clear/rain/thunder>");
     }
 
   }

@@ -245,7 +245,7 @@ public final class MessageFormatter { // pre expansion for better server runtime
 
   @NotNull
   @CheckReturnValue
-  public static String[] embedPositionalArgs(@NotNull String[] origin, @NotNull Object[] args) {
+  public static String[] embedPositionalArgs(@NotNull String[] origin, @Nullable Object[] args) {
     String[] result = new String[origin.length];
     for (int i = 0; i < origin.length; i++) {
       result[i] = embedPositionalArgs(origin[i], args);
@@ -255,7 +255,7 @@ public final class MessageFormatter { // pre expansion for better server runtime
 
   @NotNull
   @CheckReturnValue
-  public static String embedPositionalArgs(@NotNull String sequence, Object[] args) {
+  public static String embedPositionalArgs(@NotNull String sequence, @Nullable Object[] args) {
     if (args.length == 0) return sequence;
 
     // faster (maybe more error-prone) impl than regex matching
@@ -339,7 +339,8 @@ public final class MessageFormatter { // pre expansion for better server runtime
         if (c == COLORIZE_CHAR) {
           if (colorizing) {
             colorizing = false;
-            String[] embeddedColorized = embedPositionalArgs(colorizeValue, new Object[]{argument.toString()});
+            // hotfix: null value in arra to allow {1} in *colorize* for gradient phase; more robust solution required
+            String[] embeddedColorized = embedPositionalArgs(colorizeValue, new Object[]{argument.toString(), null});
             for (String s : embeddedColorized) {
               builder.append(s);
             }

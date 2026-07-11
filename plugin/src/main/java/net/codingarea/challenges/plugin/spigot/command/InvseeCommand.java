@@ -46,7 +46,7 @@ public class InvseeCommand implements PlayerCommand, Listener {
   public void onCommand(@NotNull Player player, @NotNull String[] args) throws Exception {
 
     if (args.length < 1) {
-      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "invsee <player>");
+      MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "invsee <player>");
       return;
     }
 

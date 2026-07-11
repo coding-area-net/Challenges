@@ -124,7 +124,7 @@ public class EntityLootRandomizerChallenge extends RandomizerSetting implements 
     }
 
     if (args.length == 0) {
-      MessageKey.of("syntax").send(sender, Prefix.CHALLENGES, "searchloot <entity>");
+      MessageKey.of("command.syntax").send(sender, Prefix.CHALLENGES, "searchloot <entity>");
       return;
     }
 

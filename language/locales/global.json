@@ -61,9 +61,14 @@
   },
   "timer": {
     "bar": {
-      "*colorize*": "<gradient:#FFAA00:#8E44AD:{1}><b>{0}</b></gradient>",
+      "up": {
+        "*colorize*": "<gradient:#55FF55:#00AA00:{1}><b>{0}</b></gradient>"
+      },
+      "down": {
+        "*colorize*": "<gradient:#55FFFF:#0088CC:{1}><b>{0}</b></gradient>"
+      },
       "paused": {
-        "*colorize*": "<red><b>{0}</b></red>"
+        "*colorize*": "<gradient:#FF5555:#AA0000:{1}><b>{0}</b></gradient>"
       },
       "format": {
         "seconds": "{mm}:{ss}",
@@ -491,7 +496,15 @@
       "*colorize*": "<aqua>{0}</aqua>"
     },
     "all-blocks-disappear": {
-      "*colorize*": "<red>{0}</red>"
+      "*colorize*": "<red>{0}</red>",
+      "sub": {
+        "break": {
+          "*colorize*": "<dark_aqua>{0}</dark_aqua>"
+        },
+        "place": {
+          "*colorize*": "<aqua>{0}</aqua>"
+        }
+      }
     },
     "anvil-rain": {
       "*colorize*": "<red>{0}</red>"
@@ -1038,6 +1051,18 @@
           "*colorize*": "<dark_purple>{0}</dark_purple>"
         }
       },
+      "entity_type": {
+        "any": {
+          "*colorize*": "<dark_green>{0}</dark_green>"
+        },
+        "player": {
+          "*colorize*": "<green>{0}</green>"
+        },
+        "format": {
+          "*colorize*": "<aqua>{0}</aqua>",
+          "name": "*{0}*"
+        }
+      },
       "block": {
         "any": {
           "*colorize*": "<dark_green>{0}</dark_green>"
@@ -1056,7 +1081,7 @@
         "random_player": {
           "*colorize*": "<dark_purple>{0}</dark_purple>"
         },
-        "every_player":{
+        "every_player": {
           "*colorize*": "<red>{0}</red>"
         },
         "every_mob": {

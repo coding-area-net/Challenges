@@ -30,17 +30,17 @@ import java.util.*;
 public class AllBlocksDisappearChallenge extends MenuSetting {
 
   private final int stackDropLimit;
+  private final BooleanSubSetting breakSetting, placeSetting;
 
   public AllBlocksDisappearChallenge() {
-//    super(Message.forName("menu-all-blocks-disappear-challenge-settings"));
     super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.TNT), "all-blocks-disappear");
-//    registerSetting("break", new BooleanSubSetting(
-//      () -> new LegacyItemBuilder(Material.DIAMOND_PICKAXE, Message.forName("item-all-blocks-disappear-break-challenge")),
-//      true
-//    ));
-//    registerSetting("place", new BooleanSubSetting(
-//      () -> new LegacyItemBuilder(Material.DIAMOND_BLOCK, Message.forName("item-all-blocks-disappear-place-challenge"))
-//    ));
+    breakSetting = registerSetting("break", new BooleanSubSetting(
+      new ItemStack(Material.DIAMOND_PICKAXE), getChallengeMessageKey("sub.break"),
+      true
+    ));
+    placeSetting = registerSetting("place", new BooleanSubSetting(
+      new ItemStack(Material.DIAMOND_BLOCK), getChallengeMessageKey("sub.place")
+    ));
 
     Document document = ChallengeConfigHelper.getSettingsDocument();
     stackDropLimit = document.contains("all-block-disappear-stack-drop-limit") ? document.getInt("all-block-disappear-stack-drop-limit") : 50;
@@ -49,7 +49,7 @@ public class AllBlocksDisappearChallenge extends MenuSetting {
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
   public void onBlockBreak(@NotNull BlockBreakEvent event) {
     if (!shouldExecuteEffect()) return;
-    if (!getSetting("break").getAsBoolean()) return;
+    if (!breakSetting.getAsBoolean()) return;
     if (ignorePlayer(event.getPlayer())) return;
     PlayerInventory inventory = event.getPlayer().getInventory();
     event.setDropItems(false);
@@ -59,7 +59,7 @@ public class AllBlocksDisappearChallenge extends MenuSetting {
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
   public void onBlockPlace(@NotNull BlockPlaceEvent event) {
     if (!shouldExecuteEffect()) return;
-    if (!getSetting("place").getAsBoolean()) return;
+    if (!placeSetting.getAsBoolean()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (event.getBlockAgainst().getType() == Material.BEDROCK) return;
     if (event.getBlockAgainst().getType() == Material.END_PORTAL) return;

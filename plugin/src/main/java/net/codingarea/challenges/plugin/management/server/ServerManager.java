@@ -62,16 +62,16 @@ public final class ServerManager {
   }
 
   public void endChallenge(@NotNull ChallengeEndCause endCause, Supplier<List<Player>> winnerGetter) {
-//    if (!Bukkit.isPrimaryThread()) { // TODO
-//      // calling end challenge logic async results in all kinds of issues as bukkit/paper does not allow certain actions
-//      // to be performed async (in some versions): PlayerGameModeChangeEvent may only be triggered synchronously
-//      Logger.debug("End challenge called from async thread, scheduling sync task (Caller: {}", ReflectionUtils.getCallerName(1));
-//      Bukkit.getScheduler().callSyncMethod(Challenges.getInstance(), (Callable<Void>) () -> {
-//        endChallenge(endCause, winnerGetter);
-//        return null;
-//      });
-//      return;
-//    }
+    if (!Bukkit.isPrimaryThread()) {
+      // calling end challenge logic async results in all kinds of issues as bukkit/paper does not allow certain actions
+      // to be performed async (in some versions): PlayerGameModeChangeEvent may only be triggered synchronously
+      Logger.debug("End challenge called from async thread, scheduling sync task (Caller: {}", ReflectionUtils.getCallerName(1));
+      Bukkit.getScheduler().callSyncMethod(Challenges.getInstance(), () -> {
+        endChallenge(endCause, winnerGetter);
+        return null;
+      });
+      return;
+    }
 
     if (ChallengeAPI.isPaused()) {
       Logger.warn("{} tried to end challenge while timer was paused", ReflectionUtils.getCallerName(1));

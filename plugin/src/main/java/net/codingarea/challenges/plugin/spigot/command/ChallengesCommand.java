@@ -20,7 +20,7 @@ public class ChallengesCommand implements PlayerCommand, Completer {
   @Override
   public void onCommand(@NotNull Player player, @NotNull String[] args) {
     if (args.length > 1) {
-      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "challenges [menu]");
+      MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "challenges [menu]");
       return;
     }
 

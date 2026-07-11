@@ -101,7 +101,7 @@ public class DatabaseCommand implements PlayerCommand, TabCompleter {
     }
 
     if (args.length != 2 || !databaseExecutors.containsKey(args[1])) {
-      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "database <save/load/reset> <settings/customs>");
+      MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "database <save/load/reset> <settings/customs>");
       return;
     }
 
@@ -119,7 +119,7 @@ public class DatabaseCommand implements PlayerCommand, TabCompleter {
         executor.reset(player);
         break;
       default:
-        MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "database <save/load/reset> <settings/customs>");
+        MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "database <save/load/reset> <settings/customs>");
     }
 
   }

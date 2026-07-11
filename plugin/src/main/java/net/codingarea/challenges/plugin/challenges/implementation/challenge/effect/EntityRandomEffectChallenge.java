@@ -5,6 +5,7 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
+import net.codingarea.challenges.plugin.utils.misc.PotionEffectUtils;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
@@ -55,7 +56,7 @@ public class EntityRandomEffectChallenge extends Setting {
     if (entity.getType() == EntityType.PLAYER) return;
     PotionEffectType[] types = PotionEffectType.values();
     PotionEffectType type = globalRandom.choose(types);
-    entity.addPotionEffect(type.createEffect(Integer.MAX_VALUE, 255));
+    entity.addPotionEffect(type.createEffect(PotionEffectUtils.INFINITE_DURATION, 255));
   }
 
 }

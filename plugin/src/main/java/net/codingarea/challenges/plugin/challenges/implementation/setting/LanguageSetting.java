@@ -114,7 +114,7 @@ public class LanguageSetting extends Modifier implements SenderCommand, Complete
   @Override
   public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
     if (args.length < 1) {
-      MessageKey.of("syntax").send(sender, Prefix.CHALLENGES, "setlang <language>");
+      MessageKey.of("command.syntax").send(sender, Prefix.CHALLENGES, "setlang <language>");
       return;
     }
 

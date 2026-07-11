@@ -20,7 +20,7 @@ public class GamestateCommand implements SenderCommand, Completer {
   public void onCommand(@NotNull CommandSender sender, @NotNull String[] args) throws Exception {
 
     if (args.length != 1) {
-      MessageKey.of("syntax").send(sender, Prefix.CHALLENGES, "gamestate <reset/reload>");
+      MessageKey.of("command.syntax").send(sender, Prefix.CHALLENGES, "gamestate <reset/reload>");
       return;
     }
 
@@ -38,7 +38,7 @@ public class GamestateCommand implements SenderCommand, Completer {
         MessageKey.of("command-gamestate-reload").send(sender, Prefix.CHALLENGES);
         break;
       default:
-        MessageKey.of("syntax").send(sender, Prefix.CHALLENGES, "gamestate <reset/reload>");
+        MessageKey.of("commmand.syntax").send(sender, Prefix.CHALLENGES, "gamestate <reset/reload>");
     }
 
   }

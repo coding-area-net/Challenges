@@ -139,10 +139,10 @@ public class PlayerConnectionListener implements Listener {
       DatabaseHelper.clearCache(event.getPlayer().getUniqueId());
 
       if (Challenges.getInstance().getWorldManager().isShutdownBecauseOfReset()) {
-        event.setQuitMessage(null);
+        event.quitMessage(null);
       } else if (messages) {
-        event.setQuitMessage(null);
-        MessageKey.of("quit-message").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+        event.quitMessage(null);
+        MessageKey.of("quit-message").broadcast(Prefix.CHALLENGES, event.getPlayer());
       }
     } catch (Exception exception) {
       Challenges.getInstance().getILogger().error("Error while handling disconnect", exception);

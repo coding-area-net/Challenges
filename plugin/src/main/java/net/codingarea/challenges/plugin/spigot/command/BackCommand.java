@@ -39,7 +39,7 @@ public class BackCommand implements PlayerCommand, TabCompleter, Listener {
         count = Integer.parseInt(args[0]);
       }
     } catch (NumberFormatException formatException) {
-      MessageKey.of("syntax").send(player, Prefix.CHALLENGES, "back [count]");
+      MessageKey.of("command.syntax").send(player, Prefix.CHALLENGES, "back [count]");
       return;
     }
 

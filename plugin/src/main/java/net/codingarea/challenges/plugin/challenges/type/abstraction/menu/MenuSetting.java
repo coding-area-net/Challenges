@@ -43,6 +43,7 @@ public abstract class MenuSetting extends Setting {
     return setting;
   }
 
+  @Nullable
   public final SubSetting getSetting(@NotNull String name) {
     return settings.get(name);
   }

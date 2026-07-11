@@ -44,10 +44,6 @@ public abstract class ForceBattleDisplayGoal<T extends ForceTarget<?>> extends F
   }
 
   public void updateDisplayStand(Player player) {
-    // EntityTeleportEvent may only be triggered synchronously; tested on 26.1.2
-    // TODO hotfix; trigger should already only be scheduled sync?
-    if (ChallengeHelper.runSyncIfConcurrent(() -> updateDisplayStand(player))) return;
-
     ArmorStand armorStand = displayStands.computeIfAbsent(player, player1 -> {
       World world = player1.getWorld();
       ArmorStand entity = (ArmorStand) world
