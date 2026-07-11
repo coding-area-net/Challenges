@@ -35,18 +35,19 @@ import java.util.function.Function;
 
 public class ExtremeForceBattleGoal extends ForceBattleDisplayGoal<ForceTarget<?>> {
 
+  private final BooleanSubSetting giveItemSetting, giveBlockSetting;
+
   public ExtremeForceBattleGoal() {
-//    super(Message.forName("menu-extreme-force-battle-goal-settings"));
     super(new ItemStack(Material.BOOK), "extreme-force-battle");
 
-//    registerSetting("give-item", new BooleanSubSetting(
-//      () -> new LegacyItemBuilder(Material.CHEST, Message.forName("item-force-item-battle-goal-give-item")),
-//      false
-//    ));
-//    registerSetting("give-block", new BooleanSubSetting(
-//      () -> new LegacyItemBuilder(Material.CHEST, Message.forName("item-force-block-battle-goal-give-block")),
-//      false
-//    ));
+    giveItemSetting = registerSetting("give-item", new BooleanSubSetting(
+      new ItemStack(Material.CHEST), MessageKey.of("challenge.force-item-battle.sub.give-item"),
+      false
+    ));
+    giveBlockSetting = registerSetting("give-block", new BooleanSubSetting(
+      new ItemStack(Material.CHEST), MessageKey.of("challenge.force-block-battle.sub.give-block"),
+      false
+    ));
   }
 
   @Override
@@ -167,9 +168,9 @@ public class ExtremeForceBattleGoal extends ForceBattleDisplayGoal<ForceTarget<?
   @Override
   public void handleJokerUse(Player player) {
     ForceTarget<?> target = currentTarget.get(player.getUniqueId());
-    if (giveItemOnSkip() && target instanceof ItemTarget itemTarget) {
+    if (shouldGiveItemOnSkip() && target instanceof ItemTarget itemTarget) {
       InventoryUtils.dropOrGiveItem(player.getInventory(), player.getLocation(), itemTarget.getTarget());
-    } else if (giveBlockOnSkip() && target instanceof BlockTarget blockTarget) {
+    } else if (shouldBlockOnSkip() && target instanceof BlockTarget blockTarget) {
       InventoryUtils.dropOrGiveItem(player.getInventory(), player.getLocation(), blockTarget.getTarget());
     }
     super.handleJokerUse(player);
@@ -265,12 +266,12 @@ public class ExtremeForceBattleGoal extends ForceBattleDisplayGoal<ForceTarget<?
     }
   }
 
-  private boolean giveItemOnSkip() {
-    return getSetting("give-item").getAsBoolean();
+  private boolean shouldGiveItemOnSkip() {
+    return giveItemSetting.getAsBoolean();
   }
 
-  private boolean giveBlockOnSkip() {
-    return getSetting("give-block").getAsBoolean();
+  private boolean shouldBlockOnSkip() {
+    return giveBlockSetting.getAsBoolean();
   }
 
 }

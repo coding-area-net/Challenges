@@ -37,12 +37,17 @@ public abstract class ChallengeAction extends ChallengeSetting implements IChall
   @NotNull
   @Override
   public LocalizableMessage getSettingName() {
-    return MessageKey.of("custom.action." + getRelativeMessageKey() + ".name");
+    return getSettingMessageKey("name");
   }
 
   @NotNull
   @Override
   public LocalizableMessage getSettingDescription() {
-    return MessageKey.of("custom.action." + getRelativeMessageKey() + ".desc");
+    return getSettingMessageKey("desc");
+  }
+
+  @NotNull
+  protected LocalizableMessage getSettingMessageKey(@NotNull String keySuffix) {
+    return MessageKey.of("custom.action." + getRelativeMessageKey() + "." + keySuffix);
   }
 }

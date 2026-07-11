@@ -7,12 +7,11 @@ import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.item.DefaultItems;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.translation.Translatable;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
 
@@ -28,62 +27,57 @@ public interface SelectableKey {
   @NotNull
   ItemBuilder getDisplayItem(@NotNull Locale locale);
 
-  // TODO rename factories to represent args
+  @NotNull
+  @Contract(pure = true)
+  static SelectableKey.Option of(@NotNull String key, @NotNull ItemStack displayPreset, @NotNull LocalizableMessage name, @Nullable LocalizableMessage description) {
+    return new SelectableKey.Option(key, displayPreset, name, description);
+  }
 
+  @NotNull
   @Contract(pure = true)
   static SelectableKey.Option of(@NotNull String key, @NotNull Material displayMaterial, @NotNull LocalizableMessage name) {
-    return new SelectableKey.Option(key, new ItemStack(displayMaterial), name);
+    return of(key, new ItemStack(displayMaterial), name);
   }
 
-  @Contract(pure = true)
-  static SelectableKey.Option of(@NotNull String key, @NotNull Material displayMaterial, @NotNull Translatable name) {
-    return new SelectableKey.Option(key, new ItemStack(displayMaterial), name);
-  }
-
-  @Contract(pure = true)
-  static SelectableKey.Option of(@NotNull String key, @NotNull Material displayMaterial, @NotNull Component name) {
-    return new SelectableKey.Option(key, new ItemStack(displayMaterial), name);
-  }
-
-  @Contract(pure = true)
-  static SelectableKey.Option of(@NotNull String key, @NotNull Material displayMaterial, @NotNull String nameKey, @NotNull Object... nameArgs) {
-    return of(key, displayMaterial, MessageKey.of(nameKey).withArgs(nameArgs));
-  }
-
+  @NotNull
   @Contract(pure = true)
   static SelectableKey.Option of(@NotNull String key, @NotNull ItemStack displayPreset, @NotNull LocalizableMessage name) {
-    return new SelectableKey.Option(key, displayPreset, name);
+    return of(key, displayPreset, name, null);
   }
 
+  @NotNull
   @Contract(pure = true)
-  static SelectableKey.Option of(@NotNull String key, @NotNull ItemStack displayPreset, @NotNull Translatable name) {
-    return new SelectableKey.Option(key, displayPreset, name);
+  static SelectableKey.Option ofMaterial(@NotNull String key, @NotNull Material material) {
+    return ofName(key, material, "material.format", material);
   }
 
+  @NotNull
   @Contract(pure = true)
-  static SelectableKey.Option of(@NotNull String key, @NotNull ItemStack displayPreset, @NotNull Component name) {
-    return new SelectableKey.Option(key, displayPreset, name);
+  static SelectableKey.Option ofName(@NotNull String key, @NotNull Material displayMaterial, @NotNull String nameKey, @NotNull Object... nameArgs) {
+    String baseKey = "custom.setting." + nameKey;
+    return of(key, new ItemStack(displayMaterial), MessageKey.of(baseKey + ".name").withArgs(nameArgs), null);
   }
 
+  @NotNull
   @Contract(pure = true)
-  static SelectableKey.Option of(@NotNull String key, @NotNull ItemStack displayPreset, @NotNull String nameKey, @NotNull Object... nameArgs) {
-    return of(key, displayPreset, MessageKey.of(nameKey).withArgs(nameArgs));
+  static SelectableKey.Option ofNameDesc(@NotNull String key, @NotNull Material displayMaterial, @NotNull String nameKey, @NotNull Object... nameArgs) {
+    String baseKey = "custom.setting." + nameKey;
+    return of(key, new ItemStack(displayMaterial), MessageKey.of(baseKey + ".name").withArgs(nameArgs), MessageKey.of(baseKey + ".desc").withArgs(nameArgs));
   }
 
   @Getter
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   class Option implements SelectableKey {
 
-    // TODO DESCRIPTION?
-
     private final String key;
     private final ItemStack displayItemPreset;
-    private final Object localizableNameArg;
+    private final LocalizableMessage localizableName;
+    private final LocalizableMessage localizableDescription;
 
     @NotNull
     @Override
     public ItemBuilder getDisplayItem(@NotNull Locale locale) {
-      return DefaultItems.createMenuDisplayFormat(displayItemPreset, localizableNameArg, locale);
+      return DefaultItems.createChallengeDisplayFormat(displayItemPreset, localizableName, localizableDescription, locale);
     }
   }
 

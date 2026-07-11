@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 public class ForceHeightBattleGoal extends ForceBattleGoal<HeightTarget> {
 
   public ForceHeightBattleGoal() {
-//    super(Message.forName("menu-force-height-battle-goal-settings"));
     super(new ItemStack(Material.RABBIT_FOOT), "force-height-battle");
   }
 

@@ -25,7 +25,6 @@ import java.util.Objects;
 public class ForceAdvancementBattleGoal extends ForceBattleGoal<AdvancementTarget> {
 
   public ForceAdvancementBattleGoal() {
-//    super(Message.forName("menu-force-advancement-battle-goal-settings"));
     super(new ItemStack(Material.EXPERIENCE_BOTTLE), "force-advancement-battle");
   }
 

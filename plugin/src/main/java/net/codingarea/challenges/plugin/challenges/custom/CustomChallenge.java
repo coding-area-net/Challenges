@@ -13,17 +13,24 @@ import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.common.config.Document;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.intellij.lang.annotations.RegExp;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
 @Getter
 @ToString
 public class CustomChallenge extends Setting {
+
+  @RegExp
+  public static final String ALLOWED_NAME_REGEX = "^[A-Za-z0-9()\\[\\]\",.;:'+@#%$!? -]*$";
+  public static final Pattern ALLOWED_NAME_PATTERN = Pattern.compile(ALLOWED_NAME_REGEX);
 
   private final UUID uuid;
   private Material material;
@@ -86,7 +93,8 @@ public class CustomChallenge extends Setting {
   @NotNull
   @Override
   public LocalizableMessage getChallengeName() {
-    return LocalizableMessage.wrap(getDisplayName());
+    // wrap user input in TextComponent to escape
+    return LocalizableMessage.wrap(Component.text(getDisplayName()));
   }
 
   @Override

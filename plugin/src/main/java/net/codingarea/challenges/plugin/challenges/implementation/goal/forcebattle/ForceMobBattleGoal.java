@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 public class ForceMobBattleGoal extends ForceBattleDisplayGoal<MobTarget> {
 
   public ForceMobBattleGoal() {
-//    super(Message.forName("menu-force-mob-battle-goal-settings"));
     super(new ItemStack(Material.BOW), "force-mob-battle");
   }
 

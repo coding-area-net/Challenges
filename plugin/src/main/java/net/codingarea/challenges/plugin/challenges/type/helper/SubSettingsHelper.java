@@ -36,10 +36,10 @@ public final class SubSettingsHelper {
     return SubSettingsBuilder.createChooseMultipleItem(ENTITY_TYPE).fill(builder -> {
 
       if (any) {
-        builder.addSetting(SelectableKey.of(ANY, Material.NETHER_STAR, "item-custom-setting-entity_type-any"));
+        builder.addSetting(SelectableKey.ofName(ANY, Material.NETHER_STAR, "entity_type.any"));
       }
       if (player) {
-        builder.addSetting(SelectableKey.of("PLAYER", Material.PLAYER_HEAD, "item-custom-setting-entity_type-player"));
+        builder.addSetting(SelectableKey.ofName("PLAYER", Material.PLAYER_HEAD, "entity_type.player"));
       }
       for (EntityType type : EntityType.values()) {
         if (!type.isSpawnable() || !type.isAlive()) continue;
@@ -50,17 +50,17 @@ public final class SubSettingsHelper {
           displayMaterial = Material.STRUCTURE_VOID;
         }
 
-        builder.addSetting(SelectableKey.of(type.name(), displayMaterial, type));
+        builder.addSetting(SelectableKey.ofName(type.name(), displayMaterial, "entity_type.format", type));
       }
     });
   }
 
   public static ChooseMultipleItemSubSettingBuilder createBlockSettingsBuilder() {
     return SubSettingsBuilder.createChooseMultipleItem(BLOCK).fill(builder -> {
-      builder.addSetting(SelectableKey.of(ANY, Material.NETHER_STAR, "item-custom-setting-block-any"));
+      builder.addSetting(SelectableKey.ofName(ANY, Material.NETHER_STAR, "block.any"));
       for (Material material : ExperimentalUtils.getMaterials()) {
         if (material.isBlock() && material.isItem() && !BukkitReflectionUtils.isAir(material)) {
-          builder.addSetting(SelectableKey.of(material.name(), material, material));
+          builder.addSetting(SelectableKey.ofMaterial(material.name(), material));
         }
       }
     });
@@ -68,10 +68,10 @@ public final class SubSettingsHelper {
 
   public static ChooseMultipleItemSubSettingBuilder createItemSettingsBuilder() {
     return SubSettingsBuilder.createChooseMultipleItem(ITEM).fill(builder -> {
-      builder.addSetting(SelectableKey.of(ANY, Material.NETHER_STAR, "item-custom-setting-item-any"));
+      builder.addSetting(SelectableKey.ofName(ANY, Material.NETHER_STAR, "item.any"));
       for (Material material : ExperimentalUtils.getMaterials()) {
         if (material.isItem() && !BukkitReflectionUtils.isAir(material)) {
-          builder.addSetting(SelectableKey.of(material.name(), material, material));
+          builder.addSetting(SelectableKey.ofMaterial(material.name(), material));
         }
       }
     });
@@ -89,22 +89,22 @@ public final class SubSettingsHelper {
     ChooseItemSubSettingsBuilder builder = SubSettingsBuilder.createChooseItem(TARGET_ENTITY);
 
     if (console) {
-      // TODO generic translation; constant keys?
-      builder.addSetting(SelectableKey.of("console", Material.COMMAND_BLOCK_MINECART, "item-custom-setting-target-console"));
+      // TODO constant keys?
+      builder.addSetting(SelectableKey.ofNameDesc("console", Material.COMMAND_BLOCK_MINECART, "target.console"));
     }
 
     if (!onlyPlayer) {
-      builder.addSetting(SelectableKey.of("current", Material.DRAGON_HEAD, "item-custom-setting-target-current"));
+      builder.addSetting(SelectableKey.ofNameDesc("current", Material.DRAGON_HEAD, "target.current"));
     }
 
-    builder.addSetting(SelectableKey.of("current_player", Material.PLAYER_HEAD, "item-custom-setting-target-current_player"));
-    builder.addSetting(SelectableKey.of("random_player", Material.ZOMBIE_HEAD, "item-custom-setting-target-random_player"));
-    builder.addSetting(SelectableKey.of("every_player", Material.PLAYER_HEAD, "item-custom-setting-target-every_player"));
+    builder.addSetting(SelectableKey.ofNameDesc("current_player", Material.PLAYER_HEAD, "target.current_player"));
+    builder.addSetting(SelectableKey.ofNameDesc("random_player", Material.ZOMBIE_HEAD, "target.random_player"));
+    builder.addSetting(SelectableKey.ofNameDesc("every_player", Material.PLAYER_HEAD, "target.every_player"));
 
     if (everyMob && !onlyPlayer) {
-      builder.addSetting(SelectableKey.of("every_mob", Material.WITHER_SKELETON_SKULL, "item-custom-setting-target-every_mob"));
-      builder.addSetting(SelectableKey.of("every_mob_except_current", Material.SKELETON_SKULL, "item-custom-setting-target-every_mob_except_current"));
-      builder.addSetting(SelectableKey.of("every_mob_except_players", Material.SKELETON_SKULL, "item-custom-setting-target-every_mob_except_players"));
+      builder.addSetting(SelectableKey.ofNameDesc("every_mob", Material.WITHER_SKELETON_SKULL, "target.every_mob"));
+      builder.addSetting(SelectableKey.ofNameDesc("every_mob_except_current", Material.SKELETON_SKULL, "target.every_mob_except_current"));
+      builder.addSetting(SelectableKey.ofNameDesc("every_mob_except_players", Material.SKELETON_SKULL, "target.every_mob_except_players"));
     }
     return builder;
   }
@@ -146,9 +146,10 @@ public final class SubSettingsHelper {
 
   public static SubSettingsBuilder createStructureSettingsBuilder() {
     return SubSettingsBuilder.createChooseItem(STRUCTURE).fill(builder -> {
-      builder.addSetting(SelectableKey.of("random_structure", Material.STRUCTURE_BLOCK, "item-custom-action-place_structure-random"));
+      builder.addSetting(SelectableKey.ofName("random_structure", Material.STRUCTURE_BLOCK, "structure_type.random"));
       for (StructureType structure : StructureType.getStructureTypes().values()) {
-        builder.addSetting(SelectableKey.of(structure.getName(), StructureUtils.getStructureIcon(structure), StringUtils.getEnumName(structure.getName())));
+        builder.addSetting(SelectableKey.ofName(structure.getName(), StructureUtils.getStructureIcon(structure),
+          "structure_type.format", StringUtils.getEnumName(structure.getName())));
       }
     });
   }

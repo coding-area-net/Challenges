@@ -51,6 +51,7 @@ public abstract class MenuSetting extends Setting {
   public void handleClick(@NotNull ChallengeMenuClickInfo info) {
     if (isEnabled() && !info.isRightClick() && info.isLowerItemClick()) {
       openMenu(info);
+      SoundSample.CLICK.play(info.getPlayer());
     } else {
       super.handleClick(info);
     }

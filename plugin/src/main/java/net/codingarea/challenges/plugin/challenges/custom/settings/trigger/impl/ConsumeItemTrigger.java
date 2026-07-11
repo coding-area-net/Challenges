@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class ConsumeItemTrigger extends ChallengeTrigger {
 
@@ -16,12 +17,13 @@ public class ConsumeItemTrigger extends ChallengeTrigger {
     super(name, SubSettingsBuilder.createChooseMultipleItem(SubSettingsHelper.ITEM).fill(builder -> {
       for (Material material : ExperimentalUtils.getMaterials()) {
         if (material.isEdible()) {
-          builder.addSetting(SelectableKey.of(material.name(), material, material));
+          builder.addSetting(SelectableKey.ofMaterial(material.name(), material));
         }
       }
     }));
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.COOKED_BEEF;

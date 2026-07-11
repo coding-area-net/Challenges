@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public class ForceBiomeBattleGoal extends ForceBattleGoal<BiomeTarget> {
 
   public ForceBiomeBattleGoal() {
-//    super(Message.forName("menu-force-biome-battle-goal-settings"));
     super(new ItemStack(Material.FILLED_MAP), "force-biome-battle");
   }
 

@@ -20,14 +20,15 @@ import java.util.stream.Collectors;
 @Since("2.1.3")
 public class ForceItemBattleGoal extends ForceBattleDisplayGoal<ItemTarget> {
 
+  private final BooleanSubSetting giveItemSetting;
+
   public ForceItemBattleGoal() {
-//    super(Message.forName("menu-force-item-battle-goal-settings"));
     super(new ItemStack(Material.ITEM_FRAME), "force-item-battle");
 
-//    registerSetting("give-item", new BooleanSubSetting(
-//      () -> new LegacyItemBuilder(Material.CHEST, Message.forName("item-force-item-battle-goal-give-item")),
-//      false
-//    ));
+    giveItemSetting = registerSetting("give-item", new BooleanSubSetting(
+      new ItemStack(Material.CHEST), getChallengeMessageKey("sub.give-item"),
+      false
+    ));
   }
 
   @Override
@@ -53,7 +54,7 @@ public class ForceItemBattleGoal extends ForceBattleDisplayGoal<ItemTarget> {
 
   @Override
   public void handleJokerUse(Player player) {
-    if (giveItemOnSkip()) {
+    if (shouldGiveItemOnSkip()) {
       InventoryUtils.dropOrGiveItem(player.getInventory(), player.getLocation(), currentTarget.get(player.getUniqueId()).getTarget());
     }
     super.handleJokerUse(player);
@@ -83,8 +84,8 @@ public class ForceItemBattleGoal extends ForceBattleDisplayGoal<ItemTarget> {
     }
   }
 
-  private boolean giveItemOnSkip() {
-    return getSetting("give-item").getAsBoolean();
+  private boolean shouldGiveItemOnSkip() {
+    return giveItemSetting.getAsBoolean();
   }
 
 }

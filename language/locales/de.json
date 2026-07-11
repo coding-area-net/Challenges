@@ -1291,16 +1291,16 @@
       ]
     },
     "jump-and-run": {
-      "name": "*JumpAndRun*",
+      "name": "*Jump and Run*",
       "desc": [
         "In einem gesetzten *Intervall* muss ein",
-        "*zufälliger Spieler* ein *JumpAndRun* absolvieren",
+        "*zufälliger Spieler* ein *Jump and Run* absolvieren",
         "Schafft er es *nicht*, *stirbt* er"
       ],
       "actionbar": "{@actionbar.format('*Jump & Run* <dark_gray>{@symbol.vertical}</dark_gray> <green><b>{0}</b></green> <gray>/</gray> <yellow>{1}</yellow>')}",
-      "countdown": "Nächstes <gold>JumpAndRun </gold><gray>in </gray><yellow>{0} Sekunden</yellow>",
-      "countdown-one": "Nächstes <gold>JumpAndRun </gold><gray>in </gray><yellow>einer Sekunde</yellow>",
-      "finished": "<yellow>{0} </yellow><gray>hat das </gray><gold>JumpAndRun </gold><green>geschafft</green>"
+      "countdown": "<gray>Nächstes {@name} in <yellow>{0} Sekunden</yellow></gray>",
+      "countdown-one": "<gray>Nächstes {@name} in <yellow>einer Sekunde</yellow></gray>",
+      "finished": "<yellow>{0}</yellow> <gray>hat das</gray> {@name} <green>geschafft</green>"
     },
     "one-durability": {
       "name": "*Eine Haltbarkeit*",
@@ -1590,69 +1590,122 @@
         "The first player to gain full health wins."
       ]
     },
+    "force-battles": {
+      "sub": {
+        "goal-jokers": {
+          "name": "*Anzahl der Joker*",
+          "desc": [
+            "Die *Anzahl* der *Joker*,",
+            "die jeder Spieler hat um das",
+            "aktuelle Ziel zu *überspringen*"
+          ]
+        },
+        "scoreboard": {
+          "name": "*Scoreboard anzeigen*",
+          "desc": [
+            "Ob das *Scoreboard* angezeigt,",
+            "mit der *aktuellen Bestenliste*",
+            "angezeigt werden soll"
+          ]
+        },
+        "duped-targets": {
+          "name": "*Doppelte Ziele*",
+          "desc": [
+            "Ob Ziele *mehrfach vorkommen* können"
+          ]
+        }
+      }
+    },
     "force-item-battle": {
-      "name": "*Force Item Battle*",
+      "name": "*{@menu}*",
       "desc": [
         "Jeder Spieler bekommt ein *zufälliges Item*,",
         "das er finden muss.",
         "Wer am Ende die *meisten Items* hat, gewinnt"
-      ]
+      ],
+      "menu": "Force Item Battle",
+      "sub": {
+        "give-item": {
+          "name": "*Item geben*",
+          "desc": [
+            "Wenn ein Spieler ein Item *skippt*,",
+            "wird dieses in sein *Inventar hinzugefügt*"
+          ]
+        }
+      }
     },
     "force-mob-battle": {
-      "name": "*Force Mob Battle*",
+      "name": "*{@menu}*",
       "desc": [
         "Jeder Spieler bekommt ein *zufälliges Mob*,",
         "das er töten muss."
-      ]
+      ],
+      "menu": "Force Mob Battle"
     },
     "force-advancement-battle": {
-      "name": "*Force Advancement Battle*",
+      "name": "*{@menu}*",
       "desc": [
         "Jeder Spieler bekommt ein *zufälliges*",
         "*Advancement*, welches er erreichen muss."
-      ]
+      ],
+      "menu": "Force Advancement Battle"
     },
     "force-block-battle": {
-      "name": "*Force Block Battle*",
+      "name": "*{@menu}*",
       "desc": [
         "Jeder Spieler bekommt einen *zufälligen*",
         "*Block*, auf welchem er stehen muss"
-      ]
+      ],
+      "menu": "Force Block Battle",
+      "sub": {
+        "give-block": {
+          "name": "*Block geben*",
+          "desc": [
+            "Wenn ein Spieler einen Block *skippt*,",
+            "wird dieser in sein *Inventar hinzugefügt*"
+          ]
+        }
+      }
     },
     "force-biome-battle": {
-      "name": "*Force Biome Battle*",
+      "name": "*{@menu}*",
       "desc": [
         "Jeder Spieler bekommt ein *zufälliges Biom*,",
         "das er betreten muss"
-      ]
+      ],
+      "menu": "Force Biome Battle"
     },
     "force-damage-battle": {
-      "name": "*Force Damage Battle*",
+      "name": "*{@menu}*",
       "desc": [
         "Jeder Spieler bekommt eine *zufällige Anzahl Schaden*,",
         "die er *erhalten* muss"
-      ]
+      ],
+      "menu": "Force Damage Battle"
     },
     "force-height-battle": {
-      "name": "*Force Height Battle*",
+      "name": "*{@menu}*",
       "desc": [
         "Jeder Spieler bekommt eine *zufällige Höhe*,",
         "auf der er sich befinden muss."
-      ]
+      ],
+      "menu": "Force Height Battle"
     },
     "force-position-battle": {
-      "name": "*Force Position Battle*",
+      "name": "*{@menu}*",
       "desc": [
         "Jeder Spieler bekommt eine *zufällige Position*,",
         "die er erreichen muss."
-      ]
+      ],
+      "menu": "Force Position Battle"
     },
     "extreme-force-battle": {
-      "name": "*Extreme Force Battle*",
+      "name": "*{@menu}*",
       "desc": [
         "Jeder Spieler bekommt ein *zufälliges Ziel*,",
         "welches er erreichen muss"
-      ]
+      ],
+      "menu": "Extreme Force Battle"
     },
     "last-man-standing": {
       "name": "*Last Man Standing*",
@@ -1694,8 +1747,7 @@
         "name": "*Genereller Schaden*",
         "desc": [
           "Stellt ein, ob du Schaden bekommen kannst",
-          "Du kannst *weiterhin* Schaden durch",
-          "*Challenges* sterben"
+          "Du kannst *weiterhin* durch *Challenges* sterben"
         ]
       },
       "fire": {
@@ -1934,18 +1986,9 @@
       "item-custom-trigger-damage-any": [
         "<green>Jeglicher Grund</green>"
       ],
-      "item-custom-trigger-damage_by_player": [
-        "<red>Entity Bekommt Schaden Von Spieler</red>"
-      ],
-      "item-custom-trigger-intervall-second": [
-        "<gold>Jede Sekunde</gold>"
-      ],
-      "item-custom-trigger-intervall-seconds": [
-        "<gold>Alle {0} Sekunden</gold>"
-      ],
-      "item-custom-trigger-intervall-minutes": [
-        "<gold>Alle {0} Minuten</gold>"
-      ],
+      "damage_by_player": {
+        "name": "*Entity bekommt Schaden von Spieler*"
+      },
       "block_place": {
         "name": "*Block platziert*"
       },
@@ -2185,6 +2228,95 @@
           "Ein *zufälliger* Spieler muss ein *Jump And Run*",
           "absolvieren oder er *stirbt*"
         ]
+      }
+    },
+    "setting": {
+      "interval": {
+        "second": {
+          "name": "*Jede* Sekunde"
+        },
+        "seconds": {
+          "name": "*Alle {0} Sekunden*"
+        },
+        "minutes": {
+          "name": "*Alle {0} Minuten*"
+        }
+      },
+      "target": {
+        "console": {
+          "name": "*Konsole*",
+          "desc": [
+            "Die Aktion wird für die *Serverkonsole* ausgeführt",
+            "<i>Wenn die Aktion nur für Kreaturen ausgeführt werden kann,</i>",
+            "<i>wird nicht passieren</i>"
+          ]
+        },
+        "current": {
+          "name": "*Auslösende Kreatur*",
+          "desc": [
+            "Die Aktion wird für *die Kreatur* ausgeführt,",
+            "die den *Auslöser* ausgeführt hat"
+          ]
+        },
+        "current_player": {
+          "name": "*Auslösender Spieler*",
+          "desc": [
+            "Die Aktion wird für *den Spieler* ausgeführt,",
+            "der den *Auslöser* ausgeführt hat",
+            "<i>Wenn die auslösende Kreatur kein Spieler ist,</i>",
+            "<i>wird nicht passieren</i>"
+          ]
+        },
+        "random_player": {
+          "name": "*Zufälliger Spieler*",
+          "desc": [
+            "Die Aktion wird für einen *zufällig*",
+            "ausgewählten *Spieler* ausgeführt"
+          ]
+        },
+        "every_player": {
+          "name": "*Alle Spieler*",
+          "desc": [
+            "Die Aktion wird für *alle Spieler* ausgeführt"
+          ]
+        },
+        "every_mob": {
+          "name": "*Jeder Kreatur*",
+          "desc": [
+            "Die Aktion wird für *alle Kreaturen*",
+            "(inklusive *Spieler*) ausgeführt"
+          ]
+        },
+        "every_mob_except_current": {
+          "name": "*Alle Kreaturen außer Auslösendes*",
+          "desc": [
+            "Die Aktion wird für *alle Kreaturen*",
+            "(inklusive *Spieler*) ausgeführt,",
+            "außer der *auslösenden Kreatur*"
+          ]
+        },
+        "every_mob_except_players": {
+          "name": "*Alle Kreaturen außer Spieler*",
+          "desc": [
+            "Die Aktion wird für *alle Kreaturen*",
+            "aber keine *Spieler* ausgeführt"
+          ]
+        }
+      },
+      "block": {
+        "any": {
+          "name": "*Jeglicher Block*"
+        }
+      },
+      "item": {
+        "any": {
+          "name": "*Jegliches Item*"
+        }
+      },
+      "structure_type": {
+        "random": {
+          "name": "*Zufällige Struktur*"
+        }
       }
     }
   },
@@ -2604,208 +2736,18 @@
     "Speichere vorm verlassen manuell <yellow>/db save customs</yellow>",
     " "
   ],
-  "custom-main-view-challenges": "<gold>Challenges Ansehen</gold>",
-  "custom-main-create-challenge": "<green>Challenge Erstellen</green>",
-  "custom-title-trigger": "Auslöser",
-  "custom-title-action": "Aktion",
   "custom-title-view": "Gespeichert",
   "custom-sub-finish": "<green>Fertig</green>",
-  "item-custom-info-delete": [
-    "<red>Löschen</red>",
-    "*Achtung* diese Aktion kann *nicht*",
-    "rückgängig gemacht werden"
-  ],
-  "item-custom-info-save": "<green>Speichern</green>",
-  "item-custom-info-trigger": [
-    "<red>Auslöser</red>",
-    "*Klicke* um einzustellen, was passieren",
-    "muss, damit die *Aktion* ausgeführt wird"
-  ],
-  "item-custom-info-action": [
-    "<aqua>Aktion</aqua>",
-    "*Klicke* um einzustellen, was passieren",
-    "soll, wenn der *Auslöser* erfüllt ist"
-  ],
-  "item-custom-info-material": [
-    "<gold>Anzeige Item</gold>",
-    "*Klicke* um das Anzeigeitem zu ändern"
-  ],
-  "item-custom-info-name": [
-    "<gold>Name</gold>",
-    "*Klicke* um den Namen über den Chat zu ändern",
-    "Maximale Zeichenanzahl: 50"
-  ],
-  "custom-info-currently": "<gray>Eingestellt </gray><dark_gray>» </dark_gray><yellow></yellow>",
-  "custom-info-trigger": "<gray>Auslöser</gray>",
-  "custom-info-action": "<gray>Aktion</gray>",
-  "item-custom-action-command": [
-    "<dark_red>Command Ausführen</dark_red>",
-    "Lasse Spieler einen Command ausführen lassen",
-    "Die Commands werden für Spieler mit */execute as* von",
-    "der Konsole ausgeführt.",
-    "Erlaubte Commands werden in der Config eingestellt.",
-    "Der Spieler braucht *keine Rechte* auf den Command haben.",
-    "Spieler können *keine Plugin Commands* ausführen."
-  ],
-  "item-custom-action-kill": [
-    "<dark_red>Töten</dark_red>",
-    "Töte Entities"
-  ],
-  "item-custom-action-damage": [
-    "<red>Schaden</red>",
-    "Füge Entities Schaden zu"
-  ],
-  "item-custom-action-heal": [
-    "<green>Heilen</green>",
-    "Heile Entities"
-  ],
-  "item-custom-action-hunger": [
-    "<gold>Hunger</gold>",
-    "Füge Spielern Hunger hinzu"
-  ],
-  "item-custom-action-max_health": [
-    "<red>Maximale Leben Verändern</red>",
-    "Verändere die Maximalen Leben von Spielern",
-    "Wird mit einem */gamestate reset* zurückgesetzt"
-  ],
   "item-custom-action-max_health-offset": [
     "<red>Veränderung</red>",
     "Wähle aus wie viele Leben verändert werden sollen"
   ],
-  "item-custom-action-spawn_entity": [
-    "<dark_aqua>Entity Spawnen</dark_aqua>",
-    "Spawne ein Entity bestimmten Types"
-  ],
-  "item-custom-action-random_mob": [
-    "<gold>Zufälliges Entity</gold>",
-    "Spawne ein zufälliges Entity"
-  ],
-  "item-custom-action-random_item": [
-    "<aqua>Zufälliges Item</aqua>",
-    "Gebe Spielern zufällige Items"
-  ],
-  "item-custom-action-uncraft_inventory": [
-    "<yellow>Inventar Zurück-Craften</yellow>",
-    "Lasse das Inventar von Spielern Zurück-Craften"
-  ],
-  "item-custom-action-boost_in_air": [
-    "<white>In Luft Schleudern</white>",
-    "Schleudere Entities in die Luft"
-  ],
   "item-custom-action-boost_in_air-strength": [
     "<white>Stärke</white>"
-  ],
-  "item-custom-action-potion_effect": [
-    "<light_purple>Trank Effekt</light_purple>",
-    "Gebe Entities einen bestimmten Trank Effekt"
-  ],
-  "item-custom-action-permanent_effect": [
-    "<gold>Permanenten Trank Effekt</gold>",
-    "Füge Spieler einen Permanenten Effekt hinzu.",
-    "Die Aktion nutzt die Einstellungen",
-    "von der Permanenten Effekt Challenge."
-  ],
-  "item-custom-action-random_effect": [
-    "<light_purple>Zufälliger Trank Effekt</light_purple>",
-    "Gebe Entities einen zufälligen Trank Effekt"
-  ],
-  "item-custom-action-clear_inventory": [
-    "<red>Inventar Leeren</red>",
-    "Leere das Inventar von Spielern komplett"
-  ],
-  "item-custom-action-drop_random_item": [
-    "<green>Item Aus Inventar Droppen</green>",
-    "Droppe ein Item aus dem Inventar auf den Boden"
-  ],
-  "item-custom-action-remove_random_item": [
-    "<red>Item Aus Inventar Entfernen</red>",
-    "Entferne ein Item aus dem Inventar"
-  ],
-  "item-custom-action-swap_random_item": [
-    "<gold>Items Im Inventar Tauschen</gold>",
-    "Tausche zwei Item im Inventar"
-  ],
-  "item-custom-action-freeze": [
-    "<aqua>Freeze</aqua>",
-    "Friere Mobs Zeitweise ein.",
-    "Die Aktion nutzt die Einstellungen",
-    "von der Freeze On Damage Challenge."
-  ],
-  "item-custom-action-invert_health": [
-    "<red>Invert Health</red>",
-    "Invertiere die Herzen eines Spielers.",
-    "Wenn du *8 Herzen* hast,",
-    "hast du danach *2 Herzen* und umgekehrt."
-  ],
-  "item-custom-action-water_mlg": [
-    "<blue>Water MLG</blue>",
-    "Alle Spieler müssen einen Water MLG machen"
-  ],
-  "item-custom-action-win": [
-    "<gold>Gewinnen</gold>",
-    "Die Challenge wird von *bestimmten Spielern* gewonnen"
-  ],
-  "item-custom-action-random_hotbar": [
-    "<yellow>Zufällige Hotbar</yellow>",
-    "Das Inventar wird geleert und der Spieler",
-    "bekommt zufällige Items in die HotBar"
-  ],
-  "item-custom-action-modify_border": [
-    "<aqua>World Border Verändern</aqua>",
-    "Mache die Worldborder *größer* <gray>oder *kleiner*</gray>"
   ],
   "item-custom-action-modify_border-change": [
     "<light_purple>Veränderung</light_purple>"
   ],
-  "item-custom-action-swap_mobs": [
-    "<dark_purple>Mobs tauschen</dark_purple>",
-    "Tausche ein Mob mit einem zufälligen",
-    "anderem Mob aus der gleichen Welt"
-  ],
-  "item-custom-action-place_structure": [
-    "<green>Struktur Platzieren</green>",
-    "Platziert eine Struktur"
-  ],
-  "item-custom-action-place_structure-random": "<aqua>Zufällige Struktur</aqua>",
-  "item-custom-setting-target-current": [
-    "<gold>Aktives Entity</gold>",
-    "Die Aktion wird für das *aktive Entity* ausgeführt"
-  ],
-  "item-custom-setting-target-every_mob": [
-    "<dark_red>Alle Mobs</dark_red>",
-    "Die Aktion wird für *alle Mobs* ausgeführt"
-  ],
-  "item-custom-setting-target-every_mob_except_current": [
-    "<dark_red>Alle Mobs Außer Aktives</dark_red>",
-    "Die Aktion wird für *alle Mobs*",
-    "*außer* das Aktive ausgeführt ausgeführt"
-  ],
-  "item-custom-setting-target-every_mob_except_players": [
-    "<dark_red>Alle Mobs Außer Spieler</dark_red>",
-    "Die Aktion wird für *alle Mobs*",
-    "*außer* Spieler ausgeführt"
-  ],
-  "item-custom-setting-target-random_player": [
-    "<dark_purple>Zufälliger Spieler</dark_purple>",
-    "Die Aktion wird für einen *zufälligen Spieler* ausgeführt"
-  ],
-  "item-custom-setting-target-every_player": [
-    "<red>Alle Spieler</red>",
-    "Die Aktion wird für *jeden Spieler* ausgeführt"
-  ],
-  "item-custom-setting-target-current_player": [
-    "<green>Aktiver Spieler</green>",
-    "Die Aktion wird für den *aktiven Spieler* ausgeführt",
-    "<gray><italic>Wenn das Entity kein Spieler ist, wird nichts passieren</italic></gray>"
-  ],
-  "item-custom-setting-target-console": [
-    "<dark_red>Konsole</dark_red>",
-    "Die Aktion wird für die *Konsole* ausgeführt"
-  ],
-  "item-custom-setting-entity_type-any": "<red>Jegliches Entity</red>",
-  "item-custom-setting-entity_type-player": "<green>Spieler</green>",
-  "item-custom-setting-block-any": "<dark_green>Jeglicher Block</dark_green>",
-  "item-custom-setting-item-any": "<dark_green>Jegliches Item</dark_green>",
   "custom-subsetting-target_entity": "Ziel Entity",
   "custom-subsetting-entity_type": "Entity Typ",
   "custom-subsetting-liquid": "Flüssigkeit",

@@ -18,14 +18,15 @@ import java.util.stream.Collectors;
 @Since("2.2.0")
 public class ForceBlockBattleGoal extends ForceBattleDisplayGoal<BlockTarget> {
 
+  private final BooleanSubSetting giveBlockSetting;
+
   public ForceBlockBattleGoal() {
-//    super(Message.forName("menu-force-block-battle-goal-settings"));
     super(new ItemStack(Material.CHEST), "force-block-battle");
 
-//    registerSetting("give-block", new BooleanSubSetting(
-//      () -> new LegacyItemBuilder(Material.CHEST, Message.forName("item-force-block-battle-goal-give-block")),
-//      false
-//    ));
+    giveBlockSetting = registerSetting("give-block", new BooleanSubSetting(
+      new ItemStack(Material.CHEST), getChallengeMessageKey("sub.give-block"),
+      false
+    ));
   }
 
   @Override
@@ -52,7 +53,7 @@ public class ForceBlockBattleGoal extends ForceBattleDisplayGoal<BlockTarget> {
   @Override
   public void handleJokerUse(Player player) {
     super.handleJokerUse(player);
-    if (giveBlockOnSkip()) {
+    if (shouldGiveBlockOnSkip()) {
       InventoryUtils.dropOrGiveItem(player.getInventory(), player.getLocation(), currentTarget.get(player.getUniqueId()).getTarget());
     }
   }
@@ -68,8 +69,8 @@ public class ForceBlockBattleGoal extends ForceBattleDisplayGoal<BlockTarget> {
     });
   }
 
-  private boolean giveBlockOnSkip() {
-    return getSetting("give-block").getAsBoolean();
+  private boolean shouldGiveBlockOnSkip() {
+    return giveBlockSetting.getAsBoolean();
   }
 
 }

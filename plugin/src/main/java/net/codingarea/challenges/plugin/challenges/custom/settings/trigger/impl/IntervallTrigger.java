@@ -18,23 +18,22 @@ public class IntervallTrigger extends ChallengeTrigger {
 
   public IntervallTrigger(@NotNull String name) {
     super(name, SubSettingsBuilder.createChooseItem("time").fill(builder -> {
-      builder.addSetting(SelectableKey.of("1", Material.MUSIC_DISC_13, "item-custom-trigger-intervall-second", "1"));
-      String seconds = "item-custom-trigger-intervall-seconds";
-      builder.addSetting(SelectableKey.of("2", Material.MUSIC_DISC_CAT, seconds, "2"));
-      builder.addSetting(SelectableKey.of("5", Material.MUSIC_DISC_BLOCKS, seconds, "5"));
-      builder.addSetting(SelectableKey.of("10", Material.MUSIC_DISC_CHIRP, seconds, "10"));
-      builder.addSetting(SelectableKey.of("20", Material.MUSIC_DISC_FAR, seconds, "20"));
-      builder.addSetting(SelectableKey.of("30", Material.MUSIC_DISC_MALL, seconds, "30"));
-      builder.addSetting(SelectableKey.of("60", Material.MUSIC_DISC_MELLOHI, seconds, "60"));
-      String minutes = "item-custom-trigger-intervall-minutes";
-      builder.addSetting(SelectableKey.of("120", Material.MUSIC_DISC_STAL, minutes, "2"));
-      builder.addSetting(SelectableKey.of("180", Material.MUSIC_DISC_STRAD, minutes, "3"));
-      builder.addSetting(SelectableKey.of("240", Material.MUSIC_DISC_WARD, minutes, "4"));
-      builder.addSetting(SelectableKey.of("300", Material.MUSIC_DISC_11, minutes, "5"));
+      builder.addSetting(SelectableKey.ofName("1", Material.MUSIC_DISC_13, "interval.second", "1"));
+      builder.addSetting(SelectableKey.ofName("2", Material.MUSIC_DISC_CAT, "interval.seconds", "2"));
+      builder.addSetting(SelectableKey.ofName("5", Material.MUSIC_DISC_BLOCKS, "interval.seconds", "5"));
+      builder.addSetting(SelectableKey.ofName("10", Material.MUSIC_DISC_CHIRP, "interval.seconds", "10"));
+      builder.addSetting(SelectableKey.ofName("20", Material.MUSIC_DISC_FAR, "interval.seconds", "20"));
+      builder.addSetting(SelectableKey.ofName("30", Material.MUSIC_DISC_MALL, "interval.seconds", "30"));
+      builder.addSetting(SelectableKey.ofName("60", Material.MUSIC_DISC_MELLOHI, "interval.seconds", "60"));
+      builder.addSetting(SelectableKey.ofName("120", Material.MUSIC_DISC_STAL, "interval.minutes", "2"));
+      builder.addSetting(SelectableKey.ofName("180", Material.MUSIC_DISC_STRAD, "interval.minutes", "3"));
+      builder.addSetting(SelectableKey.ofName("240", Material.MUSIC_DISC_WARD, "interval.minutes", "4"));
+      builder.addSetting(SelectableKey.ofName("300", Material.MUSIC_DISC_11, "interval.minutes", "5"));
     }));
     Challenges.getInstance().getScheduler().register(this);
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.CLOCK;

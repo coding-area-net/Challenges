@@ -61,7 +61,10 @@ public final class ChallengeHelper {
     if (Bukkit.isPrimaryThread()) {
       return false;
     }
-    Bukkit.getScheduler().runTask(Challenges.getInstance(), task);
+    Bukkit.getScheduler().callSyncMethod(Challenges.getInstance(), () -> {
+      task.run();
+      return null;
+    });
     return true;
   }
 

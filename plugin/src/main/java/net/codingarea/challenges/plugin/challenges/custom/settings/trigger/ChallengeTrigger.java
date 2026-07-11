@@ -34,13 +34,18 @@ public abstract class ChallengeTrigger extends ChallengeSetting implements IChal
   @NotNull
   @Override
   public LocalizableMessage getSettingName() {
-    return MessageKey.of("custom.trigger." + getRelativeMessageKey() + ".name");
+    return getSettingMessageKey("name");
   }
 
   @NotNull
   @Override
   public LocalizableMessage getSettingDescription() {
-    return MessageKey.of("custom.trigger." + getRelativeMessageKey() + ".desc");
+    return getSettingMessageKey("desc");
+  }
+
+  @NotNull
+  protected LocalizableMessage getSettingMessageKey(@NotNull String keySuffix) {
+    return MessageKey.of("custom.trigger." + getRelativeMessageKey() + "." + keySuffix);
   }
 
 }

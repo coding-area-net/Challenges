@@ -5,7 +5,6 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.sub.Selectabl
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.ChallengeTrigger;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
-import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import org.bukkit.Bukkit;
@@ -19,8 +18,8 @@ public class InLiquidTrigger extends ChallengeTrigger {
 
   public InLiquidTrigger(String name) {
     super(name, SubSettingsBuilder.createChooseMultipleItem(SubSettingsHelper.LIQUID).fill(builder -> {
-      builder.addSetting(SelectableKey.of("LAVA", Material.LAVA_BUCKET, LocalizableMessage.wrap("§cLava")));
-      builder.addSetting(SelectableKey.of("WATER", Material.WATER_BUCKET, LocalizableMessage.wrap("§9Water")));
+      builder.addSetting(SelectableKey.ofName("LAVA", Material.LAVA_BUCKET, "custom.setting.liquid.lava"));
+      builder.addSetting(SelectableKey.ofName("WATER", Material.WATER_BUCKET, "custom.setting.liquid.water"));
     }));
     Challenges.getInstance().getScheduler().register(this);
   }

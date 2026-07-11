@@ -26,7 +26,7 @@ public class EntityDamageTrigger extends ChallengeTrigger {
         Arrays.asList(PotionEffectType.values()));
       Collections.shuffle(types, new Random(1));
 
-      builder.addSetting(SelectableKey.of(SubSettingsHelper.ANY, Material.NETHER_STAR, "item-custom-trigger-damange-any"));
+      builder.addSetting(SelectableKey.ofName(SubSettingsHelper.ANY, Material.NETHER_STAR, "item-custom-trigger-damange-any"));
 
       DamageCause[] values = DamageCause.values();
       for (int i = 0; i < values.length; i++) {

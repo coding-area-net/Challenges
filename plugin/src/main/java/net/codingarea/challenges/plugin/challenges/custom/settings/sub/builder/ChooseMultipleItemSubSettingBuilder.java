@@ -40,7 +40,7 @@ public class ChooseMultipleItemSubSettingBuilder extends GeneratorSubSettingsBui
     List<Object> valueNameArgs = new ArrayList<>(values.length);
     for (String value : values) {
       SelectableKey.Option option = settings.get(value);
-      if (option != null) valueNameArgs.add(option.getLocalizableNameArg());
+      if (option != null) valueNameArgs.add(option.getLocalizableName());
     }
 
     SubSettingDisplay display = new SubSettingDisplay(getKeyTranslation(this.getKey()), LocalizableMessage.joinList(2, valueNameArgs));

@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public class ForceDamageBattleGoal extends ForceBattleGoal<DamageTarget> {
 
   public ForceDamageBattleGoal() {
-//    super(Message.forName("menu-force-damage-battle-goal-settings"));
     super(new ItemStack(Material.TOTEM_OF_UNDYING), "force-damage-battle");
   }
 

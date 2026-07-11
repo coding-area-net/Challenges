@@ -1,10 +1,10 @@
 package net.codingarea.challenges.plugin.utils.misc;
 
-import io.papermc.paper.world.flag.FeatureDependant;
 import net.codingarea.challenges.plugin.Challenges;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,17 +26,18 @@ public class ExperimentalUtils {
 
     World world = Challenges.getInstance().getGameWorldStorage().getWorld(World.Environment.NORMAL);
     for (Material material : Material.values()) {
-      try {
-        FeatureDependant feature = material.isItem() ? material.asItemType() : material.asBlockType();
-        if (feature != null && !world.isEnabled(feature)) {
-          continue;
-        }
-      } catch (NoSuchMethodError ignored) {
-      } // only NoSuchMethodException
-
+      if (!isMaterialFeatureEnabled(material, world)) continue;
       materials.add(material);
     }
     ExperimentalUtils.materials = materials.toArray(new Material[0]);
+  }
+
+  private static boolean isMaterialFeatureEnabled(@NotNull Material material, @NotNull World world) {
+    try {
+      return FeatureDependentAccessor.isMaterialFeatureEnabled(material, world);
+    } catch (Throwable _) {
+      return true;
+    }
   }
 
   public static EntityType[] getEntityTypes() {
@@ -51,16 +52,19 @@ public class ExperimentalUtils {
 
     World world = Challenges.getInstance().getGameWorldStorage().getWorld(World.Environment.NORMAL);
     for (EntityType type : EntityType.values()) {
-      try {
-        if (!world.isEnabled(type)) {
-          continue;
-        }
-      } catch (NoSuchMethodError | IllegalArgumentException ignored) {
-      } // only NoSuchMethodException
+      if (!isEntityTypeFeatureEnabled(type, world)) continue;
 
       entityTypes.add(type);
     }
     ExperimentalUtils.entityTypes = entityTypes.toArray(new EntityType[0]);
+  }
+
+  private static boolean isEntityTypeFeatureEnabled(@NotNull EntityType entityType, @NotNull World world) {
+    try {
+      return FeatureDependentAccessor.isEntityTypeFeatureEnabled(entityType, world);
+    } catch (Throwable _) {
+      return true;
+    }
   }
 
 }
