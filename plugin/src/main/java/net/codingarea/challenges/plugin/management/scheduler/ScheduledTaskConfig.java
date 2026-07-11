@@ -6,7 +6,7 @@ import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true) // MUST include super.async - see AbstractTaskConfig
 public final class ScheduledTaskConfig extends AbstractTaskConfig {
 
   private final int rate;
