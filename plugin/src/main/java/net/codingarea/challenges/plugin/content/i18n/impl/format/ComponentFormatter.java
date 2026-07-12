@@ -22,6 +22,7 @@ public final class ComponentFormatter {
 
   public static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
   public static final LegacyComponentSerializer LEGACY_SECTION = LegacyComponentSerializer.legacySection(); // temp migration impl
+  public static final LegacyComponentSerializer LEGACY_AMPERSAND = LegacyComponentSerializer.legacyAmpersand(); // custom user input
 
   /**
    * MiniMessage tag name prefix used to insert positional arguments ({@code {0}}, {@code {1}}, ...)

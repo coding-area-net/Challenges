@@ -20,7 +20,6 @@ import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.commons.common.collection.IRandom;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -62,7 +61,7 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
     this.menuType = MenuType.CUSTOM;
     this.uuid = customChallenge.getUniqueId();
     this.material = customChallenge.getMaterial();
-    this.name = customChallenge.getDisplayName();
+    this.name = customChallenge.getDisplayNameValue();
     this.trigger = customChallenge.getTrigger();
     this.subTriggers = customChallenge.getSubTriggers();
     this.action = customChallenge.getAction();
@@ -80,8 +79,7 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
     this.subActions = new HashMap<>();
     this.uuid = UUID.randomUUID();
     this.material = IRandom.threadLocal().choose(CustomChooseMaterialMenuGenerator.MATERIALS);
-    this.name = "§7Custom §e#" +
-      (Challenges.getInstance().getCustomChallengesLoader().getCustomChallenges().size() + 1);
+    this.name = "&7Custom &e#" + (Challenges.getInstance().getCustomChallengesLoader().getCustomChallenges().size() + 1);
   }
 
   @NotNull
@@ -125,10 +123,9 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
       MessageKey.of("menu.custom.info.item-material"), material != null ? material : MessageKey.of("generic.none")).build());
 
     // Name Item
-    // TODO escape, format?
     int maxNameLength = Challenges.getInstance().getCustomChallengesLoader().getMaxNameLength();
     inventory.setItem(NAME_SLOT, new ItemBuilder(locale, Material.NAME_TAG, MessageKey.of("menu.custom.info.item-name"),
-      name, maxNameLength).build());
+      CustomChallenge.formatChallengeName(name), maxNameLength).build());
   }
 
   protected void appendSubSettingDisplay(@NotNull ItemBuilder item, @NotNull Collection<SubSettingsBuilder.SubSettingDisplay> display) {
@@ -228,7 +225,7 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
               return;
             }
             Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
-              setName(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
+              setName(event.getMessage());
               openMenu(event.getPlayer());
             });
           });

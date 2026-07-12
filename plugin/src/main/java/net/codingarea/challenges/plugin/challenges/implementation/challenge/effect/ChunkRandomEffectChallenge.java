@@ -10,7 +10,6 @@ import net.codingarea.challenges.plugin.spigot.events.PlayerIgnoreStatusChangeEv
 import net.codingarea.challenges.plugin.utils.misc.PotionEffectUtils;
 import net.codingarea.commons.common.collection.IRandom;
 import net.codingarea.commons.common.collection.SeededRandomWrapper;
-import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;

@@ -10,27 +10,23 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.trigger.Chall
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.content.i18n.impl.format.ComponentFormatter;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.common.config.Document;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.intellij.lang.annotations.RegExp;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.regex.Pattern;
 
 @Getter
 @ToString
 public class CustomChallenge extends Setting {
-
-  @RegExp
-  public static final String ALLOWED_NAME_REGEX = "^[A-Za-z0-9()\\[\\]\",.;:'+@#%$!? -]*$";
-  public static final Pattern ALLOWED_NAME_PATTERN = Pattern.compile(ALLOWED_NAME_REGEX);
 
   private final UUID uuid;
   private Material material;
@@ -40,9 +36,12 @@ public class CustomChallenge extends Setting {
   private ChallengeAction action;
   private Map<String, String[]> subActions;
 
+  private Component cachedNameFormatted;
+
+  @SuppressWarnings("ConstantConditions") // passing null as "displayItemPreset" intentionally
   public CustomChallenge(MenuType menuType, UUID uuid, Material displayItem, String displayName, ChallengeTrigger trigger,
                          Map<String, String[]> subTriggers, ChallengeAction action, Map<String, String[]> subActions) {
-    super(menuType, null, new ItemStack(Material.BARRIER), "custom-challenge");
+    super(menuType, null, null, "custom-challenge");
     this.uuid = uuid;
     this.material = displayItem;
     this.name = displayName;
@@ -63,7 +62,7 @@ public class CustomChallenge extends Setting {
   @NotNull
   @Override
   public ItemBuilder getDisplayItem(@NotNull Locale locale) {
-    ItemBuilder item = new ItemBuilder(locale, getDisplayItemPreset(), MessageKey.of("custom.display-format"), name);
+    ItemBuilder item = new ItemBuilder(locale, getDisplayItemPreset(), MessageKey.of("custom.display-format"), getDisplayName());
 
     // ADDING CONDITION INFO
     if (getTrigger() != null) {
@@ -93,8 +92,7 @@ public class CustomChallenge extends Setting {
   @NotNull
   @Override
   public LocalizableMessage getChallengeName() {
-    // wrap user input in TextComponent to escape
-    return LocalizableMessage.wrap(Component.text(getDisplayName()));
+    return LocalizableMessage.wrap(getDisplayName());
   }
 
   @Override
@@ -167,6 +165,8 @@ public class CustomChallenge extends Setting {
     this.subTriggers = subTriggers;
     this.action = action;
     this.subActions = subActions;
+    this.cachedNameFormatted = null;
+    this.displayItemPreset = null;
   }
 
   public UUID getUniqueId() {
@@ -174,14 +174,30 @@ public class CustomChallenge extends Setting {
   }
 
   @NotNull
-  public String getDisplayName() {
+  public String getDisplayNameValue() {
     return name;
+  }
+
+  @NotNull
+  public Component getDisplayName() {
+    if (cachedNameFormatted != null) return cachedNameFormatted;
+    return cachedNameFormatted = formatChallengeName(name);
   }
 
   @NotNull
   @Override
   public String getUniqueName() {
     return uuid.toString();
+  }
+
+  @NotNull
+  public static Component formatChallengeName(@NotNull String rawName) {
+    try {
+      return ComponentFormatter.LEGACY_AMPERSAND.deserialize(rawName).colorIfAbsent(NamedTextColor.WHITE);
+    } catch (Exception _) {
+      // malformatted
+      return Component.text(rawName).colorIfAbsent(NamedTextColor.WHITE);
+    }
   }
 
 }

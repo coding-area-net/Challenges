@@ -18,6 +18,7 @@ import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -127,7 +128,7 @@ public final class ServerManager {
     player.getInventory().clear();
   }
 
-  private void dropItems(@NotNull Location location, @NotNull ItemStack[] items) {
+  private void dropItems(@NotNull Location location, @Nullable ItemStack[] items) {
     for (ItemStack item : items) {
       if (item == null) continue;
       if (BukkitReflectionUtils.isAir(item.getType())) continue;
