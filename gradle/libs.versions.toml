@@ -14,7 +14,7 @@ slf4j = "1.7.32"
 gson = "2.13.2"
 
 # annotations, compile time processing
-lombok = "1.18.38"
+lombok = "1.18.46"
 jetbrains-annotations = "26.1.0"
 
 # database
