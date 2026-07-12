@@ -6,7 +6,6 @@ import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
-import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.common.config.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -69,7 +68,7 @@ public class SnakeChallenge extends Setting {
     }
 
     if (blocks.contains(to)) {
-      getChallengeMessageKey("failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+      getChallengeMessageKey("failed").broadcast(Prefix.CHALLENGES, event.getPlayer());
       ChallengeHelper.kill(event.getPlayer());
       return;
     }

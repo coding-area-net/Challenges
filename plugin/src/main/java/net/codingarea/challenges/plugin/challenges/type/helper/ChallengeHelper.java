@@ -252,6 +252,12 @@ public final class ChallengeHelper {
 
   @NotNull
   @Contract(pure = true)
+  public static LocalizableMessage getSettingsDescriptionDamage(int hp) {
+    return MessageKey.of("challenge.settings-modifier-damage").withArgs(ArgumentFormat.HP.apply(hp));
+  }
+
+  @NotNull
+  @Contract(pure = true)
   public static LocalizableMessage getChallengeEnabledName() {
     return MessageKey.of("generic.enabled");
   }

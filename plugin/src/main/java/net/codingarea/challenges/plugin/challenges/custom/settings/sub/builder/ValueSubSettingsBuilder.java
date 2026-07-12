@@ -14,10 +14,7 @@ import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -43,10 +40,13 @@ public class ValueSubSettingsBuilder extends GeneratorSubSettingsBuilder {
   @Override
   public Collection<SubSettingDisplay> getCurrentDisplayFor(@NotNull Map<String, String[]> activated) {
     List<SubSettingDisplay> display = Lists.newLinkedList();
+    System.out.println(this.getClass() + " " + activated);
 
     // TODO logic ported from legacy code; overhaul system
     for (ValueSetting setting : defaultSettings.keySet()) {
+      System.out.println(setting.getKey());
       String[] values = activated.get(setting.getKey());
+      System.out.println(Arrays.toString(values));
       if (values == null || values.length == 0) continue;
 
       String value = values[0];

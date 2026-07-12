@@ -202,7 +202,7 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
         }
         case CONDITION_SLOT -> {
           new CustomMainSettingsMenuGenerator(CustomChallengeMenuGenerator.this, SettingType.CONDITION, "trigger",
-            MessageKey.of("custom-title-trigger"), ChallengeTrigger.getMenuItems(),
+            MessageKey.of("menu.custom.trigger.name"), ChallengeTrigger.getMenuItems(),
             key -> Challenges.getInstance().getCustomSettingsLoader().getTriggerByName(key))
             .openMenu(player);
           SoundSample.CLICK.play(player);
@@ -210,7 +210,7 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
         }
         case ACTION_SLOT -> {
           new CustomMainSettingsMenuGenerator(CustomChallengeMenuGenerator.this, SettingType.ACTION, "action",
-            MessageKey.of("custom-title-action"), ChallengeAction.getMenuItems(),
+            MessageKey.of("menu.custom.action.name"), ChallengeAction.getMenuItems(),
             key -> Challenges.getInstance().getCustomSettingsLoader().getActionByName(key))
             .openMenu(player);
           SoundSample.CLICK.play(player);
@@ -224,10 +224,11 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
         }
         case DELETE_SLOT -> {
           if (!Challenges.getInstance().getCustomChallengesLoader().getCustomChallenges().containsKey(uuid)) {
-            MessageKey.of("custom-not-deleted").send(player, Prefix.CUSTOM);
+            MessageKey.of("menu.custom.delete.new").send(player, Prefix.CUSTOM);
             SoundSample.BASS_OFF.play(player);
             return true;
           }
+          MessageKey.of("menu.custom.delete.done").send(player, Prefix.CUSTOM, CustomChallenge.formatChallengeName(name));
           navigateToChallengeList(player);
           Challenges.getInstance().getCustomChallengesLoader().unregisterCustomChallenge(uuid);
           new SoundSample().addSound(Sound.ENTITY_WITHER_BREAK_BLOCK, 0.4f).play(player);
@@ -237,15 +238,20 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
           String defaults = new CustomChallengeMenuGenerator().toString();
           String current = CustomChallengeMenuGenerator.this.toString();
           if (defaults.equals(current)) {
-            MessageKey.of("custom-no-changes").send(player, Prefix.CUSTOM);
+            MessageKey.of("menu.custom.save.no-changes").send(player, Prefix.CUSTOM);
+            SoundSample.BASS_OFF.play(player);
+            return true;
+          }
+          if (trigger == null || action == null) {
+            MessageKey.of("menu.custom.save.missing-settings").send(player, Prefix.CUSTOM);
             SoundSample.BASS_OFF.play(player);
             return true;
           }
           save();
           navigateToChallengeList(player);
-          MessageKey.of("custom-saved").send(player, Prefix.CUSTOM);
+          MessageKey.of("menu.custom.save.done").send(player, Prefix.CUSTOM);
           if (savePlayerChallenges) {
-            MessageKey.of("custom-saved-db").send(player, Prefix.CUSTOM);
+            MessageKey.of("menu.custom.save.done-db").send(player, Prefix.CUSTOM);
           }
           SoundSample.LEVEL_UP.play(player);
           return true;

@@ -73,7 +73,7 @@ public class DontStopRunningChallenge extends SettingModifier {
     broadcastFiltered(player -> {
       Integer count = playerStandingCount.getOrDefault(player, 0);
       if (count >= getValue()) {
-        getChallengeMessageKey("stopped-moving").broadcast(Prefix.CHALLENGES, NameHelper.getName(player));
+        getChallengeMessageKey("stopped-moving").broadcast(Prefix.CHALLENGES, player);
         playerStandingCount.remove(player);
         ChallengeHelper.kill(player);
         return;

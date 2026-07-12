@@ -26,7 +26,7 @@ public class OnlyDownChallenge extends Setting {
     if (ignorePlayer(event.getPlayer())) return;
     if (event.getTo() == null) return;
     if (event.getTo().getBlockY() <= event.getFrom().getBlockY()) return;
-    getChallengeMessageKey("failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+    getChallengeMessageKey("failed").broadcast(Prefix.CHALLENGES, event.getPlayer());
     ChallengeHelper.kill(event.getPlayer());
   }
 

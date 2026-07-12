@@ -5,6 +5,7 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChal
 import net.codingarea.challenges.plugin.challenges.type.abstraction.TimedChallenge;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.content.legacy.Message;
@@ -14,7 +15,6 @@ import net.codingarea.challenges.plugin.spigot.events.PlayerJumpEvent;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
-import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.TriFunction;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.codingarea.commons.bukkit.utils.misc.BukkitReflectionUtils;
@@ -62,11 +62,10 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
     instance = this;
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return ChallengeHelper.getTimeRangeSettingsDescription(this, 60 * 3, 60);
-//  }
+  @Override
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionTimeSecondsRange(getValue() * 60 * 3, 60);
+  }
 
   @Override
   protected void onEnable() {
@@ -79,7 +78,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
       String time = "§e" + timeLeft + " §7" + (timeLeft == 1 ? Message.forName("second").asString() : Message.forName("seconds").asString());
       if (currentQuestionedPlayer != player) {
         bossbar.setColor(BossBar.Color.GREEN);
-        bossbar.setTitle(MessageKey.of("bossbar-quiz-question-other"), time, NameHelper.getName(currentQuestionedPlayer));
+        bossbar.setTitle(MessageKey.of("bossbar-quiz-question-other"), time, currentQuestionedPlayer);
         return;
       }
       bossbar.setColor(BossBar.Color.RED);
@@ -94,11 +93,6 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
   }
 
   @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeSecondsRangeValueChangeTitle(this, getValue() * 60 * 3 - 60, getValue() * 60 * 3 + 60);
-  }
-
-  @Override
   protected int getSecondsUntilNextActivation() {
     return random.around(getValue() * 60 * 3, 60);
   }
@@ -108,7 +102,7 @@ public class QuizChallenge extends TimedChallenge implements PlayerCommand, TabC
       if (currentQuestionedPlayer == player1) {
         MessageKey.of(questionedPlayerMessage).send(player1, prefix, args);
       } else {
-        MessageKey.of(othersMessage).send(player1, prefix, NameHelper.getName(currentQuestionedPlayer));
+        MessageKey.of(othersMessage).send(player1, prefix, currentQuestionedPlayer);
       }
     });
   }

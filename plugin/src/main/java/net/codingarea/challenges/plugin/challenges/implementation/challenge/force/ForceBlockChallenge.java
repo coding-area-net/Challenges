@@ -11,7 +11,6 @@ import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.server.scoreboard.ChallengeBossBar.BossBarInstance;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
-import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.item.ItemUtils;
 import net.codingarea.commons.common.config.Document;
 import net.kyori.adventure.bossbar.BossBar;
@@ -67,7 +66,7 @@ public class ForceBlockChallenge extends EndingForceChallenge {
 
   @Override
   protected void broadcastFailedMessage(@NotNull Player player) {
-    getChallengeMessageKey("fail").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), player.getLocation().subtract(0, 1, 0).getBlock().getType());
+    getChallengeMessageKey("fail").broadcast(Prefix.CHALLENGES, player, player.getLocation().subtract(0, 1, 0).getBlock().getType());
   }
 
   @Override

@@ -61,7 +61,7 @@ public final class ComponentFormatter {
   private static Component deserializeLines(@Nullable String prefix, @NotNull String[] textLines, @Nullable PositionalArgResolver args) {
     if (textLines.length == 0) return Component.empty();
 
-    // Component.text() (Builder) incompatible in version change 26.1.2 -> 26.2
+    // Component.text()#build (Builder) incompatible in version change 26.1.2 -> 26.2
     Component rootComponent = Component.empty();
 
     Component prefixComponent = (prefix != null && !prefix.isEmpty()) ?

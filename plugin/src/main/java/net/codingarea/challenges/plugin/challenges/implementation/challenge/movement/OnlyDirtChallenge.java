@@ -34,7 +34,7 @@ public class OnlyDirtChallenge extends Setting {
     Block blockBelow = BlockUtils.getBlockBelow(event.getTo());
     if (blockBelow == null) return;
     if (blockBelow.getType() != Material.DIRT && !BukkitReflectionUtils.isAir(blockBelow.getType())) {
-      getChallengeMessageKey("failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+      getChallengeMessageKey("failed").broadcast(Prefix.CHALLENGES, event.getPlayer());
       ChallengeHelper.kill(event.getPlayer());
     }
 

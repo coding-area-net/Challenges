@@ -6,6 +6,8 @@ import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
+import net.codingarea.challenges.plugin.management.scheduler.task.TimerTask;
+import net.codingarea.challenges.plugin.management.scheduler.timer.TimerStatus;
 import net.codingarea.challenges.plugin.spigot.events.PlayerIgnoreStatusChangeEvent;
 import net.codingarea.challenges.plugin.utils.misc.PotionEffectUtils;
 import net.codingarea.commons.common.collection.IRandom;
@@ -91,6 +93,16 @@ public class ChunkRandomEffectChallenge extends Setting {
 
   @ScheduledTask(ticks = 20, async = false)
   public void onSecond() {
+    broadcastFiltered(player -> addEffect(player, player.getLocation()));
+  }
+
+  @TimerTask(status = TimerStatus.PAUSED)
+  public void onTimerPause() {
+    broadcastFiltered(player -> removeEffect(player, player.getLocation()));
+  }
+
+  @TimerTask(status = TimerStatus.RUNNING)
+  public void onTimerStart() {
     broadcastFiltered(player -> addEffect(player, player.getLocation()));
   }
 

@@ -9,7 +9,6 @@ import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.utils.bukkit.command.PlayerCommand;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
-import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.challenges.plugin.utils.misc.ParticleUtils;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
@@ -198,7 +197,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
           positions.remove(name);
           MessageKey.of("position-deleted").broadcast(Prefix.POSITION,
             position.getBlockX(), position.getBlockY(), position.getBlockZ(),
-            getWorldName(position), name, NameHelper.getName(player));
+            getWorldName(position), name, player);
         } else {
           MessageKey.of("position-not-exists").send(player, Prefix.POSITION);
         }
@@ -260,9 +259,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
 
         Location position = new Location(world, doubleX, doubleY, doubleZ);
         positions.put(name, position);
-        MessageKey.of("position-set")
-          .broadcast(Prefix.POSITION, position.getBlockX(), position.getBlockY(),
-            position.getBlockZ(), getWorldName(position), name, NameHelper.getName(player));
+        MessageKey.of("position-set").broadcast(Prefix.POSITION, position.getBlockX(), position.getBlockY(), position.getBlockZ(), getWorldName(position), name, player);
         SoundSample.BASS_ON.play(player);
         broadcastParticleLine(position);
 
@@ -275,8 +272,7 @@ public class PositionSetting extends Setting implements PlayerCommand, TabComple
     @Nullable
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
-      if (!(sender instanceof Player)) return new LinkedList<>();
-      Player player = (Player) sender;
+      if (!(sender instanceof Player player)) return new LinkedList<>();
       if (args.length > 5) return new LinkedList<>();
 
       if (args.length > 2) {

@@ -22,7 +22,7 @@ public class NoExpChallenge extends Setting {
     if (!shouldExecuteEffect()) return;
     if (ignorePlayer(event.getPlayer())) return;
     if (event.getAmount() <= 0) return;
-    getChallengeMessageKey("picked-up").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()));
+    getChallengeMessageKey("picked-up").broadcast(Prefix.CHALLENGES, event.getPlayer());
     ChallengeHelper.kill(event.getPlayer());
   }
 

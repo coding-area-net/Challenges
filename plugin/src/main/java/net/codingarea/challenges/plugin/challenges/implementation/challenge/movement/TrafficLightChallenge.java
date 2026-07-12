@@ -8,7 +8,6 @@ import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
-import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
 import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Material;
@@ -103,7 +102,7 @@ public class TrafficLightChallenge extends TimedChallenge {
     restartTimer();
 
     Player player = event.getPlayer();
-    getChallengeMessageKey("fail").broadcast(Prefix.CHALLENGES, NameHelper.getName(player));
+    getChallengeMessageKey("fail").broadcast(Prefix.CHALLENGES, player);
     ChallengeHelper.kill(player);
   }
 

@@ -64,7 +64,7 @@ public class ForceMobChallenge extends CompletableForceChallenge {
 
   @Override
   protected void broadcastSuccessMessage(@NotNull Player player) {
-    getChallengeMessageKey("success").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), entity);
+    getChallengeMessageKey("success").broadcast(Prefix.CHALLENGES, player, entity);
   }
 
   @Override

@@ -188,12 +188,32 @@
         ],
         "name-info": [
           "<gray>Schreibe den Namen der Challenge in den Chat</gray>",
+          "<gray>Du kannst Farben mit <yellow>&</yellow> benutzen</gray>",
           "<gray><click:run_command:/cancelinput>Klicke hier um die <red>Eingabe abzubrechen</red></click></gray>"
         ]
       },
       "material": {
         "name": "Anzeige Item",
         "format": "{@item-format('<gold>{0}</gold>')}"
+      },
+      "action": {
+        "name": "Aktion"
+      },
+      "trigger": {
+        "name": "Auslöser"
+      },
+      "save": {
+        "done": "<gray>Challenge wurde lokal</gray> <green>gespeichert</green>",
+        "done-db": [
+          "<gray>Um in <yellow>Datenbank</yellow> zu speichern benutze <yellow>/db save customs</yellow></gray>",
+          "<gray><red>Achtung:</red> Alte Einstellungen werden dabei überschrieben!</gray>"
+        ],
+        "no-changes": "<gray>Du hast an der Challenge <red>keine Änderungen</red> gemacht</gray>",
+        "missing-settings": "<gray>Du musst einen <red>Auslöser und Aktion</red> auswählen</gray>"
+      },
+      "delete": {
+        "done": "<gray>Die Challenge <yellow>{0}</yellow> wurde <red>gelöscht</red></gray>",
+        "new": "<gray>Die Challenge existiert <red>noch nicht</red></gray>"
       }
     }
   },
@@ -323,6 +343,7 @@
   },
   "challenge": {
     "settings-modifier-max-health": "<gray>Maximale Leben: {0}</gray>",
+    "settings-modifier-damage": "<gray>Schaden: {0}</gray>",
     "difficulty": {
       "name": "*Schwierigkeit*",
       "desc": [
@@ -2259,7 +2280,7 @@
     "setting": {
       "interval": {
         "second": {
-          "name": "*Jede* Sekunde"
+          "name": "*Jede Sekunde*"
         },
         "seconds": {
           "name": "*Alle {0} Sekunden*"
@@ -2747,12 +2768,6 @@
   ],
   "custom-limit": "Du hast das Limit von <yellow>{0} Challenges </yellow><gray>erreicht</gray>",
   "custom-not-deleted": "Diese Challenge existiert noch nicht!",
-  "custom-saved": "<gray>Challenge wurde lokal </gray><green>gespeichert</green>",
-  "custom-saved-db": [
-    "Um in <yellow>Datenbank </yellow><gray>zu Speichern benutze </gray><yellow>/db save customs</yellow>",
-    "<red>Achtung: </red><gray>Alte Einstellungen werden dabei überschrieben!</gray>"
-  ],
-  "custom-no-changes": "Du hast an der Challenge <red>keine </red><gray>Änderungen gemacht</gray>",
   "custom-command-info": [
     "Schreibe den Command den der Spieler ausführen soll <yellow>ohne / </yellow><gray>in den Chat</gray>",
     "Erlaubte Commands: <yellow>{0}</yellow>",

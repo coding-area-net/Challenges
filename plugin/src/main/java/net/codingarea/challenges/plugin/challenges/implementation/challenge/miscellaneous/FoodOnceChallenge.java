@@ -47,14 +47,14 @@ public class FoodOnceChallenge extends SettingModifier {
 
     Material type = event.getItem().getType();
     if (hasEaten(event.getPlayer(), type)) {
-      getChallengeMessageKey("failed").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), type);
+      getChallengeMessageKey("failed").broadcast(Prefix.CHALLENGES, event.getPlayer(), type);
       ChallengeHelper.kill(event.getPlayer(), 1);
     } else {
       addFood(event.getPlayer(), type);
       if (teamFoodsActivated()) {
-        getChallengeMessageKey("new-food-team").broadcast(Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), type);
+        getChallengeMessageKey("new-food-team").broadcast(Prefix.CHALLENGES, event.getPlayer(), type);
       } else {
-        getChallengeMessageKey("new-food").send(event.getPlayer(), Prefix.CHALLENGES, NameHelper.getName(event.getPlayer()), type);
+        getChallengeMessageKey("new-food").send(event.getPlayer(), Prefix.CHALLENGES, event.getPlayer(), type);
 
       }
     }

@@ -69,7 +69,7 @@ public class ForceItemChallenge extends CompletableForceChallenge {
 
   @Override
   protected void broadcastSuccessMessage(@NotNull Player player) {
-    getChallengeMessageKey("success").broadcast(Prefix.CHALLENGES, NameHelper.getName(player), item);
+    getChallengeMessageKey("success").broadcast(Prefix.CHALLENGES, player, item);
   }
 
   @Override
