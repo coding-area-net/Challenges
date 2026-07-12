@@ -10,7 +10,7 @@ authlib = "1.5.21"
 protocol-lib = "5.4.0"
 
 # utilities
-slf4j = "1.7.32"
+slf4j = "1.7.36"
 gson = "2.13.2"
 
 # annotations, compile time processing
