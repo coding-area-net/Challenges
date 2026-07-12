@@ -11,7 +11,7 @@ protocol-lib = "5.4.0"
 
 # utilities
 slf4j = "1.7.32"
-gson = "2.13.2"
+gson = "2.14.0"
 
 # annotations, compile time processing
 lombok = "1.18.38"
