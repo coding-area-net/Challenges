@@ -1,37 +1,38 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder;
 
+import io.papermc.paper.event.player.AsyncChatEvent;
+import lombok.RequiredArgsConstructor;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
-import net.codingarea.challenges.plugin.spigot.listener.ChatInputListener;
 import net.codingarea.challenges.plugin.utils.misc.MapUtils;
+import net.codingarea.commons.bukkit.utils.chat.ChatInputHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 public class TextInputSubSettingsBuilder extends SubSettingsBuilder {
 
   private final Consumer<Player> onOpen;
-  private final Predicate<AsyncPlayerChatEvent> isValid;
+  private final BiPredicate<Player, String> isValid;
 
   public TextInputSubSettingsBuilder(String key) {
     this(key, null);
   }
 
   public TextInputSubSettingsBuilder(String key, SubSettingsBuilder parent) {
-    this(key, parent, event -> {
-    }, event -> true);
+    this(key, parent, _ -> {
+    }, (_, _) -> true);
   }
 
   public TextInputSubSettingsBuilder(String key,
                                      Consumer<Player> onOpen,
-                                     Predicate<AsyncPlayerChatEvent> isValid) {
+                                     BiPredicate<Player, String> isValid) {
     super(key);
     this.onOpen = onOpen;
     this.isValid = isValid;
@@ -40,7 +41,7 @@ public class TextInputSubSettingsBuilder extends SubSettingsBuilder {
   public TextInputSubSettingsBuilder(String key,
                                      SubSettingsBuilder parent,
                                      Consumer<Player> onOpen,
-                                     Predicate<AsyncPlayerChatEvent> isValid) {
+                                     BiPredicate<Player, String> isValid) {
     super(key, parent);
     this.onOpen = onOpen;
     this.isValid = isValid;
@@ -50,19 +51,7 @@ public class TextInputSubSettingsBuilder extends SubSettingsBuilder {
   public boolean open(Player player, IParentCustomGenerator parentGenerator, LocalizableMessage title) {
     player.closeInventory();
     onOpen.accept(player);
-
-    ChatInputListener.setInputAction(player, event -> {
-      if (!isValid.test(event)) {
-        Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
-          parentGenerator.decline(player);
-        });
-        return;
-      }
-      Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
-        parentGenerator.accept(player, null, MapUtils.createStringArrayMap(getKey(), event.getMessage()));
-      });
-    });
-
+    ChatInputHandler.set(player, new TextInputHandler(parentGenerator));
     return true;
   }
 
@@ -84,6 +73,30 @@ public class TextInputSubSettingsBuilder extends SubSettingsBuilder {
   @Override
   public boolean hasSettings() {
     return true;
+  }
+
+  @RequiredArgsConstructor
+  public class TextInputHandler implements ChatInputHandler {
+
+    private final IParentCustomGenerator parentGenerator;
+
+    @Override
+    public void handleChatInput(@NotNull AsyncChatEvent event, @NotNull String input) {
+      if (!isValid.test(event.getPlayer(), input)) {
+        Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
+          parentGenerator.decline(event.getPlayer());
+        });
+        return;
+      }
+      Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
+        parentGenerator.accept(event.getPlayer(), null, MapUtils.createStringArrayMap(getKey(), input));
+      });
+    }
+
+    @Override
+    public void handleCancel(@NotNull Player player) {
+      parentGenerator.decline(player);
+    }
   }
 
 }

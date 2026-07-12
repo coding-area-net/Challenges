@@ -1,5 +1,6 @@
 package net.codingarea.challenges.plugin.management.menu.generator.impl.custom;
 
+import io.papermc.paper.event.player.AsyncChatEvent;
 import lombok.ToString;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.CustomChallenge;
@@ -14,9 +15,9 @@ import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.generator.SinglePageMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.choose.CustomChooseMaterialMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.choose.CustomMainSettingsMenuGenerator;
-import net.codingarea.challenges.plugin.spigot.listener.ChatInputListener;
 import net.codingarea.challenges.plugin.utils.item.ItemBuilder;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
+import net.codingarea.commons.bukkit.utils.chat.ChatInputHandler;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
 import net.codingarea.commons.common.collection.IRandom;
 import org.bukkit.Bukkit;
@@ -216,19 +217,9 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
           return true;
         }
         case NAME_SLOT -> {
-          MessageKey.of("custom-name-info").send(player, Prefix.CUSTOM);
+          MessageKey.of("menu.custom.info.name-info").send(player, Prefix.CUSTOM);
           player.closeInventory();
-          ChatInputListener.setInputAction(player, event -> {
-            int maxNameLength = Challenges.getInstance().getCustomChallengesLoader().getMaxNameLength();
-            if (event.getMessage().length() > maxNameLength) {
-              MessageKey.of("custom-chars-max_length").send(event.getPlayer(), Prefix.CUSTOM, maxNameLength);
-              return;
-            }
-            Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
-              setName(event.getMessage());
-              openMenu(event.getPlayer());
-            });
-          });
+          ChatInputHandler.set(player, new NameChatInputHandler());
           return true;
         }
         case DELETE_SLOT -> {
@@ -264,6 +255,27 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
       return false;
     }
 
+  }
+
+  public class NameChatInputHandler implements ChatInputHandler {
+
+    @Override
+    public void handleChatInput(@NotNull AsyncChatEvent event, @NotNull String input) {
+      int maxNameLength = Challenges.getInstance().getCustomChallengesLoader().getMaxNameLength();
+      if (input.length() > maxNameLength) {
+        MessageKey.of("custom-chars-max_length").send(event.getPlayer(), Prefix.CUSTOM, maxNameLength);
+        return;
+      }
+      Bukkit.getScheduler().runTask(Challenges.getInstance(), () -> {
+        setName(input);
+        openMenu(event.getPlayer());
+      });
+    }
+
+    @Override
+    public void handleCancel(@NotNull Player player) {
+      openMenu(player);
+    }
   }
 
 }

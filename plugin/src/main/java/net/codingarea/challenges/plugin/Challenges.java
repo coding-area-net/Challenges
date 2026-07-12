@@ -174,6 +174,7 @@ public final class Challenges extends BukkitModule {
     registerCommand(new ResultCommand(), "result");
     registerCommand(new SkipTimerCommand(), "skiptimer");
     registerListenerCommand(new GodModeCommand(), "godmode");
+    registerCommand(new CancelChatInputCommand(), "cancelinput");
   }
 
   private void registerListeners() {
@@ -185,7 +186,6 @@ public final class Challenges extends BukkitModule {
       new BlockDropListener(),
       new CustomEventListener(),
       new HelpListener(),
-      new ChatInputListener(),
       new GeneratorWorldsListener(),
       new ScoreboardUpdateListener()
     );

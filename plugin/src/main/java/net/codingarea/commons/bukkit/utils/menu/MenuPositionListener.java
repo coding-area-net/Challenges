@@ -14,6 +14,10 @@ import org.jetbrains.annotations.NotNull;
 
 public final class MenuPositionListener implements Listener {
 
+  public MenuPositionListener() {
+    MenuPosition.Holder.positions.clear();
+  }
+
   @EventHandler(priority = EventPriority.LOW)
   public void onClick(@NotNull InventoryClickEvent event) {
     HumanEntity human = event.getWhoClicked();

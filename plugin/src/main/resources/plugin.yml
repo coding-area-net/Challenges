@@ -236,3 +236,6 @@ commands:
     aliases:
       - "setlang"
       - "language"
+  cancelinput:
+    usage: "/cancelinput"
+    description: "Cancels the current chat input"

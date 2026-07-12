@@ -17,7 +17,7 @@ public interface MenuPosition {
     private Holder() {
     }
 
-    private static final Map<Player, MenuPosition> positions = new ConcurrentHashMap<>();
+    static final Map<Player, MenuPosition> positions = new ConcurrentHashMap<>();
 
   }
 

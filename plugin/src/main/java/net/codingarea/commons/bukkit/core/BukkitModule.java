@@ -1,5 +1,6 @@
 package net.codingarea.commons.bukkit.core;
 
+import net.codingarea.commons.bukkit.utils.chat.ChatInputListener;
 import net.codingarea.commons.bukkit.utils.menu.MenuPosition;
 import net.codingarea.commons.bukkit.utils.menu.MenuPositionListener;
 import net.codingarea.commons.bukkit.utils.misc.CompatibilityUtils;
@@ -330,7 +331,8 @@ public abstract class BukkitModule extends JavaPlugin {
   private void registerAsFirstInstance() {
     getILogger().info(getName() + " was loaded as the first BukkitModule");
     registerListener(
-      new MenuPositionListener()
+      new MenuPositionListener(),
+      new ChatInputListener()
     );
     getILogger().info("Detected server version {} -> {}", MinecraftVersion.currentExact(), MinecraftVersion.current());
   }

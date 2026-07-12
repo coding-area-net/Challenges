@@ -7,12 +7,11 @@ import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
 import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 @Getter
 public abstract class SubSettingsBuilder {
@@ -45,7 +44,7 @@ public abstract class SubSettingsBuilder {
 
   public static TextInputSubSettingsBuilder createTextInput(String key,
                                                             Consumer<Player> onOpen,
-                                                            Predicate<AsyncPlayerChatEvent> isValid) {
+                                                            BiPredicate<Player, String> isValid) {
     return new TextInputSubSettingsBuilder(key, onOpen, isValid);
   }
 
@@ -148,7 +147,7 @@ public abstract class SubSettingsBuilder {
   }
 
   public TextInputSubSettingsBuilder createTextInputChild(String key, Consumer<Player> onOpen,
-                                                          Predicate<AsyncPlayerChatEvent> isValid) {
+                                                          BiPredicate<Player, String> isValid) {
     TextInputSubSettingsBuilder builder = new TextInputSubSettingsBuilder(key,
       this, onOpen, isValid);
     this.child = builder;

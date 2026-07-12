@@ -22,16 +22,16 @@ public class ExecuteCommandAction extends PlayerTargetAction {
   public ExecuteCommandAction(String name) {
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true, true, true).createTextInputChild("command", player -> {
       MessageKey.of("custom-command-info").send(player, Prefix.CUSTOM, "/" + String.join(" /", commandsThatCanBeExecuted));
-    }, event -> {
-      String cmd = event.getMessage().split(" ")[0].toLowerCase();
+    }, (player, input) -> {
+      String cmd = input.split(" ")[0].toLowerCase();
 
       if (!commandsThatCanBeExecuted.contains(cmd)) {
-        MessageKey.of("custom-command-not-allowed").send(event.getPlayer(), Prefix.CUSTOM, cmd);
+        MessageKey.of("custom-command-not-allowed").send(player, Prefix.CUSTOM, cmd);
         return false;
       }
 
-      if (event.getMessage().length() > maxCommandLength) {
-        MessageKey.of("custom-chars-max_length").send(event.getPlayer(), Prefix.CUSTOM, maxCommandLength);
+      if (input.length() > maxCommandLength) {
+        MessageKey.of("custom-chars-max_length").send(player, Prefix.CUSTOM, maxCommandLength);
         return false;
       }
       return true;

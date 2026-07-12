@@ -185,6 +185,10 @@
           "<gray>Maximale Zeichenanzahl: {1}</gray>",
           " ",
           "{@selected-format}"
+        ],
+        "name-info": [
+          "<gray>Schreibe den Namen der Challenge in den Chat</gray>",
+          "<gray><click:run_command:/cancelinput>Klicke hier um die <red>Eingabe abzubrechen</red></click></gray>"
         ]
       },
       "material": {
@@ -1920,6 +1924,10 @@
     "skip-timer": {
       "none": "<gray>Es ist <red>keine Challenge</red> aktiviert, dessen Timer übersprungen werden könnte</gray>",
       "done": "<gray>Die Timer folgender Challenges wurden übersprungen: {0}</gray>"
+    },
+    "cancel-input": {
+      "none": "<gray>Es gibt keine Chateingabe, die du abbrechen könntest</gray>",
+      "done": "<gray>Die Chateingabe wurde <red>abgebrochen</red></gray>"
     }
   },
   "challenge-end": {
@@ -2745,7 +2753,6 @@
     "<red>Achtung: </red><gray>Alte Einstellungen werden dabei überschrieben!</gray>"
   ],
   "custom-no-changes": "Du hast an der Challenge <red>keine </red><gray>Änderungen gemacht</gray>",
-  "custom-name-info": "Schreibe den Namen der Challenge in den Chat",
   "custom-command-info": [
     "Schreibe den Command den der Spieler ausführen soll <yellow>ohne / </yellow><gray>in den Chat</gray>",
     "Erlaubte Commands: <yellow>{0}</yellow>",
