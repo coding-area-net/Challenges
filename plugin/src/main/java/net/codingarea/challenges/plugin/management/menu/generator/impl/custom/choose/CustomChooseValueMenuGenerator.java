@@ -51,14 +51,14 @@ public abstract class CustomChooseValueMenuGenerator extends UncachedMultiPageSe
   @Override
   protected void setElementItemsAt(@NotNull ValueSetting element, @NotNull Inventory inventory, int slot, @NotNull Locale locale) {
     String value = settings.get(element);
-    inventory.setItem(slot, element.getDisplayItem(value).build());
-    inventory.setItem(slot + 9, element.getSettingsItem(value).build());
+    inventory.setItem(slot, element.getDisplayItem(value, locale).build());
+    inventory.setItem(slot + 9, element.getSettingsItem(value, locale).build());
   }
 
   @NotNull
   @Override
   public ItemStack createDisplayItem(@NotNull ValueSetting element, @NotNull Locale locale) {
-    return element.getDisplayItem(settings.get(element)).build();
+    return element.getDisplayItem(settings.get(element), locale).build();
   }
 
   @Override

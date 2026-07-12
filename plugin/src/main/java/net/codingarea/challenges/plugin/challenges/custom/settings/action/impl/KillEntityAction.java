@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -25,6 +26,7 @@ public class KillEntityAction extends EntityTargetAction {
     }
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.DIAMOND_SWORD;

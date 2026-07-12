@@ -8,6 +8,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -20,8 +21,7 @@ public class RandomPotionEffectAction extends EntityTargetAction {
 
   @Override
   public void executeFor(Entity entity, Map<String, String[]> subActions) {
-    if (entity instanceof LivingEntity) {
-      LivingEntity livingEntity = (LivingEntity) entity;
+    if (entity instanceof LivingEntity livingEntity) {
       PotionEffectType randomEffect = RandomPotionEffectChallenge
         .getNewRandomEffect(livingEntity);
 
@@ -33,6 +33,7 @@ public class RandomPotionEffectAction extends EntityTargetAction {
     }
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.BREWING_STAND;

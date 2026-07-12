@@ -7,6 +7,7 @@ import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -19,6 +20,7 @@ public class FreezeAction extends EntityTargetAction {
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(true));
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.ICE;

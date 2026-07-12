@@ -1,15 +1,18 @@
 package net.codingarea.challenges.plugin.challenges.custom.settings.sub.impl;
 
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSetting;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.utils.item.DefaultItems;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class BooleanSetting extends ValueSetting {
 
-
-  public BooleanSetting(String key, LegacyItemBuilder itemBuilder) {
-    super(key, itemBuilder);
+  public BooleanSetting(@NotNull String key, @NotNull ItemStack displayItemPreset, @NotNull MessageKey messageKeyNamespace) {
+    super(key, displayItemPreset, messageKeyNamespace);
   }
 
   @Override
@@ -18,9 +21,15 @@ public class BooleanSetting extends ValueSetting {
     return value.equals("enabled") ? "disabled" : "enabled";
   }
 
+  @NotNull
   @Override
-  public LegacyItemBuilder getSettingsItem(String value) {
-    return value.equals("enabled") ? DefaultItem.enabled() : DefaultItem.disabled();
+  public ItemStack getSettingsItemPreset(@NotNull String value) {
+    return value.equals("enabled") ? DefaultItems.createEnabledPreset() : DefaultItems.createDisabledPreset();
   }
 
+  @NotNull
+  @Override
+  public LocalizableMessage getSettingsName(@NotNull String value) {
+    return value.equals("enabled") ? ChallengeHelper.getChallengeEnabledName() : ChallengeHelper.getChallengeDisabledName();
+  }
 }

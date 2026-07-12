@@ -4,9 +4,9 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.sub.Selectabl
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder.ChooseItemSubSettingsBuilder;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.builder.ChooseMultipleItemSubSettingBuilder;
+import net.codingarea.challenges.plugin.content.i18n.ArgumentFormat;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
-import net.codingarea.challenges.plugin.content.legacy.Message;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.StructureUtils;
 import net.codingarea.commons.bukkit.utils.item.StandardItemBuilder;
@@ -112,19 +112,16 @@ public final class SubSettingsHelper {
   public static SubSettingsBuilder createPotionSettingsBuilder(boolean potionType, boolean potionTime) {
     SubSettingsBuilder potionSettings = SubSettingsBuilder.createValueItem().fill(builder -> {
 
-      // TODO also port
       if (potionTime) {
-        builder.addModifierSetting("length", new LegacyItemBuilder(Material.CLOCK,
-            Message.forName("item-random-effect-length-challenge")),
-          30, 1, 60,
-          value -> "",
-          value -> Message.forName(value == 1 ? "second" : "seconds").asString());
+        builder.addModifierSetting("length",
+          new ItemStack(Material.CLOCK), MessageKey.of("custom.action.potion_effect.sub.length"),
+          30, 1, 60, ArgumentFormat.TIME
+        );
       }
-      builder.addModifierSetting("amplifier", new LegacyItemBuilder(Material.STONE_SWORD,
-          Message.forName("item-random-effect-amplifier-challenge")),
-        3, 1, 8,
-        value -> Message.forName("amplifier").asString(),
-        integer -> "");
+      builder.addModifierSetting("amplifier",
+        new ItemStack(Material.STONE_SWORD), MessageKey.of("custom.action.potion_effect.sub.amplifier"),
+        3, 1, 8, ChallengeHelper::getSettingsDescriptionModifierStrength // TOOD correct translation!
+      );
     });
 
     if (potionType) {

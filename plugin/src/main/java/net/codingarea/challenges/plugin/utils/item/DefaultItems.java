@@ -47,6 +47,18 @@ public final class DefaultItems {
     return new ItemBuilder(locale, displayItemPreset, MessageKey.of("challenge.display-format"), name, desc);
   }
 
+  public static ItemBuilder createChallengeSettingFormat(@NotNull ItemStack displayItemPreset, @NotNull Object nameArgument,
+                                                         @Nullable LocalizableMessage desc, @NotNull Locale locale) {
+    // apply formatting dynamically, to prevent duplicate format references
+    ItemBuilder item = new ItemBuilder(locale, displayItemPreset, MessageKey.of("challenge.settings-format"), nameArgument);
+
+    if (desc != null) {
+      item.appendLore(MessageKey.of("challenge.settings-format-lore"), desc);
+    }
+
+    return item;
+  }
+
   @Contract("_, _, _ -> new")
   public static ItemBuilder createMenuDisplayFormat(@NotNull ItemStack displayItemPreset, @NotNull Object nameArg, @NotNull Locale locale) {
     return new ItemBuilder(locale, displayItemPreset, MessageKey.of("menu.item-format"), nameArg);

@@ -15,10 +15,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
 
-/**
- * @see Option
- * @see ValueSetting
- */
 public interface SelectableKey {
 
   @NotNull

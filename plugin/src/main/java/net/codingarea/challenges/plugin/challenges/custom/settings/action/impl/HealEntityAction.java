@@ -10,6 +10,7 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -36,6 +37,7 @@ public class HealEntityAction extends EntityTargetAction {
     }
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.GOLDEN_APPLE;

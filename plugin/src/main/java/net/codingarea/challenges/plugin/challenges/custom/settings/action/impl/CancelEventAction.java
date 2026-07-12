@@ -27,8 +27,8 @@ public class CancelEventAction extends ChallengeAction {
     return false;
   }
 
-  @Override
   @NotNull
+  @Override
   public Material getMaterial() {
     return Material.BARRIER;
   }

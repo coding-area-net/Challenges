@@ -344,6 +344,7 @@
   "challenge": {
     "settings-modifier-max-health": "<gray>Maximale Leben: {0}</gray>",
     "settings-modifier-damage": "<gray>Schaden: {0}</gray>",
+    "settings-modifier-strength": "<gray>Stärke: <yellow>{0}</yellow></gray>",
     "difficulty": {
       "name": "*Schwierigkeit*",
       "desc": [
@@ -2138,7 +2139,17 @@
         "desc": [
           "Verändere die Maximalen Leben von Spielern",
           "Wird mit einem */gamestate reset* zurückgesetzt"
-        ]
+        ],
+        "sub": {
+          "offset": {
+            "sub-name": "Veränderung",
+            "name": "*{@sub-name}*",
+            "desc": [
+              "Wähle aus wie viele Herzen *addiert*",
+              "oder *subtrahiert* werden sollen"
+            ]
+          }
+        }
       },
       "spawn_entity": {
         "name": "*Kreatur spawnen*",
@@ -2168,13 +2179,40 @@
         "name": "*In Luft schleudern*",
         "desc": [
           "Schleudere *Kreaturen* oder *Spieler* in die Luft"
-        ]
+        ],
+        "sub": {
+          "strength": {
+            "sub-name": "Stärke",
+            "name": "*{@sub-name}*",
+            "desc": [
+              "Die Stärke des *Boosts*",
+              "Je höher die Zahl, desto *stärker* der Boost"
+            ]
+          }
+        }
       },
       "potion_effect": {
         "name": "*Trank Effekt*",
         "desc": [
           "Gebe *Kreaturen* oder *Spielern* einen Trank Effekt"
-        ]
+        ],
+        "sub": {
+          "length": {
+            "sub-name": "Dauer",
+            "name": "*{@sub-name}*",
+            "desc": [
+              "Die Dauer des *Trank Effekts*"
+            ]
+          },
+          "amplifier": {
+            "sub-name": "Stärke",
+            "name": "*{@sub-name}*",
+            "desc": [
+              "Die Stärke des *Trank Effekts*",
+              "Je höher die Zahl, desto *stärker* der Effekt"
+            ]
+          }
+        }
       },
       "permanent_effect": {
         "name": "*Permanenter Effekt*",
@@ -2254,7 +2292,17 @@
         "name": "*World Border verändern*",
         "desc": [
           "Mache die World Border *größer* oder *kleiner*"
-        ]
+        ],
+        "sub": {
+          "change": {
+            "sub-name": "Veränderung",
+            "name": "*{@sub-name}*",
+            "desc": [
+              "Wähle aus wie viele Blöcke die *World Border*",
+              "*vergrößert* oder *verkleinert* werden soll"
+            ]
+          }
+        }
       },
       "swap_mobs": {
         "name": "*Kreaturen tauschen*",
@@ -2785,16 +2833,6 @@
   ],
   "custom-title-view": "Gespeichert",
   "custom-sub-finish": "<green>Fertig</green>",
-  "item-custom-action-max_health-offset": [
-    "<red>Veränderung</red>",
-    "Wähle aus wie viele Leben verändert werden sollen"
-  ],
-  "item-custom-action-boost_in_air-strength": [
-    "<white>Stärke</white>"
-  ],
-  "item-custom-action-modify_border-change": [
-    "<light_purple>Veränderung</light_purple>"
-  ],
   "custom-subsetting-target_entity": "Ziel Entity",
   "custom-subsetting-entity_type": "Entity Typ",
   "custom-subsetting-liquid": "Flüssigkeit",

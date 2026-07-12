@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-public interface ArgumentFormat<T> {
+public interface ArgumentFormat<T> extends Function<T, LocalizableMessage> {
 
   @NotNull
   LocalizableMessage apply(@NotNull T arg);

@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,7 @@ public class ExecuteCommandAction extends PlayerTargetAction {
     Bukkit.getServer().dispatchCommand(sender, fullCommand);
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.COMMAND_BLOCK;

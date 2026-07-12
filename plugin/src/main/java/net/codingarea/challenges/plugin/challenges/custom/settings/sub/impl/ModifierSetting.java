@@ -4,38 +4,36 @@ import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSetting;
 import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.utils.item.DefaultItem;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
+import net.codingarea.challenges.plugin.utils.item.DefaultItems;
 import net.codingarea.commons.bukkit.utils.menu.MenuClickInfo;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
 public class ModifierSetting extends ValueSetting implements IModifier {
 
+  // TODO unify desc/name space with other selectable options!
+
   private final int min, max;
-  private final Function<Integer, LegacyItemBuilder> settingsItemGetter;
+  private final Function<? super Integer, LocalizableMessage> settingsFormatGetter;
 
   private int tempValue;
 
-  public ModifierSetting(String key, int min, int max, LegacyItemBuilder displayItem) {
-    this(key, min, max, displayItem, integer -> "", integer -> "");
+  public ModifierSetting(@NotNull String key, @NotNull ItemStack displayItemPreset, @NotNull MessageKey messageKeyNamespace,
+                         int min, int max) {
+    this(key, displayItemPreset, messageKeyNamespace, min, max, ChallengeHelper::getSettingsDescriptionModifierValue);
   }
 
-  public ModifierSetting(String key, int min, int max, LegacyItemBuilder itemBuilder, Function<Integer, String> prefixGetter, Function<Integer, String> suffixGetter) {
-    this(key, min, max, itemBuilder, value ->
-    {
-      String prefix = prefixGetter.apply(value);
-      String suffix = suffixGetter.apply(value);
-      return DefaultItem.value(value, (prefix.isEmpty() ? "" : "§7" + prefix + " ") + "§e")
-        .appendName(suffix.isEmpty() ? "" : " " + "§7" + suffix);
-    });
-  }
-
-  public ModifierSetting(String key, int min, int max, LegacyItemBuilder itemBuilder, Function<Integer, LegacyItemBuilder> settingsItemGetter) {
-    super(key, itemBuilder);
+  public ModifierSetting(@NotNull String key, @NotNull ItemStack displayItemPreset, @NotNull MessageKey messageKeyNamespace,
+                         int min, int max,
+                         @NotNull Function<? super Integer, LocalizableMessage> settingsFormatGetter) {
+    super(key, displayItemPreset, messageKeyNamespace);
     this.min = min;
     this.max = max;
-    this.settingsItemGetter = settingsItemGetter;
+    this.settingsFormatGetter = settingsFormatGetter;
   }
 
   @Override
@@ -75,10 +73,18 @@ public class ModifierSetting extends ValueSetting implements IModifier {
   public void playValueChangeTitle() {
   }
 
+  @NotNull
   @Override
-  public LegacyItemBuilder getSettingsItem(String value) {
+  public ItemStack getSettingsItemPreset(@NotNull String value) {
     int intValue = getIntValue(value);
-    return settingsItemGetter.apply(intValue);
+    return DefaultItems.createValuePreset(intValue);
+  }
+
+  @NotNull
+  @Override
+  public LocalizableMessage getSettingsName(@NotNull String value) {
+    int intValue = getIntValue(value);
+    return settingsFormatGetter.apply(intValue);
   }
 
   public int getIntValue(String value) {

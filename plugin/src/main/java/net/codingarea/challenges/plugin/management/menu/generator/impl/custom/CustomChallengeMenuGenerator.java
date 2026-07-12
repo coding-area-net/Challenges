@@ -106,7 +106,7 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
     ItemBuilder triggerItem = new ItemBuilder(locale, Material.WITHER_SKELETON_SKULL, MessageKey.of("menu.custom.info.item-trigger"),
       triggerName);
     if (trigger != null) {
-      appendSubSettingDisplay(triggerItem, trigger.getSubSettingsBuilder().getCurrentDisplayFor(subTriggers));
+      appendSubSettingDisplay(triggerItem, trigger.getSubSettingsBuilder().collectCurrentDisplayFor(subTriggers));
     }
     inventory.setItem(CONDITION_SLOT, triggerItem.build());
 
@@ -115,7 +115,7 @@ public class CustomChallengeMenuGenerator extends SinglePageMenuGenerator implem
     ItemBuilder actionItem = new ItemBuilder(locale, Material.NETHER_STAR, MessageKey.of("menu.custom.info.item-action"),
       actionName);
     if (action != null) {
-      appendSubSettingDisplay(actionItem, action.getSubSettingsBuilder().getCurrentDisplayFor(subActions));
+      appendSubSettingDisplay(actionItem, action.getSubSettingsBuilder().collectCurrentDisplayFor(subActions));
     }
     inventory.setItem(ACTION_SLOT, actionItem.build());
 

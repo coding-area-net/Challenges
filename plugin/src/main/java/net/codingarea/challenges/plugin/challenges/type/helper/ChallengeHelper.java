@@ -216,8 +216,20 @@ public final class ChallengeHelper {
 
   @NotNull
   @Contract(pure = true)
+  public static LocalizableMessage getSettingsDescriptionModifierValue(int value) {
+    return MessageKey.of("challenge.settings-modifier-value").withArgs(value);
+  }
+
+  @NotNull
+  @Contract(pure = true)
   public static LocalizableMessage getSettingsDescriptionModifierMultiplier(int value) {
     return MessageKey.of("challenge.settings-modifier-multiplier").withArgs(value);
+  }
+
+  @NotNull
+  @Contract(pure = true)
+  public static LocalizableMessage getSettingsDescriptionModifierStrength(int value) {
+    return MessageKey.of("challenge.settings-modifier-strength").withArgs(value);
   }
 
   @NotNull

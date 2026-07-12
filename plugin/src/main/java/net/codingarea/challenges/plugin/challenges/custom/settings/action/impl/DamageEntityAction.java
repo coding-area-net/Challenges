@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -31,6 +32,7 @@ public class DamageEntityAction extends EntityTargetAction {
     }
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.FERMENTED_SPIDER_EYE;

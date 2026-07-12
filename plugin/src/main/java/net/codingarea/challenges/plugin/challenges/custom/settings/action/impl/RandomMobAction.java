@@ -7,6 +7,7 @@ import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -40,6 +41,7 @@ public class RandomMobAction extends EntityTargetAction {
     entity.getLocation().getWorld().spawnEntity(entity.getLocation(), value);
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.BLAZE_SPAWN_EGG;

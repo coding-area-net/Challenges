@@ -158,16 +158,9 @@ public abstract class AbstractChallenge implements IChallenge, Listener {
   @Override
   public ItemBuilder getSettingsItem(@NotNull Locale locale) {
     ItemStack preset = isEnabled() ? getSettingsItemPreset() : getDisabledSettingsItemPreset();
-    // apply formatting dynamically, to prevent duplicate format references
-    ItemBuilder item = new ItemBuilder(locale, preset, MessageKey.of("challenge.settings-format"),
-      isEnabled() ? getSettingsName() : MessageKey.of("generic.disabled")); // no need to override disabled name/item
-
-    LocalizableMessage description = getSettingsDescription();
-    if (description != null && isEnabled()) {
-      item.appendLore(MessageKey.of("challenge.settings-format-lore"), description);
-    }
-
-    return item;
+    Object nameArg = isEnabled() ? getSettingsName() : ChallengeHelper.getChallengeDisabledName();
+    LocalizableMessage description = isEnabled() ? getSettingsDescription() : null;
+    return DefaultItems.createChallengeSettingFormat(preset, nameArg, description, locale);
   }
 
   @NotNull

@@ -8,6 +8,7 @@ import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper
 import net.codingarea.challenges.plugin.management.server.ChallengeEndCause;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class WinChallengeAction extends PlayerTargetAction {
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.GOLDEN_HELMET;

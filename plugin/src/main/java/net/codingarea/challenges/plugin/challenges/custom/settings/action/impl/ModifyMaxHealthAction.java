@@ -5,11 +5,13 @@ import net.codingarea.challenges.plugin.challenges.implementation.setting.MaxHea
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
-import net.codingarea.challenges.plugin.content.legacy.Message;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
+import net.codingarea.challenges.plugin.content.i18n.ArgumentFormat;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.utils.misc.MinecraftNameWrapper;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -19,13 +21,14 @@ public class ModifyMaxHealthAction extends PlayerTargetAction {
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true)
       .createValueChild().fill(builder -> {
         builder.addModifierSetting("health_offset",
-          new LegacyItemBuilder(MinecraftNameWrapper.RED_DYE,
-            Message.forName("item-custom-action-max_health-offset")),
+          new ItemStack(MinecraftNameWrapper.RED_DYE), MessageKey.of("custom.action.max_health.sub.offset"),
           0, -20, 20,
-          integer -> "", integer -> "HP §8(§e" + (integer / 2f) + " §c❤§8)");
+          ArgumentFormat.HP
+        );
       }));
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return MinecraftNameWrapper.RED_DYE;

@@ -4,6 +4,7 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.action.Player
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -13,6 +14,7 @@ public class ClearInventoryAction extends PlayerTargetAction {
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.TRAPPED_CHEST;

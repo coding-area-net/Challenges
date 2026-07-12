@@ -69,7 +69,7 @@ public class CustomChallenge extends Setting {
       item.appendBlankLoreLine()
         .appendLore(MessageKey.of("menu.custom.trigger-format"), trigger.getSettingName());
 
-      Collection<SubSettingsBuilder.SubSettingDisplay> display = trigger.getSubSettingsBuilder().getCurrentDisplayFor(subTriggers);
+      Collection<SubSettingsBuilder.SubSettingDisplay> display = trigger.getSubSettingsBuilder().collectCurrentDisplayFor(subTriggers);
       for (SubSettingsBuilder.SubSettingDisplay subSettingDisplay : display) {
         item.appendLore(MessageKey.of("menu.custom.subsetting-format"), subSettingDisplay.keyName(), subSettingDisplay.valueFormatted());
       }
@@ -80,7 +80,7 @@ public class CustomChallenge extends Setting {
       item.appendBlankLoreLine()
         .appendLore(MessageKey.of("menu.custom.action-format"), action.getSettingName());
 
-      Collection<SubSettingsBuilder.SubSettingDisplay> display = action.getSubSettingsBuilder().getCurrentDisplayFor(subActions);
+      Collection<SubSettingsBuilder.SubSettingDisplay> display = action.getSubSettingsBuilder().collectCurrentDisplayFor(subActions);
       for (SubSettingsBuilder.SubSettingDisplay subSettingDisplay : display) {
         item.appendLore(MessageKey.of("menu.custom.subsetting-format"), subSettingDisplay.keyName(), subSettingDisplay.valueFormatted());
       }

@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -16,6 +17,7 @@ public class SpawnEntityAction extends EntityTargetAction {
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false).addChild(SubSettingsHelper.createEntityTypeSettingsBuilder(false, false)));
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.ZOMBIE_SPAWN_EGG;

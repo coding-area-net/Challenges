@@ -10,7 +10,6 @@ import net.codingarea.challenges.plugin.utils.bukkit.command.SenderCommand;
 import net.codingarea.challenges.plugin.utils.misc.ExperimentalUtils;
 import net.codingarea.challenges.plugin.utils.misc.Utils;
 import net.codingarea.commons.bukkit.utils.item.ItemUtils;
-import net.codingarea.commons.common.misc.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
@@ -57,7 +56,6 @@ public class SearchCommand implements SenderCommand, Completer {
     if (blocks.isEmpty()) {
       MessageKey.of("command-search-nothing").send(sender, Prefix.CHALLENGES, material);
     } else {
-      System.out.println(blocks);
       MessageKey.of("command-search-result").send(sender, Prefix.CHALLENGES, material, LocalizableMessage.joinList(blocks));
     }
   }

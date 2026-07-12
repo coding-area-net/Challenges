@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,6 +24,7 @@ public class SwapRandomMobAction extends ChallengeAction {
       .addChild(SubSettingsHelper.createEntityTargetSettingsBuilder(true).setKey("swap_targets")));
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.ENDER_PEARL;

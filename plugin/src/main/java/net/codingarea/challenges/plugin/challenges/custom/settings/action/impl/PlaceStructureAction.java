@@ -8,6 +8,7 @@ import net.codingarea.commons.bukkit.utils.misc.MinecraftVersion;
 import net.codingarea.commons.common.collection.IRandom;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +27,7 @@ public class PlaceStructureAction extends EntityTargetAction {
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true).addChild(SubSettingsHelper.createStructureSettingsBuilder()));
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.STRUCTURE_BLOCK;

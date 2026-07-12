@@ -5,6 +5,7 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.action.Challe
 import net.codingarea.challenges.plugin.challenges.implementation.challenge.extraworld.WaterMLGChallenge;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChallenge;
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -14,6 +15,7 @@ public class WaterMLGAction extends ChallengeAction {
     super(name);
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.WATER_BUCKET;

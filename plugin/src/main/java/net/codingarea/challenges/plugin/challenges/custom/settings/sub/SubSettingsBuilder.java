@@ -55,7 +55,7 @@ public abstract class SubSettingsBuilder {
   public abstract boolean open(Player player, IParentCustomGenerator parentGenerator, LocalizableMessage title);
 
   @NotNull
-  public abstract Collection<SubSettingDisplay> getCurrentDisplayFor(@NotNull Map<String, String[]> activated);
+  protected abstract Collection<SubSettingDisplay> getCurrentDisplayFor(@NotNull Map<String, String[]> activated);
 
   public abstract boolean hasSettings();
 

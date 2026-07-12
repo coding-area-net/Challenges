@@ -29,13 +29,13 @@ public class RandomItemAction extends ChallengeAction {
     Map<String, String[]> subActions) {
 
     for (Entity target : IEntityTargetAction.getTargets(executionData.getEntity(), subActions)) {
-      if (target instanceof Player) {
-        Player player = (Player) target;
+      if (target instanceof Player player) {
         giveRandomItemToPlayer(player);
       }
     }
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.BEACON;

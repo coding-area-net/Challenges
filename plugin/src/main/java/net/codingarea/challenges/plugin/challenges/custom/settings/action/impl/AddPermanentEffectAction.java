@@ -6,6 +6,7 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.AbstractChal
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -18,6 +19,7 @@ public class AddPermanentEffectAction extends PlayerTargetAction {
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.MAGMA_CREAM;

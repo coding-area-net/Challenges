@@ -3,7 +3,6 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction;
 import net.codingarea.challenges.plugin.Challenges;
 import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
-import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.menu.info.ChallengeMenuClickInfo;
@@ -51,7 +50,7 @@ public abstract class Modifier extends AbstractChallenge implements IModifier {
   @NotNull
   @Override
   public Object getSettingsName() {
-    return MessageKey.of("challenge.settings-modifier-value").withArgs(value);
+    return ChallengeHelper.getSettingsDescriptionModifierValue(value);
   }
 
   @Override

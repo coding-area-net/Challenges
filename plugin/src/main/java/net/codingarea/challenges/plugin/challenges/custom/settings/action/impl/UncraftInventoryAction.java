@@ -6,6 +6,7 @@ import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -17,12 +18,12 @@ public class UncraftInventoryAction extends EntityTargetAction {
 
   @Override
   public void executeFor(Entity entity, Map<String, String[]> subActions) {
-    if (entity instanceof Player) {
-      Player player = (Player) entity;
+    if (entity instanceof Player player) {
       UncraftItemsChallenge.uncraftInventory(player);
     }
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.CRAFTING_TABLE;

@@ -5,6 +5,7 @@ import net.codingarea.challenges.plugin.challenges.implementation.challenge.misc
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -14,11 +15,11 @@ public class InvertHealthAction extends PlayerTargetAction {
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.REDSTONE;
   }
-
 
   @Override
   public void executeForPlayer(Player player, Map<String, String[]> subActions) {

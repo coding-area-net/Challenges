@@ -4,12 +4,13 @@ import net.codingarea.challenges.plugin.ChallengeAPI;
 import net.codingarea.challenges.plugin.challenges.custom.settings.ChallengeExecutionData;
 import net.codingarea.challenges.plugin.challenges.custom.settings.action.ChallengeAction;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.SubSettingsBuilder;
-import net.codingarea.challenges.plugin.content.legacy.Message;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.commons.bukkit.utils.logging.Logger;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -19,11 +20,12 @@ public class ChangeWorldBorderAction extends ChallengeAction {
     super(name, SubSettingsBuilder.createValueItem()
       .addModifierSetting(
         "change",
-        new LegacyItemBuilder(Material.MAGENTA_GLAZED_TERRACOTTA, Message.forName("item-custom-action-modify_border-change")),
+        new ItemStack(Material.MAGENTA_GLAZED_TERRACOTTA), MessageKey.of("custom.action.modify_border.sub.change"),
         1, -10, 10
       ));
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.STRUCTURE_VOID;

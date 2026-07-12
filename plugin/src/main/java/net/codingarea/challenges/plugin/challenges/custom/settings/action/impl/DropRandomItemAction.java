@@ -5,6 +5,7 @@ import net.codingarea.challenges.plugin.challenges.implementation.challenge.rand
 import net.codingarea.challenges.plugin.challenges.type.helper.SubSettingsHelper;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -14,6 +15,7 @@ public class DropRandomItemAction extends PlayerTargetAction {
     super(name, SubSettingsHelper.createEntityTargetSettingsBuilder(false, true));
   }
 
+  @NotNull
   @Override
   public Material getMaterial() {
     return Material.DISPENSER;

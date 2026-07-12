@@ -7,14 +7,18 @@ import net.codingarea.challenges.plugin.challenges.custom.settings.sub.ValueSett
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.impl.BooleanSetting;
 import net.codingarea.challenges.plugin.challenges.custom.settings.sub.impl.ModifierSetting;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
+import net.codingarea.challenges.plugin.content.i18n.MessageKey;
 import net.codingarea.challenges.plugin.management.menu.generator.AbstractMenuGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.IParentCustomGenerator;
 import net.codingarea.challenges.plugin.management.menu.generator.impl.custom.choose.SubSettingValueMenuGenerator;
-import net.codingarea.challenges.plugin.utils.item.LegacyItemBuilder;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -44,48 +48,37 @@ public class ValueSubSettingsBuilder extends GeneratorSubSettingsBuilder {
 
     // TODO logic ported from legacy code; overhaul system
     for (ValueSetting setting : defaultSettings.keySet()) {
-      System.out.println(setting.getKey());
       String[] values = activated.get(setting.getKey());
-      System.out.println(Arrays.toString(values));
       if (values == null || values.length == 0) continue;
 
       String value = values[0];
-
-      // TODO get setting value formatted name
-      display.add(new SubSettingDisplay(getKeyTranslation(setting.getKey()), LocalizableMessage.wrap(setting.getSettingsItem(value).getName())));
+      display.add(new SubSettingDisplay(setting.getSubName(), setting.getSettingsName(value)));
     }
 
     return display;
   }
 
-  public ValueSubSettingsBuilder addBooleanSetting(String key, LegacyItemBuilder displayItem,
-                                                   boolean defaultValue) {
-    defaultSettings.put(new BooleanSetting(key, displayItem),
+  public ValueSubSettingsBuilder addBooleanSetting(@NotNull String key, @NotNull ItemStack displayItemPreset,
+                                                   @NotNull MessageKey messageKeyNamespace, boolean defaultValue) {
+    defaultSettings.put(new BooleanSetting(key, displayItemPreset, messageKeyNamespace),
       defaultValue ? "enabled" : "disabled");
     return this;
   }
 
-  public ValueSubSettingsBuilder addModifierSetting(String key, LegacyItemBuilder displayItem,
-                                                    int defaultValue, int min, int max) {
-    defaultSettings.put(new ModifierSetting(key, min, max, displayItem),
+  public ValueSubSettingsBuilder addModifierSetting(@NotNull String key, @NotNull ItemStack displayItemPreset,
+                                                    @NotNull MessageKey messageKeyNamespace, int defaultValue, int min, int max) {
+    defaultSettings.put(new ModifierSetting(key, displayItemPreset, messageKeyNamespace, min, max),
       String.valueOf(defaultValue));
     return this;
   }
 
-  public ValueSubSettingsBuilder addModifierSetting(String key, LegacyItemBuilder displayItem,
-                                                    int defaultValue, int min, int max, Function<Integer, String> prefixGetter, Function<Integer, String> suffixGetter) {
-    defaultSettings.put(new ModifierSetting(key, min, max, displayItem, prefixGetter, suffixGetter),
+  public ValueSubSettingsBuilder addModifierSetting(@NotNull String key, @NotNull ItemStack displayItemPreset,
+                                                    @NotNull MessageKey messageKeyNamespace, int defaultValue, int min, int max,
+                                                    @NotNull Function<? super Integer, LocalizableMessage> settingsFormatGetter) {
+    defaultSettings.put(new ModifierSetting(key, displayItemPreset, messageKeyNamespace, min, max, settingsFormatGetter),
       String.valueOf(defaultValue));
     return this;
   }
-
-  public ValueSubSettingsBuilder addModifierSetting(String key, LegacyItemBuilder displayItem,
-                                                    int defaultValue, int min, int max, Function<Integer, LegacyItemBuilder> settingsItemGetter) {
-    defaultSettings.put(new ModifierSetting(key, min, max, displayItem, settingsItemGetter),
-      String.valueOf(defaultValue));
-    return this;
-  }
-
 
   public ValueSubSettingsBuilder fill(Consumer<ValueSubSettingsBuilder> actions) {
     actions.accept(this);
