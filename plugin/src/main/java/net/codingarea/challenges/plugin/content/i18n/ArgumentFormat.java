@@ -6,6 +6,7 @@ import net.codingarea.commons.common.collection.pair.Tuple;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -107,6 +108,15 @@ public interface ArgumentFormat<T> extends Function<T, LocalizableMessage> {
         return MessageKey.of("arg-format.damage-cause-source").withArgs(projectile.getType(), shooterEntity.getType());
       } else {
         return MessageKey.of("arg-format.damage-cause").withArgs(projectile.getType());
+      }
+    } else if (damageEvent.getDamager() instanceof TNTPrimed tntPrimed) {
+      Entity source = tntPrimed.getSource();
+      if (source instanceof Player sourcePlayer) {
+        return MessageKey.of("arg-format.damage-cause-source").withArgs(tntPrimed.getType(), sourcePlayer);
+      } else if (source instanceof Entity sourceEntity) {
+        return MessageKey.of("arg-format.damage-cause-source").withArgs(tntPrimed.getType(), sourceEntity.getType());
+      } else {
+        return MessageKey.of("arg-format.damage-cause").withArgs(cause, tntPrimed.getType());
       }
     } else {
       return MessageKey.of("arg-format.damage-cause-source").withArgs(cause, damageEvent.getDamager().getType());

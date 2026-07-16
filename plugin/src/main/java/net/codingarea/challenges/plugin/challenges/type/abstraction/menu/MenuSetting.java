@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.challenges.type.abstraction.menu;
 
 import lombok.Getter;
 import net.codingarea.challenges.plugin.Challenges;
+import net.codingarea.challenges.plugin.challenges.type.IModifier;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.Setting;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
@@ -22,6 +23,7 @@ import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Function;
 
 public abstract class MenuSetting extends Setting {
 
@@ -254,26 +256,31 @@ public abstract class MenuSetting extends Setting {
 
   }
 
-  public class NumberSubSetting extends SubSetting {
+  public class NumberSubSetting extends SubSetting implements IModifier {
 
+    private final Function<Integer, LocalizableMessage> settingsNameGetter;
     private final int max, min;
     private final int defaultValue;
     @Getter
     private int value;
 
-    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace) {
-      this(displayItemPreset, nameMessageKeySpace, 64);
+    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace,
+                            @NotNull Function<Integer, LocalizableMessage> settingsNameGetter) {
+      this(displayItemPreset, nameMessageKeySpace, 64, settingsNameGetter);
     }
 
-    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int max) {
-      this(displayItemPreset, nameMessageKeySpace, max, 1);
+    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int max,
+                            @NotNull Function<Integer, LocalizableMessage> settingsNameGetter) {
+      this(displayItemPreset, nameMessageKeySpace, max, 1, settingsNameGetter);
     }
 
-    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int min, int max) {
-      this(displayItemPreset, nameMessageKeySpace, min, max, min);
+    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int min, int max,
+                            @NotNull Function<Integer, LocalizableMessage> settingsNameGetter) {
+      this(displayItemPreset, nameMessageKeySpace, min, max, min, settingsNameGetter);
     }
 
-    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int min, int max, int defaultValue) {
+    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int min, int max, int defaultValue,
+                            @NotNull Function<Integer, LocalizableMessage> settingsNameGetter) {
       super(displayItemPreset, nameMessageKeySpace);
       if (max <= min) throw new IllegalArgumentException("max <= min");
       if (min < 0) throw new IllegalArgumentException("min < 0");
@@ -283,12 +290,35 @@ public abstract class MenuSetting extends Setting {
       this.defaultValue = defaultValue;
       this.max = max;
       this.min = min;
+      this.settingsNameGetter = settingsNameGetter;
+    }
+
+    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace) {
+      this(displayItemPreset, nameMessageKeySpace, ChallengeHelper::getSettingsDescriptionModifierValue);
+    }
+
+    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int max) {
+      this(displayItemPreset, nameMessageKeySpace, max, ChallengeHelper::getSettingsDescriptionModifierValue);
+    }
+
+    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int min, int max) {
+      this(displayItemPreset, nameMessageKeySpace, min, max, ChallengeHelper::getSettingsDescriptionModifierValue);
+    }
+
+    public NumberSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int min, int max, int defaultValue) {
+      this(displayItemPreset, nameMessageKeySpace, min, max, defaultValue, ChallengeHelper::getSettingsDescriptionModifierValue);
     }
 
     @NotNull
     @Override
     public ItemStack getSettingsItemPreset() {
       return DefaultItems.createValuePreset(value);
+    }
+
+    @NotNull
+    @Override
+    protected LocalizableMessage getSettingsName() {
+      return settingsNameGetter.apply(value);
     }
 
     @Override
@@ -304,7 +334,6 @@ public abstract class MenuSetting extends Setting {
       onValueChange();
     }
 
-
     @Override
     public int getAsInt() {
       return value;
@@ -317,21 +346,7 @@ public abstract class MenuSetting extends Setting {
 
     @Override
     public void handleClick(@NotNull ChallengeMenuClickInfo info) {
-      int amount = info.isShiftClick() ? 10 : 1;
-      int newValue = value;
-      if (info.isRightClick()) {
-        newValue -= amount;
-      } else {
-        newValue += amount;
-      }
-
-      if (newValue > max)
-        newValue = min;
-      if (newValue < min)
-        newValue = max;
-
-      this.setValue(newValue);
-      SoundSample.CLICK.play(info.getPlayer());
+      ChallengeHelper.handleModifierClick(info, this);
     }
 
     @Override
@@ -347,12 +362,45 @@ public abstract class MenuSetting extends Setting {
     protected void onValueChange() {
     }
 
+    @Override
+    public final int getMinValue() {
+      return min;
+    }
+
+    @Override
+    public final int getMaxValue() {
+      return max;
+    }
+
+    @Override
+    public final void playValueChangeTitle() {
+    }
   }
 
   public class NumberAndBooleanSubSetting extends NumberSubSetting {
 
     private final boolean enabledByDefault = false; // Implement in future
     private boolean enabled;
+
+    public NumberAndBooleanSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace,
+                                      @NotNull Function<Integer, LocalizableMessage> settingsNameGetter) {
+      super(displayItemPreset, nameMessageKeySpace, settingsNameGetter);
+    }
+
+    public NumberAndBooleanSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int max,
+                                      @NotNull Function<Integer, LocalizableMessage> settingsNameGetter) {
+      super(displayItemPreset, nameMessageKeySpace, max, settingsNameGetter);
+    }
+
+    public NumberAndBooleanSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int min, int max,
+                                      @NotNull Function<Integer, LocalizableMessage> settingsNameGetter) {
+      super(displayItemPreset, nameMessageKeySpace, min, max, settingsNameGetter);
+    }
+
+    public NumberAndBooleanSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace, int min, int max, int defaultValue,
+                                      @NotNull Function<Integer, LocalizableMessage> settingsNameGetter) {
+      super(displayItemPreset, nameMessageKeySpace, min, max, defaultValue, settingsNameGetter);
+    }
 
     public NumberAndBooleanSubSetting(@NotNull ItemStack displayItemPreset, @NotNull MessageKey nameMessageKeySpace) {
       super(displayItemPreset, nameMessageKeySpace);

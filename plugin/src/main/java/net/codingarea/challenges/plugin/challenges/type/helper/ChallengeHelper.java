@@ -11,7 +11,6 @@ import net.codingarea.challenges.plugin.challenges.type.abstraction.Modifier;
 import net.codingarea.challenges.plugin.content.i18n.ArgumentFormat;
 import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.MessageKey;
-import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.menu.generator.IChallengesMenuGenerator;
 import net.codingarea.challenges.plugin.utils.misc.InventoryUtils;
 import net.codingarea.commons.bukkit.utils.animation.SoundSample;
@@ -24,6 +23,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.inventory.Inventory;
@@ -153,11 +153,14 @@ public final class ChallengeHelper {
     return AbstractChallenge.ignorePlayer(damagerPlayer);
   }
 
+  @Nullable
   public static Player getDamagerPlayer(@NotNull Entity damager) {
-    if (damager instanceof Player) return ((Player) damager);
-    if (damager instanceof Projectile && ((Projectile) damager).getShooter() instanceof Player)
-      return ((Player) ((Projectile) damager).getShooter());
-    return null;
+    return switch (damager) {
+      case Player player -> player;
+      case Projectile projectile when projectile.getShooter() instanceof Player shooter -> shooter;
+      case TNTPrimed tnt when tnt.getSource() instanceof Player source -> source;
+      default -> null;
+    };
   }
 
   public static List<Player> getIngamePlayers() {
@@ -197,21 +200,6 @@ public final class ChallengeHelper {
   @Deprecated
   public static void playChallengeHeartsValueChangeTitle(@NotNull Modifier modifier) {
     playChallengeHeartsValueChangeTitle(modifier, modifier.getValue());
-  }
-
-  @Deprecated
-  public static void playChallengeSecondsValueChangeTitle(@NotNull AbstractChallenge challenge, int seconds) {
-    playChallengeValueTitle(challenge, Message.forName("subtitle-time-seconds").asString(seconds));
-  }
-
-  @Deprecated
-  public static void playChallengeSecondsRangeValueChangeTitle(@NotNull AbstractChallenge challenge, int min, int max) {
-    playChallengeValueTitle(challenge, Message.forName("subtitle-time-seconds-range").asString(min, max));
-  }
-
-  @Deprecated
-  public static void playChallengeMinutesValueChangeTitle(@NotNull AbstractChallenge challenge, int seconds) {
-    playChallengeValueTitle(challenge, Message.forName("subtitle-time-minutes").asString(seconds));
   }
 
   @NotNull
@@ -266,6 +254,22 @@ public final class ChallengeHelper {
   @Contract(pure = true)
   public static LocalizableMessage getSettingsDescriptionDamage(int hp) {
     return MessageKey.of("challenge.settings-modifier-damage").withArgs(ArgumentFormat.HP.apply(hp));
+  }
+
+  @NotNull
+  @Contract(pure = true)
+  public static LocalizableMessage getSettingsDescriptionRadiusChunks(int chunks) {
+    // TODO refactor
+    return MessageKey.of("challenge.settings-modifier-radius")
+      .withArgs(MessageKey.of("arg-format.radius").withArgs(chunks, MessageKey.pluralize("generic.chunk", chunks)));
+  }
+
+  @NotNull
+  @Contract(pure = true)
+  public static LocalizableMessage getSettingsDescriptionRadiusBlocks(int blocks) {
+    // TODO refactor
+    return MessageKey.of("challenge.settings-modifier-radius")
+      .withArgs(MessageKey.of("arg-format.radius").withArgs(blocks, MessageKey.pluralize("generic.block", blocks)));
   }
 
   @NotNull

@@ -1,6 +1,7 @@
 package net.codingarea.challenges.plugin.challenges.implementation.challenge.world;
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.menu.MenuSetting;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
@@ -26,42 +27,29 @@ public class AnvilRainChallenge extends MenuSetting {
   private final Random random = new Random();
   int currentTime = 0;
 
+  private final NumberSubSetting timeSetting;
+  private final NumberSubSetting countSetting;
+  private final NumberSubSetting rangeSetting;
+  private final NumberSubSetting damageSetting;
+
   public AnvilRainChallenge() {
     super(MenuType.CHALLENGES, SettingCategory.WORLD, new ItemStack(Material.ANVIL), "anvil-rain");
-//    registerSetting("time", new NumberSubSetting(
-//        () -> new LegacyItemBuilder(Material.CLOCK, Message.forName("item-anvil-rain-time-challenge")),
-//        value -> null,
-//        value -> "§e" + value + " §7" + Message.forName(value == 1 ? "second" : "seconds").asString(),
-//        1,
-//        30,
-//        7
-//      )
-//    );
-//    registerSetting("count", new NumberSubSetting(
-//        () -> new LegacyItemBuilder(Material.FLINT, Message.forName("item-anvil-rain-count-challenge")),
-//        1,
-//        30,
-//        8
-//      )
-//    );
-//    registerSetting("range", new NumberSubSetting(
-//        () -> new LegacyItemBuilder(Material.COMPASS, Message.forName("item-anvil-rain-range-challenge")),
-//        value -> null,
-//        value -> "§e" + value + " §7" + (value == 1 ? "chunk" : "chunks"),
-//        1,
-//        3,
-//        2
-//      )
-//    );
-//    registerSetting("damage", new NumberSubSetting(
-//        () -> new LegacyItemBuilder(Material.IRON_SWORD, Message.forName("item-anvil-rain-damage-challenge")),
-//        value -> null,
-//        value -> "§e" + Display.HEARTS.formatChat(value),
-//        1,
-//        60,
-//        30
-//      )
-//    );
+    timeSetting = registerSetting("time", new NumberSubSetting(
+      new ItemStack(Material.CLOCK), getChallengeMessageKey("sub.time"),
+      1, 30, 7, ChallengeHelper::getSettingsDescriptionIntervalSeconds
+    ));
+    countSetting = registerSetting("count", new NumberSubSetting(
+      new ItemStack(Material.FLINT), getChallengeMessageKey("sub.count"),
+      1, 30, 8
+    ));
+    rangeSetting = registerSetting("range", new NumberSubSetting(
+      new ItemStack(Material.COMPASS), getChallengeMessageKey("sub.range"),
+      1, 3, 2, ChallengeHelper::getSettingsDescriptionRadiusChunks
+    ));
+    damageSetting = registerSetting("damage", new NumberSubSetting(
+      new ItemStack(Material.IRON_SWORD), getChallengeMessageKey("sub.damage"),
+      1, 60, 30, ChallengeHelper::getSettingsDescriptionDamage
+    ));
   }
 
   @Override
@@ -89,7 +77,7 @@ public class AnvilRainChallenge extends MenuSetting {
   public void onSecond() {
     currentTime++;
 
-    if (currentTime > getSetting("time").getAsInt()) {
+    if (currentTime > getTime()) {
       currentTime = 0;
       handleTimeActivation();
     }
@@ -105,7 +93,7 @@ public class AnvilRainChallenge extends MenuSetting {
       for (Chunk targetChunk : targetChunks) {
         if (chunks.contains(targetChunk)) continue;
         chunks.add(targetChunk);
-        spawnAnvils(targetChunk, getHeight(player.getLocation().getBlockY()));
+        spawnAnvils(targetChunk, getAnvilHeight(player.getLocation().getBlockY()));
       }
     }
 
@@ -201,19 +189,23 @@ public class AnvilRainChallenge extends MenuSetting {
 
   }
 
+  private int getTime() {
+    return timeSetting.getAsInt();
+  }
+
   private int getRange() {
-    return getSetting("range").getAsInt();
+    return rangeSetting.getAsInt();
   }
 
   private int getCount() {
-    return getSetting("count").getAsInt();
+    return countSetting.getAsInt();
   }
 
   private int getDamage() {
-    return getSetting("damage").getAsInt();
+    return damageSetting.getAsInt();
   }
 
-  private int getHeight(int currentHeight) {
+  private int getAnvilHeight(int currentHeight) {
     return currentHeight + 50;
   }
 

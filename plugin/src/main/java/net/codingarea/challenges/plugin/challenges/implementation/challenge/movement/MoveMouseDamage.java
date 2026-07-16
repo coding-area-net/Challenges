@@ -3,12 +3,12 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.mov
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.annotation.Since;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.content.i18n.Prefix;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
-import net.codingarea.challenges.plugin.utils.misc.NameHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -29,15 +29,9 @@ public class MoveMouseDamage extends SettingModifier {
     super(MenuType.CHALLENGES, SettingCategory.MOVEMENT, 60, new ItemStack(Material.COMPASS), "no-mouse-move");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
-//  }
-
   @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeHeartsValueChangeTitle(this, getValue() / 2);
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionDamage(getValue());
   }
 
   @ScheduledTask(ticks = 1, timerPolicy = TimerPolicy.ALWAYS)

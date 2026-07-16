@@ -55,8 +55,7 @@ public class ForceDamageBattleGoal extends ForceBattleGoal<DamageTarget> {
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
   public void onDamage(@NotNull EntityDamageEvent event) {
     if (!shouldExecuteEffect()) return;
-    if (!(event.getEntity() instanceof Player)) return;
-    Player player = (Player) event.getEntity();
+    if (!(event.getEntity() instanceof Player player)) return;
     if (ignorePlayer(player)) return;
     if (currentTarget.get(player.getUniqueId()) == null) return;
     DamageTarget target = currentTarget.get(player.getUniqueId());

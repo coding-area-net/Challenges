@@ -13,6 +13,10 @@
     "days": "Tage",
     "time": "Zeit",
     "interval": "Intervall",
+    "chunk": "Chunk",
+    "chunks": "Chunks",
+    "block": "Block",
+    "blocks": "Blöcke",
     "disabled": "<red>Deaktiviert</red>",
     "enabled": "<green>Aktiviert</green>",
     "customize": "<gold>Anpassen</gold>",
@@ -345,6 +349,7 @@
     "settings-modifier-max-health": "<gray>Maximale Leben: {0}</gray>",
     "settings-modifier-damage": "<gray>Schaden: {0}</gray>",
     "settings-modifier-strength": "<gray>Stärke: <yellow>{0}</yellow></gray>",
+    "settings-modifier-radius": "<gray>Umkreis: <yellow>{0}</yellow></gray>",
     "difficulty": {
       "name": "*Schwierigkeit*",
       "desc": [
@@ -1105,10 +1110,41 @@
       }
     },
     "anvil-rain": {
-      "name": "*Amboss Regen*",
+      "name": "*{@menu}*",
       "desc": [
         "Vom *Himmel* fallen *Ambosse*"
-      ]
+      ],
+      "menu": "Amboss Regen",
+      "sub": {
+        "time": {
+          "name": "*Intervall*",
+          "desc": [
+            "Das *Intervall*, in",
+            "dem *Ambosse* spawnen"
+          ]
+        },
+        "range": {
+          "name": "*Umkreis*",
+          "desc": [
+            "Die *Reichweite*, in",
+            "der *Ambosse* spawnen"
+          ]
+        },
+        "count": {
+          "name": "*Anzahl*",
+          "desc": [
+            "Die *Anzahl*, an *Ambossen*,",
+            "die in einem *Chunk* spawnen"
+          ]
+        },
+        "damage": {
+          "name": "*Schaden*",
+          "desc": [
+            "Der *Schaden*, den",
+            "die *Ambosse* machen"
+          ]
+        }
+      }
     },
     "tsunami": {
       "name": "*Tsunami*",
@@ -2014,76 +2050,169 @@
   "custom": {
     "trigger": {
       "interval": {
-        "name": "*Intervall*"
+        "name": "*Intervall*",
+        "desc": [
+          "Die Aktion wird *regelmäßig*",
+          "im gewählten Intervall *ausgeführt*"
+        ]
       },
       "jump": {
-        "name": "*Spieler springt*"
+        "name": "*Spieler springt*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler *springt*"
+        ]
       },
       "sneak": {
-        "name": "*Spieler schleicht*"
+        "name": "*Spieler schleicht*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler *anfängt zu schleichen*"
+        ]
       },
       "move_block": {
-        "name": "*Spieler läuft einen Block*"
+        "name": "*Spieler läuft einen Block*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler *einen Block wechselt*"
+        ]
       },
       "death": {
-        "name": "*Entity stirbt*"
+        "name": "*Entity stirbt*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn eine *Kreatur stirbt*"
+        ]
       },
       "damage": {
-        "name": "*Entity erleidet Schaden*"
+        "name": "*Entity erleidet Schaden*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn eine *Kreatur Schaden erleidet*"
+        ]
       },
       "item-custom-trigger-damage-any": [
         "<green>Jeglicher Grund</green>"
       ],
       "damage_by_player": {
-        "name": "*Entity bekommt Schaden von Spieler*"
+        "name": "*Entity bekommt Schaden von Spieler*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn eine *Kreatur Schaden von einem Spieler* erleidet"
+        ]
       },
       "block_place": {
-        "name": "*Block platziert*"
+        "name": "*Block platziert*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler einen *Block platziert*"
+        ]
       },
       "block_break": {
-        "name": "*Block zerstört*"
+        "name": "*Block zerstört*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler einen *Block abbaut*"
+        ]
       },
       "consume_item": {
-        "name": "*Item konsumieren*"
+        "name": "*Item konsumieren*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler ein *essbares Item konsumiert*"
+        ]
       },
       "pickup_item": {
-        "name": "*Item aufheben*"
+        "name": "*Item aufheben*",
+        "desc": [
+          "Die Aktion wird für *jedes* anklicken oder aufheben ausgeführt"
+        ]
       },
       "drop_item": {
-        "name": "*Spieler droppt Item*"
+        "name": "*Spieler droppt Item*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler ein *Item droppt*"
+        ]
       },
       "advancement": {
-        "name": "*Spieler erhält Errungenschaft*"
+        "name": "*Spieler erhält Errungenschaft*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler eine neue *Errungenschaft* erhält"
+        ]
       },
       "hunger": {
-        "name": "*Spieler verliert Hunger*"
+        "name": "*Spieler verliert Sättigung*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler *Sättigung verliert* bzw. *Hunger bekommt*"
+        ]
       },
       "move_down": {
-        "name": "*Block nach unten bewegen*"
+        "name": "*Block nach unten bewegen*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler *einen Block nach unten* geht"
+        ]
       },
       "move_up": {
-        "name": "*Block nach oben bewegen*"
+        "name": "*Block nach oben bewegen*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler *einen Block nach oben* geht"
+        ]
       },
       "move_camera": {
-        "name": "*Kamera bewegen*"
+        "name": "*Kamera bewegen*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler *seinen Kopf dreht*"
+        ]
       },
       "stands_on_specific_block": {
-        "name": "*Spieler ist auf bestimmten Block*"
+        "name": "*Spieler ist auf bestimmten Block*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler sich einen *ganzen Block bewegt*",
+          "und auf einem *bestimmten Block* steht"
+        ]
       },
       "stands_not_on_specific_block": {
-        "name": "*Spieler ist nicht auf bestimmten Block*"
+        "name": "*Spieler ist nicht auf bestimmten Block*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler sich einen *ganzen Block bewegt*",
+          "und *nicht* auf einem *bestimmten Block* steht"
+        ]
       },
       "gain_xp": {
-        "name": "*Spieler bekommt XP*"
+        "name": "*Spieler bekommt XP*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler *XP bekommt*"
+        ]
       },
       "level_up": {
-        "name": "*Spieler levelt auf*"
+        "name": "*Spieler levelt auf*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler *ein Level aufsteigt*"
+        ]
       },
       "item_craft": {
-        "name": "*Spieler craftet Item*"
+        "name": "*Spieler craftet Item*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler ein *Item herstellt*"
+        ]
       },
       "in_liquid": {
-        "name": "*Spieler in Flüssigkeit*"
+        "name": "*Spieler in Flüssigkeit*",
+        "desc": [
+          "Die Aktion wird *jedes Mal* ausgeführt,",
+          "wenn ein Spieler eine *Flüssigkeit* betritt"
+        ]
       },
       "get_item": {
         "name": "*Item bekommen*",
@@ -2765,27 +2894,6 @@
     "<gold>Stärke</gold>",
     "Die *Stärke*, die der",
     "*Effekt* hat"
-  ],
-  "menu-anvil-rain-challenge-settings": "Amboss Regen",
-  "item-anvil-rain-time-challenge": [
-    "<gold>Intervall</gold>",
-    "Das *Intervall*, in",
-    "dem *Ambosse* spawnen"
-  ],
-  "item-anvil-rain-range-challenge": [
-    "<gold>Range</gold>",
-    "Die *Reichweite*, in",
-    "der *Ambosse* spawnen"
-  ],
-  "item-anvil-rain-count-challenge": [
-    "<gold>Anzahl</gold>",
-    "Die *Anzahl*, an *Ambossen*,",
-    "die in einem *Chunk* spawnen"
-  ],
-  "item-anvil-rain-damage-challenge": [
-    "<gold>Schaden</gold>",
-    "Der *Schaden*, die",
-    "die *Ambosse* machen"
   ],
   "item-collect-wood-goal-overworld": "<green>Overworld</green>",
   "item-collect-wood-goal-nether": "<red>Nether</red>",

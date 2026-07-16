@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.goal.forcebat
 
 import net.codingarea.challenges.plugin.challenges.implementation.goal.forcebattle.targets.PositionTarget;
 import net.codingarea.challenges.plugin.challenges.type.abstraction.ForceBattleGoal;
+import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
 import net.codingarea.challenges.plugin.content.legacy.Message;
 import net.codingarea.challenges.plugin.management.scheduler.policy.TimerPolicy;
 import net.codingarea.challenges.plugin.management.scheduler.task.ScheduledTask;
@@ -14,17 +15,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ForcePositionBattleGoal extends ForceBattleGoal<PositionTarget> {
+
+  private final NumberSubSetting radiusSetting;
+
   public ForcePositionBattleGoal() {
-//    super(Message.forName("menu-force-position-battle-goal-settings"));
     super(new ItemStack(Material.DIAMOND_BOOTS), "force-position-battle");
-//    registerSetting("radius", new NumberSubSetting(
-//      () -> new LegacyItemBuilder(Material.DIAMOND_BOOTS, Message.forName("item-force-position-battle-radius")),
-//      value -> null,
-//      value -> "§e" + (value * 100),
-//      1,
-//      100,
-//      15
-//    ));
+    radiusSetting = registerSetting("radius", new NumberSubSetting(
+      new ItemStack(Material.DIAMOND_BOOTS), getChallengeMessageKey("sub.radius"),
+      1, 100, 15, value -> ChallengeHelper.getSettingsDescriptionRadiusBlocks(value * 100)
+    ));
   }
 
   @Override
@@ -72,6 +71,6 @@ public class ForcePositionBattleGoal extends ForceBattleGoal<PositionTarget> {
   }
 
   protected int getRadius() {
-    return getSetting("radius").getAsInt() * 100;
+    return radiusSetting.getAsInt() * 100;
   }
 }

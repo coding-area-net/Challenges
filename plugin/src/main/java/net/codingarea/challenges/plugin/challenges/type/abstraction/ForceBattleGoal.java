@@ -47,22 +47,28 @@ public abstract class ForceBattleGoal<T extends ForceTarget<?>> extends MenuGoal
   protected T[] targetsPossibleToFind;
   private ItemStack jokerItem;
 
+  protected final NumberSubSetting jokerCountSetting;
+  protected final BooleanSubSetting scoreboardSetting;
+  protected final BooleanSubSetting dupedTargetsSetting;
+
   public ForceBattleGoal(@NotNull ItemStack displayItemPreset, @NotNull String nameMessageKey) {
     super(MenuType.GOAL, SettingCategory.FORCE_BATTLE, displayItemPreset, nameMessageKey);
 
-    registerSetting("jokers", new NumberSubSetting(
+    jokerCountSetting = registerSetting("jokers", new NumberSubSetting(
       new ItemStack(Material.BARRIER), MessageKey.of("challenge.force-battles.sub.goal-jokers"),
       1, 32, 5
     ));
-    registerSetting("showScoreboard", new BooleanSubSetting(
+    scoreboardSetting = registerSetting("showScoreboard", new BooleanSubSetting(
       new ItemStack(Material.BOOK), MessageKey.of("challenge.force-battles.sub.scoreboard"),
       true
     ));
     if (shouldRegisterDupedTargetsSetting()) {
-      registerSetting("dupedTargets", new BooleanSubSetting(
+      dupedTargetsSetting = registerSetting("dupedTargets", new BooleanSubSetting(
         new ItemStack(Material.PAPER), MessageKey.of("challenge.force-battles.sub.duped-targets"),
         true
       ));
+    } else {
+      dupedTargetsSetting = null;
     }
   }
 
@@ -214,7 +220,7 @@ public abstract class ForceBattleGoal<T extends ForceTarget<?>> extends MenuGoal
 
   protected T getRandomTarget(Player player) {
     LinkedList<T> list = new LinkedList<>(Arrays.asList(targetsPossibleToFind));
-    if (!getSetting("dupedTargets").getAsBoolean()) {
+    if (shouldRegisterDupedTargetsSetting() && !dupedTargetsSetting.getAsBoolean()) {
       list.removeAll(foundTargets.getOrDefault(player.getUniqueId(), new LinkedList<>()));
     }
     if (!list.isEmpty()) {
@@ -433,11 +439,11 @@ public abstract class ForceBattleGoal<T extends ForceTarget<?>> extends MenuGoal
   }
 
   private int getJokers() {
-    return getSetting("jokers").getAsInt();
+    return jokerCountSetting.getAsInt();
   }
 
   private boolean showScoreboard() {
-    return getSetting("showScoreboard").getAsBoolean();
+    return scoreboardSetting.getAsBoolean();
   }
 
   protected boolean shouldRegisterDupedTargetsSetting() {

@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.dam
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import org.bukkit.Material;
@@ -15,22 +16,16 @@ public class BlockBreakDamageChallenge extends SettingModifier {
     super(MenuType.CHALLENGES, SettingCategory.DAMAGE, 1, 60, new ItemStack(Material.GOLDEN_PICKAXE), "block-break-damage");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
-//  }
+  @Override
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionDamage(getValue());
+  }
 
   @EventHandler
   public void onBreak(BlockBreakEvent event) {
     if (!shouldExecuteEffect()) return;
     event.getPlayer().setNoDamageTicks(0);
     event.getPlayer().damage(getValue());
-  }
-
-  @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
   }
 
 }

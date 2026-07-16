@@ -28,7 +28,8 @@
     "damage-cause": "<yellow>{0}</yellow>",
     "damage-cause-source": "<yellow>{0}</yellow> <dark_gray>(<gray>{1}</gray>)</dark_gray>",
     "time": "<yellow>{0}</yellow> <gray>{1}</gray>",
-    "time-range": "{@time} <dark_gray>{@symbol.plus-minus}</dark_gray> {@time('{2}', '{3}')}"
+    "time-range": "{@time} <dark_gray>{@symbol.plus-minus}</dark_gray> {@time('{2}', '{3}')}",
+    "radius": "<yellow>{0}</yellow> <gray>{1}</gray>"
   },
   "prefix": {
     "format": "<dark_gray><b>{@symbol.vertical}</b> {0} {@symbol.vertical}</dark_gray> ",
@@ -507,7 +508,21 @@
       }
     },
     "anvil-rain": {
-      "*colorize*": "<red>{0}</red>"
+      "*colorize*": "<red>{0}</red>",
+      "sub": {
+        "time": {
+          "*colorize*": "<gold>{0}</gold>"
+        },
+        "range": {
+          "*colorize*": "<blue>{0}</blue>"
+        },
+        "count": {
+          "*colorize*": "<red>{0}</red>"
+        },
+        "damage": {
+          "*colorize*": "<red>{0}</red>"
+        }
+      }
     },
     "tsunami": {
       "*colorize*": "<blue>{0}</blue>"

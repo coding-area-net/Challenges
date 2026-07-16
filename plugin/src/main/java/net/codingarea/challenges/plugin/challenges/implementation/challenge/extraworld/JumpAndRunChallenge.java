@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Updated("2.4")
 public class JumpAndRunChallenge extends WorldDependentChallenge {
 
   private final List<UUID> lastPlayers = new ArrayList<>();

@@ -2,6 +2,7 @@ package net.codingarea.challenges.plugin.challenges.implementation.challenge.dam
 
 import net.codingarea.challenges.plugin.challenges.type.abstraction.SettingModifier;
 import net.codingarea.challenges.plugin.challenges.type.helper.ChallengeHelper;
+import net.codingarea.challenges.plugin.content.i18n.LocalizableMessage;
 import net.codingarea.challenges.plugin.management.menu.MenuType;
 import net.codingarea.challenges.plugin.management.menu.SettingCategory;
 import net.codingarea.challenges.plugin.utils.misc.BlockUtils;
@@ -20,11 +21,10 @@ public class DamagePerBlockChallenge extends SettingModifier {
       "damage-per-block");
   }
 
-//  @Nullable
-//  @Override
-//  protected String[] getSettingsDescription() {
-//    return Message.forName("item-heart-damage-description").asArray(getValue() / 2f);
-//  }
+  @Override
+  public LocalizableMessage getSettingsDescription() {
+    return ChallengeHelper.getSettingsDescriptionDamage(getValue());
+  }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
   public void onMove(@NotNull PlayerMoveEvent event) {
@@ -34,11 +34,6 @@ public class DamagePerBlockChallenge extends SettingModifier {
 
     event.getPlayer().setNoDamageTicks(0);
     event.getPlayer().damage(getValue());
-  }
-
-  @Override
-  public void playValueChangeTitle() {
-    ChallengeHelper.playChallengeHeartsValueChangeTitle(this);
   }
 
 }

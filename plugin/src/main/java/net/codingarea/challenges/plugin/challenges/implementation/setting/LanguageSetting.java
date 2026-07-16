@@ -98,6 +98,11 @@ public class LanguageSetting extends Modifier implements SenderCommand, Complete
   }
 
   @Override
+  public void restoreDefaults() {
+    // "/reset settings" should not reset the chosen language
+  }
+
+  @Override
   public void loadSettings(@NotNull Document document) {
     // will be saved in plugin.yml
     LanguageLoader languageLoader = Challenges.getInstance().getLoaderRegistry().findLoaderByClassOrThrow(LanguageLoader.class);
