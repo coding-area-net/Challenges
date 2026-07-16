@@ -2,7 +2,6 @@ package net.codingarea.commons.bukkit.utils.misc;
 
 import net.codingarea.commons.common.version.Version;
 import org.bukkit.Bukkit;
-import org.jetbrains.annotations.CheckReturnValue;
 import org.jetbrains.annotations.NotNull;
 
 public enum MinecraftVersion implements Version {
@@ -88,13 +87,6 @@ public enum MinecraftVersion implements Version {
   }
 
   @NotNull
-  @CheckReturnValue
-  public static Version parseExact(@NotNull String bukkitVersion) {
-    bukkitVersion = bukkitVersion.substring(0, bukkitVersion.indexOf("-"));
-    return Version.parse(bukkitVersion);
-  }
-
-  @NotNull
   public static MinecraftVersion findNearest(@NotNull Version realVersion) {
     MinecraftVersion[] versions = values(); // ascending order
     for (int i = versions.length - 1; i >= 0; i--) {
@@ -109,7 +101,7 @@ public enum MinecraftVersion implements Version {
 
   @NotNull
   public static Version currentExact() {
-    if (currentExact == null) currentExact = parseExact(Bukkit.getBukkitVersion());
+    if (currentExact == null) currentExact = Version.parse(getMinecraftVersionString());
     return currentExact;
   }
 
@@ -117,6 +109,17 @@ public enum MinecraftVersion implements Version {
   public static MinecraftVersion current() {
     if (current == null) current = findNearest(currentExact());
     return current;
+  }
+
+  @NotNull
+  public static String getMinecraftVersionString() {
+    try {
+      // available since 1.19
+      return Bukkit.getMinecraftVersion();
+    } catch (Error _) {
+      String bukkitVersion = Bukkit.getBukkitVersion();
+      return bukkitVersion.substring(0, bukkitVersion.indexOf("-"));
+    }
   }
 
 }
